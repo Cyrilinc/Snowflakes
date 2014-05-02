@@ -1,0 +1,334 @@
+/* CSS Document */
+/*
+ * Snowflakes 1.0 - CMS & Web Publishing
+ * http://cyrilinc.co.uk/snowflakes/
+ * Copyright (c) 2013 Cyril inc
+ * Licensed under MIT and GPL
+ * Date: Tues, Jan 15 2013 11:33:31 -1100
+ */
+
+.SnowflakeImage {
+	background-color:#fafafa;
+	border:1px solid #CCC;
+	margin:5px auto;
+	height:auto;
+	max-width:214px;
+	width: auto\9; /* ie8 */
+	float:left;
+	position: relative;
+	margin: 2px 4px;
+}
+
+.SnowflakeImage img {
+	max-width:200px;
+	height:auto;
+	width: auto\9; /* ie8 */
+	padding:7px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+	
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.SnowflakeDescr {
+	min-height:210px;
+	text-align:justify;
+	font-size:15px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom:40px;
+	color:#fafafa;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.SnowflakeDate{
+	margin: 5px;
+	float:left;
+	color:#40add8;
+	font-size:13px;
+}
+
+.Snowflake{
+	width:100%;
+	min-height:200px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	border-radius: 8px;
+	background:#2b2b2b;
+	/* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+	/* IE 5-7 */
+  filter: alpha(opacity=90);
+	/* Netscape */
+  -moz-opacity: 0.9;
+	-webkit-opacity:0.9;
+	/* Safari 1.x */
+  -khtml-opacity: 0.9;
+	/* Good browsers */
+  opacity: 0.9;
+	float:left;
+	position: relative;
+	padding-top: 8px;
+	padding-bottom:10px;
+	margin:5px 5px;
+}
+
+.SnowflakeHead{
+
+	text-align:center;
+	color: #40add8;
+	font-size:22px;
+	margin-top: 5px;
+	margin-bottom:5px;
+}
+
+.SnowflakePanel{
+	color:#fafafa;
+	padding-left:5px;
+}
+
+.SnowflakePanel a {
+	height:40px;
+	width:40px;
+	/* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+	/* IE 5-7 */
+  filter: alpha(opacity=90);
+	/* Netscape */
+  -moz-opacity: 0.9;
+	-webkit-opacity:0.9;
+	/* Safari 1.x */
+  -khtml-opacity: 0.9;
+	/* Good browsers */
+  opacity: 0.9;
+	background:#2b2b2b;
+	text-align:center;
+}
+
+.SnowflakePanel a:hover{
+	background-color:#40add8;
+	/* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	/* IE 5-7 */
+  filter: alpha(opacity=100);
+	/* Netscape */
+  -moz-opacity: 1;
+	-webkit-opacity:1;
+	/* Safari 1.x */
+  -khtml-opacity: 1;
+	/* Good browsers */
+  opacity: 1;
+	cursor:pointer;
+}
+
+.SnowflakePanel a img{
+	margin:0 5px;
+}
+
+PageBreak{
+	margin-top: 5px;	
+	margin-bottom:5px;
+	height:8px;
+	border-bottom: 4px #ffffff thick;
+}
+
+.smallNewButton{
+	height:30px;
+	width: 80px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	border-radius: 4px;
+		font-size:14px;
+		/* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+	/* IE 5-7 */
+  filter: alpha(opacity=90);
+	/* Netscape */
+  -moz-opacity: 0.9;
+	-webkit-opacity:0.9;
+	/* Safari 1.x */
+  -khtml-opacity: 0.9;
+	/* Good browsers */
+  opacity: 0.9;
+	background:#2b2b2b;
+	text-align:center;
+	line-height:30px;
+	padding-left: 1px;
+	color:#fafafa;
+	float:left;
+	margin: 3px;
+}
+
+.smallNewButton a{
+	color:#fafafa;
+	font-family: Strait, sans-serif;
+}
+
+.smallNewButton img{
+	height:20px;
+	width:15px;
+	padding-top: 7px;
+	float:right;
+}
+
+.smallNewButton:hover {
+	background-color:#40add8;
+	/* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	/* IE 5-7 */
+  filter: alpha(opacity=100);
+	/* Netscape */
+  -moz-opacity: 1;
+	-webkit-opacity:1;
+	/* Safari 1.x */
+  -khtml-opacity: 1;
+	/* Good browsers */
+  opacity: 1;
+	cursor:pointer;
+}
+
+
+/*###################################*/
+/*## Events Structure Rules Begins ##*/
+/*###################################*/
+.eventWrapper{
+	border: 1px dashed #AAA;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	padding:5px;
+	min-height:80px;
+	width:48%;
+	color:#fafafa;
+	background:#2b2b2b;
+	/* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+	/* IE 5-7 */
+  filter: alpha(opacity=90);
+	/* Netscape */
+  -moz-opacity: 0.9;
+	-webkit-opacity:0.9;
+	/* Safari 1.x */
+  -khtml-opacity: 0.9;
+	/* Good browsers */
+  opacity: 0.9;
+}
+
+.eventWrapper2{
+	border: 1px dashed #AAA;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	padding:5px;
+	min-height:80px;
+	width:100%;
+	color:#fafafa;
+	background:#2b2b2b;
+	/* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+	/* IE 5-7 */
+  filter: alpha(opacity=90);
+	/* Netscape */
+  -moz-opacity: 0.9;
+	-webkit-opacity:0.9;
+	/* Safari 1.x */
+  -khtml-opacity: 0.9;
+	/* Good browsers */
+  opacity: 0.9;
+}
+
+.SFEvent {
+	border-bottom: #bdbbbc 1px solid;
+	padding: 0 0 18px 0;
+	margin: 0 0 20px 0;
+}
+.SFEvent:last-child {
+	border-bottom: none;
+	}
+	
+	.SFEvent:nth-last-child(1) {
+	margin: 0 0 40px 0;
+}
+
+.prev-image {
+	margin: 0 0 9px 0;
+}
+
+.SFEvent-date {
+	float: left;
+	width: 52px;
+	text-align: center;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	background: #fafafa;
+}
+.SFEvent .SFEvent-date .month {
+	color:#2b2b2b;
+	text-transform: uppercase;
+	font:20px/26px;
+	line-height: 1;
+	margin: 0;
+	padding:4px;
+	background: url(../images/date-bg2.png) repeat-x;
+	text-align:center
+}
+.SFEvent .SFEvent-date .day {
+	font-size: 24px;
+	line-height: 1;
+	background: url(../images/date-bg.png) repeat-x;
+	border: #bdbbbc 1px solid;
+	margin: 0;
+	padding: 5px 0 0 0;
+	height: 28px;
+	text-align:center;
+	color:#2b2b2b;
+}
+
+.SFEvent .SFEvent-date .year {
+	font-size: 14px;
+	line-height: 1;
+	background: url(../images/date-bg3.png) repeat-x;
+	border: #bdbbbc 1px solid;
+	margin: 0;
+	padding: 5px 0 0 0;
+	height: 18px;
+	text-align:center;
+	color:#2b2b2b;
+}
+
+.SFEvent-content {
+	 float: left;
+	 padding-left: 5px;
+}
+.SFEvent-content h4 {
+	line-height: 1;
+	padding:2px;
+	color:#40add8;
+	font:20px/26px;
+}
+.SFEvent-content h4 a {
+	text-decoration: none;
+}
+.SFEvent-content p {
+	line-height: 1.3;
+	margin: 0;
+}
+.SFEvent-content p strong {
+	font-weight: bold;
+}
