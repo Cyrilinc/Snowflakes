@@ -164,8 +164,7 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
         <link rel="stylesheet" type="text/css" href="resources/css/Mobile.css" media="only screen and (max-width: 767px)" />
         <link rel="stylesheet" type="text/css" href="resources/css/style.css" media="only screen and (min-width: 768px)" />
         <link rel="stylesheet" title="text/css" href="resources/css/ColorBox.css" />
-        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script type="text/javascript" src="resources/Js/jquery-1.11.0.js"></script>
         <script type="text/javascript" src="resources/Js/modernizr.custom.63321.js"></script>
         <script type="text/javascript" src="resources/Js/jquery.cycle.all.js"></script>
         <script type="text/javascript" src="resources/Js/jquery.colorbox.js"></script>
