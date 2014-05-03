@@ -259,7 +259,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                         });
 
                         $(window).load(function() {
-                            $('#thumbnail').imgAreaSelect({aspectRatio: '1:<?php echo $thumbHeight / $thumbWidth; ?>', onSelectChange: preview});
+                            $('#thumbnail').imgAreaSelect({aspectRatio: '1:<?php echo $thumbHeight / $thumbWidth; ?>', onSelectChange: preview,x1: 0, y1: 0, x2: <?php echo $thumbWidth; ?>, y2: <?php echo $thumbHeight; ?>});
                         });
 
                     </script>
@@ -269,7 +269,9 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                         <p>Make a selection by dragging a box on the bigger image  below</p>
                         <img src="<?php echo $imageFileUrl; ?>" style="float: left; margin-right: 10px;" id="thumbnail" alt="Create Thumbnail" />
 
-                        <div class="controls" style="border:1px #e5e5e5 solid; float:left; position:relative; overflow:hidden; width:<?php echo $thumbWidth; ?>px; height:<?php echo $thumbHeight; ?>px;"> <img src="<?php echo $imageFileUrl; ?>" style="position: relative;" alt="Thumbnail Preview" /></div>
+                        <div class="controls" style="border:1px #e5e5e5 solid; float:left; position:relative; overflow:hidden; width:<?php echo $thumbWidth; ?>px; height:<?php echo $thumbHeight; ?>px;"> 
+                            <img src="<?php echo $imageFileUrl; ?>" style="position: relative;" alt="Thumbnail Preview" />
+                        </div>
 
                         <!-- Break -->
                         <div class="clear"></div>
