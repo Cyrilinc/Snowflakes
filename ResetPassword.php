@@ -30,7 +30,7 @@ if (isset($Post_password)) {
     $passwordReset = sfUtils::resetPassword($SFconnects, $password, $oldResetLink);
     if ($passwordReset) {
         $resetMessage.= "Your password has been reset Successfully!";
-        $resetMessage.='<img src="resources/images/Icons/Tick.png" height="16" width="16" alt="Success" />';
+        $resetMessage.='<span class="icon success"></span>';
     } else {
         $resetMessage.= "Your password could not reset properly!";
         $resetMessage.='<span class="icon error"></span><br/>'

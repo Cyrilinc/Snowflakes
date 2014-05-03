@@ -226,7 +226,7 @@ $ShareGallerysurl = str_replace("Generator.php", "Gallery/Out.php", $url);
                                 <p></p>
                                 <p>This is Ideal for HTML files, first create a div with id called Snowflakes then add the code below inside the Head tag of the page you want to display your published snowflakes. This code is generated provided that you have installed snowflakes on your Hosting server and the location is uniquely generated to point directly to your snowflake output file.</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code
 
 	&lt;div id=&quot;Snowflakes&quot;&gt; &lt;/div&gt;
@@ -281,19 +281,19 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <p></p>
                                 <p>You can also add the following style sheets links to the Head Tag or choose other tabs to see more about Snowflakes CSS.</p>
                                 <pre class='code'>
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
  &lt;link rel="stylesheet" type="text/css" href="<?php echo $csslink . "SnowflakesMob.css"; ?>" media="only screen and (max-width: 767px)" /&gt;
 &lt;link rel="stylesheet" type="text/css" href="<?php echo $csslink . "SnowflakesScrn.css"; ?>" media="only screen and (min-width: 768px)" /&gt;
                                 </pre>
                                 <p>For gallery within a snowflake add the following</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 &lt;link rel="stylesheet" type="text/css" href="<?php echo $csslink . "stapel.css"; ?>" /&gt;
 
                                 </pre>
                                 <p>and for internet explorer Browsers and mobile browser include the following.</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
   &lt;!--[if IE]&gt;
  &lt;link rel="stylesheet" type="text/css" href="<?php echo $csslink . "SnowflakesScrn.css"; ?>"/&gt;
  &lt;![endif]--&gt;
@@ -309,7 +309,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <p>This is Ideal for Php files, first create a div with id called Snowflakes then add the code below inside the id tag you've just created on the page you want to display your published snowflakes.</p>
                                 <p>Copy &amp; paste Id tag in the body tag of your webpage</p>
                                 <pre class='code'>
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
        &lt;div id=&quot;Snowflakes&quot;&gt;
             &lt;?php  include '<?php echo $Shareurl; ?>'; ?&gt;
         &lt;/div&gt;
@@ -319,14 +319,14 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <p></p>
                                 <p>If you wish to add snowflakes to a custom output or a result page that you have created yourself to view and share a single snowflake. Enter the url address of your result page in the settings page in snowflakes and save it. Then load the page with javascript or php as described above.  But change Out.php to OneView2.php?pageid= so that pageid will be queried automatically by snowflakes.  Thus</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code
 
 	&lt;div id=&quot;Snowflakes&quot;&gt; &lt;/div&gt;
                                 </pre>
                                 <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
     &lt;script type=&quot;text/javascript&quot;&gt;
     		
             function GetQuery(){
@@ -368,7 +368,7 @@ Copy &amp; paste Id tag below to the body tag of your webpage or optionally use 
                                 <h4>php</h4>
                                 <p>Copy &amp; paste Id tag in the body tag of your webpage </p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
            &lt;div id=&quot;Snowflakes&quot;&gt;
                 &lt;?php  include '<?php echo str_replace("Out.php", "OneView2.php?pageid=", $Shareurl); ?>filter_input(INPUT_GET, 'pageid')'; ?&gt;
             &lt;/div&gt;
@@ -377,12 +377,12 @@ Copy &amp; paste Id tag below to the body tag of your webpage or optionally use 
                                 <h4>Javascript</h4>
                                 <p>Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code </p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;Snowflakes&quot;&gt; &lt;/div&gt;
                                 </pre>
                                 <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
     &lt;script type=&quot;text/javascript&quot;&gt;
            $(document).ready(
             function loadSnowflakes() {
@@ -394,7 +394,7 @@ Copy &amp; paste Id tag below to the body tag of your webpage or optionally use 
                                 <h4>php</h4>
                                 <p>Copy &amp; paste Id tag in the body tag of your webpage </p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
            &lt;div id=&quot;Snowflakes&quot;&gt;
                 &lt;?php  include '<?php echo str_replace("Out.php", "SummaryOut.php?MaxNumber=3", $Shareurl); ?>'; ?&gt;
             &lt;/div&gt;
@@ -406,7 +406,7 @@ Copy &amp; paste Id tag below to the body tag of your webpage or optionally use 
                                 <p>Follow the same technique for Snowflakes for this events to work</p>
                                 <p></p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code
 
 	&lt;div id=&quot;SFEvents&quot;&gt; &lt;/div&gt;
@@ -462,7 +462,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <p></p>
                                 <p>You can also add the following style sheets links to the Head Tag or choose other tabs to see more about Snowflakes CSS.</p>
                                 <pre class='code'>
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 
 
  &lt;link rel="stylesheet" type="text/css" href="<?php echo $csslink . "SnowflakesMob.css"; ?>" media="only screen and (max-width: 767px)" /&gt;
@@ -470,7 +470,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 </pre>
                                 <p>and for internet explorer Browsers and mobile browser include the following. </p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
   &lt;!--[if IE]&gt;
  &lt;link rel="stylesheet" type="text/css" href="<?php echo $csslink . "SnowflakesScrn.css"; ?>"/&gt;
  &lt;![endif]--&gt;
@@ -485,7 +485,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <p>This is Ideal for Php files, first create a div with id called <span class="code">SFEvents</span> then add the code below inside the id tag you've just created on the page you want to display your published Events.</p>
                                 <p>Copy &amp; paste Id tag in the body tag of your webpage</p>
                                 <pre class='code'>
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 	
        &lt;div id=&quot;SFEvents&quot;&gt;
             &lt;?php  include '<?php echo $ShareEventsurl; ?>'; ?&gt;
@@ -498,12 +498,12 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <p>If you wish to add Events to a custom output or a result page that you have created yourself to view and share a single Event. Enter the url address of your result page in the settings page and save it. Then load the page with javascript or php as described above.  But change Out.php to OneView2.php?Eventid= so that Eventid will be queried automatically by snowflakes. Thus</p>
                                 <p>Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code </p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;SFEvents&quot;&gt; &lt;/div&gt;
                                 </pre>
                                 <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
     &lt;script type=&quot;text/javascript&quot;&gt;
     		
             function GetQuery(){
@@ -542,7 +542,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <h4>php</h4>
                                 <p>Copy &amp; paste Id tag in the body tag of your webpage</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>    
+<a style="float:right"><span class="icon success"></span></a>    
            &lt;div id=&quot;SFEvents&quot;&gt;
                 &lt;?php  include '<?php echo str_replace("Out.php", "OneView2.php?Eventid=", $ShareEventsurl); ?>filter_input(INPUT_GET, 'Eventid')'; ?&gt;
             &lt;/div&gt;
@@ -551,12 +551,12 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <h4>Javascript</h4>
                                 <p>Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;SFEvents&quot;&gt; &lt;/div&gt;
                                 </pre>
                                 <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
     &lt;script type=&quot;text/javascript&quot;&gt;
            $(document).ready(
             function loadSFEvents() {
@@ -568,7 +568,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <h4>php</h4>
                                 <p>Copy &amp; paste Id tag in the body tag of your webpage</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>    
+<a style="float:right"><span class="icon success"></span></a>    
            &lt;div id=&quot;SFEvents&quot;&gt;
                 &lt;?php  include '<?php echo str_replace("Out.php", "SummaryOut.php?MaxNumber=3", $ShareEventsurl); ?>'; ?&gt;
             &lt;/div&gt;
@@ -580,12 +580,12 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <p>Follow the same technique for Snowflakes for this Gallery to work but with addition of some code to display Snowflake style Gallery.</p>
                                 <p>Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;SFGallery&quot;&gt; &lt;/div&gt;
                                 </pre>
                                 <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 &lt;script type="text/javascript" src=&quot;<?php echo $JSlink . "jquery.stapel.js"; ?>&quot;&gt;&lt;/script&gt;
     &lt;script type=&quot;text/javascript&quot;&gt;
            $(document).ready(
@@ -627,7 +627,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <p></p>
                                 <p>You can also add the following style sheets links to the Head Tag or choose other tabs to see more about Snowflakes CSS.</p>
                                 <pre class='code'>
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 &lt;link rel="stylesheet" type="text/css" href="<?php echo $csslink . "stapel.css"; ?>" /&gt;
                                 </pre>
                                 <p></p>
@@ -636,7 +636,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <p>This is Ideal for Php files, first create a div with id called <span class="code">SFGallery</span> then add the code below inside the id tag you've just created on the page you want to display your published Gallery.</p>
                                 <p>Copy &amp; paste Id tag in the body tag of your webpage</p>
                                 <pre class='code'>
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 	     &lt;div id=&quot;SFGallery&quot;&gt;
                 &lt;?php  include '<?php echo $ShareGallerysurl; ?>'; ?&gt;
             &lt;/div&gt;
@@ -648,12 +648,12 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <p>If you wish to add <span class="code">SFGallery</span> to a custom output or a result page that you have created yourself to view and share a single snowflake Gallery. Enter the url address of your result page in the settings page and save it. Then load the page with javascript or php as described below by changing Out.php to OneView2.php?Galleryid= so that Galleryid will be queried automatically by snowflakes. Thus</p>
                                 <p>Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;SFGallery&quot;&gt; &lt;/div&gt;
                                 </pre>
                                 <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
     &lt;script type=&quot;text/javascript&quot;&gt;
     		
             function GetQuery(){
@@ -692,7 +692,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <h4>php</h4>
                                 <p>Copy &amp; paste Id tag in the body tag of your web page</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>    
+<a style="float:right"><span class="icon success"></span></a>    
        &lt;div id=&quot;SFGallery&quot;&gt;
             &lt;?php  include '<?php echo str_replace("Out.php", "OneView2.php?Galleryid=", $ShareGallerysurl); ?>filter_input(INPUT_GET, 'Galleryid')'; ?&gt;
         &lt;/div&gt;
@@ -702,12 +702,12 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <h4>Javascript</h4>
                                 <p>Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;SFGallery&quot;&gt; &lt;/div&gt;
                                 </pre>
                                 <p>Copy &amp; paste the javascript below in Head tag of your webpage </p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
     &lt;script type=&quot;text/javascript&quot;&gt;
            $(document).ready(
             function loadSFGallery() {
@@ -719,7 +719,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <h4>php</h4>
                                 <p>Copy &amp; paste Id tag in the body tag of your webpage</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>    
+<a style="float:right"><span class="icon success"></span></a>    
            &lt;div id=&quot;SFGallery&quot;&gt;
                 &lt;?php  include '<?php echo str_replace("Out.php", "SummaryOut.php?MaxNumber=3", $ShareGallerysurl); ?>'; ?&gt;
             &lt;/div&gt; 
@@ -736,7 +736,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <br />
                                 <p> Displays Larger than 999px: </p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
       
 Copy &amp; paste the CSS below Stylesheet of your webpage
 
@@ -1132,7 +1132,7 @@ Copy &amp; paste the CSS below Stylesheet of your webpage
                                 <br />
                                 <p> Displays Smaller than 999px: </p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
 Copy & paste the CSS below Stylesheet of your webpage
 
 
@@ -1467,7 +1467,7 @@ Copy & paste the CSS below Stylesheet of your webpage
                                 <br />
                                 <p>For all displays on mobile, tablets and large displays</p>
                                 <pre class='code'> 
-<a style="float:right"><img src="resources/images/Icons/Tick.png" height="40" width="40" alt="Tick" /></a>
+<a style="float:right"><span class="icon success"></span></a>
       
 Copy &amp; paste the CSS below Stylesheet of your webpage
 

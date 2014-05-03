@@ -58,7 +58,7 @@ class Snowflakes {
 
     public function Setup() {
         if (!$this->connect()) {
-            $this->m_outcomeMessage='<div class="SnowflakeHead">Set Up Unsuccessful <img src="../resources/images/Icons/Cross.png" height="32" width="32" alt="cross!" /> </div>';
+            $this->m_outcomeMessage='<div class="SnowflakeHead">Set Up Unsuccessful <span class="icon error"></span></div>';
             return false;
         }
         $gallery = realpath("../Uploads/") . '/';
@@ -96,8 +96,8 @@ class Snowflakes {
                 'thumbWidth = "250"' . "\n" .
                 'thumbHeight = "250"' . "\n" .
                 'maxImageWidth = "620"' . "\n" .
-                'imageExtList = "jpeg,jpg,png,gif"' . "\n" .
-                'imageTypesList = "image/pjpeg,image/jpg,image/png,image/gif,image/tiff,image/bmp"' . "\n\n" .
+                'imageExtList = "pjpeg,jpeg,jpg,png,gif,tiff,bmp"' . "\n" .
+                'imageTypesList = "image/pjpeg,image/jpeg,image/jpg,image/png,image/gif,image/tiff,image/bmp"' . "\n\n" .
                 "[datadir]\n" .
                 'logdir = "' . realpath("../data/") . "/\"\n";
 
@@ -110,7 +110,7 @@ class Snowflakes {
         } else {
             $this->m_Message .= '<br>CMS configuration file written successfully.<span class="icon success"></span><br />';
         }
-        $this->m_outcomeMessage='<div class="SnowflakeHead">Set Up Successful <img src="../resources/images/Icons/Tick.png" height="32" width="32" alt="Tick" /></div>';
+        $this->m_outcomeMessage='<div class="SnowflakeHead">Set Up Successful <span class="icon success"></span></div>';
     }
 
     public function db_connect() {
