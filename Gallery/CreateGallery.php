@@ -217,7 +217,8 @@ if ((isset($MM_insert)) && ($MM_insert == "AddGallery") && $viewLink != "#") {
 <?php } ?>
                             }
                     });
-                    });</script>
+                    });
+                    </script>
         <!-- InstanceEndEditable -->
     </head>
     <body> 

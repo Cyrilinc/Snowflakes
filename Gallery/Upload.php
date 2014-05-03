@@ -39,12 +39,15 @@ if (isset($Post_upload)) {
                     var reader = new FileReader();
 
                     // Closure to capture the file information.
-                    reader.onload = (function(theFile) {
-                        return function(e) {
+                    reader.onload = (function(aFile) {
+                        return function(evt) {
                             // Render thumbnail.
-                            var span = document.createElement('span');
-                            span.innerHTML = ['<img class="Uploadthumb" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
-                            document.getElementById('list').insertBefore(span, null);
+                            var thumbnails_ = document.getElementById('dnd-thumbnails');
+                            if (evt.target.readyState == FileReader.DONE) {
+                                thumbnails_.insertAdjacentHTML(
+                                        'afterBegin', '<img src="' + evt.target.result + '" alt="' +
+                                        aFile.name + '" title="' + aFile.name + '" />');
+                            }
                         };
                     })(f);
 
@@ -63,7 +66,7 @@ if (isset($Post_upload)) {
         <div class=" uploadContainer">
             <!-- PageWrap -->
             <div class="PageWrap">
-                <?php
+                <?php   
                 if (!empty($GalleryMessage)) {
                     echo "<p> " . $GalleryMessage . " </p>";
                 }
@@ -72,6 +75,9 @@ if (isset($Post_upload)) {
                 <div class="contactform">
                     <form action="#" method="post" enctype="multipart/form-data" name="UploadForm" id="installForm">
                         <input type="file" id="files" name="uploadImage[]" class="inputtext2 controls" placeholder="Image" size="30" multiple="multiple"/> <br /> 
+                        <div id="dropzone">
+                            <h3>Drop Images Here</h3>
+                        </div>
                         <label>Maximum allowed for each file size is <?php echo sfUtils::formatSizeUnits($settingsConfig['maxImageSize']); ?></label><br /> 
                         <label>Maximum number of images to upload at once is <?php echo ini_get('max_file_uploads'); ?></label><br /> 
                         <input type="hidden" name="MaxSize" value="<?php echo $settingsConfig['maxImageSize']; ?>">
@@ -80,8 +86,7 @@ if (isset($Post_upload)) {
                     </form>
                     <div class="clear"></div>
                     <div class="Break2"></div>
-                    <output id="list"></output>
-
+                    <div id="dnd-thumbnails" class="vbox boxcenter center"></div>
                 </div><!--contactform Ends-->
 
             </div> <!-- PageWrap Ends -->
