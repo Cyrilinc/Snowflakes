@@ -1,3 +1,14 @@
+/*
+ * Loaction jQuery plugin
+ * version 0.1
+ *
+ * Copyright (c) 2014 Cyril Adelekan (Cyrilinc.co.uk)
+ *
+ * Dual licensed under the MIT and GPL (LICENSE.txt)
+ *
+ * http://Cyrilinc.co.uk/Snowflakes/
+ *
+ */
 
 var latlong;
 function initialize() {
