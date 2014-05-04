@@ -1540,16 +1540,22 @@ final class sfUtils {
 
         $flakeCount = $result[0]['flake_it'];
 
-
         if ($operation == 'INSERT') {
             $sqlOp = "INSERT INTO snowflakes_flakeit SET flake_on='$type',flake_it=$flakeCount,flake_on_id=$id;";
         } else if ($operation == 'DELETE') {
             $sqlOp = "DELETE FROM snowflakes_flakeit WHERE flake_on_id=$id AND flake_on='$type';";
         } else if ($operation == 'UPDATE') {
-
-            $sqlOp = "INSERT INTO snowflakes_flakeit SET flake_it=" .
-                    $flakeCount . ", flake_on_id=" .
-                    $id . " AND flake_on='" . $type . "' ON DUPLICATE KEY UPDATE flake_it=$flakeCount;";
+            //Check if the flake it record exists in the flake it table, if not add it.
+            $sql = "SELECT flake_it";
+            $sql .= "FROM snowflakes_flakeit WHERE flake_on_id=$id AND flake_on='$type'";
+            $conn->fetch($sql);
+            $flakeitresult = $conn->getResultArray();
+            if (empty($flakeitresult)) {
+                $sqlOp = "INSERT INTO snowflakes_flakeit SET flake_on='$type',flake_it=$flakeCount,flake_on_id=$id;";
+            }
+            else{
+                $sqlOp = "UPDATE snowflakes_flakeit SET flake_it=$flakeCount WHERE flake_on_id=$id AND flake_on='$type';";
+            }
         } else {
             return false;
         }
