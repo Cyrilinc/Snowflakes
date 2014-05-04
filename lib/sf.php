@@ -1546,9 +1546,8 @@ final class sfUtils {
             $sqlOp = "DELETE FROM snowflakes_flakeit WHERE flake_on_id=$id AND flake_on='$type';";
         } else if ($operation == 'UPDATE') {
             // Just to make sure the record exists alread
-            $sqlOp = "INSERT IGNOTE INTO snowflakes_flakeit SET flake_on='$type',flake_it=$flakeCount,flake_on_id=$id;";
-            $conn->execute($sqlOp);
-            $sqlOp = "UPDATE snowflakes_flakeit SET flake_it=$flakeCount WHERE flake_on_id=$id AND flake_on='$type';";
+            $sqlOp = "INSERT IGNORE INTO snowflakes_flakeit SET flake_on='$type',flake_it=$flakeCount,flake_on_id=$id;";
+            $sqlOp .= "UPDATE snowflakes_flakeit SET flake_it=$flakeCount WHERE flake_on_id=$id AND flake_on='$type';";
         } else {
             return false;
         }
