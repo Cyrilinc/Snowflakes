@@ -1545,17 +1545,9 @@ final class sfUtils {
         } else if ($operation == 'DELETE') {
             $sqlOp = "DELETE FROM snowflakes_flakeit WHERE flake_on_id=$id AND flake_on='$type';";
         } else if ($operation == 'UPDATE') {
-            //Check if the flake it record exists in the flake it table, if not add it.
-            $sql = "SELECT flake_it";
-            $sql .= "FROM snowflakes_flakeit WHERE flake_on_id=$id AND flake_on='$type'";
-            $conn->fetch($sql);
-            $flakeitresult = $conn->getResultArray();
-            if (empty($flakeitresult)) {
-                $sqlOp = "INSERT INTO snowflakes_flakeit SET flake_on='$type',flake_it=$flakeCount,flake_on_id=$id;";
-            }
-            else{
-                $sqlOp = "UPDATE snowflakes_flakeit SET flake_it=$flakeCount WHERE flake_on_id=$id AND flake_on='$type';";
-            }
+            // Just to make sure the record exists alread
+            $sqlOp = "INSERT IGNOTE INTO snowflakes_flakeit SET flake_on='$type',flake_it=$flakeCount,flake_on_id=$id;";
+            $sqlOp .= "UPDATE snowflakes_flakeit SET flake_it=$flakeCount WHERE flake_on_id=$id AND flake_on='$type';";
         } else {
             return false;
         }

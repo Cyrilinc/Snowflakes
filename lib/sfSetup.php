@@ -279,6 +279,7 @@ class Snowflakes {
                 END IF;
                 
                 INSERT INTO " . $this->m_changeLogTable . " SET change_action=log_action,change_on=log_change_on,created_by=NEW.created_by,change_by=NEW.edited_by,action_id=NEW.id;
+                INSERT IGNORE INTO " . $this->m_flakeItTable . " SET flake_on=log_change_on,flake_it=NEW.flake_it,flake_on_id=NEW.id;
                 UPDATE " . $this->m_flakeItTable . " SET flake_it=NEW.flake_it WHERE flake_on_id=NEW.id AND flake_on=log_change_on;
                 
             END;");
