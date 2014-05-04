@@ -81,6 +81,8 @@ if (isset($delete_Id)) {
     $flakeStruct->getSnowflakesByid($SFconnects, $deleteId);
     $flakeStruct->m_image_dir = $settingsConfig['uploadGalleryDir'];
     $flakeStruct->deleteSnowflake($SFconnects, $setDel);
+    // Check Trigger exist , if not then use manual trigger
+    sfUtils::checkTrigger($SFconnects, $deleteId, 'snowflake', "DELETE");
 
     if (isset($_SESSION['back'])) {
         $change = $_SESSION['back'];

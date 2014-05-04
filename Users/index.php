@@ -62,6 +62,8 @@ if (isset($delete_Id)) {
     $userStruct->getUserByid($SFconnects, $delete_Id);
     $userStruct->m_image_dir = $settingsConfig['uploadGalleryDir'];
     $userStruct->deleteUser($SFconnects);
+    // Check Trigger exist , if not then use manual trigger
+    sfUtils::checkTrigger($SFconnects, $DeleteId, 'user', "DELETE");
 }
 
 $query_reAdminUsers = "SELECT * FROM snowflakes_users";
@@ -80,7 +82,6 @@ if (isset($_SESSION['MM_Username'])) {
 }
 $user = new userStruct();
 $user->getUserByUsername($SFconnects, $colname_rsAdmin);
-
 ?>
 <!DOCTYPE HTML>
 <html ><!-- InstanceBegin template="/Templates/index.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -227,7 +228,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                         <div class="Summary userBlock">
                             <?php $thedeletelink = "index.php?deleteId=" . $userStructList[$i]->m_id; ?>
 
-                                    <!--a class="edits colorboxLink" href="SendPassword.php?adminid=<?php //echo $userStructList[$i]->m_id';   ?>" title="Mail Password"> <img src="../resources/images/Icons/Mail.png" height="22" width="22" alt="Mail" /></a-->
+                                        <!--a class="edits colorboxLink" href="SendPassword.php?adminid=<?php //echo $userStructList[$i]->m_id';    ?>" title="Mail Password"> <img src="../resources/images/Icons/Mail.png" height="22" width="22" alt="Mail" /></a-->
                             <a class="edits" href="#" onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $userStructList[$i]->m_username; ?>');" title="Delete User"> <img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /></a>
                             <a class="edits" href="EditUser.php?adminid=<?php echo $userStructList[$i]->m_id; ?>" title="Edit" onclick="ConfirmDelete();"> <img src="../resources/images/Icons/Edit.png" height="22" width="22" alt="Edit" /></a>
 

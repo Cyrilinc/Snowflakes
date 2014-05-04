@@ -40,8 +40,9 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     exit;
 }
 
-if (isset($_SESSION['ImageFiles']) || isset($_SESSION['ImageThumbFiles']))
+if (isset($_SESSION['ImageFiles']) || isset($_SESSION['ImageThumbFiles'])) {
     sfImageProcessor::ResetAll();
+}
 ?>
 <?php
 if (!isset($_SESSION)) {
@@ -243,16 +244,16 @@ $Powerlink = "../resources/images/Snowflakes2.png";
                         $theRemoveGallery = "EditGallery.php?DeleteId=" . $galleryStruct->m_id . "&amp;setDel=" . $notTheOwner;
                         ?>
                         <div class="NewButton"><a  onclick="deleteConfirmation('<?php echo $theRemoveGallery; ?>', '<?php echo "This Gallery (" . $galleryStruct->m_title . ")"; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>);" href="#" title="Delete"> <img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="-" />Delete</a></div>
-                    <?php } ?>
+    <?php } ?>
                     <!-- Break -->
                     <div class="clear"></div>
                     <div class="Break"></div>
                     <!-- End of Break -->
-                <?php } ?>
+<?php } ?>
                 <!-- PageWrap -->
                 <div class="PageWrap">
 
-                    <?php if ($Galleryid != Null) { ?>   
+<?php if ($Galleryid != Null) { ?>   
 
                         <!--wrapper-->
                         <div class="wrapper"> 
@@ -299,13 +300,13 @@ $Powerlink = "../resources/images/Snowflakes2.png";
                                     }
                                     ?>
 
-                                <?php } else { ?> 
+    <?php } else { ?> 
 
                                     <!-- Snowflakes -->
                                     <li data-pile="Snowflakes :Gallery doesn't exist"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>Gallery doesn't exist</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
                                     <li data-pile="Snowflakes :Gallery doesn't exist"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>Gallery doesn't exist</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
                                     <li data-pile="Snowflakes :Gallery doesn't exist"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>Gallery doesn't exist</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
-                                <?php } ?>     
+    <?php } ?>     
 
                             </ul>
                             <!--tp-grid Ends--> 

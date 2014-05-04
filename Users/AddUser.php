@@ -94,7 +94,10 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && $loginFoundUser <= 0 && ($
 
         $newUserID = $userStruct->getUserID($SFconnects);
         $viewLink = "Account.php?userId=$newUserID";
-        //$formmessage.=$userStruct->printuser();
+        
+        // Check Trigger exist , if not then use manual trigger
+        sfUtils::checkTrigger($SFconnects, $newUserID, 'user', "INSERT");
+        
         $formmessage.='<p>'
                 . '<a href="' . $viewLink . '" title="view it">"' . $userStruct->m_username . '"</a> was added successfully. '
                 . '<span class="icon success"></span>'

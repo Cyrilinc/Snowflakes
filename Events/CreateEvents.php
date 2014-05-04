@@ -102,6 +102,8 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
         $eventID = $eventStruct->getEventID($SFconnects);
         $viewLink = "ViewEvent.php?Eventid=$eventID";
         $EditLink = "EditEvent.php?Eventid=$eventID";
+        // Check Trigger exist , if not then use manual trigger
+        sfUtils::checkTrigger($SFconnects, $eventID, 'event', "INSERT");
         $formmessage.='<p>'
                 . '<a href="' . $viewLink . '" title="view it">"' . $eventStruct->m_title . '"</a> was added successfully. '
                 . '<span class="icon success"></span>'

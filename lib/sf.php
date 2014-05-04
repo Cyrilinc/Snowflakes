@@ -149,7 +149,7 @@ class snowflakeStruct {
 
     public function getSnowflakeID($conn) {
 
-/// Sanity Checks
+        /// Sanity Checks
         if (!$this->isSfPopulated() || !$conn) {
             return false;
         }
@@ -1532,7 +1532,9 @@ final class sfUtils {
         $sql .= "FROM $tableName WHERE id=$id";
         $conn->fetch($sql);
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        /// delete means the record is deleted so it must pass the 
+        //condition to delete the flakeit record  associated with it
+        if (empty($result) && $operation != 'DELETE') {
             return false;
         }
 
@@ -1582,7 +1584,16 @@ final class sfUtils {
         $sql .= "FROM $tableName WHERE id=$id";
         $conn->fetch($sql);
         $result = $conn->getResultArray();
+        // this means that the record has been deleted already if the result is empty and in order for the user 
+        // to completely delete a snowflake, event or gallery the user must own it so we add change log using 
+        // user session
         if (empty($result)) {
+            if ($operation == 'DELETE') {
+                $user = isset($_SESSION['MM_Username']) ? $_SESSION['MM_Username'] : "Snowflakes System";
+                $insertSql = "INSERT INTO snowflakes_change_log SET change_action='$log_action',change_on='$type',"
+                        . "created_by='$user',change_by='$user',action_id=$id;";
+                return $conn->execute($insertSql);
+            }
             return false;
         }
 
@@ -1610,7 +1621,7 @@ final class sfUtils {
                 $log_action = 'unpublished';
             }
             $insertSql = "INSERT INTO snowflakes_change_log SET change_action='$log_action',change_on='$log_change_on',created_by='$created_by',change_by='$edited_by',action_id=$id;";
-            $published = $conn->execute($insertSql);
+            $conn->execute($insertSql);
         }
 
         return $inserted;
@@ -2082,7 +2093,7 @@ final class sfUtils {
     }
 
     public static function createEventRss($conn, $eventList, $inifile = '../config/config.ini') {
-    /// sanity Check
+        /// sanity Check
         if (!$conn || empty($eventList)) {
             return false;
         }

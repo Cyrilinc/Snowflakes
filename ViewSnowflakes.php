@@ -80,6 +80,8 @@ if (isset($delete_Id)) {
     $flakeStruct->getSnowflakesByid($SFconnects, $deleteId);
     $flakeStruct->m_image_dir = $settingsConfig['uploadGalleryDir'];
     $flakeStruct->deleteSnowflake($SFconnects, $setDel);
+    // Check Trigger exist , if not then use manual trigger
+    sfUtils::checkTrigger($SFconnects, $deleteId, 'snowflake', "DELETE");
 }
 
 $query_rsPages = "SELECT * FROM snowflakes";
@@ -118,7 +120,7 @@ if (isset($total_rsPages)) {
 } else {
     $sql = str_replace("SELECT * FROM", "SELECT COUNT(id) count FROM", $query_rsPages);
     $SFconnects->fetch($sql);
-    $result=$SFconnects->getResultArray();
+    $result = $SFconnects->getResultArray();
     $totalRows_rsPages = $result[0]['count'];
 }
 $totalPages_rsPages = ceil($totalRows_rsPages / $maxRows_rsPages) - 1;

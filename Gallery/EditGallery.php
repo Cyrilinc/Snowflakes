@@ -141,6 +141,8 @@ if ((isset($MM_update)) && ($MM_update == "EditGallery")) {
         $GalleryID = $galleryStruct->getGalleryID($SFconnects);
         $viewLink = "ViewOne.php?Galleryid=$GalleryID";
         $EditLink = "EditGallery.php?Eventid=$GalleryID";
+        // Check Trigger exist , if not then use manual trigger
+        sfUtils::checkTrigger($SFconnects, $GalleryID, 'gallery', "UPDATE");
         $GalleryMessage.='<p>'
                 . '<a href="' . $viewLink . '" title="view it">"' . $galleryStruct->m_title . '"</a> was editted successfully. '
                 . '<span class="icon success"></span>'
@@ -174,7 +176,9 @@ if (isset($DeleteId)) {
         if ($setDel == false) {
             sfImageProcessor::RemoveAll();
         }
-
+        // Check Trigger exist , if not then use manual trigger
+        sfUtils::checkTrigger($SFconnects, $DeleteId, 'gallery', "DELETE");
+        
         $updateGoTo = "index.php";
         header(sprintf("Location: %s", $updateGoTo));
     }

@@ -128,6 +128,8 @@ if ((isset($MM_insert)) && ($MM_insert == "AddGallery")) {
         $GalleryID = $galleryStruct->getGalleryID($SFconnects);
         $viewLink = "ViewOne.php?Galleryid=$GalleryID";
         $EditLink = "EditGallery.php?Eventid=$GalleryID";
+        // Check Trigger exist , if not then use manual trigger
+        sfUtils::checkTrigger($SFconnects, $GalleryID, 'gallery', "INSERT");
         $GalleryMessage.='<p>'
                 . '<a href="' . $viewLink . '" title="view it">"' . $galleryStruct->m_title . '"</a> was added successfully. '
                 . '<span class="icon success"></span>'
@@ -217,8 +219,7 @@ if ((isset($MM_insert)) && ($MM_insert == "AddGallery") && $viewLink != "#") {
 <?php } ?>
                             }
                     });
-                    });
-                    </script>
+                    });                    </script>
         <!-- InstanceEndEditable -->
     </head>
     <body> 

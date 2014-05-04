@@ -108,6 +108,8 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
     } else {
         $snowflakeID = $snowflakeStruct->getSnowflakeID($SFconnects);
         $viewLink = "Viewflake.php?pageid=$snowflakeID";
+        // Check Trigger exist , if not then use manual trigger
+        sfUtils::checkTrigger($SFconnects, $snowflakeID, 'snowflake', "INSERT");
         $formmessage.='<p>'
                 . '<a href="' . $viewLink . '" title="view it">"' . $snowflakeStruct->m_title . '"</a> was added successfully. '
                 . '<span class="icon success"></span>'

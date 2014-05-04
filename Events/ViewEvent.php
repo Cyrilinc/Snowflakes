@@ -71,6 +71,8 @@ if (isset($delete)) {
     $eventStruct->getEventByid($SFconnects, $deleteId);
     $eventStruct->m_image_dir = $settingsConfig['uploadGalleryDir'];
     $eventStruct->deleteEvent($SFconnects, $setDel);
+    // Check Trigger exist , if not then use manual trigger
+    sfUtils::checkTrigger($SFconnects, $deleteId, 'event', "DELETE");
 
     if (isset($_SESSION['back'])) {
         $change = $_SESSION['back'];

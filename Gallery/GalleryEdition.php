@@ -106,6 +106,8 @@ if (isset($DeleteId)) {
         if ($setDel == false) {
             sfImageProcessor::RemoveAll();
         }
+        // Check Trigger exist , if not then use manual trigger
+        sfUtils::checkTrigger($SFconnects, $DeleteId, 'gallery', "DELETE");
     }
 }
 
@@ -295,12 +297,14 @@ $totalRows_rsSFGallery = $SFconnects->recordCount();
                                 $DBImageThumbFiles = explode(",", $galleryStructList[$i]->m_thumb_name);
 
                                 // Loop through the array and add directory prefix to each item in array
-                                foreach ($DBImageFiles as &$value)
+                                foreach ($DBImageFiles as &$value) {
                                     $value = $UploadImgUrl . $value;
+                                }
 
                                 // Loop through the array and add directory prefix to each item in array	
-                                foreach ($DBImageThumbFiles as &$value)
+                                foreach ($DBImageThumbFiles as &$value) {
                                     $value = $UploadThumbUrl . $value;
+                                }
 
                                 //DataList
                                 ?>
@@ -316,7 +320,7 @@ $totalRows_rsSFGallery = $SFconnects->recordCount();
                                         ?>
                                         <a onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $galleryStructList[$i]->m_title; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  class="DeleteImage" title="Delete Gallery" href="#"><img src="../resources/images/Icons/Delete.png" width="22" height="22" alt=" X " /> </a> 
 
-                                    <?php } ?>
+        <?php } ?>
 
                                     <a class="colorbox" href="<?php echo end($DBImageFiles); ?>" onerror="this.href='<?php echo $UploadImgUrl . "missing_default.png"; ?>'" ><span class="tp-info"><span><?php echo $galleryStructList[$i]->m_title; ?></span></span> 
                                         <img src="<?php echo end($DBImageThumbFiles); ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo $galleryStructList[$i]->m_title; ?>"> 
@@ -328,13 +332,13 @@ $totalRows_rsSFGallery = $SFconnects->recordCount();
                             } while ($i < count($galleryStructList));
                             ?>
 
-                        <?php } else { ?> 
+<?php } else { ?> 
 
                             <!-- Snowflakes -->
                             <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>No Images in Gallery</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
                             <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>No Images in Gallery</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
                             <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>No Images in Gallery</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
-                        <?php } ?>     
+<?php } ?>     
 
                     </ul>
                     <!--tp-grid Ends--> 
