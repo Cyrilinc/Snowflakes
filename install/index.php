@@ -48,19 +48,17 @@ if (!isset($_SESSION['form'])) {
         <script src="../SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
         <script src="../SpryAssets/SpryValidationPassword.js" type="text/javascript"></script>
         <script src="../SpryAssets/SpryValidationConfirm.js" type="text/javascript"></script>
+        <script src="../SpryAssets/SpryValidationSelect.js" type="text/javascript"></script>
         <link href="../SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css" />
         <link href="../SpryAssets/SpryValidationPassword.css" rel="stylesheet" type="text/css" />
         <link href="../SpryAssets/SpryValidationConfirm.css" rel="stylesheet" type="text/css" />
-
+        <link href="../SpryAssets/SpryValidationSelect.css" rel="stylesheet" type="text/css">
         <!--[if IE]>
         <link rel="stylesheet" type="text/css" href="../resources/css/style.css"/>
         <![endif]-->
-
         <!--[if IEMobile]> 
            <link rel="stylesheet" type="text/css" href="../resources/css/Mobile.css"/>
         <![endif]-->
-
-
         <!-- InstanceEndEditable -->
     </head>
     <body> 
@@ -74,12 +72,9 @@ if (!isset($_SESSION['form'])) {
                         <div class="SideMenu"> <a class="opener" id="touch-menu" href="#"><i class="icon-reorder"></i>Menu</a>
                             <ul id="primary_nav" class="primary_nav">
                                 <!-- InstanceBeginEditable name="menuEdit" -->
-
                                 <li>
                                     <a href="../login.php" title="Login to Snowflake"> <img src="../resources/images/Icons/Lock.png" height="22" width="22" alt="Login" /> Log in  </a>
                                 </li>
-
-
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
@@ -119,7 +114,7 @@ if (!isset($_SESSION['form'])) {
                                 <!--SliderMain-->
                                 <div class="HalfSliderMain"> 
                                     <!--HalfPage1-->
-                                    <div class="HalfSliderPage" id="Halfpage1"> <img src="../resources/images/SnowflakesBanner.png" alt="Snowflakes" align="middle" /> </div>
+                                    <div class="HalfSliderPage" id="Halfpage1"> <img src="../resources/images/SnowflakesBanner.png" alt="Snowflakes" /> </div>
                                     <!--End HalfPage1 --> 
                                 </div>
                                 <!--End of HalfSliderMain--> 
@@ -163,22 +158,27 @@ if (!isset($_SESSION['form'])) {
                             </span><br />
 
                             <label>Database Type: </label>
-                            <select name="dbType" class=" controls">
-                                <option value="MySQL">MySQL</option>
-                                <!--option value="SQLite">SQLite</option-->
-                            </select>
-                            <br/>
+                            <span id="databaseSelect">
+                                <span class="selectRequiredMsg">Please select a database type.<br/></span>
+                                <select name="dbType" class=" controls">
+                                    <option value="MySQL">MySQL</option>
+                                    <!--option value="SQLite">SQLite</option-->
+                                </select>
+                            </span><br/>
                             <label>Time zone:</label>
-                            <select class=" controls" name="time_zone">
-                                <?php
-                                require_once '../lib/sf.php';
-                                $tzlist = sfUtils::getTimeZoneList();
-                                foreach ($tzlist as $timeZone) {
-                                    $selected = $timeZone=='Europe/London' ? 'selected="selected"' : "";
-                                    echo '<option value="' . $timeZone . '" ' . $selected . '>' . sfUtils::escape($timeZone). '</option>';
-                                }
-                                ?>                                   
-                            </select>
+                            <span id="timezoneSelect">
+                                <span class="selectRequiredMsg">Please select an a time zone.<br/></span>
+                                <select class=" controls" name="time_zone">
+                                    <?php
+                                    require_once '../lib/sf.php';
+                                    $tzlist = sfUtils::getTimeZoneList();
+                                    foreach ($tzlist as $timeZone) {
+                                        $selected = $timeZone == 'Europe/London' ? 'selected="selected"' : "";
+                                        echo '<option value="' . $timeZone . '" ' . $selected . '>' . sfUtils::escape($timeZone) . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </span>
                             <br/>
                             <br/>
 
@@ -207,15 +207,17 @@ if (!isset($_SESSION['form'])) {
                                 <input name="adminPass2" type="password" class="inputtext2"  value="" placeholder="Confirm Password" />
                             </span><br/>
 
-                            <label for="button">  </label>
                             <input class="NewButton" type="submit" name="submitButton" value="Setup CMS" />
 
                             <input type="hidden" name="MM_setup" value="setupform" />
                         </form>
 
-                        <div class="form-footer"><?php echo $_SESSION['formFooter'];
-                                unset($_SESSION['formFooter']);
-                                ?></div>
+                        <div class="form-footer">
+                            <?php
+                            echo $_SESSION['formFooter'];
+                            unset($_SESSION['formFooter']);
+                            ?>
+                        </div>
                     </div>
                     <!--END of contactform-->
                 </div>
@@ -271,6 +273,8 @@ if (!isset($_SESSION['form'])) {
             var spryconfirm1 = new Spry.Widget.ValidationConfirm("spryAdminPass2", "AdminPass", {validateOn: ["blur", "change"]});
             var sprypassword2 = new Spry.Widget.ValidationPassword("spryDBPass", {validateOn: ["blur"]});
             var sprytextfield3 = new Spry.Widget.ValidationTextField("spryAdminEmail", "email");
+            var spryselect1 = new Spry.Widget.ValidationSelect("timezoneSelect");
+            var spryselect2 = new Spry.Widget.ValidationSelect("databaseSelect");
         </script>
 
         <!-- InstanceEndEditable -->

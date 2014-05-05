@@ -152,7 +152,7 @@ if (isset($Post_password)) {
                                 <!--SliderMain-->
                                 <div class="HalfSliderMain"> 
                                     <!--HalfPage1-->
-                                    <div class="HalfSliderPage" id="Halfpage1"> <img src="resources/images/SnowflakesBanner.png" alt="Snowflakes" align="middle" /> </div>
+                                    <div class="HalfSliderPage" id="Halfpage1"> <img src="resources/images/SnowflakesBanner.png" alt="Snowflakes" /> </div>
                                     <!--End HalfPage1 --> 
                                 </div>
                                 <!--End of HalfSliderMain--> 

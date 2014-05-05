@@ -48,11 +48,13 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
 
-    if (strpos($MM_restrictGoTo, "?"))
+    if (strpos($MM_restrictGoTo, "?")) {
         $MM_qsChar = "&";
+    }
 
-    if (isset($query_string) && strlen($query_string) > 0)
+    if (isset($query_string) && strlen($query_string) > 0) {
         $MM_referrer .= "?" . $query_string;
+    }
 
     $MM_restrictGoTo = $MM_restrictGoTo . $MM_qsChar . "accesscheck=" . urlencode($MM_referrer);
     header("Location: " . $MM_restrictGoTo);
@@ -166,14 +168,14 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
         <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
         <![endif]-->
 
-        <!--[if IEMobile]> 
+        <!--[if IEMobile]>
            <link rel="stylesheet" type="text/css" href="resources/css/Mobile.css"/>
         <![endif]-->
         <!-- InstanceEndEditable -->
     </head>
-    <body> 
+    <body>
         <!--HeaderWrapper-->
-        <div class="HeaderWrapper"> 
+        <div class="HeaderWrapper">
             <!--pagewidth-->
             <div class="pagewidth">
                 <header class="site-header">
@@ -218,7 +220,7 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                                     <li>
                                         <a href="SiteSetting/index.php" title="Settings"> <img src="resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
                                         <ul>
-                                            <li><a href="Users/index.php" title="Users" class="pink" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SFUsers']['total']); ?>"> <img src="resources/images/Icons/User.png" height="22" width="22" alt="Admin" /> Admin Users </a></li> 
+                                            <li><a href="Users/index.php" title="Users" class="pink" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SFUsers']['total']); ?>"> <img src="resources/images/Icons/User.png" height="22" width="22" alt="Admin" /> Admin Users </a></li>
                                             <li><a href="SiteSetting/LogViewer.php" title="Code Generator"> <img src="resources/images/Icons/Log.png" height="22" width="22" alt="Log" /> Log Viewer </a></li>
                                             <li><a href="Generator.php" title="Code Generator"> <img src="resources/images/Icons/Key.png" height="22" width="22" alt="Code Generator" /> Code Generator </a></li>
                                             <li><a href="<?php echo $logoutAction ?>" title="Log out"> <img src="resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a></li>
@@ -236,13 +238,13 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
-                        <!--SideMenu--> 
+                        <!--SideMenu-->
                     </div>
-                    <!--pagewidth--> 
+                    <!--pagewidth-->
 
                 </header>
             </div>
-            <!--pagewidth--> 
+            <!--pagewidth-->
         </div>
         <!-- End HeaderWrapper-->
 
@@ -250,7 +252,7 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
         <div class="Break2"></div>
 
         <!-- ContentWrapper -->
-        <div class="ContentWrapper"> 
+        <div class="ContentWrapper">
             <!-- Content -->
             <div class="Content"> <!-- InstanceBeginEditable name="BodyRegion" -->
                 <h1>Add a new Snowflake</h1>
@@ -258,7 +260,7 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                 <!-- Break -->
                 <div class="clear"></div>
                 <div class="Break"></div>
-                <!-- End of Break --> 
+                <!-- End of Break -->
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
@@ -280,17 +282,17 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                                 <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('bold');" title="bold" class="switchButton" /><label id="sfeditor_bold"></label></span>
                                 <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('italic');" title="italic"/> <label id="sfeditor_italic"></label></span>
                                 <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('underline');" title="underline"/><label id="sfeditor_underline"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('strikethrough');" title="strikethrough"/><label id="sfeditor_strikethrough"></label></span>		 
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('strikethrough');" title="strikethrough"/><label id="sfeditor_strikethrough"></label></span>
                                 <span class="switchSpacer"></span>
                                 <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('createLink', promptValue('Link Url'));" title="link"/><label id="sfeditor_link"></label></span>
                                 <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('unlink');" title="unlink"/><label id="sfeditor_unlink"></label></span>
                                 <span class="switchSpacer"></span>
                                 <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('RemoveFormat', 'h1');" title="remove format"/><label id="sfeditor_removeformat"></label></span>
                                 <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h1');" title="h1"/><label id="sfeditor_h1"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h2');" title="h2"/><label id="sfeditor_h2"></label></span> 
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h3');" title="h3"/><label id="sfeditor_h3"></label></span> 
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h4');" title="h4"/><label id="sfeditor_h4"></label></span> 
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h5');" title="h5"/><label id="sfeditor_h5"></label></span> 
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h2');" title="h2"/><label id="sfeditor_h2"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h3');" title="h3"/><label id="sfeditor_h3"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h4');" title="h4"/><label id="sfeditor_h4"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h5');" title="h5"/><label id="sfeditor_h5"></label></span>
                                 <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h6');" title="h6"/><label id="sfeditor_h6"></label></span>
                                 <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('insertparagraph');" title="paragraph"/><label id="sfeditor_paragraph"></label></span>
                                 <span class="switchSpacer"></span>
@@ -333,7 +335,7 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                                     <option value="2">12</option>
                                     <option value="3">16</option>
                                     <option value="4">18</option>
-                                    <option value="5">24</option> 
+                                    <option value="5">24</option>
                                     <option value="6">32</option>
                                     <option value="7">48</option>
                                 </select>
@@ -389,28 +391,28 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                         </form>
                         <p>&nbsp;</p>
                     </div>
-                    <!--End of contactform--> 
+                    <!--End of contactform-->
 
                 </div>
-                <!-- End of PageWrap --> 
+                <!-- End of PageWrap -->
 
                 <!-- InstanceEndEditable -->  </div>
-            <!-- end of Content --> 
+            <!-- end of Content -->
         </div>
         <!-- end of ContentWrapper -->
 
-        <footer id="SnowFooter"> 
+        <footer id="SnowFooter">
             <!-- CMSFooterWrapper -->
-            <div class="CMSFooterWrapper"> 
+            <div class="CMSFooterWrapper">
 
                 <!--CopyRight-->
                 <div class="CopyRight">
                     <p>&copy; 2013 Cyril Inc. All Rights Reserved. | <a href="http://cyrilinc.co.uk/Legal.html"> Legal information</a> | <a href="mailto:contactus@cyrilinc.co.uk" id="CopyRContactus">Contact Us </a>|</p>
                 </div>
-                <!--END of  CopyRight--> 
+                <!--END of  CopyRight-->
 
                 <!--SocialBar-->
-                <div class="SocialBar"> 
+                <div class="SocialBar">
                     <!--Socialtable-->
                     <div class="Socialtable">
                         <ul>
@@ -424,20 +426,19 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                             <li><a href="http://www.youtube.com/CyrilIncBroadcast" target="_blank" title="Cyril Inc on YouTube"> <img src="resources/images/Icons/YouTube.png" alt="YouTube" /></a></li>
                         </ul>
                     </div>
-                    <!--End Socialtable--> 
+                    <!--End Socialtable-->
                 </div>
-                <!--End SocialBar--> 
+                <!--End SocialBar-->
 
             </div>
-            <!-- End of CMSFooterWrapper --> 
+            <!-- End of CMSFooterWrapper -->
 
         </footer>
-        <!-- InstanceBeginEditable name="FootEdit" --> 
+        <!-- InstanceBeginEditable name="FootEdit" -->
         <script type="text/javascript">
             var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytTitle", "none", {validateOn: ["blur", "change"], maxChars: 120});
             var sprytextarea1 = new Spry.Widget.ValidationTextarea("spryBodyText");
-        </script> 
-
+        </script>
         <!-- InstanceEndEditable -->
     </body>
     <!-- InstanceEnd --></html>
