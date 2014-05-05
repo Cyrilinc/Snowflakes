@@ -72,6 +72,10 @@ $dataconfig = Config::getConfig("datadir", '../config/config.ini');
 $logDir = $dataconfig['logdir'];
 
 $logfile = filter_input(INPUT_GET, 'logfile');
+$deletefile = filter_input(INPUT_GET, 'delfile');
+if (isset($deletefile) && !$logfile) {
+    sfUtils::Deletefile($logDir.$deletefile);
+}
 ?>
 <!DOCTYPE HTML>
 <html lang="en" ><!-- InstanceBegin template="/Templates/index.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -119,15 +123,20 @@ $logfile = filter_input(INPUT_GET, 'logfile');
         $date = explode("-", $file['Date']);
         $date[1] = $date[1] - 1;
         $loglink = $file['LogFile'];
-
         $newdate = implode(",", $date);
         echo "[new Date($newdate), '$loglink'],";
     }
     ?>
                     ]);
 
-                    var formatter = new google.visualization.PatternFormat('<a href="LogViewer.php?logfile={1}" data-log-date="{0}">{1}</a>');
+                    var formatter = new google.visualization.PatternFormat('<div>\n\
+                    <a href="LogViewer.php?logfile={1}" data-log-date="{0}">{1}</a>\n\
+                    <a href="LogViewer.php?delfile={1}" title="Delete this Logfile"><img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /></a>\n\
+                    </div>');
                     formatter.format(data, [1, 1]);
+                    
+                    //var formatter2 = new google.visualization.PatternFormat('');
+                    //formatter2.format(data, [2, 2]);
 
 
                     var table = new google.visualization.Table(document.getElementById('table_div'));
