@@ -106,6 +106,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
         <script type="text/javascript" src="../resources/Js/Snowflakes.js"></script>
 
         <!-- InstanceBeginEditable name="head" -->
+        <link rel="stylesheet" type="text/css" href="../resources/css//imgareaselect-default.css" />
         <script type="text/javascript" src="../resources/Js/jquery-pack.js"></script>
         <script type="text/javascript" src="../resources/Js/jquery.imgareaselect.min.js"></script>
         <!-- InstanceEndEditable -->
@@ -259,7 +260,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                         });
 
                         $(window).load(function() {
-                            $('#thumbnail').imgAreaSelect({aspectRatio: '1:<?php echo $thumbHeight / $thumbWidth; ?>', onSelectChange: preview,x1: 0, y1: 0, x2: <?php echo $thumbWidth; ?>, y2: <?php echo $thumbHeight; ?>});
+                            $('#thumbnail').imgAreaSelect({aspectRatio: '1:<?php echo $thumbHeight / $thumbWidth; ?>',handles: true, onSelectChange: preview,x1: 0, y1: 0, x2: <?php echo $thumbWidth; ?>, y2: <?php echo $thumbHeight; ?>});
                         });
 
                     </script>
