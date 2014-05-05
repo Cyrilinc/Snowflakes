@@ -8,22 +8,22 @@
  * Date: Tues, Jan 15 2013 11:33:31 -1100
  */
 
-$(document).ready(function(){ 
-	var touch 	= $('#touch-menu');
-	var menu 	= $('.primary_nav');
- 
-	$(touch).on('click', function(/*e*/) {
-		/*e.preventDefault();*/
-		menu.slideToggle();
-	});
-	
-	$(window).resize(function(){
-		var w = $(window).width();
-		if(w > 767 && menu.is(':hidden')) {
-			menu.removeAttr('style');
-		}
-	});
-	
+$(document).ready(function() {
+    var touch = $('#touch-menu');
+    var menu = $('.primary_nav');
+
+    $(touch).on('click', function(/*e*/) {
+        /*e.preventDefault();*/
+        menu.slideToggle();
+    });
+
+    $(window).resize(function() {
+        var w = $(window).width();
+        if (w > 767 && menu.is(':hidden')) {
+            menu.removeAttr('style');
+        }
+    });
+
 });
 
 $(document).ready(function() {
@@ -47,8 +47,8 @@ $(document).ready(function() {
         $(this).next(".SummaryDescription2").slideToggle(500);
         $(this).toggleClass("SummaryDescBtnDown2", 1000, "easeInSine");
     });
-    
-    
+
+
 });
 $(document).ready(function() {
 //Check if the width of the browser is that of a mobile or tablet or scaled lower
@@ -57,7 +57,7 @@ $(document).ready(function() {
         //toggle the componenet with class msg_body
         $(".opener").click(function()
         {
-            $(this).next(".primary_nav").slideToggle(500);
+           $(this).next(".primary_nav").slideToggle(500);
         });
     }
 

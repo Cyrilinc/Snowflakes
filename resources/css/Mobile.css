@@ -267,7 +267,7 @@ strong {
     list-style: none;
     position: absolute;
     right: 2px;
-    top: 20px;
+    top: 50px;
     min-width: 150px;
     background: #2b2b2b;
     margin-left: -25px;
@@ -922,13 +922,14 @@ a.blue[data-bubble]:after {
 only screen and (min--moz-device-pixel-ratio: 2), 
 only screen and (-o-min-device-pixel-ratio: 2/1), 
 only screen and (min-device-pixel-ratio: 2) {
-    .SideMenu a.opener {
+    .SideMenu a.opener{
         background: url(../images/opener2.png);
         background-size: 61px auto;
     }
     .SideMenu a.opener:hover {
         background-position: 0 -94px;
     }
+    
 }
 .page-holder {
     float: none;

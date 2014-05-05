@@ -308,17 +308,16 @@ $totalRows_rsSFGallery = $SFconnects->recordCount();
 
                                 //DataList
                                 ?>
-
                                 <li> <span class="tp-title" ><?php echo $galleryStructList[$i]->m_title; ?></span>
-                                    <a class="ViewThumb" title="View Gallery" href="ViewOne.php?Galleryid=<?php echo $galleryStructList[$i]->m_id; ?>" > <img src="../resources/images/Icons/View.png" height="22" width="22" alt="View" /> </a> 
-                                    <a class="EditThumb" title="Edit Gallery" href="EditGallery.php?Galleryid=<?php echo $galleryStructList[$i]->m_id; ?>"> <img src="../resources/images/Icons/Edit.png" width="22" height="22" alt="Edit" /></a>
+                                    <a class="ViewThumb" title="View Gallery" href="ViewOne.php?Galleryid=<?php echo $galleryStructList[$i]->m_id; ?>" > <img src="../resources/images/Icons/View.png" alt="View" /> </a> 
+                                    <a class="EditThumb" title="Edit Gallery" href="EditGallery.php?Galleryid=<?php echo $galleryStructList[$i]->m_id; ?>"> <img src="../resources/images/Icons/Edit.png" alt="Edit" /> </a>
 
                                     <?php
                                     $notTheOwner = $colname_rsAdmin != $galleryStructList[$i]->m_created_by ? true : false;
                                     if ($notTheOwner == false || $user->m_access_level == 5) {
                                         $thedeletelink = "GalleryEdition.php?DeleteId=" . $galleryStructList[$i]->m_id . "&amp;setDel=" . $notTheOwner;
                                         ?>
-                                        <a onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $galleryStructList[$i]->m_title; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  class="DeleteImage" title="Delete Gallery" href="#"><img src="../resources/images/Icons/Delete.png" width="22" height="22" alt=" X " /> </a> 
+                                        <a onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $galleryStructList[$i]->m_title; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  class="DeleteImage" title="Delete Gallery" href="#"><img src="../resources/images/Icons/Delete.png" alt=" X " /> </a> 
 
         <?php } ?>
 

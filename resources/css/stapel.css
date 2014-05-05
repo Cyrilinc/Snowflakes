@@ -301,21 +301,34 @@
 .ViewThumb{
     float:right;
     position:absolute;
-    right:50px;
+    right:60px;
     top:0px;
+    padding: 3px;
+    margin: 3px;
 }
 
 .EditThumb{
     float:right;
     position:absolute;
-    right:27px;
+    right:32px;
     top:0px;
+    padding: 3px;
+    margin: 3px;
 }
+
 .DeleteImage{
     float:right;
     position:absolute;
     right:5px;
     top:0px;
+    padding: 3px;
+    margin: 3px;
+}
+
+.ViewThumb img, .EditThumb img,.DeleteImage img{
+    width:28px;
+    height: auto;
+    height: auto\9;
 }
 
 .flakeitGallery{

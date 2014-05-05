@@ -106,7 +106,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
         <script type="text/javascript" src="../resources/Js/Snowflakes.js"></script>
 
         <!-- InstanceBeginEditable name="head" -->
-        <link rel="stylesheet" type="text/css" href="../resources/css//imgareaselect-default.css" />
+        <link rel="stylesheet" type="text/css" href="../resources/css/imgareaselect-default.css" />
         <script type="text/javascript" src="../resources/Js/jquery-pack.js"></script>
         <script type="text/javascript" src="../resources/Js/jquery.imgareaselect.min.js"></script>
         <!-- InstanceEndEditable -->

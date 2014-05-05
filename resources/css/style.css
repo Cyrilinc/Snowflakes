@@ -491,6 +491,17 @@ a.blue[data-bubble]:after {
 .SideMenu a.opener:hover {
     background-position: 0 -44px;
 }
+.SideMenu a.opener2 {
+    float: right;
+    background: url(../images/opener.png);
+    width:61px;
+    height: 41px;
+    background-position: 0 -44px;
+    text-indent: -9999px;
+    overflow: hidden;
+    padding: 0;
+    margin: 21px 20px 0 0;
+}
 
 #ActiveMenu, .primary_nav li:hover {
     color: #ffffff;
