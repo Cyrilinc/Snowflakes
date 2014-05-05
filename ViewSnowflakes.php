@@ -152,9 +152,7 @@ if (!empty($query_string)) {
     }
 }
 $queryString_rsPages = sprintf("&amp;totalRows_rsPages=%d%s", $totalRows_rsPages, $queryString_rsPages);
-?>
 
-<?php
 $UploadImgUrl = $settingsConfig['m_sfGalleryUrl'];
 $imageMissing = $UploadImgUrl . "missing_default.png";
 ?>

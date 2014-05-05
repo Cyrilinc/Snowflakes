@@ -93,11 +93,9 @@ $rssflogo = filter_input(INPUT_GET, 'sflogo');
 if (isset($rssflogo)) {
     $sflogo = "#" . $rssflogo;
 }
-
 ?>
-
 <script type="text/javascript">
-    var flakeitUrl = "<?php echo $row_SiteSettings['sf_url'] . "flakeit.php"; ?>";
+    var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
 </script>
 <script type="text/javascript" src="<?php echo $row_SiteSettings['sf_url']; ?>resources/Js/flakeit.js"></script>
 

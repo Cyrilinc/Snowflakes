@@ -94,7 +94,7 @@ if (isset($rssflogo)) {
 }
 ?>
 <script type="text/javascript">
-    var flakeitUrl = "<?php echo $row_SiteSettings['sf_url'] . "flakeit.php"; ?>";
+    var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
 </script>
 <script type="text/javascript" src="<?php echo $row_SiteSettings['sf_url']; ?>resources/Js/flakeit.js"></script>
 <div style="float: right; background-color:<?php echo $sflogo; ?>;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="<?php echo $Powerlink; ?>" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
