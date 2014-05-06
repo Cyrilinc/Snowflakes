@@ -150,6 +150,8 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
         <link href="../SpryAssets/SpryValidationTextarea.css" rel="stylesheet" type="text/css">
         <link href="../resources/css/jquery-ui-1.10.4.snowflakes.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Js/jquery-ui-1.10.4.snowflakes.js"></script>
+        <link rel="stylesheet" title="text/css" href="../resources/css/fontstyle.css" />
+        
         <script type="text/javascript">
             var datefield = document.createElement("input");
             datefield.setAttribute("type", "date");
@@ -296,47 +298,47 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                             </span><br />
 
                             <div id="sfeditor_toolbar" class="inputtext2 controls">
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('bold');" title="bold" class="switchButton" /><label id="sfeditor_bold"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('italic');" title="italic"/> <label id="sfeditor_italic"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('underline');" title="underline"/><label id="sfeditor_underline"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('strikethrough');" title="strikethrough"/><label id="sfeditor_strikethrough"></label></span>		 
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('bold');" title="bold" class="switchButton" /><label class="icon-bold" id="sfeditor_bold"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('italic');" title="italic"/> <label class="icon-italic" id="sfeditor_italic"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('underline');" title="underline"/><label class="icon-underline" id="sfeditor_underline"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('strikethrough');" title="strikethrough"/><label class="icon-strikethrough" id="sfeditor_strikethrough"></label></span>
                                 <span class="switchSpacer"></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('createLink', promptValue('Link Url'));" title="link"/><label id="sfeditor_link"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('unlink');" title="unlink"/><label id="sfeditor_unlink"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('createLink', promptValue('Link Url'));" title="link"/><label class="icon-link" id="sfeditor_link"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('unlink');" title="unlink"/><label class="icon-link2" id="sfeditor_unlink"></label></span>
                                 <span class="switchSpacer"></span>
                                 <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('RemoveFormat', 'h1');" title="remove format"/><label id="sfeditor_removeformat"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h1');" title="h1"/><label id="sfeditor_h1"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h2');" title="h2"/><label id="sfeditor_h2"></label></span> 
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h3');" title="h3"/><label id="sfeditor_h3"></label></span> 
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h4');" title="h4"/><label id="sfeditor_h4"></label></span> 
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h5');" title="h5"/><label id="sfeditor_h5"></label></span> 
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h6');" title="h6"/><label id="sfeditor_h6"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('insertparagraph');" title="paragraph"/><label id="sfeditor_paragraph"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h1');" title="h1"/><label class="icon-h1" id="sfeditor_h1"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h2');" title="h2"/><label class="icon-h2" id="sfeditor_h2"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h3');" title="h3"/><label class="icon-h3" id="sfeditor_h3"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h4');" title="h4"/><label class="icon-h4" id="sfeditor_h4"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h5');" title="h5"/><label class="icon-h5" id="sfeditor_h5"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('formatBlock', 'h6');" title="h6"/><label class="icon-h6" id="sfeditor_h6"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('insertparagraph');" title="paragraph"/><label class="icon-paragraph" id="sfeditor_paragraph"></label></span>
                                 <span class="switchSpacer"></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('insertimage', promptValue('Image Url'));" title="image"/><label id="sfeditor_image"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('insertimage', promptValue('Image Url'));" title="image"/><label class="icon-image" id="sfeditor_image"></label></span>
                                 <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('inserthorizontalrule');" title="hr"/><label id="sfeditor_hr"></label></span>
                                 <span class="switchSpacer"></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('undo');" title="undo"/><label id="sfeditor_undo"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('redo');" title="redo"/><label id="sfeditor_redo"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('undo');" title="undo"/><label class="icon-undo" id="sfeditor_undo"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('redo');" title="redo"/><label class="icon-redo" id="sfeditor_redo"></label></span>
                                 <span class="switchSpacer"></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('backcolor', promptValue('Background Color'));" title="backcolor"/><label id="sfeditor_backcolor"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('forecolor', promptValue('Foreground Color'));" title="fontcolor"/><label id="sfeditor_fontcolor"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('hilitecolor', promptValue('Hilight Color'));" title="hilightcolor"/><label id="sfeditor_hilightcolor"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('backcolor', promptValue('Background Color'));" title="backcolor"/><label class="icon-droplet" id="sfeditor_backcolor"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('forecolor', promptValue('Foreground Color'));" title="fontcolor"/><label class="icon-droplet2" id="sfeditor_fontcolor"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('hilitecolor', promptValue('Hilight Color'));" title="hilightcolor"/><label class="icon-palette" id="sfeditor_hilightcolor"></label></span>
                                 <span class="switchSpacer"></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('subscript');" title="subscript"/><label id="sfeditor_subscript"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('superscript');" title="superscript"/><label id="sfeditor_superscript"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('subscript');" title="subscript"/><label class="icon-subscript" id="sfeditor_subscript"><sub>2</sub></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('superscript');" title="superscript"/><label class="icon-superscript" id="sfeditor_superscript"><sup>2</sup></label></span>
                                 <span class="switchSpacer"></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('justifyleft');" title="left"/><label id="sfeditor_left"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('justifycenter');" title="center"/><label id="sfeditor_center"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('justifyright');" title="right"/><label id="sfeditor_right"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('justifyfull');" title="justify"/><label id="sfeditor_justify"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('justifyleft');" title="left"/><label class="icon-paragraph-left" id="sfeditor_left"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('justifycenter');" title="center"/><label  class="icon-paragraph-center" id="sfeditor_center"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('justifyright');" title="right"/><label  class="icon-paragraph-right" id="sfeditor_right"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('justifyfull');" title="justify"/><label  class="icon-paragraph-justify" id="sfeditor_justify"></label></span>
                                 <span class="switchSpacer"></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('insertorderedlist');" title="ol"/><label id="sfeditor_ol"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('insertunorderedlist');" title="ul"/><label id="sfeditor_ul"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('insertorderedlist');" title="ol"/><label class="icon-numbered-list" id="sfeditor_ol"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('insertunorderedlist');" title="ul"/><label class="icon-list" id="sfeditor_ul"></label></span>
                                 <span class="switchSpacer"></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('inserthtml', promptValue('Html'));" title="html"/><label id="sfeditor_html"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('indent');" title="indent"/><label id="sfeditor_indent"></label></span>
-                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('outdent');" title="outdent"/><label id="sfeditor_outdent"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('inserthtml', promptValue('Html'));" title="html"/><label class="icon-file-xml" id="sfeditor_html"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('indent');" title="indent"/><label class="icon-indent-increase" id="sfeditor_indent"></label></span>
+                                <span class="switchButton"><input type="checkbox" onclick="sfEditorAction('outdent');" title="outdent"/><label class="icon-indent-decrease" id="sfeditor_outdent"></label></span>
                                 <span class="switchSpacer"></span>
 
                                 <select onchange="sfEditorAction('fontname', this.value);" class="inputtext3 sfeditor_select">

@@ -2023,79 +2023,40 @@ pre.code{
     border-color: #8aa8bd transparent;
 }
 
-#sfeditor_bold {
-    background-image: url(../images/editor/bold.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
+#sfeditor_bold ,
+#sfeditor_italic,
+#sfeditor_underline,
+#sfeditor_strikethrough,
+#sfeditor_link,
+#sfeditor_unlink,
+#sfeditor_left,
+#sfeditor_right,
+#sfeditor_center,
+#sfeditor_justify,
+#sfeditor_ol,
+#sfeditor_ul,
+#sfeditor_indent,
+#sfeditor_outdent,
+#sfeditor_undo,
+#sfeditor_redo,
+#sfeditor_html,
+#sfeditor_h1,
+#sfeditor_h2,
+#sfeditor_h3,
+#sfeditor_h4,
+#sfeditor_h5,
+#sfeditor_h6,
+#sfeditor_paragraph,
+#sfeditor_image,
+#sfeditor_subscript,
+#sfeditor_superscript,#sfeditor_backcolor,#sfeditor_fontcolor,#sfeditor_hilightcolor  {
+    padding-top: 3px;
+    font-size: 17px;
+    text-align: center;
 }
 
-#sfeditor_italic {
-    background-image: url(../images/editor/italic.png);
-    background-size: 16px;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-#sfeditor_underline {
-    background-image: url(../images/editor/underline.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_strikethrough {
-    background-image: url(../images/editor/strikethrough.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_link {
-    background-image: url(../images/editor/link.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_unlink {
-    background-image: url(../images/editor/unlink.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
 #sfeditor_removeformat{
     background-image: url(../images/editor/removeformat.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_h1 {
-    background-image: url(../images/editor/h1.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_h2 {
-    background-image: url(../images/editor/h2.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_h3 {
-    background-image: url(../images/editor/h3.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_h4 {
-    background-image: url(../images/editor/h4.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_h5 {
-    background-image: url(../images/editor/h5.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_h6 {
-    background-image: url(../images/editor/h6.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_paragraph {
-    background-image: url(../images/editor/paragraph.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_image {
-    background-image: url(../images/editor/image.png);
     background-size: 16px;    background-position: center;    background-repeat: no-repeat;
 }
 
@@ -2104,115 +2065,6 @@ pre.code{
     background-size: 16px;    background-position: center;    background-repeat: no-repeat;
 }
 
-#sfeditor_undo {
-    background-image: url(../images/editor/undo.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_redo {
-    background-image: url(../images/editor/redo.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_backcolor {
-    background-image: url(../images/editor/backcolor.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_fontcolor {
-    background-image: url(../images/editor/fontcolor.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_hilightcolor {
-    background-image: url(../images/editor/hilightcolor.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_increase {
-    background-image: url(../images/editor/increase.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_decrease {
-    background-image: url(../images/editor/decrease.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_subscript {
-    background-image: url(../images/editor/subscript.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_superscript {
-    background-image: url(../images/editor/superscript.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_paste {
-    background-image: url(../images/editor/paste.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_cut {
-    background-image: url(../images/editor/cut.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_copy {
-    background-image: url(../images/editor/copy.gif);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_left {
-    background-image: url(../images/editor/left.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_right {
-    background-image: url(../images/editor/right.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_center {
-    background-image: url(../images/editor/center.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_justify {
-    background-image: url(../images/editor/justify.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_ol {
-    background-image: url(../images/editor/ol.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_ul {
-    background-image: url(../images/editor/ul.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_html {
-    background-image: url(../images/editor/html.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_indent {
-    background-image: url(../images/editor/indent.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_outdent {
-    background-image: url(../images/editor/outdent.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
-
-#sfeditor_delete {
-    background-image: url(../images/editor/delete.png);
-    background-size: 16px;    background-position: center;    background-repeat: no-repeat;
-}
 .tablepage{
     max-width: 60em;
     margin: 0 auto;

@@ -1,0 +1,185 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot?-864y5r');
+	src:url('../fonts/icomoon.eot?#iefix-864y5r') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?-864y5r') format('woff'),
+		url('../fonts/icomoon.ttf?-864y5r') format('truetype'),
+		url('../fonts/icomoon.svg?-864y5r#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-home:before {
+	content: "\e600";
+}
+.icon-droplet:before {
+	content: "\e601";
+}
+.icon-image:before {
+	content: "\e602";
+}
+.icon-image2:before {
+	content: "\e603";
+}
+.icon-images:before {
+	content: "\e604";
+}
+.icon-copy:before {
+	content: "\e628";
+}
+.icon-paste:before {
+	content: "\e629";
+}
+.icon-calendar:before {
+	content: "\e605";
+}
+.icon-undo:before {
+	content: "\e606";
+}
+.icon-redo:before {
+	content: "\e607";
+}
+.icon-cogs:before {
+	content: "\e608";
+}
+.icon-list:before {
+	content: "\e609";
+}
+.icon-list2:before {
+	content: "\e60a";
+}
+.icon-numbered-list:before {
+	content: "\e60b";
+}
+.icon-menu:before {
+	content: "\e61a";
+}
+.icon-menu2:before {
+	content: "\e60c";
+}
+.icon-link:before {
+	content: "\e60d";
+}
+.icon-info:before {
+	content: "\e60e";
+}
+.icon-cancel-circle:before {
+	content: "\e60f";
+}
+.icon-checkmark-circle:before {
+	content: "\e610";
+}
+.icon-spam:before {
+	content: "\e611";
+}
+.icon-close:before {
+	content: "\e612";
+}
+.icon-checkmark:before {
+	content: "\e613";
+}
+.icon-enter:before {
+	content: "\e614";
+}
+.icon-exit:before {
+	content: "\e615";
+}
+.icon-bold:before {
+	content: "\e616";
+}
+.icon-underline:before {
+	content: "\e617";
+}
+.icon-italic:before {
+	content: "\e618";
+}
+.icon-strikethrough:before {
+	content: "\e619";
+}
+.icon-paragraph-left:before {
+	content: "\e61b";
+}
+.icon-paragraph-center:before {
+	content: "\e61c";
+}
+.icon-paragraph-right:before {
+	content: "\e61d";
+}
+.icon-paragraph-justify:before {
+	content: "\e627";
+}
+.icon-indent-increase:before {
+	content: "\e61e";
+}
+.icon-indent-decrease:before {
+	content: "\e61f";
+}
+.icon-file-xml:before {
+	content: "\e620";
+}
+.icon-file-css:before {
+	content: "\e62a";
+}
+.icon-hyperlink:before {
+	content: "\e621";
+}
+.icon-link2:before {
+	content: "\e622";
+}
+.icon-camera:before {
+	content: "\e623";
+}
+.icon-palette:before {
+	content: "\e624";
+}
+.icon-droplet2:before {
+	content: "\e625";
+}
+.icon-pictures:before {
+	content: "\e626";
+}
+
+.icon-h1:before {
+	content: "H1";
+}
+.icon-h2:before {
+	content: "H2";
+}
+.icon-h3:before {
+	content: "H3";
+}
+.icon-h4:before {
+	content: "H4";
+}
+.icon-h5:before {
+	content: "H5";
+}
+.icon-h6:before {
+	content: "H6";
+}
+.icon-paragraph:before {
+	content: "P";
+}
+
+.icon-superscript:before {
+	content: "X";
+        vertical-align: sub;
+}
+.icon-subscript:before {
+	content: "X";
+        vertical-align: super;
+}
