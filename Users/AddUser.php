@@ -275,7 +275,6 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                         echo sfUtils::dialogMessage("Add User", $formmessage);
                     }
                     ?>
-
                     <!--contactform-->
                     <div class="contactform">
                         <form action="<?php echo $editFormAction; ?>" method="post" enctype="multipart/form-data" name="form1" id="installForm">

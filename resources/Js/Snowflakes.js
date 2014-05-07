@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     $(touch).on('click', function(/*e*/) {
         /*e.preventDefault();*/
-        menu.slideToggle();
+        menu.slideToggle(500);
     });
 
     $(window).resize(function() {
@@ -23,7 +23,6 @@ $(document).ready(function() {
             menu.removeAttr('style');
         }
     });
-
 });
 
 $(document).ready(function() {
@@ -50,18 +49,7 @@ $(document).ready(function() {
 
 
 });
-$(document).ready(function() {
-//Check if the width of the browser is that of a mobile or tablet or scaled lower
-    if (screen.width <= 999) {
-        $(".primary_nav").hide();
-        //toggle the componenet with class msg_body
-        $(".opener").click(function()
-        {
-           $(this).next(".primary_nav").slideToggle(500);
-        });
-    }
 
-});
 $(document).ready(function() {
     $(".HalfSlider").css("overflow", "hidden");
     $(".HalfSlider").css("display", "block");

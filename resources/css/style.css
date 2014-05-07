@@ -30,7 +30,7 @@ body{
     min-width:320px;
     /*margin:0px;
     padding: 0px;*/
-    background-color:#ffffff;
+    background-color:#fafafa;
     color:black;
 }
 ol, ul {
@@ -314,7 +314,8 @@ strong {
     font-size:0.90em;
 }
 .primary_nav{
-    margin:0;	padding:0;	list-style:none;
+    margin:0;	padding:0;	
+    list-style:none;
     display: inline-block;
 
     -webkit-border-radius:0.2em;
@@ -323,15 +324,9 @@ strong {
 
     border:1px solid #cecece;
 
-    -webkit-box-shadow:
-        inset 0px 1px 0px #fff,
-        0px 1px 2px rgba(0,0,0,.06);
-    -moz-box-shadow:
-        inset 0px 1px 0px #fff,
-        0px 1px 2px rgba(0,0,0,.06);
-    box-shadow:
-        inset 0px 1px 0px #fff,
-        0px 1px 2px rgba(0,0,0,.06);/**/
+    -webkit-box-shadow:inset 0px 1px 0px #fff,0px 1px 2px rgba(0,0,0,.06);
+    -moz-box-shadow:inset 0px 1px 0px #fff,0px 1px 2px rgba(0,0,0,.06);
+    box-shadow: inset 0px 1px 0px #fff,0px 1px 2px rgba(0,0,0,.06);/**/
 }
 
 .primary_nav li{
@@ -344,8 +339,6 @@ strong {
     transition: all 0.2s;
 
     position:relative; 
-    /*border-right:1px solid #d8d8d8;
-    border-left:1px solid #ffffff;*/
 }
 
 .primary_nav li a img{
@@ -359,13 +352,11 @@ strong {
 .SideMenu li:last-child,.primary_nav li:last-child   { border-right:none;}
 
 .primary_nav li a{
-    /*padding:10px;*/
+    
     display:block;
-    /*height:45px;*/
-    color:#fff;
-    /*font-weight:bold;
-    text-shadow:0px 1px 0px #ffffff;*/
-
+    
+    color:#fafafa;
+    
     padding:0 1em;
     line-height:2.5em;
 }
@@ -373,11 +364,10 @@ strong {
 .primary_nav li.active a,
 .primary_nav li a:hover{
     background-color:#40add8;
-    /*height:45px;*/
 }
 
 .primary_nav li:hover a {
-    color: #ffffff;
+    color: #fafafa;
 }
 
 .primary_nav li a[data-bubble]:after {
@@ -504,11 +494,11 @@ a.blue[data-bubble]:after {
 }
 
 #ActiveMenu, .primary_nav li:hover {
-    color: #ffffff;
+    color: #fafafa;
     background-color:#40add8;
 }
 .primary_nav li a:hover, #ActiveMenu a, .primary_nav li:hover > a {
-    color: #ffffff;
+    color: #fafafa;
     background-color:#40add8;
 }
 /* Dropdown menu */
@@ -516,11 +506,11 @@ a.blue[data-bubble]:after {
     display:none;
     list-style:none none;
     z-index: 9999;
-    color: #ffffff;
+    color: #fafafa;
 }
 .primary_nav li:hover ul, .primary_nav li ul li:hover ul {
     display:block;
-    color: #ffffff;
+    color: #fafafa;
     background-color:#333;
 }
 .primary_nav li ul {
@@ -541,11 +531,11 @@ a.blue[data-bubble]:after {
     float:none;
     line-height: 45px;
     font-weight: normal;
-    color: #ffffff;
+    color: #fafafa;
 }
 .primary_nav li ul li a:hover, .primary_nav li ul li:hover > a {
     text-decoration:none;
-    color: #ffffff;
+    color: #fafafa;
     background-color:#40add8;
 }
 /* End Menu CSS Definitions*/
@@ -701,13 +691,13 @@ a.blue[data-bubble]:after {
     text-align:center;
     line-height:32px;
     padding-left: 1px;
-    color:#ffffff;
+    color:#fafafa;
     float:left;
     margin: 3px;
 }
 
 .NewButton a{
-    color:#ffffff;
+    color:#fafafa;
 }
 
 
@@ -1050,7 +1040,7 @@ footer {
 
 .CopyRight {
     font-size: 10px;
-    color:#ffffff;
+    color:#fafafa;
     padding:5px;
     margin: 0px auto;
 }
@@ -1061,7 +1051,7 @@ footer {
 }
 .CopyRight p a {
     text-decoration: none;
-    color:#ffffff;
+    color:#fafafa;
     filter: alpha(opacity=90);
     opacity: 0.9;
     font-weight: bold;
@@ -1450,7 +1440,7 @@ only screen and (min-device-pixel-ratio: 2) {
 
 pre.code{
 
-    color:#ffffff;
+    color:#fafafa;
     margin-bottom:20px;
     z-index:999;
     padding:15px;

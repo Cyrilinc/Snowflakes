@@ -35,7 +35,7 @@ body {
     min-width:320px;
     /*margin:0px;
     padding: 0px;*/
-    background-color:#ffffff;
+    background-color:#fafafa;
     color:black;
 }
 ol, ul {
@@ -316,7 +316,8 @@ strong {
     position:relative;
     top:0;
     left:0;
-    width:100%;}
+    width:100%;
+}
 
 .primary_nav ul ul {left:0;}
 
@@ -631,12 +632,12 @@ a.blue[data-bubble]:after {
     text-align:center;
     line-height:32px;
     padding-left: 1px;
-    color:#ffffff;
+    color:#fafafa;
     float:left;
     margin: 3px;
 }
 .NewButton a {
-    color:#ffffff;
+    color:#fafafa;
 }
 .NewButton img {
     padding-top: 8px;
@@ -1005,7 +1006,7 @@ footer {
 }
 .CopyRight {
     font-size: 10px;
-    color:#ffffff;
+    color:#fafafa;
     padding:5px;
     margin: 0px auto;
 }
@@ -1016,7 +1017,7 @@ footer {
 }
 .CopyRight p a {
     text-decoration: none;
-    color:#ffffff;
+    color:#fafafa;
     filter: alpha(opacity=90);
     opacity: 0.9;
     font-weight: bold;
@@ -1226,7 +1227,7 @@ footer {
     display:none;
 }
 pre.code {
-    color:#ffffff;
+    color:#fafafa;
     margin-bottom:20px;
     z-index:999;
     padding:15px;
