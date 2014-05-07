@@ -1,7 +1,9 @@
 <?php
-
-$Post_submit = filter_input(INPUT_POST, 'submit');
-if (isset($Post_submit)) {
+$submit = filter_input(INPUT_POST, 'submit');
+$flakeit = filter_input(INPUT_POST, 'flakeit');
+$flakeitID = filter_input(INPUT_POST, 'id');
+$flakeitType = filter_input(INPUT_POST, 'type');
+if (isset($submit)) {
     require_once 'lib/sf.php';
     require_once 'lib/sfConnect.php';
     require_once 'config/Config.php';
@@ -11,11 +13,11 @@ if (isset($Post_submit)) {
     $SFconnects = new sfConnect($sqlArray);
     $SFconnects->connect(); // Connect to database
 
-    if (isset($_POST['flakeit']) && isset($_POST['id']) && isset($_POST['type'])) {
-        $data = json_encode(sfUtils::flakeIt($SFconnects, $_POST['id'], $_POST['type'], $_POST['flakeit']));
+    if (isset($flakeit) && isset($flakeitID) && isset($flakeitType)) {
+        $data = json_encode(sfUtils::flakeIt($SFconnects, $flakeitID, $flakeitType, $flakeit));
         $jsonError = json_last_error();
         if ($jsonError > 0) {
-            trigger_error("Error on Json Code $jsonError ", E_USER_ERROR);
+            trigger_error("Error on Json Code $jsonError ", E_USER_NOTICE);
             echo 0;
         } else {
             echo $data;
@@ -23,11 +25,6 @@ if (isset($Post_submit)) {
     } else {
         echo 0;
     }
-
-    /* if (isset($_POST['flakeit']) && isset($_POST['id']) && isset($_POST['type']))
-      echo json_encode(sfUtils::flakeIt($SFconnects, $_POST['id'], $_POST['type'],$_POST['flakeit']));
-      else
-      echo 0; */
 
     $SFconnects->close();
 }
