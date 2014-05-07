@@ -69,7 +69,7 @@ $SFconnects = new sfConnect($sqlArray);
 $SFconnects->connect(); // Connect to database
 // *** Redirect if username exists
 $MM_flag = "MM_insert";
-$loginFoundUser=0;
+$loginFoundUser = 0;
 $MM_insert_flag = filter_input(INPUT_POST, $MM_flag);
 $postUsername = filter_input(INPUT_POST, 'username');
 if (isset($MM_insert_flag)) {
@@ -86,7 +86,7 @@ $viewLink = "#";
 if ((isset($MM_insert)) && ($MM_insert == "form1") && $loginFoundUser <= 0 && ($File_is_Uploaded == TRUE)) {
 
     $userStruct = new userStruct();
-    $userStruct->init($postUsername, $_POST['password2'], $_POST['email'], $_POST['access_level'],$targetFile);
+    $userStruct->init($postUsername, $_POST['password2'], $_POST['email'], $_POST['access_level'], $targetFile);
 
     if (!$userStruct->AddUser($SFconnects)) {
         $formmessage.= "Could not insert the new User. <br>" . $SFconnects->getMessage() . '<br>';
@@ -94,10 +94,10 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && $loginFoundUser <= 0 && ($
 
         $newUserID = $userStruct->getUserID($SFconnects);
         $viewLink = "Account.php?userId=$newUserID";
-        
+
         // Check Trigger exist , if not then use manual trigger
         sfUtils::checkTrigger($SFconnects, $newUserID, 'user', "INSERT");
-        
+
         $formmessage.='<p>'
                 . '<a href="' . $viewLink . '" title="view it">"' . $userStruct->m_username . '"</a> was added successfully. '
                 . '<span class="icon success"></span>'
@@ -280,14 +280,18 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                     <div class="contactform">
                         <form action="<?php echo $editFormAction; ?>" method="post" enctype="multipart/form-data" name="form1" id="installForm">
 
-                            <span id="spryAdminName">
+                            <span id="spryAdminName"> 
                                 <span class="textfieldRequiredMsg">Username is required.<br /></span>
+                                <span class="textfieldMinCharsMsg">Minimum number of characters not met.<br /></span>
+                                <span class="textfieldMaxCharsMsg">Exceeded maximum number of characters.<br /></span>
                                 <input class="inputtext2 controls" type="text" name="username" value="<?php
                                 if (isset($postUsername)) {
                                     echo $postUsername;
                                 }
-                                ?>" placeholder="Admin Username must be between 8 and 20 characters" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required"/>
+                                ?>" placeholder="Admin Username must be between 8 and 20 characters" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required/>
                             </span><br />
+
+
 
                             <span id="spryAdminEmail">
                                 <span class="textfieldRequiredMsg">Email is required.<br /></span><span class="textfieldInvalidFormatMsg">Invalid email format.<br /></span>
@@ -372,7 +376,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" -->
         <script type="text/javascript">
-            var sprytextfield1 = new Spry.Widget.ValidationTextField("spryAdminName", "none", {validateOn: ["blur"]});
+            var sprytextfield1 = new Spry.Widget.ValidationTextField("spryAdminName", "none", {validateOn: ["blur"], minChars: 8, maxChars: 20});
             var sprypassword1 = new Spry.Widget.ValidationPassword("spryAdminPass", {validateOn: ["blur"]});
             var spryconfirm1 = new Spry.Widget.ValidationConfirm("spryPassconfirm", "Password", {validateOn: ["blur", "change"]});
             var sprytextfield2 = new Spry.Widget.ValidationTextField("spryAdminEmail", "email", {validateOn: ["blur"]});
