@@ -68,8 +68,9 @@ $imageMissing = $UploadImgDir . "missing_default.png";
 
             });
 
-
+            var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
         </script>
+        <script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
 
         <link rel="stylesheet" type="text/css" href="resources/css/stapel.css" />
         <script type="text/javascript" src="resources/Js/jquery.stapel.js"></script>
@@ -139,10 +140,6 @@ $imageMissing = $UploadImgDir . "missing_default.png";
             <div class="Content"> <!-- InstanceBeginEditable name="BodyRegion" -->
                 <!-- PageWrap -->
                 <div class="PageWrap">
-                    <script type="text/javascript">
-                        var flakeitUrl = "flakeit.php";
-                    </script>
-                    <script type="text/javascript" src="resources/Js/flakeit.js"></script>
 
                     <div style="float: right; background-color:#2b2b2b;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="<?php echo $Powerlink; ?>" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
 

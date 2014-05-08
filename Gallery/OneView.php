@@ -69,7 +69,9 @@ $Powerlink = "../resources/images/Snowflakes2.png";
 
             });
 
+            var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
         </script>
+        <script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
 
         <link rel="stylesheet" type="text/css" href="../resources/css/stapel.css" />
         <script type="text/javascript" src="../resources/Js/jquery.stapel.js"></script>
@@ -140,7 +142,7 @@ $Powerlink = "../resources/images/Snowflakes2.png";
                 <div class="PageWrap">
 
                     <script type="text/javascript">
-                        var flakeitUrl = "../flakeit.php";
+                        var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
                     </script>
                     <script type="text/javascript" src="../resources/Js/flakeit.js"></script>
 

@@ -91,7 +91,7 @@ $settingsConfig = Config::getConfig("settings", '../config/config.ini');
 <script type="text/javascript">
     var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
 </script>
-<script type="text/javascript" src="<?php echo $row_SiteSettings['sf_url']; ?>resources/Js/flakeit.js"></script>
+<script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
 
 <div style="float: right; background-color:<?php echo $sflogo; ?>;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="<?php echo $Powerlink; ?>" width="120" height="40" alt="snowflakes"/></a> </div>
 <div style="float: right; background-color:<?php echo $sflogo; ?>;" class="NewButton"><a href="<?php echo $row_SiteSettings['sf_url']; ?>rss.php?ty=events" title="Snowflakes event rss"> <img src="<?php echo $rsslink; ?>" height="22" width="22"  alt="Add" /></a></div>

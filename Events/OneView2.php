@@ -44,6 +44,10 @@ $imageMissing = $UploadImgDir . "missing_default.png";
     }
 </style>
 <script type="text/javascript" src="../resources/Js/jquery-1.11.0.js"></script>
+<script type="text/javascript">
+    var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
+</script>
+<script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
     function initialize() {

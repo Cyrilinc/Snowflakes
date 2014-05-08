@@ -35,7 +35,7 @@ $totalRows_rsSFGallery = $SFconnects->recordCount();
 
 $query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
 $SFconnects->fetch($query_SiteSettings);
-$result=$SFconnects->getResultArray();
+$result = $SFconnects->getResultArray();
 $row_SiteSettings = $result[0];
 ?>
 
@@ -56,9 +56,9 @@ $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
 <div class="PageWrap">
 
     <script type="text/javascript">
-        var flakeitUrl = "../flakeit.php";
+        var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
     </script>
-    <script type="text/javascript" src="../resources/Js/flakeit.js"></script>
+    <script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
 
 
     <div style="float: right; background-color:transparent;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="<?php echo $Powerlink; ?>" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>

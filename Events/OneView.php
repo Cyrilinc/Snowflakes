@@ -66,9 +66,9 @@ $Powerlink = "../resources/images/Snowflakes2.png";
             });
         </script>
         <script type="text/javascript">
-            var flakeitUrl = "<?php echo $settingsConfig['m_sfUrl'] . "flakeit.php"; ?>";
+            var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
         </script>
-        <script type="text/javascript" src="../resources/Js/flakeit.js"></script>
+        <script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
 

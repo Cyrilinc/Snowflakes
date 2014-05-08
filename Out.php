@@ -40,14 +40,14 @@ if (isset($total_rsOut)) {
     $totalRows_rsOut = $total_rsOut;
 } else {
     $SFconnects->fetch("SELECT COUNT(id) count FROM snowflakes WHERE publish = 1 ORDER BY created DESC");
-    $result=$SFconnects->getResultArray();
+    $result = $SFconnects->getResultArray();
     $totalRows_rsOut = $result[0]['count'];
 }
 $totalPages_rsOut = ceil($totalRows_rsOut / $maxRows_rsOut) - 1;
 
 $query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
 $SFconnects->fetch($query_SiteSettings);
-$result2=$SFconnects->getResultArray();
+$result2 = $SFconnects->getResultArray();
 $row_SiteSettings = $result2[0];
 
 $queryString_rsOut = "";
@@ -96,9 +96,9 @@ if (isset($rssflogo)) {
 <script type="text/javascript">
     var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
 </script>
-<script type="text/javascript" src="<?php echo $row_SiteSettings['sf_url']; ?>resources/Js/flakeit.js"></script>
+<script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
 <div style="float: right; background-color:<?php echo $sflogo; ?>;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="<?php echo $Powerlink; ?>" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
-<div style="float: right; background-color:<?php echo $sflogo; ?>;" class="NewButton"><a href="<?php echo $row_SiteSettings['sf_url'];?>rss.php?ty=snowflakes" title="Snowflakes rss"> <img src="<?php echo $rsslink; ?>" height="22" width="22"  alt="Add" /></a></div>
+<div style="float: right; background-color:<?php echo $sflogo; ?>;" class="NewButton"><a href="<?php echo $row_SiteSettings['sf_url']; ?>rss.php?ty=snowflakes" title="Snowflakes rss"> <img src="<?php echo $rsslink; ?>" height="22" width="22"  alt="Add" /></a></div>
 <div class="clear"></div>
 
 <?php if ($pageNum_rsOut > 0) { // Show if not first page    ?>
@@ -144,7 +144,7 @@ if ($totalRows_rsOut > 0) {
                     </a>
                 </div>
 
-        <?php echo html_entity_decode($flakeStructList[$i]->m_body_text); ?> 
+                <?php echo html_entity_decode($flakeStructList[$i]->m_body_text); ?> 
 
             </div><!--SnowflakeDescr Ends-->
             <div class="clear"></div>

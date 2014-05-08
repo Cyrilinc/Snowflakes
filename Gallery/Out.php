@@ -38,14 +38,14 @@ if (isset($totalSFGallery)) {
     $totalRows_rsSFGallery = $totalSFGallery;
 } else {
     $SFconnects->fetch("SELECT COUNT(id) count FROM snowflakes_gallery WHERE publish=1 ORDER BY id DESC");
-    $result=$SFconnects->getResultArray();
+    $result = $SFconnects->getResultArray();
     $totalRows_rsSFGallery = $result[0]['count'];
 }
 $totalPages_rsSFGallery = ceil($totalRows_rsSFGallery / $maxRows_rsSFGallery) - 1;
 
 $query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
 $SFconnects->fetch($query_SiteSettings);
-$result2=$SFconnects->getResultArray();
+$result2 = $SFconnects->getResultArray();
 $row_SiteSettings = $result2[0];
 
 $queryString_rsSFGallery = "";
@@ -97,21 +97,21 @@ if (isset($rssflogo)) {
 <script type="text/javascript">
     var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
 </script>
-<script type="text/javascript" src="<?php echo $row_SiteSettings['sf_url']; ?>resources/Js/flakeit.js"></script>
+<script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
 
 <div style="float: right; background-color:<?php echo $sflogo; ?>; z-index:1000;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="<?php echo $Powerlink; ?>" width="120" height="40" alt="snonwflakes" /></a> </div>
 <div style="float: right; background-color:<?php echo $sflogo; ?>; z-index:1000;" class="NewButton"><a href="<?php echo $row_SiteSettings['sf_url']; ?>rss.php?ty=gallery" title="Snowflakes gallery rss"> <img src="<?php echo $rsslink; ?>" height="22" width="22"  alt="Add" /></a></div>
 <div class="clear"></div>
 <!--wrapper-->
 <div class="wrapper"> 
-<?php if ($pageNum_rsSFGallery > 0) { // Show if not first page    ?>
+    <?php if ($pageNum_rsSFGallery > 0) { // Show if not first page    ?>
         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsSFGallery=%d%s", $currentPage, 0, $queryString_rsSFGallery); ?>">First</a></div>
         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsSFGallery=%d%s", $currentPage, max(0, $pageNum_rsSFGallery - 1), $queryString_rsSFGallery); ?>">Previous</a></div>
     <?php } // Show if not first page   ?>
-<?php if ($pageNum_rsSFGallery < $totalPages_rsSFGallery) { // Show if not last page  ?>
+    <?php if ($pageNum_rsSFGallery < $totalPages_rsSFGallery) { // Show if not last page  ?>
         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsSFGallery=%d%s", $currentPage, min($totalPages_rsSFGallery, $pageNum_rsSFGallery + 1), $queryString_rsSFGallery); ?>">Next</a></div>
         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsSFGallery=%d%s", $currentPage, $totalPages_rsSFGallery, $queryString_rsSFGallery); ?>">Last</a></div>
-<?php } // Show if not last page    ?>
+    <?php } // Show if not last page    ?>
 
 
     <!--topbar-->
@@ -147,9 +147,9 @@ if (isset($rssflogo)) {
                 foreach ($DBImageThumbFiles as $counter => $imageThumbLink) {
                     ?>
                     <li data-pile="<?php
-                        echo htmlentities($galleryStructList[$i]->m_title . " "
-                                . '<br/><div class="owner"> By -' . $galleryStructList[$i]->m_created_by . '</div> ');
-                        ?>"> 
+                    echo htmlentities($galleryStructList[$i]->m_title . " "
+                            . '<br/><div class="owner"> By -' . $galleryStructList[$i]->m_created_by . '</div> ');
+                    ?>"> 
                         <a class="colorbox" href="<?php echo $DBImageFiles[$counter]; ?>" onerror="this.href='<?php echo $UploadImgUrl . "missing_default.png"; ?>'" title="<?php echo htmlentities($DBImageCaption[$counter]); ?>"> 
                             <span class="tp-info"><span><?php echo htmlentities($DBImageCaption[$counter]); ?></span></span> 
                             <img src="<?php echo $imageThumbLink; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo htmlentities($DBImageCaption[$counter]); ?>"> 
@@ -160,14 +160,14 @@ if (isset($rssflogo)) {
                 $i++;
             } while ($i < count($galleryStructList));
             ?>
-<?php } else { ?>
+        <?php } else { ?>
             <!-- Snowflakes -->
             <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="<?php echo $SnowflakesUrl . 'Uploads/GalleryImages/Snowflakes.png'; ?>" > <span class="tp-info"><span>No Images in Gallery</span></span> <img src="<?php echo $SnowflakesUrl . 'Uploads/GalleryThumbs/Snowflakes.png'; ?>"  alt="Snowflakes"> </a> </li>
             <!-- Snowflakes -->
             <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="<?php echo $SnowflakesUrl . 'Uploads/GalleryImages/Snowflakes.png'; ?>" > <span class="tp-info"><span>No Images in Gallery</span></span> <img src="<?php echo $SnowflakesUrl . 'Uploads/GalleryThumbs/Snowflakes.png'; ?>"  alt="Snowflakes"> </a> </li>
             <!-- Snowflakes -->
             <li data-pile="Snowflakes : No images yet"> <a class="ViewThumb flakeit" title="flake it" data-type="gallery"> <img src="<?php echo $SnowflakesUrl . "resources/images/Icons/Snowflakes.png"; ?>" height="22" width="22" alt="View" /> </a> <a class="colorbox" href="<?php echo $SnowflakesUrl . 'Uploads/GalleryImages/Snowflakes.png'; ?>" > <span class="tp-info"><span>No Images in Gallery</span></span> <img src="<?php echo $SnowflakesUrl . 'Uploads/GalleryThumbs/Snowflakes.png'; ?>"  alt="Snowflakes"> </a> </li>
-<?php } ?>
+                <?php } ?>
     </ul>
     <!--tp-grid Ends--> 
 </div>

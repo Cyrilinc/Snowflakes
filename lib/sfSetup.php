@@ -91,7 +91,7 @@ class Snowflakes {
                 'uploadGalleryDir = "' . $gallery . "\"\n" .
                 'galleryImgDir = "' . $galleryimg . "\"\n" .
                 'galleryThumbDir = "' . $gallerythumb . "\"\n" .
-                'flakeItUrl = "' . $this->m_sfUrl . "flakeit.php\"\n" .
+                'flakeItUrl = "' . $this->m_sfUrl . "flakeIt.php\"\n" .
                 'maxImageSize = "1048576"' . "\n" .
                 'resources = "' . realpath("../resources/") . "/\"\n" .
                 'thumbWidth = "250"' . "\n" .

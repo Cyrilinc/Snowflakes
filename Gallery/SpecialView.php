@@ -11,11 +11,11 @@ $UploadDir = $settingsConfig['uploadGalleryDir'];
 //The upload Image directory
 $UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
 $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
-$imageMissing =$UploadThumbUrl. "missing_default.png";
+$imageMissing = $UploadThumbUrl . "missing_default.png";
 ?>
 <?php
 $colname_rsSFGallery = -1;
-$Galleryid= filter_input(INPUT_GET, 'Galleryid');
+$Galleryid = filter_input(INPUT_GET, 'Galleryid');
 if (isset($Galleryid)) {
     $colname_rsSFGallery = $Galleryid;
 }
@@ -31,7 +31,7 @@ $totalRows_rsSFGallery = $SFconnects->recordCount();
 
 $query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
 $SFconnects->fetch($query_SiteSettings);
-$result=$SFconnects->getResultArray();
+$result = $SFconnects->getResultArray();
 $row_SiteSettings = $result[0];
 ?>
 <?php
@@ -40,16 +40,20 @@ $SnowflakesUrl = $row_SiteSettings['sf_url'];
 if (isset($row_SiteSettings['gallery_result_url'])) {
     $SFGalleryResultUrl = $row_SiteSettings['gallery_result_url'];
     $url = $otherurl = $SFGalleryResultUrl . "&amp;Galleryid=" . $Galleryid;
-}
-else
+} else {
     $SFGalleryResultUrl = 'notset';
+}
 
 $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
 ?>
+<script type="text/javascript">
+    var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
+</script>
+<script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
 <!-- PageWrap -->
 <div class="PageWrap">
 
-<?php if ($Galleryid != Null) { ?>      
+    <?php if ($Galleryid != Null) { ?>      
         <!--wrapper-->
         <div class="wrapper"> 
 
@@ -64,7 +68,7 @@ $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
 
             <!--tp-grid-->
             <ul id="tp-grid" class="tp-grid">
-    <?php if ($totalRows_rsSFGallery > 0) { ?>
+                <?php if ($totalRows_rsSFGallery > 0) { ?>
 
                     <?php
                     // Get all the image name from database
@@ -85,31 +89,31 @@ $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
                         ?>
 
                         <li> <span class="tp-title" ><?php echo htmlentities($DBImageCaption [$counter]); ?></span>
-                            <a class="colorbox" href="<?php echo $DBImageFiles[$counter]; ?>" onerror="this.href='<?php echo $UploadImgUrl. "missing_default.png";?>'"> 
+                            <a class="colorbox" href="<?php echo $DBImageFiles[$counter]; ?>" onerror="this.href='<?php echo $UploadImgUrl . "missing_default.png"; ?>'"> 
                                 <span class="tp-info"><span><?php echo htmlentities($DBImageCaption[$counter]); ?></span></span> 
-                                <img src="<?php echo $imageThumbLink; ?>" onerror="this.src='<?php echo $imageMissing;?>'"  alt="<?php echo htmlentities($DBImageCaption[$counter]); ?>"> 
+                                <img src="<?php echo $imageThumbLink; ?>" onerror="this.src='<?php echo $imageMissing; ?>'"  alt="<?php echo htmlentities($DBImageCaption[$counter]); ?>"> 
                             </a>
                         </li>
 
-        <?php } ?>
+                    <?php } ?>
 
 
 
-    <?php } else { ?> 
+                <?php } else { ?> 
 
                     <!-- Snowflakes -->
                     <li data-pile="Snowflakes :Gallery doesn't exist"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>Gallery doesn't exist</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
                     <li data-pile="Snowflakes :Gallery doesn't exist"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>Gallery doesn't exist</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
                     <li data-pile="Snowflakes :Gallery doesn't exist"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>Gallery doesn't exist</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
-    <?php } ?>     
+                        <?php } ?>     
 
             </ul>
             <!--tp-grid Ends--> 
         </div>
         <!--wrapper Ends--> 
-<?php } else { ?>
+    <?php } else { ?>
         <h4>No Gallery to view </h4>
-<?php } ?>
+    <?php } ?>
 
 </div>
 <!-- End of PageWrap --> 

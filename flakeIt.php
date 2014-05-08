@@ -1,8 +1,15 @@
 <?php
-$submit = filter_input(INPUT_POST, 'submit');
-$flakeit = filter_input(INPUT_POST, 'flakeit');
-$flakeitID = filter_input(INPUT_POST, 'id');
-$flakeitType = filter_input(INPUT_POST, 'type');
+
+$Post_submit = filter_input(INPUT_POST, 'submit');
+$Post_flakeit = filter_input(INPUT_POST, 'flakeit');
+$Post_flakeitID = filter_input(INPUT_POST, 'id');
+$Post_flakeitType = filter_input(INPUT_POST, 'type');
+
+$submit = isset($Post_submit) ? $Post_submit : filter_input(INPUT_GET, 'submit');
+$flakeit = isset($Post_flakeit) ? $Post_flakeit : filter_input(INPUT_GET, 'flakeit');
+$flakeitID = isset($Post_flakeitID) ? $Post_flakeitID : filter_input(INPUT_GET, 'id');
+$flakeitType = isset($Post_flakeitType) ? $Post_flakeitType : filter_input(INPUT_GET, 'type');
+
 if (isset($submit)) {
     require_once 'lib/sf.php';
     require_once 'lib/sfConnect.php';
