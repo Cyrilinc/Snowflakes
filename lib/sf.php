@@ -2048,6 +2048,54 @@ final class sfUtils {
         return true;
     }
 
+    public static function copyDirectoryList($source, $dest) {
+
+        if (!$source || !is_dir($source) || !$dest) {
+            return false;
+        }
+
+        // Make destination directory
+        if (!is_dir($dest)) {
+            mkdir($dest);
+        }
+
+        $sourcefileList = scandir($source);
+        $destfileList = scandir($dest);
+
+        foreach ($sourcefileList as $file) {
+
+            if ($file == '.' || $file == '..' || in_array($file, $destfileList)) {
+                continue;
+            }
+
+            // Simple copy for a file
+            if (is_file("$source/$file")) {
+                copy("$source/$file", "$dest/$file");
+            }
+
+            // Simple copy for a file
+            if (is_dir("$source/$file")) {
+                self::copyDirectoryList("$source/$file", "$dest/$file");
+            }
+        }
+        
+        return true;
+    }
+
+    public static function migrateUpdir($source, $inifile = '../config/config.ini') {
+        if (!$source || !is_dir($source)) {
+            return false;
+        }
+        $settingsConfig = Config::getConfig("settings", $inifile);
+        // Check for symlinks
+        if (is_link($source)) {
+            return symlink(readlink($source), $settingsConfig['uploadGalleryDir']);
+        }
+
+        return self::copyDirectoryList($source,$settingsConfig['uploadGalleryDir']);
+        
+    }
+
     public static function createSnowflakesRss($conn, $snowflakesList, $inifile = '../config/config.ini') {
         /// sanity Check
         if (!$conn || empty($snowflakesList)) {
@@ -2183,6 +2231,14 @@ final class sfUtils {
             </rss>';
 
         return $rssString;
+    }
+
+    public static function startsWith($haystack, $needle) {
+        return $needle === "" || strpos($haystack, $needle) === 0;
+    }
+
+    public static function endsWith($haystack, $needle) {
+        return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
     }
 
     public static function viewLogFile($filename, $Logtype = "All") {

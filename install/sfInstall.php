@@ -24,7 +24,7 @@ if ((isset($MM_setup)) && ($MM_setup == "setupform")) {
     $Admin_Password = filter_input(INPUT_POST, "adminPass");
     $Admin_Email = filter_input(INPUT_POST, "adminEmail");
     $time_zone = filter_input(INPUT_POST, "time_zone");
-    
+
     $somem_Message = "<p>Host Name: " . $Host_Name . " <br>";
     $somem_Message = $somem_Message . "Database User Name:  " . $Database_Username . " <br>";
     $somem_Message = $somem_Message . "Database Password: " . $Database_Password . "<br>";
@@ -59,6 +59,7 @@ if ((isset($MM_setup)) && ($MM_setup == "setupform")) {
 $migrated = false;
 $MM_migrate = filter_input(INPUT_POST, "MM_migrate");
 $dbName = filter_input(INPUT_POST, "dbName");
+$oldUpdloadDir = filter_input(INPUT_POST, "oldUpdloadDir");
 if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName))) {
     require_once '../lib/sf.php';
     require_once '../lib/sfConnect.php';
@@ -76,6 +77,15 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
     $migrateSuccess = str_replace("STATUS::SUCCESS", '<span class="icon success"></span><br />', $migrateMessage);
     $migratefailure = str_replace("STATUS::FAILED", '<span class="icon error"></span><br />', $migrateSuccess);
     $somem_Message = $migratefailure;
+    
+    if( !sfUtils::migrateUpdir($oldUpdloadDir,'../config/config.ini'))
+    {
+        $somem_Message.='Snowflakes Could not Copy/Migrate old snowflakes data from'.$oldUpdloadDir.'.<br /> Please check that the directory exists <span class="icon error"></span><br />';
+    }else{
+        $somem_Message.='Snowflakes Copied/Migrated old snowflakes data from'.$oldUpdloadDir.'. <span class="icon success"></span><br />';
+    }
+    
+    
 }
 ?>
 <!DOCTYPE HTML>
@@ -250,7 +260,12 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
                         <form id="installForm" action="<?php echo $php_self; ?>" method="post" class="updateForm" enctype="multipart/form-data" autocomplete="on">
                             <span id="spryDBName">
                                 <span class="textfieldRequiredMsg">Database name is required.<br/>Note that the database has to be on the same host<br/></span>
-                                <input name="dbName" type="text" class="inputtext2" value="" placeholder="Database name for Old snowflakes" />
+                                <input name="dbName" type="text" class="inputtext2" value="" placeholder="Database name for old snowflakes" />
+                            </span><br />
+
+                            <span id="spryuploadDir">
+                                <span class="textfieldRequiredMsg">Upload directory is required.<br/></span>
+                                <input name="oldUpdloadDir" type="text" class="inputtext2" value="" placeholder="Upload directory for old snowflakes e.g ../../SnowflakesV1/Uploads/" />
                             </span><br />
                             <input class="NewButton" type="submit" name="submitButton" value="Migrate" />
                             <input type="hidden" name="MM_migrate" value="migrateform" />
@@ -302,10 +317,13 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
             <!-- End of CMSFooterWrapper --> 
 
         </footer>
-        <!-- InstanceBeginEditable name="FootEdit" --> <!-- InstanceEndEditable -->
+        <!-- InstanceBeginEditable name="FootEdit" -->
         <script type="text/javascript">
-            var sprytextfield4 = new Spry.Widget.ValidationTextField("spryDBName", "none", {validateOn: ["blur"]});
+            var sprytextfield4 = new Spry.Widget.ValidationTextField("spryDBName", "none", {validateOn: ["blur", "change"]});
+            var sprytextfield1 = new Spry.Widget.ValidationTextField("spryuploadDir", "none", {validateOn: ["blur", "change"]});
         </script>
+        <!-- InstanceEndEditable -->
+
     </body>
     <!-- InstanceEnd -->
 </html>

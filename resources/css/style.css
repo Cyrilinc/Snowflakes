@@ -1186,12 +1186,12 @@ footer {
     display: inline;
 }
 .SocialBar ul li a {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-    filter: alpha(opacity=80);
-    -moz-opacity:0.80;
-    -khtml-opacity: 0.80;
-    -webkit-opacity:0.80;
-    opacity: .80;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=70);
+    -moz-opacity:0.70;
+    -khtml-opacity: 0.70;
+    -webkit-opacity:0.70;
+    opacity: .70;
     /*Transition*/
     transition:all 0.3s ease;
     -webkit-transition: all 0.3s ease;
@@ -1206,7 +1206,6 @@ footer {
     -khtml-opacity: 1;
     -webkit-opacity:1;
     opacity: 1;
-    background-color: #40add8;
 }
 
 .SocialBar ul li a img{

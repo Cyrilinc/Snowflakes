@@ -68,11 +68,11 @@ class sfGalleryImage {
         $this->m_UploadThumbDir = $settingsConfig['galleryThumbDir'];
         $this->m_MaxSize = $settingsConfig['maxImageSize'];
         $this->m_MaxImageWidth = $settingsConfig['maxImageWidth'];
-        if ($forGallery)
+        if ($forGallery) {
             $this->setThumbinit($settingsConfig['thumbWidth'], $settingsConfig['thumbHeight']);
-        else
+        } else {
             $this->m_UploadImgDir = $settingsConfig['uploadGalleryDir'];
-
+        }
 
         $this->m_ImageExtList = explode(",", $settingsConfig['imageExtList']);
         $this->m_ImageTypesList = explode(",", $settingsConfig['imageTypesList']);
@@ -617,8 +617,8 @@ class sfImageProcessor {
         $settingsConfig = Config::getConfig("settings", $inifile);
         $query_rsSFGallery = "SELECT id,thumb_name,image_name FROM snowflakes_gallery WHERE id=" . $galleryID;
         $conn->fetch($query_rsSFGallery);
-        
-        $result=$conn->getResultArray();
+
+        $result = $conn->getResultArray();
         $deleteSFGallery = $result[0];
         // Get all the image name from database
         $_SESSION['ImageFiles'] = explode(",", $deleteSFGallery['image_name']);
