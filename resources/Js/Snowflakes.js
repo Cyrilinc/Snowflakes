@@ -1,5 +1,3 @@
-// JavaScript Document
-
 /*
  * Snowflakes 1.0 - CMS & Web Publishing
  * http://cyrilinc.co.uk/snowflakes/
@@ -23,6 +21,13 @@ $(document).ready(function() {
             menu.removeAttr('style');
         }
     });
+    
+    var copyright =$(".CopyRight p").html();
+    var replacestr='2013';
+    var snowflakesdate = new Date();
+    var newcopyright = copyright.replace(replacestr, replacestr + ' - '+ snowflakesdate.getFullYear());
+    $(".CopyRight p").html(newcopyright);
+    
 });
 
 $(document).ready(function() {
