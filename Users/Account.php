@@ -92,6 +92,8 @@ $usersnowflakeitCount = sfUtils::snowFlakeItCount($SFconnects, $sfuser->m_userna
 $usereventflakeitCount = sfUtils::eventFlakeItCount($SFconnects, $sfuser->m_username);
 $usergalleyflakeitCount = sfUtils::galleryFlakeItCount($SFconnects, $sfuser->m_username);
 
+$sfuser->changeUserFlakeit($SFconnects, $usersnowflakeitCount+$usereventflakeitCount+$usergalleyflakeitCount);
+
 $snowflakeitCount = sfUtils::snowFlakeItCount($SFconnects);
 $eventflakeitCount = sfUtils::eventFlakeItCount($SFconnects);
 $galleyflakeitCount = sfUtils::galleryFlakeItCount($SFconnects);
@@ -275,6 +277,7 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
                                     echo $lastin->format(" F j, Y g:h a");
                                     ?></p>
                                 <p> Status  : <?php echo $sfuser->m_logged_in == 1 ? "Online" : "Offline"; ?></p>
+                                <p> Flakes  : <?php echo $sfuser->m_flake_it; ?></p>
 
                                 <!--Userside starts-->
                                 <ul class="Userside">

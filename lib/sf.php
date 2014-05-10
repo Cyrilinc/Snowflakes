@@ -299,12 +299,22 @@ class userStruct {
         return $this->populate($result[0]);
     }
 
+    public function changeUserFlakeit($conn, $flakeit) {
+        if (!$this->isPopulated() || !$conn || !$flakeit) {
+            return false;
+        }
+        $sql = "UPDATE snowflakes_users SET flake_it=$flakeit"
+                . " WHERE username='$this->m_username' AND email='$this->m_email' ";
+        
+        return $conn->execute($sql);
+    }
+
     public function getUserByResetLink($conn, $resetLink) {
         if (!$conn || !$resetLink) {
             return false;
         }
 
-        $sql = "SELECT * FROM snowflakes_users WHERE reset_link=\"$resetLink\";";
+        $sql = "SELECT * FROM snowflakes_users WHERE reset_link = \"$resetLink\";";
         if (!$conn->fetch($sql)) {
             return false;
         }
@@ -402,7 +412,7 @@ class userStruct {
 
     public function getUserID($conn) {
 
-/// Sanity Checks
+        /// Sanity Checks
         if (!$this->isPopulated() || !$conn) {
             return false;
         }
@@ -2078,7 +2088,7 @@ final class sfUtils {
                 self::copyDirectoryList("$source/$file", "$dest/$file");
             }
         }
-        
+
         return true;
     }
 
@@ -2092,8 +2102,7 @@ final class sfUtils {
             return symlink(readlink($source), $settingsConfig['uploadGalleryDir']);
         }
 
-        return self::copyDirectoryList($source,$settingsConfig['uploadGalleryDir']);
-        
+        return self::copyDirectoryList($source, $settingsConfig['uploadGalleryDir']);
     }
 
     public static function createSnowflakesRss($conn, $snowflakesList, $inifile = '../config/config.ini') {

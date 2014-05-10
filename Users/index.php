@@ -63,7 +63,7 @@ if (isset($delete_Id)) {
     $userStruct->m_image_dir = $settingsConfig['uploadGalleryDir'];
     $userStruct->deleteUser($SFconnects);
     // Check Trigger exist , if not then use manual trigger
-    sfUtils::checkTrigger($SFconnects, $DeleteId, 'user', "DELETE");
+    sfUtils::checkTrigger($SFconnects, $delete_Id, 'user', "DELETE");
 }
 
 $query_reAdminUsers = "SELECT * FROM snowflakes_users";
@@ -245,6 +245,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                 <?php $lastin = new DateTime($userStructList[$i]->m_last_login); ?>
                                 <p> Last in : <?php echo $lastin->format(" F j, Y g:h a"); ?></p>
                                 <p> Status  : <?php echo $userStructList[$i]->m_logged_in == 1 ? "Online" : "Offline"; ?></p>
+                                <p> Flakes  : <?php echo $userStructList[$i]->m_flake_it; ?></p>
                             </div><!--Userside Ends-->
 
                         </div><!--Summary Ends-->

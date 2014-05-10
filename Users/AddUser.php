@@ -72,9 +72,14 @@ $MM_flag = "MM_insert";
 $loginFoundUser = 0;
 $MM_insert_flag = filter_input(INPUT_POST, $MM_flag);
 $postUsername = filter_input(INPUT_POST, 'username');
+$viewLink = "#";
+$formmessage="";
 if (isset($MM_insert_flag)) {
     $loginUsername = $postUsername;
     $loginFoundUser = sfUtils::userExits($SFconnects, $loginUsername);
+    if ($loginFoundUser >= 1) {
+        $viewLink = "Account.php?userName=$loginUsername";
+    }
 }
 
 $editFormAction = $php_self;
@@ -82,7 +87,6 @@ if (isset($query_string)) {
     $editFormAction .= "?" . htmlentities($query_string);
 }
 $MM_insert = filter_input(INPUT_POST, "MM_insert");
-$viewLink = "#";
 if ((isset($MM_insert)) && ($MM_insert == "form1") && $loginFoundUser <= 0 && ($File_is_Uploaded == TRUE)) {
 
     $userStruct = new userStruct();
@@ -161,12 +165,21 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                 $(".dialog-message").dialog({
                     modal: true,
                     buttons: {
+                        <?php if ($loginFoundUser >= 1) { ?>
+                        "Change": function() {
+                            $(this).dialog("close"); 
+                        }
+                        <?php } else { ?>
                         "Add more": function() {
-                            $(this).dialog("close");
-                        },
+                            $(this).dialog("close"); 
+                            window.location = "<?php echo $php_self ?>";
+                        }
+                        <?php }  ?>
+                        ,
                         "View": function() {
                             window.location = "<?php echo $viewLink ?>";
                         }
+                        
                     }
                 });
             });
@@ -257,14 +270,6 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
             <!-- Content -->
             <div class="Content"> <!-- InstanceBeginEditable name="BodyRegion" -->
                 <h1>Add Snowflakes Admin User</h1>
-
-                <?php
-//if there is a row in the database, the username was found - can not add the requested username
-                if ($loginFoundUser >= 1) {
-                    ?>
-                    <div class="SnowflakeHead"><span class="icon error"></span> The username "<?php echo $postUsername; ?>" already exists </div>
-                <?php }
-                ?>
                 <!-- Break -->
                 <div class="clear"></div>
                 <div class="Break"></div>
@@ -272,6 +277,11 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                 <!-- PageWrap -->
                 <div class="PageWrap">
                     <?php
+                    //if there is a row in the database, the username was found - can not add the requested username
+                    if ($loginFoundUser >= 1) {
+                        echo sfUtils::dialogMessage("Add User", '<span class="icon error"></span> The username "<a href="'.$viewLink.'">' . $postUsername . '</a>" already exists ');
+                    }
+
                     if (!empty($formmessage)) {
                         echo sfUtils::dialogMessage("Add User", $formmessage);
                     }
