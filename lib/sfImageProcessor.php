@@ -227,8 +227,8 @@ class sfGalleryImage {
 
         if (($imageType == "image/gif") || ($imageType == "image/png") || ($imageType == "image/x-png")) {
 
-            $colourTotal = imagecolorstotal($source);
-            imagetruecolortopalette($newImage, true, $colourTotal <= 0 ? 1 : $colourTotal);
+            //$colourTotal = imagecolorstotal($source);
+            //imagetruecolortopalette($newImage, true, $colourTotal <= 0 ? 255 : $colourTotal);
             $currentTransparent = imagecolortransparent($source);
 
             // If we have a specific transparent color
@@ -325,8 +325,8 @@ class sfGalleryImage {
         }
 
         if (($imageType == "image/gif") || ($imageType == "image/png") || ($imageType == "image/x-png")) {
-            $colourTotal = imagecolorstotal($source);
-            imagetruecolortopalette($newImage, true, $colourTotal <= 0 ? 1 : $colourTotal);
+            //$colourTotal = imagecolorstotal($source);
+            //imagetruecolortopalette($newImage, true, $colourTotal <= 0 ? 1 : $colourTotal);
             $currentTransparent = imagecolortransparent($source);
 
             // If we have a specific transparent color
@@ -510,10 +510,9 @@ class sfGalleryImage {
         //echo "3 -> image width and height ".$width." And ". $height. " <br>";//DEBUG
         //Scale the image if it is greater than the width or lesser that width scale to maximum width
         $scale = $this->m_MaxImageWidth / $width;
-        $uploadedimg = $this->resizeImage($this->m_TargetFileImageLoc, $width, $height, $scale);
-        if ($uploadedimg) {
-            $this->m_File_is_Uploaded = True;
-        }
+        $uploaded = $this->resizeImage($this->m_TargetFileImageLoc, $width, $height, $scale);
+
+        $this->m_File_is_Uploaded = True;
         $_SESSION['ImageFile'] = $this->m_TargetFileImageLoc;
         $_SESSION['ImageThumbFile'] = $this->m_TargetFileThumbLoc;
         $_SESSION['ImageFiles'][] = $this->m_TargetFileImageLoc;
