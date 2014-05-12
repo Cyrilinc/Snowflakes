@@ -74,9 +74,9 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
     $SFconnects->connect(); // Connect to new database
     $migrateMessage = "";
     $migrated = sfUtils::migrate($SFconnects, $Database_Name, $config['username'], $migrateMessage);
-    $migrateSuccess = str_replace("STATUS::SUCCESS", '<span class="icon success"></span><br />', $migrateMessage);
-    $migratefailure = str_replace("STATUS::FAILED", '<span class="icon error"></span><br />', $migrateSuccess);
-    $somem_Message = $migratefailure;
+    //$migrateSuccess = str_replace("STATUS::SUCCESS", '<span class="icon success"></span><br />', $migrateMessage);
+    //$migratefailure = str_replace("STATUS::FAILED", '<span class="icon error"></span><br />', $migrateSuccess);
+    $somem_Message = $migrateMessage;
     
     if( !sfUtils::migrateUpdir($oldUpdloadDir,'../config/config.ini'))
     {

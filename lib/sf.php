@@ -38,6 +38,7 @@ class snowflakeStruct {
 
     /**
      * Populate each member of {@link snowflakeStruct} given the input parameters
+     *
      * @param an array $array to be used to populate members of {@link snowflakeStruct}
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -66,7 +67,8 @@ class snowflakeStruct {
     /**
      * Get all the values of all members of {@link snowflakeStruct} given the id(identifier),
      * the data is obtained from the database and then the result is used to populate the 
-     * members of this class @see snowflakeStruct::populate
+     * members of this class {@see snowflakeStruct::populate}
+     * 
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link snowflakeStruct} the id(identifier) of the snowflake
      * 
@@ -92,6 +94,7 @@ class snowflakeStruct {
     /**
      * Get the Image name of a {@link snowflakeStruct} given the id(identifier),
      * the data is obtained from the database and then the result returned
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link snowflakeStruct} the id(identifier) of the snowflake
      * 
@@ -117,6 +120,7 @@ class snowflakeStruct {
     /**
      * Add a new {@link snowflakeStruct} data to the database table used to store snowflake
      * provided that all the mandatory members of this class is populated
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -142,6 +146,7 @@ class snowflakeStruct {
     /**
      * Update {@link snowflakeStruct} data to the database table used to store snowflake
      * provided that all the mandatory members of this class is populated
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -167,6 +172,7 @@ class snowflakeStruct {
     /**
      * Delete {@link snowflakeStruct} data store in the database table provided that the 
      * id(identifier) is indicated as a handle for which the data is to be deleted
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param bool $setDelete indicates true or false to actually delete the 
      * data from the database table or set the delete field
@@ -202,6 +208,7 @@ class snowflakeStruct {
     /**
      * Get a {@link snowflakeStruct} id(identifier) provided the members of this
      * class are populated the id(identifier) is selected from the database
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
      * @return bool/int <i>id(identifier)</i> on success, <i>false</i> otherwise
@@ -281,6 +288,7 @@ class userStruct {
 
     /**
      * initialise some member variable {@link userStruct} given the input parameters
+     *
      * @param string $username {@link userStruct} username
      * @param string $password {@link userStruct} the user's password
      * @param string $email {@link userStruct} the user's email
@@ -308,6 +316,7 @@ class userStruct {
 
     /**
      * Populate each member of {@link userStruct} given the input parameters
+     *
      * @param an array $value to be used to populate members of {@link userStruct}
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -335,6 +344,7 @@ class userStruct {
     /**
      * Get all the values of all members of {@link userStruct} given $username 
      * @see userStruct::populate
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param string $username {@link userStruct} the username
      * 
@@ -359,6 +369,7 @@ class userStruct {
 
     /**
      * Get {@link userStruct} image name given the id(identifier)
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link userStruct} the id(identifier) of the user record
      * 
@@ -384,6 +395,7 @@ class userStruct {
     /**
      * Get all the values of all members of {@link userStruct} given the id(identifier),
      * @see userStruct::populate
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link userStruct} the id(identifier) of the user record
      * 
@@ -408,6 +420,7 @@ class userStruct {
     /**
      * Change all the values of all members of {@link userStruct} given the id(identifier),
      * @see userStruct::populate
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $flakeit {@link userStruct} the flake-it value of the user record
      * 
@@ -425,6 +438,7 @@ class userStruct {
 
     /**
      * Get all the values of all members of {@link userStruct} given the reset link,
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param string $resetLink {@link userStruct} the reset link  value of the user record
      * 
@@ -448,6 +462,7 @@ class userStruct {
 
     /**
      * Get all the values of all members of {@link userStruct} given the user name and passoword,
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param string $username {@link userStruct} the username value of the user record
      * @param string $password {@link userStruct} the password value of the user record
@@ -471,6 +486,7 @@ class userStruct {
     /**
      * Add a new {@link userStruct} data to the database table used to store a user
      * provided that all the mandatory members of {@link userStruct} is populated
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -496,6 +512,7 @@ class userStruct {
     /**
      * Update {@link userStruct} data to the database table used to store user
      * provided that all the mandatory members of {@link userStruct} is populated
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -521,6 +538,7 @@ class userStruct {
     /**
      * Delete {@link userStruct} data store in the database table provided that the 
      * id(identifier) is indicated as a handle for which the data is to be deleted
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param bool $setDelete indicates true or false to actually delete the 
      * data from the database table or set the delete field
@@ -573,6 +591,7 @@ class userStruct {
     /**
      * Get a {@link userStruct} id(identifier) provided the members of {@link userStruct}
      * are populated the id(identifier) is selected from the database
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
      * @return bool/int <i>id(identifier)</i> on success, <i>false</i> otherwise
@@ -658,6 +677,7 @@ class galleryStruct {
 
     /**
      * Populate each member of {@link galleryStruct} given the input parameters
+     *
      * @param an array $value to be used to populate members of {@link galleryStruct}
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -686,6 +706,7 @@ class galleryStruct {
     /**
      * Add a new {@link galleryStruct} data to the database table used to store a user
      * provided that all the mandatory members of {@link galleryStruct} is populated
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -712,6 +733,7 @@ class galleryStruct {
     /**
      * Update {@link galleryStruct} data to the database table used to store user
      * provided that all the mandatory members of {@link galleryStruct} is populated
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -737,6 +759,7 @@ class galleryStruct {
     /**
      * Delete {@link galleryStruct} data store in the database table provided that the 
      * id(identifier) is indicated as a handle for which the data is to be deleted
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param bool $setDelete indicates true or false to actually delete the 
      * data from the database table or set the delete field
@@ -765,6 +788,7 @@ class galleryStruct {
     /**
      * Get all the values of all members of {@link galleryStruct} given the id(identifier),
      * @see galleryStruct::populate
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link galleryStruct} the id(identifier) of the user record
      * 
@@ -789,6 +813,7 @@ class galleryStruct {
     /**
      * Get a {@link galleryStruct} id(identifier) provided the members of {@link galleryStruct}
      * are populated the id(identifier) is selected from the database
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
      * @return bool/int <i>id(identifier)</i> on success, <i>false</i> otherwise
@@ -879,6 +904,7 @@ class eventStruct {
 
     /**
      * Populate each member of {@link eventStruct} given the input parameters
+     *
      * @param an array $value to be used to populate members of {@link eventStruct}
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -910,6 +936,7 @@ class eventStruct {
     /**
      * Get all the values of all members of {@link eventStruct} given the id(identifier),
      * @see eventStruct::populate
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link eventStruct} the id(identifier) of the user record
      * 
@@ -933,6 +960,7 @@ class eventStruct {
 
     /**
      * Get {@link eventStruct} image name   given the id(identifier)
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link eventStruct} the id(identifier) of the user record
      * 
@@ -958,6 +986,7 @@ class eventStruct {
     /**
      * Add a new {@link eventStruct} data to the database table used to store a user
      * provided that all the mandatory members of {@link eventStruct} is populated
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -989,6 +1018,7 @@ class eventStruct {
     /**
      * Update {@link eventStruct} data to the database table used to store user
      * provided that all the mandatory members of {@link eventStruct} is populated
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -1018,6 +1048,7 @@ class eventStruct {
     /**
      * Delete {@link eventStruct} data store in the database table provided that the 
      * id(identifier) is indicated as a handle for which the data is to be deleted
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param bool $setDelete indicates true or false to actually delete the 
      * data from the database table or set the delete field
@@ -1052,6 +1083,7 @@ class eventStruct {
     /**
      * Get a {@link eventStruct} id(identifier) provided the members of {@link eventStruct}
      * are populated the id(identifier) is selected from the database
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
      * @return bool/int <i>id(identifier)</i> on success, <i>false</i> otherwise
@@ -1247,6 +1279,7 @@ final class sfUtils {
 
     /**
      * Generate link.
+     *
      * @param string $page target page
      * @param array $params page parameters
      * 
@@ -1261,6 +1294,7 @@ final class sfUtils {
 
     /**
      * Format date.
+     *
      * @param DateTime $date date to be formatted
      * 
      * @return string formatted date
@@ -1274,6 +1308,7 @@ final class sfUtils {
 
     /**
      * Format date and time.
+     *
      * @param DateTime $date date to be formatted
      * 
      * @return string formatted date and time
@@ -1287,6 +1322,7 @@ final class sfUtils {
 
     /**
      * Redirect to the given page.
+     *
      * @param type $page target page
      * @param array $params page parameters
      */
@@ -1310,6 +1346,7 @@ final class sfUtils {
 
     /**
      * Capitalize the first letter of the given string
+     *
      * @param string $string string to be capitalized
      * 
      * @return string capitalized string
@@ -1320,6 +1357,7 @@ final class sfUtils {
 
     /**
      * Escape the given string
+     *
      * @param string $string string to be escaped
      * 
      * @return string escaped string
@@ -1334,6 +1372,7 @@ final class sfUtils {
 
     /**
      * Escape the given string
+     *
      * @param string $string string to be escaped
      * 
      * @return string escaped string
@@ -1372,6 +1411,7 @@ final class sfUtils {
 
     /**
      * Check if the data is empty or not
+     *
      * @param string $data the data to be cheked
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -1382,6 +1422,7 @@ final class sfUtils {
 
     /**
      * Create a direcory
+     *
      * @param string $Dir The directory to create
      * @param string $permissions The permissions given to the directory
      * 
@@ -1406,6 +1447,7 @@ final class sfUtils {
 
     /**
      * Calulate the approprate value in GB,MB,KB ... given the amount of bytes 
+     *
      * @param string $bytes the Bytes used to calculate the value
      * 
      * @return string the value of the byte in GB,MB,KB.
@@ -1430,6 +1472,7 @@ final class sfUtils {
 
     /**
      * Calulate the approprate value in bytes given the amount of GB,MB,KB... 
+     *
      * @param string $bytevalue the value in GB,MB,KB....
      * 
      * @return int the value of the GB,MB,KB... in bytes.
@@ -1452,6 +1495,7 @@ final class sfUtils {
 
     /**
      * Remove an element from an array
+     *
      * @param array $array the array to remove a key from
      * @param string $key the key to remove
      * 
@@ -1468,6 +1512,7 @@ final class sfUtils {
 
     /**
      * Delete a file
+     *
      * @param string $file the file path to delete
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -1492,6 +1537,7 @@ final class sfUtils {
 
     /**
      * Get a user level name by a given number
+     *
      * @param int $number the user level number
      * 
      * @return string <b>User Level name</b> on success or <b>nothing</b> on failure.
@@ -1579,7 +1625,8 @@ final class sfUtils {
      * Restrict Access To a Page: Grant or deny access to this page
      * 
      * @return bool <b>TRUE</b> on valid user or <b>FALSE</b> on invalid user.
-     * */
+     * 
+     */
     public static function isAuthorized($strUsers, $strGroups, $UserName, $UserGroup) {
         // For security, start by assuming the visitor is NOT authorized. 
         $isValid = False;
@@ -1684,6 +1731,7 @@ final class sfUtils {
 
     /**
      * validateFiterInput is used to validate data entered by user 
+     *
      * @param int $INPUT <p>
      * One of <b>INPUT_GET</b>, <b>INPUT_POST</b>,
      * <b>INPUT_COOKIE</b>, <b>INPUT_SERVER</b>, or
@@ -1739,6 +1787,7 @@ final class sfUtils {
      * to a gallery internally so that when they are both clicked, the data will
      * be shown to the user 'Cyrilinc as a user' and the 'gallery' the activity
      * log is referring to.
+     *
      * @param string $type <p> The link type to create</p> 
      * @param string $id <p> The identifier of the type</p> 
      * @param string $inifile <p> The configuration file </p> 
@@ -1787,6 +1836,7 @@ final class sfUtils {
 
     /**
      * Gets a formatted/Structured and linked html style of the activitied of a user.
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param string $userName {@link userStruct} the user name of the user who's activity is to be gotten
      * @param string $inifile <p> The configuration file </p> 
@@ -1840,6 +1890,7 @@ final class sfUtils {
 
     /**
      * Search the API database tables for user entered string .
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param string $searchString <p> The string to look for </p> 
      * @param string $filter <p> filter by API type i.e snowflakes, gallery, events and users</p> 
@@ -1924,6 +1975,7 @@ final class sfUtils {
 
     /**
      * Checkes if user exists in the API users database table.
+     *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param string $username {@link userStruct} the user name to check
      * 
@@ -1940,6 +1992,18 @@ final class sfUtils {
         return $conn->recordCount();
     }
 
+    /**
+     * checks user email on request of forgotten password and sends the user a link to reset 
+     * the password by email
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $email the email of the user requesting a password reset
+     * @param string $sender the sender (usally system administrator email)
+     * @param string $snowflakesUrl the snowflakes url
+     * @param string $errmsg the error message 
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function forgottenPassword($conn, $email, $sender, $snowflakesUrl, $errmsg = "") {
 
         if (!$conn || !$email || !$sender) {
@@ -1963,18 +2027,27 @@ final class sfUtils {
         return self::requestResetPassWord($userStruct, $sender, $snowflakesUrl);
     }
 
+    /**
+     * process a user's request for a password reset after password is forgotten by user
+     *
+     * @param userStruct $userStruct {@link userStruct} a struct filled with user information
+     * @param string $sender the sender (usally system administrator email)
+     * @param string $snowflakesUrl the snowflakes url
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function requestResetPassWord($userStruct, $sender, $snowflakesUrl) {
 
         if (!$userStruct->isPopulated() || !$sender || !$snowflakesUrl) {
             return false;
         }
 
-    # SUBJECT (Subscribe/Remove)
+        # SUBJECT (Subscribe/Remove)
         $subject = "Reset your snowflakes password";
 
         echo $subject . "<br>";
 
-    # MAIL BODY
+        # MAIL BODY
         $body = "You have been sent this mail because you requested a reset on your password.\n";
         $body .= "\tUsername: " . $userStruct->m_username . " \n";
         $body .= "\tEmail: " . $userStruct->m_email . " \n";
@@ -1986,6 +2059,15 @@ final class sfUtils {
         return mail($userStruct->m_email, $subject, $body, "From: $sender");
     }
 
+    /**
+     * Reset the user passowrd given the new password and the reset link
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $password {@link userStruct} the new password of the user requesting a password reset
+     * @param string $oldResetLink {@link userStruct} the old reset link 
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function resetPassword($conn, $password, $oldResetLink) {
 
         if (!$password || !$conn || !$oldResetLink) {
@@ -1993,32 +2075,56 @@ final class sfUtils {
         }
 
         $userStruct = new userStruct();
-// get user by reset link
+        // get user by reset link
         $userStruct->getUserByResetLink($conn, $oldResetLink);
-// re-intialize  the user with the new password provided to set the new reset link
+        // re-intialize  the user with the new password provided to set the new reset link
         $userStruct->init($userStruct->m_username, $password, $userStruct->m_email, $userStruct->m_access_level, $userStruct->m_image_name);
         return $userStruct->UpdateUser($conn);
     }
 
+    /**
+     * convert datetime string to time with am or pm appended
+     *
+     * @param string $stringDate the date time string
+     *
+     * @return string  am/pm version of time.
+     */
     public static function toAmPmTime($stringDate) {
-// Make it into a Unix TimeStamp 
-// Convert it to the format you desire 
         $datetime = new DateTime($stringDate);
         return $datetime->format("g:i a");
     }
 
+    /**
+     * Convert Date from DD/MM/YYYY to YYYY-MM-DD to be valid for sql
+     *
+     * @param string $stringDate the date time string
+     *
+     * @return string  sql formatted date 'YYYY-MM-DD'.
+     */
     public static function dateToSql($stringDate) {
-// Convert Date from DD/MM/YYYY to YYYY-MM-DD
         $datetime = new DateTime(str_replace('/', '-', $stringDate));
         return $datetime->format('Y-m-d');
     }
 
+    /**
+     * Convert Date from YYYY-MM-DD to DD/MM/YYYY from sql date string
+     *
+     * @param string $stringDate the date time string
+     *
+     * @return string  sql formatted date 'DD/MM/YYYY'.
+     */
     public static function dateFromSql($stringDate) {
-// Convert Date from YYYY-MM-DD to DD/MM/YYYY
         $datetime = new DateTime($stringDate);
         return $datetime->format("d/m/Y");
     }
 
+    /**
+     * Determine table name from type parameter passed in
+     *
+     * @param string $type the type of data whos table is to be returned
+     *
+     * @return string  the Table name of a Snowflakes API type.
+     */
     public static function tablenameFromType($type) {
 
         $tableName = "";
@@ -2030,11 +2136,27 @@ final class sfUtils {
             $tableName = "snowflakes_gallery";
         } else if ($type == 'user') {
             $tableName = "snowflakes_users";
+        } else if ($type == 'changelog') {
+            $tableName = "snowflakes_change_log";
+        } else if ($type == 'flakeit') {
+            $tableName = "snowflakes_flakeit";
         }
 
         return $tableName;
     }
 
+    /**
+     * Process manual 'flake it' triggers if the server's database snowflakes is installed into
+     * doesn't support/allows/permits the user to use triggers 
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $id the identifier of snowflake data {@link snowflakeStruct}
+     * @param string $type the type of snowflake data {@see tablenameFromType}
+     * @param string $operation the trigger operatios usually on adding, editing or deleting
+     * the snowflake data base on its identifier
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function manualFlakeitTrigger($conn, $id, $type, $operation) {
         if (!$conn || !$id || !$type || !$operation) {
             return false;
@@ -2072,6 +2194,18 @@ final class sfUtils {
         return $conn->execute($sqlOp);
     }
 
+    /**
+     * Process manual change log triggers if the server's database snowflakes is installed into
+     * doesn't support/allows/permits the user to use triggers 
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $id the identifier of snowflake data {@link snowflakeStruct}
+     * @param string $type the type of snowflake data {@see tablenameFromType}
+     * @param string $operation the trigger operatios usually on adding, editing or deleting
+     * the snowflake data base on its identifier
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function manualchangeLogTrigger($conn, $id, $type, $operation) {
 
         if (!$conn || !$id || !$type || !$operation) {
@@ -2142,6 +2276,18 @@ final class sfUtils {
         return $inserted;
     }
 
+    /**
+     * check triggers on the server's database snowflakes is installed into
+     * doesn't support/allows/permits the user to use triggers 
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $id the identifier of snowflake data {@link snowflakeStruct}
+     * @param string $type the type of snowflake data {@see tablenameFromType}
+     * @param string $operation the trigger operatios usually on adding, editing or deleting
+     * the snowflake data base on its identifier
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function checkTrigger($conn, $id, $type, $operation) {
 
         if (!$conn || !$id || !$type || !$operation) {
@@ -2174,6 +2320,18 @@ final class sfUtils {
         return true;
     }
 
+    /**
+     * process a  flake it data for any snowflake data type and increment or decrement
+     * the flake_it field of  that data type
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $id the identifier of snowflake data {@link snowflakeStruct}
+     * @param string $type the type of snowflake data {@see tablenameFromType}
+     * @param bool $flakeit if true then increment the flake_it field otherwise
+     * decrement the field
+     *
+     * @return mixed <b>the flake it value</b> on success or <b>FALSE</b> on failure.
+     */
     public static function flakeIt($conn, $id, $type, $flakeit = "true") {
 
         if (!$id || !$conn || !$type) {
@@ -2208,6 +2366,15 @@ final class sfUtils {
         return $result[0]['flake_it'];
     }
 
+    /**
+     * Add query string to a url
+     *
+     * @param string $url the url to add keys and values as query to e.g cyrilinc.co.uk
+     * @param string $key the query key /identifier e.g ?key=
+     * @param string $value the value of the key e.g ?key=value
+     *
+     * @return string The <b>url</b> with the key and the query e.g cyrilinc.co.uk?key=value.
+     */
     public static function addQuerystringVar($url, $key, $value) {
         $url = preg_replace('/(.*)(?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&');
         $url = substr($url, 0, -1);
@@ -2218,12 +2385,33 @@ final class sfUtils {
         }
     }
 
+    /**
+     * remove query string to a url
+     *
+     * @param string $url the url to add keys and values as query to e.g 
+     * cyrilinc.co.uk?key=value&key2=value2
+     * @param string $key the query key /identifier e.g ?key2=
+     * @param string $value the value of the key e.g ?key2=value2
+     *
+     * @return string The <b>url</b> with the key and the query e.g cyrilinc.co.uk?key=value.
+     */
     public static function removeQuerystringVar($url, $key) {
         $url = preg_replace('/(.*)(?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&');
         $url = substr($url, 0, -1);
         return ($url);
     }
 
+    /**
+     * Delete a snowflake gallery and all the images associated with the specific gallery 
+     * pointed out by the id(identifier)
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $id the identifier of snowflake data {@link snowflakeStruct}
+     * @param bool $setDelete indicates true or false to actually delete the 
+     * data from the database table or set the delete field
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function deleteGallery($conn, $id, $setDelete = false) {
 
         if (!$id || !$conn) {
@@ -2245,7 +2433,12 @@ final class sfUtils {
     }
 
     /**
-     * Returns an encrypted & utf8-encoded
+     * encyrpt a string and Returns an encrypted & utf8-encoded string
+     *
+     * @param string $pure_string the original string to encrypt
+     * @param int $encryption_key the encryption key
+     *
+     * @return string an encrypted & utf8-encoded string.
      */
     public static function encrypt($pure_string, $encryption_key) {
         $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
@@ -2255,7 +2448,12 @@ final class sfUtils {
     }
 
     /**
-     * Returns decrypted original string
+     * decrypt a string and Returns an decrypted string
+     *
+     * @param string $encrypted_string the encrypted string
+     * @param int $encryption_key the encryption key
+     *
+     * @return string a decrypted original string.
      */
     public static function decrypt($encrypted_string, $encryption_key) {
         $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
@@ -2264,11 +2462,21 @@ final class sfUtils {
         return $decrypted_string;
     }
 
+    /**
+     * Sets the user logged in status, to identify if the user is currently logged in to the
+     * API or not
+     *
+     * @param string $username {@link userStruct} the user name to check
+     * @param bool $value logged in if TRUE and logged out if FALSE
+     * @param string $inifile <p> The configuration file </p> 
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function setUserLoginOut($userName, $value = false, $inifile = '../config/config.ini') {
         if (!$userName) {
             return false;
         }
-//host
+        //host
         $config = Config::getConfig("db", $inifile);
         $sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
         $SFconnects = new sfConnect($sqlArray);
@@ -2278,6 +2486,15 @@ final class sfUtils {
         return $SFconnects->execute($sql);
     }
 
+    /**
+     * Counts all the flake it for all snowflakes data type(snowflakes) related to the user
+     * selected
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $username {@link userStruct} the user name to check
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function snowFlakeItCount($conn, $userName = "") {
 
         if (!$conn) {
@@ -2300,6 +2517,15 @@ final class sfUtils {
         return $result[0]['total'];
     }
 
+    /**
+     * Counts all the flake it for all snowflakes data type(event) related to the user
+     * selected
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $username {@link userStruct} the user name to check
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function eventFlakeItCount($conn, $userName = "") {
 
         if (!$conn) {
@@ -2322,6 +2548,15 @@ final class sfUtils {
         return $result[0]['total'];
     }
 
+    /**
+     * Counts all the flake it for all snowflakes data type(gallery) related to the user
+     * selected
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $username {@link userStruct} the user name to check
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function galleryFlakeItCount($conn, $userName = "") {
 
         if (!$conn) {
@@ -2344,6 +2579,15 @@ final class sfUtils {
         return $result[0]['total'];
     }
 
+    /**
+     * Counts all the flake it for all snowflakes data type related to the user
+     * selected
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $username {@link userStruct} the user name to check
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function getAllCounts($conn, $username = '') {
 
         if (!$conn) {
@@ -2446,6 +2690,14 @@ final class sfUtils {
         return true;
     }
 
+    /**
+     * process a title and a message to produce a well formated dailog message
+     *
+     * @param string $title The title of the dialog message
+     * @param string $message The dialog message
+     *
+     * @return mixed <b>The html dialog format</b> on success or <b>FALSE</b> on failure.
+     */
     public static function dialogMessage($title, $message) {
 
         if (!strlen($message)) {
@@ -2463,6 +2715,13 @@ final class sfUtils {
         return $str;
     }
 
+    /**
+     * get the string equivalent of published status
+     *
+     * @param bool $publish The publish value which coould be true,false,1 or 0
+     *
+     * @return string The string equivalent of published status.
+     */
     public static function getPublishStatus($publish) {
 
         $retValue = "";
@@ -2474,6 +2733,17 @@ final class sfUtils {
         return $retValue;
     }
 
+    /**
+     * migrate old snowflakes version database table into the new snowflakes table
+     * and copy the associated data (images) to the required folders
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $dbname the database name of the old snowflakes (v1.0 and below)
+     * @param string $adminUsername the administrator username
+     * @param string $output The message concerning the migration poulated
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function migrate($conn, $dbname, $adminUsername, &$output) {
 
         if (!$conn || !$dbname || !$adminUsername) {
@@ -2485,11 +2755,11 @@ final class sfUtils {
                 FROM ' . $dbname . '.AdminUsers a;';
 
         if (!$conn->execute($sql)) {
-            $output.="Could Not migrate users from $dbname.AdminUsers STATUS::FAILED " . $conn->getMessage() . "<br/>";
+            $output.="Could Not migrate users from $dbname.AdminUsers <span class=\"icon error\"></span><br /> " . $conn->getMessage() . "<br/>";
             return false;
         }
 
-        $output.="User Migration from $dbname.AdminUsers was successful STATUS::SUCCESS";
+        $output.="User Migration from $dbname.AdminUsers was successful <span class=\"icon sucess\"></span><br />";
 
         $sql = 'INSERT IGNORE INTO snowflakes (title,body_text,publish,image_name,gallery,created,created_by,edited,edited_by)
             SELECT b.title,b.bodytext,b.publish, b.imagename,b.gallery,b.created,b.createdby,b.created edited,b.createdby editedby
@@ -2497,11 +2767,11 @@ final class sfUtils {
 
 
         if (!$conn->execute($sql)) {
-            $output.="Could Not migrate Snowflakes from $dbname.SnowFlakeTable STATUS::FAILED " . $conn->getMessage() . "<br/>";
+            $output.="Could Not migrate Snowflakes from $dbname.SnowFlakeTable <span class=\"icon error\"></span><br /> " . $conn->getMessage() . "<br/>";
             return false;
         }
 
-        $output.="Snowflakes Migration from $dbname.SnowFlakeTable was successful STATUS::SUCCESS";
+        $output.="Snowflakes Migration from $dbname.SnowFlakeTable was successful <span class=\"icon sucess\"></span><br />";
 
         $sql = 'INSERT IGNORE INTO snowflakes_events (title,body_text,publish,image_name,event_time,event_date,end_time,end_date,location,created,edited,created_by,edited_by)
             SELECT c.title, c.bodytext, c.publish, c.imagename, c.evtime event_time, FROM_UNIXTIME(c.evDate) event_date,@endtime:=ADDTIME(c.evtime, "01:00:00") end_time, 
@@ -2510,29 +2780,29 @@ final class sfUtils {
             FROM ' . $dbname . '.SF_EventsTable c;';
 
         if (!$conn->execute($sql)) {
-            $output.="Could Not migrate Snowflakes Events from $dbname.SF_EventsTable STATUS::FAILED " . $conn->getMessage() . "<br/>";
+            $output.="Could Not migrate Snowflakes Events from $dbname.SF_EventsTable <span class=\"icon error\"></span><br /> " . $conn->getMessage() . "<br/>";
             return false;
         }
 
-        $output.="Snowflakes Events Migration from $dbname.SF_EventsTable was successful STATUS::SUCCESS";
+        $output.="Snowflakes Events Migration from $dbname.SF_EventsTable was successful <span class=\"icon sucess\"></span><br />";
 
         $sql = 'INSERT IGNORE INTO snowflakes_gallery (title,thumb_name,image_name,image_caption,created,created_by,edited,edited_by)
             SELECT d.title,d.Thumbname,d.imagename,d.ImageCaption,d.created,d.createdby,d.created edited,d.createdby edited_by 
             FROM ' . $dbname . '.SF_GalleryTable d;';
 
         if (!$conn->execute($sql)) {
-            $output.="Could Not migrate Snowflakes Gallery from $dbname.SF_GalleryTable STATUS::FAILED " . $conn->getMessage() . "<br/>";
+            $output.="Could Not migrate Snowflakes Gallery from $dbname.SF_GalleryTable <span class=\"icon error\"></span><br /> " . $conn->getMessage() . "<br/>";
             return false;
         }
 
-        $output.="Snowflakes Gallery Migration from $dbname.SF_GalleryTable was successful STATUS::SUCCESS";
+        $output.="Snowflakes Gallery Migration from $dbname.SF_GalleryTable was successful <span class=\"icon sucess\"></span><br />";
 
         $sql = 'INSERT IGNORE INTO snowflakes_settings(sf_host_name,sf_db,sf_db_username,sf_db_password,sf_db_type,sf_url,result_url,out_url,events_result_url,events_output_url,gallery_result_url,gallery_out_url,upload_gallery_dir)
             SELECT e.SFHostname, e.SFDatabase,e.SFDBUsername,e.SFDBPassword,"' . $conn->getAttribute('type') . '",e.SnowflakesUrl,e.SnowflakesResultUrl,e.SFOutUrl,e.SFEventsResultUrl,e.SFEventsOutputUrl,e.SFGalleryResultUrl,e.SFGalleryOutUrl,e.UploadGalleryDir
             FROM ' . $dbname . '.SF_SnowflakesSettings e;';
 
         if (!$conn->execute($sql)) {
-            $output.="Could Not migrate Snowflakes settings from $dbname.SF_SnowflakesSettings STATUS::FAILED " . $conn->getMessage() . "<br/>";
+            $output.="Could Not migrate Snowflakes settings from $dbname.SF_SnowflakesSettings <span class=\"icon error\"></span><br /> " . $conn->getMessage() . "<br/>";
             return false;
         }
         $sql = 'SELECT e.SnowflakesUrl,e.SnowflakesResultUrl,e.SFOutUrl,e.SFEventsResultUrl,e.SFEventsOutputUrl,e.SFGalleryResultUrl,e.SFGalleryOutUrl,e.UploadGalleryDir
@@ -2562,11 +2832,21 @@ final class sfUtils {
         $insert = 'UPDATE snowflakes_settings SET gallery_out_url="' . self::escape($result[0]['SFGalleryOutUrl']) . '" WHERE setting_id=1 AND gallery_out_url="";';
         $conn->execute($insert);
 
-        $output.="Snowflakes settings Migration from $dbname.SF_SnowflakesSettings was successful STATUS::SUCCESS";
+        $output.="Snowflakes settings Migration from $dbname.SF_SnowflakesSettings was successful <span class=\"icon sucess\"></span><br />";
 
         return true;
     }
 
+    /**
+     * Copy a directory from a source to a destination recursively thereby creating
+     * files in the destination directory and subdirectory just like in the source 
+     * directory
+     *
+     * @param string $source the Source directory
+     * @param string $dest the destination directory
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function copyDirectoryList($source, $dest) {
 
         if (!$source || !is_dir($source) || !$dest) {
@@ -2601,6 +2881,15 @@ final class sfUtils {
         return true;
     }
 
+    /**
+     * migrate data associated with snowflakes previous versions to the new
+     * snowflakes upload directory
+     *
+     * @param string $source the Source directory
+     * @param string $inifile <p> The configuration file </p> 
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function migrateUpdir($source, $inifile = '../config/config.ini') {
         if (!$source || !is_dir($source)) {
             return false;
@@ -2614,6 +2903,67 @@ final class sfUtils {
         return self::copyDirectoryList($source, $settingsConfig['uploadGalleryDir']);
     }
 
+    /**
+     * Decode xml data
+     *
+     * @param string $xmltext <p> The xml data that needs to be decoded </p> 
+     * 
+     * @return mixed <b>Decoded xml string</b> on success or <b>FALSE</b> on failure.
+     */
+    public static function xmldecoder($xmltext) {
+        if (!$xmltext) {
+            return false;
+        }
+
+        /// replace &amp; with "&"
+        $xmltext = str_replace("&amp;", "&", $xmltext);
+        /// replace &lt; with "<"
+        $xmltext = str_replace("&lt;", "<", $xmltext);
+        /// replace &gt; with ">"
+        $xmltext = str_replace("&gt;", ">", $xmltext);
+        /// replace &apos; with "'"
+        $xmltext = str_replace("&apos;", "'", $xmltext);
+        /// replace &quot; with "\""
+        $xmltext = str_replace("&quot;", "\"", $xmltext);
+
+        return $xmltext;
+    }
+
+    /**
+     * Encode xml data
+     *
+     * @param string $xmltext <p> The xml data that needs to be encoded </p> 
+     * 
+     * @return mixed <b>Encoded xml string</b> on success or <b>FALSE</b> on failure.
+     */
+    public static function xmlencoder($xmltext) {
+        if (!$xmltext) {
+            return false;
+        }
+
+        /// replace "&" with "&amp;" 
+        $xmltext = str_replace("&", "&amp;", $xmltext);
+        /// replace "<" with "&lt;"
+        $xmltext = str_replace("<", "&lt;", $xmltext);
+        /// replace ">" with "&gt;"
+        $xmltext = str_replace(">", "&gt;", $xmltext);
+        /// replace "'" with "&apos;" 
+        $xmltext = str_replace("'", "&apos;", $xmltext);
+        /// replace "\"" with "&quot;" with 
+        $xmltext = str_replace("\"", "&quot;", $xmltext);
+
+        return $xmltext;
+    }
+
+    /**
+     * generate snowflake rss data from published snowflakes
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param array $snowflakesList {@link snowflakeStruct} a list of snowflake struct
+     * @param string $inifile <p> The configuration file </p> 
+     * 
+     * @return mixed <b>Rss string</b> on success or <b>FALSE</b> on failure.
+     */
     public static function createSnowflakesRss($conn, $snowflakesList, $inifile = '../config/config.ini') {
         /// sanity Check
         if (!$conn || empty($snowflakesList)) {
@@ -2628,17 +2978,17 @@ final class sfUtils {
                 <channel>
                     <title>Snowflakes Rss</title>
                     <description>A description of Snowflakes Rss feed</description>
-                    <link>' . htmlentities($settingsConfig['m_sfUrl'] . 'rss.php?ty=snowflakes') . '</link>
+                    <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=snowflakes') . '</link>
                     <image>
                         <url>' . $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png" . '</url>
                         <title>Snowflakes Rss</title>
-                        <link>' . htmlentities($settingsConfig['m_sfUrl'] . 'rss.php?ty=snowflakes') . '</link>
+                        <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=snowflakes') . '</link>
                         <width>120</width>
                         <height>40</height>
                     </image>';
         foreach ($snowflakesList as $key => $value) {
             $flakeStruct = $value;
-            $BodyString = htmlspecialchars($flakeStruct->m_body_text, ENT_QUOTES);
+            $BodyString = self::xmlencoder($flakeStruct->m_body_text);
             $rssString .= '
                     <item>
                         <title>' . $flakeStruct->m_title . '</title>
@@ -2656,6 +3006,15 @@ final class sfUtils {
         return $rssString;
     }
 
+    /**
+     * generate snowflake rss data from published snowflakes events
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param array $eventList {@link eventStruct} a list of snowflake struct
+     * @param string $inifile <p> The configuration file </p> 
+     * 
+     * @return mixed <b>Rss string</b> on success or <b>FALSE</b> on failure.
+     */
     public static function createEventRss($conn, $eventList, $inifile = '../config/config.ini') {
         /// sanity Check
         if (!$conn || empty($eventList)) {
@@ -2669,18 +3028,18 @@ final class sfUtils {
                 <channel>
                     <title>Snowflakes Event Rss</title>
                     <description>A description of snowflakes event rss feed</description>
-                    <link>' . htmlentities($settingsConfig['m_sfUrl'] . 'rss.php?ty=events') . '</link>
+                    <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=events') . '</link>
                     <image>
-                        <url>' . $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png" . '</url>
+                        <url>' . self::xmlencoder($settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png" ). '</url>
                         <title>Snowflakes Event Rss</title>
-                        <link>' . htmlentities($settingsConfig['m_sfUrl'] . 'rss.php?ty=events') . '</link>
+                        <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=events') . '</link>
                         <width>120</width>
                         <height>40</height>
                     </image>';
 
         foreach ($eventList as $key => $value) {
             $eventStruct = $value;
-            $BodyString = htmlspecialchars($eventStruct->m_body_text, ENT_QUOTES);
+            $BodyString = self::xmlencoder($eventStruct->m_body_text);
             $eventtime = new DateTime($eventStruct->m_event_date);
             $endtime = new DateTime($eventStruct->m_end_date);
             $rssString .= '
@@ -2702,6 +3061,15 @@ final class sfUtils {
         return $rssString;
     }
 
+    /**
+     * generate snowflake rss data from published snowflakes gallery
+     *
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param array $galleryList {@link galleryStruct} a list of snowflake struct
+     * @param string $inifile <p> The configuration file </p> 
+     * 
+     * @return mixed <b>Rss string</b> on success or <b>FALSE</b> on failure.
+     */
     public static function createGalleryRss($conn, $galleryList, $inifile = '../config/config.ini') {
         /// sanity Check
         if (!$conn || empty($galleryList)) {
@@ -2715,11 +3083,11 @@ final class sfUtils {
                 <channel>
                     <title>Snowflakes Gallery Rss</title>
                     <description>A description of Snowflakes Gallery Rss feed</description>
-                    <link>' . htmlentities($settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery') . '</link>
+                    <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery') . '</link>
                     <image>
-                        <url>' . $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png" . '</url>
+                        <url>' . self::xmlencoder($settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png") . '</url>
                         <title>Snowflakes Gallery Rss</title>
-                        <link>' . htmlentities($settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery') . '</link>
+                        <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery') . '</link>
                         <width>120</width>
                         <height>40</height>
                     </image>';
@@ -2731,12 +3099,12 @@ final class sfUtils {
             $rssString .= '
                     <item>
                         <title>' . $galleryStruct->m_title . '</title>
-                        <link>' . $itemUrl . "?Galleryid=" . $galleryStruct->m_id . '</link>
+                        <link>' . self::xmlencoder($itemUrl . "?Galleryid=" . $galleryStruct->m_id) . '</link>
                         <date>' . date(" F j, Y", $galleryStruct->m_created) . '</date>
                         <image>
                             <title>' . end($covercaption) . '</title>
-                            <url>' . $settingsConfig['m_sfGalleryThumbUrl'] . end($coverimage) . '</url>
-                            <link>' . $itemUrl . "?Galleryid=" . $galleryStruct->m_id . '</link>
+                            <url>' . self::xmlencoder($settingsConfig['m_sfGalleryThumbUrl'] . end($coverimage)) . '</url>
+                            <link>' . self::xmlencoder($itemUrl . "?Galleryid=" . $galleryStruct->m_id) . '</link>
                             <width>' . $settingsConfig['thumbWidth'] . '</width>
                             <height>' . $settingsConfig['thumbHeight'] . '</height>
                         </image>
@@ -2751,14 +3119,38 @@ final class sfUtils {
         return $rssString;
     }
 
+    /**
+     * Checks if a string is at the begining of a much larger string
+     *
+     * @param string $haystack The string to search in
+     * @param array $needle the string to search for
+     * 
+     * @return mixed <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function startsWith($haystack, $needle) {
         return $needle === "" || strpos($haystack, $needle) === 0;
     }
 
+    /**
+     * Checks if a string is at the end of a much larger string
+     *
+     * @param string $haystack The string to search in
+     * @param array $needle the string to search for
+     * 
+     * @return mixed <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function endsWith($haystack, $needle) {
         return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
     }
 
+    /**
+     * read and display a log file
+     *
+     * @param string $filename the log file path to view
+     * @param array $Logtype the log type to view e.g error, warning and success
+     * 
+     * @return mixed <b>The log array </b> on success or <b>FALSE</b> on failure.
+     */
     public static function viewLogFile($filename, $Logtype = "All") {
         if (!$filename || !file_exists($filename)) {
             return false;
@@ -2806,6 +3198,14 @@ final class sfUtils {
         return $info;
     }
 
+    /**
+     * Get the list of files in a directory and returns an html table tag formatted
+     * string 
+     *
+     * @param string $dir data directory
+     * 
+     * @return mixed <b>The list string </b> on success or <b>FALSE</b> on failure.
+     */
     public static function getfileList($dir = "../data/") {
 
         // check that this $dir is populated and it's a directory
@@ -2842,6 +3242,14 @@ final class sfUtils {
         return $listString;
     }
 
+    /**
+     * Get the list of files in a directory and returns an array with file names in the
+     * directory
+     *
+     * @param string $dir data directory
+     * 
+     * @return mixed <b>The file list in an array </b> on success or <b>FALSE</b> on failure.
+     */
     public static function getfileList2($dir = "../data/") {
 
         // check that this $dir is populated and it's a directory
@@ -2870,6 +3278,13 @@ final class sfUtils {
         return $logFileList;
     }
 
+    /**
+     * if the parameter passed in is > 100 then return 99+ otherwise return as it is
+     *
+     * @param string $data the data
+     * 
+     * @return mixed <b>99+</b> on success or <b>FALSE</b> on failure.
+     */
     public static function comapact99($data) {
         if (!$data) {
             return $data;
@@ -2882,6 +3297,12 @@ final class sfUtils {
         return $data;
     }
 
+    /**
+     * Get the date time zone list from {@link DateTimeZone::listIdentifiers} if it exists
+     * else return the hardcoded list of DateTimeZone
+     * 
+     * @return array <b>DateTimeZone/b> list.
+     */
     public static function getTimeZoneList() {
 
         if (!method_exists("DateTimeZone", "listIdentifiers")) {
@@ -2980,6 +3401,13 @@ final class sfUtils {
         return $timezones;
     }
 
+    /**
+     * Set the time zone of the API 
+     * 
+     * @param string $timezones the date time zone to be set
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function settimezone($timezones) {
 
         if (!$timezones) {

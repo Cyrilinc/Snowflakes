@@ -12,7 +12,7 @@
 if (!isset($_SESSION)) {
     session_start();
 } //Do not remove this
-//only assign a new timestamp if the session variable is empty
+//only assign a new timestamps if the session variable is empty
 if (!isset($_SESSION['ImageFile']) && !isset($_SESSION['ImageThumbFile']) && !isset($_SESSION['ImageCaption']) && !isset($_SESSION['ImageFiles']) && !isset($_SESSION['ImageThumbFiles']) && !isset($_SESSION['ImageCaptions'])) {
     $_SESSION['ImageFile'] = "";
     $_SESSION['ImageThumbFile'] = "";
@@ -35,6 +35,9 @@ if (!isset($_SESSION['ImageFile']) && !isset($_SESSION['ImageThumbFile']) && !is
 
   } */
 
+/**
+ * Class to process images in Snowflakes
+ */
 class sfGalleryImage {
 
     var $m_FileName; // The image name
@@ -61,6 +64,15 @@ class sfGalleryImage {
     var $m_ImageExtList;
     var $m_ImageTypesList;
 
+    /**
+     * The constriuctor of {@link  sfGalleryImage} 
+     *
+     * @param string $inifile <p> The configuration file </p> 
+     * @param bool $forGallery to determine if this image is for gallery upload
+     * or for image upload. 
+     * <p> gallery upload generates two images, one a thumb and the other as the original image
+     *  as set by system administrator.</p> 
+     */
     public function __construct($inifile = '../config/config.ini', $forGallery = true) {
         $settingsConfig = Config::getConfig("settings", $inifile);
 
@@ -80,6 +92,16 @@ class sfGalleryImage {
         $this->m_errorCode = 0;
     }
 
+    /**
+     * Initialize the {@link  sfGalleryImage} with the parameters, which are used to detemine other 
+     * parameters in {@link  sfGalleryImage}
+     *
+     * @param string $FileName <p> The temporary/original file name of the image</p> 
+     * @param string $FileSize <p> The image file size </p> 
+     * @param string $FileType <p> The image file type </p> 
+     * 
+     * 
+     */
     public function init($FileName, $FileTmpName, $FileSize, $FileType) {
         $this->m_FileName = $FileName;
         $this->m_FileTmpName = $FileTmpName;
@@ -99,6 +121,12 @@ class sfGalleryImage {
         $this->m_TargetFileThumbLoc = $this->m_UploadThumbDir . $this->m_TargetFileName;
     }
 
+    /**
+     * Set the image thumbnail width and height
+     *
+     * @param int $thumbWidth <p> The  image thumbnail width </p> 
+     * @param int $thumbHeight <p> The  image thumbnail height </p> 
+     */
     public function setThumbinit($thumbWidth, $thumbHeight) {
         if (!$thumbWidth && !$thumbHeight) {
             return false;
@@ -108,7 +136,13 @@ class sfGalleryImage {
         $this->m_thumbHeight = $thumbHeight;
     }
 
-    //You do not need to alter these function
+    /**
+     * Get the height of an image 
+     *
+     * @param string $image <p> The  image object/file </p> 
+     * 
+     * @return mixed <b>the image height</b> on success or <b>FALSE</b> on failure.
+     */
     public static function getImageHeight($image) {
         if (!$image) {
             return false;
@@ -119,7 +153,13 @@ class sfGalleryImage {
         return $Height;
     }
 
-    //You do not need to alter these function
+    /**
+     * Get the width of an image 
+     *
+     * @param string $image <p> The  image object/file </p> 
+     * 
+     * @return mixed <b>the image width</b> on success or <b>FALSE</b> on failure.
+     */
     public static function getImageWidth($image) {
         if (!$image) {
             return false;
@@ -130,15 +170,38 @@ class sfGalleryImage {
         return $Weight;
     }
 
+    /**
+     * Set the name of an image 
+     *
+     * @param string $imgExtension <p> The  image extension  e.g png</p> 
+     * 
+     * @return string The <b> new image name</b> is returned.
+     */
     function nameImage($imgExtension) {
         return time() . substr(md5(microtime()), 0, rand(5, 12)) . $imgExtension;
     }
 
+    /**
+     * Get the success of failure message of {@link sfGalleryImage}
+     *
+     * 
+     * @return string The <b> success or failure </b> message is returned.
+     */
     function getMessage() {
         return $this->m_errorCode . " ==> " . $this->m_Message;
     }
 
-    //You do not need to alter these function
+    /**
+     * resize an image with a with and height while scalling it so that the aspect ration 
+     * remains the same
+     *
+     * @param string $image <p> The  image object/file </p> 
+     * @param int $width <p> The image width </p> 
+     * @param int $height <p> The image height </p>
+     * @param int $scale <p> The image scale ratio </p>
+     *
+     * @return image The <b>Resized</b> image on success.
+     */
     public static function resizeImage($image, $width, $height, $scale) {
         list($imagewidth, $imageheight, $imageType) = getimagesize($image);
         $imageType = image_type_to_mime_type($imageType);
@@ -221,7 +284,20 @@ class sfGalleryImage {
         return $image;
     }
 
-    //You do not need to alter these function
+    /**
+     * resize/crop an thumbnail image with a with and height  from a start height and start width
+     * while scalling it so that the aspect ratio remains the same 
+     *
+     * @param string $ThumbImageName <p> The thumbnail image file name </p> 
+     * @param string $image <p> The  image object/file </p> 
+     * @param int $width <p> The image width </p> 
+     * @param int $height <p> The image height </p>
+     * @param int $start_width <p> The starting image width position </p> 
+     * @param int $start_height <p> The starting image height position</p>
+     * @param int $scale <p> The image scale ratio </p>
+     *
+     * @return image The <b>Resized</b> thumbnail image on success.
+     */
     public static function resizeThumbnailImage($ThumbImageName, $image, $width, $height, $start_width, $start_height, $scale) {
         list($imagewidth, $imageheight, $imageType) = getimagesize($image);
         $imageType = image_type_to_mime_type($imageType);
@@ -305,7 +381,18 @@ class sfGalleryImage {
         return $ThumbImageName;
     }
 
-    /// Create Thumb Function
+    /**
+     * Create a thumbnail given all the parameters shown below
+     *
+     * @param int $x1 <p> The image first x position x1 </p> 
+     * @param int $y1 <p> The image first y position y1 </p>
+     * @param int $x2 <p> The image second x position x2 </p> 
+     * @param int $y2 <p> The image second y position y2 </p>  
+     * @param int $w <p> The image width </p> 
+     * @param int $h <p> The image height </p>
+     *
+     * @return image The <b>Resized</b> thumbnail image on success.
+     */
     public function CreateThumb($x1, $y1, $x2, $y2, $w, $h) {
         //Scale the image to the thumb_width set above
         $scale = $this->m_thumbWidth / $w;
@@ -313,23 +400,51 @@ class sfGalleryImage {
         return $cropped;
     }
 
+    /**
+     * Get the file name with path to the image 
+     *
+     * 
+     * @return string The <b> filename </b> for target image is returned.
+     */
     public function TargetFileImageLoc() {
         return $this->m_TargetFileImageLoc;
     }
 
+    /**
+     * Get the file name with path to the image thumbnail
+     *
+     * 
+     * @return string The <b> filename </b> for target thumbnail image is returned.
+     */
     public function TargetFileThumbLoc() {
         return $this->m_TargetFileThumbLoc;
     }
 
+    /**
+     * Get the trigger that determines if the image has been uploaded sucessfully
+     *
+     * 
+     *  @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function imageUploaded() {
         return $this->m_File_is_Uploaded;
     }
 
+    /**
+     * Get the trigger that determines if the thumbnail image has been uploaded sucessfully
+     *
+     * 
+     *  @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function thumbUploaded() {
         return $this->m_Thumb_is_Uploaded;
     }
 
-    ///Upload an image size and resize it to default width
+    /**
+     * Upload an image size and resize it to default width
+     *
+     *  @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function UploadImage() {
 
         $fileSizeString = sfUtils::formatSizeUnits($this->m_MaxSize);
@@ -395,9 +510,10 @@ class sfGalleryImage {
         //echo "3 -> image width and height ".$width." And ". $height. " <br>";//DEBUG
         //Scale the image if it is greater than the width or lesser that width scale to maximum width
         $scale = $this->m_MaxImageWidth / $width;
-        $uploaded = $this->resizeImage($this->m_TargetFileImageLoc, $width, $height, $scale);
-
-        $this->m_File_is_Uploaded = True;
+        $uploadedimg = $this->resizeImage($this->m_TargetFileImageLoc, $width, $height, $scale);
+        if ($uploadedimg) {
+            $this->m_File_is_Uploaded = True;
+        }
         $_SESSION['ImageFile'] = $this->m_TargetFileImageLoc;
         $_SESSION['ImageThumbFile'] = $this->m_TargetFileThumbLoc;
         $_SESSION['ImageFiles'][] = $this->m_TargetFileImageLoc;
@@ -412,33 +528,38 @@ class sfGalleryImage {
             $scale = $this->m_thumbWidth / $this->m_thumbWidth;
 
             $cropped = $this->resizeThumbnailImage($this->m_TargetFileThumbLoc, $this->m_TargetFileImageLoc, $this->m_thumbWidth, $this->m_thumbHeight, 0, 0, $scale);
-            if ($cropped)
+            if ($cropped) {
                 $this->m_Thumb_is_Uploaded = True;
+            }
         } elseif (($width > $this->m_thumbWidth) && ($height < $this->m_thumbHeight)) {
             //Scale the image to the thumb_width set above
             $scale = $this->m_thumbWidth / $this->m_thumbWidth;
             $cropped = $this->resizeThumbnailImage($this->m_TargetFileThumbLoc, $this->m_TargetFileImageLoc, $this->m_thumbWidth, $height, 0, 0, $scale);
-            if ($cropped)
+            if ($cropped) {
                 $this->m_Thumb_is_Uploaded = True;
+            }
         } elseif (($width < $this->m_thumbWidth) && ($height > $this->m_thumbHeight)) {
             //Scale the image to the thumb_width set above
             $scale = $this->m_thumbWidth / $this->m_thumbWidth;
             $cropped = $this->resizeThumbnailImage($this->m_TargetFileThumbLoc, $this->m_TargetFileImageLoc, $width, $this->m_thumbHeight, 0, 0, $scale);
-            if ($cropped)
+            if ($cropped) {
                 $this->m_Thumb_is_Uploaded = True;
+            }
         } elseif (($width < $this->m_thumbWidth) && ($height < $this->m_thumbHeight)) {
             //Scale the image to the thumb_width set above
             $scale = $this->m_thumbWidth / $this->m_thumbWidth;
             $cropped = $this->resizeThumbnailImage($this->m_TargetFileThumbLoc, $this->m_TargetFileImageLoc, $width, $height, 0, 0, $scale);
-            if ($cropped)
+            if ($cropped) {
                 $this->m_Thumb_is_Uploaded = True;
+            }
         }
         $Caption = "";
 
-        if (empty($_REQUEST["Caption"]))
+        if (empty($_REQUEST["Caption"])) {
             $Caption = addslashes($this->m_FileBaseName);
-        else
+        } else {
             $Caption = addslashes($_REQUEST["Caption"]);
+        }
 
         $_SESSION['ImageCaptions'][] = $Caption;
         $_SESSION['ImageCaption'] = $Caption;

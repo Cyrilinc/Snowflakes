@@ -122,7 +122,7 @@ $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
                                     }
                                     // Loop through the array and add directory prefix to each item in array	
                                     foreach ($DBImageThumbFiles as &$value) {
-                                        $value = $$UploadThumbUrl . $value;
+                                        $value = $UploadThumbUrl . $value;
                                     }
                                     //DataList
                                     $counter = 0;
