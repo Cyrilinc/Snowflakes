@@ -177,15 +177,12 @@ $imageMissing = $UploadImgDir . "missing_default.png";
                                     }
                                     ?>
 
-
                                     <?php echo html_entity_decode($flakeStruct->m_body_text); ?> 
 
                                     <!--Place Gallery Here if its not null-->
                                     <?php
                                     if ($flakeStruct->m_gallery != NULL) {
                                         $GalleryName = explode(",", $flakeStruct->m_gallery);
-                                        //print_r($GalleryName );
-
 
                                         $query_rsGallery = "SELECT * FROM snowflakes_gallery WHERE id =" . $GalleryName[0] . " AND title ='" . sfUtils::escape($GalleryName[1]) . "'";
                                         $SFconnects->fetch($query_rsGallery);
@@ -207,14 +204,14 @@ $imageMissing = $UploadImgDir . "missing_default.png";
                                                     $DBImageCaption = explode(",", $row_rsGallery[0]['image_caption']);
 
                                                     // Loop through the array and add directory prefix to each item in array
-                                                    foreach ($DBImageFiles as &$value)
+                                                    foreach ($DBImageFiles as &$value) {
                                                         $value = $UploadImgDir . $value;
-
+                                                    }
 
                                                     // Loop through the array and add directory prefix to each item in array	
-                                                    foreach ($DBImageThumbFiles as &$value)
+                                                    foreach ($DBImageThumbFiles as &$value) {
                                                         $value = $UploadThumbDir . $value;
-
+                                                    }
 
                                                     //DataList
                                                     $counter = 0;
@@ -246,18 +243,13 @@ $imageMissing = $UploadImgDir . "missing_default.png";
                                 <div class="SharePost"> </div>
 
                             <?php } else { ?> 
-
                                 <h1 style="color:#fafafa;">This snowflake doesn't exist </h1>
-
                             <?php } ?> 
                         </div>
                         <!-- End of Snowflake -->
-
                     <?php } else {
                         ?>
-
                         <h1>No Snowflakes to view </h1>
-
                     <?php }
                     ?>
 

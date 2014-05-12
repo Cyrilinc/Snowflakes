@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Description of sf
+ * This Contains all the classes and tools for handling data 
  *
- * @author cyrildavids
+ * @author Cyril Adelekan
  */
 //Disable error reporting
 error_reporting(0);
@@ -26,10 +26,22 @@ class snowflakeStruct {
     var $m_flake_it;
     var $m_image_dir;
 
+    /**
+     * Check that all the required fields in a {@link snowflakeStruct}
+     * is populated
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function isSfPopulated() {
         return isset($this->m_title) && isset($this->m_body_text) && (isset($this->m_created_by) || isset($this->m_edited_by)) && (isset($this->m_created) || isset($this->m_edited));
     }
 
+    /**
+     * Populate each member of {@link snowflakeStruct} given the input parameters
+     * @param an array $array to be used to populate members of {@link snowflakeStruct}
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function populate($array) {
         if (empty($array)) {
             return false;
@@ -51,6 +63,15 @@ class snowflakeStruct {
         return true;
     }
 
+    /**
+     * Get all the values of all members of {@link snowflakeStruct} given the id(identifier),
+     * the data is obtained from the database and then the result is used to populate the 
+     * members of this class @see snowflakeStruct::populate
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $id {@link snowflakeStruct} the id(identifier) of the snowflake
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function getSnowflakesByid($conn, $id) {
         if (!$conn || !$id) {
             return false;
@@ -68,6 +89,14 @@ class snowflakeStruct {
         return $this->populate($result[0]);
     }
 
+    /**
+     * Get the Image name of a {@link snowflakeStruct} given the id(identifier),
+     * the data is obtained from the database and then the result returned
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $id {@link snowflakeStruct} the id(identifier) of the snowflake
+     * 
+     * @return bool <i>Image name</i> on success, <i>false</i> otherwise
+     */
     public static function getImageNameById($conn, $id) {
 
         if (!$conn || !$id || $id == -1) {
@@ -85,6 +114,13 @@ class snowflakeStruct {
         return $result[0]['image_name'];
     }
 
+    /**
+     * Add a new {@link snowflakeStruct} data to the database table used to store snowflake
+     * provided that all the mandatory members of this class is populated
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function addSnowflake($conn) {
 
         if (!$this->isSfPopulated() || !$conn) {
@@ -103,6 +139,13 @@ class snowflakeStruct {
         return $conn->execute($insertSQL);
     }
 
+    /**
+     * Update {@link snowflakeStruct} data to the database table used to store snowflake
+     * provided that all the mandatory members of this class is populated
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function updateSnowflake($conn) {
 
         if (!$this->isSfPopulated() || !$conn || sfUtils::isEmpty($this->m_id)) {
@@ -121,6 +164,15 @@ class snowflakeStruct {
         return $conn->execute($sql);
     }
 
+    /**
+     * Delete {@link snowflakeStruct} data store in the database table provided that the 
+     * id(identifier) is indicated as a handle for which the data is to be deleted
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param bool $setDelete indicates true or false to actually delete the 
+     * data from the database table or set the delete field
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function deleteSnowflake($conn, $setDelete = false) {
 
         if (sfUtils::isEmpty($this->m_id) || !$conn) {
@@ -147,6 +199,13 @@ class snowflakeStruct {
         return $conn->execute($sql);
     }
 
+    /**
+     * Get a {@link snowflakeStruct} id(identifier) provided the members of this
+     * class are populated the id(identifier) is selected from the database
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * 
+     * @return bool/int <i>id(identifier)</i> on success, <i>false</i> otherwise
+     */
     public function getSnowflakeID($conn) {
 
         /// Sanity Checks
@@ -181,6 +240,11 @@ class snowflakeStruct {
         return $this->m_id;
     }
 
+    /**
+     * print all the members of {@link snowflakeStruct}
+     * 
+     * @return string formatted and labeled member values</i>
+     */
     public function printsnowlakes() {
         $str = 'title="' . $this->m_title . '"<br> ';
         $str.='body_text="' . $this->m_body_text . '"<br>';
@@ -215,6 +279,14 @@ class userStruct {
     var $m_last_login;
     var $m_image_dir;
 
+    /**
+     * initialise some member variable {@link userStruct} given the input parameters
+     * @param string $username {@link userStruct} username
+     * @param string $password {@link userStruct} the user's password
+     * @param string $email {@link userStruct} the user's email
+     * @param int $access_level {@link userStruct} the user's access level
+     * @param int $image_name {@link userStruct} the user's image name
+     */
     public function init($username, $password, $email, $access_level, $image_name = 'default.png') {
         $this->m_username = $username;
         $this->m_password = md5($password);
@@ -225,10 +297,21 @@ class userStruct {
         $this->m_image_name = $image_name;
     }
 
+    /**
+     * Check that all the required fields in a {@link userStruct} is populated
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function isPopulated() {
         return isset($this->m_username) && isset($this->m_password) && isset($this->m_email) && isset($this->m_access_level) && isset($this->m_access_name);
     }
 
+    /**
+     * Populate each member of {@link userStruct} given the input parameters
+     * @param an array $value to be used to populate members of {@link userStruct}
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function populate($value = array()) {
         if (empty($value)) {
             return false;
@@ -249,6 +332,14 @@ class userStruct {
         return true;
     }
 
+    /**
+     * Get all the values of all members of {@link userStruct} given $username 
+     * @see userStruct::populate
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $username {@link userStruct} the username
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function getUserByUsername($conn, $username) {
         if (!$conn || !$username) {
             return false;
@@ -266,6 +357,13 @@ class userStruct {
         return $this->populate($result[0]);
     }
 
+    /**
+     * Get {@link userStruct} image name given the id(identifier)
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $id {@link userStruct} the id(identifier) of the user record
+     * 
+     * @return bool <i>image name</i> on success, <i>false</i> otherwise
+     */
     public static function getImageNameById($conn, $id) {
 
         if (!$conn || !$id || $id == -1) {
@@ -283,6 +381,14 @@ class userStruct {
         return $result[0]['image_name'];
     }
 
+    /**
+     * Get all the values of all members of {@link userStruct} given the id(identifier),
+     * @see userStruct::populate
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $id {@link userStruct} the id(identifier) of the user record
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function getUserByid($conn, $id) {
         if (!$conn || !$id || $id == -1) {
             return false;
@@ -299,16 +405,31 @@ class userStruct {
         return $this->populate($result[0]);
     }
 
+    /**
+     * Change all the values of all members of {@link userStruct} given the id(identifier),
+     * @see userStruct::populate
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $flakeit {@link userStruct} the flake-it value of the user record
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function changeUserFlakeit($conn, $flakeit) {
         if (!$this->isPopulated() || !$conn || !$flakeit) {
             return false;
         }
         $sql = "UPDATE snowflakes_users SET flake_it=$flakeit"
                 . " WHERE username='$this->m_username' AND email='$this->m_email' ";
-        
+
         return $conn->execute($sql);
     }
 
+    /**
+     * Get all the values of all members of {@link userStruct} given the reset link,
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $resetLink {@link userStruct} the reset link  value of the user record
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function getUserByResetLink($conn, $resetLink) {
         if (!$conn || !$resetLink) {
             return false;
@@ -325,6 +446,14 @@ class userStruct {
         return $this->populate($result[0]);
     }
 
+    /**
+     * Get all the values of all members of {@link userStruct} given the user name and passoword,
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $username {@link userStruct} the username value of the user record
+     * @param string $password {@link userStruct} the password value of the user record
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function loginUser($conn, $username, $password) {
         if (!$conn || !$username || !$password) {
             return false;
@@ -339,6 +468,13 @@ class userStruct {
         return $this->populate($result[0]);
     }
 
+    /**
+     * Add a new {@link userStruct} data to the database table used to store a user
+     * provided that all the mandatory members of {@link userStruct} is populated
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function AddUser($conn) {
 
         if (!$this->isPopulated() || !$conn) {
@@ -357,6 +493,13 @@ class userStruct {
         return $conn->execute($insertSQL);
     }
 
+    /**
+     * Update {@link userStruct} data to the database table used to store user
+     * provided that all the mandatory members of {@link userStruct} is populated
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function UpdateUser($conn) {
 
         if (!$this->isPopulated() || !$conn || sfUtils::isEmpty($this->m_id)) {
@@ -375,6 +518,15 @@ class userStruct {
         return $conn->execute($sql);
     }
 
+    /**
+     * Delete {@link userStruct} data store in the database table provided that the 
+     * id(identifier) is indicated as a handle for which the data is to be deleted
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param bool $setDelete indicates true or false to actually delete the 
+     * data from the database table or set the delete field
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function deleteUser($conn, $setDelete = false) {
 
         if (sfUtils::isEmpty($this->m_id) || !$conn) {
@@ -397,6 +549,14 @@ class userStruct {
         return $conn->execute($sql);
     }
 
+    /**
+     * Checks id a suser exists given the user name 
+     * 
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $username {@link userStruct} the username value of the user record
+     * 
+     * @return bool/int <i>true/1</i> on success, <i>false</i> otherwise
+     */
     public function userExits($conn, $username) {
 
         if (!$username || !$conn) {
@@ -410,6 +570,13 @@ class userStruct {
         return $conn->recordCount();
     }
 
+    /**
+     * Get a {@link userStruct} id(identifier) provided the members of {@link userStruct}
+     * are populated the id(identifier) is selected from the database
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * 
+     * @return bool/int <i>id(identifier)</i> on success, <i>false</i> otherwise
+     */
     public function getUserID($conn) {
 
         /// Sanity Checks
@@ -442,6 +609,11 @@ class userStruct {
         return $this->m_id;
     }
 
+    /**
+     * print all the members of {@link userStruct}
+     * 
+     * @return string formatted and labeled member values</i>
+     */
     public function printuser() {
         $str = "ID = " . $this->m_id . "<br>";
         $str .= "username = " . $this->m_username . "<br>";
@@ -474,10 +646,22 @@ class galleryStruct {
     var $m_image_dir;
     var $m_thumb_dir;
 
+    /**
+     * Check that all the required fields in a {@link galleryStruct}
+     * is populated
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function isSfGPopulated() {
         return isset($this->m_title) && isset($this->m_thumb_name) && strlen($this->m_thumb_name) > 0 && isset($this->m_image_name) && strlen($this->m_image_name) > 0 && (isset($this->m_created_by) || isset($this->m_edited_by)) && (isset($this->m_created) || isset($this->m_edited));
     }
 
+    /**
+     * Populate each member of {@link galleryStruct} given the input parameters
+     * @param an array $value to be used to populate members of {@link galleryStruct}
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function populate($array) {
         if (empty($array)) {
             return false;
@@ -499,6 +683,13 @@ class galleryStruct {
         return true;
     }
 
+    /**
+     * Add a new {@link galleryStruct} data to the database table used to store a user
+     * provided that all the mandatory members of {@link galleryStruct} is populated
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function addSfGallery($conn) {
 
         if (!$this->isSfGPopulated() || !$conn) {
@@ -518,6 +709,13 @@ class galleryStruct {
         return $conn->execute($insertSQL);
     }
 
+    /**
+     * Update {@link galleryStruct} data to the database table used to store user
+     * provided that all the mandatory members of {@link galleryStruct} is populated
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function updateGallery($conn) {
 
         if (!$this->isSfGPopulated() || !$conn || sfUtils::isEmpty($this->m_id)) {
@@ -536,6 +734,15 @@ class galleryStruct {
         return $conn->execute($sql);
     }
 
+    /**
+     * Delete {@link galleryStruct} data store in the database table provided that the 
+     * id(identifier) is indicated as a handle for which the data is to be deleted
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param bool $setDelete indicates true or false to actually delete the 
+     * data from the database table or set the delete field
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function deleteGallery($conn, $setDelete = false) {
 
         if (sfUtils::isEmpty($this->m_id) || !$conn) {
@@ -555,6 +762,14 @@ class galleryStruct {
         return $conn->execute($sql);
     }
 
+    /**
+     * Get all the values of all members of {@link galleryStruct} given the id(identifier),
+     * @see galleryStruct::populate
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $id {@link galleryStruct} the id(identifier) of the user record
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function getGalleryByid($conn, $id) {
         if (!$conn || !$id || $id == -1) {
             return false;
@@ -571,6 +786,13 @@ class galleryStruct {
         return $this->populate($result[0]);
     }
 
+    /**
+     * Get a {@link galleryStruct} id(identifier) provided the members of {@link galleryStruct}
+     * are populated the id(identifier) is selected from the database
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * 
+     * @return bool/int <i>id(identifier)</i> on success, <i>false</i> otherwise
+     */
     public function getGalleryID($conn) {
 
         if (!$this->isSfGPopulated() || !$conn) {
@@ -602,6 +824,11 @@ class galleryStruct {
         return $this->m_id;
     }
 
+    /**
+     * print all the members of {@link galleryStruct}
+     * 
+     * @return string formatted and labeled member values</i>
+     */
     public function printGallery() {
         $str = 'title="' . $this->m_title . '"<br> ';
         $str.='thumb_name="' . $this->m_thumb_name . '"<br>';
@@ -641,10 +868,21 @@ class eventStruct {
     var $m_flake_it;
     var $m_image_dir;
 
+    /**
+     * Check that all the required fields in a {@link eventStruct} is populated
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function isPopulated() {
         return isset($this->m_title) && isset($this->m_body_text) && isset($this->m_event_time) && isset($this->m_event_date) && (isset($this->m_created_by) || isset($this->m_edited_by)) && (isset($this->m_created) || isset($this->m_edited));
     }
 
+    /**
+     * Populate each member of {@link eventStruct} given the input parameters
+     * @param an array $value to be used to populate members of {@link eventStruct}
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function populate($array) {
         if (empty($array)) {
             return false;
@@ -669,6 +907,14 @@ class eventStruct {
         return true;
     }
 
+    /**
+     * Get all the values of all members of {@link eventStruct} given the id(identifier),
+     * @see eventStruct::populate
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $id {@link eventStruct} the id(identifier) of the user record
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function getEventByid($conn, $id) {
         if (!$conn || !$id || $id == -1) {
             return false;
@@ -685,6 +931,13 @@ class eventStruct {
         return $this->populate($result[0]);
     }
 
+    /**
+     * Get {@link eventStruct} image name   given the id(identifier)
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $id {@link eventStruct} the id(identifier) of the user record
+     * 
+     * @return bool <i>image name</i> on success, <i>false</i> otherwise
+     */
     public static function getImageNameById($conn, $id) {
 
         if (!$conn || !$id || $id == -1) {
@@ -702,6 +955,13 @@ class eventStruct {
         return $result[0]['image_name'];
     }
 
+    /**
+     * Add a new {@link eventStruct} data to the database table used to store a user
+     * provided that all the mandatory members of {@link eventStruct} is populated
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function AddEvent($conn) {
 
         if (!$this->isPopulated() || !$conn) {
@@ -726,6 +986,13 @@ class eventStruct {
         return $conn->execute($sql);
     }
 
+    /**
+     * Update {@link eventStruct} data to the database table used to store user
+     * provided that all the mandatory members of {@link eventStruct} is populated
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function UpdateEvent($conn) {
 
         if (!$this->isPopulated() || !$conn || sfUtils::isEmpty($this->m_id)) {
@@ -748,6 +1015,15 @@ class eventStruct {
         return $conn->execute($sql);
     }
 
+    /**
+     * Delete {@link eventStruct} data store in the database table provided that the 
+     * id(identifier) is indicated as a handle for which the data is to be deleted
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param bool $setDelete indicates true or false to actually delete the 
+     * data from the database table or set the delete field
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public function deleteEvent($conn, $setDelete = false) {
 
         if (sfUtils::isEmpty($this->m_id) || !$conn) {
@@ -773,6 +1049,13 @@ class eventStruct {
         return $conn->execute($sql);
     }
 
+    /**
+     * Get a {@link eventStruct} id(identifier) provided the members of {@link eventStruct}
+     * are populated the id(identifier) is selected from the database
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * 
+     * @return bool/int <i>id(identifier)</i> on success, <i>false</i> otherwise
+     */
     public function getEventID($conn) {
 
         if (!$this->isPopulated() || !$conn) {
@@ -806,6 +1089,11 @@ class eventStruct {
         return $this->m_id;
     }
 
+    /**
+     * print all the members of {@link eventStruct}
+     * 
+     * @return string formatted and labeled member values</i>
+     */
     public function printEvents() {
         $str = 'title="' . $this->m_title . '"<br> ';
         $str.='body_text="' . $this->m_body_text . '"<br>';
@@ -831,18 +1119,44 @@ class eventStruct {
 
 class sfLogError {
 
+    /**
+     * Send a bug message to the author of the API so that bugs fixes could be
+     * implemented to make the API better.
+     * 
+     * @param string $bugMessage the message to send to author of the API
+     *
+     * @return bool <b>TRUE</b> if the mail was successfully accepted for delivery, <b>FALSE</b> otherwise.
+     */
     public static function SendBugMessage($bugMessage) {
+
+        //sanity Check
+        if (!isset($bugMessage)) {
+            return false;
+        }
+
         $body = "Message:\n $bugMessage\n";
         $subject = "Bug found ";
         $server_name = filter_input(INPUT_SERVER, 'SERVER_NAME');
         $sender = "noreply@$server_name";
-## SEND MESSAGE ##
+        ## SEND MESSAGE ##
         return mail("bugreport@cyrilinc.co.uk", $subject, $body, "From: $sender");
     }
 
-    public static function sfLogEntry($value, $user = "Snowflakes", $show = false, $dataDir = "../data") {
+    /**
+     * Log any operation the user makes during the operation of this API.
+     * {@link sfLogError} acts as an audit trail to retrace the steps of a user
+     * or operations performed by this API itself.
+     * 
+     * @param string $message the message to log
+     * @param string $user {@link userStruct} the user name of the logger
+     * @param bool $show used to print the log entry to screen if <i>TRUE</i> or not if <i>FALSE</i>
+     * @param string $dataDir the data directory where the log will be stored
+     *
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
+    public static function sfLogEntry($message, $user = "Snowflakes", $show = false, $dataDir = "../data") {
 
-        if (!isset($value)) {
+        if (!isset($message)) {
             return false;
         }
 
@@ -850,7 +1164,7 @@ class sfLogError {
         $username = isset($_SESSION['MM_Username']) ? $_SESSION['MM_Username'] : $user;
         $datetimelog = date("Y-m-d H:i:s");
         $datelog = date("Y-m-d");
-        $logEntryValue = "[ $datetimelog ] ¦=> [$username] ¦=> $value \n";
+        $logEntryValue = "[ $datetimelog ] ¦=> [$username] ¦=> $message \n";
         if ($show === true) {
             echo $logEntryValue;
         }
@@ -858,13 +1172,22 @@ class sfLogError {
         $logFilename = "$dataDir/$username-LOG-$datelog.log";
         $logResource = fopen($logFilename, "a+");
         if ($logResource === false) {
-            return;
+            return $logResource;
         }
 
         fwrite($logResource, $logEntryValue);
-        fclose($logResource);
+        return fclose($logResource);
     }
 
+    /**
+     * Handle the API errors automatically using this function
+     * 
+     * @param int $errno the error number.
+     * @param string $errstr the error message.
+     * @param string $errfile the filename where the error occured.
+     * @param string $errline the line in the filename where the error occured.
+     *
+     */
     public static function sfErrorHandler($errno, $errstr, $errfile, $errline) {
         switch ($errno) {
             case E_USER_ERROR:
@@ -883,16 +1206,6 @@ class sfLogError {
 
 }
 
-/*
-  $divisor = 0;
-  if ($divisor == 0) {
-  sfLogError::sfLogEntry("Cannot divide by zero", "Default User");
-  trigger_error("Cannot divide by zero", E_USER_WARNING);
-  }
-  //E_USER_WARNING
-  //E_USER_ERROR
-  //E_USER_NOTICE */
-
 /**
  * Miscellaneous utility methods.
  */
@@ -906,10 +1219,10 @@ final class sfUtils {
      * System config.
      */
     public function init() {
-// error reporting - all errors for development (ensure you have display_errors = On in your php.ini file)
+        // error reporting - all errors for development (ensure you have display_errors = On in your php.ini file)
         error_reporting(E_ALL | E_STRICT);
         set_exception_handler(array($this, 'handleException'));
-// session
+        // session
         if (!isset($_SESSION)) {
             session_start();
         }
@@ -917,6 +1230,8 @@ final class sfUtils {
 
     /**
      * Exception handler.
+     * 
+     * @param Exception $ex The exception to be handled {@link Exception}
      */
     public function handleException(Exception $ex) {
         $extra = array('message' => $ex->getMessage());
@@ -924,7 +1239,7 @@ final class sfUtils {
             header('HTTP/1.0 404 Not Found');
             $this->runPage('404', $extra);
         } else {
-// TODO log exception
+            // TODO log exception
             header('HTTP/1.1 500 Internal Server Error');
             $this->runPage('500', $extra);
         }
@@ -934,6 +1249,8 @@ final class sfUtils {
      * Generate link.
      * @param string $page target page
      * @param array $params page parameters
+     * 
+     * @return string string created from page and parameters.
      */
     public static function createLink($page, array $params = array()) {
         if (!$page) {
@@ -945,6 +1262,7 @@ final class sfUtils {
     /**
      * Format date.
      * @param DateTime $date date to be formatted
+     * 
      * @return string formatted date
      */
     public static function formatDate(DateTime $date = null) {
@@ -957,6 +1275,7 @@ final class sfUtils {
     /**
      * Format date and time.
      * @param DateTime $date date to be formatted
+     * 
      * @return string formatted date and time
      */
     public static function formatDateTime(DateTime $date = null) {
@@ -978,6 +1297,7 @@ final class sfUtils {
 
     /**
      * Get value of the URL param.
+     * 
      * @return string parameter value
      * @throws NotFoundException if the param is not found in the URL
      */
@@ -991,6 +1311,7 @@ final class sfUtils {
     /**
      * Capitalize the first letter of the given string
      * @param string $string string to be capitalized
+     * 
      * @return string capitalized string
      */
     public static function capitalize($string) {
@@ -1000,6 +1321,7 @@ final class sfUtils {
     /**
      * Escape the given string
      * @param string $string string to be escaped
+     * 
      * @return string escaped string
      */
     public static function escape($string) {
@@ -1013,6 +1335,7 @@ final class sfUtils {
     /**
      * Escape the given string
      * @param string $string string to be escaped
+     * 
      * @return string escaped string
      */
     public static function sfescape($string) {
@@ -1024,6 +1347,11 @@ final class sfUtils {
         return $retValue4;
     }
 
+    /**
+     * Get the current page URL 
+     * 
+     * @return string current page URL 
+     */
     public static function curPageURL() {
         $pageURL = "http";
         $https = filter_input(INPUT_SERVER, 'HTTPS');
@@ -1042,17 +1370,29 @@ final class sfUtils {
         return $pageURL;
     }
 
-///// Global Functions
+    /**
+     * Check if the data is empty or not
+     * @param string $data the data to be cheked
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function isEmpty($data) {
         return (trim($data) === "" || $data === null);
     }
 
+    /**
+     * Create a direcory
+     * @param string $Dir The directory to create
+     * @param string $permissions The permissions given to the directory
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function CreateDirectory($Dir, $permissions) {
         if (self::isEmpty($Dir)) {
             return false;
         }
 
-//Create  a directory with the right permissions if it doesn't exist
+        //Create  a directory with the right permissions if it doesn't exist
         if (!is_dir($Dir)) {
             mkdir($Dir);
         }
@@ -1064,6 +1404,12 @@ final class sfUtils {
         return true;
     }
 
+    /**
+     * Calulate the approprate value in GB,MB,KB ... given the amount of bytes 
+     * @param string $bytes the Bytes used to calculate the value
+     * 
+     * @return string the value of the byte in GB,MB,KB.
+     */
     public static function formatSizeUnits($bytes) {
         if ($bytes >= 1073741824) {
             $bytes = number_format($bytes / 1073741824, 2) . ' GB';
@@ -1082,24 +1428,37 @@ final class sfUtils {
         return $bytes;
     }
 
-    public static function toByteSize($p_sFormatted) {
+    /**
+     * Calulate the approprate value in bytes given the amount of GB,MB,KB... 
+     * @param string $bytevalue the value in GB,MB,KB....
+     * 
+     * @return int the value of the GB,MB,KB... in bytes.
+     */
+    public static function toByteSize($bytevalue) {
         $aUnits = array('B' => 0, 'KB' => 1, 'MB' => 2, 'GB' => 3, 'TB' => 4, 'PB' => 5, 'EB' => 6, 'ZB' => 7, 'YB' => 8);
-        $sUnit = strtoupper(trim(substr($p_sFormatted, -2)));
+        $sUnit = strtoupper(trim(substr($bytevalue, -2)));
         if (intval($sUnit) !== 0) {
             $sUnit = 'B';
         }
         if (!in_array($sUnit, array_keys($aUnits))) {
             return false;
         }
-        $iUnits = trim(substr($p_sFormatted, 0, strlen($p_sFormatted) - 2));
+        $iUnits = trim(substr($bytevalue, 0, strlen($bytevalue) - 2));
         if (!intval($iUnits) == $iUnits) {
             return false;
         }
         return $iUnits * pow(1024, $aUnits[$sUnit]);
     }
 
+    /**
+     * Remove an element from an array
+     * @param array $array the array to remove a key from
+     * @param string $key the key to remove
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function removeElement(&$array, $key) { // pass array by reference
-        if (!$array) {
+        if (!$array || !$key) {
             return false;
         }
 
@@ -1107,6 +1466,12 @@ final class sfUtils {
         return true;
     }
 
+    /**
+     * Delete a file
+     * @param string $file the file path to delete
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function Deletefile($file) {
         if (strlen($file) == 0) {
             return false;
@@ -1122,10 +1487,15 @@ final class sfUtils {
                 return true;
             }
         }
-        unlink($file);
-        return true;
+        return unlink($file);
     }
 
+    /**
+     * Get a user level name by a given number
+     * @param int $number the user level number
+     * 
+     * @return string <b>User Level name</b> on success or <b>nothing</b> on failure.
+     */
     public static function UserLevelName($number) {
         $userName = " ";
         switch ($number) {
@@ -1151,50 +1521,81 @@ final class sfUtils {
         return $userName;
     }
 
-///todays date date and 7 days from now
+    /**
+     * Get todays date time
+     * 
+     * @return string the current date time.
+     */
     public static function todaysDate() {
         return time();
     }
 
+    /**
+     * Get 7 days date time from current date time
+     * 
+     * @return string the 7 days date time from current date time.
+     */
     public static function TodaysDate7() {
         return strtotime("+7 day", time());
     }
 
+    /**
+     * Get maximum days in this month
+     * 
+     * @return string the maximum days in this month.
+     */
     public static function maxDays() {
         return date("t");
     }
 
+    /**
+     * Get a month's date time from current date time
+     * 
+     * @return string the month's date time from current date time.
+     */
     public static function TodaysDateMonth() {
         return strtotime("+" . date("t") . " day", time());
     }
 
+    /**
+     * Get three month's date time from current date time
+     * 
+     * @return string three month's date time from current date time.
+     */
     public static function TodayDateThreeMonths() {
         return strtotime(" + 3 month", time());
     }
 
+    /**
+     * Get six month's date time from current date time
+     * 
+     * @return string six month's date time from current date time.
+     */
     public static function TodayDateSixMonths() {
         return strtotime(" + 6 month", time());
     }
 
     /**
      * Restrict Access To a Page: Grant or deny access to this page
+     * 
+     * @return bool <b>TRUE</b> on valid user or <b>FALSE</b> on invalid user.
      * */
     public static function isAuthorized($strUsers, $strGroups, $UserName, $UserGroup) {
-// For security, start by assuming the visitor is NOT authorized. 
+        // For security, start by assuming the visitor is NOT authorized. 
         $isValid = False;
 
-// When a visitor has logged into this site, the Session variable MM_Username set equal to their username. 
-// Therefore, we know that a user is NOT logged in if that Session variable is blank. 
+        // When a visitor has logged into this site, the Session variable MM_Username set equal to their username. 
+        // Therefore, we know that a user is NOT logged in if that Session variable is blank. 
         if (!empty($UserName)) {
-// Besides being logged in, you may restrict access to only certain users based on an ID established when they login. 
-// Parse the strings into arrays. 
+            // Besides being logged in, you may restrict access to only certain users based on an ID established when they login. 
+            // Parse the strings into arrays. 
             $arrUsers = Explode(",", $strUsers);
             $arrGroups = Explode(",", $strGroups);
             if (in_array($UserName, $arrUsers)) {
                 $isValid = true;
             }
 
-// Or, you may restrict access to only certain users based on their username. 
+            // Or, you may restrict access to only certain users based on their username. 
             if (in_array($UserGroup, $arrGroups)) {
                 $isValid = true;
             }
@@ -1206,6 +1607,34 @@ final class sfUtils {
         return $isValid;
     }
 
+    /**
+     * This function crates a UUID, Which is usually 32 in length with 4 '-'.
+     * 
+     * @return string UUID String.
+     */
+    public static function UUID() {
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+                // 32 bits for "time_low"
+                mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+                // 16 bits for "time_mid"
+                mt_rand(0, 0xffff),
+                // 16 bits for "time_hi_and_version",
+                // four most significant bits holds version number 4
+                mt_rand(0, 0x0fff) | 0x4000,
+                // 16 bits, 8 bits for "clk_seq_hi_res",
+                // 8 bits for "clk_seq_low",
+                // two most significant bits holds zero and one for variant DCE1.1
+                mt_rand(0, 0x3fff) | 0x8000,
+                // 48 bits for "node"
+                mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
+    }
+
+    /**
+     * Get the sql escaped version of the value passed in depend the data type of the value
+     * 
+     * @return string database compactible String.
+     */
     public static function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") {
         if (PHP_VERSION < 6) {
             $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
@@ -1228,7 +1657,11 @@ final class sfUtils {
         return $theValue;
     }
 
-// Function to get the client IP address
+    /**
+     * Get the client IP address
+     * 
+     * @return string the client IP address.
+     */
     public static function getClientIp() {
         $ipaddress = '';
         if (isset($_SERVER['HTTP_CLIENT_IP'])) {
@@ -1249,6 +1682,23 @@ final class sfUtils {
         return $ipaddress;
     }
 
+    /**
+     * validateFiterInput is used to validate data entered by user 
+     * @param int $INPUT <p>
+     * One of <b>INPUT_GET</b>, <b>INPUT_POST</b>,
+     * <b>INPUT_COOKIE</b>, <b>INPUT_SERVER</b>, or
+     * <b>INPUT_ENV</b>.
+     * </p>
+     * @param string $tag <p>
+     * Name of a variable to get.
+     * </p>
+     * @param int $FILTER_VALIDATE <p>
+     * The ID of the filter to apply. The
+     * manual page lists the available filters.
+     * </p>
+     * 
+     * @return string <b>TRUE</b> on valid input or <b>FALSE</b> on invalid input.
+     */
     public static function validateFiterInput($INPUT, $tag, $FILTER_VALIDATE) {
 
         $validate = filter_input($INPUT, $tag, $FILTER_VALIDATE);
@@ -1281,6 +1731,21 @@ final class sfUtils {
         return $returnsql;
     }
 
+    /**
+     * createSfLink is used to Crate a snowflakes link for an interal snowflake,
+     * gallery,event,or user link when generating a notifications and user 
+     * activities. e.g 12:12 am Cyrilinc published a gallery: 'Cyrilinc' will be 
+     * linked to a user that is called 'Cyrilinc' and 'gallery' will be linked 
+     * to a gallery internally so that when they are both clicked, the data will
+     * be shown to the user 'Cyrilinc as a user' and the 'gallery' the activity
+     * log is referring to.
+     * @param string $type <p> The link type to create</p> 
+     * @param string $id <p> The identifier of the type</p> 
+     * @param string $inifile <p> The configuration file </p> 
+     * 
+     * 
+     * @return string The appropriate link given the type.
+     */
     public static function createSfLink($type, $id, $inifile = '../config/config.ini') {
         if (!isset($type) || !isset($id)) {
             return false;
@@ -1303,6 +1768,33 @@ final class sfUtils {
         return $link;
     }
 
+    /**
+     * Constructs the SSE data format and flushes that data to the client.
+     *
+     * @param string $id Timestamp/id of this connection.
+     * @param string $msg Line of text that should be transmitted.
+     */
+    public static function sendMsg($id, $msg) {
+        echo "id: $id\n";
+        echo "data: {\n";
+        echo "data: \"msg\": \"$msg\", \n";
+        echo "data: \"id\": $id\n";
+        echo "data: }\n";
+        echo "\n";
+        ob_flush();
+        flush();
+    }
+
+    /**
+     * Gets a formatted/Structured and linked html style of the activitied of a user.
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $userName {@link userStruct} the user name of the user who's activity is to be gotten
+     * @param string $inifile <p> The configuration file </p> 
+     * @param int $limitstart <p> The index of activity to start from</p> 
+     * @param int $limitend <p> The index of activity to end to</p>
+     * 
+     * @return string The formatted/Structured and linked html style of the activitied of a user.
+     */
     public static function getActivities($conn, $userName, $inifile = '../config/config.ini', $limitstart = 0, $limitend = 10) {
 
         if (!$userName || !$conn || $limitstart < 0 || $limitend < $limitstart) {
@@ -1346,6 +1838,14 @@ final class sfUtils {
         return $activitiesString;
     }
 
+    /**
+     * Search the API database tables for user entered string .
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $searchString <p> The string to look for </p> 
+     * @param string $filter <p> filter by API type i.e snowflakes, gallery, events and users</p> 
+     * 
+     * @return array The array of the results found in the API database tables.
+     */
     public static function searchString($conn, $searchString, $filter = "snowflakes") {
         if (!$conn || !$searchString) {
             return false;
@@ -1422,6 +1922,13 @@ final class sfUtils {
         return $searchResult;
     }
 
+    /**
+     * Checkes if user exists in the API users database table.
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $username {@link userStruct} the user name to check
+     * 
+     * @return bool <b>TRUE</b> if user exists or <b>FALSE</b> otherwise.
+     */
     public static function userExits($conn, $username) {
 
         if (!$username || !$conn) {
@@ -1462,12 +1969,12 @@ final class sfUtils {
             return false;
         }
 
-# SUBJECT (Subscribe/Remove)
+    # SUBJECT (Subscribe/Remove)
         $subject = "Reset your snowflakes password";
 
         echo $subject . "<br>";
 
-# MAIL BODY
+    # MAIL BODY
         $body = "You have been sent this mail because you requested a reset on your password.\n";
         $body .= "\tUsername: " . $userStruct->m_username . " \n";
         $body .= "\tEmail: " . $userStruct->m_email . " \n";
@@ -1475,7 +1982,7 @@ final class sfUtils {
         $body .= "If you requested a password then click the link below.\n ";
         $body .= $snowflakesUrl . "/ResetPassword.php?reset=" . $userStruct->m_reset_link;
 
-## SEND MESSAGE ##
+        ## SEND MESSAGE ##
         return mail($userStruct->m_email, $subject, $body, "From: $sender");
     }
 
@@ -1935,6 +2442,8 @@ final class sfUtils {
         $conn->fetch($sql);
         $totalRows_users = $conn->getResultArray();
         $_SESSION['SFUsers']['total'] = $totalRows_users[0]['count'];
+
+        return true;
     }
 
     public static function dialogMessage($title, $message) {
@@ -2669,5 +3178,4 @@ class settingsStruct {
     }
 
 }
-
 ?>

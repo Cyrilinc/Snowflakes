@@ -259,7 +259,6 @@ if (isset($MainTain) && $MainTain == "True") {
             <!-- Content -->
             <div class="Content"> <!-- InstanceBeginEditable name="BodyRegion" -->
                 <h1>Snowflakes Settings</h1>
-                <h2 class="SummaryHead">Welcome <span><?php echo $user->m_username; ?></span> Access Level (<?php echo $user->m_access_name; ?>)</h2>
                 <div class="NewButton"><a href="index.php?mt=True" title="Maintain snowflakes"> <img src="../resources/images/Icons/Settings.png" height="22" width="22" alt="Maintenance" />Maintenance</a></div>
                 <!-- Break -->
                 <div class="clear"></div>

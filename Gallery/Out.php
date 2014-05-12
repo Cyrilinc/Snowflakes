@@ -112,6 +112,7 @@ if (isset($rssflogo)) {
         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsSFGallery=%d%s", $currentPage, min($totalPages_rsSFGallery, $pageNum_rsSFGallery + 1), $queryString_rsSFGallery); ?>">Next</a></div>
         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsSFGallery=%d%s", $currentPage, $totalPages_rsSFGallery, $queryString_rsSFGallery); ?>">Last</a></div>
     <?php } // Show if not last page    ?>
+    <div class=" clear Break2"></div>
 
 
     <!--topbar-->

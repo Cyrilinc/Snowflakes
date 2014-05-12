@@ -3,7 +3,7 @@
 /**
  * Description of sfImageProcessor
  *
- * @author cyrildavids
+ * @author Cyril Adelekan
  */
 //require_once 'sf.php';
 //require_once 'config/Config.php';
@@ -88,9 +88,9 @@ class sfGalleryImage {
         $this->m_FileBaseName = basename($FileName, '.' . substr($FileName, strrpos($FileName, '.') + 1));
         $this->m_FileExtension = strtolower(substr($FileName, strrpos($FileName, '.') + 1));
 
-        require_once 'sfUUID.php';
+        require_once 'sf.php';
         //Image File Name Stamp Random sfUUID
-        $refineName = sfUUID::v4(); // or time(); // function
+        $refineName = sfUtils::UUID(); // or time(); // function
         /// Set the target file to be a sfUUID or time stamp "refineName" and the Original file name
         $refineName = strtoupper($refineName);
         $this->m_TargetFileName = trim($refineName . "." . $this->m_FileExtension);
@@ -100,8 +100,9 @@ class sfGalleryImage {
     }
 
     public function setThumbinit($thumbWidth, $thumbHeight) {
-        if (!$thumbWidth && !$thumbHeight)
+        if (!$thumbWidth && !$thumbHeight) {
             return false;
+        }
 
         $this->m_thumbWidth = $thumbWidth;
         $this->m_thumbHeight = $thumbHeight;
@@ -109,8 +110,9 @@ class sfGalleryImage {
 
     //You do not need to alter these function
     public static function getImageHeight($image) {
-        if (!$image)
+        if (!$image) {
             return false;
+        }
 
         $size = getimagesize($image);
         $Height = $size[1];
@@ -119,8 +121,9 @@ class sfGalleryImage {
 
     //You do not need to alter these function
     public static function getImageWidth($image) {
-        if (!$image)
+        if (!$image) {
             return false;
+        }
 
         $size = getimagesize($image);
         $Weight = $size[0];

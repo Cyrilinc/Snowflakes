@@ -17,13 +17,14 @@
  * Pseudo-random sfUUID
  * $v4uuid = sfUUID::v4();
  *
- * @author cyrildavids
+ * @author Cyril Adelekan
  */
 class sfUUID {
 
     public static function v3($namespace, $name) {
-        if (!self::is_valid($namespace))
+        if (!self::is_valid($namespace)) {
             return false;
+        }
 
         // Get hexadecimal components of namespace
         $nhex = str_replace(array('-', '{', '}'), '', $namespace);

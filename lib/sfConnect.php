@@ -2,7 +2,8 @@
 
 /**
  * Description of sfConnect
- *
+ * sfConnect is used to connect to the database,
+ * 
  * @author cyrildavids
  */
 class sfConnect {
@@ -122,8 +123,6 @@ class sfConnect {
                         } else {
                             $this->m_sfConnect = new PDO("sqlite:" . $dbdatapath . "snowflakes.db");
                         }
-
-                        //TODO something with the username and password, possibly encryption
                         break;
                     case 'MSSQL';
                         $this->m_sfConnect = new PDO('mssql:host=' . $host, $user, $pass);
