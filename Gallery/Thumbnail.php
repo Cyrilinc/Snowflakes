@@ -75,9 +75,8 @@ if (isset($_SESSION['MM_Username'])) {
     $colname_rsAdmin = $_SESSION['MM_Username'];
 }
 
-$config = Config::getConfig("db", '../config/config.ini');
-$sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-$SFconnects = new sfConnect($sqlArray);
+$config = new settingDBParam('../config/config.ini');
+$SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 $user = new userStruct();

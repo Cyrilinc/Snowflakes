@@ -4,21 +4,17 @@ require_once 'lib/sfConnect.php';
 require_once 'config/Config.php';
 
 $loginMessage = "";
-$config = Config::getConfig("db", 'config/config.ini');
+
+$config = new settingDBParam('config/config.ini');
 if (!$config) {
     $loginMessage.= "<p>Snowflakes could not find the Configuration file. <br/>make sure your snowflakes is setup correctly. </p>";
     $loginMessage.='<span class="icon error"></span><br/>';
     $setupLink = "install/index.php";
 }
-$sqlArray = array('type' => $config['type'],
-    'host' => $config['host'],
-    'username' => $config['username'],
-    'password' => sfUtils::decrypt($config['password'], $config['key']),
-    'database' => $config['dbname']);
-$SFconnects = new sfConnect($sqlArray);
+$SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
-if (!sfUtils::settimezone($config['time_zone'])) {
+if (!sfUtils::settimezone($config->m_time_zone)) {
     $loginMessage.='<p>Snowflakes could not set the site timezone.<span class="icon error"></span> </p>';
 }
 ?>
@@ -41,12 +37,6 @@ if (isset($post_username)) {
     $MM_redirectLoginSuccess = "Home.php";
     $MM_redirectLoginFailed = "login.php";
 
-    if (!$SFconnects) {
-        $config = Config::getConfig("db", 'config/config.ini');
-        $sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-        $SFconnects = new sfConnect($sqlArray);
-        $SFconnects->connect(); // Connect to database
-    }
     $loginUser = new userStruct();
 
     if ($loginUser->loginUser($SFconnects, $loginUsername, $password)) {

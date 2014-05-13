@@ -60,9 +60,8 @@ if (isset($query_string)) {
     $editFormAction .= "?" . htmlentities($query_string);
 }
 
-$config = Config::getConfig("db", '../config/config.ini');
-$sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-$SFconnects = new sfConnect($sqlArray);
+$config = new settingDBParam('../config/config.ini');
+$SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 $Message = "";
 $MM_update = filter_input(INPUT_POST, 'MM_update');
@@ -81,16 +80,19 @@ if ((isset($MM_update)) && ($MM_update == "form1")) {
     if (!$SFconnects->execute($updateSQL)) {
         $Message.=$SFconnects->getMessage();
     } else {
-        settingsStruct::SetsnowflakesResultUrl($_POST['result_url'], '../config/config.ini');
-        settingsStruct::SetsnowflakesOutUrl($_POST['out_url'], '../config/config.ini');
-        settingsStruct::SeteventsResultUrl($_POST['events_result_url'], '../config/config.ini');
-        settingsStruct::SeteventsOutputUrl($_POST['events_output_url'], '../config/config.ini');
-        settingsStruct::SetgalleryResultUrl($_POST['gallery_result_url'], '../config/config.ini');
-        settingsStruct::SetgalleryOutUrl($_POST['gallery_out_url'], '../config/config.ini');
-        settingsStruct::SetmaxImageSize($_POST['max_upload_size'] . 'MB', '../config/config.ini');
-        settingsStruct::SettimeZone($_POST['time_zone'], '../config/config.ini');
+        $settingsStruct = new settingsStruct();
+        $settingsStruct->init('../config/config.ini');
+        $settingsStruct->SetsnowflakesResultUrl($_POST['result_url']);
+        $settingsStruct->SetsnowflakesOutUrl($_POST['out_url']);
+        $settingsStruct->SeteventsResultUrl($_POST['events_result_url']);
+        $settingsStruct->SeteventsOutputUrl($_POST['events_output_url']);
+        $settingsStruct->SetgalleryResultUrl($_POST['gallery_result_url']);
+        $settingsStruct->SetgalleryOutUrl($_POST['gallery_out_url']);
+        $settingsStruct->SetmaxImageSize($_POST['max_upload_size'] . 'MB');
+        $settingsStruct->SettimeZone($_POST['time_zone']);
+        $settingsStruct->setConfigItems('../config/config.ini');
 
-        if (!sfUtils::settimezone($config['time_zone'])) {
+        if (!sfUtils::settimezone($config->m_time_zone)) {
             $loginMessage.='<p>Snowflakes could not set the site timezone.<span class="icon error"></span> </p>';
         }
     }

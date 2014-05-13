@@ -11,9 +11,8 @@ if (isset($RssType)) {
     $rssTypepost = $RssType;
 }
 
-$config = Config::getConfig("db", 'config/config.ini');
-$sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-$SFconnects = new sfConnect($sqlArray);
+$config = new settingDBParam('config/config.ini');
+$SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 if ($rssTypepost == "snowflakes") {
@@ -26,8 +25,7 @@ if ($rssTypepost == "snowflakes") {
         $flakeStructList[$key]->populate($value);
     }
     echo sfUtils::createSnowflakesRss($SFconnects, $flakeStructList, 'config/Config.php');
-}
-else if ($rssTypepost == "events") {
+} else if ($rssTypepost == "events") {
     $TodaysDate = sfUtils::todaysDate();
     $query_rsOut = "SELECT * FROM snowflakes_events WHERE publish = 1 AND event_date >= '" . $TodaysDate . "';";
     $SFconnects->fetch($query_rsOut);
@@ -38,8 +36,7 @@ else if ($rssTypepost == "events") {
         $eventStructList[$key]->populate($value);
     }
     echo sfUtils::createEventRss($SFconnects, $eventStructList, 'config/Config.php');
-}
-else if ($rssTypepost == "gallery") {
+} else if ($rssTypepost == "gallery") {
     $query_rsOut = "SELECT * FROM snowflakes_gallery WHERE publish=1 ORDER BY id DESC";
     $SFconnects->fetch($query_rsOut);
     $row_rsOut = $SFconnects->getResultArray();

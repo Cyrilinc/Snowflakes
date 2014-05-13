@@ -28,7 +28,7 @@ final class Config {
         if (!$m_data) {
             return $m_data;
         }
-        
+
         if (!array_key_exists($section, $m_data)) {
             trigger_error('Unknown config section: ' . $section);
         }
@@ -79,7 +79,9 @@ final class Config {
         $m_data = self::getData($inifile);
         $m_data[$section][$tag] = $value;
 
-        self::saveConfig($m_data, $inifile);
+        if (!self::saveConfig($m_data, $inifile)) {
+            return false;
+        }
 
         return $m_data;
     }
@@ -92,7 +94,7 @@ final class Config {
 
         $m_data = self::getData($inifile);
         if (!array_key_exists($section, $m_data)) {
-            throw new Exception('Unknown config section: ' . $section);
+            self::addSection($section, $inifile);
         }
 
         $m_data[$section][$tag] = $value;
@@ -132,19 +134,14 @@ final class Config {
      * @return array
      */
     private static function getData($inifile) {
-        
-        if (!$inifile || !file_exists($inifile) ) {
+
+        if (!$inifile || !file_exists($inifile)) {
             return false;
         }
 
-        if (self::$m_data !== null) {
-            return self::$m_data;
-        }
-
-        self::$m_data = parse_ini_file($inifile, true);
-        return self::$m_data;
+        $m_data = parse_ini_file($inifile, true);
+        return $m_data;
     }
-
 }
 
 ?>

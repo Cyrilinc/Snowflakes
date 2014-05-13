@@ -82,9 +82,8 @@ if (isset($GalleryRs)) {
 }
 $startRow_GalleryRs = $pageNum_GalleryRs * $maxRows_GalleryRs;
 
-$config = Config::getConfig("db", '../config/config.ini');
-$sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-$SFconnects = new sfConnect($sqlArray);
+$config = new settingDBParam('../config/config.ini');
+$SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 $user = new userStruct();

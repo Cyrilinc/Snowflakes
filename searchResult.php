@@ -61,9 +61,8 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
     exit;
 }
 
-$config = Config::getConfig("db", 'config/config.ini');
-$sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-$SFconnects = new sfConnect($sqlArray);
+$config = new settingDBParam('config/config.ini');
+$SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 $colname_rsAdmin = "-1";
@@ -259,11 +258,13 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                         <div class="clear"></div>
                         <div class="Break"></div>
                         <!-- End of Break --> 
-                        <h3><?php if (count($snowflakeResult) > 0) {
-                        echo count($snowflakeResult);
-                    } else {
-                        echo 'No';
-                    } ?> Snowflakes result for "<?php echo $post_searchStr; ?>"</h3>
+                        <h3><?php
+                            if (count($snowflakeResult) > 0) {
+                                echo count($snowflakeResult);
+                            } else {
+                                echo 'No';
+                            }
+                            ?> Snowflakes result for "<?php echo $post_searchStr; ?>"</h3>
                         <?php
                         $searchResultString = '<ul>';
                         $i = 0;
@@ -284,11 +285,13 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                         <div class="clear"></div>
                         <div class="Break"></div>
                         <!-- End of Break --> 
-                        <h3><?php if (count($eventsResult) > 0) {
-                            echo count($eventsResult);
-                        } else {
-                            echo 'No';
-                        } ?> Events result for "<?php echo $post_searchStr; ?>"</h3>
+                        <h3><?php
+                            if (count($eventsResult) > 0) {
+                                echo count($eventsResult);
+                            } else {
+                                echo 'No';
+                            }
+                            ?> Events result for "<?php echo $post_searchStr; ?>"</h3>
                         <?php
                         $searchResultString = '<ul>';
                         $i = 0;
@@ -309,11 +312,13 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                         <div class="clear"></div>
                         <div class="Break"></div>
                         <!-- End of Break --> 
-                        <h3><?php if (count($galleryResult) > 0) {
-                        echo count($galleryResult);
-                    } else {
-                        echo 'No';
-                    } ?> Gallery result for "<?php echo $post_searchStr; ?>"</h3>
+                        <h3><?php
+                        if (count($galleryResult) > 0) {
+                            echo count($galleryResult);
+                        } else {
+                            echo 'No';
+                        }
+                        ?> Gallery result for "<?php echo $post_searchStr; ?>"</h3>
                         <?php
                         $searchResultString = '<ul>';
                         $i = 0;
@@ -334,27 +339,29 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                         <div class="clear"></div>
                         <div class="Break"></div>
                         <!-- End of Break -->   
-                        <h3><?php if (count($usersResult) > 0) {
-                        echo count($usersResult);
-                    } else {
-                        echo 'No';
-                    } ?> User result for "<?php echo $post_searchStr; ?>"</h3>
+                        <h3><?php
+                        if (count($usersResult) > 0) {
+                            echo count($usersResult);
+                        } else {
+                            echo 'No';
+                        }
+                        ?> User result for "<?php echo $post_searchStr; ?>"</h3>
 
-    <?php
-    $searchResultString = '<ul>';
-    $i = 0;
-    while ($i < count($usersResult) && $usersResult != "") {
-        $record = $usersResult[$i];
-        if (!empty($record)) {
-            $searchResultString.= "<li>" . '<a href="' . $settingsConfig['m_sfUrl'] . "Users/Account.php?userName=" . $record['username'] . '">' . $record['username'] . "</a> with email " . $record['email'] . "</li>";
-        }
-        $i++;
-    }
-    $searchResultString .= "</ul>";
+                        <?php
+                        $searchResultString = '<ul>';
+                        $i = 0;
+                        while ($i < count($usersResult) && $usersResult != "") {
+                            $record = $usersResult[$i];
+                            if (!empty($record)) {
+                                $searchResultString.= "<li>" . '<a href="' . $settingsConfig['m_sfUrl'] . "Users/Account.php?userName=" . $record['username'] . '">' . $record['username'] . "</a> with email " . $record['email'] . "</li>";
+                            }
+                            $i++;
+                        }
+                        $searchResultString .= "</ul>";
 
-    echo "$searchResultString";
-}
-?>
+                        echo "$searchResultString";
+                    }
+                    ?>
 
                     <!-- Break -->
                     <div class="clear"></div>

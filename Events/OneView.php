@@ -9,9 +9,8 @@ $settingsConfig = Config::getConfig("settings", '../config/config.ini');
 $UploadImgDir = $settingsConfig['m_sfGalleryImgUrl'];
 $imageMissing = $UploadImgDir . "missing_default.png";
 
-$config = Config::getConfig("db", '../config/config.ini');
-$sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-$SFconnects = new sfConnect($sqlArray);
+$config = new settingDBParam('../config/config.ini');
+$SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 $colname_EventsRs = -1;

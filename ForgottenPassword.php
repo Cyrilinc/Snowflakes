@@ -3,10 +3,8 @@ require_once 'lib/sf.php';
 require_once 'lib/sfConnect.php';
 require_once 'config/Config.php';
 
-
-$config = Config::getConfig("db", 'config/config.ini');
-$sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-$SFconnects = new sfConnect($sqlArray);
+$config = new settingDBParam('config/config.ini');
+$SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 ?>
 <?php
@@ -27,12 +25,6 @@ $email = filter_input(INPUT_POST, 'email');
 if ((isset($MM_forget)) && ($MM_forget == "form1")) {
     $MM_email = $email;
     $MM_redirectLoginSuccess = "login.php";
-
-    if (!$SFconnects) {
-        $config = Config::getConfig("db", 'config/config.ini');
-        $sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-        $SFconnects = new sfConnect($sqlArray);
-    }
 
     $settingsConfig = Config::getConfig("settings", 'config/config.ini');
     $errMsg = "";

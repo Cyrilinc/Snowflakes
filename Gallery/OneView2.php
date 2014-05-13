@@ -23,15 +23,13 @@ if (isset($Galleryid)) {
     $colname_rsSFGallery = $Galleryid;
 }
 
-$config = Config::getConfig("db", '../config/config.ini');
-$sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-$SFconnects = new sfConnect($sqlArray);
+$config = new settingDBParam('../config/config.ini');
+$SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 $galleryStruct = new galleryStruct();
 $galleryStruct->getGalleryByid($SFconnects, $colname_rsSFGallery);
 $totalRows_rsSFGallery = $SFconnects->recordCount();
-
 
 $query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
 $SFconnects->fetch($query_SiteSettings);

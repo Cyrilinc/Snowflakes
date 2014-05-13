@@ -13,9 +13,8 @@ if (isset($EventsRs)) {
 
 $startRow_EventsRs = $pageNum_EventsRs * $maxRows_EventsRs;
 
-$config = Config::getConfig("db", '../config/config.ini');
-$sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-$SFconnects = new sfConnect($sqlArray);
+$config = new settingDBParam('../config/config.ini');
+$SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 $TodaysDate = sfUtils::todaysDate();

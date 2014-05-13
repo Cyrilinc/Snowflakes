@@ -65,9 +65,8 @@ if (isset($rsPages)) {
 }
 $startRow_rsPages = $pageNum_rsPages * $maxRows_rsPages;
 
-$config = Config::getConfig("db", 'config/config.ini');
-$sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-$SFconnects = new sfConnect($sqlArray);
+$config = new settingDBParam('config/config.ini');
+$SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 $deleteId = -1; // check for delete id first before selecting

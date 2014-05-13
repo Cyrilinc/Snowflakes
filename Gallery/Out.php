@@ -16,9 +16,8 @@ if (isset($pageSFGallery)) {
 }
 $startRow_rsSFGallery = $pageNum_rsSFGallery * $maxRows_rsSFGallery;
 
-$config = Config::getConfig("db", '../config/config.ini');
-$sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-$SFconnects = new sfConnect($sqlArray);
+$config = new settingDBParam('../config/config.ini');
+$SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 $query_rsSFGallery = "SELECT * FROM snowflakes_gallery WHERE publish=1 ORDER BY id DESC";

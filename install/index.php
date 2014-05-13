@@ -1,9 +1,10 @@
 <?php
 /* Snowflakes 2.0 - CMS & Web Publishing
-  http://cyrilinc.co.uk/snowflakes/
-  Copyright (c) 2013 Cyril inc
-  Licensed under MIT and GPL
-  Date: Thur, Dec 26 2013 11:33:31 -1100 */
+ * http://cyrilinc.co.uk/snowflakes/
+ * Copyright (c) 2013 - 2014 Cyril inc
+ * Licensed under MIT and GPL
+ * Date: Thur, Dec 26 2013 11:33:31 -1100 
+ */
 // Start session.
 session_start();
 

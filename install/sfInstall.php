@@ -68,24 +68,20 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
     $getspace = str_replace(" ", "_", $dbName);
     $Database_Name = trim($getspace);
 
-    $config = Config::getConfig("db", '../config/config.ini');
-    $sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-    $SFconnects = new sfConnect($sqlArray);
+    $config = new settingDBParam('../config/config.ini');
+    $SFconnects = new sfConnect($config->dbArray());
     $SFconnects->connect(); // Connect to new database
     $migrateMessage = "";
     $migrated = sfUtils::migrate($SFconnects, $Database_Name, $config['username'], $migrateMessage);
     //$migrateSuccess = str_replace("STATUS::SUCCESS", '<span class="icon success"></span><br />', $migrateMessage);
     //$migratefailure = str_replace("STATUS::FAILED", '<span class="icon error"></span><br />', $migrateSuccess);
     $somem_Message = $migrateMessage;
-    
-    if( !sfUtils::migrateUpdir($oldUpdloadDir,'../config/config.ini'))
-    {
-        $somem_Message.='Snowflakes Could not Copy/Migrate old snowflakes data from'.$oldUpdloadDir.'.<br /> Please check that the directory exists <span class="icon error"></span><br />';
-    }else{
-        $somem_Message.='Snowflakes Copied/Migrated old snowflakes data from'.$oldUpdloadDir.'. <span class="icon success"></span><br />';
+
+    if (!sfUtils::migrateUpdir($oldUpdloadDir, '../config/config.ini')) {
+        $somem_Message.='Snowflakes Could not Copy/Migrate old snowflakes data from' . $oldUpdloadDir . '.<br /> Please check that the directory exists <span class="icon error"></span><br />';
+    } else {
+        $somem_Message.='Snowflakes Copied/Migrated old snowflakes data from' . $oldUpdloadDir . '. <span class="icon success"></span><br />';
     }
-    
-    
 }
 ?>
 <!DOCTYPE HTML>
@@ -96,12 +92,12 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
         <meta name="viewport" content="width=device-width, maximum-scale = 1, minimum-scale=1" />
         <!-- InstanceBeginEditable name="doctitle" -->
         <title><?php
-            if (!$migrated || $migrated == false) {
-                echo 'Migrate old Snowflakes';
-            } else {
-                echo "Snowflakes Setup Results";
-            }
-            ?></title>
+if (!$migrated || $migrated == false) {
+    echo 'Migrate old Snowflakes';
+} else {
+    echo "Snowflakes Setup Results";
+}
+?></title>
         <!-- InstanceEndEditable -->
         <link rel="icon" href="../resources/images/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" href="../resources/images/favicon.ico">
@@ -216,12 +212,12 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
             <!-- Content -->
             <div class="Content"> <!-- InstanceBeginEditable name="BodyRegion" -->
                 <h1><?php
-                    if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful")) {
-                        echo 'Migrate old Snowflakes';
-                    } else {
-                        echo "Snowflakes Set up Results";
-                    }
-                    ?></h1>
+            if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful")) {
+                echo 'Migrate old Snowflakes';
+            } else {
+                echo "Snowflakes Set up Results";
+            }
+?></h1>
 
                 <!-- Break -->
                 <div class="clear"></div>
@@ -230,11 +226,11 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
-                    <?php
-                    echo '<div id="dialog" title="View snowflakes configuration">' . $somem_Message . '</div>'
-                    . '<div class="NewButton" id="setupOpener">View Config</div>';
-                    if (isset($obj->m_Message) || isset($obj->m_outcomeMessage)) {
-                        ?>
+<?php
+echo '<div id="dialog" title="View snowflakes configuration">' . $somem_Message . '</div>'
+ . '<div class="NewButton" id="setupOpener">View Config</div>';
+if (isset($obj->m_Message) || isset($obj->m_outcomeMessage)) {
+    ?>
                         <div id="setupdialog" title="Setup Log"> <?php echo $obj->m_Message . "<br/><br/>"; ?></div>
                         <div class="NewButton" id="setupLogOpener">Setup Log</div>
                         <?php
@@ -271,7 +267,7 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
                             <input type="hidden" name="MM_migrate" value="migrateform" />
 
                         </form>
-                    <?php } ?>
+<?php } ?>
                     <!-- Break -->
                     <div class="clear"></div>
                     <div class="Break"></div>

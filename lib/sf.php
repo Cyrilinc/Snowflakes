@@ -39,7 +39,7 @@ class snowflakeStruct {
     /**
      * Populate each member of {@link snowflakeStruct} given the input parameters
      *
-     * @param an array $array to be used to populate members of {@link snowflakeStruct}
+     * @param array $array to be used to populate members of {@link snowflakeStruct}
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -317,7 +317,7 @@ class userStruct {
     /**
      * Populate each member of {@link userStruct} given the input parameters
      *
-     * @param an array $value to be used to populate members of {@link userStruct}
+     * @param array $value to be used to populate members of {@link userStruct}
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -678,7 +678,7 @@ class galleryStruct {
     /**
      * Populate each member of {@link galleryStruct} given the input parameters
      *
-     * @param an array $value to be used to populate members of {@link galleryStruct}
+     * @param array $array to be used to populate members of {@link galleryStruct}
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -905,7 +905,7 @@ class eventStruct {
     /**
      * Populate each member of {@link eventStruct} given the input parameters
      *
-     * @param an array $value to be used to populate members of {@link eventStruct}
+     * @param array $array to be used to populate members of {@link eventStruct}
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -2477,9 +2477,8 @@ final class sfUtils {
             return false;
         }
         //host
-        $config = Config::getConfig("db", $inifile);
-        $sqlArray = array('type' => $config['type'], 'host' => $config['host'], 'username' => $config['username'], 'password' => sfUtils::decrypt($config['password'], $config['key']), 'database' => $config['dbname']);
-        $SFconnects = new sfConnect($sqlArray);
+        $config = new settingDBParam($inifile);
+        $SFconnects = new sfConnect($config->dbArray());
         $SFconnects->connect(); // Connect to database
         $login = $value == true ? 1 : 0;
         $sql = "UPDATE snowflakes_users SET logged_in=" . $login . ", ip=\"" . self::getClientIp() . "\" WHERE username=\"" . $userName . '"';
@@ -3030,7 +3029,7 @@ final class sfUtils {
                     <description>A description of snowflakes event rss feed</description>
                     <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=events') . '</link>
                     <image>
-                        <url>' . self::xmlencoder($settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png" ). '</url>
+                        <url>' . self::xmlencoder($settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png") . '</url>
                         <title>Snowflakes Event Rss</title>
                         <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=events') . '</link>
                         <width>120</width>
@@ -3418,6 +3417,68 @@ final class sfUtils {
 
 }
 
+class settingDBParam {
+
+    //Db Info           //config Name [db]
+    var $m_hostName;    //host
+    var $m_dbName;      //dbname
+    var $m_dbType;      //type
+    var $m_dbUsername;  //username
+    var $m_dbPassword;  //password
+    var $m_key;         //key
+    var $m_admin_email; //admin_email
+    var $m_time_zone;   //time_zone
+
+    public function __construct($inifile = '../config/config.ini') {
+        $this->init($inifile);
+    }
+
+    /**
+     * Initialize the settings struct by loading data from the config file
+     *
+     * @param string $inifile the ini config file for snowflakes API
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
+    public function init($inifile = '../config/config.ini') {
+        $m_data = Config::getConfig("db", $inifile);
+        return $this->populate($m_data);
+    }
+
+    /**
+     * Populate each member of {@link databaseParam} given the input parameters
+     *
+     * @param array $array to be used to populate members of {@link databaseParam}
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
+    public function populate($array) {
+        if (empty($array)) {
+            return false;
+        }
+        //Db Info           //config Name [db]
+        $this->m_hostName = $array['host'];
+        $this->m_dbName = $array['dbname'];
+        $this->m_dbType = $array['type'];
+        $this->m_dbUsername = $array['username'];
+        $this->m_dbPassword = $array['password'];
+        $this->m_key = $array['key'];
+        $this->m_admin_email = $array['admin_email'];
+        $this->m_time_zone = $array['time_zone'];
+    }
+
+    public function dbArray() {
+        $sqlArray = array('type' => $this->m_dbType,
+            'host' => $this->m_hostName,
+            'username' => $this->m_dbUsername,
+            'password' => sfUtils::decrypt($this->m_dbPassword, $this->m_key),
+            'database' => $this->m_dbName);
+
+        return $sqlArray;
+    }
+
+}
+
 class settingsStruct {
 
     //Db Info           //config Name [db]
@@ -3426,11 +3487,15 @@ class settingsStruct {
     var $m_dbType;      //type
     var $m_dbUsername;  //username
     var $m_dbPassword;  //password
+    var $m_key;         //key
     var $m_admin_email; //admin_email
+    var $m_time_zone;   //time_zone
     //Settings Info     //[settings]
     var $m_url;         //url
     var $m_path;        //path
     var $m_sfUrl;       //m_sfUrl
+    var $m_loginUrl;    //loginUrl
+    var $m_flakeItUrl;  //flakeItUrl
     var $m_sfGalleryUrl; //m_sfGalleryUrl
     var $m_sfGalleryImgUrl; //m_sfGalleryImgUrl
     var $m_sfGalleryThumbUrl; //m_sfGalleryThumbUrl 
@@ -3451,159 +3516,241 @@ class settingsStruct {
     var $m_galleryResultUrl; //galleryResultUrl      // One gallery result
     var $m_galleryOutUrl; //galleryOutUrl           //All gallery output
     var $m_maxImageSize; //maxImageSize
+    //datadir Info           //config Name [datadir]
+    var $m_logdir;  //logdir
+    var $m_settingsarray;
 
-    //Db Info           //config Name [db]
+    /**
+     * Initialize the settings struct by loading data from the config file
+     *
+     * @param string $inifile the ini config file for snowflakes API
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
+    public function init($inifile = '../config/config.ini') {
+        $m_data = Config::getConfig(null, $inifile);
+        $this->m_settingsarray = array();
+        return $this->populate($m_data);
+    }
 
-    public static function SethostName($value, $inifile = '../config/config.ini') {
+    /**
+     * Populate each member of {@link settingsStruct} given the input parameters
+     *
+     * @param array $array to be used to populate members of {@link settingsStruct}
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
+    public function populate($array) {
+        if (empty($array)) {
+            return false;
+        }
+        $this->m_settingsarray = $array;
+
+        //Db Info           //config Name [db]
+        $this->m_hostName = isset($this->m_settingsarray['db']['host']) ? $this->m_settingsarray['db']['host'] : "";
+        $this->m_dbName = isset($this->m_settingsarray['db']['dbname']) ? $this->m_settingsarray['db']['dbname'] : "";
+        $this->m_dbType = isset($this->m_settingsarray['db']['type']) ? $this->m_settingsarray['db']['type'] : "";
+        $this->m_dbUsername = isset($this->m_settingsarray['db']['username']) ? $this->m_settingsarray['db']['username'] : "";
+        $this->m_dbPassword = isset($this->m_settingsarray['db']['password']) ? $this->m_settingsarray['db']['password'] : "";
+        $this->m_key = isset($this->m_settingsarray['db']['key']) ? $this->m_settingsarray['db']['key'] : "";
+        $this->m_admin_email = isset($this->m_settingsarray['db']['admin_email']) ? $this->m_settingsarray['db']['admin_email'] : "";
+        $this->m_time_zone = isset($this->m_settingsarray['db']['time_zone']) ? $this->m_settingsarray['db']['time_zone'] : "";
+        //Settings Info     //[settings]
+        $this->m_url = isset($this->m_settingsarray['settings']['url']) ? $this->m_settingsarray['settings']['url'] : "";
+        $this->m_path = isset($this->m_settingsarray['settings']['path']) ? $this->m_settingsarray['settings']['path'] : "";
+        $this->m_sfUrl = isset($this->m_settingsarray['settings']['m_sfUrl']) ? $this->m_settingsarray['settings']['m_sfUrl'] : "";
+        $this->m_loginUrl = isset($this->m_settingsarray['settings']['loginUrl']) ? $this->m_settingsarray['settings']['loginUrl'] : "";
+        $this->m_flakeItUrl = isset($this->m_settingsarray['settings']['flakeItUrl']) ? $this->m_settingsarray['settings']['flakeItUrl'] : "";
+        $this->m_sfGalleryUrl = isset($this->m_settingsarray['settings']['m_sfGalleryUrl']) ? $this->m_settingsarray['settings']['m_sfGalleryUrl'] : "";
+        $this->m_sfGalleryImgUrl = isset($this->m_settingsarray['settings']['m_sfGalleryImgUrl']) ? $this->m_settingsarray['settings']['m_sfGalleryImgUrl'] : "";
+        $this->m_sfGalleryThumbUrl = isset($this->m_settingsarray['settings']['m_sfGalleryThumbUrl']) ? $this->m_settingsarray['settings']['m_sfGalleryThumbUrl'] : "";
+        $this->m_sfProfileUrl = isset($this->m_settingsarray['settings']['m_sfProfileUrl']) ? $this->m_settingsarray['settings']['m_sfProfileUrl'] : "";
+        $this->m_uploadGalleryDir = isset($this->m_settingsarray['settings']['uploadGalleryDir']) ? $this->m_settingsarray['settings']['uploadGalleryDir'] : "";
+        $this->m_galleryImgDir = isset($this->m_settingsarray['settings']['galleryImgDir']) ? $this->m_settingsarray['settings']['galleryImgDir'] : "";
+        $this->m_galleryThumbDir = isset($this->m_settingsarray['settings']['galleryThumbDir']) ? $this->m_settingsarray['settings']['galleryThumbDir'] : "";
+        $this->m_thumbWidth = isset($this->m_settingsarray['settings']['thumbWidth']) ? $this->m_settingsarray['settings']['thumbWidth'] : "";
+        $this->m_thumbHeight = isset($this->m_settingsarray['settings']['thumbHeight']) ? $this->m_settingsarray['settings']['thumbHeight'] : "";
+        $this->m_maxImageWidth = isset($this->m_settingsarray['settings']['maxImageWidth']) ? $this->m_settingsarray['settings']['maxImageWidth'] : "";
+        $this->m_resources = isset($this->m_settingsarray['settings']['resources']) ? $this->m_settingsarray['settings']['resources'] : "";
+        $this->m_imageExtList = isset($this->m_settingsarray['settings']['imageExtList']) ? $this->m_settingsarray['settings']['imageExtList'] : "";
+        $this->m_imageTypesList = isset($this->m_settingsarray['settings']['imageTypesList']) ? $this->m_settingsarray['settings']['imageTypesList'] : "";
+        $this->m_snowflakesResultUrl = isset($this->m_settingsarray['settings']['snowflakesResultUrl']) ? $this->m_settingsarray['settings']['snowflakesResultUrl'] : "";
+        $this->m_snowflakesOutUrl = isset($this->m_settingsarray['settings']['snowflakesOutUrl']) ? $this->m_settingsarray['settings']['snowflakesOutUrl'] : "";
+        $this->m_eventsResultUrl = isset($this->m_settingsarray['settings']['eventsResultUrl']) ? $this->m_settingsarray['settings']['eventsResultUrl'] : "";
+        $this->m_eventsOutputUrl = isset($this->m_settingsarray['settings']['eventsOutputUrl']) ? $this->m_settingsarray['settings']['eventsOutputUrl'] : "";
+        $this->m_galleryResultUrl = isset($this->m_settingsarray['settings']['galleryResultUrl']) ? $this->m_settingsarray['settings']['galleryResultUrl'] : "";
+        $this->m_galleryOutUrl = isset($this->m_settingsarray['settings']['galleryOutUrl']) ? $this->m_settingsarray['settings']['galleryOutUrl'] : "";
+        $this->m_maxImageSize = isset($this->m_settingsarray['settings']['maxImageSize']) ? $this->m_settingsarray['settings']['maxImageSize'] : "";
+        //datadir Info           //config Name [datadir]
+        $this->m_logdir = isset($this->m_settingsarray['datadir']['logdir']) ? $this->m_settingsarray['datadir']['logdir'] : "";
+
+        return true;
+    }
+
+    public function setConfigItems($inifile = '../config/config.ini') {
+        if (empty($this->m_settingsarray)) {
+            return false;
+        }
+        return Config::saveConfig($this->m_settingsarray, $inifile);
+    }
+
+    public function SethostName($value) {
         //host
-        return Config::setConfig($value, "host", "db", $inifile);
+        $this->m_settingsarray["db"]["host"] = $value;
     }
 
-    public static function SetdbName($value, $inifile = '../config/config.ini') {
+    public function SetdbName($value) {
         //dbname
-        return Config::setConfig($value, "dbname", "db", $inifile);
+        $this->m_settingsarray["db"]["dbname"] = $value;
     }
 
-    public static function SetdbType($value, $inifile = '../config/config.ini') {
+    public function SetdbType($value) {
         //type
-        return Config::setConfig($value, "type", "db", $inifile);
+        $this->m_settingsarray["db"]["type"] = $value;
     }
 
-    public static function SetdbUsername($value, $inifile = '../config/config.ini') {
+    public function SetdbUsername($value) {
         //username
-        return Config::setConfig($value, "username", "db", $inifile);
+        $this->m_settingsarray["db"]["username"] = $value;
     }
 
-    public static function SetdbPassword($value, $inifile = '../config/config.ini') {
+    public function SetdbPassword($value) {
         //password
-        return Config::setConfig($value, "password", "db", $inifile);
+        $this->m_settingsarray["db"]["password"] = $value;
     }
 
-    public static function Setadmin_email($value, $inifile = '../config/config.ini') {
+    public function Setadmin_email($value) {
         //admin_email
-        return Config::setConfig($value, "admin_email", "db", $inifile);
+        $this->m_settingsarray["db"]["admin_email"] = $value;
     }
 
-    public static function SettimeZone($value, $inifile = '../config/config.ini') {
+    public function SettimeZone($value) {
         //time_zone
-        return Config::setConfig($value, "time_zone", "db", $inifile);
+        $this->m_settingsarray["db"]["time_zone"] = $value;
     }
 
     //Settings Info     //[settings]
-    public static function Seturl($value, $inifile = '../config/config.ini') {
+    public function Seturl($value) {
         //url
-        return Config::setConfig($value, "url", "settings", $inifile);
+        $this->m_settingsarray["settings"]["url"] = $value;
     }
 
-    public static function Setpath($value, $inifile = '../config/config.ini') {
+    public function Setpath($value) {
         //path
-        return Config::setConfig($value, "path", "settings", $inifile);
+        $this->m_settingsarray["settings"]["path"] = $value;
     }
 
-    public static function SetsfUrl($value, $inifile = '../config/config.ini') {
+    public function SetsfUrl($value) {
         //m_sfUrl
-        return Config::setConfig($value, "m_sfUrl", "settings", $inifile);
+        $this->m_settingsarray["settings"]["m_sfUrl"] = $value;
     }
 
-    public static function SetsfGalleryUrl($value, $inifile = '../config/config.ini') {
+    public function SetsfGalleryUrl($value) {
         //m_sfGalleryUrl
-        return Config::setConfig($value, "m_sfGalleryUrl", "settings", $inifile);
+        $this->m_settingsarray["settings"]["m_sfGalleryUrl"] = $value;
     }
 
-    public static function SetsfGalleryImgUrl($value, $inifile = '../config/config.ini') {
+    public function SetsfGalleryImgUrl($value) {
         //m_sfGalleryImgUrl
-        return Config::setConfig($value, "m_sfGalleryImgUrl", "settings", $inifile);
+        $this->m_settingsarray["settings"]["m_sfGalleryImgUrl"] = $value;
     }
 
-    public static function SetsfGalleryThumbUrl($value, $inifile = '../config/config.ini') {
+    public function SetsfGalleryThumbUrl($value) {
         //m_sfGalleryThumbUrl 
-        return Config::setConfig($value, "m_sfGalleryThumbUrl", "settings", $inifile);
+        $this->m_settingsarray["settings"]["m_sfGalleryThumbUrl"] = $value;
     }
 
-    public static function SetsfProfileUrl($value, $inifile = '../config/config.ini') {
+    public function SetsfProfileUrl($value) {
         //m_sfProfileUrl
-        return Config::setConfig($value, "m_sfProfileUrl", "settings", $inifile);
+        $this->m_settingsarray["settings"]["m_sfProfileUrl"] = $value;
     }
 
-    public static function SetuploadGalleryDir($value, $inifile = '../config/config.ini') {
+    public function SetuploadGalleryDir($value) {
         //uploadGalleryDir
-        return Config::setConfig($value, "uploadGalleryDir", "settings", $inifile);
+        $this->m_settingsarray["settings"]["uploadGalleryDir"] = $value;
     }
 
-    public static function SetgalleryImgDir($value, $inifile = '../config/config.ini') {
+    public function SetgalleryImgDir($value) {
         //galleryImgDir
-        return Config::setConfig($value, "galleryImgDir", "settings", $inifile);
+        $this->m_settingsarray["settings"]["galleryImgDir"] = $value;
     }
 
-    public static function SetgalleryThumbDir($value, $inifile = '../config/config.ini') {
+    public function SetgalleryThumbDir($value) {
         //galleryThumbDir
-        return Config::setConfig($value, "galleryThumbDir", "settings", $inifile);
+        $this->m_settingsarray["settings"]["galleryThumbDir"] = $value;
     }
 
-    public static function SetthumbWidth($value, $inifile = '../config/config.ini') {
+    public function SetthumbWidth($value) {
         //thumbWidth
-        return Config::setConfig($value, "thumbWidth", "settings", $inifile);
+        $this->m_settingsarray["settings"]["thumbWidth"] = $value;
     }
 
-    public static function SetthumbHeight($value, $inifile = '../config/config.ini') {
+    public function SetthumbHeight($value) {
         //thumbHeight
-        return Config::setConfig($value, "thumbHeight", "settings", $inifile);
+        $this->m_settingsarray["settings"]["thumbHeight"] = $value;
     }
 
-    public static function SetmaxImageWidth($value, $inifile = '../config/config.ini') {
+    public function SetmaxImageWidth($value) {
         //maxImageWidth
-        return Config::setConfig($value, "maxImageWidth", "settings", $inifile);
+        $this->m_settingsarray["settings"]["maxImageWidth"] = $value;
     }
 
-    public static function Setresources($value, $inifile = '../config/config.ini') {
-//resources
-        return Config::setConfig($value, "resources", "settings", $inifile);
+    public function Setresources($value) {
+        //resources
+        $this->m_settingsarray["settings"]["resources"] = $value;
     }
 
-    public static function SetimageExtList($value, $inifile = '../config/config.ini') {
+    public function SetimageExtList($value) {
         //imageExtList
-        return Config::setConfig($value, "imageExtList", "settings", $inifile);
+        $this->m_settingsarray["settings"]["imageExtList"] = $value;
     }
 
-    public function SetimageTypesList($value, $inifile = '../config/config.ini') {
+    public function SetimageTypesList($value) {
         //imageTypesList
-        return Config::setConfig($value, "imageTypesList", "settings", $inifile);
+        $this->m_settingsarray["settings"]["imageTypesList"] = $value;
     }
 
-    public static function SetsnowflakesResultUrl($value, $inifile = '../config/config.ini') {
+    public function SetsnowflakesResultUrl($value) {
         //snowflakesResultUrl   // One snowflakes result
-        return Config::setConfig($value, "snowflakesResultUrl", "settings", $inifile);
+        $this->m_settingsarray["settings"]["snowflakesResultUrl"] = $value;
     }
 
-    public static function SetsnowflakesOutUrl($value, $inifile = '../config/config.ini') {
+    public function SetsnowflakesOutUrl($value) {
         // snowflakesOutUrl     // All snowflakes output
-        return Config::setConfig($value, "snowflakesOutUrl", "settings", $inifile);
+        $this->m_settingsarray["settings"]["snowflakesOutUrl"] = $value;
     }
 
-    public static function SeteventsResultUrl($value, $inifile = '../config/config.ini') {
+    public function SeteventsResultUrl($value) {
         //eventsResultUrl        // One event result
-        return Config::setConfig($value, "eventsResultUrl", "settings", $inifile);
+        $this->m_settingsarray["settings"]["eventsResultUrl"] = $value;
     }
 
-    public static function SeteventsOutputUrl($value, $inifile = '../config/config.ini') {
+    public function SeteventsOutputUrl($value) {
         //eventsOutputUrl        //All event output
-        return Config::setConfig($value, "eventsOutputUrl", "settings", $inifile);
+        $this->m_settingsarray["settings"]["eventsOutputUrl"] = $value;
     }
 
-    public static function SetgalleryResultUrl($value, $inifile = '../config/config.ini') {
+    public function SetgalleryResultUrl($value) {
         //galleryResultUrl      // One gallery result
-        return Config::setConfig($value, "galleryResultUrl", "settings", $inifile);
+        $this->m_settingsarray["settings"]["galleryResultUrl"] = $value;
     }
 
-    public static function SetgalleryOutUrl($value, $inifile = '../config/config.ini') {
+    public function SetgalleryOutUrl($value) {
         //galleryOutUrl           //All gallery output
-        return Config::setConfig($value, "galleryOutUrl", "settings", $inifile);
+
+        $this->m_settingsarray["settings"]["galleryOutUrl"] = $value;
     }
 
-    public static function SetmaxImageSize($value, $inifile = '../config/config.ini') {
+    public function SetmaxImageSize($value) {
         //maxImageSize
-        return Config::setConfig(sfUtils::toByteSize($value), "maxImageSize", "settings", $inifile);
+        $this->m_settingsarray["settings"]["maxImageSize"] = sfUtils::toByteSize($value);
+    }
+
+    public function setCustom($section, $tag, $value) {
+        //host
+        $this->m_settingsarray[$section][$tag] = $value;
     }
 
 }
+
 ?>
