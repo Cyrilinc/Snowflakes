@@ -3499,7 +3499,6 @@ class settingsStruct {
     var $m_sfGalleryUrl; //m_sfGalleryUrl
     var $m_sfGalleryImgUrl; //m_sfGalleryImgUrl
     var $m_sfGalleryThumbUrl; //m_sfGalleryThumbUrl 
-    var $m_sfProfileUrl; //m_sfProfileUrl
     var $m_uploadGalleryDir; //uploadGalleryDir
     var $m_galleryImgDir; //galleryImgDir
     var $m_galleryThumbDir; //galleryThumbDir
@@ -3547,42 +3546,41 @@ class settingsStruct {
         $this->m_settingsarray = $array;
 
         //Db Info           //config Name [db]
-        $this->m_hostName = isset($this->m_settingsarray['db']['host']) ? $this->m_settingsarray['db']['host'] : "";
-        $this->m_dbName = isset($this->m_settingsarray['db']['dbname']) ? $this->m_settingsarray['db']['dbname'] : "";
-        $this->m_dbType = isset($this->m_settingsarray['db']['type']) ? $this->m_settingsarray['db']['type'] : "";
-        $this->m_dbUsername = isset($this->m_settingsarray['db']['username']) ? $this->m_settingsarray['db']['username'] : "";
-        $this->m_dbPassword = isset($this->m_settingsarray['db']['password']) ? $this->m_settingsarray['db']['password'] : "";
-        $this->m_key = isset($this->m_settingsarray['db']['key']) ? $this->m_settingsarray['db']['key'] : "";
-        $this->m_admin_email = isset($this->m_settingsarray['db']['admin_email']) ? $this->m_settingsarray['db']['admin_email'] : "";
-        $this->m_time_zone = isset($this->m_settingsarray['db']['time_zone']) ? $this->m_settingsarray['db']['time_zone'] : "";
+        $this->m_hostName = $this->m_settingsarray['db']['host'];
+        $this->m_dbName = $this->m_settingsarray['db']['dbname'];
+        $this->m_dbType = $this->m_settingsarray['db']['type'];
+        $this->m_dbUsername = $this->m_settingsarray['db']['username'];
+        $this->m_dbPassword = $this->m_settingsarray['db']['password'];
+        $this->m_key = $this->m_settingsarray['db']['key'];
+        $this->m_admin_email = $this->m_settingsarray['db']['admin_email'];
+        $this->m_time_zone = $this->m_settingsarray['db']['time_zone'];
         //Settings Info     //[settings]
-        $this->m_url = isset($this->m_settingsarray['settings']['url']) ? $this->m_settingsarray['settings']['url'] : "";
-        $this->m_path = isset($this->m_settingsarray['settings']['path']) ? $this->m_settingsarray['settings']['path'] : "";
-        $this->m_sfUrl = isset($this->m_settingsarray['settings']['m_sfUrl']) ? $this->m_settingsarray['settings']['m_sfUrl'] : "";
-        $this->m_loginUrl = isset($this->m_settingsarray['settings']['loginUrl']) ? $this->m_settingsarray['settings']['loginUrl'] : "";
-        $this->m_flakeItUrl = isset($this->m_settingsarray['settings']['flakeItUrl']) ? $this->m_settingsarray['settings']['flakeItUrl'] : "";
-        $this->m_sfGalleryUrl = isset($this->m_settingsarray['settings']['m_sfGalleryUrl']) ? $this->m_settingsarray['settings']['m_sfGalleryUrl'] : "";
-        $this->m_sfGalleryImgUrl = isset($this->m_settingsarray['settings']['m_sfGalleryImgUrl']) ? $this->m_settingsarray['settings']['m_sfGalleryImgUrl'] : "";
-        $this->m_sfGalleryThumbUrl = isset($this->m_settingsarray['settings']['m_sfGalleryThumbUrl']) ? $this->m_settingsarray['settings']['m_sfGalleryThumbUrl'] : "";
-        $this->m_sfProfileUrl = isset($this->m_settingsarray['settings']['m_sfProfileUrl']) ? $this->m_settingsarray['settings']['m_sfProfileUrl'] : "";
-        $this->m_uploadGalleryDir = isset($this->m_settingsarray['settings']['uploadGalleryDir']) ? $this->m_settingsarray['settings']['uploadGalleryDir'] : "";
-        $this->m_galleryImgDir = isset($this->m_settingsarray['settings']['galleryImgDir']) ? $this->m_settingsarray['settings']['galleryImgDir'] : "";
-        $this->m_galleryThumbDir = isset($this->m_settingsarray['settings']['galleryThumbDir']) ? $this->m_settingsarray['settings']['galleryThumbDir'] : "";
-        $this->m_thumbWidth = isset($this->m_settingsarray['settings']['thumbWidth']) ? $this->m_settingsarray['settings']['thumbWidth'] : "";
-        $this->m_thumbHeight = isset($this->m_settingsarray['settings']['thumbHeight']) ? $this->m_settingsarray['settings']['thumbHeight'] : "";
-        $this->m_maxImageWidth = isset($this->m_settingsarray['settings']['maxImageWidth']) ? $this->m_settingsarray['settings']['maxImageWidth'] : "";
-        $this->m_resources = isset($this->m_settingsarray['settings']['resources']) ? $this->m_settingsarray['settings']['resources'] : "";
-        $this->m_imageExtList = isset($this->m_settingsarray['settings']['imageExtList']) ? $this->m_settingsarray['settings']['imageExtList'] : "";
-        $this->m_imageTypesList = isset($this->m_settingsarray['settings']['imageTypesList']) ? $this->m_settingsarray['settings']['imageTypesList'] : "";
-        $this->m_snowflakesResultUrl = isset($this->m_settingsarray['settings']['snowflakesResultUrl']) ? $this->m_settingsarray['settings']['snowflakesResultUrl'] : "";
-        $this->m_snowflakesOutUrl = isset($this->m_settingsarray['settings']['snowflakesOutUrl']) ? $this->m_settingsarray['settings']['snowflakesOutUrl'] : "";
-        $this->m_eventsResultUrl = isset($this->m_settingsarray['settings']['eventsResultUrl']) ? $this->m_settingsarray['settings']['eventsResultUrl'] : "";
-        $this->m_eventsOutputUrl = isset($this->m_settingsarray['settings']['eventsOutputUrl']) ? $this->m_settingsarray['settings']['eventsOutputUrl'] : "";
-        $this->m_galleryResultUrl = isset($this->m_settingsarray['settings']['galleryResultUrl']) ? $this->m_settingsarray['settings']['galleryResultUrl'] : "";
-        $this->m_galleryOutUrl = isset($this->m_settingsarray['settings']['galleryOutUrl']) ? $this->m_settingsarray['settings']['galleryOutUrl'] : "";
-        $this->m_maxImageSize = isset($this->m_settingsarray['settings']['maxImageSize']) ? $this->m_settingsarray['settings']['maxImageSize'] : "";
+        $this->m_url = $this->m_settingsarray['settings']['url'];
+        $this->m_path = $this->m_settingsarray['settings']['path'];
+        $this->m_sfUrl = $this->m_settingsarray['settings']['m_sfUrl'];
+        $this->m_loginUrl = $this->m_settingsarray['settings']['loginUrl'];
+        $this->m_flakeItUrl = $this->m_settingsarray['settings']['flakeItUrl'];
+        $this->m_sfGalleryUrl = $this->m_settingsarray['settings']['m_sfGalleryUrl'];
+        $this->m_sfGalleryImgUrl = $this->m_settingsarray['settings']['m_sfGalleryImgUrl'];
+        $this->m_sfGalleryThumbUrl = $this->m_settingsarray['settings']['m_sfGalleryThumbUrl'];
+        $this->m_uploadGalleryDir = $this->m_settingsarray['settings']['uploadGalleryDir'];
+        $this->m_galleryImgDir = $this->m_settingsarray['settings']['galleryImgDir'];
+        $this->m_galleryThumbDir = $this->m_settingsarray['settings']['galleryThumbDir'];
+        $this->m_thumbWidth = $this->m_settingsarray['settings']['thumbWidth'];
+        $this->m_thumbHeight = $this->m_settingsarray['settings']['thumbHeight'];
+        $this->m_maxImageWidth = $this->m_settingsarray['settings']['maxImageWidth'];
+        $this->m_resources = $this->m_settingsarray['settings']['resources'];
+        $this->m_imageExtList = $this->m_settingsarray['settings']['imageExtList'];
+        $this->m_imageTypesList = $this->m_settingsarray['settings']['imageTypesList'];
+        $this->m_snowflakesResultUrl = $this->m_settingsarray['settings']['snowflakesResultUrl'];
+        $this->m_snowflakesOutUrl = $this->m_settingsarray['settings']['snowflakesOutUrl'];
+        $this->m_eventsResultUrl = $this->m_settingsarray['settings']['eventsResultUrl'];
+        $this->m_eventsOutputUrl = $this->m_settingsarray['settings']['eventsOutputUrl'];
+        $this->m_galleryResultUrl = $this->m_settingsarray['settings']['galleryResultUrl'];
+        $this->m_galleryOutUrl = $this->m_settingsarray['settings']['galleryOutUrl'];
+        $this->m_maxImageSize = $this->m_settingsarray['settings']['maxImageSize'];
         //datadir Info           //config Name [datadir]
-        $this->m_logdir = isset($this->m_settingsarray['datadir']['logdir']) ? $this->m_settingsarray['datadir']['logdir'] : "";
+        $this->m_logdir = $this->m_settingsarray['datadir']['logdir'];
 
         return true;
     }
@@ -3658,11 +3656,6 @@ class settingsStruct {
     public function SetsfGalleryThumbUrl($value) {
         //m_sfGalleryThumbUrl 
         $this->m_settingsarray["settings"]["m_sfGalleryThumbUrl"] = $value;
-    }
-
-    public function SetsfProfileUrl($value) {
-        //m_sfProfileUrl
-        $this->m_settingsarray["settings"]["m_sfProfileUrl"] = $value;
     }
 
     public function SetuploadGalleryDir($value) {

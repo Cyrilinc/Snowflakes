@@ -87,7 +87,6 @@ class Snowflakes {
                 'm_sfGalleryUrl = "' . $this->m_sfUrl . "Uploads/\"\n" .
                 'm_sfGalleryImgUrl = "' . $this->m_sfUrl . "Uploads/GalleryImages/\"\n" .
                 'm_sfGalleryThumbUrl = "' . $this->m_sfUrl . "Uploads/GalleryThumbs/\"\n" .
-                'm_sfProfileUrl = "' . $this->m_sfUrl . "Uploads/profile/\"\n" .
                 'uploadGalleryDir = "' . $gallery . "\"\n" .
                 'galleryImgDir = "' . $galleryimg . "\"\n" .
                 'galleryThumbDir = "' . $gallerythumb . "\"\n" .
