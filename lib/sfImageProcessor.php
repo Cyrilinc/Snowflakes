@@ -83,7 +83,7 @@ class sfGalleryImage {
         if ($forGallery) {
             $this->setThumbinit($settingsConfig['thumbWidth'], $settingsConfig['thumbHeight']);
         } else {
-            
+
             $this->m_UploadImgDir = $datadir->m_uploadGalleryDir;
         }
 
@@ -571,6 +571,16 @@ class sfGalleryImage {
 
 class sfImageProcessor {
 
+    /**
+     * Upload a multiple images image to the upload directory for this API
+     * 
+     * @param array $imageFiles The image information each contains [name, tmp_name,size and type]
+     * @param string $inifile <p> The configuration file </p> 
+     * @param string $message <p>The message to be returned as per the success or
+     * failure of the upload.</p>
+     * 
+     * @return string <b>Success message</b> on success or <b>failure message</b> on failure.
+     */
     public static function UploadMultiImages($imageFiles, $inifile = '../config/config.ini', &$message = "") {
         //Check if the image field is not empty
         if (!empty($imageFiles)) {
@@ -613,6 +623,21 @@ class sfImageProcessor {
         //echo $message;
         return $message;
     }
+    
+    /**
+     * Upload a single image to the upload directory for this API
+     * 
+     * @param array $imageFile The image information [name, tmp_name,size and type]
+     * @param string $inifile <p> The configuration file </p> 
+     * @param string $imageLoc The new image location after upload to be returned
+     * @param string $message <p>The message to be returned as per the success or
+     * failure of the upload.</p>
+     * @param bool $forGallery <p>The indication that the image upload is for a gallery 
+     * or not. If set to true a thumbnail file will be created also in the API's 
+     * image upload directory, else a single image is uploaded.</p>
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
 
     public static function uploadSingleImage($imageFile, $inifile = '../config/config.ini', &$imageLoc = "", &$message = "", $forGallery = true) {
 
@@ -659,6 +684,12 @@ class sfImageProcessor {
         return true;
     }
 
+    /**
+     * save image thumbnail given the dimensions of the thumbnail on an original 
+     * image
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function saveThumbImage() {
 
         $x1 = $_POST["x1"];
@@ -685,6 +716,9 @@ class sfImageProcessor {
         return true;
     }
 
+    /**
+     * Resets all image session
+     */
     public static function ResetAll() {
 
         $_SESSION['ImageFiles'] = NULL;
@@ -702,29 +736,46 @@ class sfImageProcessor {
         unset($_SESSION['ImageCaptions']);
     }
 
+    /**
+     * Removes all images from the upload directory in a session and during a session
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function RemoveAll() {
 
-        foreach ($_SESSION['ImageFiles'] as $DeleteimageLink)
+        foreach ($_SESSION['ImageFiles'] as $DeleteimageLink) {
             sfUtils::Deletefile($DeleteimageLink);
+        }
 
-        foreach ($_SESSION['ImageThumbFiles'] as $DeleteThumbLink)
+        foreach ($_SESSION['ImageThumbFiles'] as $DeleteThumbLink) {
             sfUtils::Deletefile($DeleteThumbLink);
+        }
 
         self::ResetAll();
 
         return true;
     }
 
+    /**
+     * Removes one image from the upload directory during a session
+     * 
+     * @param int $index The image index in the image session variables
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function RemoveOne($Index) {
 
-        if (!$Index)
+        if (!$Index) {
             return false;
+        }
 
-        if (!sfUtils::Deletefile($_SESSION['ImageFiles'][$Index]))
+        if (!sfUtils::Deletefile($_SESSION['ImageFiles'][$Index])) {
             return false;
+        }
 
-        if (!sfUtils::Deletefile($_SESSION['ImageThumbFiles'][$Index]))
+        if (!sfUtils::Deletefile($_SESSION['ImageThumbFiles'][$Index])) {
             return false;
+        }
 
         unset($_SESSION['ImageFiles'][$Index]);
         unset($_SESSION['ImageThumbFiles'][$Index]);
@@ -733,12 +784,22 @@ class sfImageProcessor {
         return true;
     }
 
+    /**
+     * Delete a specific gallery and all its associated files in the upload directory
+     * 
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param int $galleryID The gallery identifier to point to data to delete
+     * @param string $inifile <p> The configuration file </p> 
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function deleteFileDBGallery($conn, $galleryID, $inifile = '../config/config.ini') {
 
-        if (!$conn || !$galleryID)
+        if (!$conn || !$galleryID) {
             return false;
+        }
 
-        $datadir=new dataDirParam($inifile);
+        $datadir = new dataDirParam($inifile);
         $query_rsSFGallery = "SELECT id,thumb_name,image_name FROM snowflakes_gallery WHERE id=" . $galleryID;
         $conn->fetch($query_rsSFGallery);
 
@@ -760,11 +821,18 @@ class sfImageProcessor {
         //remove all images in the physical location
         self::RemoveAll();
 
-        sfUtils::deleteGallery($conn, $galleryID);
+        return sfUtils::deleteGallery($conn, $galleryID);
     }
 
-    /* tool to resize images stored in the gallery tables */
-
+    /**
+     * Resizes images stored in the gallery tables/Gallery Directory
+     * NOTE: This is a maintenance tool
+     * 
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $inifile <p> The configuration file </p> 
+     * 
+     * @return mixed <b>number of image resized</b> on success or <b>FALSE</b> otherwise.
+     */
     public static function resizeGalleryImages($conn, $inifile = '../config/config.ini') {
 
         if (!$conn) {
@@ -773,7 +841,7 @@ class sfImageProcessor {
 
         //The upload directory
         $settingsConfig = Config::getConfig("settings", $inifile);
-        $datadir=new dataDirParam($inifile);
+        $datadir = new dataDirParam($inifile);
         //The upload Image directory
         $UploadImgDir = $datadir->m_galleryImgDir;
         $maxImageWidth = $settingsConfig['maxImageWidth'];
@@ -808,6 +876,13 @@ class sfImageProcessor {
         return $resized;
     }
 
+    /**
+     * Makes an image in the session the cover image of the album
+     * 
+     * @param int $index The image index in the image session variables
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     public static function makeCover($index) {
         if (sfUtils::isEmpty($index) || empty($_SESSION['ImageFiles'])) {
             return false;
@@ -821,10 +896,19 @@ class sfImageProcessor {
         $_SESSION['ImageFiles'][] = $imagefile;
         $_SESSION['ImageThumbFiles'][] = $imagethumb;
         $_SESSION['ImageCaptions'][] = $imagecaption;
+        return true;
     }
 
-    /* Clean up upload directory and remove files that are not in all the tables */
-
+    /**
+     * Clean up upload directory and remove files that are not in all the tables
+     * of the API. 
+     * NOTE: This is a maintenance tool
+     * 
+     * @param sfConnect $conn {@link sfConnect} used for database connections
+     * @param string $inifile <p> The configuration file </p> 
+     * 
+     * @return mixed <b>number of image cleaned</b> on success or <b>FALSE</b> otherwise.
+     */
     public static function cleanUploadDir($conn, $inifile = '../config/config.ini') {
 
         //sanity Check
@@ -833,7 +917,7 @@ class sfImageProcessor {
         }
 
         //The upload directory
-        $datadir=new dataDirParam($inifile);
+        $datadir = new dataDirParam($inifile);
         $UploadDir = $datadir->m_uploadGalleryDir;
         //The upload Image directory
         $UploadImgDir = $datadir->m_galleryImgDir;
@@ -923,6 +1007,10 @@ class sfImageProcessor {
         return $cleaned;
     }
 
+    /**
+     * Undo changes made to files recorded in session
+     * This is still a prototype
+     */
     public static function UndoChanges() {
 
         ///loop through the database image files

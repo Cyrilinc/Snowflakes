@@ -13,14 +13,14 @@ class sfConnect {
     public $m_sfConnect;
     public $m_sfStmt;
 
-	/**
-	* The constructor of the  database connection {@link sfConnect}, 
-	* its stores all the attributes needed connect to a database and sets the attribute
-	* using the array parameter key as the attrbute key and its value as the value of the attribute
-	*
-	* @param array $attributes that contains all the data needed to connect to the database.
-	* 
-	*/
+    /**
+    * The constructor of the  database connection {@link sfConnect}, 
+    * its stores all the attributes needed connect to a database and sets the attribute
+    * using the array parameter key as the attrbute key and its value as the value of the attribute
+    *
+    * @param array $attributes that contains all the data needed to connect to the database.
+    * 
+    */
     function sfConnect($attributes = array()) {
         if (count($attributes) >= 1) {
             foreach ($attributes as $key => $value) {
@@ -36,13 +36,13 @@ class sfConnect {
         }
     }
 
-       	/**
-	* Get an attribute's value 
-	*
-	* @param string $attribute the attribute to get.
-	* 
-	* @return string the value of the attribute 
-	*/
+    /**
+    * Get an attribute's value 
+    *
+    * @param string $attribute the attribute to get.
+    * 
+    * @return string the value of the attribute 
+    */
 
     function getAttribute($attribute) {
         if ($this->getStatus() == true) {
@@ -62,13 +62,13 @@ class sfConnect {
         }
     }
 
-       	/**
-	* set an attribute and its value 
-	*
-	* @param string $attribute the attribute to set.
-	* @param string $value the value of the attribute.
-	* 
-	*/
+    /**
+    * set an attribute and its value 
+    *
+    * @param string $attribute the attribute to set.
+    * @param string $value the value of the attribute.
+    * 
+    */
     function setAttribute($attribute, $value) {
         if ($this->getStatus() == true) {
             $this->deleteAttribute($attribute);
@@ -76,55 +76,55 @@ class sfConnect {
         }
     }
 
-       	/**
-	* Delete an attribute and its value 
-	*
-	* @param string $attribute the attribute to delete.
-	* 
-	*/
+    /**
+    * Delete an attribute and its value 
+    *
+    * @param string $attribute the attribute to delete.
+    * 
+    */
     function deleteAttribute($attribute) {
         if (array_key_exists($attribute, $this->attributes) == true) {
             unset($this->attributes[$attribute]);
         }
     }
 
-       	/**
-	* Get the satus of an sql operation
-	* 
-	* @return bool the value of the attribute['status'] 
-	*/
+    /**
+    * Get the satus of an sql operation
+    * 
+    * @return bool the value of the attribute['status'] 
+    */
 
     function getStatus() {
         return $this->attributes['status'];
     }
 
 
-       	/**
-	* set the satus of an sql operation
-	* 
-	* @param string $status the status value to set.
-	*/
+    /**
+    * set the satus of an sql operation
+    * 
+    * @param string $status the status value to set.
+    */
 
     function setStatus($status) {
         $this->attributes['status'] = $status;
     }
 
-	/**
-	* Get an sql operation message
-	* 
-	* @return string the value of the attribute['message'] 
-	*/
+    /**
+    * Get an sql operation message
+    * 
+    * @return string the value of the attribute['message'] 
+    */
 
     function getMessage() {
         return $this->getAttribute('message');
     }
 
-     	/**
-	* set the message of an sql operation
-	* 
-	* @param string $message the message value to set.
-	* @param bool $log if set to true also log the message.
-	*/
+    /**
+    * set the message of an sql operation
+    * 
+    * @param string $message the message value to set.
+    * @param bool $log if set to true also log the message.
+    */
 
     function setMessage($message, $log = true) {
         if ($log == true) {
@@ -133,11 +133,11 @@ class sfConnect {
         $this->setAttribute('message', $message);
     }
 
-	/**
-	* Get the result of an sql operation
-	* 
-	* @return array the value of the attribute['result'] 
-	*/
+    /**
+    * Get the result of an sql operation
+    * 
+    * @return array the value of the attribute['result'] 
+    */
     function getResultArray() {
         if ($this->getStatus() == true) {
             if (array_key_exists('result', $this->attributes)) {
@@ -150,11 +150,11 @@ class sfConnect {
         }
     }
 
-	/**
-	* Connect to the database given that all the attributes to connecting 
-	* to the database is populated
-	* 
-	*/
+    /**
+    * Connect to the database given that all the attributes to connecting 
+    * to the database is populated
+    * 
+    */
     function connect() {
 
         $user = $this->getAttribute('username');
@@ -240,13 +240,13 @@ class sfConnect {
     }
 
 
-     /**
-     * Select database to which the sql operation will be running against
-     * @param string $database This is the database name
-     * @param bool $userAccess This is to detemine if one wants to set user Grant for the database
-     * 
-     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
-     */
+    /**
+    * Select database to which the sql operation will be running against
+    * @param string $database This is the database name
+    * @param bool $userAccess This is to detemine if one wants to set user Grant for the database
+    * 
+    * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+    */
 
     function selectDatabase($database, $userAccess = false) {
         if (!$database)
@@ -332,7 +332,7 @@ class sfConnect {
         return $this->getStatus();
     }
 
-	/**
+    /**
      * execute the sql query and optionally log both the query and the outcome of the sql
      * operation
      * 
@@ -382,7 +382,7 @@ class sfConnect {
         return $status;
     }
 
-	/**
+    /**
      * Get the count of records fetched or executed
      *
      * @return int the record count of an sql query.
@@ -392,7 +392,7 @@ class sfConnect {
         return $this->getAttribute('recordcount');
     }
 
-	/**
+    /**
      * get the last insert Identifier of a table (usually of an autoi incremented primary key)
      * 
      * @return int the Identifier generated by the sql operation afte an INSERT statement.
