@@ -75,15 +75,16 @@ class sfGalleryImage {
      */
     public function __construct($inifile = '../config/config.ini', $forGallery = true) {
         $settingsConfig = Config::getConfig("settings", $inifile);
-
-        $this->m_UploadImgDir = $settingsConfig['galleryImgDir'];
-        $this->m_UploadThumbDir = $settingsConfig['galleryThumbDir'];
+        $datadir = new dataDirParam($inifile);
+        $this->m_UploadImgDir = $datadir->m_galleryImgDir;
+        $this->m_UploadThumbDir = $datadir->m_galleryThumbDir;
         $this->m_MaxSize = $settingsConfig['maxImageSize'];
         $this->m_MaxImageWidth = $settingsConfig['maxImageWidth'];
         if ($forGallery) {
             $this->setThumbinit($settingsConfig['thumbWidth'], $settingsConfig['thumbHeight']);
         } else {
-            $this->m_UploadImgDir = $settingsConfig['uploadGalleryDir'];
+            
+            $this->m_UploadImgDir = $datadir->m_uploadGalleryDir;
         }
 
         $this->m_ImageExtList = explode(",", $settingsConfig['imageExtList']);
@@ -737,7 +738,7 @@ class sfImageProcessor {
         if (!$conn || !$galleryID)
             return false;
 
-        $settingsConfig = Config::getConfig("settings", $inifile);
+        $datadir=new dataDirParam($inifile);
         $query_rsSFGallery = "SELECT id,thumb_name,image_name FROM snowflakes_gallery WHERE id=" . $galleryID;
         $conn->fetch($query_rsSFGallery);
 
@@ -748,12 +749,12 @@ class sfImageProcessor {
         $_SESSION['ImageThumbFiles'] = explode(",", $deleteSFGallery['thumb_name']);
         // Loop through the array and add directory prefix to each item in array
         foreach ($_SESSION['ImageFiles'] as &$value) {
-            $value = $settingsConfig['galleryImgDir'] . $value;
+            $value = $datadir->m_galleryImgDir . $value;
         }
 
         // Loop through the array and add directory prefix to each item in array	
         foreach ($_SESSION['ImageThumbFiles'] as &$value) {
-            $value = $settingsConfig['galleryThumbDir'] . $value;
+            $value = $datadir->m_galleryThumbDir . $value;
         }
 
         //remove all images in the physical location
@@ -772,8 +773,9 @@ class sfImageProcessor {
 
         //The upload directory
         $settingsConfig = Config::getConfig("settings", $inifile);
+        $datadir=new dataDirParam($inifile);
         //The upload Image directory
-        $UploadImgDir = $settingsConfig['galleryImgDir'];
+        $UploadImgDir = $datadir->m_galleryImgDir;
         $maxImageWidth = $settingsConfig['maxImageWidth'];
 
         $sql = "SELECT image_name FROM snowflakes_gallery";
@@ -831,11 +833,11 @@ class sfImageProcessor {
         }
 
         //The upload directory
-        $settingsConfig = Config::getConfig("settings", $inifile);
-        $UploadDir = $settingsConfig['uploadGalleryDir'];
+        $datadir=new dataDirParam($inifile);
+        $UploadDir = $datadir->m_uploadGalleryDir;
         //The upload Image directory
-        $UploadImgDir = $settingsConfig['galleryImgDir'];
-        $UploadThumbDir = $settingsConfig['galleryThumbDir'];
+        $UploadImgDir = $datadir->m_galleryImgDir;
+        $UploadThumbDir = $datadir->m_galleryThumbDir;
 
         $cleaned = 0;
 

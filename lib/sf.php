@@ -2893,13 +2893,13 @@ final class sfUtils {
         if (!$source || !is_dir($source)) {
             return false;
         }
-        $settingsConfig = Config::getConfig("settings", $inifile);
+        $datadir=new dataDirParam($inifile);
         // Check for symlinks
         if (is_link($source)) {
-            return symlink(readlink($source), $settingsConfig['uploadGalleryDir']);
+            return symlink(readlink($source), $datadir->m_uploadGalleryDir);
         }
 
-        return self::copyDirectoryList($source, $settingsConfig['uploadGalleryDir']);
+        return self::copyDirectoryList($source, $datadir->m_uploadGalleryDir);
     }
 
     /**
@@ -3462,9 +3462,9 @@ class settingDBParam {
         $this->m_dbType = $array['type'];
         $this->m_dbUsername = $array['username'];
         $this->m_dbPassword = $array['password'];
-        $this->m_key = $array['key'];
         $this->m_admin_email = $array['admin_email'];
         $this->m_time_zone = $array['time_zone'];
+        $this->m_key = "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
     }
 
     public function dbArray() {
@@ -3477,6 +3477,52 @@ class settingDBParam {
         return $sqlArray;
     }
 
+}
+
+class dataDirParam {
+
+    //datadir Info           //config Name [datadir]
+    var $m_logdir;  //logdir
+    var $m_path;        //path
+    var $m_resources; //resources
+    var $m_uploadGalleryDir; //uploadGalleryDir
+    var $m_galleryImgDir; //galleryImgDir
+    var $m_galleryThumbDir; //galleryThumbDir
+    public function __construct($inifile = '../config/config.ini') {
+        $this->init($inifile);
+    }
+
+    /**
+     * Initialize the settings struct by loading data from the config file
+     *
+     * @param string $inifile the ini config file for snowflakes API
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
+    public function init($inifile = '../config/config.ini') {
+        $m_data = Config::getConfig("datadir", $inifile);
+        return $this->populate($m_data);
+    }
+
+    /**
+     * Populate each member of {@link dataDirParam} given the input parameters
+     *
+     * @param array $array to be used to populate members of {@link dataDirParam}
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
+    public function populate($array) {
+        if (empty($array)) {
+            return false;
+        }
+        //datadir Info           //config Name [datadir]
+        $this->m_logdir = $array['logdir'];
+        $this->m_path = $array['path'];
+        $this->m_resources = $array['resources'];
+        $this->m_uploadGalleryDir = $array['uploadGalleryDir'];
+        $this->m_galleryImgDir = $array['galleryImgDir'];
+        $this->m_galleryThumbDir = $array['galleryThumbDir'];
+    }
 }
 
 class settingsStruct {
@@ -3492,20 +3538,15 @@ class settingsStruct {
     var $m_time_zone;   //time_zone
     //Settings Info     //[settings]
     var $m_url;         //url
-    var $m_path;        //path
     var $m_sfUrl;       //m_sfUrl
     var $m_loginUrl;    //loginUrl
     var $m_flakeItUrl;  //flakeItUrl
     var $m_sfGalleryUrl; //m_sfGalleryUrl
     var $m_sfGalleryImgUrl; //m_sfGalleryImgUrl
-    var $m_sfGalleryThumbUrl; //m_sfGalleryThumbUrl 
-    var $m_uploadGalleryDir; //uploadGalleryDir
-    var $m_galleryImgDir; //galleryImgDir
-    var $m_galleryThumbDir; //galleryThumbDir
+    var $m_sfGalleryThumbUrl; //m_sfGalleryThumbUrl
     var $m_thumbWidth; //thumbWidth
     var $m_thumbHeight; //thumbHeight
     var $m_maxImageWidth; //maxImageWidth
-    var $m_resources; //resources
     var $m_imageExtList; //imageExtList
     var $m_imageTypesList; //imageTypesList
     var $m_snowflakesResultUrl; //snowflakesResultUrl// One snowflakes result
@@ -3517,6 +3558,11 @@ class settingsStruct {
     var $m_maxImageSize; //maxImageSize
     //datadir Info           //config Name [datadir]
     var $m_logdir;  //logdir
+    var $m_path;        //path
+    var $m_resources; //resources
+    var $m_uploadGalleryDir; //uploadGalleryDir
+    var $m_galleryImgDir; //galleryImgDir
+    var $m_galleryThumbDir; //galleryThumbDir
     var $m_settingsarray;
 
     /**
@@ -3556,20 +3602,15 @@ class settingsStruct {
         $this->m_time_zone = $this->m_settingsarray['db']['time_zone'];
         //Settings Info     //[settings]
         $this->m_url = $this->m_settingsarray['settings']['url'];
-        $this->m_path = $this->m_settingsarray['settings']['path'];
         $this->m_sfUrl = $this->m_settingsarray['settings']['m_sfUrl'];
         $this->m_loginUrl = $this->m_settingsarray['settings']['loginUrl'];
         $this->m_flakeItUrl = $this->m_settingsarray['settings']['flakeItUrl'];
         $this->m_sfGalleryUrl = $this->m_settingsarray['settings']['m_sfGalleryUrl'];
         $this->m_sfGalleryImgUrl = $this->m_settingsarray['settings']['m_sfGalleryImgUrl'];
         $this->m_sfGalleryThumbUrl = $this->m_settingsarray['settings']['m_sfGalleryThumbUrl'];
-        $this->m_uploadGalleryDir = $this->m_settingsarray['settings']['uploadGalleryDir'];
-        $this->m_galleryImgDir = $this->m_settingsarray['settings']['galleryImgDir'];
-        $this->m_galleryThumbDir = $this->m_settingsarray['settings']['galleryThumbDir'];
         $this->m_thumbWidth = $this->m_settingsarray['settings']['thumbWidth'];
         $this->m_thumbHeight = $this->m_settingsarray['settings']['thumbHeight'];
         $this->m_maxImageWidth = $this->m_settingsarray['settings']['maxImageWidth'];
-        $this->m_resources = $this->m_settingsarray['settings']['resources'];
         $this->m_imageExtList = $this->m_settingsarray['settings']['imageExtList'];
         $this->m_imageTypesList = $this->m_settingsarray['settings']['imageTypesList'];
         $this->m_snowflakesResultUrl = $this->m_settingsarray['settings']['snowflakesResultUrl'];
@@ -3581,6 +3622,12 @@ class settingsStruct {
         $this->m_maxImageSize = $this->m_settingsarray['settings']['maxImageSize'];
         //datadir Info           //config Name [datadir]
         $this->m_logdir = $this->m_settingsarray['datadir']['logdir'];
+        $this->m_resources = $this->m_settingsarray['datadir']['resources'];
+        $this->m_path = $this->m_settingsarray['datadir']['path'];
+        $this->m_uploadGalleryDir = $this->m_settingsarray['datadir']['uploadGalleryDir'];
+        $this->m_galleryImgDir = $this->m_settingsarray['datadir']['galleryImgDir'];
+        $this->m_galleryThumbDir = $this->m_settingsarray['datadir']['galleryThumbDir'];
+
 
         return true;
     }

@@ -95,9 +95,9 @@ if ((isset($MM_update)) && ($MM_update == "editform") && ($File_is_Uploaded == T
     if (!$snowflakeStruct->updateSnowflake($SFconnects)) {
         $formmessage.= "Could not edit the snowflake. <br> " . $SFconnects->getMessage() . '<br>';
     } else {
-
+        $datadir=new dataDirParam("config/config.ini");
         if ($snowflakeStruct->m_image_name != $oldImage) {
-            sfUtils::Deletefile($settingsConfig['uploadGalleryDir'] . $oldImage);
+            sfUtils::Deletefile($datadir->m_uploadGalleryDir. $oldImage);
         }
         // Check Trigger exist , if not then use manual trigger
         sfUtils::checkTrigger($SFconnects, $post_Id, 'snowflake', "UPDATE");

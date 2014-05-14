@@ -68,10 +68,11 @@ $queryString_rsSFGallery = sprintf("&amp;totalRows_rsSFGallery=%d%s", $totalRows
 <?php
 //The upload directory
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
-$UploadDir = $settingsConfig['m_sfGalleryUrl'];
+$datadir=new dataDirParam("../config/config.ini");
+$UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory
 $UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$UploadThumbDir = $settingsConfig['galleryThumbDir'];
+$UploadThumbDir = $datadir->m_galleryThumbDir;
 $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 $imageMissing = $UploadThumbUrl . "missing_default.png";
 ?>

@@ -7,7 +7,6 @@ require_once '../lib/sfImageProcessor.php';
 <?php
 //The upload directory
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
-$UploadDir = $settingsConfig['uploadGalleryDir'];
 //The upload Image directory
 $UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
 $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];

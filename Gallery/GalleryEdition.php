@@ -8,12 +8,12 @@ require_once '../lib/sfImageProcessor.php';
 <?php
 //The upload directory
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
-$UploadDir = $settingsConfig['m_sfGalleryUrl'];
+$datadir=new dataDirParam("../config/config.ini");
+$UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory
-
-$UploadImgDir = $settingsConfig['galleryImgDir'];
+$UploadImgDir = $datadir->m_galleryImgDir;
 $UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$UploadThumbDir = $settingsConfig['galleryThumbDir'];
+$UploadThumbDir = $datadir->m_galleryThumbDir;
 $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 $imageMissing = $UploadThumbUrl . "missing_default.png";
 ?>

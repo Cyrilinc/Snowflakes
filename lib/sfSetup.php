@@ -74,32 +74,31 @@ class Snowflakes {
                 'type = "' . $this->m_dbType . "\"\n" .
                 'username = "' . $this->m_dbUsername . "\"\n" .
                 'password = "' . $encryptedPassword . "\"\n" .
-                'key = "'.$key."\"\n".
                 'admin_email = "' . $this->m_adminEmail . "\"\n" .
                 "time_zone = \"$this->m_timeZone\"\n\n" .
                 "[settings]\n" .
                 "Setup = \"True\"\n" .
                 'url = "' . sfUtils::curPageURL() . "\"\n" .
                 'loginUrl = "' . $loginUrl . "\"\n" .
-                'path = "' . realpath("../") . "/\"\n" .
-                'datapath = "' . realpath("../") . "/data/\"\n" .
                 'm_sfUrl = "' . $this->m_sfUrl . "\"\n" .
                 'm_sfGalleryUrl = "' . $this->m_sfUrl . "Uploads/\"\n" .
                 'm_sfGalleryImgUrl = "' . $this->m_sfUrl . "Uploads/GalleryImages/\"\n" .
-                'm_sfGalleryThumbUrl = "' . $this->m_sfUrl . "Uploads/GalleryThumbs/\"\n" .
-                'uploadGalleryDir = "' . $gallery . "\"\n" .
-                'galleryImgDir = "' . $galleryimg . "\"\n" .
-                'galleryThumbDir = "' . $gallerythumb . "\"\n" .
+                'm_sfGalleryThumbUrl = "' . $this->m_sfUrl . "Uploads/GalleryThumbs/\"\n"  .
                 'flakeItUrl = "' . $this->m_sfUrl . "flakeIt.php\"\n" .
                 'maxImageSize = "1048576"' . "\n" .
-                'resources = "' . realpath("../resources/") . "/\"\n" .
                 'thumbWidth = "250"' . "\n" .
                 'thumbHeight = "250"' . "\n" .
                 'maxImageWidth = "620"' . "\n" .
                 'imageExtList = "pjpeg,jpeg,jpg,png,gif,tiff,bmp"' . "\n" .
                 'imageTypesList = "image/pjpeg,image/jpeg,image/jpg,image/png,image/gif,image/tiff,image/bmp"' . "\n\n" .
                 "[datadir]\n" .
-                'logdir = "' . realpath("../data/") . "/\"\n";
+                'logdir = "' . realpath("../data/") . "/\"\n".
+                'resources = "' . realpath("../resources/") . "/\"\n".
+                'path = "' . realpath("../") . "/\"\n" .
+                'datapath = "' . realpath("../") . "/data/\"\n".
+                'uploadGalleryDir = "' . $gallery . "\"\n" .
+                'galleryImgDir = "' . $galleryimg . "\"\n" .
+                'galleryThumbDir = "' . $gallerythumb . "\"\n" ;
 
         $fp = fopen("../config/config.ini", "w");
         fwrite($fp, $sfConfig);

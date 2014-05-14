@@ -57,9 +57,10 @@ $SFconnects->connect(); // Connect to database
 // check for delete id first before selecting
 $delete_Id = filter_input(INPUT_GET, 'deleteId');
 if (isset($delete_Id)) {
+    $datadir = new dataDirParam("../config/config.ini");
     $userStruct = new userStruct();
     $userStruct->getUserByid($SFconnects, $delete_Id);
-    $userStruct->m_image_dir = $settingsConfig['uploadGalleryDir'];
+    $userStruct->m_image_dir = $datadir->m_uploadGalleryDir;
     $userStruct->deleteUser($SFconnects);
     // Check Trigger exist , if not then use manual trigger
     sfUtils::checkTrigger($SFconnects, $delete_Id, 'user', "DELETE");

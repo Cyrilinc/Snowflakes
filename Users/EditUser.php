@@ -88,9 +88,9 @@ if ((isset($MM_update)) && ($MM_update == "form1") && ($File_is_Uploaded == TRUE
     if (!$userStruct->UpdateUser($SFconnects)) {
         $formmessage.= "Could not change the user info. <br>" . $SFconnects->getMessage() . '<br>';
     } else {
-
+        $datadir = new dataDirParam("../config/config.ini");
         if ($userStruct->m_image_name != $oldImage) {
-            sfUtils::Deletefile($settingsConfig['uploadGalleryDir'] . $oldImage);
+            sfUtils::Deletefile($datadir->m_uploadGalleryDir . $oldImage);
         }
 
         $editedUserID = $userStruct->getUserID($SFconnects);

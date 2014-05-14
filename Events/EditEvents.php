@@ -98,8 +98,9 @@ if ((isset($MM_update)) && ($MM_update == "editform") && ($File_is_Uploaded == T
     if (!$eventStruct->UpdateEvent($SFconnects)) {
         $formmessage.= " <br>" . $SFconnects->getMessage() . '<br>';
     } else {
+        $datadir=new dataDirParam("../config/config.ini");
         if ($eventStruct->m_image_name != $oldImage) {
-            sfUtils::Deletefile($settingsConfig['uploadGalleryDir'] . $oldImage);
+            sfUtils::Deletefile($datadir->m_uploadGalleryDir . $oldImage);
         }
         $eventID = $eventStruct->getEventID($SFconnects);
         $viewLink = "ViewEvent.php?Eventid=$eventID";

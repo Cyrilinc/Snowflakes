@@ -74,10 +74,10 @@ $delete_Id = filter_input(INPUT_GET, 'deleteId');
 if (isset($delete_Id)) {
     $deleteId = $delete_Id;
     $setDel = filter_input(INPUT_GET, 'setDel');
-
+    $datadir = new dataDirParam("config/config.ini");
     $flakeStruct = new snowflakeStruct();
     $flakeStruct->getSnowflakesByid($SFconnects, $deleteId);
-    $flakeStruct->m_image_dir = $settingsConfig['uploadGalleryDir'];
+    $flakeStruct->m_image_dir = $datadir->m_uploadGalleryDir;
     $flakeStruct->deleteSnowflake($SFconnects, $setDel);
     // Check Trigger exist , if not then use manual trigger
     sfUtils::checkTrigger($SFconnects, $deleteId, 'snowflake', "DELETE");

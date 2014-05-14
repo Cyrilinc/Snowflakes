@@ -66,9 +66,10 @@ $delete = filter_input(INPUT_GET, 'deleteId');
 if (isset($delete)) {
     $deleteId = $delete;
     $setDel = filter_input(INPUT_GET, 'setDel');
+    $datadir = new dataDirParam("../config/config.ini");
     $eventStruct = new eventStruct();
     $eventStruct->getEventByid($SFconnects, $deleteId);
-    $eventStruct->m_image_dir = $settingsConfig['uploadGalleryDir'];
+    $eventStruct->m_image_dir = $datadir->m_uploadGalleryDir;
     $eventStruct->deleteEvent($SFconnects, $setDel);
     // Check Trigger exist , if not then use manual trigger
     sfUtils::checkTrigger($SFconnects, $deleteId, 'event', "DELETE");
