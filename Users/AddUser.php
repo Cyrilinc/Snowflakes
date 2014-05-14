@@ -63,7 +63,7 @@ if (empty($_FILES["uploadImage"]["name"])) {
     //$formmessage .=" <br>" . $targetFile;
 }
 
-$config = new settingDBParam('../config/config.ini');
+$config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 // *** Redirect if username exists

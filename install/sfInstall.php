@@ -68,7 +68,7 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
     $getspace = str_replace(" ", "_", $dbName);
     $Database_Name = trim($getspace);
 
-    $config = new settingDBParam('../config/config.ini');
+    $config = new databaseParam('../config/config.ini');
     $SFconnects = new sfConnect($config->dbArray());
     $SFconnects->connect(); // Connect to new database
     $migrateMessage = "";

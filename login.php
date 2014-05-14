@@ -5,7 +5,7 @@ require_once 'config/Config.php';
 
 $loginMessage = "";
 
-$config = new settingDBParam('config/config.ini');
+$config = new databaseParam('config/config.ini');
 if (!$config) {
     $loginMessage.= "<p>Snowflakes could not find the Configuration file. <br/>make sure your snowflakes is setup correctly. </p>";
     $loginMessage.='<span class="icon error"></span><br/>';

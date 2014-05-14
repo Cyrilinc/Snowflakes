@@ -81,7 +81,7 @@ if (isset($GalleryRs)) {
 }
 $startRow_GalleryRs = $pageNum_GalleryRs * $maxRows_GalleryRs;
 
-$config = new settingDBParam('../config/config.ini');
+$config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 

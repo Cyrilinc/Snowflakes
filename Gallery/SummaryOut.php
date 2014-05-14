@@ -23,7 +23,7 @@ if (isset($GalleryRs)) {
 }
 $startRow_rsSFGallery = $pageNum_rsSFGallery * $maxRows_rsSFGallery;
 
-$config = new settingDBParam('../config/config.ini');
+$config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 

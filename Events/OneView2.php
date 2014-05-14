@@ -4,7 +4,7 @@ require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
 ?>
 <?php
-$config = new settingDBParam('../config/config.ini');
+$config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 

@@ -22,7 +22,7 @@ if (isset($Post_password)) {
     $MM_redirectLoginSuccess = "login.php";
     $MM_redirectLoginFailed = $php_self;
 
-    $config = new settingDBParam('config/config.ini');
+    $config = new databaseParam('config/config.ini');
     $SFconnects = new sfConnect($config->dbArray());
     $SFconnects->connect(); // Connect to database
 

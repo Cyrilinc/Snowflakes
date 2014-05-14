@@ -2477,7 +2477,7 @@ final class sfUtils {
             return false;
         }
         //host
-        $config = new settingDBParam($inifile);
+        $config = new databaseParam($inifile);
         $SFconnects = new sfConnect($config->dbArray());
         $SFconnects->connect(); // Connect to database
         $login = $value == true ? 1 : 0;
@@ -3417,7 +3417,7 @@ final class sfUtils {
 
 }
 
-class settingDBParam {
+class databaseParam {
 
     //Db Info           //config Name [db]
     var $m_hostName;    //host

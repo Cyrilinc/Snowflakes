@@ -54,7 +54,7 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
 }
 ?>
 <?php
-$config = new settingDBParam('../config/config.ini');
+$config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 $Message = "";

@@ -11,7 +11,7 @@ if (isset($RssType)) {
     $rssTypepost = $RssType;
 }
 
-$config = new settingDBParam('config/config.ini');
+$config = new databaseParam('config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 

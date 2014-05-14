@@ -64,7 +64,7 @@ if (isset($userId)) {
     $colname_id = $userId;
 }
 
-$config = new settingDBParam('../config/config.ini');
+$config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
