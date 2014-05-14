@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class sfGalleryImage | Snowflakes</title>
+
+	<script type="text/javascript" src="resources/combined.js?774890837"></script>
+	<script type="text/javascript" src="elementlist.js?3838031492"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Config.html">Config</a></li>
+				<li><a href="class-databaseParam.html">databaseParam</a></li>
+				<li><a href="class-dataDirParam.html">dataDirParam</a></li>
+				<li><a href="class-eventStruct.html">eventStruct</a></li>
+				<li><a href="class-galleryStruct.html">galleryStruct</a></li>
+				<li><a href="class-migrationTable.html">migrationTable</a></li>
+				<li><a href="class-settingsStruct.html">settingsStruct</a></li>
+				<li><a href="class-sfConnect.html">sfConnect</a></li>
+				<li><a href="class-sfConnectInterface.html">sfConnectInterface</a></li>
+				<li class="active"><a href="class-sfGalleryImage.html">sfGalleryImage</a></li>
+				<li><a href="class-sfImageProcessor.html">sfImageProcessor</a></li>
+				<li><a href="class-sfLogError.html">sfLogError</a></li>
+				<li><a href="class-sfUtils.html">sfUtils</a></li>
+				<li><a href="class-sfUUID.html">sfUUID</a></li>
+				<li><a href="class-Snowflakes.html">Snowflakes</a></li>
+				<li><a href="class-snowflakeStruct.html">snowflakeStruct</a></li>
+				<li><a href="class-userStruct.html">userStruct</a></li>
+			</ul>
+
+
+
+
+
+			<h3>Functions</h3>
+			<ul>
+				<li><a href="function-create_progress.html">create_progress</a></li>
+				<li><a href="function-displayMap.html">displayMap</a></li>
+				<li><a href="function-get_data.html">get_data</a></li>
+				<li><a href="function-sendMsg.html" class="invalid">sendMsg</a></li>
+				<li><a href="function-update_progress.html">update_progress</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-None.html" title="Summary of None"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class sfGalleryImage</h1>
+
+
+	<div class="description">
+	
+<p>Class to process images in Snowflakes</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		
+
+				<b>Author:</b>
+				Cyril Adelekan<br />
+		<b>Located at</b> <a href="source-class-sfGalleryImage.html#38-570" title="Go to source code">lib/sfImageProcessor.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-sfGalleryImage.html#67-94" title="Go to source code">__construct</a>( <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>boolean <var>$forGallery</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			
+<p>The constriuctor of <code><a href="class-sfGalleryImage.html">sfGalleryImage</a></code></p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>The constriuctor of <code><a href="class-sfGalleryImage.html">sfGalleryImage</a></code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+					<dt><var>$forGallery</var></dt>
+					<dd><code>boolean</code><br>$forGallery to determine if this image is for gallery upload or for image
+upload.
+<p>gallery upload generates two images, one a thumb and the other as the
+original image as set by system administrator.</p>
+</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="init" id="_init">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_init">#</a>
+		<code><a href="source-class-sfGalleryImage.html#96-123" title="Go to source code">init</a>( <span>string <var>$FileName</var></span>, <span>string <var>$FileTmpName</var></span>, <span>string <var>$FileSize</var></span>, <span>mixed <var>$FileType</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Initialize the <code><a href="class-sfGalleryImage.html">sfGalleryImage</a></code> with the parameters, which are used to
+detemine other parameters in <code><a href="class-sfGalleryImage.html">sfGalleryImage</a></code></p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Initialize the <code><a href="class-sfGalleryImage.html">sfGalleryImage</a></code> with the parameters, which are used to
+detemine other parameters in <code><a href="class-sfGalleryImage.html">sfGalleryImage</a></code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$FileName</var></dt>
+					<dd><code>string</code><br>$FileName
+<p>The temporary/original file name of the image</p>
+</dd>
+					<dt><var>$FileTmpName</var></dt>
+					<dd><code>string</code><br>$FileSize
+<p>The image file size</p>
+</dd>
+					<dt><var>$FileSize</var></dt>
+					<dd><code>string</code><br>$FileType
+<p>The image file type</p>
+</dd>
+					<dt><var>$FileType</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setThumbinit" id="_setThumbinit">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setThumbinit">#</a>
+		<code><a href="source-class-sfGalleryImage.html#125-138" title="Go to source code">setThumbinit</a>( <span>integer <var>$thumbWidth</var></span>, <span>integer <var>$thumbHeight</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the image thumbnail width and height</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the image thumbnail width and height</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$thumbWidth</var></dt>
+					<dd><code>integer</code><br>$thumbWidth
+<p>The image thumbnail width</p>
+</dd>
+					<dt><var>$thumbHeight</var></dt>
+					<dd><code>integer</code><br>$thumbHeight
+<p>The image thumbnail height</p>
+</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getImageHeight" id="_getImageHeight">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getImageHeight">#</a>
+		<code><a href="source-class-sfGalleryImage.html#140-155" title="Go to source code">getImageHeight</a>( <span>string <var>$image</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the height of an image</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the height of an image</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$image</var></dt>
+					<dd><code>string</code><br>$image
+<p>The image object/file</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>the image height</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getImageWidth" id="_getImageWidth">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getImageWidth">#</a>
+		<code><a href="source-class-sfGalleryImage.html#157-172" title="Go to source code">getImageWidth</a>( <span>string <var>$image</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the width of an image</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the width of an image</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$image</var></dt>
+					<dd><code>string</code><br>$image
+<p>The image object/file</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>the image width</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="nameImage" id="_nameImage">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_nameImage">#</a>
+		<code><a href="source-class-sfGalleryImage.html#174-183" title="Go to source code">nameImage</a>( <span>string <var>$imgExtension</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the name of an image</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the name of an image</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$imgExtension</var></dt>
+					<dd><code>string</code><br>$imgExtension
+<p>The image extension e.g png</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The <b> new image name</b> is returned.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMessage" id="_getMessage">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMessage">#</a>
+		<code><a href="source-class-sfGalleryImage.html#185-193" title="Go to source code">getMessage</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the success of failure message of <code><a href="class-sfGalleryImage.html">sfGalleryImage</a></code></p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the success of failure message of <code><a href="class-sfGalleryImage.html">sfGalleryImage</a></code></p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The <b> success or failure </b> message is returned.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="resizeImage" id="_resizeImage">
+
+		<td class="attributes"><code>
+			 public static
+			image
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_resizeImage">#</a>
+		<code><a href="source-class-sfGalleryImage.html#195-286" title="Go to source code">resizeImage</a>( <span>string <var>$image</var></span>, <span>integer <var>$width</var></span>, <span>integer <var>$height</var></span>, <span>integer <var>$scale</var></span> )</code>
+
+		<div class="description short">
+			
+<p>resize an image with a with and height while scalling it so that the aspect
+ration remains the same</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>resize an image with a with and height while scalling it so that the aspect
+ration remains the same</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$image</var></dt>
+					<dd><code>string</code><br>$image
+<p>The image object/file</p>
+</dd>
+					<dt><var>$width</var></dt>
+					<dd><code>integer</code><br>$width
+<p>The image width</p>
+</dd>
+					<dt><var>$height</var></dt>
+					<dd><code>integer</code><br>$height
+<p>The image height</p>
+</dd>
+					<dt><var>$scale</var></dt>
+					<dd><code>integer</code><br>$scale
+<p>The image scale ratio</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>image</code><br>The <b>Resized</b> image on success.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="resizeThumbnailImage" id="_resizeThumbnailImage">
+
+		<td class="attributes"><code>
+			 public static
+			image
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_resizeThumbnailImage">#</a>
+		<code><a href="source-class-sfGalleryImage.html#288-383" title="Go to source code">resizeThumbnailImage</a>( <span>string <var>$ThumbImageName</var></span>, <span>string <var>$image</var></span>, <span>integer <var>$width</var></span>, <span>integer <var>$height</var></span>, <span>integer <var>$start_width</var></span>, <span>integer <var>$start_height</var></span>, <span>integer <var>$scale</var></span> )</code>
+
+		<div class="description short">
+			
+<p>resize/crop an thumbnail image with a with and height from a start height and
+start width while scalling it so that the aspect ratio remains the same</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>resize/crop an thumbnail image with a with and height from a start height and
+start width while scalling it so that the aspect ratio remains the same</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$ThumbImageName</var></dt>
+					<dd><code>string</code><br>$ThumbImageName
+<p>The thumbnail image file name</p>
+</dd>
+					<dt><var>$image</var></dt>
+					<dd><code>string</code><br>$image
+<p>The image object/file</p>
+</dd>
+					<dt><var>$width</var></dt>
+					<dd><code>integer</code><br>$width
+<p>The image width</p>
+</dd>
+					<dt><var>$height</var></dt>
+					<dd><code>integer</code><br>$height
+<p>The image height</p>
+</dd>
+					<dt><var>$start_width</var></dt>
+					<dd><code>integer</code><br>$start_width
+<p>The starting image width position</p>
+</dd>
+					<dt><var>$start_height</var></dt>
+					<dd><code>integer</code><br>$start_height
+<p>The starting image height position</p>
+</dd>
+					<dt><var>$scale</var></dt>
+					<dd><code>integer</code><br>$scale
+<p>The image scale ratio</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>image</code><br>The <b>Resized</b> thumbnail image on success.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="CreateThumb" id="_CreateThumb">
+
+		<td class="attributes"><code>
+			 public 
+			image
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_CreateThumb">#</a>
+		<code><a href="source-class-sfGalleryImage.html#385-402" title="Go to source code">CreateThumb</a>( <span>integer <var>$x1</var></span>, <span>integer <var>$y1</var></span>, <span>integer <var>$x2</var></span>, <span>integer <var>$y2</var></span>, <span>integer <var>$w</var></span>, <span>integer <var>$h</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Create a thumbnail given all the parameters shown below</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a thumbnail given all the parameters shown below</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$x1</var></dt>
+					<dd><code>integer</code><br>$x1
+<p>The image first x position x1</p>
+</dd>
+					<dt><var>$y1</var></dt>
+					<dd><code>integer</code><br>$y1
+<p>The image first y position y1</p>
+</dd>
+					<dt><var>$x2</var></dt>
+					<dd><code>integer</code><br>$x2
+<p>The image second x position x2</p>
+</dd>
+					<dt><var>$y2</var></dt>
+					<dd><code>integer</code><br>$y2
+<p>The image second y position y2</p>
+</dd>
+					<dt><var>$w</var></dt>
+					<dd><code>integer</code><br>$w
+<p>The image width</p>
+</dd>
+					<dt><var>$h</var></dt>
+					<dd><code>integer</code><br>$h
+<p>The image height</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>image</code><br>The <b>Resized</b> thumbnail image on success.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="TargetFileImageLoc" id="_TargetFileImageLoc">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_TargetFileImageLoc">#</a>
+		<code><a href="source-class-sfGalleryImage.html#404-412" title="Go to source code">TargetFileImageLoc</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the file name with path to the image</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the file name with path to the image</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The <b> filename </b> for target image is returned.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="TargetFileThumbLoc" id="_TargetFileThumbLoc">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_TargetFileThumbLoc">#</a>
+		<code><a href="source-class-sfGalleryImage.html#414-422" title="Go to source code">TargetFileThumbLoc</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the file name with path to the image thumbnail</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the file name with path to the image thumbnail</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The <b> filename </b> for target thumbnail image is returned.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="imageUploaded" id="_imageUploaded">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_imageUploaded">#</a>
+		<code><a href="source-class-sfGalleryImage.html#424-432" title="Go to source code">imageUploaded</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the trigger that determines if the image has been uploaded
+sucessfully</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the trigger that determines if the image has been uploaded
+sucessfully</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="thumbUploaded" id="_thumbUploaded">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_thumbUploaded">#</a>
+		<code><a href="source-class-sfGalleryImage.html#434-442" title="Go to source code">thumbUploaded</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the trigger that determines if the thumbnail image has been uploaded
+sucessfully</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the trigger that determines if the thumbnail image has been uploaded
+sucessfully</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="UploadImage" id="_UploadImage">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_UploadImage">#</a>
+		<code><a href="source-class-sfGalleryImage.html#444-568" title="Go to source code">UploadImage</a>( )</code>
+
+		<div class="description short">
+			
+<p>Upload an image size and resize it to default width</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Upload an image size and resize it to default width</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="m_FileName" id="$m_FileName">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#43" title="Go to source code"><var>$m_FileName</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_FileName" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_FileTmpName" id="$m_FileTmpName">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#44" title="Go to source code"><var>$m_FileTmpName</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_FileTmpName" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_FileSize" id="$m_FileSize">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#45" title="Go to source code"><var>$m_FileSize</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_FileSize" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_FileType" id="$m_FileType">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#46" title="Go to source code"><var>$m_FileType</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_FileType" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_FileBaseName" id="$m_FileBaseName">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#47" title="Go to source code"><var>$m_FileBaseName</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_FileBaseName" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_FileExtension" id="$m_FileExtension">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#48" title="Go to source code"><var>$m_FileExtension</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_FileExtension" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_MaxSize" id="$m_MaxSize">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#49" title="Go to source code"><var>$m_MaxSize</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_MaxSize" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_Message" id="$m_Message">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#50" title="Go to source code"><var>$m_Message</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_Message" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_Height" id="$m_Height">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#51" title="Go to source code"><var>$m_Height</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_Height" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_Weight" id="$m_Weight">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#52" title="Go to source code"><var>$m_Weight</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_Weight" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_TargetFileName" id="$m_TargetFileName">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#53" title="Go to source code"><var>$m_TargetFileName</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_TargetFileName" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_TargetFileImageLoc" id="$m_TargetFileImageLoc">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#54" title="Go to source code"><var>$m_TargetFileImageLoc</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_TargetFileImageLoc" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_TargetFileThumbLoc" id="$m_TargetFileThumbLoc">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#55" title="Go to source code"><var>$m_TargetFileThumbLoc</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_TargetFileThumbLoc" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_UploadImgDir" id="$m_UploadImgDir">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#56" title="Go to source code"><var>$m_UploadImgDir</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_UploadImgDir" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_UploadThumbDir" id="$m_UploadThumbDir">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#57" title="Go to source code"><var>$m_UploadThumbDir</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_UploadThumbDir" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_thumbWidth" id="$m_thumbWidth">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#58" title="Go to source code"><var>$m_thumbWidth</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_thumbWidth" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_thumbHeight" id="$m_thumbHeight">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#59" title="Go to source code"><var>$m_thumbHeight</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_thumbHeight" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_MaxImageWidth" id="$m_MaxImageWidth">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#60" title="Go to source code"><var>$m_MaxImageWidth</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_MaxImageWidth" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_File_is_Uploaded" id="$m_File_is_Uploaded">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#61" title="Go to source code"><var>$m_File_is_Uploaded</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_File_is_Uploaded" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_Thumb_is_Uploaded" id="$m_Thumb_is_Uploaded">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#62" title="Go to source code"><var>$m_Thumb_is_Uploaded</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_Thumb_is_Uploaded" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_errorCode" id="$m_errorCode">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#63" title="Go to source code"><var>$m_errorCode</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_errorCode" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_ImageExtList" id="$m_ImageExtList">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#64" title="Go to source code"><var>$m_ImageExtList</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_ImageExtList" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_ImageTypesList" id="$m_ImageTypesList">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-sfGalleryImage.html#65" title="Go to source code"><var>$m_ImageTypesList</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_ImageTypesList" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Snowflakes API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

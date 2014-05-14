@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class settingsStruct | Snowflakes</title>
+
+	<script type="text/javascript" src="resources/combined.js?774890837"></script>
+	<script type="text/javascript" src="elementlist.js?3838031492"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Config.html">Config</a></li>
+				<li><a href="class-databaseParam.html">databaseParam</a></li>
+				<li><a href="class-dataDirParam.html">dataDirParam</a></li>
+				<li><a href="class-eventStruct.html">eventStruct</a></li>
+				<li><a href="class-galleryStruct.html">galleryStruct</a></li>
+				<li><a href="class-migrationTable.html">migrationTable</a></li>
+				<li class="active"><a href="class-settingsStruct.html">settingsStruct</a></li>
+				<li><a href="class-sfConnect.html">sfConnect</a></li>
+				<li><a href="class-sfConnectInterface.html">sfConnectInterface</a></li>
+				<li><a href="class-sfGalleryImage.html">sfGalleryImage</a></li>
+				<li><a href="class-sfImageProcessor.html">sfImageProcessor</a></li>
+				<li><a href="class-sfLogError.html">sfLogError</a></li>
+				<li><a href="class-sfUtils.html">sfUtils</a></li>
+				<li><a href="class-sfUUID.html">sfUUID</a></li>
+				<li><a href="class-Snowflakes.html">Snowflakes</a></li>
+				<li><a href="class-snowflakeStruct.html">snowflakeStruct</a></li>
+				<li><a href="class-userStruct.html">userStruct</a></li>
+			</ul>
+
+
+
+
+
+			<h3>Functions</h3>
+			<ul>
+				<li><a href="function-create_progress.html">create_progress</a></li>
+				<li><a href="function-displayMap.html">displayMap</a></li>
+				<li><a href="function-get_data.html">get_data</a></li>
+				<li><a href="function-sendMsg.html" class="invalid">sendMsg</a></li>
+				<li><a href="function-update_progress.html">update_progress</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-None.html" title="Summary of None"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class settingsStruct</h1>
+
+
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		
+
+				<b>Author:</b>
+				Cyril Adelekan<br />
+		<b>Located at</b> <a href="source-class-settingsStruct.html#3528-3794" title="Go to source code">lib/sf.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="init" id="_init">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_init">#</a>
+		<code><a href="source-class-settingsStruct.html#3568-3579" title="Go to source code">init</a>( <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Initialize the settings struct by loading data from the config file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Initialize the settings struct by loading data from the config file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile the ini config file for snowflakes API</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="populate" id="_populate">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_populate">#</a>
+		<code><a href="source-class-settingsStruct.html#3581-3633" title="Go to source code">populate</a>( <span>array <var>$array</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Populate each member of <code><a href="class-settingsStruct.html">settingsStruct</a></code> given the input parameters</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Populate each member of <code><a href="class-settingsStruct.html">settingsStruct</a></code> given the input parameters</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$array</var></dt>
+					<dd><code>array</code><br>$array to be used to populate members of <code><a href="class-settingsStruct.html">settingsStruct</a></code></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setConfigItems" id="_setConfigItems">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setConfigItems">#</a>
+		<code><a href="source-class-settingsStruct.html#3635-3640" title="Go to source code">setConfigItems</a>( <span>mixed <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SethostName" id="_SethostName">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SethostName">#</a>
+		<code><a href="source-class-settingsStruct.html#3642-3645" title="Go to source code">SethostName</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetdbName" id="_SetdbName">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetdbName">#</a>
+		<code><a href="source-class-settingsStruct.html#3647-3650" title="Go to source code">SetdbName</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetdbType" id="_SetdbType">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetdbType">#</a>
+		<code><a href="source-class-settingsStruct.html#3652-3655" title="Go to source code">SetdbType</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetdbUsername" id="_SetdbUsername">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetdbUsername">#</a>
+		<code><a href="source-class-settingsStruct.html#3657-3660" title="Go to source code">SetdbUsername</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetdbPassword" id="_SetdbPassword">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetdbPassword">#</a>
+		<code><a href="source-class-settingsStruct.html#3662-3665" title="Go to source code">SetdbPassword</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="Setadmin_email" id="_Setadmin_email">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Setadmin_email">#</a>
+		<code><a href="source-class-settingsStruct.html#3667-3670" title="Go to source code">Setadmin_email</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SettimeZone" id="_SettimeZone">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SettimeZone">#</a>
+		<code><a href="source-class-settingsStruct.html#3672-3675" title="Go to source code">SettimeZone</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="Seturl" id="_Seturl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Seturl">#</a>
+		<code><a href="source-class-settingsStruct.html#3678-3681" title="Go to source code">Seturl</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="Setpath" id="_Setpath">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Setpath">#</a>
+		<code><a href="source-class-settingsStruct.html#3683-3686" title="Go to source code">Setpath</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetsfUrl" id="_SetsfUrl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetsfUrl">#</a>
+		<code><a href="source-class-settingsStruct.html#3688-3691" title="Go to source code">SetsfUrl</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetsfGalleryUrl" id="_SetsfGalleryUrl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetsfGalleryUrl">#</a>
+		<code><a href="source-class-settingsStruct.html#3693-3696" title="Go to source code">SetsfGalleryUrl</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetsfGalleryImgUrl" id="_SetsfGalleryImgUrl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetsfGalleryImgUrl">#</a>
+		<code><a href="source-class-settingsStruct.html#3698-3701" title="Go to source code">SetsfGalleryImgUrl</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetsfGalleryThumbUrl" id="_SetsfGalleryThumbUrl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetsfGalleryThumbUrl">#</a>
+		<code><a href="source-class-settingsStruct.html#3703-3706" title="Go to source code">SetsfGalleryThumbUrl</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetuploadGalleryDir" id="_SetuploadGalleryDir">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetuploadGalleryDir">#</a>
+		<code><a href="source-class-settingsStruct.html#3708-3711" title="Go to source code">SetuploadGalleryDir</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetgalleryImgDir" id="_SetgalleryImgDir">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetgalleryImgDir">#</a>
+		<code><a href="source-class-settingsStruct.html#3713-3716" title="Go to source code">SetgalleryImgDir</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetgalleryThumbDir" id="_SetgalleryThumbDir">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetgalleryThumbDir">#</a>
+		<code><a href="source-class-settingsStruct.html#3718-3721" title="Go to source code">SetgalleryThumbDir</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetthumbWidth" id="_SetthumbWidth">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetthumbWidth">#</a>
+		<code><a href="source-class-settingsStruct.html#3723-3726" title="Go to source code">SetthumbWidth</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetthumbHeight" id="_SetthumbHeight">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetthumbHeight">#</a>
+		<code><a href="source-class-settingsStruct.html#3728-3731" title="Go to source code">SetthumbHeight</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetmaxImageWidth" id="_SetmaxImageWidth">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetmaxImageWidth">#</a>
+		<code><a href="source-class-settingsStruct.html#3733-3736" title="Go to source code">SetmaxImageWidth</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="Setresources" id="_Setresources">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Setresources">#</a>
+		<code><a href="source-class-settingsStruct.html#3738-3741" title="Go to source code">Setresources</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetimageExtList" id="_SetimageExtList">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetimageExtList">#</a>
+		<code><a href="source-class-settingsStruct.html#3743-3746" title="Go to source code">SetimageExtList</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetimageTypesList" id="_SetimageTypesList">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetimageTypesList">#</a>
+		<code><a href="source-class-settingsStruct.html#3748-3751" title="Go to source code">SetimageTypesList</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetsnowflakesResultUrl" id="_SetsnowflakesResultUrl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetsnowflakesResultUrl">#</a>
+		<code><a href="source-class-settingsStruct.html#3753-3756" title="Go to source code">SetsnowflakesResultUrl</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetsnowflakesOutUrl" id="_SetsnowflakesOutUrl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetsnowflakesOutUrl">#</a>
+		<code><a href="source-class-settingsStruct.html#3758-3761" title="Go to source code">SetsnowflakesOutUrl</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SeteventsResultUrl" id="_SeteventsResultUrl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SeteventsResultUrl">#</a>
+		<code><a href="source-class-settingsStruct.html#3763-3766" title="Go to source code">SeteventsResultUrl</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SeteventsOutputUrl" id="_SeteventsOutputUrl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SeteventsOutputUrl">#</a>
+		<code><a href="source-class-settingsStruct.html#3768-3771" title="Go to source code">SeteventsOutputUrl</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetgalleryResultUrl" id="_SetgalleryResultUrl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetgalleryResultUrl">#</a>
+		<code><a href="source-class-settingsStruct.html#3773-3776" title="Go to source code">SetgalleryResultUrl</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetgalleryOutUrl" id="_SetgalleryOutUrl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetgalleryOutUrl">#</a>
+		<code><a href="source-class-settingsStruct.html#3778-3782" title="Go to source code">SetgalleryOutUrl</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetmaxImageSize" id="_SetmaxImageSize">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetmaxImageSize">#</a>
+		<code><a href="source-class-settingsStruct.html#3784-3787" title="Go to source code">SetmaxImageSize</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setCustom" id="_setCustom">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setCustom">#</a>
+		<code><a href="source-class-settingsStruct.html#3789-3792" title="Go to source code">setCustom</a>( <span>mixed <var>$section</var></span>, <span>mixed <var>$tag</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="m_hostName" id="$m_hostName">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3531" title="Go to source code"><var>$m_hostName</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_hostName" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_dbName" id="$m_dbName">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3532" title="Go to source code"><var>$m_dbName</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_dbName" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_dbType" id="$m_dbType">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3533" title="Go to source code"><var>$m_dbType</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_dbType" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_dbUsername" id="$m_dbUsername">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3534" title="Go to source code"><var>$m_dbUsername</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_dbUsername" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_dbPassword" id="$m_dbPassword">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3535" title="Go to source code"><var>$m_dbPassword</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_dbPassword" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_key" id="$m_key">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3536" title="Go to source code"><var>$m_key</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_key" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_admin_email" id="$m_admin_email">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3537" title="Go to source code"><var>$m_admin_email</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_admin_email" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_time_zone" id="$m_time_zone">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3538" title="Go to source code"><var>$m_time_zone</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_time_zone" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_url" id="$m_url">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3540" title="Go to source code"><var>$m_url</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_url" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_sfUrl" id="$m_sfUrl">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3541" title="Go to source code"><var>$m_sfUrl</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_sfUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_loginUrl" id="$m_loginUrl">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3542" title="Go to source code"><var>$m_loginUrl</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_loginUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_flakeItUrl" id="$m_flakeItUrl">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3543" title="Go to source code"><var>$m_flakeItUrl</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_flakeItUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_sfGalleryUrl" id="$m_sfGalleryUrl">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3544" title="Go to source code"><var>$m_sfGalleryUrl</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_sfGalleryUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_sfGalleryImgUrl" id="$m_sfGalleryImgUrl">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3545" title="Go to source code"><var>$m_sfGalleryImgUrl</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_sfGalleryImgUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_sfGalleryThumbUrl" id="$m_sfGalleryThumbUrl">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3546" title="Go to source code"><var>$m_sfGalleryThumbUrl</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_sfGalleryThumbUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_thumbWidth" id="$m_thumbWidth">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3547" title="Go to source code"><var>$m_thumbWidth</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_thumbWidth" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_thumbHeight" id="$m_thumbHeight">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3548" title="Go to source code"><var>$m_thumbHeight</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_thumbHeight" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_maxImageWidth" id="$m_maxImageWidth">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3549" title="Go to source code"><var>$m_maxImageWidth</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_maxImageWidth" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_imageExtList" id="$m_imageExtList">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3550" title="Go to source code"><var>$m_imageExtList</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_imageExtList" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_imageTypesList" id="$m_imageTypesList">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3551" title="Go to source code"><var>$m_imageTypesList</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_imageTypesList" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_snowflakesResultUrl" id="$m_snowflakesResultUrl">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3552" title="Go to source code"><var>$m_snowflakesResultUrl</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_snowflakesResultUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_snowflakesOutUrl" id="$m_snowflakesOutUrl">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3553" title="Go to source code"><var>$m_snowflakesOutUrl</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_snowflakesOutUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_eventsResultUrl" id="$m_eventsResultUrl">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3554" title="Go to source code"><var>$m_eventsResultUrl</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_eventsResultUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_eventsOutputUrl" id="$m_eventsOutputUrl">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3555" title="Go to source code"><var>$m_eventsOutputUrl</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_eventsOutputUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_galleryResultUrl" id="$m_galleryResultUrl">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3556" title="Go to source code"><var>$m_galleryResultUrl</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_galleryResultUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_galleryOutUrl" id="$m_galleryOutUrl">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3557" title="Go to source code"><var>$m_galleryOutUrl</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_galleryOutUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_maxImageSize" id="$m_maxImageSize">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3558" title="Go to source code"><var>$m_maxImageSize</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_maxImageSize" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_logdir" id="$m_logdir">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3560" title="Go to source code"><var>$m_logdir</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_logdir" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_path" id="$m_path">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3561" title="Go to source code"><var>$m_path</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_path" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_resources" id="$m_resources">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3562" title="Go to source code"><var>$m_resources</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_resources" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_uploadGalleryDir" id="$m_uploadGalleryDir">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3563" title="Go to source code"><var>$m_uploadGalleryDir</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_uploadGalleryDir" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_galleryImgDir" id="$m_galleryImgDir">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3564" title="Go to source code"><var>$m_galleryImgDir</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_galleryImgDir" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_galleryThumbDir" id="$m_galleryThumbDir">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3565" title="Go to source code"><var>$m_galleryThumbDir</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_galleryThumbDir" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_settingsarray" id="$m_settingsarray">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-settingsStruct.html#3566" title="Go to source code"><var>$m_settingsarray</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_settingsarray" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Snowflakes API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

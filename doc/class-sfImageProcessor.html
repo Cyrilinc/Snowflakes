@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class sfImageProcessor | Snowflakes</title>
+
+	<script type="text/javascript" src="resources/combined.js?774890837"></script>
+	<script type="text/javascript" src="elementlist.js?3838031492"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Config.html">Config</a></li>
+				<li><a href="class-databaseParam.html">databaseParam</a></li>
+				<li><a href="class-dataDirParam.html">dataDirParam</a></li>
+				<li><a href="class-eventStruct.html">eventStruct</a></li>
+				<li><a href="class-galleryStruct.html">galleryStruct</a></li>
+				<li><a href="class-migrationTable.html">migrationTable</a></li>
+				<li><a href="class-settingsStruct.html">settingsStruct</a></li>
+				<li><a href="class-sfConnect.html">sfConnect</a></li>
+				<li><a href="class-sfConnectInterface.html">sfConnectInterface</a></li>
+				<li><a href="class-sfGalleryImage.html">sfGalleryImage</a></li>
+				<li class="active"><a href="class-sfImageProcessor.html">sfImageProcessor</a></li>
+				<li><a href="class-sfLogError.html">sfLogError</a></li>
+				<li><a href="class-sfUtils.html">sfUtils</a></li>
+				<li><a href="class-sfUUID.html">sfUUID</a></li>
+				<li><a href="class-Snowflakes.html">Snowflakes</a></li>
+				<li><a href="class-snowflakeStruct.html">snowflakeStruct</a></li>
+				<li><a href="class-userStruct.html">userStruct</a></li>
+			</ul>
+
+
+
+
+
+			<h3>Functions</h3>
+			<ul>
+				<li><a href="function-create_progress.html">create_progress</a></li>
+				<li><a href="function-displayMap.html">displayMap</a></li>
+				<li><a href="function-get_data.html">get_data</a></li>
+				<li><a href="function-sendMsg.html" class="invalid">sendMsg</a></li>
+				<li><a href="function-update_progress.html">update_progress</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-None.html" title="Summary of None"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class sfImageProcessor</h1>
+
+
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		
+
+				<b>Author:</b>
+				Cyril Adelekan<br />
+		<b>Located at</b> <a href="source-class-sfImageProcessor.html#572-1049" title="Go to source code">lib/sfImageProcessor.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="UploadMultiImages" id="_UploadMultiImages">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_UploadMultiImages">#</a>
+		<code><a href="source-class-sfImageProcessor.html#574-625" title="Go to source code">UploadMultiImages</a>( <span>array <var>$imageFiles</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>string <var>&amp; $message</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Upload a multiple images image to the upload directory for this API</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Upload a multiple images image to the upload directory for this API</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$imageFiles</var></dt>
+					<dd><code>array</code><br>$imageFiles The image information each contains [name, tmp_name,size and type]</dd>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message
+<p>The message to be returned as per the success or failure of the upload.</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br><b>Success message</b> on success or <b>failure message</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="uploadSingleImage" id="_uploadSingleImage">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_uploadSingleImage">#</a>
+		<code><a href="source-class-sfImageProcessor.html#628-685" title="Go to source code">uploadSingleImage</a>( <span>array <var>$imageFile</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>string <var>&amp; $imageLoc</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>string <var>&amp; $message</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>boolean <var>$forGallery</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Upload a single image to the upload directory for this API</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Upload a single image to the upload directory for this API</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$imageFile</var></dt>
+					<dd><code>array</code><br>$imageFile The image information [name, tmp_name,size and type]</dd>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+					<dt><var>$imageLoc</var></dt>
+					<dd><code>string</code><br>$imageLoc The new image location after upload to be returned</dd>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message
+<p>The message to be returned as per the success or failure of the upload.</p>
+</dd>
+					<dt><var>$forGallery</var></dt>
+					<dd><code>boolean</code><br>$forGallery
+<p>The indication that the image upload is for a gallery or not. If set to true
+a thumbnail file will be created also in the API's image upload directory, else
+a single image is uploaded.</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="saveThumbImage" id="_saveThumbImage">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_saveThumbImage">#</a>
+		<code><a href="source-class-sfImageProcessor.html#687-717" title="Go to source code">saveThumbImage</a>( )</code>
+
+		<div class="description short">
+			
+<p>save image thumbnail given the dimensions of the thumbnail on an original
+image</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>save image thumbnail given the dimensions of the thumbnail on an original
+image</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="ResetAll" id="_ResetAll">
+
+		<td class="attributes"><code>
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_ResetAll">#</a>
+		<code><a href="source-class-sfImageProcessor.html#719-737" title="Go to source code">ResetAll</a>( )</code>
+
+		<div class="description short">
+			
+<p>Resets all image session</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Resets all image session</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="RemoveAll" id="_RemoveAll">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_RemoveAll">#</a>
+		<code><a href="source-class-sfImageProcessor.html#739-757" title="Go to source code">RemoveAll</a>( )</code>
+
+		<div class="description short">
+			
+<p>Removes all images from the upload directory in a session and during a
+session</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Removes all images from the upload directory in a session and during a
+session</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="RemoveOne" id="_RemoveOne">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_RemoveOne">#</a>
+		<code><a href="source-class-sfImageProcessor.html#759-785" title="Go to source code">RemoveOne</a>( <span>integer <var>$Index</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Removes one image from the upload directory during a session</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Removes one image from the upload directory during a session</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$Index</var></dt>
+					<dd><code>integer</code><br>$index The image index in the image session variables</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="deleteFileDBGallery" id="_deleteFileDBGallery">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_deleteFileDBGallery">#</a>
+		<code><a href="source-class-sfImageProcessor.html#787-825" title="Go to source code">deleteFileDBGallery</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$galleryID</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Delete a specific gallery and all its associated files in the upload
+directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Delete a specific gallery and all its associated files in the upload
+directory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$galleryID</var></dt>
+					<dd><code>integer</code><br>$galleryID The gallery identifier to point to data to delete</dd>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="resizeGalleryImages" id="_resizeGalleryImages">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_resizeGalleryImages">#</a>
+		<code><a href="source-class-sfImageProcessor.html#827-877" title="Go to source code">resizeGalleryImages</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Resizes images stored in the gallery tables/Gallery Directory NOTE: This is a
+maintenance tool</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Resizes images stored in the gallery tables/Gallery Directory NOTE: This is a
+maintenance tool</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>number of image resized</b> on success or <b>FALSE</b> otherwise.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="makeCover" id="_makeCover">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_makeCover">#</a>
+		<code><a href="source-class-sfImageProcessor.html#879-900" title="Go to source code">makeCover</a>( <span>integer <var>$index</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Makes an image in the session the cover image of the album</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Makes an image in the session the cover image of the album</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$index</var></dt>
+					<dd><code>integer</code><br>$index The image index in the image session variables</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="cleanUploadDir" id="_cleanUploadDir">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_cleanUploadDir">#</a>
+		<code><a href="source-class-sfImageProcessor.html#902-1008" title="Go to source code">cleanUploadDir</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Clean up upload directory and remove files that are not in all the tables of
+the API. NOTE: This is a maintenance tool</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Clean up upload directory and remove files that are not in all the tables of
+the API. NOTE: This is a maintenance tool</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>number of image cleaned</b> on success or <b>FALSE</b> otherwise.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="UndoChanges" id="_UndoChanges">
+
+		<td class="attributes"><code>
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_UndoChanges">#</a>
+		<code><a href="source-class-sfImageProcessor.html#1010-1047" title="Go to source code">UndoChanges</a>( )</code>
+
+		<div class="description short">
+			
+<p>Undo changes made to files recorded in session This is still a prototype</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Undo changes made to files recorded in session This is still a prototype</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Snowflakes API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

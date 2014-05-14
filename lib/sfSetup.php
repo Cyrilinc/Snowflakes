@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Description of Snowflakes
+ * Snowflakes is used to set up Snowflakes API
+ * 
+ * @author Cyril Adelekan
+ */
+
 include_once '../lib/sf.php';
 include_once '../lib/sfConnect.php';
 include_once '../config/Config.php';

@@ -4,7 +4,7 @@
  * Description of sfConnect
  * sfConnect is used to connect to the database,
  * 
- * @author cyrildavids
+ * @author Cyril Adelekan
  */
 class sfConnect {
 

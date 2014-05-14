@@ -1,0 +1,3374 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class sfUtils | Snowflakes</title>
+
+	<script type="text/javascript" src="resources/combined.js?774890837"></script>
+	<script type="text/javascript" src="elementlist.js?3838031492"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Config.html">Config</a></li>
+				<li><a href="class-databaseParam.html">databaseParam</a></li>
+				<li><a href="class-dataDirParam.html">dataDirParam</a></li>
+				<li><a href="class-eventStruct.html">eventStruct</a></li>
+				<li><a href="class-galleryStruct.html">galleryStruct</a></li>
+				<li><a href="class-migrationTable.html">migrationTable</a></li>
+				<li><a href="class-settingsStruct.html">settingsStruct</a></li>
+				<li><a href="class-sfConnect.html">sfConnect</a></li>
+				<li><a href="class-sfConnectInterface.html">sfConnectInterface</a></li>
+				<li><a href="class-sfGalleryImage.html">sfGalleryImage</a></li>
+				<li><a href="class-sfImageProcessor.html">sfImageProcessor</a></li>
+				<li><a href="class-sfLogError.html">sfLogError</a></li>
+				<li class="active"><a href="class-sfUtils.html">sfUtils</a></li>
+				<li><a href="class-sfUUID.html">sfUUID</a></li>
+				<li><a href="class-Snowflakes.html">Snowflakes</a></li>
+				<li><a href="class-snowflakeStruct.html">snowflakeStruct</a></li>
+				<li><a href="class-userStruct.html">userStruct</a></li>
+			</ul>
+
+
+
+
+
+			<h3>Functions</h3>
+			<ul>
+				<li><a href="function-create_progress.html">create_progress</a></li>
+				<li><a href="function-displayMap.html">displayMap</a></li>
+				<li><a href="function-get_data.html">get_data</a></li>
+				<li><a href="function-sendMsg.html" class="invalid">sendMsg</a></li>
+				<li><a href="function-update_progress.html">update_progress</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-None.html" title="Summary of None"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class sfUtils</h1>
+
+
+	<div class="description">
+	
+<p>Miscellaneous utility methods.</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		<b>Final</b><br />
+		
+		
+		
+
+				<b>Author:</b>
+				Cyril Adelekan<br />
+		<b>Located at</b> <a href="source-class-sfUtils.html#1241-3418" title="Go to source code">lib/sf.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="init" id="_init">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_init">#</a>
+		<code><a href="source-class-sfUtils.html#1250-1261" title="Go to source code">init</a>( )</code>
+
+		<div class="description short">
+			
+<p>System config.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>System config.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="handleException" id="_handleException">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_handleException">#</a>
+		<code><a href="source-class-sfUtils.html#1263-1278" title="Go to source code">handleException</a>( <span><code><a href="class-Exception.html">Exception</a></code> <var>$ex</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Exception handler.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Exception handler.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$ex</var></dt>
+					<dd><code><code><a href="class-Exception.html">Exception</a></code></code><br>$ex The exception to be handled <code><a href="class-Exception.html">Exception</a></code></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createLink" id="_createLink">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createLink">#</a>
+		<code><a href="source-class-sfUtils.html#1280-1293" title="Go to source code">createLink</a>( <span>string <var>$page</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Generate link.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Generate link.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$page</var></dt>
+					<dd><code>string</code><br>$page target page</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params page parameters</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>string created from page and parameters.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="formatDate" id="_formatDate">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_formatDate">#</a>
+		<code><a href="source-class-sfUtils.html#1295-1307" title="Go to source code">formatDate</a>( <span><code><a href="class-DateTime.html">DateTime</a></code> <var>$date</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Format date.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Format date.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$date</var></dt>
+					<dd><code><code><a href="class-DateTime.html">DateTime</a></code></code><br>$date date to be formatted</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>formatted date<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="formatDateTime" id="_formatDateTime">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_formatDateTime">#</a>
+		<code><a href="source-class-sfUtils.html#1309-1321" title="Go to source code">formatDateTime</a>( <span><code><a href="class-DateTime.html">DateTime</a></code> <var>$date</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Format date and time.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Format date and time.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$date</var></dt>
+					<dd><code><code><a href="class-DateTime.html">DateTime</a></code></code><br>$date date to be formatted</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>formatted date and time<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="redirect" id="_redirect">
+
+		<td class="attributes"><code>
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_redirect">#</a>
+		<code><a href="source-class-sfUtils.html#1323-1332" title="Go to source code">redirect</a>( <span>type <var>$page</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Redirect to the given page.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Redirect to the given page.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$page</var></dt>
+					<dd><code>type</code><br>$page target page</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params page parameters</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getUrlParam" id="_getUrlParam">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getUrlParam">#</a>
+		<code><a href="source-class-sfUtils.html#1334-1345" title="Go to source code">getUrlParam</a>( <span>mixed <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get value of the URL param.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get value of the URL param.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>parameter value<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>NotFoundException</code><br>if the param is not found in the URL<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="capitalize" id="_capitalize">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_capitalize">#</a>
+		<code><a href="source-class-sfUtils.html#1347-1356" title="Go to source code">capitalize</a>( <span>string <var>$string</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Capitalize the first letter of the given string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Capitalize the first letter of the given string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$string</var></dt>
+					<dd><code>string</code><br>$string string to be capitalized</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>capitalized string<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="escape" id="_escape">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_escape">#</a>
+		<code><a href="source-class-sfUtils.html#1358-1371" title="Go to source code">escape</a>( <span>string <var>$string</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Escape the given string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Escape the given string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$string</var></dt>
+					<dd><code>string</code><br>$string string to be escaped</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>escaped string<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sfescape" id="_sfescape">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sfescape">#</a>
+		<code><a href="source-class-sfUtils.html#1373-1387" title="Go to source code">sfescape</a>( <span>string <var>$string</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Escape the given string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Escape the given string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$string</var></dt>
+					<dd><code>string</code><br>$string string to be escaped</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>escaped string<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="curPageURL" id="_curPageURL">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_curPageURL">#</a>
+		<code><a href="source-class-sfUtils.html#1389-1410" title="Go to source code">curPageURL</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the current page URL</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the current page URL</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>current page URL<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isEmpty" id="_isEmpty">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isEmpty">#</a>
+		<code><a href="source-class-sfUtils.html#1412-1421" title="Go to source code">isEmpty</a>( <span>string <var>$data</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the data is empty or not</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the data is empty or not</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd><code>string</code><br>$data the data to be cheked</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="CreateDirectory" id="_CreateDirectory">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_CreateDirectory">#</a>
+		<code><a href="source-class-sfUtils.html#1423-1446" title="Go to source code">CreateDirectory</a>( <span>string <var>$Dir</var></span>, <span>string <var>$permissions</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Create a direcory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a direcory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$Dir</var></dt>
+					<dd><code>string</code><br>$Dir The directory to create</dd>
+					<dt><var>$permissions</var></dt>
+					<dd><code>string</code><br>$permissions The permissions given to the directory</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="formatSizeUnits" id="_formatSizeUnits">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_formatSizeUnits">#</a>
+		<code><a href="source-class-sfUtils.html#1448-1471" title="Go to source code">formatSizeUnits</a>( <span>string <var>$bytes</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Calulate the approprate value in GB,MB,KB ... given the amount of bytes</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Calulate the approprate value in GB,MB,KB ... given the amount of bytes</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bytes</var></dt>
+					<dd><code>string</code><br>$bytes the Bytes used to calculate the value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>the value of the byte in GB,MB,KB.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toByteSize" id="_toByteSize">
+
+		<td class="attributes"><code>
+			 public static
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toByteSize">#</a>
+		<code><a href="source-class-sfUtils.html#1473-1494" title="Go to source code">toByteSize</a>( <span>string <var>$bytevalue</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Calulate the approprate value in bytes given the amount of GB,MB,KB...</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Calulate the approprate value in bytes given the amount of GB,MB,KB...</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bytevalue</var></dt>
+					<dd><code>string</code><br>$bytevalue the value in GB,MB,KB....</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>the value of the GB,MB,KB... in bytes.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeElement" id="_removeElement">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeElement">#</a>
+		<code><a href="source-class-sfUtils.html#1496-1511" title="Go to source code">removeElement</a>( <span>array <var>&amp; $array</var></span>, <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Remove an element from an array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove an element from an array</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$array</var></dt>
+					<dd><code>array</code><br>$array the array to remove a key from</dd>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key the key to remove</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="Deletefile" id="_Deletefile">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Deletefile">#</a>
+		<code><a href="source-class-sfUtils.html#1513-1536" title="Go to source code">Deletefile</a>( <span>string <var>$file</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Delete a file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Delete a file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$file</var></dt>
+					<dd><code>string</code><br>$file the file path to delete</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="UserLevelName" id="_UserLevelName">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_UserLevelName">#</a>
+		<code><a href="source-class-sfUtils.html#1538-1568" title="Go to source code">UserLevelName</a>( <span>integer <var>$number</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get a user level name by a given number</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get a user level name by a given number</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$number</var></dt>
+					<dd><code>integer</code><br>$number the user level number</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br><b>User Level name</b> on success or <b>nothing</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="todaysDate" id="_todaysDate">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_todaysDate">#</a>
+		<code><a href="source-class-sfUtils.html#1570-1577" title="Go to source code">todaysDate</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get todays date time</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get todays date time</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>the current date time.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="TodaysDate7" id="_TodaysDate7">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_TodaysDate7">#</a>
+		<code><a href="source-class-sfUtils.html#1579-1586" title="Go to source code">TodaysDate7</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get 7 days date time from current date time</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get 7 days date time from current date time</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>the 7 days date time from current date time.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="maxDays" id="_maxDays">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_maxDays">#</a>
+		<code><a href="source-class-sfUtils.html#1588-1595" title="Go to source code">maxDays</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get maximum days in this month</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get maximum days in this month</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>the maximum days in this month.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="TodaysDateMonth" id="_TodaysDateMonth">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_TodaysDateMonth">#</a>
+		<code><a href="source-class-sfUtils.html#1597-1604" title="Go to source code">TodaysDateMonth</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get a month's date time from current date time</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get a month's date time from current date time</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>the month's date time from current date time.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="TodayDateThreeMonths" id="_TodayDateThreeMonths">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_TodayDateThreeMonths">#</a>
+		<code><a href="source-class-sfUtils.html#1606-1613" title="Go to source code">TodayDateThreeMonths</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get three month's date time from current date time</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get three month's date time from current date time</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>three month's date time from current date time.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="TodayDateSixMonths" id="_TodayDateSixMonths">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_TodayDateSixMonths">#</a>
+		<code><a href="source-class-sfUtils.html#1615-1622" title="Go to source code">TodayDateSixMonths</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get six month's date time from current date time</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get six month's date time from current date time</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>six month's date time from current date time.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAuthorized" id="_isAuthorized">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isAuthorized">#</a>
+		<code><a href="source-class-sfUtils.html#1624-1655" title="Go to source code">isAuthorized</a>( <span>mixed <var>$strUsers</var></span>, <span>mixed <var>$strGroups</var></span>, <span>mixed <var>$UserName</var></span>, <span>mixed <var>$UserGroup</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Restrict Access To a Page: Grant or deny access to this page</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Restrict Access To a Page: Grant or deny access to this page</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on valid user or <b>FALSE</b> on invalid user.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="UUID" id="_UUID">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_UUID">#</a>
+		<code><a href="source-class-sfUtils.html#1657-1678" title="Go to source code">UUID</a>( )</code>
+
+		<div class="description short">
+			
+<p>This function crates a UUID, Which is usually 32 in length with 4 '-'.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>This function crates a UUID, Which is usually 32 in length with 4 '-'.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>UUID String.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="GetSQLValueString" id="_GetSQLValueString">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_GetSQLValueString">#</a>
+		<code><a href="source-class-sfUtils.html#1680-1705" title="Go to source code">GetSQLValueString</a>( <span>mixed <var>$theValue</var></span>, <span>mixed <var>$theType</var></span>, <span>mixed <var>$theDefinedValue</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>mixed <var>$theNotDefinedValue</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the sql escaped version of the value passed in depend the data type of
+the value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the sql escaped version of the value passed in depend the data type of
+the value</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>database compactible String.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getClientIp" id="_getClientIp">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getClientIp">#</a>
+		<code><a href="source-class-sfUtils.html#1707-1730" title="Go to source code">getClientIp</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the client IP address</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the client IP address</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>the client IP address.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="validateFiterInput" id="_validateFiterInput">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_validateFiterInput">#</a>
+		<code><a href="source-class-sfUtils.html#1732-1780" title="Go to source code">validateFiterInput</a>( <span>integer <var>$INPUT</var></span>, <span>string <var>$tag</var></span>, <span>integer <var>$FILTER_VALIDATE</var></span> )</code>
+
+		<div class="description short">
+			
+<p>validateFiterInput is used to validate data entered by user</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>validateFiterInput is used to validate data entered by user</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$INPUT</var></dt>
+					<dd><code>integer</code><br>$INPUT
+<p>One of <b>INPUT_GET</b>, <b>INPUT_POST</b>, <b>INPUT_COOKIE</b>,
+<b>INPUT_SERVER</b>, or <b>INPUT_ENV</b>.</p>
+</dd>
+					<dt><var>$tag</var></dt>
+					<dd><code>string</code><br>$tag
+<p>Name of a variable to get.</p>
+</dd>
+					<dt><var>$FILTER_VALIDATE</var></dt>
+					<dd><code>integer</code><br>$FILTER_VALIDATE
+<p>The ID of the filter to apply. The manual page lists the available
+filters.</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br><b>TRUE</b> on valid input or <b>FALSE</b> on invalid input.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createSfLink" id="_createSfLink">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createSfLink">#</a>
+		<code><a href="source-class-sfUtils.html#1782-1818" title="Go to source code">createSfLink</a>( <span>string <var>$type</var></span>, <span>string <var>$id</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>createSfLink is used to Crate a snowflakes link for an interal snowflake,
+gallery,event,or user link when generating a notifications and user activities.
+e.g 12:12 am Cyrilinc published a gallery: 'Cyrilinc' will be linked to a user
+that is called 'Cyrilinc' and 'gallery' will be linked to a gallery internally
+so that when they are both clicked, the data will be shown to the user 'Cyrilinc
+as a user' and the 'gallery' the activity log is referring to.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>createSfLink is used to Crate a snowflakes link for an interal snowflake,
+gallery,event,or user link when generating a notifications and user activities.
+e.g 12:12 am Cyrilinc published a gallery: 'Cyrilinc' will be linked to a user
+that is called 'Cyrilinc' and 'gallery' will be linked to a gallery internally
+so that when they are both clicked, the data will be shown to the user 'Cyrilinc
+as a user' and the 'gallery' the activity log is referring to.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$type</var></dt>
+					<dd><code>string</code><br>$type
+<p>The link type to create</p>
+</dd>
+					<dt><var>$id</var></dt>
+					<dd><code>string</code><br>$id
+<p>The identifier of the type</p>
+</dd>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The appropriate link given the type.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendMsg" id="_sendMsg">
+
+		<td class="attributes"><code>
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendMsg">#</a>
+		<code><a href="source-class-sfUtils.html#1820-1835" title="Go to source code">sendMsg</a>( <span>string <var>$id</var></span>, <span>string <var>$msg</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Constructs the SSE data format and flushes that data to the client.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructs the SSE data format and flushes that data to the client.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$id</var></dt>
+					<dd><code>string</code><br>$id Timestamp/id of this connection.</dd>
+					<dt><var>$msg</var></dt>
+					<dd><code>string</code><br>$msg Line of text that should be transmitted.</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getActivities" id="_getActivities">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getActivities">#</a>
+		<code><a href="source-class-sfUtils.html#1837-1889" title="Go to source code">getActivities</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$userName</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>integer <var>$limitstart</var> = <span class="php-num">0</span></span>, <span>integer <var>$limitend</var> = <span class="php-num">10</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Gets a formatted/Structured and linked html style of the activitied of a
+user.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Gets a formatted/Structured and linked html style of the activitied of a
+user.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$userName</var></dt>
+					<dd><code>string</code><br>$userName <code><a href="class-userStruct.html">userStruct</a></code> the user name of the user who's activity is to be
+gotten</dd>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+					<dt><var>$limitstart</var></dt>
+					<dd><code>integer</code><br>$limitstart
+<p>The index of activity to start from</p>
+</dd>
+					<dt><var>$limitend</var></dt>
+					<dd><code>integer</code><br>$limitend
+<p>The index of activity to end to</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The formatted/Structured and linked html style of the activitied of a user.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="searchString" id="_searchString">
+
+		<td class="attributes"><code>
+			 public static
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_searchString">#</a>
+		<code><a href="source-class-sfUtils.html#1891-1974" title="Go to source code">searchString</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$searchString</var></span>, <span>string <var>$filter</var> = <span class="php-quote">&quot;snowflakes&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Search the API database tables for user entered string .</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Search the API database tables for user entered string .</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$searchString</var></dt>
+					<dd><code>string</code><br>$searchString
+<p>The string to look for</p>
+</dd>
+					<dt><var>$filter</var></dt>
+					<dd><code>string</code><br>$filter
+<p>filter by API type i.e snowflakes, gallery, events and users</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>The array of the results found in the API database tables.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="userExits" id="_userExits">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_userExits">#</a>
+		<code><a href="source-class-sfUtils.html#1976-1993" title="Go to source code">userExits</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$username</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Checkes if user exists in the API users database table.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checkes if user exists in the API users database table.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$username</var></dt>
+					<dd><code>string</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the user name to check</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> if user exists or <b>FALSE</b> otherwise.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="forgottenPassword" id="_forgottenPassword">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_forgottenPassword">#</a>
+		<code><a href="source-class-sfUtils.html#1995-2028" title="Go to source code">forgottenPassword</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$email</var></span>, <span>string <var>$sender</var></span>, <span>string <var>$snowflakesUrl</var></span>, <span>string <var>$errmsg</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>checks user email on request of forgotten password and sends the user a link
+to reset the password by email</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>checks user email on request of forgotten password and sends the user a link
+to reset the password by email</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$email</var></dt>
+					<dd><code>string</code><br>$email the email of the user requesting a password reset</dd>
+					<dt><var>$sender</var></dt>
+					<dd><code>string</code><br>$sender the sender (usally system administrator email)</dd>
+					<dt><var>$snowflakesUrl</var></dt>
+					<dd><code>string</code><br>$snowflakesUrl the snowflakes url</dd>
+					<dt><var>$errmsg</var></dt>
+					<dd><code>string</code><br>$errmsg the error message</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="requestResetPassWord" id="_requestResetPassWord">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_requestResetPassWord">#</a>
+		<code><a href="source-class-sfUtils.html#2030-2060" title="Go to source code">requestResetPassWord</a>( <span><code><a href="class-userStruct.html">userStruct</a></code> <var>$userStruct</var></span>, <span>string <var>$sender</var></span>, <span>string <var>$snowflakesUrl</var></span> )</code>
+
+		<div class="description short">
+			
+<p>process a user's request for a password reset after password is forgotten by
+user</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>process a user's request for a password reset after password is forgotten by
+user</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$userStruct</var></dt>
+					<dd><code><code><a href="class-userStruct.html">userStruct</a></code></code><br>$userStruct <code><a href="class-userStruct.html">userStruct</a></code> a struct filled with user information</dd>
+					<dt><var>$sender</var></dt>
+					<dd><code>string</code><br>$sender the sender (usally system administrator email)</dd>
+					<dt><var>$snowflakesUrl</var></dt>
+					<dd><code>string</code><br>$snowflakesUrl the snowflakes url</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="resetPassword" id="_resetPassword">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_resetPassword">#</a>
+		<code><a href="source-class-sfUtils.html#2062-2083" title="Go to source code">resetPassword</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$password</var></span>, <span>string <var>$oldResetLink</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Reset the user passowrd given the new password and the reset link</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Reset the user passowrd given the new password and the reset link</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$password</var></dt>
+					<dd><code>string</code><br>$password <code><a href="class-userStruct.html">userStruct</a></code> the new password of the user requesting a password
+reset</dd>
+					<dt><var>$oldResetLink</var></dt>
+					<dd><code>string</code><br>$oldResetLink <code><a href="class-userStruct.html">userStruct</a></code> the old reset link</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toAmPmTime" id="_toAmPmTime">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toAmPmTime">#</a>
+		<code><a href="source-class-sfUtils.html#2085-2095" title="Go to source code">toAmPmTime</a>( <span>string <var>$stringDate</var></span> )</code>
+
+		<div class="description short">
+			
+<p>convert datetime string to time with am or pm appended</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>convert datetime string to time with am or pm appended</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$stringDate</var></dt>
+					<dd><code>string</code><br>$stringDate the date time string</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>am/pm version of time.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="dateToSql" id="_dateToSql">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_dateToSql">#</a>
+		<code><a href="source-class-sfUtils.html#2097-2107" title="Go to source code">dateToSql</a>( <span>string <var>$stringDate</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Convert Date from DD/MM/YYYY to YYYY-MM-DD to be valid for sql</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convert Date from DD/MM/YYYY to YYYY-MM-DD to be valid for sql</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$stringDate</var></dt>
+					<dd><code>string</code><br>$stringDate the date time string</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>sql formatted date 'YYYY-MM-DD'.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="dateFromSql" id="_dateFromSql">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_dateFromSql">#</a>
+		<code><a href="source-class-sfUtils.html#2109-2119" title="Go to source code">dateFromSql</a>( <span>string <var>$stringDate</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Convert Date from YYYY-MM-DD to DD/MM/YYYY from sql date string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convert Date from YYYY-MM-DD to DD/MM/YYYY from sql date string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$stringDate</var></dt>
+					<dd><code>string</code><br>$stringDate the date time string</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>sql formatted date 'DD/MM/YYYY'.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="tablenameFromType" id="_tablenameFromType">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_tablenameFromType">#</a>
+		<code><a href="source-class-sfUtils.html#2121-2146" title="Go to source code">tablenameFromType</a>( <span>string <var>$type</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Determine table name from type parameter passed in</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Determine table name from type parameter passed in</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$type</var></dt>
+					<dd><code>string</code><br>$type the type of data whos table is to be returned</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>the Table name of a Snowflakes API type.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="manualFlakeitTrigger" id="_manualFlakeitTrigger">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_manualFlakeitTrigger">#</a>
+		<code><a href="source-class-sfUtils.html#2148-2195" title="Go to source code">manualFlakeitTrigger</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>string <var>$type</var></span>, <span>string <var>$operation</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Process manual 'flake it' triggers if the server's database snowflakes is
+installed into doesn't support/allows/permits the user to use triggers</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Process manual 'flake it' triggers if the server's database snowflakes is
+installed into doesn't support/allows/permits the user to use triggers</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$id</var></dt>
+					<dd><code>integer</code><br>$id the identifier of snowflake data <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code></dd>
+					<dt><var>$type</var></dt>
+					<dd><code>string</code><br>$type the type of snowflake data <code><a href="class-sfUtils.html#_tablenameFromType">sfUtils::tablenameFromType()</a></code></dd>
+					<dt><var>$operation</var></dt>
+					<dd><code>string</code><br>$operation the trigger operatios usually on adding, editing or deleting the
+snowflake data base on its identifier</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="manualchangeLogTrigger" id="_manualchangeLogTrigger">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_manualchangeLogTrigger">#</a>
+		<code><a href="source-class-sfUtils.html#2197-2277" title="Go to source code">manualchangeLogTrigger</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>string <var>$type</var></span>, <span>string <var>$operation</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Process manual change log triggers if the server's database snowflakes is
+installed into doesn't support/allows/permits the user to use triggers</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Process manual change log triggers if the server's database snowflakes is
+installed into doesn't support/allows/permits the user to use triggers</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$id</var></dt>
+					<dd><code>integer</code><br>$id the identifier of snowflake data <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code></dd>
+					<dt><var>$type</var></dt>
+					<dd><code>string</code><br>$type the type of snowflake data <code><a href="class-sfUtils.html#_tablenameFromType">sfUtils::tablenameFromType()</a></code></dd>
+					<dt><var>$operation</var></dt>
+					<dd><code>string</code><br>$operation the trigger operatios usually on adding, editing or deleting the
+snowflake data base on its identifier</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="checkTrigger" id="_checkTrigger">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_checkTrigger">#</a>
+		<code><a href="source-class-sfUtils.html#2279-2321" title="Go to source code">checkTrigger</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>string <var>$type</var></span>, <span>string <var>$operation</var></span> )</code>
+
+		<div class="description short">
+			
+<p>check triggers on the server's database snowflakes is installed into doesn't
+support/allows/permits the user to use triggers</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>check triggers on the server's database snowflakes is installed into doesn't
+support/allows/permits the user to use triggers</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$id</var></dt>
+					<dd><code>integer</code><br>$id the identifier of snowflake data <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code></dd>
+					<dt><var>$type</var></dt>
+					<dd><code>string</code><br>$type the type of snowflake data <code><a href="class-sfUtils.html#_tablenameFromType">sfUtils::tablenameFromType()</a></code></dd>
+					<dt><var>$operation</var></dt>
+					<dd><code>string</code><br>$operation the trigger operatios usually on adding, editing or deleting the
+snowflake data base on its identifier</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="flakeIt" id="_flakeIt">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_flakeIt">#</a>
+		<code><a href="source-class-sfUtils.html#2323-2367" title="Go to source code">flakeIt</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>string <var>$type</var></span>, <span>boolean <var>$flakeit</var> = <span class="php-quote">&quot;true&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>process a flake it data for any snowflake data type and increment or
+decrement the flake_it field of that data type</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>process a flake it data for any snowflake data type and increment or
+decrement the flake_it field of that data type</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$id</var></dt>
+					<dd><code>integer</code><br>$id the identifier of snowflake data <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code></dd>
+					<dt><var>$type</var></dt>
+					<dd><code>string</code><br>$type the type of snowflake data <code><a href="class-sfUtils.html#_tablenameFromType">sfUtils::tablenameFromType()</a></code></dd>
+					<dt><var>$flakeit</var></dt>
+					<dd><code>boolean</code><br>$flakeit if true then increment the flake_it field otherwise decrement the field</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>the flake it value</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addQuerystringVar" id="_addQuerystringVar">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addQuerystringVar">#</a>
+		<code><a href="source-class-sfUtils.html#2369-2386" title="Go to source code">addQuerystringVar</a>( <span>string <var>$url</var></span>, <span>string <var>$key</var></span>, <span>string <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Add query string to a url</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Add query string to a url</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url the url to add keys and values as query to e.g cyrilinc.co.uk</dd>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key the query key /identifier e.g ?key=</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value the value of the key e.g ?key=value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The <b>url</b> with the key and the query e.g cyrilinc.co.uk?key=value.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeQuerystringVar" id="_removeQuerystringVar">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeQuerystringVar">#</a>
+		<code><a href="source-class-sfUtils.html#2388-2402" title="Go to source code">removeQuerystringVar</a>( <span>string <var>$url</var></span>, <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>remove query string to a url</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>remove query string to a url</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url the url to add keys and values as query to e.g
+cyrilinc.co.uk?key=value&amp;key2=value2</dd>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key the query key /identifier e.g ?key2=</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The <b>url</b> with the key and the query e.g cyrilinc.co.uk?key=value.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="deleteGallery" id="_deleteGallery">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_deleteGallery">#</a>
+		<code><a href="source-class-sfUtils.html#2404-2433" title="Go to source code">deleteGallery</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>boolean <var>$setDelete</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Delete a snowflake gallery and all the images associated with the specific
+gallery pointed out by the id(identifier)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Delete a snowflake gallery and all the images associated with the specific
+gallery pointed out by the id(identifier)</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$id</var></dt>
+					<dd><code>integer</code><br>$id the identifier of snowflake data <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code></dd>
+					<dt><var>$setDelete</var></dt>
+					<dd><code>boolean</code><br>$setDelete indicates true or false to actually delete the data from the database
+table or set the delete field</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="encrypt" id="_encrypt">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_encrypt">#</a>
+		<code><a href="source-class-sfUtils.html#2435-2448" title="Go to source code">encrypt</a>( <span>string <var>$pure_string</var></span>, <span>integer <var>$encryption_key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>encyrpt a string and Returns an encrypted &amp; utf8-encoded string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>encyrpt a string and Returns an encrypted &amp; utf8-encoded string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$pure_string</var></dt>
+					<dd><code>string</code><br>$pure_string the original string to encrypt</dd>
+					<dt><var>$encryption_key</var></dt>
+					<dd><code>integer</code><br>$encryption_key the encryption key</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>an encrypted &amp; utf8-encoded string.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="decrypt" id="_decrypt">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_decrypt">#</a>
+		<code><a href="source-class-sfUtils.html#2450-2463" title="Go to source code">decrypt</a>( <span>string <var>$encrypted_string</var></span>, <span>integer <var>$encryption_key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>decrypt a string and Returns an decrypted string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>decrypt a string and Returns an decrypted string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$encrypted_string</var></dt>
+					<dd><code>string</code><br>$encrypted_string the encrypted string</dd>
+					<dt><var>$encryption_key</var></dt>
+					<dd><code>integer</code><br>$encryption_key the encryption key</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>a decrypted original string.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setUserLoginOut" id="_setUserLoginOut">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setUserLoginOut">#</a>
+		<code><a href="source-class-sfUtils.html#2465-2486" title="Go to source code">setUserLoginOut</a>( <span>string <var>$userName</var></span>, <span>boolean <var>$value</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets the user logged in status, to identify if the user is currently logged
+in to the API or not</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets the user logged in status, to identify if the user is currently logged
+in to the API or not</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$userName</var></dt>
+					<dd><code>string</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the user name to check</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>boolean</code><br>$value logged in if TRUE and logged out if FALSE</dd>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="snowFlakeItCount" id="_snowFlakeItCount">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_snowFlakeItCount">#</a>
+		<code><a href="source-class-sfUtils.html#2488-2517" title="Go to source code">snowFlakeItCount</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$userName</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Counts all the flake it for all snowflakes data type(snowflakes) related to
+the user selected</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Counts all the flake it for all snowflakes data type(snowflakes) related to
+the user selected</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$userName</var></dt>
+					<dd><code>string</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the user name to check</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="eventFlakeItCount" id="_eventFlakeItCount">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_eventFlakeItCount">#</a>
+		<code><a href="source-class-sfUtils.html#2519-2548" title="Go to source code">eventFlakeItCount</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$userName</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Counts all the flake it for all snowflakes data type(event) related to the
+user selected</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Counts all the flake it for all snowflakes data type(event) related to the
+user selected</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$userName</var></dt>
+					<dd><code>string</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the user name to check</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="galleryFlakeItCount" id="_galleryFlakeItCount">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_galleryFlakeItCount">#</a>
+		<code><a href="source-class-sfUtils.html#2550-2579" title="Go to source code">galleryFlakeItCount</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$userName</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Counts all the flake it for all snowflakes data type(gallery) related to the
+user selected</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Counts all the flake it for all snowflakes data type(gallery) related to the
+user selected</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$userName</var></dt>
+					<dd><code>string</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the user name to check</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAllCounts" id="_getAllCounts">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAllCounts">#</a>
+		<code><a href="source-class-sfUtils.html#2581-2690" title="Go to source code">getAllCounts</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$username</var> = <span class="php-quote">''</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Counts all the flake it for all snowflakes data type related to the user
+selected</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Counts all the flake it for all snowflakes data type related to the user
+selected</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$username</var></dt>
+					<dd><code>string</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the user name to check</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="dialogMessage" id="_dialogMessage">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_dialogMessage">#</a>
+		<code><a href="source-class-sfUtils.html#2692-2715" title="Go to source code">dialogMessage</a>( <span>string <var>$title</var></span>, <span>string <var>$message</var></span> )</code>
+
+		<div class="description short">
+			
+<p>process a title and a message to produce a well formated dailog message</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>process a title and a message to produce a well formated dailog message</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$title</var></dt>
+					<dd><code>string</code><br>$title The title of the dialog message</dd>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message The dialog message</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>The html dialog format</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPublishStatus" id="_getPublishStatus">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPublishStatus">#</a>
+		<code><a href="source-class-sfUtils.html#2717-2733" title="Go to source code">getPublishStatus</a>( <span>boolean <var>$publish</var></span> )</code>
+
+		<div class="description short">
+			
+<p>get the string equivalent of published status</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>get the string equivalent of published status</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$publish</var></dt>
+					<dd><code>boolean</code><br>$publish The publish value which coould be true,false,1 or 0</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The string equivalent of published status.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="migrate" id="_migrate">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_migrate">#</a>
+		<code><a href="source-class-sfUtils.html#2735-2837" title="Go to source code">migrate</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$dbname</var></span>, <span>string <var>$adminUsername</var></span>, <span>string <var>&amp; $output</var></span> )</code>
+
+		<div class="description short">
+			
+<p>migrate old snowflakes version database table into the new snowflakes table
+and copy the associated data (images) to the required folders</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>migrate old snowflakes version database table into the new snowflakes table
+and copy the associated data (images) to the required folders</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$dbname</var></dt>
+					<dd><code>string</code><br>$dbname the database name of the old snowflakes (v1.0 and below)</dd>
+					<dt><var>$adminUsername</var></dt>
+					<dd><code>string</code><br>$adminUsername the administrator username</dd>
+					<dt><var>$output</var></dt>
+					<dd><code>string</code><br>$output The message concerning the migration poulated</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="copyDirectoryList" id="_copyDirectoryList">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_copyDirectoryList">#</a>
+		<code><a href="source-class-sfUtils.html#2839-2881" title="Go to source code">copyDirectoryList</a>( <span>string <var>$source</var></span>, <span>string <var>$dest</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Copy a directory from a source to a destination recursively thereby creating
+files in the destination directory and subdirectory just like in the source
+directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Copy a directory from a source to a destination recursively thereby creating
+files in the destination directory and subdirectory just like in the source
+directory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$source</var></dt>
+					<dd><code>string</code><br>$source the Source directory</dd>
+					<dt><var>$dest</var></dt>
+					<dd><code>string</code><br>$dest the destination directory</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="migrateUpdir" id="_migrateUpdir">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_migrateUpdir">#</a>
+		<code><a href="source-class-sfUtils.html#2883-2903" title="Go to source code">migrateUpdir</a>( <span>string <var>$source</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>migrate data associated with snowflakes previous versions to the new
+snowflakes upload directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>migrate data associated with snowflakes previous versions to the new
+snowflakes upload directory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$source</var></dt>
+					<dd><code>string</code><br>$source the Source directory</dd>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="xmldecoder" id="_xmldecoder">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_xmldecoder">#</a>
+		<code><a href="source-class-sfUtils.html#2905-2929" title="Go to source code">xmldecoder</a>( <span>string <var>$xmltext</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Decode xml data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Decode xml data</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$xmltext</var></dt>
+					<dd><code>string</code><br>$xmltext
+<p>The xml data that needs to be decoded</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>Decoded xml string</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="xmlencoder" id="_xmlencoder">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_xmlencoder">#</a>
+		<code><a href="source-class-sfUtils.html#2931-2955" title="Go to source code">xmlencoder</a>( <span>string <var>$xmltext</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Encode xml data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Encode xml data</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$xmltext</var></dt>
+					<dd><code>string</code><br>$xmltext
+<p>The xml data that needs to be encoded</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>Encoded xml string</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createSnowflakesRss" id="_createSnowflakesRss">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createSnowflakesRss">#</a>
+		<code><a href="source-class-sfUtils.html#2957-3006" title="Go to source code">createSnowflakesRss</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>array <var>$snowflakesList</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>generate snowflake rss data from published snowflakes</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>generate snowflake rss data from published snowflakes</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$snowflakesList</var></dt>
+					<dd><code>array</code><br>$snowflakesList <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code> a list of snowflake struct</dd>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>Rss string</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createEventRss" id="_createEventRss">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createEventRss">#</a>
+		<code><a href="source-class-sfUtils.html#3008-3061" title="Go to source code">createEventRss</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>array <var>$eventList</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>generate snowflake rss data from published snowflakes events</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>generate snowflake rss data from published snowflakes events</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$eventList</var></dt>
+					<dd><code>array</code><br>$eventList <code><a href="class-eventStruct.html">eventStruct</a></code> a list of snowflake struct</dd>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>Rss string</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createGalleryRss" id="_createGalleryRss">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createGalleryRss">#</a>
+		<code><a href="source-class-sfUtils.html#3063-3119" title="Go to source code">createGalleryRss</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>array <var>$galleryList</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>generate snowflake rss data from published snowflakes gallery</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>generate snowflake rss data from published snowflakes gallery</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conn</var></dt>
+					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
+					<dt><var>$galleryList</var></dt>
+					<dd><code>array</code><br>$galleryList <code><a href="class-galleryStruct.html">galleryStruct</a></code> a list of snowflake struct</dd>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>Rss string</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="startsWith" id="_startsWith">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_startsWith">#</a>
+		<code><a href="source-class-sfUtils.html#3121-3131" title="Go to source code">startsWith</a>( <span>string <var>$haystack</var></span>, <span>array <var>$needle</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Checks if a string is at the begining of a much larger string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks if a string is at the begining of a much larger string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$haystack</var></dt>
+					<dd><code>string</code><br>$haystack The string to search in</dd>
+					<dt><var>$needle</var></dt>
+					<dd><code>array</code><br>$needle the string to search for</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="endsWith" id="_endsWith">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_endsWith">#</a>
+		<code><a href="source-class-sfUtils.html#3133-3143" title="Go to source code">endsWith</a>( <span>string <var>$haystack</var></span>, <span>array <var>$needle</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Checks if a string is at the end of a much larger string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks if a string is at the end of a much larger string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$haystack</var></dt>
+					<dd><code>string</code><br>$haystack The string to search in</dd>
+					<dt><var>$needle</var></dt>
+					<dd><code>array</code><br>$needle the string to search for</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="viewLogFile" id="_viewLogFile">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_viewLogFile">#</a>
+		<code><a href="source-class-sfUtils.html#3145-3198" title="Go to source code">viewLogFile</a>( <span>string <var>$filename</var></span>, <span>array <var>$Logtype</var> = <span class="php-quote">&quot;All&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>read and display a log file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>read and display a log file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filename</var></dt>
+					<dd><code>string</code><br>$filename the log file path to view</dd>
+					<dt><var>$Logtype</var></dt>
+					<dd><code>array</code><br>$Logtype the log type to view e.g error, warning and success</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>The log array </b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getfileList" id="_getfileList">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getfileList">#</a>
+		<code><a href="source-class-sfUtils.html#3200-3242" title="Go to source code">getfileList</a>( <span>string <var>$dir</var> = <span class="php-quote">&quot;../data/&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the list of files in a directory and returns an html table tag formatted
+string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the list of files in a directory and returns an html table tag formatted
+string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>string</code><br>$dir data directory</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>The list string </b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getfileList2" id="_getfileList2">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getfileList2">#</a>
+		<code><a href="source-class-sfUtils.html#3244-3278" title="Go to source code">getfileList2</a>( <span>string <var>$dir</var> = <span class="php-quote">&quot;../data/&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the list of files in a directory and returns an array with file names in
+the directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the list of files in a directory and returns an array with file names in
+the directory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>string</code><br>$dir data directory</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>The file list in an array </b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="comapact99" id="_comapact99">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_comapact99">#</a>
+		<code><a href="source-class-sfUtils.html#3280-3297" title="Go to source code">comapact99</a>( <span>string <var>$data</var></span> )</code>
+
+		<div class="description short">
+			
+<p>if the parameter passed in is &gt; 100 then return 99+ otherwise return as it
+is</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>if the parameter passed in is &gt; 100 then return 99+ otherwise return as it
+is</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd><code>string</code><br>$data the data</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br><b>99+</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getTimeZoneList" id="_getTimeZoneList">
+
+		<td class="attributes"><code>
+			 public static
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTimeZoneList">#</a>
+		<code><a href="source-class-sfUtils.html#3299-3401" title="Go to source code">getTimeZoneList</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the date time zone list from DateTimeZone::listIdentifiers if it
+exists else return the hardcoded list of DateTimeZone</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the date time zone list from DateTimeZone::listIdentifiers if it
+exists else return the hardcoded list of DateTimeZone</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br><b>DateTimeZone/b&gt; list.</b><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="settimezone" id="_settimezone">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_settimezone">#</a>
+		<code><a href="source-class-sfUtils.html#3403-3416" title="Go to source code">settimezone</a>( <span>string <var>$timezones</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the time zone of the API</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the time zone of the API</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$timezones</var></dt>
+					<dd><code>string</code><br>$timezones the date time zone to be set</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Snowflakes API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
