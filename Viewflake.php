@@ -112,8 +112,7 @@ if ($flakeStruct->m_gallery != NULL) {
     $totalRows_rsGallery = $SFconnects->recordCount();
 }
 
-$UploadDir = $settingsConfig['m_sfGalleryUrl'];
-//The upload Image directory
+//The upload base Image url
 $UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
 $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 ?>

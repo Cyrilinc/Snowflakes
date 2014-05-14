@@ -23,8 +23,7 @@ $totalRows_rsOut = $SFconnects->recordCount();
 $url = $otherurl = sfUtils::curPageURL();
 $settingsConfig = Config::getConfig("settings", 'config/config.ini');
 $Powerlink = "resources/images/Snowflakes2.png";
-$UploadDir = $settingsConfig['m_sfGalleryUrl'];
-//The upload Image directory
+//The upload base Image url
 $UploadImgDir = $settingsConfig['m_sfGalleryImgUrl'];
 $UploadThumbDir = $settingsConfig['m_sfGalleryThumbUrl'];
 $imageMissing = $UploadImgDir . "missing_default.png";
