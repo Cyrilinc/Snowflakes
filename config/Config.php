@@ -1,7 +1,10 @@
 <?php
 
 /**
- * Application config.
+ * Application configuration file handler used to add, edit and
+ * delete configuration elements for Snowflakes API
+ * 
+ * @author Cyril Adelekan
  */
 final class Config {
 
@@ -9,15 +12,23 @@ final class Config {
     private static $m_data = null;
 
     /**
-     * @return bool
+     * Checks if a configuration file exists
+     *
+     * @param string $inifile <p> The configuration file </p>
+     *
+     * @return bool <b>TRUE</b> if user exists or <b>FALSE</b> otherwise.
      */
     public static function checkConfig($inifile = '../config/config.ini') {
         return file_exists($inifile);
     }
 
     /**
-     * @return array
-     *
+     * Get a specific section in the configuration file
+     * 
+     * @param string $section <p> Th tag/element header name of the configuration element to get </p> 
+     * @param string $inifile <p> The configuration file </p>
+     * 
+     * @return array The specific configuration data in form of an array
      */
     public static function getConfig($section = null, $inifile = '../config/config.ini') {
         if ($section === null) {
@@ -36,6 +47,14 @@ final class Config {
         return $m_data[$section];
     }
 
+    /**
+     * Add a section in the configuration file
+     * 
+     * @param string $section <p> Th tag/element header name of the configuration element to Add </p> 
+     * @param string $inifile <p> The configuration file </p>
+     * 
+     * @return array The combination of all the configuration data in form of an array
+     */
     public static function addSection($section, $inifile = '../config/config.ini') {
         if (!$section) {
             return false;
@@ -53,6 +72,14 @@ final class Config {
         return $m_data;
     }
 
+    /**
+     * Deletes a section in the configuration file
+     * 
+     * @param string $section <p> Th tag/element header name of the configuration element to delete </p> 
+     * @param string $inifile <p> The configuration file </p>
+     * 
+     * @return array The rest of the configuration data in form of an array
+     */
     public static function deleteSection($section, $inifile = '../config/config.ini') {
         if (!$section) {
             return false;
@@ -70,6 +97,16 @@ final class Config {
         return $m_data;
     }
 
+    /**
+     * Adds a new configuration element to the configuration file
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param string $tag <p> The tag/element name of the configuration element to set </p>
+     * @param string $section <p> Th tag/element header name of the configuration element to set </p> 
+     * @param string $inifile <p> The configuration file </p>
+     * 
+     * @return array The configuration data in form of an array
+     */
     public static function addConfig($value, $tag, $section, $inifile = '../config/config.ini') {
 
         if (!$section || !$tag) {
@@ -86,6 +123,18 @@ final class Config {
         return $m_data;
     }
 
+    /**
+     * Sets an the value of an element in a section of a configuration file
+     * e.g $config[$section][$tag] = $value;. if the section doesn't exists
+     * in the configuration file, it is created.
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param string $tag <p> The tag/element name of the configuration element to set </p>
+     * @param string $section <p> Th tag/element header name of the configuration element to set </p> 
+     * @param string $inifile <p> The configuration file </p>
+     * 
+     * @return array The configuration data in form of an array
+     */
     public static function setConfig($value, $tag, $section, $inifile = '../config/config.ini') {
 
         if (!$section || !$tag) {
@@ -104,6 +153,13 @@ final class Config {
         return $m_data;
     }
 
+    /**
+     * Create a string version formated in a configuration mannger given keys of the array
+     * 
+     * @param array $m_data <p> The Array of configration keys and values to convert</p> 
+     * 
+     * @return string The configuration data in string form
+     */
     public static function arrayToConfig($m_data) {
 
         if (!$m_data) {
@@ -124,6 +180,15 @@ final class Config {
         return $configString;
     }
 
+    /**
+     * Save an array into a configuration filel, but first a configuration array
+     * has to be formatted in a way that is readable {@see arrayToConfig}
+     * 
+     * @param array $m_data <p> The Array of configration keys and values to store</p> 
+     * @param string $inifile <p> The configuration file </p>
+     * 
+     * @return array The configuration data in form of an array
+     */
     public static function saveConfig($m_data, $inifile = '../config/config.ini') {
 
         $config = self::arrayToConfig($m_data);
@@ -131,7 +196,11 @@ final class Config {
     }
 
     /**
-     * @return array
+     * Get the data from a ini file in form of an array
+     * 
+     * @param string $inifile <p> The configuration file </p>
+     * 
+     * @return array The configuration data in form of an array
      */
     private static function getData($inifile) {
 
@@ -142,6 +211,7 @@ final class Config {
         $m_data = parse_ini_file($inifile, true);
         return $m_data;
     }
+
 }
 
 ?>
