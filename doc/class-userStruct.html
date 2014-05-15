@@ -7,7 +7,7 @@
 	<title>Class userStruct | Snowflakes</title>
 
 	<script type="text/javascript" src="resources/combined.js?774890837"></script>
-	<script type="text/javascript" src="elementlist.js?3838031492"></script>
+	<script type="text/javascript" src="elementlist.js?3935771214"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -39,16 +39,13 @@
 				<li><a href="class-dataDirParam.html">dataDirParam</a></li>
 				<li><a href="class-eventStruct.html">eventStruct</a></li>
 				<li><a href="class-galleryStruct.html">galleryStruct</a></li>
-				<li><a href="class-migrationTable.html">migrationTable</a></li>
 				<li><a href="class-settingsStruct.html">settingsStruct</a></li>
 				<li><a href="class-sfConnect.html">sfConnect</a></li>
-				<li><a href="class-sfConnectInterface.html">sfConnectInterface</a></li>
 				<li><a href="class-sfGalleryImage.html">sfGalleryImage</a></li>
 				<li><a href="class-sfImageProcessor.html">sfImageProcessor</a></li>
 				<li><a href="class-sfLogError.html">sfLogError</a></li>
 				<li><a href="class-sfUtils.html">sfUtils</a></li>
-				<li><a href="class-sfUUID.html">sfUUID</a></li>
-				<li><a href="class-Snowflakes.html">Snowflakes</a></li>
+				<li><a href="class-SnowflakesSetUp.html">SnowflakesSetUp</a></li>
 				<li><a href="class-snowflakeStruct.html">snowflakeStruct</a></li>
 				<li class="active"><a href="class-userStruct.html">userStruct</a></li>
 			</ul>
@@ -57,14 +54,6 @@
 
 
 
-			<h3>Functions</h3>
-			<ul>
-				<li><a href="function-create_progress.html">create_progress</a></li>
-				<li><a href="function-displayMap.html">displayMap</a></li>
-				<li><a href="function-get_data.html">get_data</a></li>
-				<li><a href="function-sendMsg.html" class="invalid">sendMsg</a></li>
-				<li><a href="function-update_progress.html">update_progress</a></li>
-			</ul>
 		</div>
 	</div>
 </div>
@@ -121,7 +110,7 @@
 
 				<b>Author:</b>
 				Cyril Adelekan<br />
-		<b>Located at</b> <a href="source-class-userStruct.html#273-649" title="Go to source code">lib/sf.php</a><br />
+		<b>Located at</b> <a href="source-class-userStruct.html#272-648" title="Go to source code">lib/sf.php</a><br />
 	</div>
 
 
@@ -139,7 +128,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_init">#</a>
-		<code><a href="source-class-userStruct.html#289-306" title="Go to source code">init</a>( <span>string <var>$username</var></span>, <span>string <var>$password</var></span>, <span>string <var>$email</var></span>, <span>integer <var>$access_level</var></span>, <span>integer <var>$image_name</var> = <span class="php-quote">'default.png'</span></span> )</code>
+		<code><a href="source-class-userStruct.html#288-305" title="Go to source code">init</a>( <span>string <var>$username</var></span>, <span>string <var>$password</var></span>, <span>string <var>$email</var></span>, <span>integer <var>$access_level</var></span>, <span>integer <var>$image_name</var> = <span class="php-quote">'default.png'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -187,7 +176,7 @@ parameters</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isPopulated">#</a>
-		<code><a href="source-class-userStruct.html#308-315" title="Go to source code">isPopulated</a>( )</code>
+		<code><a href="source-class-userStruct.html#307-314" title="Go to source code">isPopulated</a>( )</code>
 
 		<div class="description short">
 			
@@ -224,7 +213,7 @@ parameters</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_populate">#</a>
-		<code><a href="source-class-userStruct.html#317-342" title="Go to source code">populate</a>( <span>array <var>$value</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-userStruct.html#316-341" title="Go to source code">populate</a>( <span>array <var>$value</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -266,17 +255,17 @@ parameters</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserByUsername">#</a>
-		<code><a href="source-class-userStruct.html#344-368" title="Go to source code">getUserByUsername</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$username</var></span> )</code>
+		<code><a href="source-class-userStruct.html#343-367" title="Go to source code">getUserByUsername</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$username</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Get all the values of all members of <code><a href="class-userStruct.html">userStruct</a></code> given $username</p>
+<p>Get all the values of all members of <code><a href="class-userStruct.html">userStruct</a></code> given $username <code><a href="class-userStruct.html#_populate">userStruct::populate()</a></code></p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Get all the values of all members of <code><a href="class-userStruct.html">userStruct</a></code> given $username</p>
+<p>Get all the values of all members of <code><a href="class-userStruct.html">userStruct</a></code> given $username <code><a href="class-userStruct.html#_populate">userStruct::populate()</a></code></p>
 
 
 
@@ -294,10 +283,6 @@ parameters</p>
 				</div>
 
 
-				<h4>See</h4>
-				<div class="list">
-						<code><code><a href="class-userStruct.html#_populate">userStruct::populate()</a></code></code><br />
-				</div>
 
 
 		</div>
@@ -314,7 +299,7 @@ parameters</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getImageNameById">#</a>
-		<code><a href="source-class-userStruct.html#370-393" title="Go to source code">getImageNameById</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span> )</code>
+		<code><a href="source-class-userStruct.html#369-392" title="Go to source code">getImageNameById</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -338,7 +323,7 @@ parameters</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code><br><i>image name</i> on success, <i>false</i> otherwise<br />
+					<code>boolean</code><br><b>image name</b> on success or <b>FALSE</b> otherwise<br />
 				</div>
 
 
@@ -358,19 +343,19 @@ parameters</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserByid">#</a>
-		<code><a href="source-class-userStruct.html#395-418" title="Go to source code">getUserByid</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span> )</code>
+		<code><a href="source-class-userStruct.html#394-417" title="Go to source code">getUserByid</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
 <p>Get all the values of all members of <code><a href="class-userStruct.html">userStruct</a></code> given the
-id(identifier),</p>
+id(identifier), <code><a href="class-userStruct.html#_populate">userStruct::populate()</a></code></p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
 <p>Get all the values of all members of <code><a href="class-userStruct.html">userStruct</a></code> given the
-id(identifier),</p>
+id(identifier), <code><a href="class-userStruct.html#_populate">userStruct::populate()</a></code></p>
 
 
 
@@ -388,10 +373,6 @@ id(identifier),</p>
 				</div>
 
 
-				<h4>See</h4>
-				<div class="list">
-						<code><code><a href="class-userStruct.html#_populate">userStruct::populate()</a></code></code><br />
-				</div>
 
 
 		</div>
@@ -408,19 +389,19 @@ id(identifier),</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_changeUserFlakeit">#</a>
-		<code><a href="source-class-userStruct.html#420-437" title="Go to source code">changeUserFlakeit</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$flakeit</var></span> )</code>
+		<code><a href="source-class-userStruct.html#419-436" title="Go to source code">changeUserFlakeit</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$flakeit</var></span> )</code>
 
 		<div class="description short">
 			
 <p>Change all the values of all members of <code><a href="class-userStruct.html">userStruct</a></code> given the
-id(identifier),</p>
+id(identifier), <code><a href="class-userStruct.html#_populate">userStruct::populate()</a></code></p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
 <p>Change all the values of all members of <code><a href="class-userStruct.html">userStruct</a></code> given the
-id(identifier),</p>
+id(identifier), <code><a href="class-userStruct.html#_populate">userStruct::populate()</a></code></p>
 
 
 
@@ -438,10 +419,6 @@ id(identifier),</p>
 				</div>
 
 
-				<h4>See</h4>
-				<div class="list">
-						<code><code><a href="class-userStruct.html#_populate">userStruct::populate()</a></code></code><br />
-				</div>
 
 
 		</div>
@@ -458,7 +435,7 @@ id(identifier),</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserByResetLink">#</a>
-		<code><a href="source-class-userStruct.html#439-461" title="Go to source code">getUserByResetLink</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$resetLink</var></span> )</code>
+		<code><a href="source-class-userStruct.html#438-460" title="Go to source code">getUserByResetLink</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$resetLink</var></span> )</code>
 
 		<div class="description short">
 			
@@ -504,7 +481,7 @@ link,</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loginUser">#</a>
-		<code><a href="source-class-userStruct.html#463-484" title="Go to source code">loginUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$username</var></span>, <span>string <var>$password</var></span> )</code>
+		<code><a href="source-class-userStruct.html#462-483" title="Go to source code">loginUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$username</var></span>, <span>string <var>$password</var></span> )</code>
 
 		<div class="description short">
 			
@@ -552,7 +529,7 @@ and passoword,</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_AddUser">#</a>
-		<code><a href="source-class-userStruct.html#486-510" title="Go to source code">AddUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
+		<code><a href="source-class-userStruct.html#485-509" title="Go to source code">AddUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -596,7 +573,7 @@ provided that all the mandatory members of <code><a href="class-userStruct.html"
 
 		<td class="name"><div>
 		<a class="anchor" href="#_UpdateUser">#</a>
-		<code><a href="source-class-userStruct.html#512-536" title="Go to source code">UpdateUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
+		<code><a href="source-class-userStruct.html#511-535" title="Go to source code">UpdateUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -640,7 +617,7 @@ provided that all the mandatory members of <code><a href="class-userStruct.html"
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteUser">#</a>
-		<code><a href="source-class-userStruct.html#538-568" title="Go to source code">deleteUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>boolean <var>$setDelete</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-userStruct.html#537-567" title="Go to source code">deleteUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>boolean <var>$setDelete</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -687,7 +664,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_userExits">#</a>
-		<code><a href="source-class-userStruct.html#570-589" title="Go to source code">userExits</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$username</var></span> )</code>
+		<code><a href="source-class-userStruct.html#569-588" title="Go to source code">userExits</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$username</var></span> )</code>
 
 		<div class="description short">
 			
@@ -711,7 +688,7 @@ table or set the delete field</dd>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>bool/int</code><br><i>true/1</i> on success, <i>false</i> otherwise<br />
+					<code>bool/int</code><br><b>TRUE / &gt;=1</b> on success or <b>FALSE</b> otherwise<br />
 				</div>
 
 
@@ -731,7 +708,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserID">#</a>
-		<code><a href="source-class-userStruct.html#591-629" title="Go to source code">getUserID</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
+		<code><a href="source-class-userStruct.html#590-628" title="Go to source code">getUserID</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -753,7 +730,7 @@ table or set the delete field</dd>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>bool/int</code><br><i>id(identifier)</i> on success, <i>false</i> otherwise<br />
+					<code>bool/int</code><br><b>id(identifier)</b> on success or <b>FALSE</b> otherwise<br />
 				</div>
 
 
@@ -773,7 +750,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_printuser">#</a>
-		<code><a href="source-class-userStruct.html#631-647" title="Go to source code">printuser</a>( )</code>
+		<code><a href="source-class-userStruct.html#630-646" title="Go to source code">printuser</a>( )</code>
 
 		<div class="description short">
 			
@@ -821,7 +798,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#275" title="Go to source code"><var>$m_id</var></a>
+				<a href="source-class-userStruct.html#274" title="Go to source code"><var>$m_id</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -844,7 +821,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#276" title="Go to source code"><var>$m_username</var></a>
+				<a href="source-class-userStruct.html#275" title="Go to source code"><var>$m_username</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -867,7 +844,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#277" title="Go to source code"><var>$m_password</var></a>
+				<a href="source-class-userStruct.html#276" title="Go to source code"><var>$m_password</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -890,7 +867,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#278" title="Go to source code"><var>$m_email</var></a>
+				<a href="source-class-userStruct.html#277" title="Go to source code"><var>$m_email</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -913,7 +890,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#279" title="Go to source code"><var>$m_access_level</var></a>
+				<a href="source-class-userStruct.html#278" title="Go to source code"><var>$m_access_level</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -936,7 +913,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#280" title="Go to source code"><var>$m_access_name</var></a>
+				<a href="source-class-userStruct.html#279" title="Go to source code"><var>$m_access_name</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -959,7 +936,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#281" title="Go to source code"><var>$m_reset_link</var></a>
+				<a href="source-class-userStruct.html#280" title="Go to source code"><var>$m_reset_link</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -982,7 +959,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#282" title="Go to source code"><var>$m_image_name</var></a>
+				<a href="source-class-userStruct.html#281" title="Go to source code"><var>$m_image_name</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1005,7 +982,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#283" title="Go to source code"><var>$m_deleted</var></a>
+				<a href="source-class-userStruct.html#282" title="Go to source code"><var>$m_deleted</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1028,7 +1005,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#284" title="Go to source code"><var>$m_flake_it</var></a>
+				<a href="source-class-userStruct.html#283" title="Go to source code"><var>$m_flake_it</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1051,7 +1028,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#285" title="Go to source code"><var>$m_logged_in</var></a>
+				<a href="source-class-userStruct.html#284" title="Go to source code"><var>$m_logged_in</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1074,7 +1051,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#286" title="Go to source code"><var>$m_last_login</var></a>
+				<a href="source-class-userStruct.html#285" title="Go to source code"><var>$m_last_login</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1097,7 +1074,7 @@ table or set the delete field</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-userStruct.html#287" title="Go to source code"><var>$m_image_dir</var></a>
+				<a href="source-class-userStruct.html#286" title="Go to source code"><var>$m_image_dir</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>

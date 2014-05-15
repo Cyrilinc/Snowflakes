@@ -1,17 +1,16 @@
 <?php
 
 /**
- * Description of Snowflakes
- * Snowflakes is used to set up Snowflakes API
+ * Description of SnowflakesSetUp
+ * SnowflakesSetUp is used to set up Snowflakes API
  * 
  * @author Cyril Adelekan
  */
-
 include_once '../lib/sf.php';
 include_once '../lib/sfConnect.php';
 include_once '../config/Config.php';
 
-class Snowflakes {
+class SnowflakesSetUp {
 
     var $m_hostName;
     var $m_dbUsername;
@@ -63,18 +62,24 @@ class Snowflakes {
     public $m_changeLogTable = "snowflakes_change_log";
     public $m_connection;
 
+    /**
+     * 
+     * Set up snowflakes database tables, conguration, super administrator and 
+     * generates success or failure messages to be displayed to the user.
+     * 
+     */
     public function Setup() {
-        if (!$this->connect()) {
-            $this->m_outcomeMessage='<div class="SnowflakeHead">Set Up Unsuccessful <span class="icon error"></span></div>';
+        if (!$this->createTables()) {
+            $this->m_outcomeMessage = '<div class="SnowflakeHead">Set Up Unsuccessful <span class="icon error"></span></div>';
             return false;
         }
         $gallery = realpath("../Uploads/") . '/';
         $galleryimg = $gallery . "GalleryImages/";
         $gallerythumb = $gallery . "GalleryThumbs/";
         $loginUrl = str_replace("install/sfInstall.php", "login.php", sfUtils::curPageURL());
-        $key="$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
-        $encryptedPassword=sfUtils::encrypt($this->m_adminPassword,$key);
-        
+        $key = "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
+        $encryptedPassword = sfUtils::encrypt($this->m_adminPassword, $key);
+
         $sfConfig = "[db]\n" .
                 'host = "' . $this->m_hostName . "\"\n" .
                 'dbname = "' . $this->m_dbName . "\"\n" .
@@ -90,7 +95,7 @@ class Snowflakes {
                 'm_sfUrl = "' . $this->m_sfUrl . "\"\n" .
                 'm_sfGalleryUrl = "' . $this->m_sfUrl . "Uploads/\"\n" .
                 'm_sfGalleryImgUrl = "' . $this->m_sfUrl . "Uploads/GalleryImages/\"\n" .
-                'm_sfGalleryThumbUrl = "' . $this->m_sfUrl . "Uploads/GalleryThumbs/\"\n"  .
+                'm_sfGalleryThumbUrl = "' . $this->m_sfUrl . "Uploads/GalleryThumbs/\"\n" .
                 'flakeItUrl = "' . $this->m_sfUrl . "flakeIt.php\"\n" .
                 'maxImageSize = "1048576"' . "\n" .
                 'thumbWidth = "250"' . "\n" .
@@ -99,13 +104,13 @@ class Snowflakes {
                 'imageExtList = "pjpeg,jpeg,jpg,png,gif,tiff,bmp"' . "\n" .
                 'imageTypesList = "image/pjpeg,image/jpeg,image/jpg,image/png,image/gif,image/tiff,image/bmp"' . "\n\n" .
                 "[datadir]\n" .
-                'logdir = "' . realpath("../data/") . "/\"\n".
-                'resources = "' . realpath("../resources/") . "/\"\n".
+                'logdir = "' . realpath("../data/") . "/\"\n" .
+                'resources = "' . realpath("../resources/") . "/\"\n" .
                 'path = "' . realpath("../") . "/\"\n" .
-                'datapath = "' . realpath("../") . "/data/\"\n".
+                'datapath = "' . realpath("../") . "/data/\"\n" .
                 'uploadGalleryDir = "' . $gallery . "\"\n" .
                 'galleryImgDir = "' . $galleryimg . "\"\n" .
-                'galleryThumbDir = "' . $gallerythumb . "\"\n" ;
+                'galleryThumbDir = "' . $gallerythumb . "\"\n";
 
         $fp = fopen("../config/config.ini", "w");
         fwrite($fp, $sfConfig);
@@ -116,10 +121,17 @@ class Snowflakes {
         } else {
             $this->m_Message .= '<br>CMS configuration file written successfully.<span class="icon success"></span><br />';
         }
-        $this->m_outcomeMessage='<div class="SnowflakeHead">Set Up Successful <span class="icon success"></span></div>';
+        $this->m_outcomeMessage = '<div class="SnowflakeHead">Set Up Successful <span class="icon success"></span></div>';
     }
 
-    public function db_connect() {
+    /**
+     * 
+     * Connects to the database for the first time and 
+     * generates success or failure messages to be displayed to the user.
+     * 
+     * @return sfConnect The database connection.
+     */
+    public function dbConnect() {
         $sqlArray = array('type' => $this->m_dbType, 'host' => $this->m_hostName, 'username' => $this->m_dbUsername, 'password' => $this->m_dbPassword, 'database' => $this->m_dbName, 'datapath' => realpath("../") . "/data/");
 
         $conn = new sfConnect($sqlArray);
@@ -139,14 +151,21 @@ class Snowflakes {
         return $conn;
     }
 
-    public function connect() {
+    /**
+     * 
+     * Create all snowflakes table to the database inidicated by user and 
+     * generates success or failure messages to be displayed to the user.
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
+    public function createTables() {
         /// Check 1 Start connection
-        $conn = $this->db_connect();
+        $conn = $this->dbConnect();
 
         if (!$conn) {
             return false;
         }
-
+        
         // Create change log table 
         if ($this->createChangeLog($conn) == false) {
             return false;
@@ -190,6 +209,7 @@ class Snowflakes {
         // Insert Snowflakes settings
         $this->insertSnowflakesSettings($conn);
 
+        $conn->close();
         return true;
     }
 
@@ -567,17 +587,17 @@ class Snowflakes {
         if (!$conn) {
             return false;
         }
-        $key="$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
-        $encryptedPassword=sfUtils::encrypt($this->m_adminPassword,$key);
+        $key = "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
+        $encryptedPassword = sfUtils::encrypt($this->m_adminPassword, $key);
 
         $sql = "INSERT IGNORE INTO " . $this->m_settingTable . " SET
 		sf_host_name='" . $this->m_hostName . "' ,
 		sf_db='" . $this->m_dbName . "' ,
 		sf_db_username='" . $this->m_dbUsername . "' ,
                 sf_db_type='" . $this->m_dbType . "' ,
-		sf_db_password='" . sfUtils::escape($encryptedPassword). "' ,
+		sf_db_password='" . sfUtils::escape($encryptedPassword) . "' ,
 		sf_url='" . $this->m_sfUrl . "',
-                time_zone='". $this->m_timeZone."';";
+                time_zone='" . $this->m_timeZone . "';";
 
         if (!$conn->execute($sql)) {
             $this->m_Message .="<br>" . 'Could not insert into Snowflakes Setting table named "' . $this->m_settingTable . '" due to error.' . ".<br/> " . $conn->getMessage() . ' <span class="icon error"></span><br />';

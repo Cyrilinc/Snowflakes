@@ -41,7 +41,7 @@ if ((isset($MM_setup)) && ($MM_setup == "setupform")) {
     $m_sfUrl = str_replace("install/sfInstall.php", "", $url);
     $somem_Message = $somem_Message . "Snowflakes Base: " . $m_sfUrl . " <br></p>";
 
-    $obj = new Snowflakes();
+    $obj = new SnowflakesSetUp();
     $obj->m_hostName = $Host_Name;
     $obj->m_dbUsername = $Database_Username;
     $obj->m_dbPassword = $Database_Password;
@@ -72,9 +72,7 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
     $SFconnects = new sfConnect($config->dbArray());
     $SFconnects->connect(); // Connect to new database
     $migrateMessage = "";
-    $migrated = sfUtils::migrate($SFconnects, $Database_Name, $config['username'], $migrateMessage);
-    //$migrateSuccess = str_replace("STATUS::SUCCESS", '<span class="icon success"></span><br />', $migrateMessage);
-    //$migratefailure = str_replace("STATUS::FAILED", '<span class="icon error"></span><br />', $migrateSuccess);
+    $migrated = sfUtils::migrate($SFconnects, $Database_Name, $config->m_username, $migrateMessage);
     $somem_Message = $migrateMessage;
 
     if (!sfUtils::migrateUpdir($oldUpdloadDir, '../config/config.ini')) {

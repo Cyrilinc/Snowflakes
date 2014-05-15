@@ -224,9 +224,6 @@ if (!isset($_SESSION['form'])) {
                     <!--END of contactform-->
                 </div>
                 <!--END of PageWrap-->
-
-
-
                 <!-- InstanceEndEditable -->  </div>
             <!-- end of Content --> 
         </div>

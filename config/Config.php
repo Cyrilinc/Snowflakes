@@ -25,7 +25,7 @@ final class Config {
     /**
      * Get a specific section in the configuration file
      * 
-     * @param string $section <p> Th tag/element header name of the configuration element to get </p> 
+     * @param string $section <p> The tag/element header name of the configuration element to get </p> 
      * @param string $inifile <p> The configuration file </p>
      * 
      * @return array The specific configuration data in form of an array
@@ -50,7 +50,7 @@ final class Config {
     /**
      * Add a section in the configuration file
      * 
-     * @param string $section <p> Th tag/element header name of the configuration element to Add </p> 
+     * @param string $section <p> The tag/element header name of the configuration element to Add </p> 
      * @param string $inifile <p> The configuration file </p>
      * 
      * @return array The combination of all the configuration data in form of an array
@@ -75,7 +75,7 @@ final class Config {
     /**
      * Deletes a section in the configuration file
      * 
-     * @param string $section <p> Th tag/element header name of the configuration element to delete </p> 
+     * @param string $section <p> The tag/element header name of the configuration element to delete </p> 
      * @param string $inifile <p> The configuration file </p>
      * 
      * @return array The rest of the configuration data in form of an array
@@ -102,7 +102,7 @@ final class Config {
      * 
      * @param string $value <p> The value of  configuration element to set</p> 
      * @param string $tag <p> The tag/element name of the configuration element to set </p>
-     * @param string $section <p> Th tag/element header name of the configuration element to set </p> 
+     * @param string $section <p> The tag/element header name of the configuration element to set </p> 
      * @param string $inifile <p> The configuration file </p>
      * 
      * @return array The configuration data in form of an array
@@ -130,7 +130,7 @@ final class Config {
      * 
      * @param string $value <p> The value of  configuration element to set</p> 
      * @param string $tag <p> The tag/element name of the configuration element to set </p>
-     * @param string $section <p> Th tag/element header name of the configuration element to set </p> 
+     * @param string $section <p> The tag/element header name of the configuration element to set </p> 
      * @param string $inifile <p> The configuration file </p>
      * 
      * @return array The configuration data in form of an array

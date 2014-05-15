@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This Contains all the classes and tools for handling data 
  *
@@ -67,7 +66,7 @@ class snowflakeStruct {
     /**
      * Get all the values of all members of {@link snowflakeStruct} given the id(identifier),
      * the data is obtained from the database and then the result is used to populate the 
-     * members of this class {@see snowflakeStruct::populate}
+     * members of this class {@see populate}
      * 
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link snowflakeStruct} the id(identifier) of the snowflake
@@ -98,7 +97,7 @@ class snowflakeStruct {
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link snowflakeStruct} the id(identifier) of the snowflake
      * 
-     * @return bool <i>Image name</i> on success, <i>false</i> otherwise
+     * @return bool <b>Image name</b> on success or <b>FALSE</b> otherwise
      */
     public static function getImageNameById($conn, $id) {
 
@@ -211,7 +210,7 @@ class snowflakeStruct {
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
-     * @return bool/int <i>id(identifier)</i> on success, <i>false</i> otherwise
+     * @return bool/int <b>id(identifier)</b> on success or <b>FALSE</b> otherwise
      */
     public function getSnowflakeID($conn) {
 
@@ -250,7 +249,7 @@ class snowflakeStruct {
     /**
      * print all the members of {@link snowflakeStruct}
      * 
-     * @return string formatted and labeled member values</i>
+     * @return string formatted and labeled member values</b>
      */
     public function printsnowlakes() {
         $str = 'title="' . $this->m_title . '"<br> ';
@@ -343,7 +342,7 @@ class userStruct {
 
     /**
      * Get all the values of all members of {@link userStruct} given $username 
-     * @see userStruct::populate
+     * {@see populate}
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param string $username {@link userStruct} the username
@@ -373,7 +372,7 @@ class userStruct {
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link userStruct} the id(identifier) of the user record
      * 
-     * @return bool <i>image name</i> on success, <i>false</i> otherwise
+     * @return bool <b>image name</b> on success or <b>FALSE</b> otherwise
      */
     public static function getImageNameById($conn, $id) {
 
@@ -394,7 +393,7 @@ class userStruct {
 
     /**
      * Get all the values of all members of {@link userStruct} given the id(identifier),
-     * @see userStruct::populate
+     * {@see populate}
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link userStruct} the id(identifier) of the user record
@@ -419,7 +418,7 @@ class userStruct {
 
     /**
      * Change all the values of all members of {@link userStruct} given the id(identifier),
-     * @see userStruct::populate
+     * {@see populate}
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $flakeit {@link userStruct} the flake-it value of the user record
@@ -573,7 +572,7 @@ class userStruct {
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param string $username {@link userStruct} the username value of the user record
      * 
-     * @return bool/int <i>true/1</i> on success, <i>false</i> otherwise
+     * @return bool/int <b>TRUE / >=1</b> on success or <b>FALSE</b> otherwise
      */
     public function userExits($conn, $username) {
 
@@ -594,7 +593,7 @@ class userStruct {
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
-     * @return bool/int <i>id(identifier)</i> on success, <i>false</i> otherwise
+     * @return bool/int <b>id(identifier)</b> on success or <b>FALSE</b> otherwise
      */
     public function getUserID($conn) {
 
@@ -631,7 +630,7 @@ class userStruct {
     /**
      * print all the members of {@link userStruct}
      * 
-     * @return string formatted and labeled member values</i>
+     * @return string formatted and labeled member values</b>
      */
     public function printuser() {
         $str = "ID = " . $this->m_id . "<br>";
@@ -787,7 +786,7 @@ class galleryStruct {
 
     /**
      * Get all the values of all members of {@link galleryStruct} given the id(identifier),
-     * @see galleryStruct::populate
+     * {@see populate}
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link galleryStruct} the id(identifier) of the user record
@@ -816,7 +815,7 @@ class galleryStruct {
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
-     * @return bool/int <i>id(identifier)</i> on success, <i>false</i> otherwise
+     * @return bool/int <b>id(identifier)</b> on success or <b>FALSE</b> otherwise
      */
     public function getGalleryID($conn) {
 
@@ -852,7 +851,7 @@ class galleryStruct {
     /**
      * print all the members of {@link galleryStruct}
      * 
-     * @return string formatted and labeled member values</i>
+     * @return string formatted and labeled member values</b>
      */
     public function printGallery() {
         $str = 'title="' . $this->m_title . '"<br> ';
@@ -935,7 +934,7 @@ class eventStruct {
 
     /**
      * Get all the values of all members of {@link eventStruct} given the id(identifier),
-     * @see eventStruct::populate
+     * {@see populate}
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link eventStruct} the id(identifier) of the user record
@@ -964,7 +963,7 @@ class eventStruct {
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id {@link eventStruct} the id(identifier) of the user record
      * 
-     * @return bool <i>image name</i> on success, <i>false</i> otherwise
+     * @return bool <b>image name</b> on success or <b>FALSE</b> otherwise
      */
     public static function getImageNameById($conn, $id) {
 
@@ -1086,10 +1085,10 @@ class eventStruct {
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * 
-     * @return bool/int <i>id(identifier)</i> on success, <i>false</i> otherwise
+     * @return bool/int <b>id(identifier)</b> on success or <b>FALSE</b> otherwise
      */
     public function getEventID($conn) {
-
+        // Sanity check
         if (!$this->isPopulated() || !$conn) {
             return false;
         }
@@ -1124,7 +1123,7 @@ class eventStruct {
     /**
      * print all the members of {@link eventStruct}
      * 
-     * @return string formatted and labeled member values</i>
+     * @return string formatted and labeled member values</b>
      */
     public function printEvents() {
         $str = 'title="' . $this->m_title . '"<br> ';
@@ -1181,7 +1180,7 @@ class sfLogError {
      * 
      * @param string $message the message to log
      * @param string $user {@link userStruct} the user name of the logger
-     * @param bool $show used to print the log entry to screen if <i>TRUE</i> or not if <i>FALSE</i>
+     * @param bool $show used to print the log entry to screen if <b>TRUE</b> or not if <b>FALSE</b>
      * @param string $dataDir the data directory where the log will be stored
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -1248,7 +1247,7 @@ final class sfUtils {
     }
 
     /**
-     * System config.
+     * Snowflakes utilities configuration initialisation.
      */
     public function init() {
         // error reporting - all errors for development (ensure you have display_errors = On in your php.ini file)
@@ -1278,12 +1277,12 @@ final class sfUtils {
     }
 
     /**
-     * Generate link.
+     * Generate a link with parameters from the url and parameter passed in.
      *
      * @param string $page target page
      * @param array $params page parameters
      * 
-     * @return string string created from page and parameters.
+     * @return string created from page and parameters.
      */
     public static function createLink($page, array $params = array()) {
         if (!$page) {
@@ -1293,7 +1292,7 @@ final class sfUtils {
     }
 
     /**
-     * Format date.
+     * Format date to d/m/Y.
      *
      * @param DateTime $date date to be formatted
      * 
@@ -1307,7 +1306,7 @@ final class sfUtils {
     }
 
     /**
-     * Format date and time.
+     * Format date and time to d/m/Y H(hours):i(seconds) .
      *
      * @param DateTime $date date to be formatted
      * 
@@ -2893,7 +2892,7 @@ final class sfUtils {
         if (!$source || !is_dir($source)) {
             return false;
         }
-        $datadir=new dataDirParam($inifile);
+        $datadir = new dataDirParam($inifile);
         // Check for symlinks
         if (is_link($source)) {
             return symlink(readlink($source), $datadir->m_uploadGalleryDir);
@@ -3415,6 +3414,27 @@ final class sfUtils {
         return date_default_timezone_set($timezones);
     }
 
+    /**
+     *  gets the data from a URL 
+     * 
+     * @param string $url The URL to which data is gotten from
+     * 
+     * @return mixed <b>URL Data</b> on success or <b>FALSE</b> on failure.
+     */
+    public static function getData($url) {
+        if (!$url) {
+            return false;
+        }
+        $ch = curl_init();
+        $timeout = 5;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
+    }
+
 }
 
 class databaseParam {
@@ -3429,12 +3449,16 @@ class databaseParam {
     var $m_admin_email; //admin_email
     var $m_time_zone;   //time_zone
 
+    /**
+     * Initialize the database parameter by loading data from the 
+     * configuration file 
+     */
     public function __construct($inifile = '../config/config.ini') {
         $this->init($inifile);
     }
 
     /**
-     * Initialize the settings struct by loading data from the config file
+     * Initialize the database parameter by loading data from the config file
      *
      * @param string $inifile the ini config file for snowflakes API
      * 
@@ -3467,6 +3491,11 @@ class databaseParam {
         $this->m_key = "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
     }
 
+    /**
+     * This gets all the data ready for a database connection and returns it 
+     * 
+     * @return array The array of parameters used to connect to database.
+     */
     public function dbArray() {
         $sqlArray = array('type' => $this->m_dbType,
             'host' => $this->m_hostName,
@@ -3488,6 +3517,11 @@ class dataDirParam {
     var $m_uploadGalleryDir; //uploadGalleryDir
     var $m_galleryImgDir; //galleryImgDir
     var $m_galleryThumbDir; //galleryThumbDir
+
+    /**
+     * Initialize the data directory parameter by loading data from the 
+     * configuration file 
+     */
     public function __construct($inifile = '../config/config.ini') {
         $this->init($inifile);
     }
@@ -3523,6 +3557,7 @@ class dataDirParam {
         $this->m_galleryImgDir = $array['galleryImgDir'];
         $this->m_galleryThumbDir = $array['galleryThumbDir'];
     }
+
 }
 
 class settingsStruct {

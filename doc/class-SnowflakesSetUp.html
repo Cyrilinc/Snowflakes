@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Snowflakes | Snowflakes</title>
+	<title>Class SnowflakesSetUp | Snowflakes</title>
 
 	<script type="text/javascript" src="resources/combined.js?774890837"></script>
-	<script type="text/javascript" src="elementlist.js?3838031492"></script>
+	<script type="text/javascript" src="elementlist.js?3935771214"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -39,16 +39,13 @@
 				<li><a href="class-dataDirParam.html">dataDirParam</a></li>
 				<li><a href="class-eventStruct.html">eventStruct</a></li>
 				<li><a href="class-galleryStruct.html">galleryStruct</a></li>
-				<li><a href="class-migrationTable.html">migrationTable</a></li>
 				<li><a href="class-settingsStruct.html">settingsStruct</a></li>
 				<li><a href="class-sfConnect.html">sfConnect</a></li>
-				<li><a href="class-sfConnectInterface.html">sfConnectInterface</a></li>
 				<li><a href="class-sfGalleryImage.html">sfGalleryImage</a></li>
 				<li><a href="class-sfImageProcessor.html">sfImageProcessor</a></li>
 				<li><a href="class-sfLogError.html">sfLogError</a></li>
 				<li><a href="class-sfUtils.html">sfUtils</a></li>
-				<li><a href="class-sfUUID.html">sfUUID</a></li>
-				<li class="active"><a href="class-Snowflakes.html">Snowflakes</a></li>
+				<li class="active"><a href="class-SnowflakesSetUp.html">SnowflakesSetUp</a></li>
 				<li><a href="class-snowflakeStruct.html">snowflakeStruct</a></li>
 				<li><a href="class-userStruct.html">userStruct</a></li>
 			</ul>
@@ -57,14 +54,6 @@
 
 
 
-			<h3>Functions</h3>
-			<ul>
-				<li><a href="function-create_progress.html">create_progress</a></li>
-				<li><a href="function-displayMap.html">displayMap</a></li>
-				<li><a href="function-get_data.html">get_data</a></li>
-				<li><a href="function-sendMsg.html" class="invalid">sendMsg</a></li>
-				<li><a href="function-update_progress.html">update_progress</a></li>
-			</ul>
 		</div>
 	</div>
 </div>
@@ -101,7 +90,7 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class Snowflakes</h1>
+	<h1>Class SnowflakesSetUp</h1>
 
 
 
@@ -119,7 +108,9 @@
 		
 		
 
-		<b>Located at</b> <a href="source-class-Snowflakes.html#7-700" title="Go to source code">lib/sfSetup.php</a><br />
+				<b>Author:</b>
+				Cyril Adelekan<br />
+		<b>Located at</b> <a href="source-class-SnowflakesSetUp.html#13-727" title="Go to source code">lib/sfSetup.php</a><br />
 	</div>
 
 
@@ -137,7 +128,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Setup">#</a>
-		<code><a href="source-class-Snowflakes.html#59-113" title="Go to source code">Setup</a>( )</code>
+		<code><a href="source-class-SnowflakesSetUp.html#65-125" title="Go to source code">Setup</a>( )</code>
 
 		<div class="description short">
 			
@@ -145,6 +136,9 @@
 
 		<div class="description detailed hidden">
 			
+<p>Set up snowflakes database tables, conguration, super administrator and
+generates success or failure messages to be displayed to the user.</p>
+
 
 
 
@@ -155,18 +149,18 @@
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="db_connect" id="_db_connect">
+	<tr data-order="dbConnect" id="_dbConnect">
 
 		<td class="attributes"><code>
 			 public 
-			
+			<code><a href="class-sfConnect.html">sfConnect</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_db_connect">#</a>
-		<code><a href="source-class-Snowflakes.html#115-133" title="Go to source code">db_connect</a>( )</code>
+		<a class="anchor" href="#_dbConnect">#</a>
+		<code><a href="source-class-SnowflakesSetUp.html#127-152" title="Go to source code">dbConnect</a>( )</code>
 
 		<div class="description short">
 			
@@ -174,9 +168,16 @@
 
 		<div class="description detailed hidden">
 			
+<p>Connects to the database for the first time and generates success or failure
+messages to be displayed to the user.</p>
 
 
 
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>The database connection.<br />
+				</div>
 
 
 
@@ -184,18 +185,18 @@
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="connect" id="_connect">
+	<tr data-order="createTables" id="_createTables">
 
 		<td class="attributes"><code>
 			 public 
-			
+			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_connect">#</a>
-		<code><a href="source-class-Snowflakes.html#135-187" title="Go to source code">connect</a>( )</code>
+		<a class="anchor" href="#_createTables">#</a>
+		<code><a href="source-class-SnowflakesSetUp.html#154-214" title="Go to source code">createTables</a>( )</code>
 
 		<div class="description short">
 			
@@ -203,9 +204,16 @@
 
 		<div class="description detailed hidden">
 			
+<p>Create all snowflakes table to the database inidicated by user and generates
+success or failure messages to be displayed to the user.</p>
 
 
 
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> on success or <b>FALSE</b> on failure.<br />
+				</div>
 
 
 
@@ -235,7 +243,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#9" title="Go to source code"><var>$m_hostName</var></a>
+				<a href="source-class-SnowflakesSetUp.html#15" title="Go to source code"><var>$m_hostName</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -258,7 +266,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#10" title="Go to source code"><var>$m_dbUsername</var></a>
+				<a href="source-class-SnowflakesSetUp.html#16" title="Go to source code"><var>$m_dbUsername</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -281,7 +289,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#11" title="Go to source code"><var>$m_dbPassword</var></a>
+				<a href="source-class-SnowflakesSetUp.html#17" title="Go to source code"><var>$m_dbPassword</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -304,7 +312,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#12" title="Go to source code"><var>$m_dbName</var></a>
+				<a href="source-class-SnowflakesSetUp.html#18" title="Go to source code"><var>$m_dbName</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -327,7 +335,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#13" title="Go to source code"><var>$m_dbType</var></a>
+				<a href="source-class-SnowflakesSetUp.html#19" title="Go to source code"><var>$m_dbType</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -350,7 +358,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#14" title="Go to source code"><var>$m_adminUsername</var></a>
+				<a href="source-class-SnowflakesSetUp.html#20" title="Go to source code"><var>$m_adminUsername</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -373,7 +381,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#15" title="Go to source code"><var>$m_adminPassword</var></a>
+				<a href="source-class-SnowflakesSetUp.html#21" title="Go to source code"><var>$m_adminPassword</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -396,7 +404,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#16" title="Go to source code"><var>$m_adminEmail</var></a>
+				<a href="source-class-SnowflakesSetUp.html#22" title="Go to source code"><var>$m_adminEmail</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -419,7 +427,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#17" title="Go to source code"><var>$m_returnUrl</var></a>
+				<a href="source-class-SnowflakesSetUp.html#23" title="Go to source code"><var>$m_returnUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -442,7 +450,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#18" title="Go to source code"><var>$m_logInUrl</var></a>
+				<a href="source-class-SnowflakesSetUp.html#24" title="Go to source code"><var>$m_logInUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -465,7 +473,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#19" title="Go to source code"><var>$m_sfUrl</var></a>
+				<a href="source-class-SnowflakesSetUp.html#25" title="Go to source code"><var>$m_sfUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -488,7 +496,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#20" title="Go to source code"><var>$m_sfMigrationDb</var></a>
+				<a href="source-class-SnowflakesSetUp.html#26" title="Go to source code"><var>$m_sfMigrationDb</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -511,7 +519,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#21" title="Go to source code"><var>$m_timeZone</var></a>
+				<a href="source-class-SnowflakesSetUp.html#27" title="Go to source code"><var>$m_timeZone</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -534,7 +542,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#22" title="Go to source code"><var>$m_Message</var></a>
+				<a href="source-class-SnowflakesSetUp.html#28" title="Go to source code"><var>$m_Message</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">&quot;&lt;b&gt;Snowflakes &lt;/b&gt; &lt;br&gt;&quot;</span></code></td>
 		<td class="description"><div>
@@ -557,7 +565,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#23" title="Go to source code"><var>$m_outcomeMessage</var></a>
+				<a href="source-class-SnowflakesSetUp.html#29" title="Go to source code"><var>$m_outcomeMessage</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">&quot;&lt;b&gt;Snowflakes &lt;/b&gt; &lt;br&gt;&quot;</span></code></td>
 		<td class="description"><div>
@@ -580,7 +588,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#28" title="Go to source code"><var>$m_sfTable</var></a>
+				<a href="source-class-SnowflakesSetUp.html#34" title="Go to source code"><var>$m_sfTable</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">&quot;snowflakes&quot;</span></code></td>
 		<td class="description"><div>
@@ -603,7 +611,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#33" title="Go to source code"><var>$m_usersTable</var></a>
+				<a href="source-class-SnowflakesSetUp.html#39" title="Go to source code"><var>$m_usersTable</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">&quot;snowflakes_users&quot;</span></code></td>
 		<td class="description"><div>
@@ -626,7 +634,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#38" title="Go to source code"><var>$m_eventsTable</var></a>
+				<a href="source-class-SnowflakesSetUp.html#44" title="Go to source code"><var>$m_eventsTable</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">&quot;snowflakes_events&quot;</span></code></td>
 		<td class="description"><div>
@@ -649,7 +657,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#42" title="Go to source code"><var>$m_galleryTable</var></a>
+				<a href="source-class-SnowflakesSetUp.html#48" title="Go to source code"><var>$m_galleryTable</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">&quot;snowflakes_gallery&quot;</span></code></td>
 		<td class="description"><div>
@@ -672,7 +680,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#47" title="Go to source code"><var>$m_settingTable</var></a>
+				<a href="source-class-SnowflakesSetUp.html#53" title="Go to source code"><var>$m_settingTable</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">&quot;snowflakes_settings&quot;</span></code></td>
 		<td class="description"><div>
@@ -695,7 +703,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#52" title="Go to source code"><var>$m_flakeItTable</var></a>
+				<a href="source-class-SnowflakesSetUp.html#58" title="Go to source code"><var>$m_flakeItTable</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">&quot;snowflakes_flakeit&quot;</span></code></td>
 		<td class="description"><div>
@@ -718,7 +726,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#56" title="Go to source code"><var>$m_changeLogTable</var></a>
+				<a href="source-class-SnowflakesSetUp.html#62" title="Go to source code"><var>$m_changeLogTable</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">&quot;snowflakes_change_log&quot;</span></code></td>
 		<td class="description"><div>
@@ -741,7 +749,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Snowflakes.html#57" title="Go to source code"><var>$m_connection</var></a>
+				<a href="source-class-SnowflakesSetUp.html#63" title="Go to source code"><var>$m_connection</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>

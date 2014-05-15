@@ -67,13 +67,13 @@ $user = new userStruct();
 $user->getUserByUsername($SFconnects, $colname_rsAdmin);
 sfUtils::getAllCounts($SFconnects, $user->m_username);
 
-$dataconfig = Config::getConfig("datadir", '../config/config.ini');
-$logDir = $dataconfig['logdir'];
+$datadir = new dataDirParam("../config/config.ini");
+$logDir = $datadir->m_logdir;
 
 $logfile = filter_input(INPUT_GET, 'logfile');
 $deletefile = filter_input(INPUT_GET, 'delfile');
 if (isset($deletefile) && !$logfile) {
-    sfUtils::Deletefile($logDir.$deletefile);
+    sfUtils::Deletefile($logDir . $deletefile);
 }
 ?>
 <!DOCTYPE HTML>
@@ -134,7 +134,7 @@ if (isset($deletefile) && !$logfile) {
                     <a href="LogViewer.php?delfile={1}" title="Delete this Logfile"><img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /></a>\n\
                     </div>');
                     formatter.format(data, [1, 1]);
-                    
+
                     //var formatter2 = new google.visualization.PatternFormat('');
                     //formatter2.format(data, [2, 2]);
 
@@ -157,8 +157,8 @@ if (isset($deletefile) && !$logfile) {
                     data.addColumn('string', 'Operation');
                     data.addRows([
     <?php
-    $config = Config::getConfig("datadir", '../config/config.ini');
-    $logDir = $config['logdir'];
+    $datadir = new dataDirParam("../config/config.ini");
+    $logDir = $datadir->m_logdir;
 
     $info = sfUtils::viewLogFile($logDir . $logfile);
     $errorcount = $info['errorcount'];
