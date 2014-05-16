@@ -41,7 +41,7 @@ if ((isset($MM_setup)) && ($MM_setup == "setupform")) {
     $m_sfUrl = str_replace("install/sfInstall.php", "", $url);
     $somem_Message = $somem_Message . "Snowflakes Base: " . $m_sfUrl . " <br></p>";
 
-    $obj = new SnowflakesSetUp();
+    $obj = new snowflakesSetUp();
     $obj->m_hostName = $Host_Name;
     $obj->m_dbUsername = $Database_Username;
     $obj->m_dbPassword = $Database_Password;

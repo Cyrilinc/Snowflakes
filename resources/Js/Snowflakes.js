@@ -102,4 +102,54 @@ function GetQuery() {
     }
     return query_string;
 }
+
+
+function snowflakesCount(ssefile) {
+    var source = new EventSource(ssefile);
+
+    source.addEventListener('message', function(ev) {
+        var data = JSON.parse(ev.data);
+        alert(data.Snowflakes_total);
+        $("#Snowflakes_published").attr('data-bubble', data.Snowflakes_published);
+        $("#Snowflakes_published2").attr('data-bubble', data.Snowflakes_published);
+        $("#Snowflakes_unpublished").attr('data-bubble', data.Snowflakes_unpublished);
+        $("#Snowflakes_user_total").attr('data-bubble', data.Snowflakes_user_total);
+        $("#Snowflakes_total").attr('data-bubble', data.Snowflakes_total);
+
+        $("#Snowflakes_user_published").html(data.Snowflakes_user_published);
+        $("#Snowflakes_user_unpublished").html(data.Snowflakes_user_unpublished);
+
+        $("#SfGallery_unpublished").attr('data-bubble', data.SfGallery_unpublished);
+        $("#SfGallery_published").attr('data-bubble', data.SfGallery_published);
+        $("#SfGallery_published2").attr('data-bubble', data.SfGallery_published);
+        $("#SfGallery_user_total").attr('data-bubble', data.SfGallery_user_total);
+        $("#SfGallery_total").attr('data-bubble', data.SfGallery_total);
+
+        $("#SfGallery_user_published").html(data.SfGallery_user_published);
+        $("#SfGallery_user_unpublished").html(data.SfGallery_user_unpublished);
+
+        $("#SfEvents_published").attr('data-bubble', data.SfEvents_published);
+        $("#SfEvents_published2").attr('data-bubble', data.SfEvents_published);
+        $("#SfEvents_unpublished").attr('data-bubble', data.SfEvents_unpublished);
+        $("#SfEvents_user_total").attr('data-bubble', data.SfEvents_user_total);
+        $("#SfEvents_total").attr('data-bubble', data.SfEvents_total);
+
+        $("#SfEvents_user_published").html(data.SfEvents_user_published);
+        $("#SfEvents_user_unpublished").html(data.SfEvents_user_unpublished);
+
+        $("#SFUsers_total").attr('data-bubble', data.SFUsers_total);
+    }, false);
+
+}
+;
+
+function userActivities(ssefile) {
+    var source = new EventSource(ssefile);
+    source.addEventListener('message', function(ev) {
+        var data = JSON.parse(ev.data);
+        alert(data.msg);
+        $("#activities").html(data.msg);
+    }, false);
+}
+;
 			

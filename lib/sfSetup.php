@@ -10,7 +10,7 @@ include_once '../lib/sf.php';
 include_once '../lib/sfConnect.php';
 include_once '../config/Config.php';
 
-class SnowflakesSetUp {
+class snowflakesSetUp {
 
     var $m_hostName;
     var $m_dbUsername;

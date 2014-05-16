@@ -171,6 +171,11 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
         <script type="text/javascript" src="../resources/Js/Snowflakes.js"></script>
 
         <!-- InstanceBeginEditable name="head" -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                snowflakesCount("../sse/snowflakesCount.php");
+            });
+        </script>
         <link rel="stylesheet" type="text/css" href="../resources/css/stapel.css" />
         <script type="text/javascript" src="../resources/Js/jquery.stapel.js"></script>
         <script type="text/javascript">
@@ -216,7 +221,7 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                                 <!-- InstanceBeginEditable name="menuEdit" -->
                                 <li><a href="../Home.php" title="Snowflake Home"> <img src="../resources/images/Icons/Home.png" height="22" width="22"  alt="Add" /> Home </a>
                                     <ul>
-                                        <li><a href="../ViewSnowflakes.php?userSf=<?php echo $user->m_username; ?>" title="My Snowflakes" class="blue" data-bubble="<?php echo sfUtils::comapact99($_SESSION['Snowflakes']['user_total']); ?>"> <img src="../resources/images/Icons/Snowflakes.png" height="22" width="22" alt="View" /> My Snowflakes </a></li>
+                                        <li><a href="../ViewSnowflakes.php?userSf=<?php echo $user->m_username; ?>" title="My Snowflakes" class="blue" id="Snowflakes_user_total" data-bubble="<?php echo sfUtils::comapact99($_SESSION['Snowflakes']['user_total']); ?>"> <img src="../resources/images/Icons/Snowflakes.png" height="22" width="22" alt="View" /> My Snowflakes </a></li>
                                         <li><a href="../Events/index.php?userSf=<?php echo $user->m_username; ?>" title="My Events" class="yellow" data-bubble="<?php echo $_SESSION['SfEvents']['user_total']; ?>"> <img src="../resources/images/Icons/Events.png" height="22" width="22" alt="View" /> My Events </a></li>
                                         <li><a href="../Gallery/index.php?userSf=<?php echo $user->m_username; ?>" title="My Gallery" class="green" data-bubble="<?php echo $_SESSION['SfGallery']['user_total']; ?>"> <img src="../resources/images/Icons/Gallery.png" height="22" width="22" alt="View" /> My Gallery </a></li>
                                     </ul>

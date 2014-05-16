@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This Contains all the classes and tools for handling data 
  *
@@ -1238,7 +1239,8 @@ class sfLogError {
 }
 
 /**
- * Miscellaneous utility methods.
+ * Miscellaneous snowflakes utility  methods for carrying out operations to 
+ * files and data in snowflakes API .
  */
 final class sfUtils {
 
@@ -1820,17 +1822,21 @@ final class sfUtils {
      * Constructs the SSE data format and flushes that data to the client.
      *
      * @param string $id Timestamp/id of this connection.
-     * @param string $msg Line of text that should be transmitted.
+     * @param string $msg Line1of text that should be transmitted.
+     * @param int $retry the retry value in millisecconds. 1000ms = 1 second.
      */
-    public static function sendMsg($id, $msg) {
-        echo "id: $id\n";
-        echo "data: {\n";
-        echo "data: \"msg\": \"$msg\", \n";
-        echo "data: \"id\": $id\n";
-        echo "data: }\n";
-        echo "\n";
-        ob_flush();
-        flush();
+    public static function sendMsg($id, $msg, $retry) {
+		echo "id: $id" . PHP_EOL;
+		if($retry){
+			echo "retry: $retry" . PHP_EOL;
+		}
+		echo "data: {\n";
+		echo "data: \"msg\": \"$msg\", \n";
+		echo "data: \"id\": $id\n";
+		echo "data: }\n";
+		echo PHP_EOL;
+		ob_flush();
+		flush();
     }
 
     /**
@@ -2596,96 +2602,97 @@ final class sfUtils {
         $_SESSION['SfGallery'] = array();
         $_SESSION['SfEvents'] = array();
         $_SESSION['SFUsers'] = array();
+	$countSnowflakes=array();
 
         $origSql = "SELECT COUNT(id) count FROM snowflakes WHERE ";
 
         $sql = $origSql . "publish = 1";
         $conn->fetch($sql);
         $totalRows_rsPublished = $conn->getResultArray();
-        $_SESSION['Snowflakes']['published'] = $totalRows_rsPublished[0]['count'];
+        $countSnowflakes ['Snowflakes_published'] = $_SESSION['Snowflakes']['published'] = $totalRows_rsPublished[0]['count'];
 
         if (strlen($username)) {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userPubSnowflakes = $conn->getResultArray();
-            $_SESSION['Snowflakes']['user_published'] = $userPubSnowflakes[0]['count'];
+            $countSnowflakes ['Snowflakes_user_published'] = $_SESSION['Snowflakes']['user_published'] = $userPubSnowflakes[0]['count'];
         }
 
         $sql = $origSql . "publish = 0";
         $conn->fetch($sql);
         $totalRows_rsUnplublished = $conn->getResultArray();
-        $_SESSION['Snowflakes']['unpublished'] = $totalRows_rsUnplublished[0]['count'];
+        $countSnowflakes ['Snowflakes_unpublished'] = $_SESSION['Snowflakes']['unpublished'] = $totalRows_rsUnplublished[0]['count'];
 
         if (strlen($username)) {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userUnPubSnowflakes = $conn->getResultArray();
-            $_SESSION['Snowflakes']['user_unpublished'] = $userUnPubSnowflakes[0]['count'];
-            $_SESSION['Snowflakes']['user_total'] = $userUnPubSnowflakes[0]['count'] + $userPubSnowflakes[0]['count'];
+            $countSnowflakes ['Snowflakes_user_unpublished']= $_SESSION['Snowflakes']['user_unpublished'] = $userUnPubSnowflakes[0]['count'];
+            $countSnowflakes ['Snowflakes_user_total']=$_SESSION['Snowflakes']['user_total'] = $userUnPubSnowflakes[0]['count'] + $userPubSnowflakes[0]['count'];
         }
 
-        $_SESSION['Snowflakes']['total'] = $totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count'];
+        $countSnowflakes ['Snowflakes_total']= $_SESSION['Snowflakes']['total'] = $totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count'];
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_events WHERE publish = 1";
         $conn->fetch($sql);
         $totalRows_rsPublished = $conn->getResultArray();
-        $_SESSION['SfEvents']['published'] = $totalRows_rsPublished[0]['count'];
+        $countSnowflakes ['SfEvents_published']= $_SESSION['SfEvents']['published'] = $totalRows_rsPublished[0]['count'];
 
         if (strlen($username)) {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userPubEvent = $conn->getResultArray();
-            $_SESSION['SfEvents']['user_published'] = $userPubEvent[0]['count'];
+            $countSnowflakes ['SfEvents_user_published']=$_SESSION['SfEvents']['user_published'] = $userPubEvent[0]['count'];
         }
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_events WHERE publish = 0";
         $conn->fetch($sql);
         $totalRows_rsUnplublished = $conn->getResultArray();
-        $_SESSION['SfEvents']['unpublished'] = $totalRows_rsUnplublished[0]['count'];
+        $countSnowflakes ['SfEvents_unpublished']= $_SESSION['SfEvents']['unpublished'] = $totalRows_rsUnplublished[0]['count'];
 
         if (strlen($username)) {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userUnPubEvent = $conn->getResultArray();
-            $_SESSION['SfEvents']['user_unpublished'] = $userUnPubEvent[0]['count'];
-            $_SESSION['SfEvents']['user_total'] = $userUnPubEvent[0]['count'] + $userPubEvent[0]['count'];
+            $countSnowflakes ['SfEvents_user_unpublished']=$_SESSION['SfEvents']['user_unpublished'] = $userUnPubEvent[0]['count'];
+            $countSnowflakes ['SfEvents_user_total']= $_SESSION['SfEvents']['user_total'] = $userUnPubEvent[0]['count'] + $userPubEvent[0]['count'];
         }
 
-        $_SESSION['SfEvents']['total'] = $totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count'];
+        $countSnowflakes ['SfEvents_total']= $_SESSION['SfEvents']['total'] = $totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count'];
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_gallery WHERE publish = 0";
         $conn->fetch($sql);
         $totalRows_galleryUnpublished = $conn->getResultArray();
-        $_SESSION['SfGallery']['unpublished'] = $totalRows_galleryUnpublished[0]['count'];
+        $countSnowflakes ['SfGallery_unpublished']= $_SESSION['SfGallery']['unpublished'] = $totalRows_galleryUnpublished[0]['count'];
 
         if (strlen($username)) {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userPubGallery = $conn->getResultArray();
-            $_SESSION['SfGallery']['user_unpublished'] = $userPubGallery[0]['count'];
+            $countSnowflakes ['SfGallery_user_unpublished']= $_SESSION['SfGallery']['user_unpublished'] = $userPubGallery[0]['count'];
         }
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_gallery WHERE publish = 1";
         $conn->fetch($sql);
         $totalRows_galleryPublished = $conn->getResultArray();
-        $_SESSION['SfGallery']['published'] = $totalRows_galleryPublished[0]['count'];
+        $countSnowflakes ['SfGallery_published']=$_SESSION['SfGallery']['published'] = $totalRows_galleryPublished[0]['count'];
 
         if (strlen($username)) {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userUnPubGallery = $conn->getResultArray();
-            $_SESSION['SfGallery']['user_published'] = $userUnPubGallery[0]['count'];
-            $_SESSION['SfGallery']['user_total'] = $userUnPubGallery[0]['count'] + $userPubGallery[0]['count'];
+            $countSnowflakes ['SfGallery_user_published']=$_SESSION['SfGallery']['user_published'] = $userUnPubGallery[0]['count'];
+            $countSnowflakes ['SfGallery_user_total']=$_SESSION['SfGallery']['user_total'] = $userUnPubGallery[0]['count'] + $userPubGallery[0]['count'];
         }
 
-        $_SESSION['SfGallery']['total'] = $totalRows_galleryPublished[0]['count'] + $totalRows_galleryUnpublished[0]['count'];
+        $countSnowflakes ['SfGallery_total']=$_SESSION['SfGallery']['total'] = $totalRows_galleryPublished[0]['count'] + $totalRows_galleryUnpublished[0]['count'];
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_users";
         $conn->fetch($sql);
         $totalRows_users = $conn->getResultArray();
-        $_SESSION['SFUsers']['total'] = $totalRows_users[0]['count'];
+        $countSnowflakes ['SFUsers_total']=$_SESSION['SFUsers']['total'] = $totalRows_users[0]['count'];
 
-        return true;
+        return $countSnowflakes;
     }
 
     /**
@@ -2970,12 +2977,12 @@ final class sfUtils {
 
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['snowflakesResultUrl']) ? $settingsConfig['snowflakesResultUrl'] : $settingsConfig['m_sfUrl'] . "OneView.php";
-
+	$headers= apache_request_headers();
         $rssString = '
             <rss version="2.0">
                 <channel>
                     <title>Snowflakes Rss</title>
-                    <description>A description of Snowflakes Rss feed</description>
+                    <description>A '.$headers['Host'].' Snowflakes Rss feed</description>
                     <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=snowflakes') . '</link>
                     <image>
                         <url>' . $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png" . '</url>
@@ -3021,11 +3028,12 @@ final class sfUtils {
 
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['eventsResultUrl']) ? $settingsConfig['eventsResultUrl'] : $settingsConfig['m_sfUrl'] . "Events/OneView.php";
+		$headers= apache_request_headers();
         $rssString = '
             <rss version="2.0">
                 <channel>
                     <title>Snowflakes Event Rss</title>
-                    <description>A description of snowflakes event rss feed</description>
+                    <description>A '.$headers['Host'].' snowflakes event rss feed</description>
                     <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=events') . '</link>
                     <image>
                         <url>' . self::xmlencoder($settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png") . '</url>
@@ -3076,11 +3084,12 @@ final class sfUtils {
 
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['galleryResultUrl']) ? $settingsConfig['galleryResultUrl'] : $settingsConfig['m_sfUrl'] . "Gallery/OneView.php";
+		$headers= apache_request_headers();
         $rssString = '
             <rss version="2.0">
                 <channel>
                     <title>Snowflakes Gallery Rss</title>
-                    <description>A description of Snowflakes Gallery Rss feed</description>
+                    <description>A '.$headers['Host'].' Snowflakes Gallery Rss feed</description>
                     <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery') . '</link>
                     <image>
                         <url>' . self::xmlencoder($settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png") . '</url>
@@ -3453,6 +3462,7 @@ class databaseParam {
      * Initialize the database parameter by loading data from the 
      * configuration file 
      */
+
     public function __construct($inifile = '../config/config.ini') {
         $this->init($inifile);
     }
@@ -3522,6 +3532,7 @@ class dataDirParam {
      * Initialize the data directory parameter by loading data from the 
      * configuration file 
      */
+
     public function __construct($inifile = '../config/config.ini') {
         $this->init($inifile);
     }
@@ -3667,6 +3678,13 @@ class settingsStruct {
         return true;
     }
 
+    /**
+     * Stores all the new configuration set into the configuration file
+     * 
+     * @param string $inifile <p> The configuration file </p>
+     * 
+     * @return mixed The <b>configuration data </b> in form of an array on success or <b>FALSE</b> on failure.
+     */
     public function setConfigItems($inifile = '../config/config.ini') {
         if (empty($this->m_settingsarray)) {
             return false;
@@ -3674,156 +3692,325 @@ class settingsStruct {
         return Config::saveConfig($this->m_settingsarray, $inifile);
     }
 
+    /**
+     * sets the database host name of the db in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SethostName($value) {
         //host
         $this->m_settingsarray["db"]["host"] = $value;
     }
 
+    /**
+     * sets the database name of the db in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetdbName($value) {
         //dbname
         $this->m_settingsarray["db"]["dbname"] = $value;
     }
 
+    /**
+     * sets the database type of the db in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetdbType($value) {
         //type
         $this->m_settingsarray["db"]["type"] = $value;
     }
 
+    /**
+     * sets the database username of the db in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetdbUsername($value) {
         //username
         $this->m_settingsarray["db"]["username"] = $value;
     }
 
+    /**
+     * sets the database password of the db in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetdbPassword($value) {
         //password
-        $this->m_settingsarray["db"]["password"] = $value;
+        $this->m_settingsarray["db"]["password"] = sfUtils::decrypt($value, $this->m_key) ;
     }
 
+    /**
+     * sets the administration email of the db in the  configuration file
+     * 
+     * @param string $value <p> The value of  configuration element to set</p>  
+     */
     public function Setadmin_email($value) {
         //admin_email
         $this->m_settingsarray["db"]["admin_email"] = $value;
+        
     }
 
+    /**
+     * sets the site time zone of the db in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SettimeZone($value) {
         //time_zone
         $this->m_settingsarray["db"]["time_zone"] = $value;
     }
 
+    
     //Settings Info     //[settings]
+    
+    /**
+     * sets the snowflakes installation url of the settings in the  configuration file
+     * 
+     * @param string $value <p> The value of  configuration element to set</p>  
+     */
     public function Seturl($value) {
         //url
         $this->m_settingsarray["settings"]["url"] = $value;
     }
 
-    public function Setpath($value) {
-        //path
-        $this->m_settingsarray["settings"]["path"] = $value;
-    }
-
+    /**
+     * sets the snowflake url of the settings in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetsfUrl($value) {
         //m_sfUrl
         $this->m_settingsarray["settings"]["m_sfUrl"] = $value;
     }
 
+    /**
+     * sets the snowflake gallery url of the settings in the  configuration file
+     * 
+     * @param string $value <p> The value of  configuration element to set</p>  
+     */
     public function SetsfGalleryUrl($value) {
         //m_sfGalleryUrl
         $this->m_settingsarray["settings"]["m_sfGalleryUrl"] = $value;
     }
 
+    /**
+     * sets the snowflakes Gallery image url of the settings in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetsfGalleryImgUrl($value) {
         //m_sfGalleryImgUrl
         $this->m_settingsarray["settings"]["m_sfGalleryImgUrl"] = $value;
     }
 
+    /**
+     * sets the snowflake gallery thumbnail image url of the settings in the  
+     * configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetsfGalleryThumbUrl($value) {
         //m_sfGalleryThumbUrl 
         $this->m_settingsarray["settings"]["m_sfGalleryThumbUrl"] = $value;
     }
 
-    public function SetuploadGalleryDir($value) {
-        //uploadGalleryDir
-        $this->m_settingsarray["settings"]["uploadGalleryDir"] = $value;
-    }
-
-    public function SetgalleryImgDir($value) {
-        //galleryImgDir
-        $this->m_settingsarray["settings"]["galleryImgDir"] = $value;
-    }
-
-    public function SetgalleryThumbDir($value) {
-        //galleryThumbDir
-        $this->m_settingsarray["settings"]["galleryThumbDir"] = $value;
-    }
-
+    /**
+     * sets the snowflake gallery thumbnail image width of the settings in the  
+     * configuration file 
+     * 
+     * @param int $value <p> The value of  configuration element to set</p> 
+     */
     public function SetthumbWidth($value) {
         //thumbWidth
         $this->m_settingsarray["settings"]["thumbWidth"] = $value;
     }
 
+    /**
+     * sets the snowflake gallery thumbnail image height of the settings in the
+     * configuration file 
+     * 
+     * @param int $value <p> The value of  configuration element to set</p> 
+     */
     public function SetthumbHeight($value) {
         //thumbHeight
         $this->m_settingsarray["settings"]["thumbHeight"] = $value;
     }
 
+    /**
+     * sets the snowflake gallery maximum image width of the settings in the  
+     * configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetmaxImageWidth($value) {
         //maxImageWidth
         $this->m_settingsarray["settings"]["maxImageWidth"] = $value;
     }
 
-    public function Setresources($value) {
-        //resources
-        $this->m_settingsarray["settings"]["resources"] = $value;
-    }
 
+    /**
+     * sets the snowflake gallery supported image extesion list of the settings 
+     * in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetimageExtList($value) {
         //imageExtList
         $this->m_settingsarray["settings"]["imageExtList"] = $value;
     }
 
+    /**
+     * sets the snowflake gallery supported image type list  of the settings 
+     * in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetimageTypesList($value) {
         //imageTypesList
         $this->m_settingsarray["settings"]["imageTypesList"] = $value;
     }
 
+    /**
+     * sets the snowflakes output url where snowflakes audience can see one 
+     * snowflakes published of the settings in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetsnowflakesResultUrl($value) {
         //snowflakesResultUrl   // One snowflakes result
         $this->m_settingsarray["settings"]["snowflakesResultUrl"] = $value;
     }
 
+    /**
+     * sets the snowflakes output url where snowflakes audience can see all 
+     * snowflakes published of the settings in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetsnowflakesOutUrl($value) {
         // snowflakesOutUrl     // All snowflakes output
         $this->m_settingsarray["settings"]["snowflakesOutUrl"] = $value;
     }
 
+    /**
+     * sets the events output url where snowflakes audience can see one 
+     * snowflakes published of the settings in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SeteventsResultUrl($value) {
         //eventsResultUrl        // One event result
         $this->m_settingsarray["settings"]["eventsResultUrl"] = $value;
     }
 
+    /**
+     * sets the events output url where snowflakes audience can see all 
+     * snowflakes published of the settings in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SeteventsOutputUrl($value) {
         //eventsOutputUrl        //All event output
         $this->m_settingsarray["settings"]["eventsOutputUrl"] = $value;
     }
 
+    /**
+     * sets the gallery output url where snowflakes audience can see one 
+     * snowflakes published of the settings in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
     public function SetgalleryResultUrl($value) {
         //galleryResultUrl      // One gallery result
         $this->m_settingsarray["settings"]["galleryResultUrl"] = $value;
     }
 
+    /**
+     * sets the gallery output url where snowflakes audience can see all 
+     * snowflakes published of the settings in the  configuration file
+     * 
+     * @param string $value <p> The value of  configuration element to set</p>  
+     */
     public function SetgalleryOutUrl($value) {
         //galleryOutUrl           //All gallery output
 
         $this->m_settingsarray["settings"]["galleryOutUrl"] = $value;
     }
 
+    /**
+     * sets the maximum image size allowed for upload of the settings in the  
+     * configuration file 
+     * 
+     * @param int $value <p> The value of  configuration element to set</p> 
+     */
     public function SetmaxImageSize($value) {
         //maxImageSize
         $this->m_settingsarray["settings"]["maxImageSize"] = sfUtils::toByteSize($value);
     }
 
+    /**
+     * Adds a new configuration element to the configuration file
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param string $tag <p> The tag/element name of the configuration element to set </p>
+     * @param string $section <p> The tag/element header name of the configuration element to set </p> 
+     * 
+     */
     public function setCustom($section, $tag, $value) {
-        //host
         $this->m_settingsarray[$section][$tag] = $value;
+    }
+
+    /**
+     * sets the data path of the datadir in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
+    public function Setpath($value) {
+        //path
+        $this->m_settingsarray["datadir"]["path"] = $value;
+    }
+
+    /**
+     * sets the data resources of the datadir in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
+    public function Setresources($value) {
+        //resources
+        $this->m_settingsarray["datadir"]["resources"] = $value;
+    }
+
+    /**
+     * sets the gallery upload directory of the datadir in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
+    public function SetuploadGalleryDir($value) {
+        //uploadGalleryDir
+        $this->m_settingsarray["datadir"]["uploadGalleryDir"] = $value;
+    }
+
+    /**
+     * sets the gallery image upload directory of the datadir in the  configuration file
+     * 
+     * @param string $value <p> The value of  configuration element to set</p>  
+     */
+    public function SetgalleryImgDir($value) {
+        //galleryImgDir
+        $this->m_settingsarray["datadir"]["galleryImgDir"] = $value;
+    }
+
+    /**
+     * sets the gallery image thumbnail upload directory of the datadir in the  configuration file 
+     * 
+     * @param string $value <p> The value of  configuration element to set</p> 
+     */
+    public function SetgalleryThumbDir($value) {
+        //galleryThumbDir
+        $this->m_settingsarray["datadir"]["galleryThumbDir"] = $value;
     }
 
 }

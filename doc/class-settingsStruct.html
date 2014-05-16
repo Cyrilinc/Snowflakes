@@ -7,7 +7,7 @@
 	<title>Class settingsStruct | Snowflakes</title>
 
 	<script type="text/javascript" src="resources/combined.js?774890837"></script>
-	<script type="text/javascript" src="elementlist.js?3935771214"></script>
+	<script type="text/javascript" src="elementlist.js?4233389632"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -45,7 +45,7 @@
 				<li><a href="class-sfImageProcessor.html">sfImageProcessor</a></li>
 				<li><a href="class-sfLogError.html">sfLogError</a></li>
 				<li><a href="class-sfUtils.html">sfUtils</a></li>
-				<li><a href="class-SnowflakesSetUp.html">SnowflakesSetUp</a></li>
+				<li><a href="class-snowflakesSetUp.html">snowflakesSetUp</a></li>
 				<li><a href="class-snowflakeStruct.html">snowflakeStruct</a></li>
 				<li><a href="class-userStruct.html">userStruct</a></li>
 			</ul>
@@ -110,7 +110,7 @@
 
 				<b>Author:</b>
 				Cyril Adelekan<br />
-		<b>Located at</b> <a href="source-class-settingsStruct.html#3563-3829" title="Go to source code">lib/sf.php</a><br />
+		<b>Located at</b> <a href="source-class-settingsStruct.html#3574-4016" title="Go to source code">lib/sf.php</a><br />
 	</div>
 
 
@@ -128,7 +128,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_init">#</a>
-		<code><a href="source-class-settingsStruct.html#3603-3614" title="Go to source code">init</a>( <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3614-3625" title="Go to source code">init</a>( <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -170,7 +170,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_populate">#</a>
-		<code><a href="source-class-settingsStruct.html#3616-3668" title="Go to source code">populate</a>( <span>array <var>$array</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3627-3679" title="Go to source code">populate</a>( <span>array <var>$array</var></span> )</code>
 
 		<div class="description short">
 			
@@ -205,24 +205,40 @@
 
 		<td class="attributes"><code>
 			 public 
-			
+			mixed
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setConfigItems">#</a>
-		<code><a href="source-class-settingsStruct.html#3670-3675" title="Go to source code">setConfigItems</a>( <span>mixed <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3681-3693" title="Go to source code">setConfigItems</a>( <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
+<p>Stores all the new configuration set into the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Stores all the new configuration set into the configuration file</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>The <b>configuration data </b> in form of an array on success or <b>FALSE</b> on
+failure.<br />
+				</div>
 
 
 
@@ -241,16 +257,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SethostName">#</a>
-		<code><a href="source-class-settingsStruct.html#3677-3680" title="Go to source code">SethostName</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3695-3703" title="Go to source code">SethostName</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the database host name of the db in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the database host name of the db in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -270,16 +297,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetdbName">#</a>
-		<code><a href="source-class-settingsStruct.html#3682-3685" title="Go to source code">SetdbName</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3705-3713" title="Go to source code">SetdbName</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the database name of the db in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the database name of the db in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -299,16 +337,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetdbType">#</a>
-		<code><a href="source-class-settingsStruct.html#3687-3690" title="Go to source code">SetdbType</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3715-3723" title="Go to source code">SetdbType</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the database type of the db in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the database type of the db in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -328,16 +377,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetdbUsername">#</a>
-		<code><a href="source-class-settingsStruct.html#3692-3695" title="Go to source code">SetdbUsername</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3725-3733" title="Go to source code">SetdbUsername</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the database username of the db in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the database username of the db in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -357,16 +417,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetdbPassword">#</a>
-		<code><a href="source-class-settingsStruct.html#3697-3700" title="Go to source code">SetdbPassword</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3735-3743" title="Go to source code">SetdbPassword</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the database password of the db in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the database password of the db in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -386,16 +457,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Setadmin_email">#</a>
-		<code><a href="source-class-settingsStruct.html#3702-3705" title="Go to source code">Setadmin_email</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3745-3754" title="Go to source code">Setadmin_email</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the administration email of the db in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the administration email of the db in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -415,16 +497,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SettimeZone">#</a>
-		<code><a href="source-class-settingsStruct.html#3707-3710" title="Go to source code">SettimeZone</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3756-3764" title="Go to source code">SettimeZone</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the site time zone of the db in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the site time zone of the db in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -444,45 +537,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Seturl">#</a>
-		<code><a href="source-class-settingsStruct.html#3713-3716" title="Go to source code">Seturl</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3769-3777" title="Go to source code">Seturl</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the snowflakes installation url of the settings in the configuration
+file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the snowflakes installation url of the settings in the configuration
+file</p>
 
 
 
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="Setpath" id="_Setpath">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_Setpath">#</a>
-		<code><a href="source-class-settingsStruct.html#3718-3721" title="Go to source code">Setpath</a>( <span>mixed <var>$value</var></span> )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -502,16 +579,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetsfUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#3723-3726" title="Go to source code">SetsfUrl</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3779-3787" title="Go to source code">SetsfUrl</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the snowflake url of the settings in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the snowflake url of the settings in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -531,16 +619,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetsfGalleryUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#3728-3731" title="Go to source code">SetsfGalleryUrl</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3789-3797" title="Go to source code">SetsfGalleryUrl</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the snowflake gallery url of the settings in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the snowflake gallery url of the settings in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -560,16 +659,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetsfGalleryImgUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#3733-3736" title="Go to source code">SetsfGalleryImgUrl</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3799-3807" title="Go to source code">SetsfGalleryImgUrl</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the snowflakes Gallery image url of the settings in the configuration
+file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the snowflakes Gallery image url of the settings in the configuration
+file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -589,103 +701,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetsfGalleryThumbUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#3738-3741" title="Go to source code">SetsfGalleryThumbUrl</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3809-3818" title="Go to source code">SetsfGalleryThumbUrl</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the snowflake gallery thumbnail image url of the settings in the
+configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the snowflake gallery thumbnail image url of the settings in the
+configuration file</p>
 
 
 
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="SetuploadGalleryDir" id="_SetuploadGalleryDir">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_SetuploadGalleryDir">#</a>
-		<code><a href="source-class-settingsStruct.html#3743-3746" title="Go to source code">SetuploadGalleryDir</a>( <span>mixed <var>$value</var></span> )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="SetgalleryImgDir" id="_SetgalleryImgDir">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_SetgalleryImgDir">#</a>
-		<code><a href="source-class-settingsStruct.html#3748-3751" title="Go to source code">SetgalleryImgDir</a>( <span>mixed <var>$value</var></span> )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="SetgalleryThumbDir" id="_SetgalleryThumbDir">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_SetgalleryThumbDir">#</a>
-		<code><a href="source-class-settingsStruct.html#3753-3756" title="Go to source code">SetgalleryThumbDir</a>( <span>mixed <var>$value</var></span> )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -705,16 +743,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetthumbWidth">#</a>
-		<code><a href="source-class-settingsStruct.html#3758-3761" title="Go to source code">SetthumbWidth</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3820-3829" title="Go to source code">SetthumbWidth</a>( <span>integer <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the snowflake gallery thumbnail image width of the settings in the
+configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the snowflake gallery thumbnail image width of the settings in the
+configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>integer</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -734,16 +785,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetthumbHeight">#</a>
-		<code><a href="source-class-settingsStruct.html#3763-3766" title="Go to source code">SetthumbHeight</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3831-3840" title="Go to source code">SetthumbHeight</a>( <span>integer <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the snowflake gallery thumbnail image height of the settings in the
+configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the snowflake gallery thumbnail image height of the settings in the
+configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>integer</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -763,45 +827,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetmaxImageWidth">#</a>
-		<code><a href="source-class-settingsStruct.html#3768-3771" title="Go to source code">SetmaxImageWidth</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3842-3851" title="Go to source code">SetmaxImageWidth</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the snowflake gallery maximum image width of the settings in the
+configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the snowflake gallery maximum image width of the settings in the
+configuration file</p>
 
 
 
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="Setresources" id="_Setresources">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_Setresources">#</a>
-		<code><a href="source-class-settingsStruct.html#3773-3776" title="Go to source code">Setresources</a>( <span>mixed <var>$value</var></span> )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -821,16 +869,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetimageExtList">#</a>
-		<code><a href="source-class-settingsStruct.html#3778-3781" title="Go to source code">SetimageExtList</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3854-3863" title="Go to source code">SetimageExtList</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the snowflake gallery supported image extesion list of the settings in
+the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the snowflake gallery supported image extesion list of the settings in
+the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -850,16 +911,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetimageTypesList">#</a>
-		<code><a href="source-class-settingsStruct.html#3783-3786" title="Go to source code">SetimageTypesList</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3865-3874" title="Go to source code">SetimageTypesList</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the snowflake gallery supported image type list of the settings in the
+configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the snowflake gallery supported image type list of the settings in the
+configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -879,16 +953,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetsnowflakesResultUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#3788-3791" title="Go to source code">SetsnowflakesResultUrl</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3876-3885" title="Go to source code">SetsnowflakesResultUrl</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the snowflakes output url where snowflakes audience can see one
+snowflakes published of the settings in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the snowflakes output url where snowflakes audience can see one
+snowflakes published of the settings in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -908,16 +995,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetsnowflakesOutUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#3793-3796" title="Go to source code">SetsnowflakesOutUrl</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3887-3896" title="Go to source code">SetsnowflakesOutUrl</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the snowflakes output url where snowflakes audience can see all
+snowflakes published of the settings in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the snowflakes output url where snowflakes audience can see all
+snowflakes published of the settings in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -937,16 +1037,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SeteventsResultUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#3798-3801" title="Go to source code">SeteventsResultUrl</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3898-3907" title="Go to source code">SeteventsResultUrl</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the events output url where snowflakes audience can see one snowflakes
+published of the settings in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the events output url where snowflakes audience can see one snowflakes
+published of the settings in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -966,16 +1079,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SeteventsOutputUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#3803-3806" title="Go to source code">SeteventsOutputUrl</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3909-3918" title="Go to source code">SeteventsOutputUrl</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the events output url where snowflakes audience can see all snowflakes
+published of the settings in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the events output url where snowflakes audience can see all snowflakes
+published of the settings in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -995,16 +1121,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetgalleryResultUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#3808-3811" title="Go to source code">SetgalleryResultUrl</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3920-3929" title="Go to source code">SetgalleryResultUrl</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the gallery output url where snowflakes audience can see one snowflakes
+published of the settings in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the gallery output url where snowflakes audience can see one snowflakes
+published of the settings in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -1024,16 +1163,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetgalleryOutUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#3813-3817" title="Go to source code">SetgalleryOutUrl</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3931-3941" title="Go to source code">SetgalleryOutUrl</a>( <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the gallery output url where snowflakes audience can see all snowflakes
+published of the settings in the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the gallery output url where snowflakes audience can see all snowflakes
+published of the settings in the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -1053,16 +1205,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetmaxImageSize">#</a>
-		<code><a href="source-class-settingsStruct.html#3819-3822" title="Go to source code">SetmaxImageSize</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3943-3952" title="Go to source code">SetmaxImageSize</a>( <span>integer <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>sets the maximum image size allowed for upload of the settings in the
+configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>sets the maximum image size allowed for upload of the settings in the
+configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>integer</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -1082,16 +1247,241 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCustom">#</a>
-		<code><a href="source-class-settingsStruct.html#3824-3827" title="Go to source code">setCustom</a>( <span>mixed <var>$section</var></span>, <span>mixed <var>$tag</var></span>, <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-settingsStruct.html#3954-3964" title="Go to source code">setCustom</a>( <span>string <var>$section</var></span>, <span>string <var>$tag</var></span>, <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Adds a new configuration element to the configuration file</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Adds a new configuration element to the configuration file</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$section</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+					<dt><var>$tag</var></dt>
+					<dd><code>string</code><br>$tag
+<p>The tag/element name of the configuration element to set</p>
+</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$section
+<p>The tag/element header name of the configuration element to set</p>
+</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="Setpath" id="_Setpath">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Setpath">#</a>
+		<code><a href="source-class-settingsStruct.html#3966-3974" title="Go to source code">Setpath</a>( <span>string <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>sets the data path of the datadir in the configuration file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>sets the data path of the datadir in the configuration file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="Setresources" id="_Setresources">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Setresources">#</a>
+		<code><a href="source-class-settingsStruct.html#3976-3984" title="Go to source code">Setresources</a>( <span>string <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>sets the data resources of the datadir in the configuration file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>sets the data resources of the datadir in the configuration file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetuploadGalleryDir" id="_SetuploadGalleryDir">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetuploadGalleryDir">#</a>
+		<code><a href="source-class-settingsStruct.html#3986-3994" title="Go to source code">SetuploadGalleryDir</a>( <span>string <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>sets the gallery upload directory of the datadir in the configuration
+file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>sets the gallery upload directory of the datadir in the configuration
+file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetgalleryImgDir" id="_SetgalleryImgDir">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetgalleryImgDir">#</a>
+		<code><a href="source-class-settingsStruct.html#3996-4004" title="Go to source code">SetgalleryImgDir</a>( <span>string <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>sets the gallery image upload directory of the datadir in the configuration
+file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>sets the gallery image upload directory of the datadir in the configuration
+file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SetgalleryThumbDir" id="_SetgalleryThumbDir">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SetgalleryThumbDir">#</a>
+		<code><a href="source-class-settingsStruct.html#4006-4014" title="Go to source code">SetgalleryThumbDir</a>( <span>string <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>sets the gallery image thumbnail upload directory of the datadir in the
+configuration file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>sets the gallery image thumbnail upload directory of the datadir in the
+configuration file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value
+<p>The value of configuration element to set</p>
+</dd>
+				</dl></div>
 
 
 
@@ -1122,7 +1512,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3566" title="Go to source code"><var>$m_hostName</var></a>
+				<a href="source-class-settingsStruct.html#3577" title="Go to source code"><var>$m_hostName</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1145,7 +1535,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3567" title="Go to source code"><var>$m_dbName</var></a>
+				<a href="source-class-settingsStruct.html#3578" title="Go to source code"><var>$m_dbName</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1168,7 +1558,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3568" title="Go to source code"><var>$m_dbType</var></a>
+				<a href="source-class-settingsStruct.html#3579" title="Go to source code"><var>$m_dbType</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1191,7 +1581,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3569" title="Go to source code"><var>$m_dbUsername</var></a>
+				<a href="source-class-settingsStruct.html#3580" title="Go to source code"><var>$m_dbUsername</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1214,7 +1604,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3570" title="Go to source code"><var>$m_dbPassword</var></a>
+				<a href="source-class-settingsStruct.html#3581" title="Go to source code"><var>$m_dbPassword</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1237,7 +1627,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3571" title="Go to source code"><var>$m_key</var></a>
+				<a href="source-class-settingsStruct.html#3582" title="Go to source code"><var>$m_key</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1260,7 +1650,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3572" title="Go to source code"><var>$m_admin_email</var></a>
+				<a href="source-class-settingsStruct.html#3583" title="Go to source code"><var>$m_admin_email</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1283,7 +1673,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3573" title="Go to source code"><var>$m_time_zone</var></a>
+				<a href="source-class-settingsStruct.html#3584" title="Go to source code"><var>$m_time_zone</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1306,7 +1696,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3575" title="Go to source code"><var>$m_url</var></a>
+				<a href="source-class-settingsStruct.html#3586" title="Go to source code"><var>$m_url</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1329,7 +1719,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3576" title="Go to source code"><var>$m_sfUrl</var></a>
+				<a href="source-class-settingsStruct.html#3587" title="Go to source code"><var>$m_sfUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1352,7 +1742,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3577" title="Go to source code"><var>$m_loginUrl</var></a>
+				<a href="source-class-settingsStruct.html#3588" title="Go to source code"><var>$m_loginUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1375,7 +1765,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3578" title="Go to source code"><var>$m_flakeItUrl</var></a>
+				<a href="source-class-settingsStruct.html#3589" title="Go to source code"><var>$m_flakeItUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1398,7 +1788,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3579" title="Go to source code"><var>$m_sfGalleryUrl</var></a>
+				<a href="source-class-settingsStruct.html#3590" title="Go to source code"><var>$m_sfGalleryUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1421,7 +1811,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3580" title="Go to source code"><var>$m_sfGalleryImgUrl</var></a>
+				<a href="source-class-settingsStruct.html#3591" title="Go to source code"><var>$m_sfGalleryImgUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1444,7 +1834,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3581" title="Go to source code"><var>$m_sfGalleryThumbUrl</var></a>
+				<a href="source-class-settingsStruct.html#3592" title="Go to source code"><var>$m_sfGalleryThumbUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1467,7 +1857,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3582" title="Go to source code"><var>$m_thumbWidth</var></a>
+				<a href="source-class-settingsStruct.html#3593" title="Go to source code"><var>$m_thumbWidth</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1490,7 +1880,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3583" title="Go to source code"><var>$m_thumbHeight</var></a>
+				<a href="source-class-settingsStruct.html#3594" title="Go to source code"><var>$m_thumbHeight</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1513,7 +1903,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3584" title="Go to source code"><var>$m_maxImageWidth</var></a>
+				<a href="source-class-settingsStruct.html#3595" title="Go to source code"><var>$m_maxImageWidth</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1536,7 +1926,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3585" title="Go to source code"><var>$m_imageExtList</var></a>
+				<a href="source-class-settingsStruct.html#3596" title="Go to source code"><var>$m_imageExtList</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1559,7 +1949,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3586" title="Go to source code"><var>$m_imageTypesList</var></a>
+				<a href="source-class-settingsStruct.html#3597" title="Go to source code"><var>$m_imageTypesList</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1582,7 +1972,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3587" title="Go to source code"><var>$m_snowflakesResultUrl</var></a>
+				<a href="source-class-settingsStruct.html#3598" title="Go to source code"><var>$m_snowflakesResultUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1605,7 +1995,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3588" title="Go to source code"><var>$m_snowflakesOutUrl</var></a>
+				<a href="source-class-settingsStruct.html#3599" title="Go to source code"><var>$m_snowflakesOutUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1628,7 +2018,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3589" title="Go to source code"><var>$m_eventsResultUrl</var></a>
+				<a href="source-class-settingsStruct.html#3600" title="Go to source code"><var>$m_eventsResultUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1651,7 +2041,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3590" title="Go to source code"><var>$m_eventsOutputUrl</var></a>
+				<a href="source-class-settingsStruct.html#3601" title="Go to source code"><var>$m_eventsOutputUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1674,7 +2064,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3591" title="Go to source code"><var>$m_galleryResultUrl</var></a>
+				<a href="source-class-settingsStruct.html#3602" title="Go to source code"><var>$m_galleryResultUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1697,7 +2087,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3592" title="Go to source code"><var>$m_galleryOutUrl</var></a>
+				<a href="source-class-settingsStruct.html#3603" title="Go to source code"><var>$m_galleryOutUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1720,7 +2110,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3593" title="Go to source code"><var>$m_maxImageSize</var></a>
+				<a href="source-class-settingsStruct.html#3604" title="Go to source code"><var>$m_maxImageSize</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1743,7 +2133,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3595" title="Go to source code"><var>$m_logdir</var></a>
+				<a href="source-class-settingsStruct.html#3606" title="Go to source code"><var>$m_logdir</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1766,7 +2156,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3596" title="Go to source code"><var>$m_path</var></a>
+				<a href="source-class-settingsStruct.html#3607" title="Go to source code"><var>$m_path</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1789,7 +2179,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3597" title="Go to source code"><var>$m_resources</var></a>
+				<a href="source-class-settingsStruct.html#3608" title="Go to source code"><var>$m_resources</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1812,7 +2202,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3598" title="Go to source code"><var>$m_uploadGalleryDir</var></a>
+				<a href="source-class-settingsStruct.html#3609" title="Go to source code"><var>$m_uploadGalleryDir</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1835,7 +2225,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3599" title="Go to source code"><var>$m_galleryImgDir</var></a>
+				<a href="source-class-settingsStruct.html#3610" title="Go to source code"><var>$m_galleryImgDir</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1858,7 +2248,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3600" title="Go to source code"><var>$m_galleryThumbDir</var></a>
+				<a href="source-class-settingsStruct.html#3611" title="Go to source code"><var>$m_galleryThumbDir</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1881,7 +2271,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#3601" title="Go to source code"><var>$m_settingsarray</var></a>
+				<a href="source-class-settingsStruct.html#3612" title="Go to source code"><var>$m_settingsarray</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
