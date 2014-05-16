@@ -1,4 +1,5 @@
 <?php
+
 header("Content-Type: text/event-stream");
 header("Cache-Control:no-cache");
 // user activity Server Sent Event
@@ -8,16 +9,18 @@ if (!isset($_SESSION)) {
 }
 
 $startedAt = time();
+$userName = filter_input(INPUT_GET, 'userName');
 do {
     // Cap connections at 10 seconds. The browser will reopen the connection on close
     if ((time() - $startedAt) > 10) {
         die();
     }
 
-    if (!isset($_SESSION['MM_Username'])) {
+    if (!isset($_SESSION['MM_Username']) && !isset($userName)) {
         die();
     }
 
+    $userName = $userName ? $userName : $_SESSION['MM_Username'];
     require_once '../lib/sf.php';
     require_once '../lib/sfConnect.php';
     require_once '../config/Config.php';
@@ -26,8 +29,9 @@ do {
     $SFconnects = new sfConnect($config->dbArray());
     $SFconnects->connect(); // Connect to database
 
-    $activities = sfUtils::getActivities($SFconnects, $_SESSION['MM_Username'], '../config/config.ini');
-    sfUtils::sendMsg($startedAt, $activities);
+    $activities = sfUtils::getActivities($SFconnects, $userName, '../config/config.ini');
+    
+    sfUtils::sendSSEMsg($startedAt, $activities);
     $SFconnects->close();
     sleep(5);
 

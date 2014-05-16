@@ -1825,18 +1825,18 @@ final class sfUtils {
      * @param string $msg Line1of text that should be transmitted.
      * @param int $retry the retry value in millisecconds. 1000ms = 1 second.
      */
-    public static function sendMsg($id, $msg, $retry) {
-		echo "id: $id" . PHP_EOL;
-		if($retry){
-			echo "retry: $retry" . PHP_EOL;
-		}
-		echo "data: {\n";
-		echo "data: \"msg\": \"$msg\", \n";
-		echo "data: \"id\": $id\n";
-		echo "data: }\n";
-		echo PHP_EOL;
-		ob_flush();
-		flush();
+    public static function sendSSEMsg($id, $msg, $retry) {
+        echo "id: $id" . PHP_EOL;
+        if ($retry) {
+            echo "retry: $retry" . PHP_EOL;
+        }
+        echo "data: {\n";
+        echo "data: \"msg\": " . json_encode($msg) . ", \n";
+        echo "data: \"id\": $id\n";
+        echo "data: }\n";
+        echo PHP_EOL;
+        ob_flush();
+        flush();
     }
 
     /**
@@ -2602,7 +2602,7 @@ final class sfUtils {
         $_SESSION['SfGallery'] = array();
         $_SESSION['SfEvents'] = array();
         $_SESSION['SFUsers'] = array();
-	$countSnowflakes=array();
+        $countSnowflakes = array();
 
         $origSql = "SELECT COUNT(id) count FROM snowflakes WHERE ";
 
@@ -2627,70 +2627,70 @@ final class sfUtils {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userUnPubSnowflakes = $conn->getResultArray();
-            $countSnowflakes ['Snowflakes_user_unpublished']= $_SESSION['Snowflakes']['user_unpublished'] = $userUnPubSnowflakes[0]['count'];
-            $countSnowflakes ['Snowflakes_user_total']=$_SESSION['Snowflakes']['user_total'] = $userUnPubSnowflakes[0]['count'] + $userPubSnowflakes[0]['count'];
+            $countSnowflakes ['Snowflakes_user_unpublished'] = $_SESSION['Snowflakes']['user_unpublished'] = $userUnPubSnowflakes[0]['count'];
+            $countSnowflakes ['Snowflakes_user_total'] = $_SESSION['Snowflakes']['user_total'] = $userUnPubSnowflakes[0]['count'] + $userPubSnowflakes[0]['count'];
         }
 
-        $countSnowflakes ['Snowflakes_total']= $_SESSION['Snowflakes']['total'] = $totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count'];
+        $countSnowflakes ['Snowflakes_total'] = $_SESSION['Snowflakes']['total'] = $totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count'];
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_events WHERE publish = 1";
         $conn->fetch($sql);
         $totalRows_rsPublished = $conn->getResultArray();
-        $countSnowflakes ['SfEvents_published']= $_SESSION['SfEvents']['published'] = $totalRows_rsPublished[0]['count'];
+        $countSnowflakes ['SfEvents_published'] = $_SESSION['SfEvents']['published'] = $totalRows_rsPublished[0]['count'];
 
         if (strlen($username)) {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userPubEvent = $conn->getResultArray();
-            $countSnowflakes ['SfEvents_user_published']=$_SESSION['SfEvents']['user_published'] = $userPubEvent[0]['count'];
+            $countSnowflakes ['SfEvents_user_published'] = $_SESSION['SfEvents']['user_published'] = $userPubEvent[0]['count'];
         }
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_events WHERE publish = 0";
         $conn->fetch($sql);
         $totalRows_rsUnplublished = $conn->getResultArray();
-        $countSnowflakes ['SfEvents_unpublished']= $_SESSION['SfEvents']['unpublished'] = $totalRows_rsUnplublished[0]['count'];
+        $countSnowflakes ['SfEvents_unpublished'] = $_SESSION['SfEvents']['unpublished'] = $totalRows_rsUnplublished[0]['count'];
 
         if (strlen($username)) {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userUnPubEvent = $conn->getResultArray();
-            $countSnowflakes ['SfEvents_user_unpublished']=$_SESSION['SfEvents']['user_unpublished'] = $userUnPubEvent[0]['count'];
-            $countSnowflakes ['SfEvents_user_total']= $_SESSION['SfEvents']['user_total'] = $userUnPubEvent[0]['count'] + $userPubEvent[0]['count'];
+            $countSnowflakes ['SfEvents_user_unpublished'] = $_SESSION['SfEvents']['user_unpublished'] = $userUnPubEvent[0]['count'];
+            $countSnowflakes ['SfEvents_user_total'] = $_SESSION['SfEvents']['user_total'] = $userUnPubEvent[0]['count'] + $userPubEvent[0]['count'];
         }
 
-        $countSnowflakes ['SfEvents_total']= $_SESSION['SfEvents']['total'] = $totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count'];
+        $countSnowflakes ['SfEvents_total'] = $_SESSION['SfEvents']['total'] = $totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count'];
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_gallery WHERE publish = 0";
         $conn->fetch($sql);
         $totalRows_galleryUnpublished = $conn->getResultArray();
-        $countSnowflakes ['SfGallery_unpublished']= $_SESSION['SfGallery']['unpublished'] = $totalRows_galleryUnpublished[0]['count'];
+        $countSnowflakes ['SfGallery_unpublished'] = $_SESSION['SfGallery']['unpublished'] = $totalRows_galleryUnpublished[0]['count'];
 
         if (strlen($username)) {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userPubGallery = $conn->getResultArray();
-            $countSnowflakes ['SfGallery_user_unpublished']= $_SESSION['SfGallery']['user_unpublished'] = $userPubGallery[0]['count'];
+            $countSnowflakes ['SfGallery_user_unpublished'] = $_SESSION['SfGallery']['user_unpublished'] = $userPubGallery[0]['count'];
         }
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_gallery WHERE publish = 1";
         $conn->fetch($sql);
         $totalRows_galleryPublished = $conn->getResultArray();
-        $countSnowflakes ['SfGallery_published']=$_SESSION['SfGallery']['published'] = $totalRows_galleryPublished[0]['count'];
+        $countSnowflakes ['SfGallery_published'] = $_SESSION['SfGallery']['published'] = $totalRows_galleryPublished[0]['count'];
 
         if (strlen($username)) {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userUnPubGallery = $conn->getResultArray();
-            $countSnowflakes ['SfGallery_user_published']=$_SESSION['SfGallery']['user_published'] = $userUnPubGallery[0]['count'];
-            $countSnowflakes ['SfGallery_user_total']=$_SESSION['SfGallery']['user_total'] = $userUnPubGallery[0]['count'] + $userPubGallery[0]['count'];
+            $countSnowflakes ['SfGallery_user_published'] = $_SESSION['SfGallery']['user_published'] = $userUnPubGallery[0]['count'];
+            $countSnowflakes ['SfGallery_user_total'] = $_SESSION['SfGallery']['user_total'] = $userUnPubGallery[0]['count'] + $userPubGallery[0]['count'];
         }
 
-        $countSnowflakes ['SfGallery_total']=$_SESSION['SfGallery']['total'] = $totalRows_galleryPublished[0]['count'] + $totalRows_galleryUnpublished[0]['count'];
+        $countSnowflakes ['SfGallery_total'] = $_SESSION['SfGallery']['total'] = $totalRows_galleryPublished[0]['count'] + $totalRows_galleryUnpublished[0]['count'];
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_users";
         $conn->fetch($sql);
         $totalRows_users = $conn->getResultArray();
-        $countSnowflakes ['SFUsers_total']=$_SESSION['SFUsers']['total'] = $totalRows_users[0]['count'];
+        $countSnowflakes ['SFUsers_total'] = $_SESSION['SFUsers']['total'] = $totalRows_users[0]['count'];
 
         return $countSnowflakes;
     }
@@ -2977,12 +2977,12 @@ final class sfUtils {
 
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['snowflakesResultUrl']) ? $settingsConfig['snowflakesResultUrl'] : $settingsConfig['m_sfUrl'] . "OneView.php";
-	$headers= apache_request_headers();
+        $headers = apache_request_headers();
         $rssString = '
             <rss version="2.0">
                 <channel>
                     <title>Snowflakes Rss</title>
-                    <description>A '.$headers['Host'].' Snowflakes Rss feed</description>
+                    <description>A ' . $headers['Host'] . ' Snowflakes Rss feed</description>
                     <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=snowflakes') . '</link>
                     <image>
                         <url>' . $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png" . '</url>
@@ -3028,12 +3028,12 @@ final class sfUtils {
 
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['eventsResultUrl']) ? $settingsConfig['eventsResultUrl'] : $settingsConfig['m_sfUrl'] . "Events/OneView.php";
-		$headers= apache_request_headers();
+        $headers = apache_request_headers();
         $rssString = '
             <rss version="2.0">
                 <channel>
                     <title>Snowflakes Event Rss</title>
-                    <description>A '.$headers['Host'].' snowflakes event rss feed</description>
+                    <description>A ' . $headers['Host'] . ' snowflakes event rss feed</description>
                     <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=events') . '</link>
                     <image>
                         <url>' . self::xmlencoder($settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png") . '</url>
@@ -3084,12 +3084,12 @@ final class sfUtils {
 
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['galleryResultUrl']) ? $settingsConfig['galleryResultUrl'] : $settingsConfig['m_sfUrl'] . "Gallery/OneView.php";
-		$headers= apache_request_headers();
+        $headers = apache_request_headers();
         $rssString = '
             <rss version="2.0">
                 <channel>
                     <title>Snowflakes Gallery Rss</title>
-                    <description>A '.$headers['Host'].' Snowflakes Gallery Rss feed</description>
+                    <description>A ' . $headers['Host'] . ' Snowflakes Gallery Rss feed</description>
                     <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery') . '</link>
                     <image>
                         <url>' . self::xmlencoder($settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png") . '</url>
@@ -3739,7 +3739,7 @@ class settingsStruct {
      */
     public function SetdbPassword($value) {
         //password
-        $this->m_settingsarray["db"]["password"] = sfUtils::decrypt($value, $this->m_key) ;
+        $this->m_settingsarray["db"]["password"] = sfUtils::decrypt($value, $this->m_key);
     }
 
     /**
@@ -3750,7 +3750,6 @@ class settingsStruct {
     public function Setadmin_email($value) {
         //admin_email
         $this->m_settingsarray["db"]["admin_email"] = $value;
-        
     }
 
     /**
@@ -3763,9 +3762,8 @@ class settingsStruct {
         $this->m_settingsarray["db"]["time_zone"] = $value;
     }
 
-    
     //Settings Info     //[settings]
-    
+
     /**
      * sets the snowflakes installation url of the settings in the  configuration file
      * 
@@ -3849,7 +3847,6 @@ class settingsStruct {
         //maxImageWidth
         $this->m_settingsarray["settings"]["maxImageWidth"] = $value;
     }
-
 
     /**
      * sets the snowflake gallery supported image extesion list of the settings 

@@ -21,13 +21,13 @@ $(document).ready(function() {
             menu.removeAttr('style');
         }
     });
-    
-    var copyright =$(".CopyRight p").html();
-    var replacestr='2013';
+
+    var copyright = $(".CopyRight p").html();
+    var replacestr = '2013';
     var snowflakesdate = new Date();
-    var newcopyright = copyright.replace(replacestr, replacestr + ' - '+ snowflakesdate.getFullYear());
+    var newcopyright = copyright.replace(replacestr, replacestr + ' - ' + snowflakesdate.getFullYear());
     $(".CopyRight p").html(newcopyright);
-    
+
 });
 
 $(document).ready(function() {
@@ -109,7 +109,6 @@ function snowflakesCount(ssefile) {
 
     source.addEventListener('message', function(ev) {
         var data = JSON.parse(ev.data);
-        alert(data.Snowflakes_total);
         $("#Snowflakes_published").attr('data-bubble', data.Snowflakes_published);
         $("#Snowflakes_published2").attr('data-bubble', data.Snowflakes_published);
         $("#Snowflakes_unpublished").attr('data-bubble', data.Snowflakes_unpublished);
@@ -140,6 +139,9 @@ function snowflakesCount(ssefile) {
         $("#SFUsers_total").attr('data-bubble', data.SFUsers_total);
     }, false);
 
+    source.addEventListener('open', function(event) {
+    }, false);
+
 }
 ;
 
@@ -147,8 +149,7 @@ function userActivities(ssefile) {
     var source = new EventSource(ssefile);
     source.addEventListener('message', function(ev) {
         var data = JSON.parse(ev.data);
-        alert(data.msg);
-        $("#activities").html(data.msg);
+        $("#activities").replaceWith(data.msg);
     }, false);
 }
 ;

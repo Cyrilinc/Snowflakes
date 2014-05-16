@@ -137,7 +137,7 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
         <script type="text/javascript">
             $(document).ready(function() {
                 snowflakesCount("../sse/snowflakesCount.php");
-                userActivities("../sse/userActivities.php");
+                userActivities("../sse/userActivities.php?userName=<?php echo $sfuser->m_username; ?>");
             });
         </script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>

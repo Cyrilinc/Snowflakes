@@ -1918,13 +1918,13 @@
 </span></span><span id="1825" class="l"><a class="l" href="#1825">1825: </a><span class="php-comment">     * @param string $msg Line1of text that should be transmitted.
 </span></span><span id="1826" class="l"><a class="l" href="#1826">1826: </a><span class="php-comment">     * @param int $retry the retry value in millisecconds. 1000ms = 1 second.
 </span></span><span id="1827" class="l"><a class="l" href="#1827">1827: </a><span class="php-comment">     */</span>
-</span><span id="1828" class="l"><a class="l" href="#1828">1828: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_sendMsg" href="#_sendMsg">sendMsg</a>(<span class="php-var">$id</span>, <span class="php-var">$msg</span>, <span class="php-var">$retry</span>) {
+</span><span id="1828" class="l"><a class="l" href="#1828">1828: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_sendSSEMsg" href="#_sendSSEMsg">sendSSEMsg</a>(<span class="php-var">$id</span>, <span class="php-var">$msg</span>, <span class="php-var">$retry</span>) {
 </span><span id="1829" class="l"><a class="l" href="#1829">1829: </a>        <span class="php-keyword1">echo</span> <span class="php-quote">&quot;id: </span><span class="php-var">$id</span><span class="php-quote">&quot;</span> . PHP_EOL;
-</span><span id="1830" class="l"><a class="l" href="#1830">1830: </a>        <span class="php-keyword1">if</span>(<span class="php-var">$retry</span>){
+</span><span id="1830" class="l"><a class="l" href="#1830">1830: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$retry</span>) {
 </span><span id="1831" class="l"><a class="l" href="#1831">1831: </a>            <span class="php-keyword1">echo</span> <span class="php-quote">&quot;retry: </span><span class="php-var">$retry</span><span class="php-quote">&quot;</span> . PHP_EOL;
 </span><span id="1832" class="l"><a class="l" href="#1832">1832: </a>        }
 </span><span id="1833" class="l"><a class="l" href="#1833">1833: </a>        <span class="php-keyword1">echo</span> <span class="php-quote">&quot;data: {\n&quot;</span>;
-</span><span id="1834" class="l"><a class="l" href="#1834">1834: </a>        <span class="php-keyword1">echo</span> <span class="php-quote">&quot;data: \&quot;msg\&quot;: \&quot;</span><span class="php-var">$msg</span><span class="php-quote">\&quot;, \n&quot;</span>;
+</span><span id="1834" class="l"><a class="l" href="#1834">1834: </a>        <span class="php-keyword1">echo</span> <span class="php-quote">&quot;data: \&quot;msg\&quot;: &quot;</span> . <span class="php-keyword2">json_encode</span>(<span class="php-var">$msg</span>) . <span class="php-quote">&quot;, \n&quot;</span>;
 </span><span id="1835" class="l"><a class="l" href="#1835">1835: </a>        <span class="php-keyword1">echo</span> <span class="php-quote">&quot;data: \&quot;id\&quot;: </span><span class="php-var">$id</span><span class="php-quote">\n&quot;</span>;
 </span><span id="1836" class="l"><a class="l" href="#1836">1836: </a>        <span class="php-keyword1">echo</span> <span class="php-quote">&quot;data: }\n&quot;</span>;
 </span><span id="1837" class="l"><a class="l" href="#1837">1837: </a>        <span class="php-keyword1">echo</span> PHP_EOL;
@@ -2695,7 +2695,7 @@
 </span><span id="2602" class="l"><a class="l" href="#2602">2602: </a>        <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>] = <span class="php-keyword1">array</span>();
 </span><span id="2603" class="l"><a class="l" href="#2603">2603: </a>        <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>] = <span class="php-keyword1">array</span>();
 </span><span id="2604" class="l"><a class="l" href="#2604">2604: </a>        <span class="php-var">$_SESSION</span>[<span class="php-quote">'SFUsers'</span>] = <span class="php-keyword1">array</span>();
-</span><span id="2605" class="l"><a class="l" href="#2605">2605: </a>    <span class="php-var">$countSnowflakes</span>=<span class="php-keyword1">array</span>();
+</span><span id="2605" class="l"><a class="l" href="#2605">2605: </a>        <span class="php-var">$countSnowflakes</span> = <span class="php-keyword1">array</span>();
 </span><span id="2606" class="l"><a class="l" href="#2606">2606: </a>
 </span><span id="2607" class="l"><a class="l" href="#2607">2607: </a>        <span class="php-var">$origSql</span> = <span class="php-quote">&quot;SELECT COUNT(id) count FROM snowflakes WHERE &quot;</span>;
 </span><span id="2608" class="l"><a class="l" href="#2608">2608: </a>
@@ -2720,70 +2720,70 @@
 </span><span id="2627" class="l"><a class="l" href="#2627">2627: </a>            <span class="php-var">$sql</span> = <span class="php-var">$sql</span> . <span class="php-quote">' AND created_by=&quot;'</span> . self::escape(<span class="php-var">$username</span>) . <span class="php-quote">'&quot;'</span>;
 </span><span id="2628" class="l"><a class="l" href="#2628">2628: </a>            <span class="php-var">$conn</span>-&gt;fetch(<span class="php-var">$sql</span>);
 </span><span id="2629" class="l"><a class="l" href="#2629">2629: </a>            <span class="php-var">$userUnPubSnowflakes</span> = <span class="php-var">$conn</span>-&gt;getResultArray();
-</span><span id="2630" class="l"><a class="l" href="#2630">2630: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'Snowflakes_user_unpublished'</span>]= <span class="php-var">$_SESSION</span>[<span class="php-quote">'Snowflakes'</span>][<span class="php-quote">'user_unpublished'</span>] = <span class="php-var">$userUnPubSnowflakes</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
-</span><span id="2631" class="l"><a class="l" href="#2631">2631: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'Snowflakes_user_total'</span>]=<span class="php-var">$_SESSION</span>[<span class="php-quote">'Snowflakes'</span>][<span class="php-quote">'user_total'</span>] = <span class="php-var">$userUnPubSnowflakes</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>] + <span class="php-var">$userPubSnowflakes</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2630" class="l"><a class="l" href="#2630">2630: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'Snowflakes_user_unpublished'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'Snowflakes'</span>][<span class="php-quote">'user_unpublished'</span>] = <span class="php-var">$userUnPubSnowflakes</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2631" class="l"><a class="l" href="#2631">2631: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'Snowflakes_user_total'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'Snowflakes'</span>][<span class="php-quote">'user_total'</span>] = <span class="php-var">$userUnPubSnowflakes</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>] + <span class="php-var">$userPubSnowflakes</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2632" class="l"><a class="l" href="#2632">2632: </a>        }
 </span><span id="2633" class="l"><a class="l" href="#2633">2633: </a>
-</span><span id="2634" class="l"><a class="l" href="#2634">2634: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'Snowflakes_total'</span>]= <span class="php-var">$_SESSION</span>[<span class="php-quote">'Snowflakes'</span>][<span class="php-quote">'total'</span>] = <span class="php-var">$totalRows_rsPublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>] + <span class="php-var">$totalRows_rsUnplublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2634" class="l"><a class="l" href="#2634">2634: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'Snowflakes_total'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'Snowflakes'</span>][<span class="php-quote">'total'</span>] = <span class="php-var">$totalRows_rsPublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>] + <span class="php-var">$totalRows_rsUnplublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2635" class="l"><a class="l" href="#2635">2635: </a>
 </span><span id="2636" class="l"><a class="l" href="#2636">2636: </a>        <span class="php-var">$sql</span> = <span class="php-quote">&quot;SELECT COUNT(id) count FROM snowflakes_events WHERE publish = 1&quot;</span>;
 </span><span id="2637" class="l"><a class="l" href="#2637">2637: </a>        <span class="php-var">$conn</span>-&gt;fetch(<span class="php-var">$sql</span>);
 </span><span id="2638" class="l"><a class="l" href="#2638">2638: </a>        <span class="php-var">$totalRows_rsPublished</span> = <span class="php-var">$conn</span>-&gt;getResultArray();
-</span><span id="2639" class="l"><a class="l" href="#2639">2639: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfEvents_published'</span>]= <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>][<span class="php-quote">'published'</span>] = <span class="php-var">$totalRows_rsPublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2639" class="l"><a class="l" href="#2639">2639: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfEvents_published'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>][<span class="php-quote">'published'</span>] = <span class="php-var">$totalRows_rsPublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2640" class="l"><a class="l" href="#2640">2640: </a>
 </span><span id="2641" class="l"><a class="l" href="#2641">2641: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">strlen</span>(<span class="php-var">$username</span>)) {
 </span><span id="2642" class="l"><a class="l" href="#2642">2642: </a>            <span class="php-var">$sql</span> = <span class="php-var">$sql</span> . <span class="php-quote">' AND created_by=&quot;'</span> . self::escape(<span class="php-var">$username</span>) . <span class="php-quote">'&quot;'</span>;
 </span><span id="2643" class="l"><a class="l" href="#2643">2643: </a>            <span class="php-var">$conn</span>-&gt;fetch(<span class="php-var">$sql</span>);
 </span><span id="2644" class="l"><a class="l" href="#2644">2644: </a>            <span class="php-var">$userPubEvent</span> = <span class="php-var">$conn</span>-&gt;getResultArray();
-</span><span id="2645" class="l"><a class="l" href="#2645">2645: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfEvents_user_published'</span>]=<span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>][<span class="php-quote">'user_published'</span>] = <span class="php-var">$userPubEvent</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2645" class="l"><a class="l" href="#2645">2645: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfEvents_user_published'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>][<span class="php-quote">'user_published'</span>] = <span class="php-var">$userPubEvent</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2646" class="l"><a class="l" href="#2646">2646: </a>        }
 </span><span id="2647" class="l"><a class="l" href="#2647">2647: </a>
 </span><span id="2648" class="l"><a class="l" href="#2648">2648: </a>        <span class="php-var">$sql</span> = <span class="php-quote">&quot;SELECT COUNT(id) count FROM snowflakes_events WHERE publish = 0&quot;</span>;
 </span><span id="2649" class="l"><a class="l" href="#2649">2649: </a>        <span class="php-var">$conn</span>-&gt;fetch(<span class="php-var">$sql</span>);
 </span><span id="2650" class="l"><a class="l" href="#2650">2650: </a>        <span class="php-var">$totalRows_rsUnplublished</span> = <span class="php-var">$conn</span>-&gt;getResultArray();
-</span><span id="2651" class="l"><a class="l" href="#2651">2651: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfEvents_unpublished'</span>]= <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>][<span class="php-quote">'unpublished'</span>] = <span class="php-var">$totalRows_rsUnplublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2651" class="l"><a class="l" href="#2651">2651: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfEvents_unpublished'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>][<span class="php-quote">'unpublished'</span>] = <span class="php-var">$totalRows_rsUnplublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2652" class="l"><a class="l" href="#2652">2652: </a>
 </span><span id="2653" class="l"><a class="l" href="#2653">2653: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">strlen</span>(<span class="php-var">$username</span>)) {
 </span><span id="2654" class="l"><a class="l" href="#2654">2654: </a>            <span class="php-var">$sql</span> = <span class="php-var">$sql</span> . <span class="php-quote">' AND created_by=&quot;'</span> . self::escape(<span class="php-var">$username</span>) . <span class="php-quote">'&quot;'</span>;
 </span><span id="2655" class="l"><a class="l" href="#2655">2655: </a>            <span class="php-var">$conn</span>-&gt;fetch(<span class="php-var">$sql</span>);
 </span><span id="2656" class="l"><a class="l" href="#2656">2656: </a>            <span class="php-var">$userUnPubEvent</span> = <span class="php-var">$conn</span>-&gt;getResultArray();
-</span><span id="2657" class="l"><a class="l" href="#2657">2657: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfEvents_user_unpublished'</span>]=<span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>][<span class="php-quote">'user_unpublished'</span>] = <span class="php-var">$userUnPubEvent</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
-</span><span id="2658" class="l"><a class="l" href="#2658">2658: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfEvents_user_total'</span>]= <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>][<span class="php-quote">'user_total'</span>] = <span class="php-var">$userUnPubEvent</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>] + <span class="php-var">$userPubEvent</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2657" class="l"><a class="l" href="#2657">2657: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfEvents_user_unpublished'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>][<span class="php-quote">'user_unpublished'</span>] = <span class="php-var">$userUnPubEvent</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2658" class="l"><a class="l" href="#2658">2658: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfEvents_user_total'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>][<span class="php-quote">'user_total'</span>] = <span class="php-var">$userUnPubEvent</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>] + <span class="php-var">$userPubEvent</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2659" class="l"><a class="l" href="#2659">2659: </a>        }
 </span><span id="2660" class="l"><a class="l" href="#2660">2660: </a>
-</span><span id="2661" class="l"><a class="l" href="#2661">2661: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfEvents_total'</span>]= <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>][<span class="php-quote">'total'</span>] = <span class="php-var">$totalRows_rsPublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>] + <span class="php-var">$totalRows_rsUnplublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2661" class="l"><a class="l" href="#2661">2661: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfEvents_total'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfEvents'</span>][<span class="php-quote">'total'</span>] = <span class="php-var">$totalRows_rsPublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>] + <span class="php-var">$totalRows_rsUnplublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2662" class="l"><a class="l" href="#2662">2662: </a>
 </span><span id="2663" class="l"><a class="l" href="#2663">2663: </a>        <span class="php-var">$sql</span> = <span class="php-quote">&quot;SELECT COUNT(id) count FROM snowflakes_gallery WHERE publish = 0&quot;</span>;
 </span><span id="2664" class="l"><a class="l" href="#2664">2664: </a>        <span class="php-var">$conn</span>-&gt;fetch(<span class="php-var">$sql</span>);
 </span><span id="2665" class="l"><a class="l" href="#2665">2665: </a>        <span class="php-var">$totalRows_galleryUnpublished</span> = <span class="php-var">$conn</span>-&gt;getResultArray();
-</span><span id="2666" class="l"><a class="l" href="#2666">2666: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfGallery_unpublished'</span>]= <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>][<span class="php-quote">'unpublished'</span>] = <span class="php-var">$totalRows_galleryUnpublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2666" class="l"><a class="l" href="#2666">2666: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfGallery_unpublished'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>][<span class="php-quote">'unpublished'</span>] = <span class="php-var">$totalRows_galleryUnpublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2667" class="l"><a class="l" href="#2667">2667: </a>
 </span><span id="2668" class="l"><a class="l" href="#2668">2668: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">strlen</span>(<span class="php-var">$username</span>)) {
 </span><span id="2669" class="l"><a class="l" href="#2669">2669: </a>            <span class="php-var">$sql</span> = <span class="php-var">$sql</span> . <span class="php-quote">' AND created_by=&quot;'</span> . self::escape(<span class="php-var">$username</span>) . <span class="php-quote">'&quot;'</span>;
 </span><span id="2670" class="l"><a class="l" href="#2670">2670: </a>            <span class="php-var">$conn</span>-&gt;fetch(<span class="php-var">$sql</span>);
 </span><span id="2671" class="l"><a class="l" href="#2671">2671: </a>            <span class="php-var">$userPubGallery</span> = <span class="php-var">$conn</span>-&gt;getResultArray();
-</span><span id="2672" class="l"><a class="l" href="#2672">2672: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfGallery_user_unpublished'</span>]= <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>][<span class="php-quote">'user_unpublished'</span>] = <span class="php-var">$userPubGallery</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2672" class="l"><a class="l" href="#2672">2672: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfGallery_user_unpublished'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>][<span class="php-quote">'user_unpublished'</span>] = <span class="php-var">$userPubGallery</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2673" class="l"><a class="l" href="#2673">2673: </a>        }
 </span><span id="2674" class="l"><a class="l" href="#2674">2674: </a>
 </span><span id="2675" class="l"><a class="l" href="#2675">2675: </a>        <span class="php-var">$sql</span> = <span class="php-quote">&quot;SELECT COUNT(id) count FROM snowflakes_gallery WHERE publish = 1&quot;</span>;
 </span><span id="2676" class="l"><a class="l" href="#2676">2676: </a>        <span class="php-var">$conn</span>-&gt;fetch(<span class="php-var">$sql</span>);
 </span><span id="2677" class="l"><a class="l" href="#2677">2677: </a>        <span class="php-var">$totalRows_galleryPublished</span> = <span class="php-var">$conn</span>-&gt;getResultArray();
-</span><span id="2678" class="l"><a class="l" href="#2678">2678: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfGallery_published'</span>]=<span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>][<span class="php-quote">'published'</span>] = <span class="php-var">$totalRows_galleryPublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2678" class="l"><a class="l" href="#2678">2678: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfGallery_published'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>][<span class="php-quote">'published'</span>] = <span class="php-var">$totalRows_galleryPublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2679" class="l"><a class="l" href="#2679">2679: </a>
 </span><span id="2680" class="l"><a class="l" href="#2680">2680: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">strlen</span>(<span class="php-var">$username</span>)) {
 </span><span id="2681" class="l"><a class="l" href="#2681">2681: </a>            <span class="php-var">$sql</span> = <span class="php-var">$sql</span> . <span class="php-quote">' AND created_by=&quot;'</span> . self::escape(<span class="php-var">$username</span>) . <span class="php-quote">'&quot;'</span>;
 </span><span id="2682" class="l"><a class="l" href="#2682">2682: </a>            <span class="php-var">$conn</span>-&gt;fetch(<span class="php-var">$sql</span>);
 </span><span id="2683" class="l"><a class="l" href="#2683">2683: </a>            <span class="php-var">$userUnPubGallery</span> = <span class="php-var">$conn</span>-&gt;getResultArray();
-</span><span id="2684" class="l"><a class="l" href="#2684">2684: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfGallery_user_published'</span>]=<span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>][<span class="php-quote">'user_published'</span>] = <span class="php-var">$userUnPubGallery</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
-</span><span id="2685" class="l"><a class="l" href="#2685">2685: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfGallery_user_total'</span>]=<span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>][<span class="php-quote">'user_total'</span>] = <span class="php-var">$userUnPubGallery</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>] + <span class="php-var">$userPubGallery</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2684" class="l"><a class="l" href="#2684">2684: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfGallery_user_published'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>][<span class="php-quote">'user_published'</span>] = <span class="php-var">$userUnPubGallery</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2685" class="l"><a class="l" href="#2685">2685: </a>            <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfGallery_user_total'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>][<span class="php-quote">'user_total'</span>] = <span class="php-var">$userUnPubGallery</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>] + <span class="php-var">$userPubGallery</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2686" class="l"><a class="l" href="#2686">2686: </a>        }
 </span><span id="2687" class="l"><a class="l" href="#2687">2687: </a>
-</span><span id="2688" class="l"><a class="l" href="#2688">2688: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfGallery_total'</span>]=<span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>][<span class="php-quote">'total'</span>] = <span class="php-var">$totalRows_galleryPublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>] + <span class="php-var">$totalRows_galleryUnpublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2688" class="l"><a class="l" href="#2688">2688: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SfGallery_total'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SfGallery'</span>][<span class="php-quote">'total'</span>] = <span class="php-var">$totalRows_galleryPublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>] + <span class="php-var">$totalRows_galleryUnpublished</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2689" class="l"><a class="l" href="#2689">2689: </a>
 </span><span id="2690" class="l"><a class="l" href="#2690">2690: </a>        <span class="php-var">$sql</span> = <span class="php-quote">&quot;SELECT COUNT(id) count FROM snowflakes_users&quot;</span>;
 </span><span id="2691" class="l"><a class="l" href="#2691">2691: </a>        <span class="php-var">$conn</span>-&gt;fetch(<span class="php-var">$sql</span>);
 </span><span id="2692" class="l"><a class="l" href="#2692">2692: </a>        <span class="php-var">$totalRows_users</span> = <span class="php-var">$conn</span>-&gt;getResultArray();
-</span><span id="2693" class="l"><a class="l" href="#2693">2693: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SFUsers_total'</span>]=<span class="php-var">$_SESSION</span>[<span class="php-quote">'SFUsers'</span>][<span class="php-quote">'total'</span>] = <span class="php-var">$totalRows_users</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
+</span><span id="2693" class="l"><a class="l" href="#2693">2693: </a>        <span class="php-var">$countSnowflakes</span> [<span class="php-quote">'SFUsers_total'</span>] = <span class="php-var">$_SESSION</span>[<span class="php-quote">'SFUsers'</span>][<span class="php-quote">'total'</span>] = <span class="php-var">$totalRows_users</span>[<span class="php-num">0</span>][<span class="php-quote">'count'</span>];
 </span><span id="2694" class="l"><a class="l" href="#2694">2694: </a>
 </span><span id="2695" class="l"><a class="l" href="#2695">2695: </a>        <span class="php-keyword1">return</span> <span class="php-var">$countSnowflakes</span>;
 </span><span id="2696" class="l"><a class="l" href="#2696">2696: </a>    }
@@ -3070,12 +3070,12 @@
 </span><span id="2977" class="l"><a class="l" href="#2977">2977: </a>
 </span><span id="2978" class="l"><a class="l" href="#2978">2978: </a>        <span class="php-var">$settingsConfig</span> = Config::getConfig(<span class="php-quote">&quot;settings&quot;</span>, <span class="php-var">$inifile</span>);
 </span><span id="2979" class="l"><a class="l" href="#2979">2979: </a>        <span class="php-var">$itemUrl</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$settingsConfig</span>[<span class="php-quote">'snowflakesResultUrl'</span>]) ? <span class="php-var">$settingsConfig</span>[<span class="php-quote">'snowflakesResultUrl'</span>] : <span class="php-var">$settingsConfig</span>[<span class="php-quote">'m_sfUrl'</span>] . <span class="php-quote">&quot;OneView.php&quot;</span>;
-</span><span id="2980" class="l"><a class="l" href="#2980">2980: </a>    <span class="php-var">$headers</span>= <span class="php-keyword2">apache_request_headers</span>();
+</span><span id="2980" class="l"><a class="l" href="#2980">2980: </a>        <span class="php-var">$headers</span> = <span class="php-keyword2">apache_request_headers</span>();
 </span><span id="2981" class="l"><a class="l" href="#2981">2981: </a>        <span class="php-var">$rssString</span> = <span class="php-quote">'
 </span></span><span id="2982" class="l"><a class="l" href="#2982">2982: </a><span class="php-quote">            &lt;rss version=&quot;2.0&quot;&gt;
 </span></span><span id="2983" class="l"><a class="l" href="#2983">2983: </a><span class="php-quote">                &lt;channel&gt;
 </span></span><span id="2984" class="l"><a class="l" href="#2984">2984: </a><span class="php-quote">                    &lt;title&gt;Snowflakes Rss&lt;/title&gt;
-</span></span><span id="2985" class="l"><a class="l" href="#2985">2985: </a><span class="php-quote">                    &lt;description&gt;A '</span>.<span class="php-var">$headers</span>[<span class="php-quote">'Host'</span>].<span class="php-quote">' Snowflakes Rss feed&lt;/description&gt;
+</span></span><span id="2985" class="l"><a class="l" href="#2985">2985: </a><span class="php-quote">                    &lt;description&gt;A '</span> . <span class="php-var">$headers</span>[<span class="php-quote">'Host'</span>] . <span class="php-quote">' Snowflakes Rss feed&lt;/description&gt;
 </span></span><span id="2986" class="l"><a class="l" href="#2986">2986: </a><span class="php-quote">                    &lt;link&gt;'</span> . self::xmlencoder(<span class="php-var">$settingsConfig</span>[<span class="php-quote">'m_sfUrl'</span>] . <span class="php-quote">'rss.php?ty=snowflakes'</span>) . <span class="php-quote">'&lt;/link&gt;
 </span></span><span id="2987" class="l"><a class="l" href="#2987">2987: </a><span class="php-quote">                    &lt;image&gt;
 </span></span><span id="2988" class="l"><a class="l" href="#2988">2988: </a><span class="php-quote">                        &lt;url&gt;'</span> . <span class="php-var">$settingsConfig</span>[<span class="php-quote">'m_sfUrl'</span>] . <span class="php-quote">&quot;resources/images/Snowflakes2.png&quot;</span> . <span class="php-quote">'&lt;/url&gt;
@@ -3121,12 +3121,12 @@
 </span><span id="3028" class="l"><a class="l" href="#3028">3028: </a>
 </span><span id="3029" class="l"><a class="l" href="#3029">3029: </a>        <span class="php-var">$settingsConfig</span> = Config::getConfig(<span class="php-quote">&quot;settings&quot;</span>, <span class="php-var">$inifile</span>);
 </span><span id="3030" class="l"><a class="l" href="#3030">3030: </a>        <span class="php-var">$itemUrl</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$settingsConfig</span>[<span class="php-quote">'eventsResultUrl'</span>]) ? <span class="php-var">$settingsConfig</span>[<span class="php-quote">'eventsResultUrl'</span>] : <span class="php-var">$settingsConfig</span>[<span class="php-quote">'m_sfUrl'</span>] . <span class="php-quote">&quot;Events/OneView.php&quot;</span>;
-</span><span id="3031" class="l"><a class="l" href="#3031">3031: </a>        <span class="php-var">$headers</span>= <span class="php-keyword2">apache_request_headers</span>();
+</span><span id="3031" class="l"><a class="l" href="#3031">3031: </a>        <span class="php-var">$headers</span> = <span class="php-keyword2">apache_request_headers</span>();
 </span><span id="3032" class="l"><a class="l" href="#3032">3032: </a>        <span class="php-var">$rssString</span> = <span class="php-quote">'
 </span></span><span id="3033" class="l"><a class="l" href="#3033">3033: </a><span class="php-quote">            &lt;rss version=&quot;2.0&quot;&gt;
 </span></span><span id="3034" class="l"><a class="l" href="#3034">3034: </a><span class="php-quote">                &lt;channel&gt;
 </span></span><span id="3035" class="l"><a class="l" href="#3035">3035: </a><span class="php-quote">                    &lt;title&gt;Snowflakes Event Rss&lt;/title&gt;
-</span></span><span id="3036" class="l"><a class="l" href="#3036">3036: </a><span class="php-quote">                    &lt;description&gt;A '</span>.<span class="php-var">$headers</span>[<span class="php-quote">'Host'</span>].<span class="php-quote">' snowflakes event rss feed&lt;/description&gt;
+</span></span><span id="3036" class="l"><a class="l" href="#3036">3036: </a><span class="php-quote">                    &lt;description&gt;A '</span> . <span class="php-var">$headers</span>[<span class="php-quote">'Host'</span>] . <span class="php-quote">' snowflakes event rss feed&lt;/description&gt;
 </span></span><span id="3037" class="l"><a class="l" href="#3037">3037: </a><span class="php-quote">                    &lt;link&gt;'</span> . self::xmlencoder(<span class="php-var">$settingsConfig</span>[<span class="php-quote">'m_sfUrl'</span>] . <span class="php-quote">'rss.php?ty=events'</span>) . <span class="php-quote">'&lt;/link&gt;
 </span></span><span id="3038" class="l"><a class="l" href="#3038">3038: </a><span class="php-quote">                    &lt;image&gt;
 </span></span><span id="3039" class="l"><a class="l" href="#3039">3039: </a><span class="php-quote">                        &lt;url&gt;'</span> . self::xmlencoder(<span class="php-var">$settingsConfig</span>[<span class="php-quote">'m_sfUrl'</span>] . <span class="php-quote">&quot;resources/images/Snowflakes2.png&quot;</span>) . <span class="php-quote">'&lt;/url&gt;
@@ -3177,12 +3177,12 @@
 </span><span id="3084" class="l"><a class="l" href="#3084">3084: </a>
 </span><span id="3085" class="l"><a class="l" href="#3085">3085: </a>        <span class="php-var">$settingsConfig</span> = Config::getConfig(<span class="php-quote">&quot;settings&quot;</span>, <span class="php-var">$inifile</span>);
 </span><span id="3086" class="l"><a class="l" href="#3086">3086: </a>        <span class="php-var">$itemUrl</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$settingsConfig</span>[<span class="php-quote">'galleryResultUrl'</span>]) ? <span class="php-var">$settingsConfig</span>[<span class="php-quote">'galleryResultUrl'</span>] : <span class="php-var">$settingsConfig</span>[<span class="php-quote">'m_sfUrl'</span>] . <span class="php-quote">&quot;Gallery/OneView.php&quot;</span>;
-</span><span id="3087" class="l"><a class="l" href="#3087">3087: </a>        <span class="php-var">$headers</span>= <span class="php-keyword2">apache_request_headers</span>();
+</span><span id="3087" class="l"><a class="l" href="#3087">3087: </a>        <span class="php-var">$headers</span> = <span class="php-keyword2">apache_request_headers</span>();
 </span><span id="3088" class="l"><a class="l" href="#3088">3088: </a>        <span class="php-var">$rssString</span> = <span class="php-quote">'
 </span></span><span id="3089" class="l"><a class="l" href="#3089">3089: </a><span class="php-quote">            &lt;rss version=&quot;2.0&quot;&gt;
 </span></span><span id="3090" class="l"><a class="l" href="#3090">3090: </a><span class="php-quote">                &lt;channel&gt;
 </span></span><span id="3091" class="l"><a class="l" href="#3091">3091: </a><span class="php-quote">                    &lt;title&gt;Snowflakes Gallery Rss&lt;/title&gt;
-</span></span><span id="3092" class="l"><a class="l" href="#3092">3092: </a><span class="php-quote">                    &lt;description&gt;A '</span>.<span class="php-var">$headers</span>[<span class="php-quote">'Host'</span>].<span class="php-quote">' Snowflakes Gallery Rss feed&lt;/description&gt;
+</span></span><span id="3092" class="l"><a class="l" href="#3092">3092: </a><span class="php-quote">                    &lt;description&gt;A '</span> . <span class="php-var">$headers</span>[<span class="php-quote">'Host'</span>] . <span class="php-quote">' Snowflakes Gallery Rss feed&lt;/description&gt;
 </span></span><span id="3093" class="l"><a class="l" href="#3093">3093: </a><span class="php-quote">                    &lt;link&gt;'</span> . self::xmlencoder(<span class="php-var">$settingsConfig</span>[<span class="php-quote">'m_sfUrl'</span>] . <span class="php-quote">'rss.php?ty=gallery'</span>) . <span class="php-quote">'&lt;/link&gt;
 </span></span><span id="3094" class="l"><a class="l" href="#3094">3094: </a><span class="php-quote">                    &lt;image&gt;
 </span></span><span id="3095" class="l"><a class="l" href="#3095">3095: </a><span class="php-quote">                        &lt;url&gt;'</span> . self::xmlencoder(<span class="php-var">$settingsConfig</span>[<span class="php-quote">'m_sfUrl'</span>] . <span class="php-quote">&quot;resources/images/Snowflakes2.png&quot;</span>) . <span class="php-quote">'&lt;/url&gt;
@@ -3832,7 +3832,7 @@
 </span></span><span id="3739" class="l"><a class="l" href="#3739">3739: </a><span class="php-comment">     */</span>
 </span><span id="3740" class="l"><a class="l" href="#3740">3740: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetdbPassword" href="#_SetdbPassword">SetdbPassword</a>(<span class="php-var">$value</span>) {
 </span><span id="3741" class="l"><a class="l" href="#3741">3741: </a>        <span class="php-comment">//password</span>
-</span><span id="3742" class="l"><a class="l" href="#3742">3742: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;db&quot;</span>][<span class="php-quote">&quot;password&quot;</span>] = sfUtils::decrypt(<span class="php-var">$value</span>, <span class="php-var">$this</span>-&gt;m_key) ;
+</span><span id="3742" class="l"><a class="l" href="#3742">3742: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;db&quot;</span>][<span class="php-quote">&quot;password&quot;</span>] = sfUtils::decrypt(<span class="php-var">$value</span>, <span class="php-var">$this</span>-&gt;m_key);
 </span><span id="3743" class="l"><a class="l" href="#3743">3743: </a>    }
 </span><span id="3744" class="l"><a class="l" href="#3744">3744: </a>
 </span><span id="3745" class="l"><a class="l" href="#3745">3745: </a>    <span class="php-comment">/**
@@ -3843,273 +3843,270 @@
 </span><span id="3750" class="l"><a class="l" href="#3750">3750: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_Setadmin_email" href="#_Setadmin_email">Setadmin_email</a>(<span class="php-var">$value</span>) {
 </span><span id="3751" class="l"><a class="l" href="#3751">3751: </a>        <span class="php-comment">//admin_email</span>
 </span><span id="3752" class="l"><a class="l" href="#3752">3752: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;db&quot;</span>][<span class="php-quote">&quot;admin_email&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3753" class="l"><a class="l" href="#3753">3753: </a>        
-</span><span id="3754" class="l"><a class="l" href="#3754">3754: </a>    }
-</span><span id="3755" class="l"><a class="l" href="#3755">3755: </a>
-</span><span id="3756" class="l"><a class="l" href="#3756">3756: </a>    <span class="php-comment">/**
-</span></span><span id="3757" class="l"><a class="l" href="#3757">3757: </a><span class="php-comment">     * sets the site time zone of the db in the  configuration file 
-</span></span><span id="3758" class="l"><a class="l" href="#3758">3758: </a><span class="php-comment">     * 
-</span></span><span id="3759" class="l"><a class="l" href="#3759">3759: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3760" class="l"><a class="l" href="#3760">3760: </a><span class="php-comment">     */</span>
-</span><span id="3761" class="l"><a class="l" href="#3761">3761: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SettimeZone" href="#_SettimeZone">SettimeZone</a>(<span class="php-var">$value</span>) {
-</span><span id="3762" class="l"><a class="l" href="#3762">3762: </a>        <span class="php-comment">//time_zone</span>
-</span><span id="3763" class="l"><a class="l" href="#3763">3763: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;db&quot;</span>][<span class="php-quote">&quot;time_zone&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3764" class="l"><a class="l" href="#3764">3764: </a>    }
-</span><span id="3765" class="l"><a class="l" href="#3765">3765: </a>
-</span><span id="3766" class="l"><a class="l" href="#3766">3766: </a>    
-</span><span id="3767" class="l"><a class="l" href="#3767">3767: </a>    <span class="php-comment">//Settings Info     //[settings]</span>
-</span><span id="3768" class="l"><a class="l" href="#3768">3768: </a>    
-</span><span id="3769" class="l"><a class="l" href="#3769">3769: </a>    <span class="php-comment">/**
-</span></span><span id="3770" class="l"><a class="l" href="#3770">3770: </a><span class="php-comment">     * sets the snowflakes installation url of the settings in the  configuration file
-</span></span><span id="3771" class="l"><a class="l" href="#3771">3771: </a><span class="php-comment">     * 
-</span></span><span id="3772" class="l"><a class="l" href="#3772">3772: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt;  
-</span></span><span id="3773" class="l"><a class="l" href="#3773">3773: </a><span class="php-comment">     */</span>
-</span><span id="3774" class="l"><a class="l" href="#3774">3774: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_Seturl" href="#_Seturl">Seturl</a>(<span class="php-var">$value</span>) {
-</span><span id="3775" class="l"><a class="l" href="#3775">3775: </a>        <span class="php-comment">//url</span>
-</span><span id="3776" class="l"><a class="l" href="#3776">3776: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;url&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3777" class="l"><a class="l" href="#3777">3777: </a>    }
-</span><span id="3778" class="l"><a class="l" href="#3778">3778: </a>
-</span><span id="3779" class="l"><a class="l" href="#3779">3779: </a>    <span class="php-comment">/**
-</span></span><span id="3780" class="l"><a class="l" href="#3780">3780: </a><span class="php-comment">     * sets the snowflake url of the settings in the  configuration file 
-</span></span><span id="3781" class="l"><a class="l" href="#3781">3781: </a><span class="php-comment">     * 
-</span></span><span id="3782" class="l"><a class="l" href="#3782">3782: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3783" class="l"><a class="l" href="#3783">3783: </a><span class="php-comment">     */</span>
-</span><span id="3784" class="l"><a class="l" href="#3784">3784: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetsfUrl" href="#_SetsfUrl">SetsfUrl</a>(<span class="php-var">$value</span>) {
-</span><span id="3785" class="l"><a class="l" href="#3785">3785: </a>        <span class="php-comment">//m_sfUrl</span>
-</span><span id="3786" class="l"><a class="l" href="#3786">3786: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;m_sfUrl&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3787" class="l"><a class="l" href="#3787">3787: </a>    }
-</span><span id="3788" class="l"><a class="l" href="#3788">3788: </a>
-</span><span id="3789" class="l"><a class="l" href="#3789">3789: </a>    <span class="php-comment">/**
-</span></span><span id="3790" class="l"><a class="l" href="#3790">3790: </a><span class="php-comment">     * sets the snowflake gallery url of the settings in the  configuration file
-</span></span><span id="3791" class="l"><a class="l" href="#3791">3791: </a><span class="php-comment">     * 
-</span></span><span id="3792" class="l"><a class="l" href="#3792">3792: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt;  
-</span></span><span id="3793" class="l"><a class="l" href="#3793">3793: </a><span class="php-comment">     */</span>
-</span><span id="3794" class="l"><a class="l" href="#3794">3794: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetsfGalleryUrl" href="#_SetsfGalleryUrl">SetsfGalleryUrl</a>(<span class="php-var">$value</span>) {
-</span><span id="3795" class="l"><a class="l" href="#3795">3795: </a>        <span class="php-comment">//m_sfGalleryUrl</span>
-</span><span id="3796" class="l"><a class="l" href="#3796">3796: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;m_sfGalleryUrl&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3797" class="l"><a class="l" href="#3797">3797: </a>    }
-</span><span id="3798" class="l"><a class="l" href="#3798">3798: </a>
-</span><span id="3799" class="l"><a class="l" href="#3799">3799: </a>    <span class="php-comment">/**
-</span></span><span id="3800" class="l"><a class="l" href="#3800">3800: </a><span class="php-comment">     * sets the snowflakes Gallery image url of the settings in the  configuration file 
-</span></span><span id="3801" class="l"><a class="l" href="#3801">3801: </a><span class="php-comment">     * 
-</span></span><span id="3802" class="l"><a class="l" href="#3802">3802: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3803" class="l"><a class="l" href="#3803">3803: </a><span class="php-comment">     */</span>
-</span><span id="3804" class="l"><a class="l" href="#3804">3804: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetsfGalleryImgUrl" href="#_SetsfGalleryImgUrl">SetsfGalleryImgUrl</a>(<span class="php-var">$value</span>) {
-</span><span id="3805" class="l"><a class="l" href="#3805">3805: </a>        <span class="php-comment">//m_sfGalleryImgUrl</span>
-</span><span id="3806" class="l"><a class="l" href="#3806">3806: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;m_sfGalleryImgUrl&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3807" class="l"><a class="l" href="#3807">3807: </a>    }
-</span><span id="3808" class="l"><a class="l" href="#3808">3808: </a>
-</span><span id="3809" class="l"><a class="l" href="#3809">3809: </a>    <span class="php-comment">/**
-</span></span><span id="3810" class="l"><a class="l" href="#3810">3810: </a><span class="php-comment">     * sets the snowflake gallery thumbnail image url of the settings in the  
-</span></span><span id="3811" class="l"><a class="l" href="#3811">3811: </a><span class="php-comment">     * configuration file 
-</span></span><span id="3812" class="l"><a class="l" href="#3812">3812: </a><span class="php-comment">     * 
-</span></span><span id="3813" class="l"><a class="l" href="#3813">3813: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3814" class="l"><a class="l" href="#3814">3814: </a><span class="php-comment">     */</span>
-</span><span id="3815" class="l"><a class="l" href="#3815">3815: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetsfGalleryThumbUrl" href="#_SetsfGalleryThumbUrl">SetsfGalleryThumbUrl</a>(<span class="php-var">$value</span>) {
-</span><span id="3816" class="l"><a class="l" href="#3816">3816: </a>        <span class="php-comment">//m_sfGalleryThumbUrl </span>
-</span><span id="3817" class="l"><a class="l" href="#3817">3817: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;m_sfGalleryThumbUrl&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3818" class="l"><a class="l" href="#3818">3818: </a>    }
-</span><span id="3819" class="l"><a class="l" href="#3819">3819: </a>
-</span><span id="3820" class="l"><a class="l" href="#3820">3820: </a>    <span class="php-comment">/**
-</span></span><span id="3821" class="l"><a class="l" href="#3821">3821: </a><span class="php-comment">     * sets the snowflake gallery thumbnail image width of the settings in the  
-</span></span><span id="3822" class="l"><a class="l" href="#3822">3822: </a><span class="php-comment">     * configuration file 
-</span></span><span id="3823" class="l"><a class="l" href="#3823">3823: </a><span class="php-comment">     * 
-</span></span><span id="3824" class="l"><a class="l" href="#3824">3824: </a><span class="php-comment">     * @param int $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3825" class="l"><a class="l" href="#3825">3825: </a><span class="php-comment">     */</span>
-</span><span id="3826" class="l"><a class="l" href="#3826">3826: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetthumbWidth" href="#_SetthumbWidth">SetthumbWidth</a>(<span class="php-var">$value</span>) {
-</span><span id="3827" class="l"><a class="l" href="#3827">3827: </a>        <span class="php-comment">//thumbWidth</span>
-</span><span id="3828" class="l"><a class="l" href="#3828">3828: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;thumbWidth&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3829" class="l"><a class="l" href="#3829">3829: </a>    }
-</span><span id="3830" class="l"><a class="l" href="#3830">3830: </a>
-</span><span id="3831" class="l"><a class="l" href="#3831">3831: </a>    <span class="php-comment">/**
-</span></span><span id="3832" class="l"><a class="l" href="#3832">3832: </a><span class="php-comment">     * sets the snowflake gallery thumbnail image height of the settings in the
-</span></span><span id="3833" class="l"><a class="l" href="#3833">3833: </a><span class="php-comment">     * configuration file 
-</span></span><span id="3834" class="l"><a class="l" href="#3834">3834: </a><span class="php-comment">     * 
-</span></span><span id="3835" class="l"><a class="l" href="#3835">3835: </a><span class="php-comment">     * @param int $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3836" class="l"><a class="l" href="#3836">3836: </a><span class="php-comment">     */</span>
-</span><span id="3837" class="l"><a class="l" href="#3837">3837: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetthumbHeight" href="#_SetthumbHeight">SetthumbHeight</a>(<span class="php-var">$value</span>) {
-</span><span id="3838" class="l"><a class="l" href="#3838">3838: </a>        <span class="php-comment">//thumbHeight</span>
-</span><span id="3839" class="l"><a class="l" href="#3839">3839: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;thumbHeight&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3840" class="l"><a class="l" href="#3840">3840: </a>    }
-</span><span id="3841" class="l"><a class="l" href="#3841">3841: </a>
-</span><span id="3842" class="l"><a class="l" href="#3842">3842: </a>    <span class="php-comment">/**
-</span></span><span id="3843" class="l"><a class="l" href="#3843">3843: </a><span class="php-comment">     * sets the snowflake gallery maximum image width of the settings in the  
-</span></span><span id="3844" class="l"><a class="l" href="#3844">3844: </a><span class="php-comment">     * configuration file 
-</span></span><span id="3845" class="l"><a class="l" href="#3845">3845: </a><span class="php-comment">     * 
-</span></span><span id="3846" class="l"><a class="l" href="#3846">3846: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3847" class="l"><a class="l" href="#3847">3847: </a><span class="php-comment">     */</span>
-</span><span id="3848" class="l"><a class="l" href="#3848">3848: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetmaxImageWidth" href="#_SetmaxImageWidth">SetmaxImageWidth</a>(<span class="php-var">$value</span>) {
-</span><span id="3849" class="l"><a class="l" href="#3849">3849: </a>        <span class="php-comment">//maxImageWidth</span>
-</span><span id="3850" class="l"><a class="l" href="#3850">3850: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;maxImageWidth&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3851" class="l"><a class="l" href="#3851">3851: </a>    }
-</span><span id="3852" class="l"><a class="l" href="#3852">3852: </a>
-</span><span id="3853" class="l"><a class="l" href="#3853">3853: </a>
-</span><span id="3854" class="l"><a class="l" href="#3854">3854: </a>    <span class="php-comment">/**
-</span></span><span id="3855" class="l"><a class="l" href="#3855">3855: </a><span class="php-comment">     * sets the snowflake gallery supported image extesion list of the settings 
-</span></span><span id="3856" class="l"><a class="l" href="#3856">3856: </a><span class="php-comment">     * in the  configuration file 
-</span></span><span id="3857" class="l"><a class="l" href="#3857">3857: </a><span class="php-comment">     * 
-</span></span><span id="3858" class="l"><a class="l" href="#3858">3858: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3859" class="l"><a class="l" href="#3859">3859: </a><span class="php-comment">     */</span>
-</span><span id="3860" class="l"><a class="l" href="#3860">3860: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetimageExtList" href="#_SetimageExtList">SetimageExtList</a>(<span class="php-var">$value</span>) {
-</span><span id="3861" class="l"><a class="l" href="#3861">3861: </a>        <span class="php-comment">//imageExtList</span>
-</span><span id="3862" class="l"><a class="l" href="#3862">3862: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;imageExtList&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3863" class="l"><a class="l" href="#3863">3863: </a>    }
-</span><span id="3864" class="l"><a class="l" href="#3864">3864: </a>
-</span><span id="3865" class="l"><a class="l" href="#3865">3865: </a>    <span class="php-comment">/**
-</span></span><span id="3866" class="l"><a class="l" href="#3866">3866: </a><span class="php-comment">     * sets the snowflake gallery supported image type list  of the settings 
-</span></span><span id="3867" class="l"><a class="l" href="#3867">3867: </a><span class="php-comment">     * in the  configuration file 
-</span></span><span id="3868" class="l"><a class="l" href="#3868">3868: </a><span class="php-comment">     * 
-</span></span><span id="3869" class="l"><a class="l" href="#3869">3869: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3870" class="l"><a class="l" href="#3870">3870: </a><span class="php-comment">     */</span>
-</span><span id="3871" class="l"><a class="l" href="#3871">3871: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetimageTypesList" href="#_SetimageTypesList">SetimageTypesList</a>(<span class="php-var">$value</span>) {
-</span><span id="3872" class="l"><a class="l" href="#3872">3872: </a>        <span class="php-comment">//imageTypesList</span>
-</span><span id="3873" class="l"><a class="l" href="#3873">3873: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;imageTypesList&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3874" class="l"><a class="l" href="#3874">3874: </a>    }
-</span><span id="3875" class="l"><a class="l" href="#3875">3875: </a>
-</span><span id="3876" class="l"><a class="l" href="#3876">3876: </a>    <span class="php-comment">/**
-</span></span><span id="3877" class="l"><a class="l" href="#3877">3877: </a><span class="php-comment">     * sets the snowflakes output url where snowflakes audience can see one 
-</span></span><span id="3878" class="l"><a class="l" href="#3878">3878: </a><span class="php-comment">     * snowflakes published of the settings in the  configuration file 
-</span></span><span id="3879" class="l"><a class="l" href="#3879">3879: </a><span class="php-comment">     * 
-</span></span><span id="3880" class="l"><a class="l" href="#3880">3880: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3881" class="l"><a class="l" href="#3881">3881: </a><span class="php-comment">     */</span>
-</span><span id="3882" class="l"><a class="l" href="#3882">3882: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetsnowflakesResultUrl" href="#_SetsnowflakesResultUrl">SetsnowflakesResultUrl</a>(<span class="php-var">$value</span>) {
-</span><span id="3883" class="l"><a class="l" href="#3883">3883: </a>        <span class="php-comment">//snowflakesResultUrl   // One snowflakes result</span>
-</span><span id="3884" class="l"><a class="l" href="#3884">3884: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;snowflakesResultUrl&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3885" class="l"><a class="l" href="#3885">3885: </a>    }
-</span><span id="3886" class="l"><a class="l" href="#3886">3886: </a>
-</span><span id="3887" class="l"><a class="l" href="#3887">3887: </a>    <span class="php-comment">/**
-</span></span><span id="3888" class="l"><a class="l" href="#3888">3888: </a><span class="php-comment">     * sets the snowflakes output url where snowflakes audience can see all 
-</span></span><span id="3889" class="l"><a class="l" href="#3889">3889: </a><span class="php-comment">     * snowflakes published of the settings in the  configuration file 
-</span></span><span id="3890" class="l"><a class="l" href="#3890">3890: </a><span class="php-comment">     * 
-</span></span><span id="3891" class="l"><a class="l" href="#3891">3891: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3892" class="l"><a class="l" href="#3892">3892: </a><span class="php-comment">     */</span>
-</span><span id="3893" class="l"><a class="l" href="#3893">3893: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetsnowflakesOutUrl" href="#_SetsnowflakesOutUrl">SetsnowflakesOutUrl</a>(<span class="php-var">$value</span>) {
-</span><span id="3894" class="l"><a class="l" href="#3894">3894: </a>        <span class="php-comment">// snowflakesOutUrl     // All snowflakes output</span>
-</span><span id="3895" class="l"><a class="l" href="#3895">3895: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;snowflakesOutUrl&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3896" class="l"><a class="l" href="#3896">3896: </a>    }
-</span><span id="3897" class="l"><a class="l" href="#3897">3897: </a>
-</span><span id="3898" class="l"><a class="l" href="#3898">3898: </a>    <span class="php-comment">/**
-</span></span><span id="3899" class="l"><a class="l" href="#3899">3899: </a><span class="php-comment">     * sets the events output url where snowflakes audience can see one 
-</span></span><span id="3900" class="l"><a class="l" href="#3900">3900: </a><span class="php-comment">     * snowflakes published of the settings in the  configuration file 
-</span></span><span id="3901" class="l"><a class="l" href="#3901">3901: </a><span class="php-comment">     * 
-</span></span><span id="3902" class="l"><a class="l" href="#3902">3902: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3903" class="l"><a class="l" href="#3903">3903: </a><span class="php-comment">     */</span>
-</span><span id="3904" class="l"><a class="l" href="#3904">3904: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SeteventsResultUrl" href="#_SeteventsResultUrl">SeteventsResultUrl</a>(<span class="php-var">$value</span>) {
-</span><span id="3905" class="l"><a class="l" href="#3905">3905: </a>        <span class="php-comment">//eventsResultUrl        // One event result</span>
-</span><span id="3906" class="l"><a class="l" href="#3906">3906: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;eventsResultUrl&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3907" class="l"><a class="l" href="#3907">3907: </a>    }
-</span><span id="3908" class="l"><a class="l" href="#3908">3908: </a>
-</span><span id="3909" class="l"><a class="l" href="#3909">3909: </a>    <span class="php-comment">/**
-</span></span><span id="3910" class="l"><a class="l" href="#3910">3910: </a><span class="php-comment">     * sets the events output url where snowflakes audience can see all 
-</span></span><span id="3911" class="l"><a class="l" href="#3911">3911: </a><span class="php-comment">     * snowflakes published of the settings in the  configuration file 
-</span></span><span id="3912" class="l"><a class="l" href="#3912">3912: </a><span class="php-comment">     * 
-</span></span><span id="3913" class="l"><a class="l" href="#3913">3913: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3914" class="l"><a class="l" href="#3914">3914: </a><span class="php-comment">     */</span>
-</span><span id="3915" class="l"><a class="l" href="#3915">3915: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SeteventsOutputUrl" href="#_SeteventsOutputUrl">SeteventsOutputUrl</a>(<span class="php-var">$value</span>) {
-</span><span id="3916" class="l"><a class="l" href="#3916">3916: </a>        <span class="php-comment">//eventsOutputUrl        //All event output</span>
-</span><span id="3917" class="l"><a class="l" href="#3917">3917: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;eventsOutputUrl&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3918" class="l"><a class="l" href="#3918">3918: </a>    }
-</span><span id="3919" class="l"><a class="l" href="#3919">3919: </a>
-</span><span id="3920" class="l"><a class="l" href="#3920">3920: </a>    <span class="php-comment">/**
-</span></span><span id="3921" class="l"><a class="l" href="#3921">3921: </a><span class="php-comment">     * sets the gallery output url where snowflakes audience can see one 
-</span></span><span id="3922" class="l"><a class="l" href="#3922">3922: </a><span class="php-comment">     * snowflakes published of the settings in the  configuration file 
-</span></span><span id="3923" class="l"><a class="l" href="#3923">3923: </a><span class="php-comment">     * 
-</span></span><span id="3924" class="l"><a class="l" href="#3924">3924: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3925" class="l"><a class="l" href="#3925">3925: </a><span class="php-comment">     */</span>
-</span><span id="3926" class="l"><a class="l" href="#3926">3926: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetgalleryResultUrl" href="#_SetgalleryResultUrl">SetgalleryResultUrl</a>(<span class="php-var">$value</span>) {
-</span><span id="3927" class="l"><a class="l" href="#3927">3927: </a>        <span class="php-comment">//galleryResultUrl      // One gallery result</span>
-</span><span id="3928" class="l"><a class="l" href="#3928">3928: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;galleryResultUrl&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3929" class="l"><a class="l" href="#3929">3929: </a>    }
-</span><span id="3930" class="l"><a class="l" href="#3930">3930: </a>
-</span><span id="3931" class="l"><a class="l" href="#3931">3931: </a>    <span class="php-comment">/**
-</span></span><span id="3932" class="l"><a class="l" href="#3932">3932: </a><span class="php-comment">     * sets the gallery output url where snowflakes audience can see all 
-</span></span><span id="3933" class="l"><a class="l" href="#3933">3933: </a><span class="php-comment">     * snowflakes published of the settings in the  configuration file
-</span></span><span id="3934" class="l"><a class="l" href="#3934">3934: </a><span class="php-comment">     * 
-</span></span><span id="3935" class="l"><a class="l" href="#3935">3935: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt;  
-</span></span><span id="3936" class="l"><a class="l" href="#3936">3936: </a><span class="php-comment">     */</span>
-</span><span id="3937" class="l"><a class="l" href="#3937">3937: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetgalleryOutUrl" href="#_SetgalleryOutUrl">SetgalleryOutUrl</a>(<span class="php-var">$value</span>) {
-</span><span id="3938" class="l"><a class="l" href="#3938">3938: </a>        <span class="php-comment">//galleryOutUrl           //All gallery output</span>
+</span><span id="3753" class="l"><a class="l" href="#3753">3753: </a>    }
+</span><span id="3754" class="l"><a class="l" href="#3754">3754: </a>
+</span><span id="3755" class="l"><a class="l" href="#3755">3755: </a>    <span class="php-comment">/**
+</span></span><span id="3756" class="l"><a class="l" href="#3756">3756: </a><span class="php-comment">     * sets the site time zone of the db in the  configuration file 
+</span></span><span id="3757" class="l"><a class="l" href="#3757">3757: </a><span class="php-comment">     * 
+</span></span><span id="3758" class="l"><a class="l" href="#3758">3758: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3759" class="l"><a class="l" href="#3759">3759: </a><span class="php-comment">     */</span>
+</span><span id="3760" class="l"><a class="l" href="#3760">3760: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SettimeZone" href="#_SettimeZone">SettimeZone</a>(<span class="php-var">$value</span>) {
+</span><span id="3761" class="l"><a class="l" href="#3761">3761: </a>        <span class="php-comment">//time_zone</span>
+</span><span id="3762" class="l"><a class="l" href="#3762">3762: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;db&quot;</span>][<span class="php-quote">&quot;time_zone&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3763" class="l"><a class="l" href="#3763">3763: </a>    }
+</span><span id="3764" class="l"><a class="l" href="#3764">3764: </a>
+</span><span id="3765" class="l"><a class="l" href="#3765">3765: </a>    <span class="php-comment">//Settings Info     //[settings]</span>
+</span><span id="3766" class="l"><a class="l" href="#3766">3766: </a>
+</span><span id="3767" class="l"><a class="l" href="#3767">3767: </a>    <span class="php-comment">/**
+</span></span><span id="3768" class="l"><a class="l" href="#3768">3768: </a><span class="php-comment">     * sets the snowflakes installation url of the settings in the  configuration file
+</span></span><span id="3769" class="l"><a class="l" href="#3769">3769: </a><span class="php-comment">     * 
+</span></span><span id="3770" class="l"><a class="l" href="#3770">3770: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt;  
+</span></span><span id="3771" class="l"><a class="l" href="#3771">3771: </a><span class="php-comment">     */</span>
+</span><span id="3772" class="l"><a class="l" href="#3772">3772: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_Seturl" href="#_Seturl">Seturl</a>(<span class="php-var">$value</span>) {
+</span><span id="3773" class="l"><a class="l" href="#3773">3773: </a>        <span class="php-comment">//url</span>
+</span><span id="3774" class="l"><a class="l" href="#3774">3774: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;url&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3775" class="l"><a class="l" href="#3775">3775: </a>    }
+</span><span id="3776" class="l"><a class="l" href="#3776">3776: </a>
+</span><span id="3777" class="l"><a class="l" href="#3777">3777: </a>    <span class="php-comment">/**
+</span></span><span id="3778" class="l"><a class="l" href="#3778">3778: </a><span class="php-comment">     * sets the snowflake url of the settings in the  configuration file 
+</span></span><span id="3779" class="l"><a class="l" href="#3779">3779: </a><span class="php-comment">     * 
+</span></span><span id="3780" class="l"><a class="l" href="#3780">3780: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3781" class="l"><a class="l" href="#3781">3781: </a><span class="php-comment">     */</span>
+</span><span id="3782" class="l"><a class="l" href="#3782">3782: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetsfUrl" href="#_SetsfUrl">SetsfUrl</a>(<span class="php-var">$value</span>) {
+</span><span id="3783" class="l"><a class="l" href="#3783">3783: </a>        <span class="php-comment">//m_sfUrl</span>
+</span><span id="3784" class="l"><a class="l" href="#3784">3784: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;m_sfUrl&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3785" class="l"><a class="l" href="#3785">3785: </a>    }
+</span><span id="3786" class="l"><a class="l" href="#3786">3786: </a>
+</span><span id="3787" class="l"><a class="l" href="#3787">3787: </a>    <span class="php-comment">/**
+</span></span><span id="3788" class="l"><a class="l" href="#3788">3788: </a><span class="php-comment">     * sets the snowflake gallery url of the settings in the  configuration file
+</span></span><span id="3789" class="l"><a class="l" href="#3789">3789: </a><span class="php-comment">     * 
+</span></span><span id="3790" class="l"><a class="l" href="#3790">3790: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt;  
+</span></span><span id="3791" class="l"><a class="l" href="#3791">3791: </a><span class="php-comment">     */</span>
+</span><span id="3792" class="l"><a class="l" href="#3792">3792: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetsfGalleryUrl" href="#_SetsfGalleryUrl">SetsfGalleryUrl</a>(<span class="php-var">$value</span>) {
+</span><span id="3793" class="l"><a class="l" href="#3793">3793: </a>        <span class="php-comment">//m_sfGalleryUrl</span>
+</span><span id="3794" class="l"><a class="l" href="#3794">3794: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;m_sfGalleryUrl&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3795" class="l"><a class="l" href="#3795">3795: </a>    }
+</span><span id="3796" class="l"><a class="l" href="#3796">3796: </a>
+</span><span id="3797" class="l"><a class="l" href="#3797">3797: </a>    <span class="php-comment">/**
+</span></span><span id="3798" class="l"><a class="l" href="#3798">3798: </a><span class="php-comment">     * sets the snowflakes Gallery image url of the settings in the  configuration file 
+</span></span><span id="3799" class="l"><a class="l" href="#3799">3799: </a><span class="php-comment">     * 
+</span></span><span id="3800" class="l"><a class="l" href="#3800">3800: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3801" class="l"><a class="l" href="#3801">3801: </a><span class="php-comment">     */</span>
+</span><span id="3802" class="l"><a class="l" href="#3802">3802: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetsfGalleryImgUrl" href="#_SetsfGalleryImgUrl">SetsfGalleryImgUrl</a>(<span class="php-var">$value</span>) {
+</span><span id="3803" class="l"><a class="l" href="#3803">3803: </a>        <span class="php-comment">//m_sfGalleryImgUrl</span>
+</span><span id="3804" class="l"><a class="l" href="#3804">3804: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;m_sfGalleryImgUrl&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3805" class="l"><a class="l" href="#3805">3805: </a>    }
+</span><span id="3806" class="l"><a class="l" href="#3806">3806: </a>
+</span><span id="3807" class="l"><a class="l" href="#3807">3807: </a>    <span class="php-comment">/**
+</span></span><span id="3808" class="l"><a class="l" href="#3808">3808: </a><span class="php-comment">     * sets the snowflake gallery thumbnail image url of the settings in the  
+</span></span><span id="3809" class="l"><a class="l" href="#3809">3809: </a><span class="php-comment">     * configuration file 
+</span></span><span id="3810" class="l"><a class="l" href="#3810">3810: </a><span class="php-comment">     * 
+</span></span><span id="3811" class="l"><a class="l" href="#3811">3811: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3812" class="l"><a class="l" href="#3812">3812: </a><span class="php-comment">     */</span>
+</span><span id="3813" class="l"><a class="l" href="#3813">3813: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetsfGalleryThumbUrl" href="#_SetsfGalleryThumbUrl">SetsfGalleryThumbUrl</a>(<span class="php-var">$value</span>) {
+</span><span id="3814" class="l"><a class="l" href="#3814">3814: </a>        <span class="php-comment">//m_sfGalleryThumbUrl </span>
+</span><span id="3815" class="l"><a class="l" href="#3815">3815: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;m_sfGalleryThumbUrl&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3816" class="l"><a class="l" href="#3816">3816: </a>    }
+</span><span id="3817" class="l"><a class="l" href="#3817">3817: </a>
+</span><span id="3818" class="l"><a class="l" href="#3818">3818: </a>    <span class="php-comment">/**
+</span></span><span id="3819" class="l"><a class="l" href="#3819">3819: </a><span class="php-comment">     * sets the snowflake gallery thumbnail image width of the settings in the  
+</span></span><span id="3820" class="l"><a class="l" href="#3820">3820: </a><span class="php-comment">     * configuration file 
+</span></span><span id="3821" class="l"><a class="l" href="#3821">3821: </a><span class="php-comment">     * 
+</span></span><span id="3822" class="l"><a class="l" href="#3822">3822: </a><span class="php-comment">     * @param int $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3823" class="l"><a class="l" href="#3823">3823: </a><span class="php-comment">     */</span>
+</span><span id="3824" class="l"><a class="l" href="#3824">3824: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetthumbWidth" href="#_SetthumbWidth">SetthumbWidth</a>(<span class="php-var">$value</span>) {
+</span><span id="3825" class="l"><a class="l" href="#3825">3825: </a>        <span class="php-comment">//thumbWidth</span>
+</span><span id="3826" class="l"><a class="l" href="#3826">3826: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;thumbWidth&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3827" class="l"><a class="l" href="#3827">3827: </a>    }
+</span><span id="3828" class="l"><a class="l" href="#3828">3828: </a>
+</span><span id="3829" class="l"><a class="l" href="#3829">3829: </a>    <span class="php-comment">/**
+</span></span><span id="3830" class="l"><a class="l" href="#3830">3830: </a><span class="php-comment">     * sets the snowflake gallery thumbnail image height of the settings in the
+</span></span><span id="3831" class="l"><a class="l" href="#3831">3831: </a><span class="php-comment">     * configuration file 
+</span></span><span id="3832" class="l"><a class="l" href="#3832">3832: </a><span class="php-comment">     * 
+</span></span><span id="3833" class="l"><a class="l" href="#3833">3833: </a><span class="php-comment">     * @param int $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3834" class="l"><a class="l" href="#3834">3834: </a><span class="php-comment">     */</span>
+</span><span id="3835" class="l"><a class="l" href="#3835">3835: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetthumbHeight" href="#_SetthumbHeight">SetthumbHeight</a>(<span class="php-var">$value</span>) {
+</span><span id="3836" class="l"><a class="l" href="#3836">3836: </a>        <span class="php-comment">//thumbHeight</span>
+</span><span id="3837" class="l"><a class="l" href="#3837">3837: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;thumbHeight&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3838" class="l"><a class="l" href="#3838">3838: </a>    }
+</span><span id="3839" class="l"><a class="l" href="#3839">3839: </a>
+</span><span id="3840" class="l"><a class="l" href="#3840">3840: </a>    <span class="php-comment">/**
+</span></span><span id="3841" class="l"><a class="l" href="#3841">3841: </a><span class="php-comment">     * sets the snowflake gallery maximum image width of the settings in the  
+</span></span><span id="3842" class="l"><a class="l" href="#3842">3842: </a><span class="php-comment">     * configuration file 
+</span></span><span id="3843" class="l"><a class="l" href="#3843">3843: </a><span class="php-comment">     * 
+</span></span><span id="3844" class="l"><a class="l" href="#3844">3844: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3845" class="l"><a class="l" href="#3845">3845: </a><span class="php-comment">     */</span>
+</span><span id="3846" class="l"><a class="l" href="#3846">3846: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetmaxImageWidth" href="#_SetmaxImageWidth">SetmaxImageWidth</a>(<span class="php-var">$value</span>) {
+</span><span id="3847" class="l"><a class="l" href="#3847">3847: </a>        <span class="php-comment">//maxImageWidth</span>
+</span><span id="3848" class="l"><a class="l" href="#3848">3848: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;maxImageWidth&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3849" class="l"><a class="l" href="#3849">3849: </a>    }
+</span><span id="3850" class="l"><a class="l" href="#3850">3850: </a>
+</span><span id="3851" class="l"><a class="l" href="#3851">3851: </a>    <span class="php-comment">/**
+</span></span><span id="3852" class="l"><a class="l" href="#3852">3852: </a><span class="php-comment">     * sets the snowflake gallery supported image extesion list of the settings 
+</span></span><span id="3853" class="l"><a class="l" href="#3853">3853: </a><span class="php-comment">     * in the  configuration file 
+</span></span><span id="3854" class="l"><a class="l" href="#3854">3854: </a><span class="php-comment">     * 
+</span></span><span id="3855" class="l"><a class="l" href="#3855">3855: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3856" class="l"><a class="l" href="#3856">3856: </a><span class="php-comment">     */</span>
+</span><span id="3857" class="l"><a class="l" href="#3857">3857: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetimageExtList" href="#_SetimageExtList">SetimageExtList</a>(<span class="php-var">$value</span>) {
+</span><span id="3858" class="l"><a class="l" href="#3858">3858: </a>        <span class="php-comment">//imageExtList</span>
+</span><span id="3859" class="l"><a class="l" href="#3859">3859: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;imageExtList&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3860" class="l"><a class="l" href="#3860">3860: </a>    }
+</span><span id="3861" class="l"><a class="l" href="#3861">3861: </a>
+</span><span id="3862" class="l"><a class="l" href="#3862">3862: </a>    <span class="php-comment">/**
+</span></span><span id="3863" class="l"><a class="l" href="#3863">3863: </a><span class="php-comment">     * sets the snowflake gallery supported image type list  of the settings 
+</span></span><span id="3864" class="l"><a class="l" href="#3864">3864: </a><span class="php-comment">     * in the  configuration file 
+</span></span><span id="3865" class="l"><a class="l" href="#3865">3865: </a><span class="php-comment">     * 
+</span></span><span id="3866" class="l"><a class="l" href="#3866">3866: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3867" class="l"><a class="l" href="#3867">3867: </a><span class="php-comment">     */</span>
+</span><span id="3868" class="l"><a class="l" href="#3868">3868: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetimageTypesList" href="#_SetimageTypesList">SetimageTypesList</a>(<span class="php-var">$value</span>) {
+</span><span id="3869" class="l"><a class="l" href="#3869">3869: </a>        <span class="php-comment">//imageTypesList</span>
+</span><span id="3870" class="l"><a class="l" href="#3870">3870: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;imageTypesList&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3871" class="l"><a class="l" href="#3871">3871: </a>    }
+</span><span id="3872" class="l"><a class="l" href="#3872">3872: </a>
+</span><span id="3873" class="l"><a class="l" href="#3873">3873: </a>    <span class="php-comment">/**
+</span></span><span id="3874" class="l"><a class="l" href="#3874">3874: </a><span class="php-comment">     * sets the snowflakes output url where snowflakes audience can see one 
+</span></span><span id="3875" class="l"><a class="l" href="#3875">3875: </a><span class="php-comment">     * snowflakes published of the settings in the  configuration file 
+</span></span><span id="3876" class="l"><a class="l" href="#3876">3876: </a><span class="php-comment">     * 
+</span></span><span id="3877" class="l"><a class="l" href="#3877">3877: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3878" class="l"><a class="l" href="#3878">3878: </a><span class="php-comment">     */</span>
+</span><span id="3879" class="l"><a class="l" href="#3879">3879: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetsnowflakesResultUrl" href="#_SetsnowflakesResultUrl">SetsnowflakesResultUrl</a>(<span class="php-var">$value</span>) {
+</span><span id="3880" class="l"><a class="l" href="#3880">3880: </a>        <span class="php-comment">//snowflakesResultUrl   // One snowflakes result</span>
+</span><span id="3881" class="l"><a class="l" href="#3881">3881: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;snowflakesResultUrl&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3882" class="l"><a class="l" href="#3882">3882: </a>    }
+</span><span id="3883" class="l"><a class="l" href="#3883">3883: </a>
+</span><span id="3884" class="l"><a class="l" href="#3884">3884: </a>    <span class="php-comment">/**
+</span></span><span id="3885" class="l"><a class="l" href="#3885">3885: </a><span class="php-comment">     * sets the snowflakes output url where snowflakes audience can see all 
+</span></span><span id="3886" class="l"><a class="l" href="#3886">3886: </a><span class="php-comment">     * snowflakes published of the settings in the  configuration file 
+</span></span><span id="3887" class="l"><a class="l" href="#3887">3887: </a><span class="php-comment">     * 
+</span></span><span id="3888" class="l"><a class="l" href="#3888">3888: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3889" class="l"><a class="l" href="#3889">3889: </a><span class="php-comment">     */</span>
+</span><span id="3890" class="l"><a class="l" href="#3890">3890: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetsnowflakesOutUrl" href="#_SetsnowflakesOutUrl">SetsnowflakesOutUrl</a>(<span class="php-var">$value</span>) {
+</span><span id="3891" class="l"><a class="l" href="#3891">3891: </a>        <span class="php-comment">// snowflakesOutUrl     // All snowflakes output</span>
+</span><span id="3892" class="l"><a class="l" href="#3892">3892: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;snowflakesOutUrl&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3893" class="l"><a class="l" href="#3893">3893: </a>    }
+</span><span id="3894" class="l"><a class="l" href="#3894">3894: </a>
+</span><span id="3895" class="l"><a class="l" href="#3895">3895: </a>    <span class="php-comment">/**
+</span></span><span id="3896" class="l"><a class="l" href="#3896">3896: </a><span class="php-comment">     * sets the events output url where snowflakes audience can see one 
+</span></span><span id="3897" class="l"><a class="l" href="#3897">3897: </a><span class="php-comment">     * snowflakes published of the settings in the  configuration file 
+</span></span><span id="3898" class="l"><a class="l" href="#3898">3898: </a><span class="php-comment">     * 
+</span></span><span id="3899" class="l"><a class="l" href="#3899">3899: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3900" class="l"><a class="l" href="#3900">3900: </a><span class="php-comment">     */</span>
+</span><span id="3901" class="l"><a class="l" href="#3901">3901: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SeteventsResultUrl" href="#_SeteventsResultUrl">SeteventsResultUrl</a>(<span class="php-var">$value</span>) {
+</span><span id="3902" class="l"><a class="l" href="#3902">3902: </a>        <span class="php-comment">//eventsResultUrl        // One event result</span>
+</span><span id="3903" class="l"><a class="l" href="#3903">3903: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;eventsResultUrl&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3904" class="l"><a class="l" href="#3904">3904: </a>    }
+</span><span id="3905" class="l"><a class="l" href="#3905">3905: </a>
+</span><span id="3906" class="l"><a class="l" href="#3906">3906: </a>    <span class="php-comment">/**
+</span></span><span id="3907" class="l"><a class="l" href="#3907">3907: </a><span class="php-comment">     * sets the events output url where snowflakes audience can see all 
+</span></span><span id="3908" class="l"><a class="l" href="#3908">3908: </a><span class="php-comment">     * snowflakes published of the settings in the  configuration file 
+</span></span><span id="3909" class="l"><a class="l" href="#3909">3909: </a><span class="php-comment">     * 
+</span></span><span id="3910" class="l"><a class="l" href="#3910">3910: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3911" class="l"><a class="l" href="#3911">3911: </a><span class="php-comment">     */</span>
+</span><span id="3912" class="l"><a class="l" href="#3912">3912: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SeteventsOutputUrl" href="#_SeteventsOutputUrl">SeteventsOutputUrl</a>(<span class="php-var">$value</span>) {
+</span><span id="3913" class="l"><a class="l" href="#3913">3913: </a>        <span class="php-comment">//eventsOutputUrl        //All event output</span>
+</span><span id="3914" class="l"><a class="l" href="#3914">3914: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;eventsOutputUrl&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3915" class="l"><a class="l" href="#3915">3915: </a>    }
+</span><span id="3916" class="l"><a class="l" href="#3916">3916: </a>
+</span><span id="3917" class="l"><a class="l" href="#3917">3917: </a>    <span class="php-comment">/**
+</span></span><span id="3918" class="l"><a class="l" href="#3918">3918: </a><span class="php-comment">     * sets the gallery output url where snowflakes audience can see one 
+</span></span><span id="3919" class="l"><a class="l" href="#3919">3919: </a><span class="php-comment">     * snowflakes published of the settings in the  configuration file 
+</span></span><span id="3920" class="l"><a class="l" href="#3920">3920: </a><span class="php-comment">     * 
+</span></span><span id="3921" class="l"><a class="l" href="#3921">3921: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3922" class="l"><a class="l" href="#3922">3922: </a><span class="php-comment">     */</span>
+</span><span id="3923" class="l"><a class="l" href="#3923">3923: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetgalleryResultUrl" href="#_SetgalleryResultUrl">SetgalleryResultUrl</a>(<span class="php-var">$value</span>) {
+</span><span id="3924" class="l"><a class="l" href="#3924">3924: </a>        <span class="php-comment">//galleryResultUrl      // One gallery result</span>
+</span><span id="3925" class="l"><a class="l" href="#3925">3925: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;galleryResultUrl&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3926" class="l"><a class="l" href="#3926">3926: </a>    }
+</span><span id="3927" class="l"><a class="l" href="#3927">3927: </a>
+</span><span id="3928" class="l"><a class="l" href="#3928">3928: </a>    <span class="php-comment">/**
+</span></span><span id="3929" class="l"><a class="l" href="#3929">3929: </a><span class="php-comment">     * sets the gallery output url where snowflakes audience can see all 
+</span></span><span id="3930" class="l"><a class="l" href="#3930">3930: </a><span class="php-comment">     * snowflakes published of the settings in the  configuration file
+</span></span><span id="3931" class="l"><a class="l" href="#3931">3931: </a><span class="php-comment">     * 
+</span></span><span id="3932" class="l"><a class="l" href="#3932">3932: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt;  
+</span></span><span id="3933" class="l"><a class="l" href="#3933">3933: </a><span class="php-comment">     */</span>
+</span><span id="3934" class="l"><a class="l" href="#3934">3934: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetgalleryOutUrl" href="#_SetgalleryOutUrl">SetgalleryOutUrl</a>(<span class="php-var">$value</span>) {
+</span><span id="3935" class="l"><a class="l" href="#3935">3935: </a>        <span class="php-comment">//galleryOutUrl           //All gallery output</span>
+</span><span id="3936" class="l"><a class="l" href="#3936">3936: </a>
+</span><span id="3937" class="l"><a class="l" href="#3937">3937: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;galleryOutUrl&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3938" class="l"><a class="l" href="#3938">3938: </a>    }
 </span><span id="3939" class="l"><a class="l" href="#3939">3939: </a>
-</span><span id="3940" class="l"><a class="l" href="#3940">3940: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;galleryOutUrl&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3941" class="l"><a class="l" href="#3941">3941: </a>    }
-</span><span id="3942" class="l"><a class="l" href="#3942">3942: </a>
-</span><span id="3943" class="l"><a class="l" href="#3943">3943: </a>    <span class="php-comment">/**
-</span></span><span id="3944" class="l"><a class="l" href="#3944">3944: </a><span class="php-comment">     * sets the maximum image size allowed for upload of the settings in the  
-</span></span><span id="3945" class="l"><a class="l" href="#3945">3945: </a><span class="php-comment">     * configuration file 
-</span></span><span id="3946" class="l"><a class="l" href="#3946">3946: </a><span class="php-comment">     * 
-</span></span><span id="3947" class="l"><a class="l" href="#3947">3947: </a><span class="php-comment">     * @param int $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3948" class="l"><a class="l" href="#3948">3948: </a><span class="php-comment">     */</span>
-</span><span id="3949" class="l"><a class="l" href="#3949">3949: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetmaxImageSize" href="#_SetmaxImageSize">SetmaxImageSize</a>(<span class="php-var">$value</span>) {
-</span><span id="3950" class="l"><a class="l" href="#3950">3950: </a>        <span class="php-comment">//maxImageSize</span>
-</span><span id="3951" class="l"><a class="l" href="#3951">3951: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;maxImageSize&quot;</span>] = sfUtils::toByteSize(<span class="php-var">$value</span>);
-</span><span id="3952" class="l"><a class="l" href="#3952">3952: </a>    }
-</span><span id="3953" class="l"><a class="l" href="#3953">3953: </a>
-</span><span id="3954" class="l"><a class="l" href="#3954">3954: </a>    <span class="php-comment">/**
-</span></span><span id="3955" class="l"><a class="l" href="#3955">3955: </a><span class="php-comment">     * Adds a new configuration element to the configuration file
-</span></span><span id="3956" class="l"><a class="l" href="#3956">3956: </a><span class="php-comment">     * 
-</span></span><span id="3957" class="l"><a class="l" href="#3957">3957: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3958" class="l"><a class="l" href="#3958">3958: </a><span class="php-comment">     * @param string $tag &lt;p&gt; The tag/element name of the configuration element to set &lt;/p&gt;
-</span></span><span id="3959" class="l"><a class="l" href="#3959">3959: </a><span class="php-comment">     * @param string $section &lt;p&gt; The tag/element header name of the configuration element to set &lt;/p&gt; 
-</span></span><span id="3960" class="l"><a class="l" href="#3960">3960: </a><span class="php-comment">     * 
-</span></span><span id="3961" class="l"><a class="l" href="#3961">3961: </a><span class="php-comment">     */</span>
-</span><span id="3962" class="l"><a class="l" href="#3962">3962: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setCustom" href="#_setCustom">setCustom</a>(<span class="php-var">$section</span>, <span class="php-var">$tag</span>, <span class="php-var">$value</span>) {
-</span><span id="3963" class="l"><a class="l" href="#3963">3963: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-var">$section</span>][<span class="php-var">$tag</span>] = <span class="php-var">$value</span>;
-</span><span id="3964" class="l"><a class="l" href="#3964">3964: </a>    }
-</span><span id="3965" class="l"><a class="l" href="#3965">3965: </a>
-</span><span id="3966" class="l"><a class="l" href="#3966">3966: </a>    <span class="php-comment">/**
-</span></span><span id="3967" class="l"><a class="l" href="#3967">3967: </a><span class="php-comment">     * sets the data path of the datadir in the  configuration file 
-</span></span><span id="3968" class="l"><a class="l" href="#3968">3968: </a><span class="php-comment">     * 
-</span></span><span id="3969" class="l"><a class="l" href="#3969">3969: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3970" class="l"><a class="l" href="#3970">3970: </a><span class="php-comment">     */</span>
-</span><span id="3971" class="l"><a class="l" href="#3971">3971: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_Setpath" href="#_Setpath">Setpath</a>(<span class="php-var">$value</span>) {
-</span><span id="3972" class="l"><a class="l" href="#3972">3972: </a>        <span class="php-comment">//path</span>
-</span><span id="3973" class="l"><a class="l" href="#3973">3973: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;datadir&quot;</span>][<span class="php-quote">&quot;path&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3974" class="l"><a class="l" href="#3974">3974: </a>    }
-</span><span id="3975" class="l"><a class="l" href="#3975">3975: </a>
-</span><span id="3976" class="l"><a class="l" href="#3976">3976: </a>    <span class="php-comment">/**
-</span></span><span id="3977" class="l"><a class="l" href="#3977">3977: </a><span class="php-comment">     * sets the data resources of the datadir in the  configuration file 
-</span></span><span id="3978" class="l"><a class="l" href="#3978">3978: </a><span class="php-comment">     * 
-</span></span><span id="3979" class="l"><a class="l" href="#3979">3979: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3980" class="l"><a class="l" href="#3980">3980: </a><span class="php-comment">     */</span>
-</span><span id="3981" class="l"><a class="l" href="#3981">3981: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_Setresources" href="#_Setresources">Setresources</a>(<span class="php-var">$value</span>) {
-</span><span id="3982" class="l"><a class="l" href="#3982">3982: </a>        <span class="php-comment">//resources</span>
-</span><span id="3983" class="l"><a class="l" href="#3983">3983: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;datadir&quot;</span>][<span class="php-quote">&quot;resources&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3984" class="l"><a class="l" href="#3984">3984: </a>    }
-</span><span id="3985" class="l"><a class="l" href="#3985">3985: </a>
-</span><span id="3986" class="l"><a class="l" href="#3986">3986: </a>    <span class="php-comment">/**
-</span></span><span id="3987" class="l"><a class="l" href="#3987">3987: </a><span class="php-comment">     * sets the gallery upload directory of the datadir in the  configuration file 
-</span></span><span id="3988" class="l"><a class="l" href="#3988">3988: </a><span class="php-comment">     * 
-</span></span><span id="3989" class="l"><a class="l" href="#3989">3989: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="3990" class="l"><a class="l" href="#3990">3990: </a><span class="php-comment">     */</span>
-</span><span id="3991" class="l"><a class="l" href="#3991">3991: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetuploadGalleryDir" href="#_SetuploadGalleryDir">SetuploadGalleryDir</a>(<span class="php-var">$value</span>) {
-</span><span id="3992" class="l"><a class="l" href="#3992">3992: </a>        <span class="php-comment">//uploadGalleryDir</span>
-</span><span id="3993" class="l"><a class="l" href="#3993">3993: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;datadir&quot;</span>][<span class="php-quote">&quot;uploadGalleryDir&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="3994" class="l"><a class="l" href="#3994">3994: </a>    }
-</span><span id="3995" class="l"><a class="l" href="#3995">3995: </a>
-</span><span id="3996" class="l"><a class="l" href="#3996">3996: </a>    <span class="php-comment">/**
-</span></span><span id="3997" class="l"><a class="l" href="#3997">3997: </a><span class="php-comment">     * sets the gallery image upload directory of the datadir in the  configuration file
-</span></span><span id="3998" class="l"><a class="l" href="#3998">3998: </a><span class="php-comment">     * 
-</span></span><span id="3999" class="l"><a class="l" href="#3999">3999: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt;  
-</span></span><span id="4000" class="l"><a class="l" href="#4000">4000: </a><span class="php-comment">     */</span>
-</span><span id="4001" class="l"><a class="l" href="#4001">4001: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetgalleryImgDir" href="#_SetgalleryImgDir">SetgalleryImgDir</a>(<span class="php-var">$value</span>) {
-</span><span id="4002" class="l"><a class="l" href="#4002">4002: </a>        <span class="php-comment">//galleryImgDir</span>
-</span><span id="4003" class="l"><a class="l" href="#4003">4003: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;datadir&quot;</span>][<span class="php-quote">&quot;galleryImgDir&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="4004" class="l"><a class="l" href="#4004">4004: </a>    }
-</span><span id="4005" class="l"><a class="l" href="#4005">4005: </a>
-</span><span id="4006" class="l"><a class="l" href="#4006">4006: </a>    <span class="php-comment">/**
-</span></span><span id="4007" class="l"><a class="l" href="#4007">4007: </a><span class="php-comment">     * sets the gallery image thumbnail upload directory of the datadir in the  configuration file 
-</span></span><span id="4008" class="l"><a class="l" href="#4008">4008: </a><span class="php-comment">     * 
-</span></span><span id="4009" class="l"><a class="l" href="#4009">4009: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
-</span></span><span id="4010" class="l"><a class="l" href="#4010">4010: </a><span class="php-comment">     */</span>
-</span><span id="4011" class="l"><a class="l" href="#4011">4011: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetgalleryThumbDir" href="#_SetgalleryThumbDir">SetgalleryThumbDir</a>(<span class="php-var">$value</span>) {
-</span><span id="4012" class="l"><a class="l" href="#4012">4012: </a>        <span class="php-comment">//galleryThumbDir</span>
-</span><span id="4013" class="l"><a class="l" href="#4013">4013: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;datadir&quot;</span>][<span class="php-quote">&quot;galleryThumbDir&quot;</span>] = <span class="php-var">$value</span>;
-</span><span id="4014" class="l"><a class="l" href="#4014">4014: </a>    }
-</span><span id="4015" class="l"><a class="l" href="#4015">4015: </a>
-</span><span id="4016" class="l"><a class="l" href="#4016">4016: </a>}
-</span><span id="4017" class="l"><a class="l" href="#4017">4017: </a>
-</span><span id="4018" class="l"><a class="l" href="#4018">4018: </a><span class="xlang">?&gt;</span>
-</span><span id="4019" class="l"><a class="l" href="#4019">4019: </a></span></code></pre>
+</span><span id="3940" class="l"><a class="l" href="#3940">3940: </a>    <span class="php-comment">/**
+</span></span><span id="3941" class="l"><a class="l" href="#3941">3941: </a><span class="php-comment">     * sets the maximum image size allowed for upload of the settings in the  
+</span></span><span id="3942" class="l"><a class="l" href="#3942">3942: </a><span class="php-comment">     * configuration file 
+</span></span><span id="3943" class="l"><a class="l" href="#3943">3943: </a><span class="php-comment">     * 
+</span></span><span id="3944" class="l"><a class="l" href="#3944">3944: </a><span class="php-comment">     * @param int $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3945" class="l"><a class="l" href="#3945">3945: </a><span class="php-comment">     */</span>
+</span><span id="3946" class="l"><a class="l" href="#3946">3946: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetmaxImageSize" href="#_SetmaxImageSize">SetmaxImageSize</a>(<span class="php-var">$value</span>) {
+</span><span id="3947" class="l"><a class="l" href="#3947">3947: </a>        <span class="php-comment">//maxImageSize</span>
+</span><span id="3948" class="l"><a class="l" href="#3948">3948: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;settings&quot;</span>][<span class="php-quote">&quot;maxImageSize&quot;</span>] = sfUtils::toByteSize(<span class="php-var">$value</span>);
+</span><span id="3949" class="l"><a class="l" href="#3949">3949: </a>    }
+</span><span id="3950" class="l"><a class="l" href="#3950">3950: </a>
+</span><span id="3951" class="l"><a class="l" href="#3951">3951: </a>    <span class="php-comment">/**
+</span></span><span id="3952" class="l"><a class="l" href="#3952">3952: </a><span class="php-comment">     * Adds a new configuration element to the configuration file
+</span></span><span id="3953" class="l"><a class="l" href="#3953">3953: </a><span class="php-comment">     * 
+</span></span><span id="3954" class="l"><a class="l" href="#3954">3954: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3955" class="l"><a class="l" href="#3955">3955: </a><span class="php-comment">     * @param string $tag &lt;p&gt; The tag/element name of the configuration element to set &lt;/p&gt;
+</span></span><span id="3956" class="l"><a class="l" href="#3956">3956: </a><span class="php-comment">     * @param string $section &lt;p&gt; The tag/element header name of the configuration element to set &lt;/p&gt; 
+</span></span><span id="3957" class="l"><a class="l" href="#3957">3957: </a><span class="php-comment">     * 
+</span></span><span id="3958" class="l"><a class="l" href="#3958">3958: </a><span class="php-comment">     */</span>
+</span><span id="3959" class="l"><a class="l" href="#3959">3959: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setCustom" href="#_setCustom">setCustom</a>(<span class="php-var">$section</span>, <span class="php-var">$tag</span>, <span class="php-var">$value</span>) {
+</span><span id="3960" class="l"><a class="l" href="#3960">3960: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-var">$section</span>][<span class="php-var">$tag</span>] = <span class="php-var">$value</span>;
+</span><span id="3961" class="l"><a class="l" href="#3961">3961: </a>    }
+</span><span id="3962" class="l"><a class="l" href="#3962">3962: </a>
+</span><span id="3963" class="l"><a class="l" href="#3963">3963: </a>    <span class="php-comment">/**
+</span></span><span id="3964" class="l"><a class="l" href="#3964">3964: </a><span class="php-comment">     * sets the data path of the datadir in the  configuration file 
+</span></span><span id="3965" class="l"><a class="l" href="#3965">3965: </a><span class="php-comment">     * 
+</span></span><span id="3966" class="l"><a class="l" href="#3966">3966: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3967" class="l"><a class="l" href="#3967">3967: </a><span class="php-comment">     */</span>
+</span><span id="3968" class="l"><a class="l" href="#3968">3968: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_Setpath" href="#_Setpath">Setpath</a>(<span class="php-var">$value</span>) {
+</span><span id="3969" class="l"><a class="l" href="#3969">3969: </a>        <span class="php-comment">//path</span>
+</span><span id="3970" class="l"><a class="l" href="#3970">3970: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;datadir&quot;</span>][<span class="php-quote">&quot;path&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3971" class="l"><a class="l" href="#3971">3971: </a>    }
+</span><span id="3972" class="l"><a class="l" href="#3972">3972: </a>
+</span><span id="3973" class="l"><a class="l" href="#3973">3973: </a>    <span class="php-comment">/**
+</span></span><span id="3974" class="l"><a class="l" href="#3974">3974: </a><span class="php-comment">     * sets the data resources of the datadir in the  configuration file 
+</span></span><span id="3975" class="l"><a class="l" href="#3975">3975: </a><span class="php-comment">     * 
+</span></span><span id="3976" class="l"><a class="l" href="#3976">3976: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3977" class="l"><a class="l" href="#3977">3977: </a><span class="php-comment">     */</span>
+</span><span id="3978" class="l"><a class="l" href="#3978">3978: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_Setresources" href="#_Setresources">Setresources</a>(<span class="php-var">$value</span>) {
+</span><span id="3979" class="l"><a class="l" href="#3979">3979: </a>        <span class="php-comment">//resources</span>
+</span><span id="3980" class="l"><a class="l" href="#3980">3980: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;datadir&quot;</span>][<span class="php-quote">&quot;resources&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3981" class="l"><a class="l" href="#3981">3981: </a>    }
+</span><span id="3982" class="l"><a class="l" href="#3982">3982: </a>
+</span><span id="3983" class="l"><a class="l" href="#3983">3983: </a>    <span class="php-comment">/**
+</span></span><span id="3984" class="l"><a class="l" href="#3984">3984: </a><span class="php-comment">     * sets the gallery upload directory of the datadir in the  configuration file 
+</span></span><span id="3985" class="l"><a class="l" href="#3985">3985: </a><span class="php-comment">     * 
+</span></span><span id="3986" class="l"><a class="l" href="#3986">3986: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="3987" class="l"><a class="l" href="#3987">3987: </a><span class="php-comment">     */</span>
+</span><span id="3988" class="l"><a class="l" href="#3988">3988: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetuploadGalleryDir" href="#_SetuploadGalleryDir">SetuploadGalleryDir</a>(<span class="php-var">$value</span>) {
+</span><span id="3989" class="l"><a class="l" href="#3989">3989: </a>        <span class="php-comment">//uploadGalleryDir</span>
+</span><span id="3990" class="l"><a class="l" href="#3990">3990: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;datadir&quot;</span>][<span class="php-quote">&quot;uploadGalleryDir&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="3991" class="l"><a class="l" href="#3991">3991: </a>    }
+</span><span id="3992" class="l"><a class="l" href="#3992">3992: </a>
+</span><span id="3993" class="l"><a class="l" href="#3993">3993: </a>    <span class="php-comment">/**
+</span></span><span id="3994" class="l"><a class="l" href="#3994">3994: </a><span class="php-comment">     * sets the gallery image upload directory of the datadir in the  configuration file
+</span></span><span id="3995" class="l"><a class="l" href="#3995">3995: </a><span class="php-comment">     * 
+</span></span><span id="3996" class="l"><a class="l" href="#3996">3996: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt;  
+</span></span><span id="3997" class="l"><a class="l" href="#3997">3997: </a><span class="php-comment">     */</span>
+</span><span id="3998" class="l"><a class="l" href="#3998">3998: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetgalleryImgDir" href="#_SetgalleryImgDir">SetgalleryImgDir</a>(<span class="php-var">$value</span>) {
+</span><span id="3999" class="l"><a class="l" href="#3999">3999: </a>        <span class="php-comment">//galleryImgDir</span>
+</span><span id="4000" class="l"><a class="l" href="#4000">4000: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;datadir&quot;</span>][<span class="php-quote">&quot;galleryImgDir&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="4001" class="l"><a class="l" href="#4001">4001: </a>    }
+</span><span id="4002" class="l"><a class="l" href="#4002">4002: </a>
+</span><span id="4003" class="l"><a class="l" href="#4003">4003: </a>    <span class="php-comment">/**
+</span></span><span id="4004" class="l"><a class="l" href="#4004">4004: </a><span class="php-comment">     * sets the gallery image thumbnail upload directory of the datadir in the  configuration file 
+</span></span><span id="4005" class="l"><a class="l" href="#4005">4005: </a><span class="php-comment">     * 
+</span></span><span id="4006" class="l"><a class="l" href="#4006">4006: </a><span class="php-comment">     * @param string $value &lt;p&gt; The value of  configuration element to set&lt;/p&gt; 
+</span></span><span id="4007" class="l"><a class="l" href="#4007">4007: </a><span class="php-comment">     */</span>
+</span><span id="4008" class="l"><a class="l" href="#4008">4008: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_SetgalleryThumbDir" href="#_SetgalleryThumbDir">SetgalleryThumbDir</a>(<span class="php-var">$value</span>) {
+</span><span id="4009" class="l"><a class="l" href="#4009">4009: </a>        <span class="php-comment">//galleryThumbDir</span>
+</span><span id="4010" class="l"><a class="l" href="#4010">4010: </a>        <span class="php-var">$this</span>-&gt;m_settingsarray[<span class="php-quote">&quot;datadir&quot;</span>][<span class="php-quote">&quot;galleryThumbDir&quot;</span>] = <span class="php-var">$value</span>;
+</span><span id="4011" class="l"><a class="l" href="#4011">4011: </a>    }
+</span><span id="4012" class="l"><a class="l" href="#4012">4012: </a>
+</span><span id="4013" class="l"><a class="l" href="#4013">4013: </a>}
+</span><span id="4014" class="l"><a class="l" href="#4014">4014: </a>
+</span><span id="4015" class="l"><a class="l" href="#4015">4015: </a><span class="xlang">?&gt;</span>
+</span><span id="4016" class="l"><a class="l" href="#4016">4016: </a></span></code></pre>
 
 	<div id="footer">
 		Snowflakes API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
