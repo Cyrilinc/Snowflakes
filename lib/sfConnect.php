@@ -39,9 +39,9 @@ class sfConnect {
     /**
     * Get an attribute's value 
     *
-    * @param string $attribute the attribute to get.
+    * @param String $attribute the attribute to get.
     * 
-    * @return string the value of the attribute 
+    * @return String the value of the attribute 
     */
 
     function getAttribute($attribute) {
@@ -65,8 +65,8 @@ class sfConnect {
     /**
     * set an attribute and its value 
     *
-    * @param string $attribute the attribute to set.
-    * @param string $value the value of the attribute.
+    * @param String $attribute the attribute to set.
+    * @param String $value the value of the attribute.
     * 
     */
     function setAttribute($attribute, $value) {
@@ -79,7 +79,7 @@ class sfConnect {
     /**
     * Delete an attribute and its value 
     *
-    * @param string $attribute the attribute to delete.
+    * @param String $attribute the attribute to delete.
     * 
     */
     function deleteAttribute($attribute) {
@@ -102,7 +102,7 @@ class sfConnect {
     /**
     * set the satus of an sql operation
     * 
-    * @param string $status the status value to set.
+    * @param String $status the status value to set.
     */
 
     function setStatus($status) {
@@ -112,7 +112,7 @@ class sfConnect {
     /**
     * Get an sql operation message
     * 
-    * @return string the value of the attribute['message'] 
+    * @return String the value of the attribute['message'] 
     */
 
     function getMessage() {
@@ -122,7 +122,7 @@ class sfConnect {
     /**
     * set the message of an sql operation
     * 
-    * @param string $message the message value to set.
+    * @param String $message the message value to set.
     * @param bool $log if set to true also log the message.
     */
 
@@ -242,7 +242,7 @@ class sfConnect {
 
     /**
     * Select database to which the sql operation will be running against
-    * @param string $database This is the database name
+    * @param String $database This is the database name
     * @param bool $userAccess This is to detemine if one wants to set user Grant for the database
     * 
     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -273,7 +273,7 @@ class sfConnect {
      /**
      * Fetch the result of an sql query
      *
-     * @param string $sql This is the sql query
+     * @param String $sql This is the sql query
      * @param bool $log This is to detemine if one wants to log the outcome or not
      * 
      * @return mixed <b>Array  of results</b> on success or <b>FALSE</b> on failure.
@@ -336,7 +336,7 @@ class sfConnect {
      * execute the sql query and optionally log both the query and the outcome of the sql
      * operation
      * 
-     * @param string $sql This is the sql query
+     * @param String $sql This is the sql query
      * @param bool $log This is to detemine if one wants to log the outcome or not
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.

@@ -128,7 +128,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_init">#</a>
-		<code><a href="source-class-userStruct.html#289-306" title="Go to source code">init</a>( <span>string <var>$username</var></span>, <span>string <var>$password</var></span>, <span>string <var>$email</var></span>, <span>integer <var>$access_level</var></span>, <span>integer <var>$image_name</var> = <span class="php-quote">'default.png'</span></span> )</code>
+		<code><a href="source-class-userStruct.html#289-306" title="Go to source code">init</a>( <span>String <var>$username</var></span>, <span>String <var>$password</var></span>, <span>String <var>$email</var></span>, <span>integer <var>$access_level</var></span>, <span>integer <var>$image_name</var> = <span class="php-quote">'default.png'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -147,11 +147,11 @@ parameters</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$username</var></dt>
-					<dd><code>string</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> username</dd>
+					<dd><code>String</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> username</dd>
 					<dt><var>$password</var></dt>
-					<dd><code>string</code><br>$password <code><a href="class-userStruct.html">userStruct</a></code> the user's password</dd>
+					<dd><code>String</code><br>$password <code><a href="class-userStruct.html">userStruct</a></code> the user's password</dd>
 					<dt><var>$email</var></dt>
-					<dd><code>string</code><br>$email <code><a href="class-userStruct.html">userStruct</a></code> the user's email</dd>
+					<dd><code>String</code><br>$email <code><a href="class-userStruct.html">userStruct</a></code> the user's email</dd>
 					<dt><var>$access_level</var></dt>
 					<dd><code>integer</code><br>$access_level <code><a href="class-userStruct.html">userStruct</a></code> the user's access level</dd>
 					<dt><var>$image_name</var></dt>
@@ -255,7 +255,7 @@ parameters</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserByUsername">#</a>
-		<code><a href="source-class-userStruct.html#344-368" title="Go to source code">getUserByUsername</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$username</var></span> )</code>
+		<code><a href="source-class-userStruct.html#344-368" title="Go to source code">getUserByUsername</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$username</var></span> )</code>
 
 		<div class="description short">
 			
@@ -274,7 +274,7 @@ parameters</p>
 					<dt><var>$conn</var></dt>
 					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
 					<dt><var>$username</var></dt>
-					<dd><code>string</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the username</dd>
+					<dd><code>String</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the username</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -435,7 +435,7 @@ id(identifier), <code><a href="class-userStruct.html#_populate">userStruct::popu
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserByResetLink">#</a>
-		<code><a href="source-class-userStruct.html#439-461" title="Go to source code">getUserByResetLink</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$resetLink</var></span> )</code>
+		<code><a href="source-class-userStruct.html#439-461" title="Go to source code">getUserByResetLink</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$resetLink</var></span> )</code>
 
 		<div class="description short">
 			
@@ -456,7 +456,7 @@ link,</p>
 					<dt><var>$conn</var></dt>
 					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
 					<dt><var>$resetLink</var></dt>
-					<dd><code>string</code><br>$resetLink <code><a href="class-userStruct.html">userStruct</a></code> the reset link value of the user record</dd>
+					<dd><code>String</code><br>$resetLink <code><a href="class-userStruct.html">userStruct</a></code> the reset link value of the user record</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -481,7 +481,7 @@ link,</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loginUser">#</a>
-		<code><a href="source-class-userStruct.html#463-484" title="Go to source code">loginUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$username</var></span>, <span>string <var>$password</var></span> )</code>
+		<code><a href="source-class-userStruct.html#463-484" title="Go to source code">loginUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$username</var></span>, <span>String <var>$password</var></span> )</code>
 
 		<div class="description short">
 			
@@ -502,9 +502,9 @@ and passoword,</p>
 					<dt><var>$conn</var></dt>
 					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
 					<dt><var>$username</var></dt>
-					<dd><code>string</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the username value of the user record</dd>
+					<dd><code>String</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the username value of the user record</dd>
 					<dt><var>$password</var></dt>
-					<dd><code>string</code><br>$password <code><a href="class-userStruct.html">userStruct</a></code> the password value of the user record</dd>
+					<dd><code>String</code><br>$password <code><a href="class-userStruct.html">userStruct</a></code> the password value of the user record</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -664,7 +664,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_userExits">#</a>
-		<code><a href="source-class-userStruct.html#570-589" title="Go to source code">userExits</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$username</var></span> )</code>
+		<code><a href="source-class-userStruct.html#570-589" title="Go to source code">userExits</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$username</var></span> )</code>
 
 		<div class="description short">
 			
@@ -683,7 +683,7 @@ table or set the delete field</dd>
 					<dt><var>$conn</var></dt>
 					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
 					<dt><var>$username</var></dt>
-					<dd><code>string</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the username value of the user record</dd>
+					<dd><code>String</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the username value of the user record</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -743,7 +743,7 @@ table or set the delete field</dd>
 
 		<td class="attributes"><code>
 			 public 
-			string
+			String
 			
 			</code>
 		</td>
@@ -767,7 +767,7 @@ table or set the delete field</dd>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code><br>formatted and labeled member values<br />
+					<code>String</code><br>formatted and labeled member values<br />
 				</div>
 
 

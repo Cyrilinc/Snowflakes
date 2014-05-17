@@ -250,7 +250,7 @@ class snowflakeStruct {
     /**
      * print all the members of {@link snowflakeStruct}
      * 
-     * @return string formatted and labeled member values</b>
+     * @return String formatted and labeled member values</b>
      */
     public function printsnowlakes() {
         $str = 'title="' . $this->m_title . '"<br> ';
@@ -289,9 +289,9 @@ class userStruct {
     /**
      * initialise some member variable {@link userStruct} given the input parameters
      *
-     * @param string $username {@link userStruct} username
-     * @param string $password {@link userStruct} the user's password
-     * @param string $email {@link userStruct} the user's email
+     * @param String $username {@link userStruct} username
+     * @param String $password {@link userStruct} the user's password
+     * @param String $email {@link userStruct} the user's email
      * @param int $access_level {@link userStruct} the user's access level
      * @param int $image_name {@link userStruct} the user's image name
      */
@@ -346,7 +346,7 @@ class userStruct {
      * {@see populate}
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $username {@link userStruct} the username
+     * @param String $username {@link userStruct} the username
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -440,7 +440,7 @@ class userStruct {
      * Get all the values of all members of {@link userStruct} given the reset link,
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $resetLink {@link userStruct} the reset link  value of the user record
+     * @param String $resetLink {@link userStruct} the reset link  value of the user record
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -464,8 +464,8 @@ class userStruct {
      * Get all the values of all members of {@link userStruct} given the user name and passoword,
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $username {@link userStruct} the username value of the user record
-     * @param string $password {@link userStruct} the password value of the user record
+     * @param String $username {@link userStruct} the username value of the user record
+     * @param String $password {@link userStruct} the password value of the user record
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -571,7 +571,7 @@ class userStruct {
      * Checks id a suser exists given the user name 
      * 
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $username {@link userStruct} the username value of the user record
+     * @param String $username {@link userStruct} the username value of the user record
      * 
      * @return bool/int <b>TRUE / >=1</b> on success or <b>FALSE</b> otherwise
      */
@@ -631,7 +631,7 @@ class userStruct {
     /**
      * print all the members of {@link userStruct}
      * 
-     * @return string formatted and labeled member values</b>
+     * @return String formatted and labeled member values</b>
      */
     public function printuser() {
         $str = "ID = " . $this->m_id . "<br>";
@@ -852,7 +852,7 @@ class galleryStruct {
     /**
      * print all the members of {@link galleryStruct}
      * 
-     * @return string formatted and labeled member values</b>
+     * @return String formatted and labeled member values</b>
      */
     public function printGallery() {
         $str = 'title="' . $this->m_title . '"<br> ';
@@ -1124,7 +1124,7 @@ class eventStruct {
     /**
      * print all the members of {@link eventStruct}
      * 
-     * @return string formatted and labeled member values</b>
+     * @return String formatted and labeled member values</b>
      */
     public function printEvents() {
         $str = 'title="' . $this->m_title . '"<br> ';
@@ -1155,7 +1155,7 @@ class sfLogError {
      * Send a bug message to the author of the API so that bugs fixes could be
      * implemented to make the API better.
      * 
-     * @param string $bugMessage the message to send to author of the API
+     * @param String $bugMessage the message to send to author of the API
      *
      * @return bool <b>TRUE</b> if the mail was successfully accepted for delivery, <b>FALSE</b> otherwise.
      */
@@ -1179,10 +1179,10 @@ class sfLogError {
      * {@link sfLogError} acts as an audit trail to retrace the steps of a user
      * or operations performed by this API itself.
      * 
-     * @param string $message the message to log
-     * @param string $user {@link userStruct} the user name of the logger
+     * @param String $message the message to log
+     * @param String $user {@link userStruct} the user name of the logger
      * @param bool $show used to print the log entry to screen if <b>TRUE</b> or not if <b>FALSE</b>
-     * @param string $dataDir the data directory where the log will be stored
+     * @param String $dataDir the data directory where the log will be stored
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -1215,9 +1215,9 @@ class sfLogError {
      * Handle the API errors automatically using this function
      * 
      * @param int $errno the error number.
-     * @param string $errstr the error message.
-     * @param string $errfile the filename where the error occured.
-     * @param string $errline the line in the filename where the error occured.
+     * @param String $errstr the error message.
+     * @param String $errfile the filename where the error occured.
+     * @param String $errline the line in the filename where the error occured.
      *
      */
     public static function sfErrorHandler($errno, $errstr, $errfile, $errline) {
@@ -1281,10 +1281,10 @@ final class sfUtils {
     /**
      * Generate a link with parameters from the url and parameter passed in.
      *
-     * @param string $page target page
+     * @param String $page target page
      * @param array $params page parameters
      * 
-     * @return string created from page and parameters.
+     * @return String created from page and parameters.
      */
     public static function createLink($page, array $params = array()) {
         if (!$page) {
@@ -1298,7 +1298,7 @@ final class sfUtils {
      *
      * @param DateTime $date date to be formatted
      * 
-     * @return string formatted date
+     * @return String formatted date
      */
     public static function formatDate(DateTime $date = null) {
         if ($date === null) {
@@ -1312,7 +1312,7 @@ final class sfUtils {
      *
      * @param DateTime $date date to be formatted
      * 
-     * @return string formatted date and time
+     * @return String formatted date and time
      */
     public static function formatDateTime(DateTime $date = null) {
         if ($date === null) {
@@ -1335,7 +1335,7 @@ final class sfUtils {
     /**
      * Get value of the URL param.
      * 
-     * @return string parameter value
+     * @return String parameter value
      * @throws NotFoundException if the param is not found in the URL
      */
     public static function getUrlParam($name) {
@@ -1348,9 +1348,9 @@ final class sfUtils {
     /**
      * Capitalize the first letter of the given string
      *
-     * @param string $string string to be capitalized
+     * @param String $string string to be capitalized
      * 
-     * @return string capitalized string
+     * @return String capitalized string
      */
     public static function capitalize($string) {
         return ucfirst(mb_strtolower($string));
@@ -1359,9 +1359,9 @@ final class sfUtils {
     /**
      * Escape the given string
      *
-     * @param string $string string to be escaped
+     * @param String $string string to be escaped
      * 
-     * @return string escaped string
+     * @return String escaped string
      */
     public static function escape($string) {
         if (defined('ENT_SUBSTITUTE')) {
@@ -1374,9 +1374,9 @@ final class sfUtils {
     /**
      * Escape the given string
      *
-     * @param string $string string to be escaped
+     * @param String $string string to be escaped
      * 
-     * @return string escaped string
+     * @return String escaped string
      */
     public static function sfescape($string) {
         $retValue = str_replace("'", "\'", $string);
@@ -1390,7 +1390,7 @@ final class sfUtils {
     /**
      * Get the current page URL 
      * 
-     * @return string current page URL 
+     * @return String current page URL 
      */
     public static function curPageURL() {
         $pageURL = "http";
@@ -1413,7 +1413,7 @@ final class sfUtils {
     /**
      * Check if the data is empty or not
      *
-     * @param string $data the data to be cheked
+     * @param String $data the data to be cheked
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -1424,8 +1424,8 @@ final class sfUtils {
     /**
      * Create a direcory
      *
-     * @param string $Dir The directory to create
-     * @param string $permissions The permissions given to the directory
+     * @param String $Dir The directory to create
+     * @param String $permissions The permissions given to the directory
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -1449,9 +1449,9 @@ final class sfUtils {
     /**
      * Calulate the approprate value in GB,MB,KB ... given the amount of bytes 
      *
-     * @param string $bytes the Bytes used to calculate the value
+     * @param String $bytes the Bytes used to calculate the value
      * 
-     * @return string the value of the byte in GB,MB,KB.
+     * @return String the value of the byte in GB,MB,KB.
      */
     public static function formatSizeUnits($bytes) {
         if ($bytes >= 1073741824) {
@@ -1474,7 +1474,7 @@ final class sfUtils {
     /**
      * Calulate the approprate value in bytes given the amount of GB,MB,KB... 
      *
-     * @param string $bytevalue the value in GB,MB,KB....
+     * @param String $bytevalue the value in GB,MB,KB....
      * 
      * @return int the value of the GB,MB,KB... in bytes.
      */
@@ -1498,7 +1498,7 @@ final class sfUtils {
      * Remove an element from an array
      *
      * @param array $array the array to remove a key from
-     * @param string $key the key to remove
+     * @param String $key the key to remove
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -1514,7 +1514,7 @@ final class sfUtils {
     /**
      * Delete a file
      *
-     * @param string $file the file path to delete
+     * @param String $file the file path to delete
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -1541,7 +1541,7 @@ final class sfUtils {
      *
      * @param int $number the user level number
      * 
-     * @return string <b>User Level name</b> on success or <b>nothing</b> on failure.
+     * @return String <b>User Level name</b> on success or <b>nothing</b> on failure.
      */
     public static function UserLevelName($number) {
         $userName = " ";
@@ -1571,7 +1571,7 @@ final class sfUtils {
     /**
      * Get todays date time
      * 
-     * @return string the current date time.
+     * @return String the current date time.
      */
     public static function todaysDate() {
         return time();
@@ -1580,7 +1580,7 @@ final class sfUtils {
     /**
      * Get 7 days date time from current date time
      * 
-     * @return string the 7 days date time from current date time.
+     * @return String the 7 days date time from current date time.
      */
     public static function TodaysDate7() {
         return strtotime("+7 day", time());
@@ -1589,7 +1589,7 @@ final class sfUtils {
     /**
      * Get maximum days in this month
      * 
-     * @return string the maximum days in this month.
+     * @return String the maximum days in this month.
      */
     public static function maxDays() {
         return date("t");
@@ -1598,7 +1598,7 @@ final class sfUtils {
     /**
      * Get a month's date time from current date time
      * 
-     * @return string the month's date time from current date time.
+     * @return String the month's date time from current date time.
      */
     public static function TodaysDateMonth() {
         return strtotime("+" . date("t") . " day", time());
@@ -1607,7 +1607,7 @@ final class sfUtils {
     /**
      * Get three month's date time from current date time
      * 
-     * @return string three month's date time from current date time.
+     * @return String three month's date time from current date time.
      */
     public static function TodayDateThreeMonths() {
         return strtotime(" + 3 month", time());
@@ -1616,7 +1616,7 @@ final class sfUtils {
     /**
      * Get six month's date time from current date time
      * 
-     * @return string six month's date time from current date time.
+     * @return String six month's date time from current date time.
      */
     public static function TodayDateSixMonths() {
         return strtotime(" + 6 month", time());
@@ -1658,7 +1658,7 @@ final class sfUtils {
     /**
      * This function crates a UUID, Which is usually 32 in length with 4 '-'.
      * 
-     * @return string UUID String.
+     * @return String UUID String.
      */
     public static function UUID() {
         return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
@@ -1681,7 +1681,7 @@ final class sfUtils {
     /**
      * Get the sql escaped version of the value passed in depend the data type of the value
      * 
-     * @return string database compactible String.
+     * @return String database compactible String.
      */
     public static function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") {
         if (PHP_VERSION < 6) {
@@ -1708,7 +1708,7 @@ final class sfUtils {
     /**
      * Get the client IP address
      * 
-     * @return string the client IP address.
+     * @return String the client IP address.
      */
     public static function getClientIp() {
         $ipaddress = '';
@@ -1738,7 +1738,7 @@ final class sfUtils {
      * <b>INPUT_COOKIE</b>, <b>INPUT_SERVER</b>, or
      * <b>INPUT_ENV</b>.
      * </p>
-     * @param string $tag <p>
+     * @param String $tag <p>
      * Name of a variable to get.
      * </p>
      * @param int $FILTER_VALIDATE <p>
@@ -1746,7 +1746,7 @@ final class sfUtils {
      * manual page lists the available filters.
      * </p>
      * 
-     * @return string <b>TRUE</b> on valid input or <b>FALSE</b> on invalid input.
+     * @return String <b>TRUE</b> on valid input or <b>FALSE</b> on invalid input.
      */
     public static function validateFiterInput($INPUT, $tag, $FILTER_VALIDATE) {
 
@@ -1789,12 +1789,12 @@ final class sfUtils {
      * be shown to the user 'Cyrilinc as a user' and the 'gallery' the activity
      * log is referring to.
      *
-     * @param string $type <p> The link type to create</p> 
-     * @param string $id <p> The identifier of the type</p> 
-     * @param string $inifile <p> The configuration file </p> 
+     * @param String $type <p> The link type to create</p> 
+     * @param String $id <p> The identifier of the type</p> 
+     * @param String $inifile <p> The configuration file </p> 
      * 
      * 
-     * @return string The appropriate link given the type.
+     * @return String The appropriate link given the type.
      */
     public static function createSfLink($type, $id, $inifile = '../config/config.ini') {
         if (!isset($type) || !isset($id)) {
@@ -1821,8 +1821,8 @@ final class sfUtils {
     /**
      * Constructs the SSE data format and flushes that data to the client.
      *
-     * @param string $id Timestamp/id of this connection.
-     * @param string $msg Line of text that should be transmitted.
+     * @param String $id Timestamp/id of this connection.
+     * @param String $msg Line of text that should be transmitted.
      * @param int $retry the retry value in millisecconds. 1000ms = 1 second.
      */
     public static function sendSSEMsg($id, $msg, $retry = "") {
@@ -1846,12 +1846,12 @@ final class sfUtils {
      * Gets a formatted/Structured and linked html style of the activitied of a user.
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $userName {@link userStruct} the user name of the user who's activity is to be gotten
-     * @param string $inifile <p> The configuration file </p> 
+     * @param String $userName {@link userStruct} the user name of the user who's activity is to be gotten
+     * @param String $inifile <p> The configuration file </p> 
      * @param int $limitstart <p> The index of activity to start from</p> 
      * @param int $limitend <p> The index of activity to end to</p>
      * 
-     * @return string The formatted/Structured and linked html style of the activitied of a user.
+     * @return String The formatted/Structured and linked html style of the activitied of a user.
      */
     public static function getActivities($conn, $userName, $inifile = '../config/config.ini', $limitstart = 0, $limitend = 10) {
 
@@ -1900,8 +1900,8 @@ final class sfUtils {
      * Search the API database tables for user entered string .
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $searchString <p> The string to look for </p> 
-     * @param string $filter <p> filter by API type i.e snowflakes, gallery, events and users</p> 
+     * @param String $searchString <p> The string to look for </p> 
+     * @param String $filter <p> filter by API type i.e snowflakes, gallery, events and users</p> 
      * 
      * @return array The array of the results found in the API database tables.
      */
@@ -1985,7 +1985,7 @@ final class sfUtils {
      * Checkes if user exists in the API users database table.
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $username {@link userStruct} the user name to check
+     * @param String $username {@link userStruct} the user name to check
      * 
      * @return bool <b>TRUE</b> if user exists or <b>FALSE</b> otherwise.
      */
@@ -2005,10 +2005,10 @@ final class sfUtils {
      * the password by email
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $email the email of the user requesting a password reset
-     * @param string $sender the sender (usally system administrator email)
-     * @param string $snowflakesUrl the snowflakes url
-     * @param string $errmsg the error message 
+     * @param String $email the email of the user requesting a password reset
+     * @param String $sender the sender (usally system administrator email)
+     * @param String $snowflakesUrl the snowflakes url
+     * @param String $errmsg the error message 
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -2039,8 +2039,8 @@ final class sfUtils {
      * process a user's request for a password reset after password is forgotten by user
      *
      * @param userStruct $userStruct {@link userStruct} a struct filled with user information
-     * @param string $sender the sender (usally system administrator email)
-     * @param string $snowflakesUrl the snowflakes url
+     * @param String $sender the sender (usally system administrator email)
+     * @param String $snowflakesUrl the snowflakes url
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -2071,8 +2071,8 @@ final class sfUtils {
      * Reset the user passowrd given the new password and the reset link
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $password {@link userStruct} the new password of the user requesting a password reset
-     * @param string $oldResetLink {@link userStruct} the old reset link 
+     * @param String $password {@link userStruct} the new password of the user requesting a password reset
+     * @param String $oldResetLink {@link userStruct} the old reset link 
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -2093,9 +2093,9 @@ final class sfUtils {
     /**
      * convert datetime string to time with am or pm appended
      *
-     * @param string $stringDate the date time string
+     * @param String $stringDate the date time string
      *
-     * @return string  am/pm version of time.
+     * @return String  am/pm version of time.
      */
     public static function toAmPmTime($stringDate) {
         $datetime = new DateTime($stringDate);
@@ -2105,9 +2105,9 @@ final class sfUtils {
     /**
      * Convert Date from DD/MM/YYYY to YYYY-MM-DD to be valid for sql
      *
-     * @param string $stringDate the date time string
+     * @param String $stringDate the date time string
      *
-     * @return string  sql formatted date 'YYYY-MM-DD'.
+     * @return String  sql formatted date 'YYYY-MM-DD'.
      */
     public static function dateToSql($stringDate) {
         $datetime = new DateTime(str_replace('/', '-', $stringDate));
@@ -2117,9 +2117,9 @@ final class sfUtils {
     /**
      * Convert Date from YYYY-MM-DD to DD/MM/YYYY from sql date string
      *
-     * @param string $stringDate the date time string
+     * @param String $stringDate the date time string
      *
-     * @return string  sql formatted date 'DD/MM/YYYY'.
+     * @return String  sql formatted date 'DD/MM/YYYY'.
      */
     public static function dateFromSql($stringDate) {
         $datetime = new DateTime($stringDate);
@@ -2129,9 +2129,9 @@ final class sfUtils {
     /**
      * Determine table name from type parameter passed in
      *
-     * @param string $type the type of data whos table is to be returned
+     * @param String $type the type of data whos table is to be returned
      *
-     * @return string  the Table name of a Snowflakes API type.
+     * @return String  the Table name of a Snowflakes API type.
      */
     public static function tablenameFromType($type) {
 
@@ -2159,8 +2159,8 @@ final class sfUtils {
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id the identifier of snowflake data {@link snowflakeStruct}
-     * @param string $type the type of snowflake data {@see tablenameFromType}
-     * @param string $operation the trigger operatios usually on adding, editing or deleting
+     * @param String $type the type of snowflake data {@see tablenameFromType}
+     * @param String $operation the trigger operatios usually on adding, editing or deleting
      * the snowflake data base on its identifier
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -2208,8 +2208,8 @@ final class sfUtils {
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id the identifier of snowflake data {@link snowflakeStruct}
-     * @param string $type the type of snowflake data {@see tablenameFromType}
-     * @param string $operation the trigger operatios usually on adding, editing or deleting
+     * @param String $type the type of snowflake data {@see tablenameFromType}
+     * @param String $operation the trigger operatios usually on adding, editing or deleting
      * the snowflake data base on its identifier
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -2290,8 +2290,8 @@ final class sfUtils {
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id the identifier of snowflake data {@link snowflakeStruct}
-     * @param string $type the type of snowflake data {@see tablenameFromType}
-     * @param string $operation the trigger operatios usually on adding, editing or deleting
+     * @param String $type the type of snowflake data {@see tablenameFromType}
+     * @param String $operation the trigger operatios usually on adding, editing or deleting
      * the snowflake data base on its identifier
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -2334,7 +2334,7 @@ final class sfUtils {
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $id the identifier of snowflake data {@link snowflakeStruct}
-     * @param string $type the type of snowflake data {@see tablenameFromType}
+     * @param String $type the type of snowflake data {@see tablenameFromType}
      * @param bool $flakeit if true then increment the flake_it field otherwise
      * decrement the field
      *
@@ -2377,11 +2377,11 @@ final class sfUtils {
     /**
      * Add query string to a url
      *
-     * @param string $url the url to add keys and values as query to e.g cyrilinc.co.uk
-     * @param string $key the query key /identifier e.g ?key=
-     * @param string $value the value of the key e.g ?key=value
+     * @param String $url the url to add keys and values as query to e.g cyrilinc.co.uk
+     * @param String $key the query key /identifier e.g ?key=
+     * @param String $value the value of the key e.g ?key=value
      *
-     * @return string The <b>url</b> with the key and the query e.g cyrilinc.co.uk?key=value.
+     * @return String The <b>url</b> with the key and the query e.g cyrilinc.co.uk?key=value.
      */
     public static function addQuerystringVar($url, $key, $value) {
         $url = preg_replace('/(.*)(?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&');
@@ -2396,12 +2396,12 @@ final class sfUtils {
     /**
      * remove query string to a url
      *
-     * @param string $url the url to add keys and values as query to e.g 
+     * @param String $url the url to add keys and values as query to e.g 
      * cyrilinc.co.uk?key=value&key2=value2
-     * @param string $key the query key /identifier e.g ?key2=
-     * @param string $value the value of the key e.g ?key2=value2
+     * @param String $key the query key /identifier e.g ?key2=
+     * @param String $value the value of the key e.g ?key2=value2
      *
-     * @return string The <b>url</b> with the key and the query e.g cyrilinc.co.uk?key=value.
+     * @return String The <b>url</b> with the key and the query e.g cyrilinc.co.uk?key=value.
      */
     public static function removeQuerystringVar($url, $key) {
         $url = preg_replace('/(.*)(?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&');
@@ -2443,10 +2443,10 @@ final class sfUtils {
     /**
      * encyrpt a string and Returns an encrypted & utf8-encoded string
      *
-     * @param string $pure_string the original string to encrypt
+     * @param String $pure_string the original string to encrypt
      * @param int $encryption_key the encryption key
      *
-     * @return string an encrypted & utf8-encoded string.
+     * @return String an encrypted & utf8-encoded string.
      */
     public static function encrypt($pure_string, $encryption_key) {
         if (!$pure_string || !$encryption_key) {
@@ -2461,10 +2461,10 @@ final class sfUtils {
     /**
      * decrypt a string and Returns an decrypted string
      *
-     * @param string $encrypted_string the encrypted string
+     * @param String $encrypted_string the encrypted string
      * @param int $encryption_key the encryption key
      *
-     * @return string a decrypted original string.
+     * @return String a decrypted original string.
      */
     public static function decrypt($encrypted_string, $encryption_key) {
         if (!$encrypted_string || !$encryption_key) {
@@ -2480,9 +2480,9 @@ final class sfUtils {
      * Sets the user logged in status, to identify if the user is currently logged in to the
      * API or not
      *
-     * @param string $username {@link userStruct} the user name to check
+     * @param String $username {@link userStruct} the user name to check
      * @param bool $value logged in if TRUE and logged out if FALSE
-     * @param string $inifile <p> The configuration file </p> 
+     * @param String $inifile <p> The configuration file </p> 
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -2504,7 +2504,7 @@ final class sfUtils {
      * selected
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $username {@link userStruct} the user name to check
+     * @param String $username {@link userStruct} the user name to check
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -2535,7 +2535,7 @@ final class sfUtils {
      * selected
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $username {@link userStruct} the user name to check
+     * @param String $username {@link userStruct} the user name to check
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -2566,7 +2566,7 @@ final class sfUtils {
      * selected
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $username {@link userStruct} the user name to check
+     * @param String $username {@link userStruct} the user name to check
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -2597,7 +2597,7 @@ final class sfUtils {
      * selected
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $username {@link userStruct} the user name to check
+     * @param String $username {@link userStruct} the user name to check
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -2707,8 +2707,8 @@ final class sfUtils {
     /**
      * process a title and a message to produce a well formated dailog message
      *
-     * @param string $title The title of the dialog message
-     * @param string $message The dialog message
+     * @param String $title The title of the dialog message
+     * @param String $message The dialog message
      *
      * @return mixed <b>The html dialog format</b> on success or <b>FALSE</b> on failure.
      */
@@ -2734,7 +2734,7 @@ final class sfUtils {
      *
      * @param bool $publish The publish value which coould be true,false,1 or 0
      *
-     * @return string The string equivalent of published status.
+     * @return String The string equivalent of published status.
      */
     public static function getPublishStatus($publish) {
 
@@ -2752,9 +2752,9 @@ final class sfUtils {
      * and copy the associated data (images) to the required folders
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $dbname the database name of the old snowflakes (v1.0 and below)
-     * @param string $adminUsername the administrator username
-     * @param string $output The message concerning the migration poulated
+     * @param String $dbname the database name of the old snowflakes (v1.0 and below)
+     * @param String $adminUsername the administrator username
+     * @param String $output The message concerning the migration poulated
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -2856,8 +2856,8 @@ final class sfUtils {
      * files in the destination directory and subdirectory just like in the source 
      * directory
      *
-     * @param string $source the Source directory
-     * @param string $dest the destination directory
+     * @param String $source the Source directory
+     * @param String $dest the destination directory
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -2899,8 +2899,8 @@ final class sfUtils {
      * migrate data associated with snowflakes previous versions to the new
      * snowflakes upload directory
      *
-     * @param string $source the Source directory
-     * @param string $inifile <p> The configuration file </p> 
+     * @param String $source the Source directory
+     * @param String $inifile <p> The configuration file </p> 
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -2920,7 +2920,7 @@ final class sfUtils {
     /**
      * Decode xml data
      *
-     * @param string $xmltext <p> The xml data that needs to be decoded </p> 
+     * @param String $xmltext <p> The xml data that needs to be decoded </p> 
      * 
      * @return mixed <b>Decoded xml string</b> on success or <b>FALSE</b> on failure.
      */
@@ -2946,7 +2946,7 @@ final class sfUtils {
     /**
      * Encode xml data
      *
-     * @param string $xmltext <p> The xml data that needs to be encoded </p> 
+     * @param String $xmltext <p> The xml data that needs to be encoded </p> 
      * 
      * @return mixed <b>Encoded xml string</b> on success or <b>FALSE</b> on failure.
      */
@@ -2974,7 +2974,7 @@ final class sfUtils {
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param array $snowflakesList {@link snowflakeStruct} a list of snowflake struct
-     * @param string $inifile <p> The configuration file </p> 
+     * @param String $inifile <p> The configuration file </p> 
      * 
      * @return mixed <b>Rss string</b> on success or <b>FALSE</b> on failure.
      */
@@ -3025,7 +3025,7 @@ final class sfUtils {
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param array $eventList {@link eventStruct} a list of snowflake struct
-     * @param string $inifile <p> The configuration file </p> 
+     * @param String $inifile <p> The configuration file </p> 
      * 
      * @return mixed <b>Rss string</b> on success or <b>FALSE</b> on failure.
      */
@@ -3081,7 +3081,7 @@ final class sfUtils {
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param array $galleryList {@link galleryStruct} a list of snowflake struct
-     * @param string $inifile <p> The configuration file </p> 
+     * @param String $inifile <p> The configuration file </p> 
      * 
      * @return mixed <b>Rss string</b> on success or <b>FALSE</b> on failure.
      */
@@ -3138,7 +3138,7 @@ final class sfUtils {
     /**
      * Checks if a string is at the begining of a much larger string
      *
-     * @param string $haystack The string to search in
+     * @param String $haystack The string to search in
      * @param array $needle the string to search for
      * 
      * @return mixed <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -3150,7 +3150,7 @@ final class sfUtils {
     /**
      * Checks if a string is at the end of a much larger string
      *
-     * @param string $haystack The string to search in
+     * @param String $haystack The string to search in
      * @param array $needle the string to search for
      * 
      * @return mixed <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -3162,7 +3162,7 @@ final class sfUtils {
     /**
      * read and display a log file
      *
-     * @param string $filename the log file path to view
+     * @param String $filename the log file path to view
      * @param array $Logtype the log type to view e.g error, warning and success
      * 
      * @return mixed <b>The log array </b> on success or <b>FALSE</b> on failure.
@@ -3218,7 +3218,7 @@ final class sfUtils {
      * Get the list of files in a directory and returns an html table tag formatted
      * string 
      *
-     * @param string $dir data directory
+     * @param String $dir data directory
      * 
      * @return mixed <b>The list string </b> on success or <b>FALSE</b> on failure.
      */
@@ -3262,7 +3262,7 @@ final class sfUtils {
      * Get the list of files in a directory and returns an array with file names in the
      * directory
      *
-     * @param string $dir data directory
+     * @param String $dir data directory
      * 
      * @return mixed <b>The file list in an array </b> on success or <b>FALSE</b> on failure.
      */
@@ -3297,7 +3297,7 @@ final class sfUtils {
     /**
      * if the parameter passed in is > 100 then return 99+ otherwise return as it is
      *
-     * @param string $data the data
+     * @param String $data the data
      * 
      * @return mixed <b>99+</b> on success or <b>FALSE</b> on failure.
      */
@@ -3420,7 +3420,7 @@ final class sfUtils {
     /**
      * Set the time zone of the API 
      * 
-     * @param string $timezones the date time zone to be set
+     * @param String $timezones the date time zone to be set
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -3435,7 +3435,7 @@ final class sfUtils {
     /**
      *  gets the data from a URL 
      * 
-     * @param string $url The URL to which data is gotten from
+     * @param String $url The URL to which data is gotten from
      * 
      * @return mixed <b>URL Data</b> on success or <b>FALSE</b> on failure.
      */
@@ -3470,6 +3470,9 @@ class databaseParam {
     /**
      * Initialize the database parameter by loading data from the 
      * configuration file 
+     * 
+     * @param String $inifile the ini config file for snowflakes API
+     * 
      */
 
     public function __construct($inifile = '../config/config.ini') {
@@ -3479,7 +3482,7 @@ class databaseParam {
     /**
      * Initialize the database parameter by loading data from the config file
      *
-     * @param string $inifile the ini config file for snowflakes API
+     * @param String $inifile the ini config file for snowflakes API
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -3540,8 +3543,9 @@ class dataDirParam {
     /**
      * Initialize the data directory parameter by loading data from the 
      * configuration file 
+     * 
+     * @param String $inifile the ini config file for snowflakes API
      */
-
     public function __construct($inifile = '../config/config.ini') {
         $this->init($inifile);
     }
@@ -3549,7 +3553,7 @@ class dataDirParam {
     /**
      * Initialize the settings struct by loading data from the config file
      *
-     * @param string $inifile the ini config file for snowflakes API
+     * @param String $inifile the ini config file for snowflakes API
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -3623,7 +3627,7 @@ class settingsStruct {
     /**
      * Initialize the settings struct by loading data from the config file
      *
-     * @param string $inifile the ini config file for snowflakes API
+     * @param String $inifile the ini config file for snowflakes API
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -3694,7 +3698,7 @@ class settingsStruct {
     /**
      * Stores all the new configuration set into the configuration file
      * 
-     * @param string $inifile <p> The configuration file </p>
+     * @param String $inifile <p> The configuration file </p>
      * 
      * @return mixed The <b>configuration data </b> in form of an array on success or <b>FALSE</b> on failure.
      */
@@ -3708,7 +3712,7 @@ class settingsStruct {
     /**
      * sets the database host name of the db in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SethostName($value) {
         //host
@@ -3718,7 +3722,7 @@ class settingsStruct {
     /**
      * sets the database name of the db in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetdbName($value) {
         //dbname
@@ -3728,7 +3732,7 @@ class settingsStruct {
     /**
      * sets the database type of the db in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetdbType($value) {
         //type
@@ -3738,7 +3742,7 @@ class settingsStruct {
     /**
      * sets the database username of the db in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetdbUsername($value) {
         //username
@@ -3748,8 +3752,8 @@ class settingsStruct {
     /**
      * sets the database password of the db in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
-     * @param string $key <p> The password encryption key for the password</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
+     * @param String $key <p> The password encryption key for the password</p> 
      */
     public function SetdbPassword($value, $key = "") {
         if (!$value) {
@@ -3769,7 +3773,7 @@ class settingsStruct {
     /**
      * sets the administration email of the db in the  configuration file
      * 
-     * @param string $value <p> The value of  configuration element to set</p>  
+     * @param String $value <p> The value of  configuration element to set</p>  
      */
     public function Setadmin_email($value) {
         //admin_email
@@ -3779,7 +3783,7 @@ class settingsStruct {
     /**
      * sets the site time zone of the db in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SettimeZone($value) {
         //time_zone
@@ -3791,7 +3795,7 @@ class settingsStruct {
     /**
      * sets the snowflakes installation url of the settings in the  configuration file
      * 
-     * @param string $value <p> The value of  configuration element to set</p>  
+     * @param String $value <p> The value of  configuration element to set</p>  
      */
     public function Seturl($value) {
         //url
@@ -3801,7 +3805,7 @@ class settingsStruct {
     /**
      * sets the snowflake url of the settings in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetsfUrl($value) {
         //m_sfUrl
@@ -3811,7 +3815,7 @@ class settingsStruct {
     /**
      * sets the snowflake gallery url of the settings in the  configuration file
      * 
-     * @param string $value <p> The value of  configuration element to set</p>  
+     * @param String $value <p> The value of  configuration element to set</p>  
      */
     public function SetsfGalleryUrl($value) {
         //m_sfGalleryUrl
@@ -3821,7 +3825,7 @@ class settingsStruct {
     /**
      * sets the snowflakes Gallery image url of the settings in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetsfGalleryImgUrl($value) {
         //m_sfGalleryImgUrl
@@ -3832,7 +3836,7 @@ class settingsStruct {
      * sets the snowflake gallery thumbnail image url of the settings in the  
      * configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetsfGalleryThumbUrl($value) {
         //m_sfGalleryThumbUrl 
@@ -3865,7 +3869,7 @@ class settingsStruct {
      * sets the snowflake gallery maximum image width of the settings in the  
      * configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetmaxImageWidth($value) {
         //maxImageWidth
@@ -3876,7 +3880,7 @@ class settingsStruct {
      * sets the snowflake gallery supported image extesion list of the settings 
      * in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetimageExtList($value) {
         //imageExtList
@@ -3887,7 +3891,7 @@ class settingsStruct {
      * sets the snowflake gallery supported image type list  of the settings 
      * in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetimageTypesList($value) {
         //imageTypesList
@@ -3898,7 +3902,7 @@ class settingsStruct {
      * sets the snowflakes output url where snowflakes audience can see one 
      * snowflakes published of the settings in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetsnowflakesResultUrl($value) {
         //snowflakesResultUrl   // One snowflakes result
@@ -3909,7 +3913,7 @@ class settingsStruct {
      * sets the snowflakes output url where snowflakes audience can see all 
      * snowflakes published of the settings in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetsnowflakesOutUrl($value) {
         // snowflakesOutUrl     // All snowflakes output
@@ -3920,7 +3924,7 @@ class settingsStruct {
      * sets the events output url where snowflakes audience can see one 
      * snowflakes published of the settings in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SeteventsResultUrl($value) {
         //eventsResultUrl        // One event result
@@ -3931,7 +3935,7 @@ class settingsStruct {
      * sets the events output url where snowflakes audience can see all 
      * snowflakes published of the settings in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SeteventsOutputUrl($value) {
         //eventsOutputUrl        //All event output
@@ -3942,7 +3946,7 @@ class settingsStruct {
      * sets the gallery output url where snowflakes audience can see one 
      * snowflakes published of the settings in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetgalleryResultUrl($value) {
         //galleryResultUrl      // One gallery result
@@ -3953,7 +3957,7 @@ class settingsStruct {
      * sets the gallery output url where snowflakes audience can see all 
      * snowflakes published of the settings in the  configuration file
      * 
-     * @param string $value <p> The value of  configuration element to set</p>  
+     * @param String $value <p> The value of  configuration element to set</p>  
      */
     public function SetgalleryOutUrl($value) {
         //galleryOutUrl           //All gallery output
@@ -3975,9 +3979,9 @@ class settingsStruct {
     /**
      * Adds a new configuration element to the configuration file
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
-     * @param string $tag <p> The tag/element name of the configuration element to set </p>
-     * @param string $section <p> The tag/element header name of the configuration element to set </p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
+     * @param String $tag <p> The tag/element name of the configuration element to set </p>
+     * @param String $section <p> The tag/element header name of the configuration element to set </p> 
      * 
      */
     public function setCustom($section, $tag, $value) {
@@ -3987,7 +3991,7 @@ class settingsStruct {
     /**
      * sets the data path of the datadir in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function Setpath($value) {
         //path
@@ -3997,7 +4001,7 @@ class settingsStruct {
     /**
      * sets the data resources of the datadir in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function Setresources($value) {
         //resources
@@ -4007,7 +4011,7 @@ class settingsStruct {
     /**
      * sets the gallery upload directory of the datadir in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetuploadGalleryDir($value) {
         //uploadGalleryDir
@@ -4017,7 +4021,7 @@ class settingsStruct {
     /**
      * sets the gallery image upload directory of the datadir in the  configuration file
      * 
-     * @param string $value <p> The value of  configuration element to set</p>  
+     * @param String $value <p> The value of  configuration element to set</p>  
      */
     public function SetgalleryImgDir($value) {
         //galleryImgDir
@@ -4027,7 +4031,7 @@ class settingsStruct {
     /**
      * sets the gallery image thumbnail upload directory of the datadir in the  configuration file 
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
+     * @param String $value <p> The value of  configuration element to set</p> 
      */
     public function SetgalleryThumbDir($value) {
         //galleryThumbDir

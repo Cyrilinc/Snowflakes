@@ -121,14 +121,14 @@
 
 		<td class="attributes"><code>
 			 public static
-			string
+			String
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_UploadMultiImages">#</a>
-		<code><a href="source-class-sfImageProcessor.html#574-625" title="Go to source code">UploadMultiImages</a>( <span>array <var>$imageFiles</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>string <var>&amp; $message</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+		<code><a href="source-class-sfImageProcessor.html#574-625" title="Go to source code">UploadMultiImages</a>( <span>array <var>$imageFiles</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>String <var>&amp; $message</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -147,18 +147,18 @@
 					<dt><var>$imageFiles</var></dt>
 					<dd><code>array</code><br>$imageFiles The image information each contains [name, tmp_name,size and type]</dd>
 					<dt><var>$inifile</var></dt>
-					<dd><code>string</code><br>$inifile
+					<dd><code>String</code><br>$inifile
 <p>The configuration file</p>
 </dd>
 					<dt><var>$message</var></dt>
-					<dd><code>string</code><br>$message
+					<dd><code>String</code><br>$message
 <p>The message to be returned as per the success or failure of the upload.</p>
 </dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code><br><b>Success message</b> on success or <b>failure message</b> on failure.<br />
+					<code>String</code><br><b>Success message</b> on success or <b>failure message</b> on failure.<br />
 				</div>
 
 
@@ -178,7 +178,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_uploadSingleImage">#</a>
-		<code><a href="source-class-sfImageProcessor.html#628-685" title="Go to source code">uploadSingleImage</a>( <span>array <var>$imageFile</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>string <var>&amp; $imageLoc</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>string <var>&amp; $message</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>boolean <var>$forGallery</var> = <span class="php-keyword1">true</span></span> )</code>
+		<code><a href="source-class-sfImageProcessor.html#628-685" title="Go to source code">uploadSingleImage</a>( <span>array <var>$imageFile</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>String <var>&amp; $imageLoc</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>String <var>&amp; $message</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>boolean <var>$forGallery</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -197,13 +197,13 @@
 					<dt><var>$imageFile</var></dt>
 					<dd><code>array</code><br>$imageFile The image information [name, tmp_name,size and type]</dd>
 					<dt><var>$inifile</var></dt>
-					<dd><code>string</code><br>$inifile
+					<dd><code>String</code><br>$inifile
 <p>The configuration file</p>
 </dd>
 					<dt><var>$imageLoc</var></dt>
-					<dd><code>string</code><br>$imageLoc The new image location after upload to be returned</dd>
+					<dd><code>String</code><br>$imageLoc The new image location after upload to be returned</dd>
 					<dt><var>$message</var></dt>
-					<dd><code>string</code><br>$message
+					<dd><code>String</code><br>$message
 <p>The message to be returned as per the success or failure of the upload.</p>
 </dd>
 					<dt><var>$forGallery</var></dt>
@@ -389,7 +389,7 @@ session</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteFileDBGallery">#</a>
-		<code><a href="source-class-sfImageProcessor.html#787-825" title="Go to source code">deleteFileDBGallery</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$galleryID</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-sfImageProcessor.html#787-825" title="Go to source code">deleteFileDBGallery</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$galleryID</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -412,7 +412,7 @@ directory</p>
 					<dt><var>$galleryID</var></dt>
 					<dd><code>integer</code><br>$galleryID The gallery identifier to point to data to delete</dd>
 					<dt><var>$inifile</var></dt>
-					<dd><code>string</code><br>$inifile
+					<dd><code>String</code><br>$inifile
 <p>The configuration file</p>
 </dd>
 				</dl></div>
@@ -439,7 +439,7 @@ directory</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_resizeGalleryImages">#</a>
-		<code><a href="source-class-sfImageProcessor.html#827-877" title="Go to source code">resizeGalleryImages</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-sfImageProcessor.html#827-877" title="Go to source code">resizeGalleryImages</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -460,7 +460,7 @@ maintenance tool</p>
 					<dt><var>$conn</var></dt>
 					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
 					<dt><var>$inifile</var></dt>
-					<dd><code>string</code><br>$inifile
+					<dd><code>String</code><br>$inifile
 <p>The configuration file</p>
 </dd>
 				</dl></div>
@@ -529,7 +529,7 @@ maintenance tool</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_cleanUploadDir">#</a>
-		<code><a href="source-class-sfImageProcessor.html#902-1008" title="Go to source code">cleanUploadDir</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-sfImageProcessor.html#902-1008" title="Go to source code">cleanUploadDir</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -550,7 +550,7 @@ the API. NOTE: This is a maintenance tool</p>
 					<dt><var>$conn</var></dt>
 					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
 					<dt><var>$inifile</var></dt>
-					<dd><code>string</code><br>$inifile
+					<dd><code>String</code><br>$inifile
 <p>The configuration file</p>
 </dd>
 				</dl></div>

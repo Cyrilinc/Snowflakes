@@ -182,7 +182,7 @@ final class Config {
      * 
      * @param array $m_data <p> The Array of configration keys and values to convert</p> 
      * 
-     * @return string The configuration data in string form
+     * @return String The configuration data in string form
      */
     public static function arrayToConfig($m_data) {
 

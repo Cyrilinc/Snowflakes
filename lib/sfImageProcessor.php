@@ -67,7 +67,7 @@ class sfGalleryImage {
     /**
      * The constriuctor of {@link  sfGalleryImage} 
      *
-     * @param string $inifile <p> The configuration file </p> 
+     * @param String $inifile <p> The configuration file </p> 
      * @param bool $forGallery to determine if this image is for gallery upload
      * or for image upload. 
      * <p> gallery upload generates two images, one a thumb and the other as the original image
@@ -97,9 +97,9 @@ class sfGalleryImage {
      * Initialize the {@link  sfGalleryImage} with the parameters, which are used to detemine other 
      * parameters in {@link  sfGalleryImage}
      *
-     * @param string $FileName <p> The temporary/original file name of the image</p> 
-     * @param string $FileSize <p> The image file size </p> 
-     * @param string $FileType <p> The image file type </p> 
+     * @param String $FileName <p> The temporary/original file name of the image</p> 
+     * @param String $FileSize <p> The image file size </p> 
+     * @param String $FileType <p> The image file type </p> 
      * 
      * 
      */
@@ -140,7 +140,7 @@ class sfGalleryImage {
     /**
      * Get the height of an image 
      *
-     * @param string $image <p> The  image object/file </p> 
+     * @param String $image <p> The  image object/file </p> 
      * 
      * @return mixed <b>the image height</b> on success or <b>FALSE</b> on failure.
      */
@@ -157,7 +157,7 @@ class sfGalleryImage {
     /**
      * Get the width of an image 
      *
-     * @param string $image <p> The  image object/file </p> 
+     * @param String $image <p> The  image object/file </p> 
      * 
      * @return mixed <b>the image width</b> on success or <b>FALSE</b> on failure.
      */
@@ -174,9 +174,9 @@ class sfGalleryImage {
     /**
      * Set the name of an image 
      *
-     * @param string $imgExtension <p> The  image extension  e.g png</p> 
+     * @param String $imgExtension <p> The  image extension  e.g png</p> 
      * 
-     * @return string The <b> new image name</b> is returned.
+     * @return String The <b> new image name</b> is returned.
      */
     function nameImage($imgExtension) {
         return time() . substr(md5(microtime()), 0, rand(5, 12)) . $imgExtension;
@@ -186,7 +186,7 @@ class sfGalleryImage {
      * Get the success of failure message of {@link sfGalleryImage}
      *
      * 
-     * @return string The <b> success or failure </b> message is returned.
+     * @return String The <b> success or failure </b> message is returned.
      */
     function getMessage() {
         return $this->m_errorCode . " ==> " . $this->m_Message;
@@ -196,7 +196,7 @@ class sfGalleryImage {
      * resize an image with a with and height while scalling it so that the aspect ration 
      * remains the same
      *
-     * @param string $image <p> The  image object/file </p> 
+     * @param String $image <p> The  image object/file </p> 
      * @param int $width <p> The image width </p> 
      * @param int $height <p> The image height </p>
      * @param int $scale <p> The image scale ratio </p>
@@ -289,8 +289,8 @@ class sfGalleryImage {
      * resize/crop an thumbnail image with a with and height  from a start height and start width
      * while scalling it so that the aspect ratio remains the same 
      *
-     * @param string $ThumbImageName <p> The thumbnail image file name </p> 
-     * @param string $image <p> The  image object/file </p> 
+     * @param String $ThumbImageName <p> The thumbnail image file name </p> 
+     * @param String $image <p> The  image object/file </p> 
      * @param int $width <p> The image width </p> 
      * @param int $height <p> The image height </p>
      * @param int $start_width <p> The starting image width position </p> 
@@ -405,7 +405,7 @@ class sfGalleryImage {
      * Get the file name with path to the image 
      *
      * 
-     * @return string The <b> filename </b> for target image is returned.
+     * @return String The <b> filename </b> for target image is returned.
      */
     public function TargetFileImageLoc() {
         return $this->m_TargetFileImageLoc;
@@ -415,7 +415,7 @@ class sfGalleryImage {
      * Get the file name with path to the image thumbnail
      *
      * 
-     * @return string The <b> filename </b> for target thumbnail image is returned.
+     * @return String The <b> filename </b> for target thumbnail image is returned.
      */
     public function TargetFileThumbLoc() {
         return $this->m_TargetFileThumbLoc;
@@ -575,11 +575,11 @@ class sfImageProcessor {
      * Upload a multiple images image to the upload directory for this API
      * 
      * @param array $imageFiles The image information each contains [name, tmp_name,size and type]
-     * @param string $inifile <p> The configuration file </p> 
-     * @param string $message <p>The message to be returned as per the success or
+     * @param String $inifile <p> The configuration file </p> 
+     * @param String $message <p>The message to be returned as per the success or
      * failure of the upload.</p>
      * 
-     * @return string <b>Success message</b> on success or <b>failure message</b> on failure.
+     * @return String <b>Success message</b> on success or <b>failure message</b> on failure.
      */
     public static function UploadMultiImages($imageFiles, $inifile = '../config/config.ini', &$message = "") {
         //Check if the image field is not empty
@@ -628,9 +628,9 @@ class sfImageProcessor {
      * Upload a single image to the upload directory for this API
      * 
      * @param array $imageFile The image information [name, tmp_name,size and type]
-     * @param string $inifile <p> The configuration file </p> 
-     * @param string $imageLoc The new image location after upload to be returned
-     * @param string $message <p>The message to be returned as per the success or
+     * @param String $inifile <p> The configuration file </p> 
+     * @param String $imageLoc The new image location after upload to be returned
+     * @param String $message <p>The message to be returned as per the success or
      * failure of the upload.</p>
      * @param bool $forGallery <p>The indication that the image upload is for a gallery 
      * or not. If set to true a thumbnail file will be created also in the API's 
@@ -789,7 +789,7 @@ class sfImageProcessor {
      * 
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param int $galleryID The gallery identifier to point to data to delete
-     * @param string $inifile <p> The configuration file </p> 
+     * @param String $inifile <p> The configuration file </p> 
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -829,7 +829,7 @@ class sfImageProcessor {
      * NOTE: This is a maintenance tool
      * 
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $inifile <p> The configuration file </p> 
+     * @param String $inifile <p> The configuration file </p> 
      * 
      * @return mixed <b>number of image resized</b> on success or <b>FALSE</b> otherwise.
      */
@@ -905,7 +905,7 @@ class sfImageProcessor {
      * NOTE: This is a maintenance tool
      * 
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param string $inifile <p> The configuration file </p> 
+     * @param String $inifile <p> The configuration file </p> 
      * 
      * @return mixed <b>number of image cleaned</b> on success or <b>FALSE</b> otherwise.
      */
