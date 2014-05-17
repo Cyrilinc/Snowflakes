@@ -139,11 +139,7 @@ function snowflakesCount(ssefile) {
         $("#SFUsers_total").attr('data-bubble', data.SFUsers_total);
     }, false);
 
-    source.addEventListener('open', function(event) {
-    }, false);
-
-}
-;
+};
 
 function userActivities(ssefile) {
     var source = new EventSource(ssefile);
@@ -151,6 +147,5 @@ function userActivities(ssefile) {
         var data = JSON.parse(ev.data);
         $("#activities").replaceWith(data.msg);
     }, false);
-}
-;
+};
 			

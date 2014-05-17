@@ -79,34 +79,34 @@ class snowflakesSetUp {
         $loginUrl = str_replace("install/sfInstall.php", "login.php", sfUtils::curPageURL());
         $key = "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
         $inifile = '../config/config.ini';
-        
+
         $settingsStruct = new settingsStruct();
         $settingsStruct->init($inifile);
         $settingsStruct->SethostName($this->m_hostName);
         $settingsStruct->SetdbName($this->m_dbName);
         $settingsStruct->SetdbType($this->m_dbType);
         $settingsStruct->SetdbUsername($this->m_dbUsername);
-        $settingsStruct->SetdbPassword($this->m_adminPassword,$key);
+        $settingsStruct->SetdbPassword($this->m_adminPassword, $key);
         $settingsStruct->Setadmin_email($this->m_adminEmail);
         $settingsStruct->SettimeZone($this->m_timeZone);
         $settingsStruct->setCustom("settings", "Setup", "True");
         $settingsStruct->Seturl(sfUtils::curPageURL());
         $settingsStruct->setCustom("settings", "loginUrl", $loginUrl);
         $settingsStruct->SetsfUrl($this->m_sfUrl);
-        $settingsStruct->SetsfGalleryUrl($this->m_sfUrl. "Uploads/");
-        $settingsStruct->SetsfGalleryImgUrl($this->m_sfUrl. "Uploads/GalleryImages/");
-        $settingsStruct->SetsfGalleryThumbUrl($this->m_sfUrl. "Uploads/GalleryThumbs/");
-        $settingsStruct->setCustom("settings","flakeItUrl",$this->m_sfUrl . "flakeIt.php");
+        $settingsStruct->SetsfGalleryUrl($this->m_sfUrl . "Uploads/");
+        $settingsStruct->SetsfGalleryImgUrl($this->m_sfUrl . "Uploads/GalleryImages/");
+        $settingsStruct->SetsfGalleryThumbUrl($this->m_sfUrl . "Uploads/GalleryThumbs/");
+        $settingsStruct->setCustom("settings", "flakeItUrl", $this->m_sfUrl . "flakeIt.php");
         $settingsStruct->SetmaxImageSize("1MB");
         $settingsStruct->SetthumbWidth("250");
         $settingsStruct->SetthumbHeight("250");
         $settingsStruct->SetmaxImageWidth("620");
         $settingsStruct->SetimageExtList("pjpeg,jpeg,jpg,png,gif,tiff,bmp");
         $settingsStruct->SetimageTypesList("image/pjpeg,image/jpeg,image/jpg,image/png,image/gif,image/tiff,image/bmp");
-        $settingsStruct->setCustom('datadir','logdir',realpath("../data/") . "/");
+        $settingsStruct->setCustom('datadir', 'logdir', realpath("../data/") . "/");
         $settingsStruct->Setresources(realpath("../resources/") . "/");
         $settingsStruct->Setpath(realpath("../") . "/");
-        $settingsStruct->setCustom('datadir','datapath',realpath("../data/") . "/");
+        $settingsStruct->setCustom('datadir', 'datapath', realpath("../data/") . "/");
         $settingsStruct->SetuploadGalleryDir($gallery);
         $settingsStruct->SetgalleryImgDir($galleryimg);
         $settingsStruct->SetgalleryThumbDir($gallerythumb);
@@ -160,7 +160,7 @@ class snowflakesSetUp {
         if (!$conn) {
             return false;
         }
-        
+
         // Create change log table 
         if ($this->createChangeLog($conn) == false) {
             return false;
@@ -175,13 +175,13 @@ class snowflakesSetUp {
         if ($this->createSfTable($conn) == false) {
             return false;
         }
-        $this->insertDefaultPosts($conn);
+        $this->insertDefaultSnowflakes($conn);
 
         // Check 3 Create Admin
         if ($this->createUserTable($conn) == false) {
             return false;
         }
-        $this->insertAdmin($conn);
+        $this->insertSuperUser($conn);
 
         // Check 4  Create events
         if ($this->createEventsTable($conn) == false) {
@@ -603,7 +603,7 @@ class snowflakesSetUp {
         return true;
     }
 
-    private function insertAdmin($conn) {
+    private function insertSuperUser($conn) {
 
         //sanity check
         if (!$conn) {
@@ -630,32 +630,20 @@ class snowflakesSetUp {
 
     private function insertDefaultEvents($conn) {
 
-        //sanity check
-        if (!$conn) {
+        if (!$conn) {//sanity check
             return false;
         }
-
         $eventDate = date('Y-m-d');
         $timeNumber = date('H:i');
         $endtimeNumber = date('H:i', time() + (2 * 60 * 60));
         $create = time();
         $loginUsername = $this->m_adminUsername;
-        $sql = "INSERT IGNORE INTO " . $this->m_eventsTable . " SET
-                id=1,
-		title='Create More Snowflakes',
+        $sql = "INSERT IGNORE INTO " . $this->m_eventsTable . " SET id=1,title='Create More Snowflakes',
 		body_text='This event involves adding new snowflakes to our site to fill it with information',
-		publish=1,
-		image_name='default.png',
-		event_time='$timeNumber',
-		event_date='$eventDate',
-                end_time='$endtimeNumber',
-                end_date='$eventDate',
-		location='Houston, Texas, United States',
-                lat_long='29.7601927,-95.36938959999998',
-		created='$create',
-		created_by='$loginUsername',
-                edited='$create',
-		edited_by='$loginUsername'";
+		publish=1,image_name='default.png',event_time='$timeNumber',event_date='$eventDate',
+                end_time='$endtimeNumber',end_date='$eventDate',location='Houston, Texas, United States',
+                lat_long='29.7601927,-95.36938959999998',created='$create',created_by='$loginUsername',
+                edited='$create',edited_by='$loginUsername',flake_it=1";
         if (!$conn->execute($sql)) {
             $this->m_Message .="<br>" . 'Could not insert into Events table named "' . $this->m_eventsTable . '" due to error.<br/> ' . $conn->getMessage() . ' <span class="icon error"></span><br />';
             return false;
@@ -667,8 +655,7 @@ class snowflakesSetUp {
 
     private function insertDefaultGallery($conn) {
 
-        //sanity check
-        if (!$conn) {
+        if (!$conn) {//sanity check
             return false;
         }
 
@@ -680,21 +667,17 @@ class snowflakesSetUp {
 		thumb_name='Snowflakes1.png,Snowflakes2.png,Snowflakes3.png,Snowflakes.png',
 		image_name='Snowflakes1.png,Snowflakes2.png,Snowflakes3.png,Snowflakes.png',
 		image_caption='About, Demo, Features, Logo',
-                publish=0,
-		created='$create',
-		created_by='$loginUsername',
-                edited='$create',
-		edited_by='$loginUsername'";
+                publish=0,created='$create',created_by='$loginUsername',edited='$create',
+		edited_by='$loginUsername',flake_it=1";
         if (!$conn->execute($sql)) {
             $this->m_Message .='<br>Could not insert into Gallery table named "' . $this->m_galleryTable . '" due to error.<br/> ' . $conn->getMessage() . ' <span class="icon error"></span><br />';
             return false;
         }
-
         $this->m_Message .='<br> First Gallery successfully added.<span class="icon success"></span><br />';
         return true;
     }
 
-    private function insertDefaultPosts($conn) {
+    private function insertDefaultSnowflakes($conn) {
 
         //sanity check
         if (!$conn) {
@@ -703,12 +686,12 @@ class snowflakesSetUp {
 
         $create = time();
         $loginUsername = $this->m_adminUsername;
-        $sql = "INSERT IGNORE INTO " . $this->m_sfTable . " (id,title,body_text,publish,image_name,gallery,created,created_by,edited,edited_by)
+        $sql = "INSERT IGNORE INTO " . $this->m_sfTable . " (id,title,body_text,publish,image_name,gallery,created,created_by,edited,edited_by,flake_it)
 		VALUES 
-                (1, 'Welcome to Snowflakes 1', '<h3> Introduction & Instructions</h3>\r\nThis is the first snowflake of the page. You can view this snowflake on its own by clicking the view button at the top right hand side of this snowflake. On the view page you can Edit or delete this first snowflake by using the Edit or delete function on the top right hand corner of this view page. you can add snowflake by clicking Add New Post button on the Side menu. you can view all snowflakes and you can also go back to the home page to view the 3 most recent snowflakes you have made. Delete or edit this snowflake after reading this snowflake, so as to make room for your own snowflakes. You can include one image per snowflake or use the default image provided for a blank image format. You can view admin users by clicking the admin panel on the Side Menu. You can only add one image to a snowflake in this demo version, in the full version you will be able to add galleries to a snowflake. You can also add html div or a tags for links to other sites such as youtube, Facebook  and links to other sites <a href= \" https://www.facebook.com/pages/Cyril-Inc/151728454900027 \" target=\"_blank\" > Like this </a>. for example a paragraph <br ><br ><p>This a Paragraph text after Two breaks. However still in the same paragraph you can create header tags like the \" Introduction  & Instructions \" above.</p>\r\nA simple enter key can make a new line, check the \" Welcome to Cyril Inc CMS 1 \" for further instructions.', 1, 'default.png','1,Snowflakes', '$create', '$loginUsername', '$create', '$loginUsername'), 
-		(2, 'Welcome to Snowflakes 2', '<h3>More Instructions</h3>\r\nThis is an unpublished Page in the database used for demonstration purposes, This is good in a way that it allows you to create pages and store them on the database for edition later if more materials needs to be added on a later date. Like the other snowflake you can make use of the side menu to navigate through the CMS delete or edit this snowflake to make it our own so as to be published on the main view page on your website.  To publish a snowflake click on the edit icon on the snowflake and tick the \" Publish this snowflake now \"  Checkbox and submit the snowflake. it is that easy.\r\n <br /><br />\r\nIn the Admin Panel you can add users delete users and edit users how ever way you want, but make sure that when you do add a user that the user is part of your staff or an editor who will not tamper with your snowflakes but put new snowflake authorised by you. A page with all your published snowflakes and are sorted by the date they were most recently edited. To learn more about Cyril inc CMS visit our site at <a href=\" http://www.cyrilinc.co.uk \" target=\"_blank\"> Cyril Inc Website</a> ', 0, 'default.png','1,Snowflakes', '$create', '$loginUsername', '$create', '$loginUsername'), 
-		(3, 'Snowflakes Features', 'You can add a snowflake without an image and the default snowflake icon will appear in the snowflake. This is so because a snowflake always has an image to go with it.  you can also share a flake on social sites, it has already been pre-configured to be shared and you can customise it by including it removing images, description, title and link.<br><br> \r\nSnowflake is an ultimate Content management System design for news on your website  and uses mysql database. Manage flakes and have them shared by your viewers, You can also customise your output to better suit the theme of your website by including the generated output on one of your site pages. Snowflakes is able to generate php code or javascript code to post your flakes on.\r\n<br><br>\r\n<p> This can be done by using a php code \"  include \"http://www.Yoursite.com/Snowflakes/Out.php\";  \" in the page that you want your snow to appear in and use css to customise how it looks.</p>  \r\n<br><br>\r\na flake class structure for css is thus:\r\n<br>\r\nSnowflake class- for the whole flake\r\n<br>SnowflakeHead class - for the title\r\n<br>SnowflakePanel class for the view and share icons\r\n<br>PageBreak class - for the white  break line \r\n<br>	 SnowflakeDescr class - for the body text of a flake\r\n<br>		 SnowflakeImage class - is the div that contains the image of a snowflake. contained within the SnowflakeDescr class\r\n<br> PageBreak Class - another white break line\r\n<br> SnowflakeDate - the snowflake date of modification & create\r\n<br><br>\r\nyou can choose to hide any of the features such as the box panel and date or the image by writing your own css for the snowflake structure. ', 0, 'default.png','1,Snowflakes', '$create', '$loginUsername', '$create', '$loginUsername'),		
-		(4,'Snowflakes Features 2', '<p> Given the that you have added and published snowflakes, you can get a generated code to add anywhere on the website at the settings menu of snowflakes, follow the instructions there at the <a href=\"#\">Snowflakes Generator</a>. </p>\r\n<br />\r\n<p>Once you have Set up your Snowflakes and display the custom Output Snowflakes on your website, given that there are sharing icons on the output Snowflakes you need to dedicate a page to viewing Snowflakes for when your website vistor decides to view your snowflakes. The <a href=\"#\">Snowflakes Generator</a> will generate the code once you have installed added and published snowflakes. make sure you follow the instructions on the   <a href=\"#\">Snowflakes Generator</a> to the later to ensure that it works. </p>\r\n<br />\r\n<p> Visit <a href=\"http://cyrilinc.co.uk/ \"> Cyril Inc Website </a> and contact us if you spot a bug or require technical help.</p>', 0, 'default.png','1,Snowflakes', '$create', '$loginUsername', '$create', '$loginUsername')";
+                (1, 'Welcome to Snowflakes 1', '<h3> Introduction & Instructions</h3>\r\nThis is the first snowflake of the page. You can view this snowflake on its own by clicking the view button at the top right hand side of this snowflake. On the view page you can Edit or delete this first snowflake by using the Edit or delete function on the top right hand corner of this view page. you can add snowflake by clicking Add New Post button on the Side menu. you can view all snowflakes and you can also go back to the home page to view the 3 most recent snowflakes you have made. Delete or edit this snowflake after reading this snowflake, so as to make room for your own snowflakes. You can include one image per snowflake or use the default image provided for a blank image format. You can view admin users by clicking the admin panel on the Side Menu. You can only add one image to a snowflake in this demo version, in the full version you will be able to add galleries to a snowflake. You can also add html div or a tags for links to other sites such as youtube, Facebook  and links to other sites <a href= \" https://www.facebook.com/pages/Cyril-Inc/151728454900027 \" target=\"_blank\" > Like this </a>. for example a paragraph <br ><br ><p>This a Paragraph text after Two breaks. However still in the same paragraph you can create header tags like the \" Introduction  & Instructions \" above.</p>\r\nA simple enter key can make a new line, check the \" Welcome to Cyril Inc CMS 1 \" for further instructions.', 1, 'default.png','1,Snowflakes', '$create', '$loginUsername', '$create', '$loginUsername',1), 
+		(2, 'Welcome to Snowflakes 2', '<h3>More Instructions</h3>\r\nThis is an unpublished Page in the database used for demonstration purposes, This is good in a way that it allows you to create pages and store them on the database for edition later if more materials needs to be added on a later date. Like the other snowflake you can make use of the side menu to navigate through the CMS delete or edit this snowflake to make it our own so as to be published on the main view page on your website.  To publish a snowflake click on the edit icon on the snowflake and tick the \" Publish this snowflake now \"  Checkbox and submit the snowflake. it is that easy.\r\n <br /><br />\r\nIn the Admin Panel you can add users delete users and edit users how ever way you want, but make sure that when you do add a user that the user is part of your staff or an editor who will not tamper with your snowflakes but put new snowflake authorised by you. A page with all your published snowflakes and are sorted by the date they were most recently edited. To learn more about Cyril inc CMS visit our site at <a href=\" http://www.cyrilinc.co.uk \" target=\"_blank\"> Cyril Inc Website</a> ', 0, 'default.png','1,Snowflakes', '$create', '$loginUsername', '$create', '$loginUsername',1), 
+		(3, 'Snowflakes Features', 'You can add a snowflake without an image and the default snowflake icon will appear in the snowflake. This is so because a snowflake always has an image to go with it.  you can also share a flake on social sites, it has already been pre-configured to be shared and you can customise it by including it removing images, description, title and link.<br><br> \r\nSnowflake is an ultimate Content management System design for news on your website  and uses mysql database. Manage flakes and have them shared by your viewers, You can also customise your output to better suit the theme of your website by including the generated output on one of your site pages. Snowflakes is able to generate php code or javascript code to post your flakes on.\r\n<br><br>\r\n<p> This can be done by using a php code \"  include \"http://www.Yoursite.com/Snowflakes/Out.php\";  \" in the page that you want your snow to appear in and use css to customise how it looks.</p>  \r\n<br><br>\r\na flake class structure for css is thus:\r\n<br>\r\nSnowflake class- for the whole flake\r\n<br>SnowflakeHead class - for the title\r\n<br>SnowflakePanel class for the view and share icons\r\n<br>PageBreak class - for the white  break line \r\n<br>	 SnowflakeDescr class - for the body text of a flake\r\n<br>		 SnowflakeImage class - is the div that contains the image of a snowflake. contained within the SnowflakeDescr class\r\n<br> PageBreak Class - another white break line\r\n<br> SnowflakeDate - the snowflake date of modification & create\r\n<br><br>\r\nyou can choose to hide any of the features such as the box panel and date or the image by writing your own css for the snowflake structure. ', 0, 'default.png','1,Snowflakes', '$create', '$loginUsername', '$create', '$loginUsername',1),		
+		(4,'Snowflakes Features 2', '<p> Given the that you have added and published snowflakes, you can get a generated code to add anywhere on the website at the settings menu of snowflakes, follow the instructions there at the <a href=\"#\">Snowflakes Generator</a>. </p>\r\n<br />\r\n<p>Once you have Set up your Snowflakes and display the custom Output Snowflakes on your website, given that there are sharing icons on the output Snowflakes you need to dedicate a page to viewing Snowflakes for when your website vistor decides to view your snowflakes. The <a href=\"#\">Snowflakes Generator</a> will generate the code once you have installed added and published snowflakes. make sure you follow the instructions on the   <a href=\"#\">Snowflakes Generator</a> to the later to ensure that it works. </p>\r\n<br />\r\n<p> Visit <a href=\"http://cyrilinc.co.uk/ \"> Cyril Inc Website </a> and contact us if you spot a bug or require technical help.</p>', 0, 'default.png','1,Snowflakes', '$create', '$loginUsername', '$create', '$loginUsername',1)";
 
         if (!$conn->execute($sql)) {
             $this->m_Message .="<br>" . 'Could not insert first snowflake due to Error.<br/> ' . $conn->getMessage() . ' <span class="icon error"></span><br />';

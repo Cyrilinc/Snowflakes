@@ -190,6 +190,8 @@ final class Config {
             return false;
         }
 
+        $configString = "";
+
         foreach ($m_data as $section => $value) {
             $configString.="[" . $section . "]\n";
 

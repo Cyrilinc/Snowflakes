@@ -1822,12 +1822,15 @@ final class sfUtils {
      * Constructs the SSE data format and flushes that data to the client.
      *
      * @param string $id Timestamp/id of this connection.
-     * @param string $msg Line1of text that should be transmitted.
+     * @param string $msg Line of text that should be transmitted.
      * @param int $retry the retry value in millisecconds. 1000ms = 1 second.
      */
-    public static function sendSSEMsg($id, $msg, $retry) {
+    public static function sendSSEMsg($id, $msg, $retry = "") {
+        if (!$id || !$msg) {// sanity check
+            return false;
+        }
         echo "id: $id" . PHP_EOL;
-        if ($retry) {
+        if ($retry !== "") {
             echo "retry: $retry" . PHP_EOL;
         }
         echo "data: {\n";
@@ -3748,18 +3751,18 @@ class settingsStruct {
      * @param string $value <p> The value of  configuration element to set</p> 
      * @param string $key <p> The password encryption key for the password</p> 
      */
-    public function SetdbPassword($value, $key="") {
+    public function SetdbPassword($value, $key = "") {
         if (!$value) {
             return false;
         }
         //password
-        if ($key!=="") {
+        if ($key !== "") {
             $this->m_key = $key;
             $password = sfUtils::encrypt($value, $this->m_key);
         } else {
             $password = $value;
         }
-        
+
         $this->m_settingsarray["db"]["password"] = $password;
     }
 

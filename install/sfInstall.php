@@ -11,6 +11,7 @@
 session_start();
 //set the return URL
 $MM_setup = filter_input(INPUT_POST, 'MM_setup');
+$obj = new snowflakesSetUp();
 if ((isset($MM_setup)) && ($MM_setup == "setupform")) {
     $return_url = "index.php";
     $LogIn_url = "../login.php";
@@ -41,7 +42,6 @@ if ((isset($MM_setup)) && ($MM_setup == "setupform")) {
     $m_sfUrl = str_replace("install/sfInstall.php", "", $url);
     $somem_Message = $somem_Message . "Snowflakes Base: " . $m_sfUrl . " <br></p>";
 
-    $obj = new snowflakesSetUp();
     $obj->m_hostName = $Host_Name;
     $obj->m_dbUsername = $Database_Username;
     $obj->m_dbPassword = $Database_Password;
@@ -60,6 +60,7 @@ $migrated = false;
 $MM_migrate = filter_input(INPUT_POST, "MM_migrate");
 $dbName = filter_input(INPUT_POST, "dbName");
 $oldUpdloadDir = filter_input(INPUT_POST, "oldUpdloadDir");
+$Username = filter_input(INPUT_POST, "username");
 if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName))) {
     require_once '../lib/sf.php';
     require_once '../lib/sfConnect.php';
@@ -72,7 +73,7 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
     $SFconnects = new sfConnect($config->dbArray());
     $SFconnects->connect(); // Connect to new database
     $migrateMessage = "";
-    $migrated = sfUtils::migrate($SFconnects, $Database_Name, $config->m_username, $migrateMessage);
+    $migrated = sfUtils::migrate($SFconnects, $Database_Name, $Username, $migrateMessage);
     $somem_Message = $migrateMessage;
 
     if (!sfUtils::migrateUpdir($oldUpdloadDir, '../config/config.ini')) {
@@ -239,14 +240,12 @@ if (isset($obj->m_Message) || isset($obj->m_outcomeMessage)) {
                             echo '<div class="NewButton"><a href="' . $obj->m_logInUrl . '"> Admin Log In  <img src="../resources/images/Icons/User.png" height="22" width="22" alt="Admin" /></a></div><br/>';
                         }
                         ?>
-
                         <div class="clear"></div>
                         <?php
                         if (strpos($obj->m_outcomeMessage, "Set Up Successful")) {
                             echo '<h2> OR </h2>';
                         }
                     }
-
                     if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful")) {
                         $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
                         ?>
@@ -262,6 +261,7 @@ if (isset($obj->m_Message) || isset($obj->m_outcomeMessage)) {
                                 <input name="oldUpdloadDir" type="text" class="inputtext2" value="" placeholder="Upload directory for old snowflakes e.g ../../SnowflakesV1/Uploads/" />
                             </span><br />
                             <input class="NewButton" type="submit" name="submitButton" value="Migrate" />
+                            <input type="hidden" name="username" value="<?php echo $Admin_Username;?>" />
                             <input type="hidden" name="MM_migrate" value="migrateform" />
 
                         </form>
