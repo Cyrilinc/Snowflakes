@@ -2446,6 +2446,9 @@ final class sfUtils {
      * @return string an encrypted & utf8-encoded string.
      */
     public static function encrypt($pure_string, $encryption_key) {
+        if (!$pure_string || !$encryption_key) {
+            return false;
+        }
         $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
         $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
         $encrypted_string = mcrypt_encrypt(MCRYPT_BLOWFISH, $encryption_key, utf8_encode($pure_string), MCRYPT_MODE_ECB, $iv);
@@ -2461,6 +2464,9 @@ final class sfUtils {
      * @return string a decrypted original string.
      */
     public static function decrypt($encrypted_string, $encryption_key) {
+        if (!$encrypted_string || !$encryption_key) {
+            return false;
+        }
         $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
         $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
         $decrypted_string = mcrypt_decrypt(MCRYPT_BLOWFISH, $encryption_key, $encrypted_string, MCRYPT_MODE_ECB, $iv);
@@ -3620,6 +3626,10 @@ class settingsStruct {
      */
     public function init($inifile = '../config/config.ini') {
         $m_data = Config::getConfig(null, $inifile);
+
+        if ($m_data === false) {
+            return Config::createConfig($inifile, true);
+        }
         $this->m_settingsarray = array();
         return $this->populate($m_data);
     }
@@ -3736,10 +3746,21 @@ class settingsStruct {
      * sets the database password of the db in the  configuration file 
      * 
      * @param string $value <p> The value of  configuration element to set</p> 
+     * @param string $key <p> The password encryption key for the password</p> 
      */
-    public function SetdbPassword($value) {
+    public function SetdbPassword($value, $key="") {
+        if (!$value) {
+            return false;
+        }
         //password
-        $this->m_settingsarray["db"]["password"] = sfUtils::decrypt($value, $this->m_key);
+        if ($key!=="") {
+            $this->m_key = $key;
+            $password = sfUtils::encrypt($value, $this->m_key);
+        } else {
+            $password = $value;
+        }
+        
+        $this->m_settingsarray["db"]["password"] = $password;
     }
 
     /**

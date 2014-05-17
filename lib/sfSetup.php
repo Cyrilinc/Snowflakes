@@ -78,45 +78,40 @@ class snowflakesSetUp {
         $gallerythumb = $gallery . "GalleryThumbs/";
         $loginUrl = str_replace("install/sfInstall.php", "login.php", sfUtils::curPageURL());
         $key = "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
-        $encryptedPassword = sfUtils::encrypt($this->m_adminPassword, $key);
+        $inifile = '../config/config.ini';
+        
+        $settingsStruct = new settingsStruct();
+        $settingsStruct->init($inifile);
+        $settingsStruct->SethostName($this->m_hostName);
+        $settingsStruct->SetdbName($this->m_dbName);
+        $settingsStruct->SetdbType($this->m_dbType);
+        $settingsStruct->SetdbUsername($this->m_dbUsername);
+        $settingsStruct->SetdbPassword($this->m_adminPassword,$key);
+        $settingsStruct->Setadmin_email($this->m_adminEmail);
+        $settingsStruct->SettimeZone($this->m_timeZone);
+        $settingsStruct->setCustom("settings", "Setup", "True");
+        $settingsStruct->Seturl(sfUtils::curPageURL());
+        $settingsStruct->setCustom("settings", "loginUrl", $loginUrl);
+        $settingsStruct->SetsfUrl($this->m_sfUrl);
+        $settingsStruct->SetsfGalleryUrl($this->m_sfUrl. "Uploads/");
+        $settingsStruct->SetsfGalleryImgUrl($this->m_sfUrl. "Uploads/GalleryImages/");
+        $settingsStruct->SetsfGalleryThumbUrl($this->m_sfUrl. "Uploads/GalleryThumbs/");
+        $settingsStruct->setCustom("settings","flakeItUrl",$this->m_sfUrl . "flakeIt.php");
+        $settingsStruct->SetmaxImageSize("1MB");
+        $settingsStruct->SetthumbWidth("250");
+        $settingsStruct->SetthumbHeight("250");
+        $settingsStruct->SetmaxImageWidth("620");
+        $settingsStruct->SetimageExtList("pjpeg,jpeg,jpg,png,gif,tiff,bmp");
+        $settingsStruct->SetimageTypesList("image/pjpeg,image/jpeg,image/jpg,image/png,image/gif,image/tiff,image/bmp");
+        $settingsStruct->setCustom('datadir','logdir',realpath("../data/") . "/");
+        $settingsStruct->Setresources(realpath("../resources/") . "/");
+        $settingsStruct->Setpath(realpath("../") . "/");
+        $settingsStruct->setCustom('datadir','datapath',realpath("../data/") . "/");
+        $settingsStruct->SetuploadGalleryDir($gallery);
+        $settingsStruct->SetgalleryImgDir($galleryimg);
+        $settingsStruct->SetgalleryThumbDir($gallerythumb);
 
-        $sfConfig = "[db]\n" .
-                'host = "' . $this->m_hostName . "\"\n" .
-                'dbname = "' . $this->m_dbName . "\"\n" .
-                'type = "' . $this->m_dbType . "\"\n" .
-                'username = "' . $this->m_dbUsername . "\"\n" .
-                'password = "' . $encryptedPassword . "\"\n" .
-                'admin_email = "' . $this->m_adminEmail . "\"\n" .
-                "time_zone = \"$this->m_timeZone\"\n\n" .
-                "[settings]\n" .
-                "Setup = \"True\"\n" .
-                'url = "' . sfUtils::curPageURL() . "\"\n" .
-                'loginUrl = "' . $loginUrl . "\"\n" .
-                'm_sfUrl = "' . $this->m_sfUrl . "\"\n" .
-                'm_sfGalleryUrl = "' . $this->m_sfUrl . "Uploads/\"\n" .
-                'm_sfGalleryImgUrl = "' . $this->m_sfUrl . "Uploads/GalleryImages/\"\n" .
-                'm_sfGalleryThumbUrl = "' . $this->m_sfUrl . "Uploads/GalleryThumbs/\"\n" .
-                'flakeItUrl = "' . $this->m_sfUrl . "flakeIt.php\"\n" .
-                'maxImageSize = "1048576"' . "\n" .
-                'thumbWidth = "250"' . "\n" .
-                'thumbHeight = "250"' . "\n" .
-                'maxImageWidth = "620"' . "\n" .
-                'imageExtList = "pjpeg,jpeg,jpg,png,gif,tiff,bmp"' . "\n" .
-                'imageTypesList = "image/pjpeg,image/jpeg,image/jpg,image/png,image/gif,image/tiff,image/bmp"' . "\n\n" .
-                "[datadir]\n" .
-                'logdir = "' . realpath("../data/") . "/\"\n" .
-                'resources = "' . realpath("../resources/") . "/\"\n" .
-                'path = "' . realpath("../") . "/\"\n" .
-                'datapath = "' . realpath("../") . "/data/\"\n" .
-                'uploadGalleryDir = "' . $gallery . "\"\n" .
-                'galleryImgDir = "' . $galleryimg . "\"\n" .
-                'galleryThumbDir = "' . $gallerythumb . "\"\n";
-
-        $fp = fopen("../config/config.ini", "w");
-        fwrite($fp, $sfConfig);
-        fclose($fp);
-
-        if (!$fp) {
+        if (!$settingsStruct->setConfigItems($inifile)) {
             $this->m_Message .= '<br> Could not open or write CMS configuration file. <span class="icon error"></span><br />';
         } else {
             $this->m_Message .= '<br>CMS configuration file written successfully.<span class="icon success"></span><br />';

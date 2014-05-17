@@ -116,7 +116,7 @@ configuration elements for Snowflakes API</p>
 
 				<b>Author:</b>
 				Cyril Adelekan<br />
-		<b>Located at</b> <a href="source-class-Config.html#3-215" title="Go to source code">config/Config.php</a><br />
+		<b>Located at</b> <a href="source-class-Config.html#3-237" title="Go to source code">config/Config.php</a><br />
 	</div>
 
 
@@ -134,7 +134,7 @@ configuration elements for Snowflakes API</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_checkConfig">#</a>
-		<code><a href="source-class-Config.html#14-23" title="Go to source code">checkConfig</a>( <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-Config.html#14-24" title="Go to source code">checkConfig</a>( <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -158,7 +158,60 @@ configuration elements for Snowflakes API</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code><br><b>TRUE</b> if user exists or <b>FALSE</b> otherwise.<br />
+					<code>boolean</code><br><b>TRUE</b> if the config file or directory specified by <i>filename</i> exists;
+<b>FALSE</b> otherwise.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createConfig" id="_createConfig">
+
+		<td class="attributes"><code>
+			 public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createConfig">#</a>
+		<code><a href="source-class-Config.html#26-46" title="Go to source code">createConfig</a>( <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>boolean <var>$createit</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Checks if a configuration file exists and create is according to the creat it
+flag raised.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks if a configuration file exists and create is according to the creat it
+flag raised.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$inifile</var></dt>
+					<dd><code>string</code><br>$inifile
+<p>The configuration file</p>
+</dd>
+					<dt><var>$createit</var></dt>
+					<dd><code>boolean</code><br>$createit
+<p>The flag to indicate if the file should be created if it doesn't exists or
+not.</p>
+</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><b>TRUE</b> if the config file or directory specified by <i>filename</i> exists;
+<b>FALSE</b> otherwise.<br />
 				</div>
 
 
@@ -178,7 +231,7 @@ configuration elements for Snowflakes API</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getConfig">#</a>
-		<code><a href="source-class-Config.html#25-48" title="Go to source code">getConfig</a>( <span>string <var>$section</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-Config.html#48-71" title="Go to source code">getConfig</a>( <span>string <var>$section</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -226,7 +279,7 @@ configuration elements for Snowflakes API</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addSection">#</a>
-		<code><a href="source-class-Config.html#50-73" title="Go to source code">addSection</a>( <span>string <var>$section</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-Config.html#73-96" title="Go to source code">addSection</a>( <span>string <var>$section</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -274,7 +327,7 @@ configuration elements for Snowflakes API</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteSection">#</a>
-		<code><a href="source-class-Config.html#75-98" title="Go to source code">deleteSection</a>( <span>string <var>$section</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-Config.html#98-121" title="Go to source code">deleteSection</a>( <span>string <var>$section</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -322,7 +375,7 @@ configuration elements for Snowflakes API</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addConfig">#</a>
-		<code><a href="source-class-Config.html#100-124" title="Go to source code">addConfig</a>( <span>string <var>$value</var></span>, <span>string <var>$tag</var></span>, <span>string <var>$section</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-Config.html#123-147" title="Go to source code">addConfig</a>( <span>string <var>$value</var></span>, <span>string <var>$tag</var></span>, <span>string <var>$section</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -378,7 +431,7 @@ configuration elements for Snowflakes API</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setConfig">#</a>
-		<code><a href="source-class-Config.html#126-154" title="Go to source code">setConfig</a>( <span>string <var>$value</var></span>, <span>string <var>$tag</var></span>, <span>string <var>$section</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-Config.html#149-177" title="Go to source code">setConfig</a>( <span>string <var>$value</var></span>, <span>string <var>$tag</var></span>, <span>string <var>$section</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -438,7 +491,7 @@ configuration file, it is created.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_arrayToConfig">#</a>
-		<code><a href="source-class-Config.html#156-181" title="Go to source code">arrayToConfig</a>( <span>array <var>$m_data</var></span> )</code>
+		<code><a href="source-class-Config.html#179-202" title="Go to source code">arrayToConfig</a>( <span>array <var>$m_data</var></span> )</code>
 
 		<div class="description short">
 			
@@ -484,7 +537,7 @@ array</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_saveConfig">#</a>
-		<code><a href="source-class-Config.html#183-196" title="Go to source code">saveConfig</a>( <span>array <var>$m_data</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-Config.html#204-217" title="Go to source code">saveConfig</a>( <span>array <var>$m_data</var></span>, <span>string <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			

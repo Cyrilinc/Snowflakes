@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * 
  * Application configuration file handler used to add, edit and
  * delete configuration elements for Snowflakes API
  * 
@@ -14,19 +15,42 @@ final class Config {
     /**
      * Checks if a configuration file exists
      *
-     * @param string $inifile <p> The configuration file </p>
+     * @param String $inifile <p> The configuration file </p>
      *
-     * @return bool <b>TRUE</b> if user exists or <b>FALSE</b> otherwise.
+     * @return bool <b>TRUE</b> if the config file or directory specified by
+     * <i>filename</i> exists; <b>FALSE</b> otherwise.
      */
     public static function checkConfig($inifile = '../config/config.ini') {
         return file_exists($inifile);
+    }
+    
+    /**
+     * Checks if a configuration file exists and create is according to the 
+     * creat it flag raised.
+     *
+     * @param String $inifile <p> The configuration file </p>
+     * @param bool $createit <p> The flag to indicate if the file should be created
+     * if it doesn't exists or not.</p>
+     *
+     * @return bool <b>TRUE</b> if the config file or directory specified by
+     * <i>filename</i> exists; <b>FALSE</b> otherwise.
+     */
+    public static function createConfig($inifile = '../config/config.ini', $createit = false) {
+        if (!file_exists($inifile)) {
+            if ($createit) {
+                $fp = fopen($inifile, "w");
+                return fclose($fp);
+            }
+            return $createit;
+        }
+        return true;
     }
 
     /**
      * Get a specific section in the configuration file
      * 
-     * @param string $section <p> The tag/element header name of the configuration element to get </p> 
-     * @param string $inifile <p> The configuration file </p>
+     * @param String $section <p> The tag/element header name of the configuration element to get </p> 
+     * @param String $inifile <p> The configuration file </p>
      * 
      * @return array The specific configuration data in form of an array
      */
@@ -50,8 +74,8 @@ final class Config {
     /**
      * Add a section in the configuration file
      * 
-     * @param string $section <p> The tag/element header name of the configuration element to Add </p> 
-     * @param string $inifile <p> The configuration file </p>
+     * @param String $section <p> The tag/element header name of the configuration element to Add </p> 
+     * @param String $inifile <p> The configuration file </p>
      * 
      * @return array The combination of all the configuration data in form of an array
      */
@@ -75,8 +99,8 @@ final class Config {
     /**
      * Deletes a section in the configuration file
      * 
-     * @param string $section <p> The tag/element header name of the configuration element to delete </p> 
-     * @param string $inifile <p> The configuration file </p>
+     * @param String $section <p> The tag/element header name of the configuration element to delete </p> 
+     * @param String $inifile <p> The configuration file </p>
      * 
      * @return array The rest of the configuration data in form of an array
      */
@@ -100,10 +124,10 @@ final class Config {
     /**
      * Adds a new configuration element to the configuration file
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
-     * @param string $tag <p> The tag/element name of the configuration element to set </p>
-     * @param string $section <p> The tag/element header name of the configuration element to set </p> 
-     * @param string $inifile <p> The configuration file </p>
+     * @param String $value <p> The value of  configuration element to set</p> 
+     * @param String $tag <p> The tag/element name of the configuration element to set </p>
+     * @param String $section <p> The tag/element header name of the configuration element to set </p> 
+     * @param String $inifile <p> The configuration file </p>
      * 
      * @return array The configuration data in form of an array
      */
@@ -128,10 +152,10 @@ final class Config {
      * e.g $config[$section][$tag] = $value;. if the section doesn't exists
      * in the configuration file, it is created.
      * 
-     * @param string $value <p> The value of  configuration element to set</p> 
-     * @param string $tag <p> The tag/element name of the configuration element to set </p>
-     * @param string $section <p> The tag/element header name of the configuration element to set </p> 
-     * @param string $inifile <p> The configuration file </p>
+     * @param String $value <p> The value of  configuration element to set</p> 
+     * @param String $tag <p> The tag/element name of the configuration element to set </p>
+     * @param String $section <p> The tag/element header name of the configuration element to set </p> 
+     * @param String $inifile <p> The configuration file </p>
      * 
      * @return array The configuration data in form of an array
      */
@@ -166,13 +190,11 @@ final class Config {
             return false;
         }
 
-        $configString = "\n";
-
         foreach ($m_data as $section => $value) {
             $configString.="[" . $section . "]\n";
 
             foreach ($value as $tag => $val) {
-                $configString.=$tag . '="' . $val . "\"\n";
+                $configString.=$tag . ' = "' . $val . "\"\n";
             }
 
             $configString.="\n";
@@ -185,7 +207,7 @@ final class Config {
      * has to be formatted in a way that is readable {@see arrayToConfig}
      * 
      * @param array $m_data <p> The Array of configration keys and values to store</p> 
-     * @param string $inifile <p> The configuration file </p>
+     * @param String $inifile <p> The configuration file </p>
      * 
      * @return array The configuration data in form of an array
      */
@@ -198,9 +220,10 @@ final class Config {
     /**
      * Get the data from a ini file in form of an array
      * 
-     * @param string $inifile <p> The configuration file </p>
+     * @param String $inifile <p> The configuration file </p>
      * 
-     * @return array The configuration data in form of an array
+     * @return mixed The <b>configuration data </b> in form of an array on success 
+     * or <b>FALSE</b> on failure usually because the file doesn't exists.
      */
     private static function getData($inifile) {
 
