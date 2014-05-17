@@ -1,0 +1,20 @@
+#
+# robots.txt
+#
+# This file is to prevent the crawling and indexing of certain parts
+# of your site by web crawlers and spiders run by sites like Yahoo!
+# and Google. By telling these "robots" where not to go on your site,
+# you save bandwidth and server resources.
+#
+User-agent: *
+Crawl-delay: 10
+# Directories
+Disallow: /config/
+Disallow: /install/
+Disallow: /Uploads/
+Disallow: /SpryAssets/
+Disallow: /Events/
+Disallow: /sse/
+# Files
+Disallow: /Install.mysql.txt
+Disallow: /License.txt
