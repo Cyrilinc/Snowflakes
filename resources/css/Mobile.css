@@ -536,6 +536,12 @@ a.blue[data-bubble]:after {
     color:#fafafa;
 }
 
+.SnowflakeIt img{
+    height: 22px;
+    width: 22px;
+    vertical-align:middle;
+}
+
 .PageWrap table {
     background-color:transparent;
     color: #2b2b2b;

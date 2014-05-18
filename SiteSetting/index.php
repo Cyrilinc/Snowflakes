@@ -118,15 +118,15 @@ if (isset($MainTain) && $MainTain == "True") {
 
     $cleaned = sfImageProcessor::cleanUploadDir($SFconnects, '../config/config.ini');
     if ($cleaned >= 1) {
-        $Message .= sfUtils::sfPromptMessage("Cleaned $cleaned images <br />",'success');
+        $Message .= sfUtils::sfPromptMessage("Cleaned $cleaned images.",'success');
     } else {
-        $Message.=sfUtils::sfPromptMessage("Cleaned $cleaned images <br />",'error');
+        $Message.=sfUtils::sfPromptMessage("Cleaned $cleaned images.",'error');
     }
     $resized = sfImageProcessor::resizeGalleryImages($SFconnects, '../config/config.ini');
     if ($resized >= 1) {
-        $Message .= sfUtils::sfPromptMessage("$resized images re-sized<br />",'success');
+        $Message .= sfUtils::sfPromptMessage("$resized images re-sized.",'success');
     } else {
-        $Message .= sfUtils::sfPromptMessage("$resized images re-sized <br />",'error');
+        $Message .= sfUtils::sfPromptMessage("$resized images re-sized.",'error');
     }
 }
 ?>

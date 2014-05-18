@@ -1767,16 +1767,12 @@ final class sfUtils {
         } else if ($FILTER_VALIDATE == FILTER_VALIDATE_URL) {
             $tagtype = 'url';
         }
-
         $returnsql = '';
         if ($validate) {
-            $returnsql.= '<div style="background-color:green;padding:10px;color:#fff;font-size:16px;">
-            <b>' . filter_input($INPUT, $tag) . '</b> is a valid ' . $tagtype . ' </div>';
+            $returnsql.= sfUtils::sfPromptMessage('<b>' . filter_input($INPUT, $tag) . '</b> is a valid ' . $tagtype.'.' , 'success');
         } else {
-            $returnsql.= '<div style="background-color:red;padding:10px;color:#fff;font-size:16px;">
-            <b>' . filter_input($INPUT, $tag) . '</b> is not a valid ' . $tagtype . ' </div>';
+            $returnsql.= sfUtils::sfPromptMessage('<b>' . filter_input($INPUT, $tag) . '</b> is not a valid ' . $tagtype.'.' , 'failure');
         }
-
         return $returnsql;
     }
 
