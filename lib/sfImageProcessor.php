@@ -228,8 +228,8 @@ class sfGalleryImage {
 
         if (($imageType == "image/gif") || ($imageType == "image/png") || ($imageType == "image/x-png")) {
 
-            //$colourTotal = imagecolorstotal($source);
-            //imagetruecolortopalette($newImage, true, $colourTotal <= 0 ? 255 : $colourTotal);
+            $colourTotal = imagecolorstotal($source);
+            imagetruecolortopalette($newImage, true, $colourTotal <= 0 ? 1 : $colourTotal);
             $currentTransparent = imagecolortransparent($source);
 
             // If we have a specific transparent color
@@ -326,8 +326,8 @@ class sfGalleryImage {
         }
 
         if (($imageType == "image/gif") || ($imageType == "image/png") || ($imageType == "image/x-png")) {
-            //$colourTotal = imagecolorstotal($source);
-            //imagetruecolortopalette($newImage, true, $colourTotal <= 0 ? 1 : $colourTotal);
+            $colourTotal = imagecolorstotal($source);
+            imagetruecolortopalette($newImage, true, $colourTotal <= 0 ? 1 : $colourTotal);
             $currentTransparent = imagecolortransparent($source);
 
             // If we have a specific transparent color
@@ -422,7 +422,7 @@ class sfGalleryImage {
     }
 
     /**
-     * Get the trigger that determines if the image has been uploaded sucessfully
+     * Get the trigger that determines if the image has been uploaded successfully
      *
      * 
      *  @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -432,7 +432,7 @@ class sfGalleryImage {
     }
 
     /**
-     * Get the trigger that determines if the thumbnail image has been uploaded sucessfully
+     * Get the trigger that determines if the thumbnail image has been uploaded successfully
      *
      * 
      *  @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
@@ -513,7 +513,7 @@ class sfGalleryImage {
         $_SESSION['ImageThumbFile'] = $this->m_TargetFileThumbLoc;
         $_SESSION['ImageFiles'][] = $this->m_TargetFileImageLoc;
         $_SESSION['ImageThumbFiles'][] = $this->m_TargetFileThumbLoc;
-        //echo "4 -> I was here in the image Has been saved sucessfully section<br> saved at ".$_SESSION['ImageFile'] ." <br>";//DEBUG
+        //echo "4 -> I was here in the image Has been saved successfully section<br> saved at ".$_SESSION['ImageFile'] ." <br>";//DEBUG
         $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . ' Upload successful...','success');
 
         // now automatically Create a thumbnail file
@@ -580,7 +580,7 @@ class sfImageProcessor {
         //Check if the image field is not empty
         if (!empty($imageFiles)) {
             $TotalFiles = count($imageFiles['name']);
-            $sucessCount = 0;
+            $successCount = 0;
             $failureCount = 0;
 
             for ($i = 0; $i < $TotalFiles; $i++) {
@@ -598,7 +598,7 @@ class sfImageProcessor {
                 //echo  $sfimage->m_Message."<br>";
                 switch ($sfimage->m_errorCode) {
                     case 0:
-                        $sucessCount++;
+                        $successCount++;
                         break;
                     default :
                         $failureCount++;
@@ -607,9 +607,9 @@ class sfImageProcessor {
                 //TODO log this message
                 //$message.= $sfimage->m_Message . "<br>";
             }
-            if ($sucessCount > 0 || $failureCount > 0) {
-                $message.=sfUtils::sfPromptMessage('<strong>[' . $sucessCount . ']</strong> Sucessful.','success');
-                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsucessful'.'error');
+            if ($successCount > 0 || $failureCount > 0) {
+                $message.=sfUtils::sfPromptMessage('<strong>[' . $successCount . ']</strong> Sucessful.','success');
+                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsuccessful'.'error');
             }
         } else {
             $message .= "<p>Please select an image to upload.<p>";
@@ -638,7 +638,7 @@ class sfImageProcessor {
 
         //Check if the image field is not empty
         if (!empty($imageFile)) {
-            $sucessCount = 0;
+            $successCount = 0;
             $failureCount = 0;
 
             $FileName = $imageFile["name"];
@@ -659,7 +659,7 @@ class sfImageProcessor {
             //$message.  $sfimage->m_Message."<br>";
             switch ($sfimage->m_errorCode) {
                 case 0:
-                    $sucessCount++;
+                    $successCount++;
                     break;
                 default :
                     $failureCount++;
@@ -667,9 +667,9 @@ class sfImageProcessor {
             }
             $message.= $sfimage->m_Message;
 
-            $message.=sfUtils::sfPromptMessage('<strong>[' . $sucessCount . ']</strong> Sucessful.','success');
+            $message.=sfUtils::sfPromptMessage('<strong>[' . $successCount . ']</strong> Sucessful.','success');
             if ($failureCount > 0) {
-                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsucessful','error');
+                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsuccessful','error');
             }
         } else {
             $message .= "<p>Please select an image to upload.<p>";
