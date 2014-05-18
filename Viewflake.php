@@ -147,7 +147,7 @@ $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
         <!--[if IEMobile]> 
            <link rel="stylesheet" type="text/css" href="resources/css/Mobile.css"/>
         <![endif]-->
-        
+
         <script type="text/javascript">
             $(document).ready(function() {
                 snowflakesCount("sse/snowflakesCount.php");
@@ -226,8 +226,8 @@ $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
                                         <li><a href="Gallery/OutputView.php" title="View output Gallery" class="green" id="SfGallery_published2" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['published']); ?>"> <img src="resources/images/Icons/Output.png" height="22" width="22" alt="Output" /> View Output</a></li>
                                     </ul>
                                 </li>                                <?php
-if ($user->m_access_level == 5 || $user->m_access_level == 4) {
-    ?>
+                                if ($user->m_access_level == 5 || $user->m_access_level == 4) {
+                                    ?>
                                     <li>
                                         <a href="SiteSetting/index.php" title="Settings"> <img src="resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
                                         <ul>
@@ -363,7 +363,10 @@ if ($user->m_access_level == 5 || $user->m_access_level == 4) {
                             <div class="clear"></div>
                             <div class="PageBreak"></div>
                             <div class="SnowflakeDate"> Date Created |: <?php echo date(" F j, Y", $flakeStruct->m_created); ?>  | By - <?php echo $flakeStruct->m_created_by; ?> </div>
-                            <div class="SnowflakeIt"> flakes <div class="flakeitParam" id="flakecount<?php echo $flakeStruct->m_id; ?>"> <?php echo $flakeStruct->m_flake_it; ?> </div></div>
+                            <div class="SnowflakeIt">  
+                                <img src="resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> 
+                                <span class="flakeitParam" id="flakecount<?php echo $flakeStruct->m_id; ?>"> <?php echo $flakeStruct->m_flake_it; ?> </span>
+                            </div>
                             <div class="SharePost"> </div>
                         </div>
                         <!-- End of Snowflake -->

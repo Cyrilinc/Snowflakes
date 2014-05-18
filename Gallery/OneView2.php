@@ -8,7 +8,7 @@ require_once '../lib/sfImageProcessor.php';
 <?php
 //The upload directory
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
-$datadir=new dataDirParam("../config/config.ini");
+$datadir = new dataDirParam("../config/config.ini");
 $UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory
 $UploadImgDir = $datadir->m_galleryImgDir;
@@ -45,8 +45,9 @@ $SnowflakesUrl = $row_SiteSettings['sf_url'];
 if (isset($row_SiteSettings['gallery_result_url'])) {
     $SFGalleryResultUrl = $row_SiteSettings['gallery_result_url'];
     $url = $otherurl = $SFGalleryResultUrl . "&amp;Galleryid=" . $Galleryid;
-} else
+} else {
     $SFGalleryResultUrl = 'notset';
+}
 
 $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
 ?>
@@ -61,7 +62,7 @@ $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
 
 
     <div style="float: right; background-color:transparent;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="<?php echo $Powerlink; ?>" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
-    <?php if ($Galleryid != Null) { ?>   
+<?php if ($Galleryid != Null) { ?>   
         <!--SnowflakePanel-->
         <div class="SnowflakePanel"> 
             <div style="color:#000; float:left">Share </div> 
@@ -71,7 +72,7 @@ $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
             <a href="http://digg.com/submit?phase=2&url=<? echo "" . $url; ?>&amp;title=<?php echo $galleryStruct->m_title; ?>" title="Digg" target="_blank"> <img src="<?php echo $SnowflakesUrl . 'resources/images/Icons/Digg.png'; ?>" height="22" width="22" alt="Digg" /> </a> 
             <a href="http://stumbleupon.com/submit?url=<? echo "" . $url; ?>&amp;title=<?php echo $galleryStruct->m_title; ?>" title="stumbleupon" target="_blank"> <img src="<?php echo $SnowflakesUrl . 'resources/images/Icons/Stumbleupon.png'; ?>" height="22" width="22" alt="stumbleupon" /> </a> 
             <a href="http://del.icio.us/post?url=<? echo "" . $url; ?>&amp;title=<?php echo $galleryStruct->m_title; ?>" title="delicious" target="_blank"> <img src="<?php echo $SnowflakesUrl . 'resources/images/Icons/delicious.png'; ?>" height="22" width="22" alt="delicious" /> </a> 
-            <a class="flakeit" id="flakeit<?php echo $galleryStruct->m_id; ?>" title="flake it" data-type="gallery"> <span>Flake it</span> <img src="../resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> </a> 
+            <a class="flakeit" id="flakeit<?php echo $galleryStruct->m_id; ?>" title="flake it" data-type="gallery"> <span>Flake it</span> <img src="<?php echo $SnowflakesUrl . 'resources/images/Icons/Snowflakes.png'; ?>" height="22" width="22" alt="flake it" /> </a> 
         </div>
         <!--End of SnowflakePanel-->
 
@@ -121,13 +122,13 @@ $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
 
                     <?php } ?>
 
-                <?php } else { ?> 
+    <?php } else { ?> 
 
                     <!-- Snowflakes -->
                     <li data-pile="Snowflakes :Gallery doesn't exist"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>Gallery doesn't exist</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
                     <li data-pile="Snowflakes :Gallery doesn't exist"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>Gallery doesn't exist</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
                     <li data-pile="Snowflakes :Gallery doesn't exist"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>Gallery doesn't exist</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
-                        <?php } ?>     
+    <?php } ?>     
 
             </ul>
             <!--tp-grid Ends--> 
@@ -137,7 +138,7 @@ $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
 
     <?php } else { ?>
         <h4>No Gallery to view </h4>
-    <?php } ?>
+<?php } ?>
 
 </div>
 <!-- End of PageWrap --> 

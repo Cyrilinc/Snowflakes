@@ -667,6 +667,11 @@ a.blue[data-bubble]:after {
     font-size:13px;
     color:#fafafa;
 }
+.SnowflakeIt img{
+    height: 22px;
+    width: 22px;
+    vertical-align:middle;
+}
 
 .contactform{
     padding-top:5px;

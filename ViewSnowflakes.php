@@ -363,7 +363,9 @@ $imageMissing = $UploadImgUrl . "missing_default.png";
                                 <div class="clear"></div>
                                 <div class="PageBreak"></div>
                                 <div class="SnowflakeDate">Date Created |: <?php echo date(" F j, Y", $flakeStructList[$i]->m_created); ?>  | By - <?php echo $flakeStructList[$i]->m_created_by; ?> </div>
-                                <div class="SnowflakeIt"> flakes <div class="flakeitParam" id="flakecount<?php echo $flakeStructList[$i]->m_id; ?>"> <?php echo $flakeStructList[$i]->m_flake_it; ?> </div></div>
+                                <div class="SnowflakeIt"> 
+                                    <img src="resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> 
+                                    <span class="flakeitParam" id="flakecount<?php echo $flakeStructList[$i]->m_id; ?>"> <?php echo $flakeStructList[$i]->m_flake_it; ?> </span></div>
                                 <div class="SharePost"> </div>
                             </div>
                             <?php

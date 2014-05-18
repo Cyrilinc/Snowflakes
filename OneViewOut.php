@@ -19,7 +19,7 @@ $totalRows_rsOut = $SFconnects->recordCount();
 
 $query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
 $SFconnects->fetch($query_SiteSettings);
-$result= $SFconnects->getResultArray();
+$result = $SFconnects->getResultArray();
 $row_SiteSettings = $result[0];
 ?>
 
@@ -148,7 +148,9 @@ $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
                 <div class="clear"></div>
                 <div class="PageBreak"></div>
                 <div class="SnowflakeDate"> Published |: <?php echo date(" F j, Y", $flakeStruct->m_created); ?>  | By - <?php echo $flakeStruct->m_createdby; ?></div>
-                <div class="SnowflakeIt"> flakes <div class="flakeitParam" id="flakecount<?php echo $flakeStruct->m_id; ?>"> <?php echo $flakeStruct->m_flake_it; ?> </div></div>
+                <div class="SnowflakeIt">
+                    <img src="<?php echo $SnowflakesUrl . "resources/images/Icons/Snowflakes.png"; ?>" height="22" width="22" alt="flake it" /> 
+                    <span class="flakeitParam" id="flakecount<?php echo $flakeStruct->m_id; ?>"> <?php echo $flakeStruct->m_flake_it; ?> </span></div>
                 <div class="SharePost"> </div>
             </div>
         <?php } else { ?> 

@@ -390,7 +390,10 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                                         </div>
                                         <div class="PageBreak"></div>
                                         <div class="SnowflakeDate">Date Created |: <?php echo date(" F j, Y", $row_rsPages[$i]['created']); ?> | By - <?php echo $row_rsPages[$i]['created_by']; ?> </div>
-                                        <div class="SnowflakeIt"> flakes <div class="flakeitParam"> <?php echo $row_rsPages[$i]['flake_it']; ?> </div></div>
+                                        <div class="SnowflakeIt">  
+                                            <img src="resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> 
+                                            <span  class="flakeitParam"> <?php echo $row_rsPages[$i]['flake_it']; ?> </span>
+                                        </div>
                                     </div>
                                     <!-- End of Snowflake -->
                                     <?php
@@ -451,7 +454,10 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                                     </div> <!--SFEvent Ends-->
                                     <div class="clear"></div>
                                     <div class="SnowflakeDate"> Posted |: <?php echo date(" F j, Y", $row_rsCompare[$i]['created']); ?>  | By - <?php echo $row_rsCompare[$i]['created_by']; ?> </div>
-                                    <div class="SnowflakeIt"> flakes <div class="flakeitParam"> <?php echo $row_rsCompare[$i]['flake_it']; ?> </div></div>
+                                    <div class="SnowflakeIt">  
+                                        <img src="resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> 
+                                        <span  class="flakeitParam"> <?php echo $row_rsCompare[$i]['flake_it']; ?> </span>
+                                    </div>
 
                                     <p>&nbsp;</p>
                                     <?php
@@ -533,8 +539,10 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                                     <!--SummaryWrapper Ends-->
                                     <div class="PageBreak"></div>
                                     <div class="SnowflakeDate">Date Created |: <?php echo date(" F j, Y", $row_rsSFGallery[0]['created']); ?> | By - <?php echo $row_rsSFGallery[0]['created_by']; ?> </div>
-                                    <div class="SnowflakeIt"> flakes <div class="flakeitParam"> <?php echo $row_rsSFGallery[0]['flake_it']; ?> </div></div>
-
+                                    <div class="SnowflakeIt">  
+                                        <img src="resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> 
+                                        <span class="flakeitParam"> <?php echo $row_rsSFGallery[0]['flake_it']; ?> </span>
+                                    </div>
                                     <?php
                                     $i++;
                                 } while ($i < count($row_rsSFGallery));

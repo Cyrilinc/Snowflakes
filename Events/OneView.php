@@ -196,7 +196,10 @@ $Powerlink = "../resources/images/Snowflakes2.png";
                                     <div id="map-canvas2"></div>
                                     <div class="clear PageBreak"></div>
                                     <div class="SnowflakeDate"> Date Created |: <?php echo date(" F j, Y", $eventStruct->m_created); ?>  | By - <?php echo $eventStruct->m_created_by; ?> </div>
-                                    <div class="SnowflakeIt"> flakes <div class="flakeitParam" id="flakecount<?php echo $eventStruct->m_id; ?>"> <?php echo $eventStruct->m_flake_it; ?> </div></div>
+                                    <div class="SnowflakeIt">
+                                        <img src="../resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> 
+                                        <span class="flakeitParam" id="flakecount<?php echo $eventStruct->m_id; ?>"> <?php echo $eventStruct->m_flake_it; ?> </span>
+                                    </div>
 
                                 <?php } else { ?> 
 

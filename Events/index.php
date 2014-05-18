@@ -173,7 +173,7 @@ $queryString_EventsRs = sprintf("&totalRows_EventsRs=%d%s", $totalRows_EventsRs,
                 snowflakesCount("../sse/snowflakesCount.php");
             });
         </script>
-        
+
         <!-- InstanceEndEditable -->
     </head>
     <body> 
@@ -339,7 +339,10 @@ $queryString_EventsRs = sprintf("&totalRows_EventsRs=%d%s", $totalRows_EventsRs,
                                 <!--SFEvent Ends--> 
                                 <div class="clear"></div>
                                 <div class="SnowflakeDate"> Posted |: <?php echo date(" F j, Y", $eventStructList[$i]->m_created); ?>  | By - <?php echo $eventStructList[$i]->m_created_by; ?> </div>
-                                <div class="SnowflakeIt"> flakes <div class="flakeitParam" id="flakecount<?php echo $eventStructList[$i]->m_id; ?>"> <?php echo $eventStructList[$i]->m_flake_it; ?> </div></div>
+                                <div class="SnowflakeIt">  
+                                    <img src="../resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> 
+                                    <span  class="flakeitParam" id="flakecount<?php echo $eventStructList[$i]->m_id; ?>"> <?php echo $eventStructList[$i]->m_flake_it; ?> </span>
+                                </div>
                             </div>
                             <!--eventWrapper Ends-->
                             <?php
