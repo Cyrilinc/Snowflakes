@@ -41,7 +41,6 @@ final class Config {
                 $fp = fopen($inifile, "w");
                 return fclose($fp);
             }
-            return $createit;
         }
         return true;
     }

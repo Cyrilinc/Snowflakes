@@ -7,6 +7,10 @@
  * Date: Thu, Dec 19 2013 22:56:31 
  */
 
+include_once '../lib/sf.php';
+include_once '../lib/sfConnect.php';
+include_once '../config/Config.php';
+include_once '../lib/sfSetup.php';
 //start the session
 session_start();
 //set the return URL
@@ -34,10 +38,6 @@ if ((isset($MM_setup)) && ($MM_setup == "setupform")) {
     $somem_Message = $somem_Message . "Admin Email: " . $Admin_Email . "<br>";
     $somem_Message = $somem_Message . "Admin Password: " . $Admin_Password . " <br>";
 
-    include_once '../lib/sf.php';
-    include_once '../lib/sfConnect.php';
-    include_once '../config/Config.php';
-    include_once '../lib/sfSetup.php';
     $url = sfUtils::curPageURL();
     $m_sfUrl = str_replace("install/sfInstall.php", "", $url);
     $somem_Message = $somem_Message . "Snowflakes Base: " . $m_sfUrl . " <br></p>";
@@ -62,9 +62,6 @@ $dbName = filter_input(INPUT_POST, "dbName");
 $oldUpdloadDir = filter_input(INPUT_POST, "oldUpdloadDir");
 $Username = filter_input(INPUT_POST, "username");
 if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName))) {
-    require_once '../lib/sf.php';
-    require_once '../lib/sfConnect.php';
-    require_once '../config/Config.php';
 
     $getspace = str_replace(" ", "_", $dbName);
     $Database_Name = trim($getspace);
@@ -77,9 +74,9 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
     $somem_Message = $migrateMessage;
 
     if (!sfUtils::migrateUpdir($oldUpdloadDir, '../config/config.ini')) {
-        $somem_Message.=sfUtils::sfPromptMessage('Snowflakes Could not Copy/Migrate old snowflakes data from' . $oldUpdloadDir . '.<br /> Please check that the directory exists.','error');
+        $somem_Message.=sfUtils::sfPromptMessage('Snowflakes Could not Copy/Migrate old snowflakes data from' . $oldUpdloadDir . '.<br /> Please check that the directory exists.', 'error');
     } else {
-        $somem_Message.=sfUtils::sfPromptMessage('Snowflakes Copied/Migrated old snowflakes data from' . $oldUpdloadDir . '.','success');
+        $somem_Message.=sfUtils::sfPromptMessage('Snowflakes Copied/Migrated old snowflakes data from' . $oldUpdloadDir . '.', 'success');
     }
 }
 ?>
@@ -91,12 +88,12 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
         <meta name="viewport" content="width=device-width, maximum-scale = 1, minimum-scale=1" />
         <!-- InstanceBeginEditable name="doctitle" -->
         <title><?php
-if (!$migrated || $migrated == false) {
-    echo 'Migrate old Snowflakes';
-} else {
-    echo "Snowflakes Setup Results";
-}
-?></title>
+            if (!$migrated || $migrated == false) {
+                echo 'Migrate old Snowflakes';
+            } else {
+                echo "Snowflakes Setup Results";
+            }
+            ?></title>
         <!-- InstanceEndEditable -->
         <link rel="icon" href="../resources/images/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" href="../resources/images/favicon.ico">
@@ -211,12 +208,12 @@ if (!$migrated || $migrated == false) {
             <!-- Content -->
             <div class="Content"> <!-- InstanceBeginEditable name="BodyRegion" -->
                 <h1><?php
-            if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful")) {
-                echo 'Migrate old Snowflakes';
-            } else {
-                echo "Snowflakes Set up Results";
-            }
-?></h1>
+                    if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful")) {
+                        echo 'Migrate old Snowflakes';
+                    } else {
+                        echo "Snowflakes Set up Results";
+                    }
+                    ?></h1>
 
                 <!-- Break -->
                 <div class="clear"></div>
@@ -225,11 +222,11 @@ if (!$migrated || $migrated == false) {
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
-<?php
-echo '<div id="dialog" title="View snowflakes configuration">' . $somem_Message . '</div>'
- . '<div class="NewButton" id="setupOpener">View Config</div>';
-if (isset($obj->m_Message) || isset($obj->m_outcomeMessage)) {
-    ?>
+                    <?php
+                    echo '<div id="dialog" title="View snowflakes configuration">' . $somem_Message . '</div>'
+                    . '<div class="NewButton" id="setupOpener">View Config</div>';
+                    if (isset($obj->m_Message) || isset($obj->m_outcomeMessage)) {
+                        ?>
                         <div id="setupdialog" title="Setup Log"> <?php echo $obj->m_Message . "<br/><br/>"; ?></div>
                         <div class="NewButton" id="setupLogOpener">Setup Log</div>
                         <?php
@@ -261,11 +258,11 @@ if (isset($obj->m_Message) || isset($obj->m_outcomeMessage)) {
                                 <input name="oldUpdloadDir" type="text" class="inputtext2" value="" placeholder="Upload directory for old snowflakes e.g ../../SnowflakesV1/Uploads/" />
                             </span><br />
                             <input class="NewButton" type="submit" name="submitButton" value="Migrate" />
-                            <input type="hidden" name="username" value="<?php echo $Admin_Username;?>" />
+                            <input type="hidden" name="username" value="<?php echo $Admin_Username; ?>" />
                             <input type="hidden" name="MM_migrate" value="migrateform" />
 
                         </form>
-<?php } ?>
+                    <?php } ?>
                     <!-- Break -->
                     <div class="clear"></div>
                     <div class="Break"></div>

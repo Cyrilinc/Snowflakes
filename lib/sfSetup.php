@@ -247,7 +247,7 @@ class snowflakesSetUp {
             return false;
         }
 
-        $this->m_Message .=sfUtils::sfPromptMessage('Change log table named "' . $this->m_sfTable . '" has been created.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('Change log table named "' . $this->m_changeLogTable . '" has been created.','success');
 
         return true;
     }

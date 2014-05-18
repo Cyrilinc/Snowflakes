@@ -3657,11 +3657,10 @@ class settingsStruct {
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
     public function init($inifile = '../config/config.ini') {
+        // create ini file if it doesn't exists
+        Config::createConfig($inifile, true);
+        
         $m_data = Config::getConfig(null, $inifile);
-
-        if ($m_data === false) {
-            return Config::createConfig($inifile, true);
-        }
         $this->m_settingsarray = array();
         return $this->populate($m_data);
     }
