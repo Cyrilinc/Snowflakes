@@ -56,6 +56,7 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
 <?php
 //The Default image
 $targetFile = "default.png";
+$formmessage="";
 if (empty($_FILES["uploadImage"]["name"])) {
     $File_is_Uploaded = True;
 } else {
@@ -72,7 +73,6 @@ $loginFoundUser = 0;
 $MM_insert_flag = filter_input(INPUT_POST, $MM_flag);
 $postUsername = filter_input(INPUT_POST, 'username');
 $viewLink = "#";
-$formmessage="";
 if (isset($MM_insert_flag)) {
     $loginUsername = $postUsername;
     $loginFoundUser = sfUtils::userExits($SFconnects, $loginUsername);
@@ -92,7 +92,7 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && $loginFoundUser <= 0 && ($
     $userStruct->init($postUsername, $_POST['password2'], $_POST['email'], $_POST['access_level'], $targetFile);
 
     if (!$userStruct->AddUser($SFconnects)) {
-        $formmessage.= "Could not insert the new User. <br>" . $SFconnects->getMessage() . '<br>';
+        $formmessage.=  sfUtils::sfPromptMessage("Could not insert the new User. <br>" . $SFconnects->getMessage() . '<br>','error');
     } else {
 
         $newUserID = $userStruct->getUserID($SFconnects);
@@ -101,10 +101,7 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && $loginFoundUser <= 0 && ($
         // Check Trigger exist , if not then use manual trigger
         sfUtils::checkTrigger($SFconnects, $newUserID, 'user', "INSERT");
 
-        $formmessage.='<p>'
-                . '<a href="' . $viewLink . '" title="view it">"' . $userStruct->m_username . '"</a> was added successfully. '
-                . '<span class="icon success"></span>'
-                . '</p>';
+        $formmessage.=sfUtils::sfPromptMessage('<a href="' . $viewLink . '" title="view it">"' . $userStruct->m_username . '"</a> was added successfully. ','success');
     }
 }
 
@@ -281,7 +278,8 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                     <?php
                     //if there is a row in the database, the username was found - can not add the requested username
                     if ($loginFoundUser >= 1) {
-                        echo sfUtils::dialogMessage("Add User", '<span class="icon error"></span> The username "<a href="'.$viewLink.'">' . $postUsername . '</a>" already exists ');
+                        $msg= sfUtils::sfPromptMessage('The username "<a href="'.$viewLink.'">' . $postUsername . '</a>" already exists','error');
+                        echo sfUtils::dialogMessage("Add User",$msg);
                     }
 
                     if (!empty($formmessage)) {

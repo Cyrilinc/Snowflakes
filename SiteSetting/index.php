@@ -93,7 +93,7 @@ if ((isset($MM_update)) && ($MM_update == "form1")) {
         $settingsStruct->setConfigItems('../config/config.ini');
 
         if (!sfUtils::settimezone($config->m_time_zone)) {
-            $loginMessage.='<p>Snowflakes could not set the site timezone.<span class="icon error"></span> </p>';
+            $loginMessage.=sfUtils::sfPromptMessage('Snowflakes could not set the site timezone.','error');
         }
     }
 }
@@ -118,15 +118,15 @@ if (isset($MainTain) && $MainTain == "True") {
 
     $cleaned = sfImageProcessor::cleanUploadDir($SFconnects, '../config/config.ini');
     if ($cleaned >= 1) {
-        $Message .= "Cleaned $cleaned images " . '<span class="icon success"></span><br />';
+        $Message .= sfUtils::sfPromptMessage("Cleaned $cleaned images <br />",'success');
     } else {
-        $Message .= "Cleaned $cleaned images " . '<span class="icon error"></span><br />';
+        $Message.=sfUtils::sfPromptMessage("Cleaned $cleaned images <br />",'error');
     }
     $resized = sfImageProcessor::resizeGalleryImages($SFconnects, '../config/config.ini');
     if ($resized >= 1) {
-        $Message .= "$resized images re-sized" . '<span class="icon success"></span><br />';
+        $Message .= sfUtils::sfPromptMessage("$resized images re-sized<br />",'success');
     } else {
-        $Message .= "$resized images re-sized " . '<span class="icon error"></span><br />';
+        $Message .= sfUtils::sfPromptMessage("$resized images re-sized <br />",'error');
     }
 }
 ?>

@@ -99,10 +99,8 @@ if ((isset($MM_update)) && ($MM_update == "form1") && ($File_is_Uploaded == TRUE
         // Check Trigger exist , if not then use manual trigger
         sfUtils::checkTrigger($SFconnects, $editedUserID, 'user', "UPDATE");
 
-        $formmessage.='<p>'
-                . '<a href="' . $viewLink . '" title="view it">"' . $userStruct->m_username . '"</a> was edited successfully. '
-                . '<span class="icon success"></span>'
-                . '</p>';
+        $formmessage.=sfUtils::sfPromptMessage('<a href="' . $viewLink . '" title="view it">"' . $userStruct->m_username . '"</a> was edited successfully.','success');
+                
     }
 }
 

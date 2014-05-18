@@ -77,9 +77,9 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
     $somem_Message = $migrateMessage;
 
     if (!sfUtils::migrateUpdir($oldUpdloadDir, '../config/config.ini')) {
-        $somem_Message.='Snowflakes Could not Copy/Migrate old snowflakes data from' . $oldUpdloadDir . '.<br /> Please check that the directory exists <span class="icon error"></span><br />';
+        $somem_Message.=sfUtils::sfPromptMessage('Snowflakes Could not Copy/Migrate old snowflakes data from' . $oldUpdloadDir . '.<br /> Please check that the directory exists.','error');
     } else {
-        $somem_Message.='Snowflakes Copied/Migrated old snowflakes data from' . $oldUpdloadDir . '. <span class="icon success"></span><br />';
+        $somem_Message.=sfUtils::sfPromptMessage('Snowflakes Copied/Migrated old snowflakes data from' . $oldUpdloadDir . '.','success');
     }
 }
 ?>

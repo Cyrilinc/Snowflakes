@@ -2728,6 +2728,31 @@ final class sfUtils {
                  <!-- End dialog-message -->';
         return $str;
     }
+    
+    /**
+     * Display message with error,warning or success icons  
+     *
+     * @param String $message The prompt message to display
+     * @param String $icon The icon message to be displayed usually success,error and warning
+     *
+     * @return mixed <b>The html prompt format</b> on success or <b>FALSE</b> on failure.
+     */
+    public static function sfPromptMessage($message,$icon) {
+
+        if (!strlen($message) || !strlen($icon)) {
+            return false;
+        }
+
+        $str = 
+        '<!-- sfPromptmessage Starts-->
+        <div class="sfPromptmessage">    
+            <div class="propmtIcon"><span class="icon '.$icon.'"></span></div>
+            <div class="promptmessage"><p>'.$message.'</p></div>
+            <div style="clear:both;"></div> 
+        </div>
+        <!-- End sfPromptmessage -->';
+        return $str;
+    }
 
     /**
      * get the string equivalent of published status
@@ -2769,7 +2794,7 @@ final class sfUtils {
                 FROM ' . $dbname . '.AdminUsers a;';
 
         if (!$conn->execute($sql)) {
-            $output.="Could Not migrate users from $dbname.AdminUsers <span class=\"icon error\"></span><br /> " . $conn->getMessage() . "<br/>";
+            $output.=self::sfPromptMessage("Could Not migrate users from $dbname.AdminUsers <br /> " . $conn->getMessage() . "<br/>",'error');
             return false;
         }
 
@@ -2781,7 +2806,7 @@ final class sfUtils {
 
 
         if (!$conn->execute($sql)) {
-            $output.="Could Not migrate Snowflakes from $dbname.SnowFlakeTable <span class=\"icon error\"></span><br /> " . $conn->getMessage() . "<br/>";
+            $output.=self::sfPromptMessage("Could Not migrate Snowflakes from $dbname.SnowFlakeTable<br /> " . $conn->getMessage() . "<br/>",'error');
             return false;
         }
 
@@ -2794,7 +2819,7 @@ final class sfUtils {
             FROM ' . $dbname . '.SF_EventsTable c;';
 
         if (!$conn->execute($sql)) {
-            $output.="Could Not migrate Snowflakes Events from $dbname.SF_EventsTable <span class=\"icon error\"></span><br /> " . $conn->getMessage() . "<br/>";
+            $output.=self::sfPromptMessage("Could Not migrate Snowflakes Events from $dbname.SF_EventsTable<br /> " . $conn->getMessage() . "<br/>",'error');
             return false;
         }
 
@@ -2805,7 +2830,7 @@ final class sfUtils {
             FROM ' . $dbname . '.SF_GalleryTable d;';
 
         if (!$conn->execute($sql)) {
-            $output.="Could Not migrate Snowflakes Gallery from $dbname.SF_GalleryTable <span class=\"icon error\"></span><br /> " . $conn->getMessage() . "<br/>";
+            $output.=self::sfPromptMessage("Could Not migrate Snowflakes Gallery from $dbname.SF_GalleryTable<br /> " . $conn->getMessage() . "<br/>",'error');
             return false;
         }
 
@@ -2816,7 +2841,7 @@ final class sfUtils {
             FROM ' . $dbname . '.SF_SnowflakesSettings e;';
 
         if (!$conn->execute($sql)) {
-            $output.="Could Not migrate Snowflakes settings from $dbname.SF_SnowflakesSettings <span class=\"icon error\"></span><br /> " . $conn->getMessage() . "<br/>";
+            $output.=self::sfPromptMessage("Could Not migrate Snowflakes settings from $dbname.SF_SnowflakesSettings <br /> " . $conn->getMessage() . "<br/>",'error');
             return false;
         }
         $sql = 'SELECT e.SnowflakesUrl,e.SnowflakesResultUrl,e.SFOutUrl,e.SFEventsResultUrl,e.SFEventsOutputUrl,e.SFGalleryResultUrl,e.SFGalleryOutUrl,e.UploadGalleryDir

@@ -7,15 +7,14 @@ $loginMessage = "";
 
 $config = new databaseParam('config/config.ini');
 if (!$config) {
-    $loginMessage.= "<p>Snowflakes could not find the Configuration file. <br/>make sure your snowflakes is setup correctly. </p>";
-    $loginMessage.='<span class="icon error"></span><br/>';
+    $loginMessage.= sfUtils::sfPromptMessage("Snowflakes could not find the Configuration file. make sure your snowflakes is setup correctly.",'error');
     $setupLink = "install/index.php";
 }
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 if (!sfUtils::settimezone($config->m_time_zone)) {
-    $loginMessage.='<p>Snowflakes could not set the site timezone.<span class="icon error"></span> </p>';
+    $loginMessage.=sfUtils::sfPromptMessage('Snowflakes could not set the site timezone.','error');
 }
 ?>
 <?php
@@ -59,8 +58,7 @@ if (isset($post_username)) {
 
         header("Location: " . $MM_redirectLoginSuccess);
     } else {
-        $loginMessage.= "Login was unsuccessful! check that your Username and password is correct. ";
-        $loginMessage.='<span class="icon error"></span><br/>' . $SFconnects->getMessage() . '<br/>';
+        $loginMessage.= sfUtils::sfPromptMessage("Login was unsuccessful! check that your Username and password is correct. <br/>" . $SFconnects->getMessage() . '<br/>','error');
     }
 }
 ?>

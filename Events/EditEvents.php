@@ -106,10 +106,7 @@ if ((isset($MM_update)) && ($MM_update == "editform") && ($File_is_Uploaded == T
         $viewLink = "ViewEvent.php?Eventid=$eventID";
         // Check Trigger exist , if not then use manual trigger
         sfUtils::checkTrigger($SFconnects, $eventID, 'event', "UPDATE");
-        $formmessage.='<p>'
-                . '<a href="' . $viewLink . '" title="view it">"' . $eventStruct->m_title . '"</a> was editted successfully. '
-                . '<span class="icon success"></span>'
-                . '</p>';
+        $formmessage.=sfUtils::sfPromptMessage('<a href="' . $viewLink . '" title="view it">"' . $eventStruct->m_title . '"</a> was editted successfully.','success');
     }
 }
 

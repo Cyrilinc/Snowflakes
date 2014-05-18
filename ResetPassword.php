@@ -28,12 +28,9 @@ if (isset($Post_password)) {
 
     $passwordReset = sfUtils::resetPassword($SFconnects, $password, $oldResetLink);
     if ($passwordReset) {
-        $resetMessage.= "Your password has been reset Successfully!";
-        $resetMessage.='<span class="icon success"></span>';
+        $resetMessage.=sfUtils::sfPromptMessage("Your password has been reset Successfully!",'success');
     } else {
-        $resetMessage.= "Your password could not reset properly!";
-        $resetMessage.='<span class="icon error"></span><br/>'
-                . $SFconnects->getMessage() . '<br/>';
+        $resetMessage.=sfUtils::sfPromptMessage("Your password could not reset properly!<br/>".$SFconnects->getMessage() . "<br/>",'error');
     }
 }
 ?>

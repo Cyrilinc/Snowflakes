@@ -111,10 +111,7 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
         $viewLink = "Viewflake.php?pageid=$snowflakeID";
         // Check Trigger exist , if not then use manual trigger
         sfUtils::checkTrigger($SFconnects, $snowflakeID, 'snowflake', "INSERT");
-        $formmessage.='<p>'
-                . '<a href="' . $viewLink . '" title="view it">"' . $snowflakeStruct->m_title . '"</a> was added successfully. '
-                . '<span class="icon success"></span>'
-                . '</p>';
+        $formmessage.=sfUtils::sfPromptMessage('<a href="' . $viewLink . '" title="view it">"' . $snowflakeStruct->m_title . '"</a> was added successfully. ', 'success');
     }
 }
 ?>
@@ -149,7 +146,7 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
         <link href="SpryAssets/SpryValidationTextarea.css" rel="stylesheet" type="text/css" />
         <link href="resources/css/jquery-ui-1.10.4.snowflakes.css" rel="stylesheet" type="text/css" />
         <script src="resources/Js/jquery-ui-1.10.4.snowflakes.js"></script>
-        
+
         <script type="text/javascript">
             $(function() {
                 $(".dialog-message").dialog({
@@ -380,13 +377,13 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                             <br/>
                             <input class="NewButton" type="submit" value="Add New Flake" onClick="transferEditorData('form1');" />
                             <input type="hidden" name="image_name" value="<?php
-                            if (empty($targetFile)) {
-                                $targetFile = "default.png";
-                                echo $targetFile;
-                            } else {
-                                echo $targetFile;
-                            }
-                            ?>" />
+                                if (empty($targetFile)) {
+                                    $targetFile = "default.png";
+                                    echo $targetFile;
+                                } else {
+                                    echo $targetFile;
+                                }
+                                ?>" />
                             <input type="hidden" name="created" value="<?php echo time(); ?>" />
                             <input type="hidden" name="edited" value="<?php echo time(); ?>" />
                             <input type="hidden" name="created_by" value="<?php echo $_SESSION['MM_Username']; ?>" />

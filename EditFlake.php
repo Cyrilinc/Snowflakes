@@ -102,10 +102,8 @@ if ((isset($MM_update)) && ($MM_update == "editform") && ($File_is_Uploaded == T
         // Check Trigger exist , if not then use manual trigger
         sfUtils::checkTrigger($SFconnects, $post_Id, 'snowflake', "UPDATE");
         $viewLink = "Viewflake.php?pageid=$post_Id";
-        $formmessage.='<p>'
-                . '<a href="' . $viewLink . '" title="view it">"' . $snowflakeStruct->m_title . '"</a> was editted successfully. '
-                . '<span class="icon success"></span>'
-                . '</p>';
+        $formmessage.=sfUtils::sfPromptMessage('<a href="' . $viewLink . '" title="view it">"' . $snowflakeStruct->m_title . '"</a> was editted successfully.', 'success');
+                
     }
 }
 

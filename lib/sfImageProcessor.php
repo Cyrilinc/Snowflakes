@@ -451,30 +451,26 @@ class sfGalleryImage {
         $fileSizeString = sfUtils::formatSizeUnits($this->m_MaxSize);
         // Check if the file size is greater that the Maximum file size
         if ($this->m_FileSize > $this->m_MaxSize) {
-            $this->m_Message .= "<p>" . $this->m_FileName . " is larger than the required " . $fileSizeString . " . Image must be ";
-            $this->m_Message .= $fileSizeString . "  or less than " . $fileSizeString . ' in size. <span class="icon error"></span><p>';
+            $this->m_Message .= sfUtils::sfPromptMessage( $this->m_FileName . " is larger than the required " . $fileSizeString . " . Image must be ".
+            $fileSizeString . "  or less than " . $fileSizeString . ' in size.','error');
             $this->m_errorCode = 1;
             return false;
         }
 
-        $this->m_Message .= '<p> ' . $this->m_FileName . ' Size ' . sfUtils::formatSizeUnits($this->m_FileSize);
-        $this->m_Message .= ' is Okay <span class="icon success"></span> </p>';
+        $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . ' Size ' . sfUtils::formatSizeUnits($this->m_FileSize).' is Okay.','success');
 
         if (!in_array($this->m_FileType, $this->m_ImageTypesList) && !in_array($this->m_FileExtension, $this->m_ImageExtList)) {
-            $this->m_Message .= "<p>Invalid file. Only <strong>" . implode(",", $this->m_ImageExtList);
-            $this->m_Message .='</strong> images accepted for upload. <span class="icon error"></span></p>';
+            $this->m_Message .= sfUtils::sfPromptMessage("Invalid file. Only <strong>" . implode(",", $this->m_ImageExtList).'</strong> images accepted for upload.','error');
             $this->m_errorCode = 2;
             return false;
         }
         // Check for the Image type and its extension
-        $this->m_Message .= "<p> " . $this->m_FileName . " Type " . $this->m_FileExtension;
-        $this->m_Message .= ' is Okay <span class="icon success"></span> </p>';
+        $this->m_Message .= sfUtils::sfPromptMessage( $this->m_FileName . " Type " . $this->m_FileExtension.' is Okay.','success');
 
         //echo "1 -> I was here in the make image section<br>";//DEBUG
         // Check if the image Exists
         if (file_exists($this->m_UploadImgDir . $this->m_FileName)) {
-            $this->m_Message .= " <p>" . $this->m_FileName;
-            $this->m_Message .= ' File already exists. <span class="icon error"></span></p>';
+            $this->m_Message .=sfUtils::sfPromptMessage(  $this->m_FileName.' File already exists. ','error');
             //echo "2 -> I was here in the image Exits Section<br>";//DEBUG
             $this->m_errorCode = 3;
             return false;
@@ -486,8 +482,7 @@ class sfGalleryImage {
         // Move the original image from the temporary directory to the our default image Directory
         $isMoved = move_uploaded_file($this->m_FileTmpName, $this->m_TargetFileImageLoc);
         if (!$isMoved) {
-            $this->m_Message .= " <p>" . $this->m_FileName;
-            $this->m_Message .= ' File Could not be moved. <span class="icon error"></span></p>';
+            $this->m_Message .= sfUtils::sfPromptMessage( $this->m_FileName. ' File Could not be moved.','error');
             //echo "2 -> I was here in the image Exits Section<br>";//DEBUG
             $this->m_errorCode = 4;
             return false;
@@ -499,7 +494,7 @@ class sfGalleryImage {
         // because gallery images always have a thumb version
         if (!$this->m_thumbHeight && !$this->m_thumbHeight) {
             $this->m_File_is_Uploaded = True;
-            $this->m_Message .= "<p>" . $this->m_FileName . ' Upload successful.. <span class="icon success"></span> </p>';
+            $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . ' Upload successful...','success');
             return true;
         }
 
@@ -519,7 +514,7 @@ class sfGalleryImage {
         $_SESSION['ImageFiles'][] = $this->m_TargetFileImageLoc;
         $_SESSION['ImageThumbFiles'][] = $this->m_TargetFileThumbLoc;
         //echo "4 -> I was here in the image Has been saved sucessfully section<br> saved at ".$_SESSION['ImageFile'] ." <br>";//DEBUG
-        $this->m_Message .= "<p>" . $this->m_FileName . ' Upload successful.. <span class="icon success"></span> </p>';
+        $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . ' Upload successful...','success');
 
         // now automatically Create a thumbnail file
         //Get the new coordinates to crop the image.
@@ -613,8 +608,8 @@ class sfImageProcessor {
                 //$message.= $sfimage->m_Message . "<br>";
             }
             if ($sucessCount > 0 || $failureCount > 0) {
-                $message.='<p><strong>[' . $sucessCount . ']</strong> Sucessful <span class="icon success"></span> ';
-                $message.='<strong>[' . $failureCount . ']</strong> Unsucessful <span class="icon error"></span><p>';
+                $message.=sfUtils::sfPromptMessage('<strong>[' . $sucessCount . ']</strong> Sucessful.','success');
+                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsucessful'.'error');
             }
         } else {
             $message .= "<p>Please select an image to upload.<p>";
@@ -672,11 +667,10 @@ class sfImageProcessor {
             }
             $message.= $sfimage->m_Message;
 
-            $message.='<p><strong>[' . $sucessCount . ']</strong> Sucessful <span class="icon success"></span> ';
+            $message.=sfUtils::sfPromptMessage('<strong>[' . $sucessCount . ']</strong> Sucessful.','success');
             if ($failureCount > 0) {
-                $message.='<strong>[' . $failureCount . ']</strong> Unsucessful <span class="icon error"></span>';
+                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsucessful','error');
             }
-            $message.='</p>';
         } else {
             $message .= "<p>Please select an image to upload.<p>";
             return false;

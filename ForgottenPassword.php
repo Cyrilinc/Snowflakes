@@ -29,18 +29,18 @@ if ((isset($MM_forget)) && ($MM_forget == "form1")) {
     $settingsConfig = Config::getConfig("settings", 'config/config.ini');
     $errMsg = "";
     $resetPass = sfUtils::forgottenPassword($SFconnects, $MM_email, $config->m_admin_email, $settingsConfig['m_sfUrl'], $errMsg);
-
+    
     if ($resetPass) {
-        $forgottenMsg = 'An email has been sent to ' . $MM_email . ', to reset your password click the link provided in the email.';
-        $forgottenMsg.='<span class="icon success"></span>';
+        $msg= 'An email has been sent to ' . $MM_email . ', to reset your password click the link provided in the email.';
+        $forgottenMsg = sfUtils::sfPromptMessage($msg,'success');
     } else {
+        $getMsg="";
         if (strlen($errMsg) >= 1) {
-            $forgottenMsg = $errMsg;
+            $getMsg = $errMsg;
         } else {
-            $forgottenMsg = 'Could not send your password reset link to ' . $MM_email . ". ";
+            $getMsg = 'Could not send your password reset link to ' . $MM_email . ". ";
         }
-
-        $forgottenMsg.='Please retry with a valid email <span class="icon error"></span>';
+        $forgottenMsg.=sfUtils::sfPromptMessage($getMsg.'Please retry with a valid email','error');
     }
 }
 ?>
@@ -176,9 +176,11 @@ if ((isset($MM_forget)) && ($MM_forget == "form1")) {
                             <span id="spryAdminEmail">
                                 <span class="textfieldRequiredMsg"><br />Your account email is required.<br /></span>
                                 <span class="textfieldInvalidFormatMsg"><br />Invalid email format.<br /></span>
-                                <input class="inputtext2" type="text" name="email" value="<?php if (isset($email)) {
-                                echo $email;
-                            } ?>" placeholder="Enter Your Email Address" />
+                                <input class="inputtext2" type="text" name="email" value="<?php
+                                if (isset($email)) {
+                                    echo $email;
+                                }
+                                ?>" placeholder="Enter Your Email Address" />
                             </span><br />
 
                             <input class="NewButton" id="button" type="submit" value="Reset Password" />

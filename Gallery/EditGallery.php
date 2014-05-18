@@ -143,10 +143,7 @@ if ((isset($MM_update)) && ($MM_update == "EditGallery")) {
         $EditLink = "EditGallery.php?Eventid=$GalleryID";
         // Check Trigger exist , if not then use manual trigger
         sfUtils::checkTrigger($SFconnects, $GalleryID, 'gallery', "UPDATE");
-        $GalleryMessage.='<p>'
-                . '<a href="' . $viewLink . '" title="view it">"' . $galleryStruct->m_title . '"</a> was editted successfully. '
-                . '<span class="icon success"></span>'
-                . '</p>';
+        $GalleryMessage.=sfUtils::sfPromptMessage('<a href="' . $viewLink . '" title="view it">"' . $galleryStruct->m_title . '"</a> was editted successfully.','success');
     }
 }
 
