@@ -131,7 +131,7 @@ class snowflakesSetUp {
 
         $conn = new sfConnect($sqlArray);
 
-        if (!$conn->connect()) {// Connect to database if it fails return false
+        if ($conn->connect()===false) {// Connect to database if it fails return false
             $this->m_Message .=sfUtils::sfPromptMessage("Database Connection Unsuccessful. Could not connect." . $conn->getMessage() . '.','error');
             return false;
         }

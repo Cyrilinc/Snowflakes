@@ -14,13 +14,13 @@ class sfConnect {
     public $m_sfStmt;
 
     /**
-    * The constructor of the  database connection {@link sfConnect}, 
-    * its stores all the attributes needed connect to a database and sets the attribute
-    * using the array parameter key as the attrbute key and its value as the value of the attribute
-    *
-    * @param array $attributes that contains all the data needed to connect to the database.
-    * 
-    */
+     * The constructor of the  database connection {@link sfConnect}, 
+     * its stores all the attributes needed connect to a database and sets the attribute
+     * using the array parameter key as the attrbute key and its value as the value of the attribute
+     *
+     * @param array $attributes that contains all the data needed to connect to the database.
+     * 
+     */
     function sfConnect($attributes = array()) {
         if (count($attributes) >= 1) {
             foreach ($attributes as $key => $value) {
@@ -37,13 +37,12 @@ class sfConnect {
     }
 
     /**
-    * Get an attribute's value 
-    *
-    * @param String $attribute the attribute to get.
-    * 
-    * @return String the value of the attribute 
-    */
-
+     * Get an attribute's value 
+     *
+     * @param String $attribute the attribute to get.
+     * 
+     * @return String the value of the attribute 
+     */
     function getAttribute($attribute) {
         if ($this->getStatus() == true) {
             if (array_key_exists($attribute, $this->attributes)) {
@@ -63,12 +62,12 @@ class sfConnect {
     }
 
     /**
-    * set an attribute and its value 
-    *
-    * @param String $attribute the attribute to set.
-    * @param String $value the value of the attribute.
-    * 
-    */
+     * set an attribute and its value 
+     *
+     * @param String $attribute the attribute to set.
+     * @param String $value the value of the attribute.
+     * 
+     */
     function setAttribute($attribute, $value) {
         if ($this->getStatus() == true) {
             $this->deleteAttribute($attribute);
@@ -77,11 +76,11 @@ class sfConnect {
     }
 
     /**
-    * Delete an attribute and its value 
-    *
-    * @param String $attribute the attribute to delete.
-    * 
-    */
+     * Delete an attribute and its value 
+     *
+     * @param String $attribute the attribute to delete.
+     * 
+     */
     function deleteAttribute($attribute) {
         if (array_key_exists($attribute, $this->attributes) == true) {
             unset($this->attributes[$attribute]);
@@ -89,43 +88,38 @@ class sfConnect {
     }
 
     /**
-    * Get the satus of an sql operation
-    * 
-    * @return bool the value of the attribute['status'] 
-    */
-
+     * Get the satus of an sql operation
+     * 
+     * @return bool the value of the attribute['status'] 
+     */
     function getStatus() {
         return $this->attributes['status'];
     }
 
-
     /**
-    * set the satus of an sql operation
-    * 
-    * @param String $status the status value to set.
-    */
-
+     * set the satus of an sql operation
+     * 
+     * @param String $status the status value to set.
+     */
     function setStatus($status) {
         $this->attributes['status'] = $status;
     }
 
     /**
-    * Get an sql operation message
-    * 
-    * @return String the value of the attribute['message'] 
-    */
-
+     * Get an sql operation message
+     * 
+     * @return String the value of the attribute['message'] 
+     */
     function getMessage() {
         return $this->getAttribute('message');
     }
 
     /**
-    * set the message of an sql operation
-    * 
-    * @param String $message the message value to set.
-    * @param bool $log if set to true also log the message.
-    */
-
+     * set the message of an sql operation
+     * 
+     * @param String $message the message value to set.
+     * @param bool $log if set to true also log the message.
+     */
     function setMessage($message, $log = true) {
         if ($log == true) {
             sfLogError::sfLogEntry($message);
@@ -134,10 +128,10 @@ class sfConnect {
     }
 
     /**
-    * Get the result of an sql operation
-    * 
-    * @return array the value of the attribute['result'] 
-    */
+     * Get the result of an sql operation
+     * 
+     * @return array the value of the attribute['result'] 
+     */
     function getResultArray() {
         if ($this->getStatus() == true) {
             if (array_key_exists('result', $this->attributes)) {
@@ -151,10 +145,10 @@ class sfConnect {
     }
 
     /**
-    * Connect to the database given that all the attributes to connecting 
-    * to the database is populated
-    * 
-    */
+     * Connect to the database given that all the attributes to connecting 
+     * to the database is populated
+     * 
+     */
     function connect() {
 
         $user = $this->getAttribute('username');
@@ -214,6 +208,9 @@ class sfConnect {
             } catch (PDOException $e) {
                 $this->setMessage($e->getMessage());
                 $this->setStatus(false);
+            }
+
+            if ($this->getStatus() === false) {
                 return false;
             }
 
@@ -226,12 +223,10 @@ class sfConnect {
         }
     }
 
-
     /**
      * Close the sfConnect connection to the database.
      * 
      */
-
     function close() {
         $type = $this->getAttribute('type');
         if ($type <> false) {
@@ -240,18 +235,17 @@ class sfConnect {
         }
     }
 
-
     /**
-    * Select database to which the sql operation will be running against
-    * @param String $database This is the database name
-    * @param bool $userAccess This is to detemine if one wants to set user Grant for the database
-    * 
-    * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
-    */
-
+     * Select database to which the sql operation will be running against
+     * @param String $database This is the database name
+     * @param bool $userAccess This is to detemine if one wants to set user Grant for the database
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
     function selectDatabase($database, $userAccess = false) {
-        if (!$database)
+        if (!$database) {
             return false;
+        }
         $user = $this->getAttribute('username');
         $pass = $this->getAttribute('password');
         $host = $this->getAttribute('host');
@@ -270,8 +264,7 @@ class sfConnect {
         $this->m_sfConnect->exec("USE " . $database . ";");
     }
 
-
-     /**
+    /**
      * Fetch the result of an sql query
      *
      * @param String $sql This is the sql query
@@ -279,7 +272,6 @@ class sfConnect {
      * 
      * @return mixed <b>Array  of results</b> on success or <b>FALSE</b> on failure.
      */
-
     function fetch($sql, $log = true) {
         $type = $this->getAttribute('type');
         //echo $type." Connection Type <br>";
@@ -388,7 +380,6 @@ class sfConnect {
      *
      * @return int the record count of an sql query.
      */
-
     function recordCount() {
         return $this->getAttribute('recordcount');
     }
@@ -398,7 +389,6 @@ class sfConnect {
      * 
      * @return int the Identifier generated by the sql operation afte an INSERT statement.
      */
-
     function lastInsertId() {
         return $this->m_sfConnect->lastInsertId();
     }

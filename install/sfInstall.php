@@ -88,7 +88,7 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
         <meta name="viewport" content="width=device-width, maximum-scale = 1, minimum-scale=1" />
         <!-- InstanceBeginEditable name="doctitle" -->
         <title><?php
-            if (!$migrated || $migrated == false) {
+            if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful")) {
                 echo 'Migrate old Snowflakes';
             } else {
                 echo "Snowflakes Setup Results";
