@@ -32,6 +32,8 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
         exit;
     }
 }
+$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$imageMissing = $UploadThumbUrl . "missing_default.png";
 ?>
 <?php
 if (!isset($_SESSION)) {
@@ -99,8 +101,7 @@ if ((isset($MM_update)) && ($MM_update == "form1") && ($File_is_Uploaded == TRUE
         // Check Trigger exist , if not then use manual trigger
         sfUtils::checkTrigger($SFconnects, $editedUserID, 'user', "UPDATE");
 
-        $formmessage.=sfUtils::sfPromptMessage('<a href="' . $viewLink . '" title="view it">"' . $userStruct->m_username . '"</a> was edited successfully.','success');
-                
+        $formmessage.=sfUtils::sfPromptMessage('<a href="' . $viewLink . '" title="view it">"' . $userStruct->m_username . '"</a> was edited successfully.', 'success');
     }
 }
 
@@ -313,37 +314,41 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                     <input class="inputtext2 controls" type="password" name="password2" value="" id="password2" placeholder="Confirm Password" />
                                 </span><br />
 
-                                <div class="SnowflakeImageSmall"><a class="colorbox" href="<?php echo $settingsConfig['m_sfGalleryUrl'] . $edituserStruct->m_image_name; ?>" title="<?php echo $edituserStruct->m_username; ?>" > <img src="<?php echo $settingsConfig['m_sfGalleryUrl'] . $edituserStruct->m_image_name; ?>"  alt="User Image" /></a></div>
+                                <div class="SnowflakeImageSmall">
+                                    <a class="colorbox" href="<?php echo $settingsConfig['m_sfGalleryUrl'] . $edituserStruct->m_image_name; ?>" title="<?php echo $edituserStruct->m_username; ?>" > 
+                                        <img src="<?php echo $settingsConfig['m_sfGalleryUrl'] . $edituserStruct->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="User Image" />
+                                    </a>
+                                </div>
                                 <input type="file" class="inputtext3 controls" name="uploadImage" />
                                 <br />
 
                                 <span id="sprySelectAcLv">
                                     <select name="access_level" class="inputtext3 controls">
                                         <option value="1" <?php
-                                        if (!(strcmp(1, $edituserStruct->m_access_level))) {
-                                            echo " selected=\"selected\"";
-                                        }
-                                        ?>>Author/ Editor 1</option>
+                    if (!(strcmp(1, $edituserStruct->m_access_level))) {
+                        echo " selected=\"selected\"";
+                    }
+                        ?>>Author/ Editor 1</option>
                                         <option value="2" <?php
-                                        if (!(strcmp(2, $edituserStruct->m_access_level))) {
-                                            echo "selected=\"selected\"";
-                                        }
-                                        ?>>Publisher 2</option>
+                                    if (!(strcmp(2, $edituserStruct->m_access_level))) {
+                                        echo "selected=\"selected\"";
+                                    }
+                        ?>>Publisher 2</option>
                                         <option value="3" <?php
-                                        if (!(strcmp(3, $edituserStruct->m_access_level))) {
-                                            echo " selected=\"selected\"";
-                                        }
-                                        ?>>Manager 3</option>
+                                    if (!(strcmp(3, $edituserStruct->m_access_level))) {
+                                        echo " selected=\"selected\"";
+                                    }
+                        ?>>Manager 3</option>
                                         <option value="4" <?php
-                                        if (!(strcmp(4, $edituserStruct->m_access_level))) {
-                                            echo " selected=\"selected\"";
-                                        }
-                                        ?>>Administrator 4</option>
+                                    if (!(strcmp(4, $edituserStruct->m_access_level))) {
+                                        echo " selected=\"selected\"";
+                                    }
+                        ?>>Administrator 4</option>
                                         <option value="5" <?php
-                                        if (!(strcmp(5, $edituserStruct->m_access_level))) {
-                                            echo " selected=\"selected\"";
-                                        }
-                                        ?>>Super Administrator 5</option>
+                                    if (!(strcmp(5, $edituserStruct->m_access_level))) {
+                                        echo " selected=\"selected\"";
+                                    }
+                        ?>>Super Administrator 5</option>
                                     </select>
                                     <span class="selectRequiredMsg">Please select an access level.</span></span><br />
                                 <br />

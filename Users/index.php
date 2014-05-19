@@ -31,6 +31,8 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
         exit;
     }
 }
+$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$imageMissing = $UploadThumbUrl . "missing_default.png";
 ?>
 <?php
 if (!isset($_SESSION)) {
@@ -234,14 +236,18 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                         <div class="Summary userBlock">
                             <?php $thedeletelink = "index.php?deleteId=" . $userStructList[$i]->m_id; ?>
 
-                                                <!--a class="edits colorboxLink" href="SendPassword.php?adminid=<?php //echo $userStructList[$i]->m_id';      ?>" title="Mail Password"> <img src="../resources/images/Icons/Mail.png" height="22" width="22" alt="Mail" /></a-->
+                                                    <!--a class="edits colorboxLink" href="SendPassword.php?adminid=<?php //echo $userStructList[$i]->m_id';       ?>" title="Mail Password"> <img src="../resources/images/Icons/Mail.png" height="22" width="22" alt="Mail" /></a-->
                             <a class="edits" href="#" onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $userStructList[$i]->m_username; ?>');" title="Delete User"> <img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /></a>
                             <a class="edits" href="EditUser.php?adminid=<?php echo $userStructList[$i]->m_id; ?>" title="Edit" onclick="ConfirmDelete();"> <img src="../resources/images/Icons/Edit.png" height="22" width="22" alt="Edit" /></a>
 
                             <h4 class="SummaryHead"><a href="Account.php?userName=<?php echo $userStructList[$i]->m_username; ?>"><?php echo $userStructList[$i]->m_username; ?></a></h4>
                             <div class="clear"></div>
                             <div class="Break2"></div>
-                            <div class="userImage"><a class="colorbox" href="../Uploads/<?php echo $userStructList[$i]->m_image_name; ?>" title="<?php echo $userStructList[$i]->m_username; ?>" > <img src="../Uploads/<?php echo $userStructList[$i]->m_image_name; ?>"  alt="Profile" /></a></div>
+                            <div class="userImage">
+                                <a class="colorbox" href="../Uploads/<?php echo $userStructList[$i]->m_image_name; ?>" title="<?php echo $userStructList[$i]->m_username; ?>" > 
+                                    <img src="../Uploads/<?php echo $userStructList[$i]->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo $sfuser->m_username . "'s"; ?> profile" />
+                                </a>
+                            </div>
 
                             <!--Userside starts-->
                             <div class="Userside">

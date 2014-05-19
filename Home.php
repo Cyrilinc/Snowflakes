@@ -312,7 +312,7 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                         <div class="clear"></div>
                         <div class="Break2"></div>
                         <div class="SnowflakeImageSmall"><a class="colorbox" href="Uploads/<?php echo $user->m_image_name; ?>" title="<?php echo $user->m_username; ?>" > 
-                                <img src="Uploads/<?php echo $user->m_image_name; ?>"  alt="Profile" /></a>
+                                <img src="Uploads/<?php echo $user->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="Profile" /></a>
                         </div>
                         <p>&nbsp;</p>
                         <p>Access: <?php echo $user->m_access_name; ?></p>

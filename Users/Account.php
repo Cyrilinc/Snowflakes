@@ -31,6 +31,8 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
         exit;
     }
 }
+$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$imageMissing = $UploadThumbUrl . "missing_default.png";
 ?>
 <?php
 if (!isset($_SESSION)) {
@@ -277,7 +279,11 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
                             <!--SnowflakeDescr-->
                             <div class="SnowflakeDescr">
                                 <div class="SnowflakeHead"><?php echo $sfuser->m_username; ?></div>
-                                <div class="SnowflakeImage"><a class="colorbox" href="../Uploads/<?php echo $sfuser->m_image_name; ?>" title="<?php echo $sfuser->m_username; ?>" ><img src="../Uploads/<?php echo $sfuser->m_image_name; ?>"  alt="Image" /></a></div>
+                                <div class="SnowflakeImage">
+                                    <a class="colorbox" href="../Uploads/<?php echo $sfuser->m_image_name; ?>" title="<?php echo $sfuser->m_username; ?>" >
+                                        <img src="../Uploads/<?php echo $sfuser->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo $sfuser->m_username."'s"; ?> profile" />
+                                    </a>
+                                </div>
                                 <p>&nbsp;</p>
                                 <p> Access  : <?php echo $levelname; ?></p>
                                 <p> Email   : <?php echo $sfuser->m_email; ?></p>
