@@ -64,7 +64,7 @@ class snowflakesSetUp {
 
     /**
      * 
-     * Set up snowflakes database tables, conguration, super administrator and 
+     * Set up snowflakes database tables, configuration, super administrator and 
      * generates success or failure messages to be displayed to the user.
      * 
      */
@@ -130,9 +130,8 @@ class snowflakesSetUp {
         $sqlArray = array('type' => $this->m_dbType, 'host' => $this->m_hostName, 'username' => $this->m_dbUsername, 'password' => $this->m_dbPassword, 'database' => $this->m_dbName, 'datapath' => realpath("../") . "/data/");
 
         $conn = new sfConnect($sqlArray);
-        $conn->connect(); // Connect to database via writer connection
 
-        if ($conn->getStatus() == false) {
+        if (!$conn->connect()) {// Connect to database if it fails return false
             $this->m_Message .=sfUtils::sfPromptMessage("Database Connection Unsuccessful. Could not connect." . $conn->getMessage() . '.','error');
             return false;
         }

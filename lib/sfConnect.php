@@ -214,6 +214,7 @@ class sfConnect {
             } catch (PDOException $e) {
                 $this->setMessage($e->getMessage());
                 $this->setStatus(false);
+                return false;
             }
 
             $this->setAttribute('link', $this->m_sfConnect);
