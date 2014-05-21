@@ -2052,11 +2052,11 @@ final class sfUtils {
         echo $subject . "<br>";
 
         # MAIL BODY
-        $body = "You have been sent this mail because you requested a reset on your password.\n";
-        $body .= "\tUsername: " . $userStruct->m_username . " \n";
-        $body .= "\tEmail: " . $userStruct->m_email . " \n";
-        $body .= "If haven't asked for a password reset then ignore this message.\n";
-        $body .= "If you requested a password then click the link below.\n ";
+        $body = "You have been sent this mail because you requested a reset on your password.\n\n";
+        $body .= "Username: " . $userStruct->m_username . " \n";
+        $body .= "Email: " . $userStruct->m_email . " \n\n";
+        $body .= "If you haven't asked for a password reset then ignore this message.\n";
+        $body .= "If you requested to reset your password then click the link below.\n ";
         $body .= $snowflakesUrl . "/ResetPassword.php?reset=" . $userStruct->m_reset_link;
 
         ## SEND MESSAGE ##
@@ -2794,7 +2794,7 @@ final class sfUtils {
             return false;
         }
 
-        $output.="User Migration from $dbname.AdminUsers was successful <span class=\"icon sucess\"></span><br />";
+        $output.="User Migration from $dbname.AdminUsers was successful <span class=\"icon success\"></span><br />";
 
         $sql = 'INSERT IGNORE INTO snowflakes (title,body_text,publish,image_name,gallery,created,created_by,edited,edited_by)
             SELECT b.title,b.bodytext,b.publish, b.imagename,b.gallery,b.created,b.createdby,b.created edited,b.createdby editedby
@@ -2806,7 +2806,7 @@ final class sfUtils {
             return false;
         }
 
-        $output.="Snowflakes Migration from $dbname.SnowFlakeTable was successful <span class=\"icon sucess\"></span><br />";
+        $output.="Snowflakes Migration from $dbname.SnowFlakeTable was successful <span class=\"icon success\"></span><br />";
 
         $sql = 'INSERT IGNORE INTO snowflakes_events (title,body_text,publish,image_name,event_time,event_date,end_time,end_date,location,created,edited,created_by,edited_by)
             SELECT c.title, c.bodytext, c.publish, c.imagename, c.evtime event_time, FROM_UNIXTIME(c.evDate) event_date,@endtime:=ADDTIME(c.evtime, "01:00:00") end_time, 
@@ -2819,7 +2819,7 @@ final class sfUtils {
             return false;
         }
 
-        $output.="Snowflakes Events Migration from $dbname.SF_EventsTable was successful <span class=\"icon sucess\"></span><br />";
+        $output.="Snowflakes Events Migration from $dbname.SF_EventsTable was successful <span class=\"icon success\"></span><br />";
 
         $sql = 'INSERT IGNORE INTO snowflakes_gallery (title,thumb_name,image_name,image_caption,created,created_by,edited,edited_by)
             SELECT d.title,d.Thumbname,d.imagename,d.ImageCaption,d.created,d.createdby,d.created edited,d.createdby edited_by 
@@ -2830,7 +2830,7 @@ final class sfUtils {
             return false;
         }
 
-        $output.="Snowflakes Gallery Migration from $dbname.SF_GalleryTable was successful <span class=\"icon sucess\"></span><br />";
+        $output.="Snowflakes Gallery Migration from $dbname.SF_GalleryTable was successful <span class=\"icon success\"></span><br />";
 
         $sql = 'INSERT IGNORE INTO snowflakes_settings(sf_host_name,sf_db,sf_db_username,sf_db_password,sf_db_type,sf_url,result_url,out_url,events_result_url,events_output_url,gallery_result_url,gallery_out_url,upload_gallery_dir)
             SELECT e.SFHostname, e.SFDatabase,e.SFDBUsername,e.SFDBPassword,"' . $conn->getAttribute('type') . '",e.SnowflakesUrl,e.SnowflakesResultUrl,e.SFOutUrl,e.SFEventsResultUrl,e.SFEventsOutputUrl,e.SFGalleryResultUrl,e.SFGalleryOutUrl,e.UploadGalleryDir
@@ -2867,7 +2867,7 @@ final class sfUtils {
         $insert = 'UPDATE snowflakes_settings SET gallery_out_url="' . self::escape($result[0]['SFGalleryOutUrl']) . '" WHERE setting_id=1 AND gallery_out_url="";';
         $conn->execute($insert);
 
-        $output.="Snowflakes settings Migration from $dbname.SF_SnowflakesSettings was successful <span class=\"icon sucess\"></span><br />";
+        $output.="Snowflakes settings Migration from $dbname.SF_SnowflakesSettings was successful <span class=\"icon success\"></span><br />";
 
         return true;
     }

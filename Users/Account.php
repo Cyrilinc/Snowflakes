@@ -276,12 +276,22 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
                 <div class="PageWrap">
                     <?php if ($userName != Null || $userId != Null || $colname_id != -1) { ?>
                         <div class="Snowflake">
+
                             <!--SnowflakeDescr-->
                             <div class="SnowflakeDescr">
-                                <div class="SnowflakeHead"><?php echo $sfuser->m_username; ?></div>
+                                <?php if ($sfuser->m_username == $user->m_username) { ?>
+                                    <div class="SnowflakeHead">
+                                        <a href="EditUser.php?adminid=<?php echo $sfuser->m_id; ?>" title="Edit your profile" onclick="ConfirmDelete();">
+                                            <?php echo $sfuser->m_username; ?>
+                                            <img src="../resources/images/Icons/Edit.png" height="25" width="25" alt="Edit your profile" />
+                                        </a>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="SnowflakeHead"><?php echo $sfuser->m_username; ?></div>
+                                <?php } ?>
                                 <div class="SnowflakeImage">
                                     <a class="colorbox" href="../Uploads/<?php echo $sfuser->m_image_name; ?>" title="<?php echo $sfuser->m_username; ?>" >
-                                        <img src="../Uploads/<?php echo $sfuser->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo $sfuser->m_username."'s"; ?> profile" />
+                                        <img src="../Uploads/<?php echo $sfuser->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo $sfuser->m_username . "'s"; ?> profile" />
                                     </a>
                                 </div>
                                 <p>&nbsp;</p>

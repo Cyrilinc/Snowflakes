@@ -46,10 +46,12 @@ $MM_restrictGoTo = "../login.php";
 if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
-    if (strpos($MM_restrictGoTo, "?"))
+    if (strpos($MM_restrictGoTo, "?")) {
         $MM_qsChar = "&";
-    if (isset($query_string) && strlen($query_string) > 0)
+    }
+    if (isset($query_string) && strlen($query_string) > 0) {
         $MM_referrer .= "?" . $query_string;
+    }
     $MM_restrictGoTo = $MM_restrictGoTo . $MM_qsChar . "accesscheck=" . urlencode($MM_referrer);
     header("Location: " . $MM_restrictGoTo);
     exit;
@@ -121,6 +123,14 @@ if (isset($_SESSION['MM_Username'])) {
 
 $user = new userStruct();
 $user->getUserByUsername($SFconnects, $colname_rsAdmin);
+//TODO implement this later
+/* / if this is not the user's profile and the user don't have the permissions to change other peoples profile 
+  // Then go back home
+  if ($edituserStruct->m_username !== $user->m_username && ($user->m_access_level !== 5 || $user->m_access_level !== 4)) {
+  $SFconnects->close();
+  header("Location: ../Home.php");
+  exit;
+  } */
 ?>
 
 <!DOCTYPE HTML><html ><!-- InstanceBegin template="/Templates/index.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -273,7 +283,11 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
         <div class="ContentWrapper"> 
             <!-- Content -->
             <div class="Content"> <!-- InstanceBeginEditable name="BodyRegion" -->
-                <h1>Edit <?php if (isset($edituserStruct->m_username)) echo $edituserStruct->m_username . "'s"; ?> account</h1>
+                <h1>Edit <?php
+                    if (isset($edituserStruct->m_username) && $edituserStruct->m_username !== $user->m_username) {
+                        echo $edituserStruct->m_username . "'s";
+                    }else if (isset($edituserStruct->m_username) && $edituserStruct->m_username === $user->m_username) {echo "your";}
+                    ?> account</h1>
 
                 <!-- Break -->
                 <div class="clear"></div>
@@ -325,30 +339,30 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                 <span id="sprySelectAcLv">
                                     <select name="access_level" class="inputtext3 controls">
                                         <option value="1" <?php
-                    if (!(strcmp(1, $edituserStruct->m_access_level))) {
-                        echo " selected=\"selected\"";
-                    }
-                        ?>>Author/ Editor 1</option>
+                                        if (!(strcmp(1, $edituserStruct->m_access_level))) {
+                                            echo " selected=\"selected\"";
+                                        }
+                                        ?>>Author/ Editor 1</option>
                                         <option value="2" <?php
-                                    if (!(strcmp(2, $edituserStruct->m_access_level))) {
-                                        echo "selected=\"selected\"";
-                                    }
-                        ?>>Publisher 2</option>
+                                        if (!(strcmp(2, $edituserStruct->m_access_level))) {
+                                            echo "selected=\"selected\"";
+                                        }
+                                        ?>>Publisher 2</option>
                                         <option value="3" <?php
-                                    if (!(strcmp(3, $edituserStruct->m_access_level))) {
-                                        echo " selected=\"selected\"";
-                                    }
-                        ?>>Manager 3</option>
+                                        if (!(strcmp(3, $edituserStruct->m_access_level))) {
+                                            echo " selected=\"selected\"";
+                                        }
+                                        ?>>Manager 3</option>
                                         <option value="4" <?php
-                                    if (!(strcmp(4, $edituserStruct->m_access_level))) {
-                                        echo " selected=\"selected\"";
-                                    }
-                        ?>>Administrator 4</option>
+                                        if (!(strcmp(4, $edituserStruct->m_access_level))) {
+                                            echo " selected=\"selected\"";
+                                        }
+                                        ?>>Administrator 4</option>
                                         <option value="5" <?php
-                                    if (!(strcmp(5, $edituserStruct->m_access_level))) {
-                                        echo " selected=\"selected\"";
-                                    }
-                        ?>>Super Administrator 5</option>
+                                        if (!(strcmp(5, $edituserStruct->m_access_level))) {
+                                            echo " selected=\"selected\"";
+                                        }
+                                        ?>>Super Administrator 5</option>
                                     </select>
                                     <span class="selectRequiredMsg">Please select an access level.</span></span><br />
                                 <br />
@@ -362,7 +376,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                         <!--End of contactform-->
                     <?php } else { ?>
                         <h2 class="SummaryHead">No User id provided</h2>
-                    <?php } ?>
+<?php } ?>
 
                 </div><!-- End of PageWrap -->
 
@@ -405,7 +419,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
 
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" -->
-        <?php if (isset($adminid)) { ?>
+<?php if (isset($adminid)) { ?>
             <script type="text/javascript">
                 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryAdminName", "none", {validateOn: ["blur"]});
                 var sprypassword1 = new Spry.Widget.ValidationPassword("spryAdminPass", {validateOn: ["blur"]});
@@ -413,7 +427,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                 var sprytextfield2 = new Spry.Widget.ValidationTextField("spryAdminEmail", "email", {validateOn: ["blur"]});
                 var spryselect1 = new Spry.Widget.ValidationSelect("sprySelectAcLv");
             </script>
-        <?php } ?>
+<?php } ?>
         <!-- InstanceEndEditable -->
     </body>
     <!-- InstanceEnd --></html>

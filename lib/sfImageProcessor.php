@@ -608,7 +608,7 @@ class sfImageProcessor {
                 //$message.= $sfimage->m_Message . "<br>";
             }
             if ($successCount > 0 || $failureCount > 0) {
-                $message.=sfUtils::sfPromptMessage('<strong>[' . $successCount . ']</strong> Sucessful.','success');
+                $message.=sfUtils::sfPromptMessage('<strong>[' . $successCount . ']</strong> Successful.','success');
                 $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsuccessful'.'error');
             }
         } else {
@@ -667,7 +667,7 @@ class sfImageProcessor {
             }
             $message.= $sfimage->m_Message;
 
-            $message.=sfUtils::sfPromptMessage('<strong>[' . $successCount . ']</strong> Sucessful.','success');
+            $message.=sfUtils::sfPromptMessage('<strong>[' . $successCount . ']</strong> Successful.','success');
             if ($failureCount > 0) {
                 $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsuccessful','error');
             }
