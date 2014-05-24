@@ -7,6 +7,8 @@
  */
 //Disable error reporting
 error_reporting(0);
+//declare(ticks = 5);
+//register_tick_function('sfUtils::memoryTickHandler');
 set_error_handler("sfLogError::sfErrorHandler");
 date_default_timezone_set('Europe/London');
 
@@ -44,7 +46,8 @@ class snowflakeStruct {
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
     public function populate($array) {
-        if (empty($array)) {
+
+        if (empty($array) && !is_array($array)) {
             return false;
         }
 
@@ -250,7 +253,7 @@ class snowflakeStruct {
     /**
      * print all the members of {@link snowflakeStruct}
      * 
-     * @return String formatted and labeled member values</b>
+     * @return String formatted and labeled member values
      */
     public function printsnowlakes() {
         $str = 'title="' . $this->m_title . '"<br> ';
@@ -266,6 +269,55 @@ class snowflakeStruct {
         $str.='flake_it="' . $this->m_flake_it . '"<br>';
         $str.='id=' . $this->m_id . '<br>';
         return $str;
+    }
+
+    /**
+     * Convert all the members of {@link snowflakeStruct} to an array
+     * 
+     * @return array The array value of {@link snowflakeStruct}
+     */
+    public function toArray() {
+        $retArray = array();
+        $retArray['id'] = $this->m_id;
+        $retArray['title'] = $this->m_title;
+        $retArray['body_text'] = $this->m_body_text;
+        $retArray['publish'] = $this->m_publish;
+        $retArray['image_name'] = $this->m_image_name;
+        $retArray['gallery'] = $this->m_gallery;
+        $retArray['created'] = $this->m_created;
+        $retArray['created_by'] = $this->m_created_by;
+        $retArray['edited'] = $this->m_edited;
+        $retArray['edited_by'] = $this->m_edited_by;
+        $retArray['deleted'] = $this->m_deleted;
+        $retArray['flake_it'] = $this->m_flake_it;
+
+        return $retArray;
+    }
+
+    /**
+     * Convert all the members of {@link snowflakeStruct} to an xml format
+     * 
+     * @return string The xml string value of {@link snowflakeStruct}
+     */
+    public function toXml() {
+        $retXml = "<snowflake id='$this->m_id'>";
+        $retXml .= "    <title>" . $this->m_title . "</title>";
+        $retXml .= "    <body_text>" . $this->m_body_text . "</body_text>";
+        $retXml .= "    <publish>" . $this->m_publish . "</publish>";
+        $retXml .= "    <image_name rel='$this->m_image_name' href='#UPLOADIMGURL#$this->m_image_name'/>";
+        if (!sfUtils::isEmpty($this->m_gallery)) {
+            $Gallery = explode(",", $this->m_gallery);
+            $retXml .= "    <gallery id='$Gallery[0]' />";
+        }
+        $retXml .= "    <created>" . $this->m_created . "</created>";
+        $retXml .= "    <created_by>" . $this->m_created_by . "</created_by>";
+        $retXml .= "    <edited>" . $this->m_edited . "</edited>";
+        $retXml .= "    <edited_by>" . $this->m_edited_by . "</edited_by>";
+        $retXml .= "    <deleted>" . $this->m_deleted . "</deleted>";
+        $retXml .= "    <flake_it>" . $this->m_flake_it . "</flake_it>";
+        $retXml .= "</snowflake>";
+
+        return $retXml;
     }
 
 }
@@ -321,8 +373,8 @@ class userStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function populate($value = array()) {
-        if (empty($value)) {
+    public function populate($value) {
+        if (empty($value) && !is_array($value)) {
             return false;
         }
         $this->m_id = isset($value['id']) ? $value['id'] : "";
@@ -634,7 +686,7 @@ class userStruct {
      * @return String formatted and labeled member values</b>
      */
     public function printuser() {
-        $str = "ID = " . $this->m_id . "<br>";
+        $str = "id = " . $this->m_id . "<br>";
         $str .= "username = " . $this->m_username . "<br>";
         $str .= "password = " . $this->m_password . "<br>";
         $str .= "email = " . $this->m_email . "<br>";
@@ -642,8 +694,60 @@ class userStruct {
         $str .= "access level = " . $this->m_access_level . "<br>";
         $str .= "access name = " . $this->m_access_name . "<br>";
         $str .= "reset link = " . $this->m_reset_link . "<br>";
+        $str .= "deleted = " . $this->m_deleted . "<br>";
+        $str .= "flake it = " . $this->m_flake_it . "<br>";
+        $str .= "logged in = " . $this->m_logged_in . "<br>";
+        $str .= "last login = " . $this->m_last_login . "<br>";
 
         return $str;
+    }
+
+    /**
+     * Convert all the members of {@link userStruct} to an array
+     * 
+     * @return array The array value of {@link userStruct}
+     */
+    public function toArray() {
+        $retArray = array();
+
+        $retArray ["id"] = $this->m_id;
+        $retArray ["username"] = $this->m_username;
+        $retArray ["password"] = $this->m_password;
+        $retArray ["email"] = $this->m_email;
+        $retArray ["image_name "] = $this->m_image_name;
+        $retArray ["access_level"] = $this->m_access_level;
+        $retArray ["access_name "] = $this->m_access_name;
+        $retArray ["reset_link"] = $this->m_reset_link;
+        $retArray ["deleted"] = $this->m_deleted;
+        $retArray ["flake_it"] = $this->m_flake_it;
+        $retArray ["logged_in"] = $this->m_logged_in;
+        $retArray ["last_login."] = $this->m_last_login;
+
+        return $retArray;
+    }
+
+    /**
+     * Convert all the members of {@link userStruct} to an xml format
+     * 
+     * @return String The xml string value of {@link userStruct}
+     */
+    public function toXml() {
+        $retXml = "<user id='$this->m_id'>";
+        $retXml .= "    <username>" . $this->m_username . "</username>";
+        $retXml .= "    <password>" . $this->m_password . "</password>";
+        $retXml .= "    <email>" . $this->m_email . "</email>";
+        $retXml .= "    <image_name rel='$this->m_image_name' href='#UPLOADIMGURL#$this->m_image_name'/>";
+        $retXml .= "    <access_level>" . $this->m_access_level . "</access_level>";
+        $retXml .= "    <access_name>" . $this->m_access_name . "</access_name>";
+        $retXml .= "    <reset_link>" . $this->m_reset_link . "</reset_link>";
+        $retXml .= "    <edited_by>" . $this->m_edited_by . "</edited_by>";
+        $retXml .= "    <deleted>" . $this->m_deleted . "</deleted>";
+        $retXml .= "    <flake_it>" . $this->m_flake_it . "</flake_it>";
+        $retXml .= "    <logged_in>" . $this->m_logged_in . "</logged_in>";
+        $retXml .= "    <last_login>" . $this->m_last_login . "</last_login>";
+        $retXml .= "</user>";
+
+        return $retXml;
     }
 
 }
@@ -683,7 +787,7 @@ class galleryStruct {
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
     public function populate($array) {
-        if (empty($array)) {
+        if (empty($array) && !is_array($array)) {
             return false;
         }
 
@@ -868,6 +972,52 @@ class galleryStruct {
         $str.='flake_it="' . $this->m_flake_it . '"<br>';
         $str.='id=' . $this->m_id . '<br>';
         return $str;
+    }
+
+    /**
+     * Convert all the members of {@link galleryStruct} to an array
+     * 
+     * @return array The array value of {@link galleryStruct}
+     */
+    public function toArray() {
+        $retArray = array();
+
+        $retArray ['id'] = $this->m_id;
+        $retArray ['title'] . $this->m_title;
+        $retArray ['thumb_name'] = $this->m_thumb_name;
+        $retArray ['image_name'] = $this->m_image_name;
+        $retArray ['image_caption'] = $this->m_image_caption;
+        $retArray ['publish'] = $this->m_publish;
+        $retArray ['created'] = $this->m_created;
+        $retArray ['created_by'] = $this->m_created_by;
+        $retArray ['edited'] = $this->m_edited;
+        $retArray ['edited_by'] = $this->m_edited_by;
+        $retArray ['deleted'] = $this->m_deleted;
+        $retArray ['flake_it'] = $this->m_flake_it;
+
+        return $retArray;
+    }
+
+    /**
+     * Convert all the members of {@link galleryStruct} to an xml format
+     * 
+     * @return String The xml string value of {@link galleryStruct}
+     */
+    public function toXml() {
+        $retXml = "<gallery id='$this->m_id' publish='$this->m_publish'>";
+        $retXml .= "    <title>" . $this->m_title . "</title>";
+        $retXml .= "    <thumb_name imageurlPrefix='#GALLERYTHUMBURL#'>" . $this->m_thumb_name . "</thumb_name>";
+        $retXml .= "    <image_name imageurlPrefix='#GALLERYIMGURL#'>" . $this->m_image_name . "</image_name>";
+        $retXml .= "    <image_caption>" . $this->m_image_caption . "</image_caption>";
+        $retXml .= "    <created>" . $this->m_created . "</created>";
+        $retXml .= "    <created_by>" . $this->m_created_by . "</created_by>";
+        $retXml .= "    <edited>" . $this->m_edited . "</edited>";
+        $retXml .= "    <edited_by>" . $this->m_edited_by . "</edited_by>";
+        $retXml .= "    <deleted>" . $this->m_deleted . "</deleted>";
+        $retXml .= "    <flake_it>" . $this->m_flake_it . "</flake_it>";
+        $retXml .= "</gallery>";
+
+        return $retXml;
     }
 
 }
@@ -1145,6 +1295,62 @@ class eventStruct {
         $str.='flake_it="' . $this->m_flake_it . '"<br>';
         $str.='id=' . $this->m_id . '<br>';
         return $str;
+    }
+
+    /**
+     * Convert all the members of {@link eventStruct} to an array
+     * 
+     * @return array The array value of {@link eventStruct}
+     */
+    public function toArray() {
+        $retArray = array();
+
+        $retArray ["id"] = $this->m_id;
+        $retArray ['title'] = $this->m_title;
+        $retArray ['body_text'] = $this->m_body_text;
+        $retArray ['publish'] = $this->m_publish;
+        $retArray ['image_name'] = $this->m_image_name;
+        $retArray ['event_time'] = $this->m_event_time;
+        $retArray ['event_date'] = $this->m_event_date;
+        $retArray ['end_time'] = $this->m_end_time;
+        $retArray ['end_date'] = $this->m_end_date;
+        $retArray ['location'] = $this->m_location;
+        $retArray ['lat_long'] = $this->m_lat_long;
+        $retArray ['created'] = $this->m_created;
+        $retArray ['created_by'] = $this->m_created_by;
+        $retArray ['edited'] = $this->m_edited;
+        $retArray ['edited_by'] = $this->m_edited_by;
+        $retArray ['deleted'] = $this->m_deleted;
+        $retArray ['flake_it'] = $this->m_flake_it;
+
+        return $retArray;
+    }
+
+    /**
+     * Convert all the members of {@link eventStruct} to an xml format
+     * 
+     * @return String The xml string value of {@link eventStruct}
+     */
+    public function toXml() {
+        $retXml = "<event id='$this->m_id' publish='$this->m_publish'>";
+        $retXml .= "    <title>" . $this->m_title . "</title>";
+        $retXml .= "    <body_text>" . $this->m_body_text . "</body_text>";
+        $retXml .= "    <image_name rel='$this->m_image_name' href='#UPLOADIMGURL#$this->m_image_name'/>";
+        $retXml .= "    <event_time>" . $this->m_event_time . "</event_time>";
+        $retXml .= "    <event_date>" . $this->m_event_date . "</event_date>";
+        $retXml .= "    <end_time>" . $this->m_end_time . "</end_time>";
+        $retXml .= "    <end_date>" . $this->m_end_date . "</end_date>";
+        $retXml .= "    <location>" . $this->m_location . "</location>";
+        $retXml .= "    <lat_long>" . $this->m_lat_long . "</lat_long>";
+        $retXml .= "    <created>" . $this->m_created . "</created>";
+        $retXml .= "    <created_by>" . $this->m_created_by . "</created_by>";
+        $retXml .= "    <edited>" . $this->m_edited . "</edited>";
+        $retXml .= "    <edited_by>" . $this->m_edited_by . "</edited_by>";
+        $retXml .= "    <deleted>" . $this->m_deleted . "</deleted>";
+        $retXml .= "    <flake_it>" . $this->m_flake_it . "</flake_it>";
+        $retXml .= "</event>";
+
+        return $retXml;
     }
 
 }
@@ -1769,9 +1975,9 @@ final class sfUtils {
         }
         $returnsql = '';
         if ($validate) {
-            $returnsql.= sfUtils::sfPromptMessage('<b>' . filter_input($INPUT, $tag) . '</b> is a valid ' . $tagtype.'.' , 'success');
+            $returnsql.= sfUtils::sfPromptMessage('<b>' . filter_input($INPUT, $tag) . '</b> is a valid ' . $tagtype . '.', 'success');
         } else {
-            $returnsql.= sfUtils::sfPromptMessage('<b>' . filter_input($INPUT, $tag) . '</b> is not a valid ' . $tagtype.'.' , 'failure');
+            $returnsql.= sfUtils::sfPromptMessage('<b>' . filter_input($INPUT, $tag) . '</b> is not a valid ' . $tagtype . '.', 'failure');
         }
         return $returnsql;
     }
@@ -2720,11 +2926,11 @@ final class sfUtils {
         $str = ' <!-- dialog-message Starts-->'
                 . '<div class="dialog-message" title="' . $title . '">
                     ' . $message . '
-		</div>
+        </div>
                  <!-- End dialog-message -->';
         return $str;
     }
-    
+
     /**
      * Display message with error,warning or success icons  
      *
@@ -2733,17 +2939,16 @@ final class sfUtils {
      *
      * @return mixed <b>The html prompt format</b> on success or <b>FALSE</b> on failure.
      */
-    public static function sfPromptMessage($message,$icon) {
+    public static function sfPromptMessage($message, $icon) {
 
         if (!strlen($message) || !strlen($icon)) {
             return false;
         }
 
-        $str = 
-        '<!-- sfPromptmessage Starts-->
+        $str = '<!-- sfPromptmessage Starts-->
         <div class="sfPromptmessage">    
-            <div class="propmtIcon"><span class="icon '.$icon.'"></span></div>
-            <div class="promptmessage"><p>'.$message.'</p></div>
+            <div class="propmtIcon"><span class="icon ' . $icon . '"></span></div>
+            <div class="promptmessage"><p>' . $message . '</p></div>
             <div style="clear:both;"></div> 
         </div>
         <!-- End sfPromptmessage -->';
@@ -2790,7 +2995,7 @@ final class sfUtils {
                 FROM ' . $dbname . '.AdminUsers a;';
 
         if (!$conn->execute($sql)) {
-            $output.=self::sfPromptMessage("Could Not migrate users from $dbname.AdminUsers <br /> " . $conn->getMessage() . "<br/>",'error');
+            $output.=self::sfPromptMessage("Could Not migrate users from $dbname.AdminUsers <br /> " . $conn->getMessage() . "<br/>", 'error');
             return false;
         }
 
@@ -2802,7 +3007,7 @@ final class sfUtils {
 
 
         if (!$conn->execute($sql)) {
-            $output.=self::sfPromptMessage("Could Not migrate Snowflakes from $dbname.SnowFlakeTable<br /> " . $conn->getMessage() . "<br/>",'error');
+            $output.=self::sfPromptMessage("Could Not migrate Snowflakes from $dbname.SnowFlakeTable<br /> " . $conn->getMessage() . "<br/>", 'error');
             return false;
         }
 
@@ -2815,7 +3020,7 @@ final class sfUtils {
             FROM ' . $dbname . '.SF_EventsTable c;';
 
         if (!$conn->execute($sql)) {
-            $output.=self::sfPromptMessage("Could Not migrate Snowflakes Events from $dbname.SF_EventsTable<br /> " . $conn->getMessage() . "<br/>",'error');
+            $output.=self::sfPromptMessage("Could Not migrate Snowflakes Events from $dbname.SF_EventsTable<br /> " . $conn->getMessage() . "<br/>", 'error');
             return false;
         }
 
@@ -2826,7 +3031,7 @@ final class sfUtils {
             FROM ' . $dbname . '.SF_GalleryTable d;';
 
         if (!$conn->execute($sql)) {
-            $output.=self::sfPromptMessage("Could Not migrate Snowflakes Gallery from $dbname.SF_GalleryTable<br /> " . $conn->getMessage() . "<br/>",'error');
+            $output.=self::sfPromptMessage("Could Not migrate Snowflakes Gallery from $dbname.SF_GalleryTable<br /> " . $conn->getMessage() . "<br/>", 'error');
             return false;
         }
 
@@ -2837,7 +3042,7 @@ final class sfUtils {
             FROM ' . $dbname . '.SF_SnowflakesSettings e;';
 
         if (!$conn->execute($sql)) {
-            $output.=self::sfPromptMessage("Could Not migrate Snowflakes settings from $dbname.SF_SnowflakesSettings <br /> " . $conn->getMessage() . "<br/>",'error');
+            $output.=self::sfPromptMessage("Could Not migrate Snowflakes settings from $dbname.SF_SnowflakesSettings <br /> " . $conn->getMessage() . "<br/>", 'error');
             return false;
         }
         $sql = 'SELECT e.SnowflakesUrl,e.SnowflakesResultUrl,e.SFOutUrl,e.SFEventsResultUrl,e.SFEventsOutputUrl,e.SFGalleryResultUrl,e.SFGalleryOutUrl,e.UploadGalleryDir
@@ -3269,10 +3474,10 @@ final class sfUtils {
                 continue;
             }
             $datestring = substr($file, -14, -4);
-            $listString .='	 <tr><td>' . $datestring . '</td><td><a href="LogViewer.php?logfile=' . $file . '" data-log-date="' . $datestring . '">' . $file . "</a></td></tr>\n";
+            $listString .='  <tr><td>' . $datestring . '</td><td><a href="LogViewer.php?logfile=' . $file . '" data-log-date="' . $datestring . '">' . $file . "</a></td></tr>\n";
         }
 
-        $listString .='	</tbody>
+        $listString .=' </tbody>
                 </table>
             </div><!-- End of tablepage --> ';
 
@@ -3474,6 +3679,30 @@ final class sfUtils {
         return $data;
     }
 
+    /**
+     * Dynamically increases php memory limit if the limit is almost reached 
+     * depending on the threshold set in this function
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
+    public static function memoryTickHandler() {
+
+        $usage = memory_get_usage();
+        $Memory = ini_get('memory_limit');
+        $Memory = self::toByteSize($Memory);
+        $delta = ($usage / $Memory) * 100;
+        $threshold = 98; //percent threshold before adding more memory;
+        if ($delta < $threshold) {
+            return false;
+        }
+        $added = bcmul($Memory, 0.3); //add 30% more than the original memory limit
+        $total = $added + $Memory;
+        ini_set('memory_limit', (int) $total);
+        //echo "\n memory limit adjusted dynamically - $total";
+        sleep(1);
+        return true;
+    }
+
 }
 
 class databaseParam {
@@ -3520,7 +3749,7 @@ class databaseParam {
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
     public function populate($array) {
-        if (empty($array)) {
+        if (empty($array) || !is_array($array)) {
             return false;
         }
         //Db Info           //config Name [db]
@@ -3567,6 +3796,7 @@ class dataDirParam {
      * 
      * @param String $inifile the ini config file for snowflakes API
      */
+
     public function __construct($inifile = '../config/config.ini') {
         $this->init($inifile);
     }
@@ -3655,7 +3885,7 @@ class settingsStruct {
     public function init($inifile = '../config/config.ini') {
         // create ini file if it doesn't exists
         Config::createConfig($inifile, true);
-        
+
         $m_data = Config::getConfig(null, $inifile);
         $this->m_settingsarray = array();
         return $this->populate($m_data);
@@ -4056,6 +4286,220 @@ class settingsStruct {
     public function SetgalleryThumbDir($value) {
         //galleryThumbDir
         $this->m_settingsarray["datadir"]["galleryThumbDir"] = $value;
+    }
+
+}
+
+class sfWebservice {
+
+    var $m_allow = array();
+    var $m_content_type;
+    var $m_request = array();
+    var $m_method = "";
+    var $m_format = "json";
+    var $m_status = 404;
+    var $m_code = 0;
+    var $m_data = NULL;
+    var $m_path_info;
+    var $m_uri_parts;
+    // Define whether an HTTPS connection is required
+    var $HTTPS_required = FALSE;
+    // Define whether user authentication is required
+    var $authentication_required = FALSE;
+    // Define API response codes and their related HTTP response
+    var $api_response_code = array(
+        0 => array('HTTP Response' => 400, 'Message' => 'Unknown Error'),
+        1 => array('HTTP Response' => 200, 'Message' => 'Success'),
+        2 => array('HTTP Response' => 403, 'Message' => 'HTTPS Required'),
+        3 => array('HTTP Response' => 401, 'Message' => 'Authentication Required'),
+        4 => array('HTTP Response' => 401, 'Message' => 'Authentication Failed'),
+        5 => array('HTTP Response' => 404, 'Message' => 'Invalid Request'),
+        6 => array('HTTP Response' => 400, 'Message' => 'Invalid Response Format')
+    );
+    var $m_http_response_code = array(
+        100 => 'Continue',
+        101 => 'Switching Protocols',
+        200 => 'OK',
+        201 => 'Created',
+        202 => 'Accepted',
+        203 => 'Non-Authoritative Information',
+        204 => 'No Content',
+        205 => 'Reset Content',
+        206 => 'Partial Content',
+        300 => 'Multiple Choices',
+        301 => 'Moved Permanently',
+        302 => 'Found',
+        303 => 'See Other',
+        304 => 'Not Modified',
+        305 => 'Use Proxy',
+        306 => '(Unused)',
+        307 => 'Temporary Redirect',
+        400 => 'Bad Request',
+        401 => 'Unauthorized',
+        402 => 'Payment Required',
+        403 => 'Forbidden',
+        404 => 'Not Found',
+        405 => 'Method Not Allowed',
+        406 => 'Not Acceptable',
+        407 => 'Proxy Authentication Required',
+        408 => 'Request Timeout',
+        409 => 'Conflict',
+        410 => 'Gone',
+        411 => 'Length Required',
+        412 => 'Precondition Failed',
+        413 => 'Request Entity Too Large',
+        414 => 'Request-URI Too Long',
+        415 => 'Unsupported Media Type',
+        416 => 'Requested Range Not Satisfiable',
+        417 => 'Expectation Failed',
+        500 => 'Internal Server Error',
+        501 => 'Not Implemented',
+        502 => 'Bad Gateway',
+        503 => 'Service Unavailable',
+        504 => 'Gateway Timeout',
+        505 => 'HTTP Version Not Supported');
+
+    public function __construct() {
+        $this->inputs();
+    }
+
+    private function inputs() {
+
+        $this->m_path_info = filter_input(INPUT_SERVER, "ORIG_PATH_INFO"); //e.g. index.php/authors/
+        $this->m_uri_parts = $this->parse_uri($this->m_path_info);
+        $resource_type = $this->m_uri_parts['resource_type']; //e.g. "snowflake"
+        $request = $this->m_uri_parts['request']; //anything after the resource type
+
+        $this->m_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
+        var_dump($this->m_method);
+        switch ($this->m_method) {
+            case "POST":
+                $this->m_request = $this->cleanInputs($_POST);
+                $this->m_format = $this->m_request['fmt'];
+                break;
+            case "GET":
+            case "DELETE":
+                $this->m_request = $this->cleanInputs($_GET);
+                $this->m_format = $this->m_request['fmt'];
+                break;
+            case "PUT":
+                parse_str(file_get_contents("php://input"), $this->m_request);
+                $this->m_request = $this->cleanInputs($this->m_request);
+                $this->m_format = $this->m_request['fmt'];
+                break;
+            default:
+                //$this->response('', 406);
+                break;
+        }
+    }
+
+    public function parse_uri($path_string) {
+        // $path_string is something like
+        // 'index.php/authors/'
+        $path_parts = explode("/", $path_string);
+        $restype = $path_parts[1];
+        $req = $path_parts[2];
+
+        $ret_array = array();
+        $ret_array['resource_type'] = $restype;
+        $ret_array['request'] = $req;
+
+        return $ret_array;
+    }
+
+    private function cleanInputs($data) {
+        $clean_input = array();
+        if (is_array($data)) {
+            foreach ($data as $k => $v) {
+                $clean_input[$k] = $this->cleanInputs($v);
+            }
+        } else {
+            if (get_magic_quotes_gpc()) {
+                $data = trim(stripslashes($data));
+            }
+            $data = strip_tags($data);
+            $clean_input = trim($data);
+        }
+        return $clean_input;
+    }
+
+    public function get_referer() {
+        return filter_input(INPUT_SERVER, "HTTP_REFERER");
+    }
+
+    public function response($data, $status) {
+        $this->m_status = ($status) ? $status : 200;
+        $this->set_headers();
+        echo $data;
+        exit;
+    }
+
+    private function get_status_message() {
+        return ($this->m_http_response_code[$this->m_status]) ? $this->m_http_response_code[$this->m_status] : $this->m_http_response_code[500];
+    }
+
+    private function set_headers($content_type = "json") {
+        if (strcasecmp($content_type, 'json') == 0) {
+            $this->m_content_type = "application/json; charset=utf-8";
+        } elseif (strcasecmp($content_type, 'xml') == 0) {
+            $this->m_content_type = "application/xml; charset=utf-8";
+        } else {
+            $this->m_content_type = "text/html; charset=utf-8";
+        }
+        $this->m_content_type = $content_type;
+        header("HTTP/1.1 " . $this->m_status . " " . $this->get_status_message());
+        header("Content-Type:" . $this->m_content_type);
+    }
+
+    /**
+     * Deliver HTTP Response and HTTP response content type
+     * 
+     * @param String $api_response The desired HTTP response data which contains format of
+     * The desired HTTP response content type: [json, html, xml], the status code:200,
+     * 500..., code and data to return in the format specified
+     * 
+     * @return mixed <b>HTTP Response Data</b> on success or <b>FALSE</b> on failure.
+     * 
+     * */
+    public function deliverResponseAndExit($data, $code, $status = '', $format = '') {
+
+        if (!$data || !$status || !$format) {
+            return false;
+        }
+
+        $this->m_status = $status != '' ? $status : $this->m_status;
+        $this->m_format = $format != '' ? $format : $this->m_format;
+
+        // Set HTTP Response and HTTP Response Content Type
+        $this->set_headers($this->m_format);
+
+        // Process different content types
+        if (strcasecmp($this->m_format, 'json') == 0) {
+
+            // Format data into a JSON response
+            $json_response = json_encode($data);
+
+            // Deliver formatted data
+            echo $json_response;
+        } elseif (strcasecmp($this->m_format, 'xml') == 0) {
+
+            // Format data into an XML response (This is only good at handling string data, not arrays)
+            $xmlResponse = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
+                    '<SnoflakesResponse>' . "\n" .
+                    "\t" . '<code>' . $code . '</code>' . "\n" .
+                    "\t" . '<data>' . "\n" .
+                    $data . "\n" .
+                    "\t" . '</data>' . "\n" .
+                    '</SnoflakesResponse>';
+
+            header('Content-Length: ' . strlen($xmlResponse));
+            // Deliver formatted data
+            echo $xmlResponse;
+        } else {
+            // Deliver formatted data
+            echo $data;
+        }
+        die();
     }
 
 }
