@@ -3213,37 +3213,41 @@ final class sfUtils {
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['snowflakesResultUrl']) ? $settingsConfig['snowflakesResultUrl'] : $settingsConfig['m_sfUrl'] . "OneView.php";
         $headers = apache_request_headers();
-        $rssString = '
-            <rss version="2.0">
-                <channel>
-                    <title>Snowflakes Rss</title>
-                    <description>A ' . $headers['Host'] . ' Snowflakes Rss feed</description>
-                    <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=snowflakes') . '</link>
-                    <image>
-                        <url>' . $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png" . '</url>
-                        <title>Snowflakes Rss</title>
-                        <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=snowflakes') . '</link>
-                        <width>120</width>
-                        <height>40</height>
-                    </image>';
+        // build parent element
+        $rss = new SimpleXMLElement("<rss version='2.0'></rss>");
+        $channel = $rss->addChild('channel');
+        $channel->addChild('title', 'Snowflakes Rss');
+        $channel->addChild('description', 'A ' . $headers['Host'] . ' Snowflakes Rss feed');
+        $channel->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=snowflakes');
+
+        $image = $channel->addChild('image');
+        $image->addChild('url', $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png");
+        $image->addChild('title', "Snowflakes Rss image");
+        $image->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=snowflakes');
+        $image->addChild('width', '120');
+        $image->addChild('height', '40');
+
         foreach ($snowflakesList as $key => $value) {
             $flakeStruct = $value;
-            $BodyString = self::xmlencoder($flakeStruct->m_body_text);
-            $rssString .= '
-                    <item>
-                        <title>' . $flakeStruct->m_title . '</title>
-                        <description>' . substr($BodyString, 0, 280) . '...</description>
-                        <link>' . $itemUrl . "?pageid=" . $flakeStruct->m_id . '</link>
-                        <date>' . date(" F j, Y", $flakeStruct->m_created) . '</date>
-                        <publisher>' . $flakeStruct->m_created_by . '</publisher>
-                        <flakes>' . $flakeStruct->m_flake_it . '</flakes>
-                    </item>';
-        }
-        $rssString .='
-                </channel>
-            </rss>';
+            $BodyString = self::escape(html_entity_decode($flakeStruct->m_body_text));
 
-        return $rssString;
+            $item = $channel->addChild('item');
+            $item->addChild('title', self::escape($flakeStruct->m_title));
+            $item->addChild('description', substr($BodyString, 0, 280) . '...');
+            $item->addChild('link', $itemUrl . "?pageid=" . $flakeStruct->m_id);
+            $item->addChild('date', date(" F j, Y", $flakeStruct->m_created));
+            $item->addChild('publisher', $flakeStruct->m_created_by);
+            $item->addChild('flakes', $flakeStruct->m_flake_it);
+            
+        }
+
+        //format for pretty printing
+        $dom = new DOMDocument('1.0', 'UTF-8');
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $dom->loadXML($rss->asXML());
+
+        return $dom->saveXML();
     }
 
     /**
@@ -3264,42 +3268,45 @@ final class sfUtils {
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['eventsResultUrl']) ? $settingsConfig['eventsResultUrl'] : $settingsConfig['m_sfUrl'] . "Events/OneView.php";
         $headers = apache_request_headers();
-        $rssString = '
-            <rss version="2.0">
-                <channel>
-                    <title>Snowflakes Event Rss</title>
-                    <description>A ' . $headers['Host'] . ' snowflakes event rss feed</description>
-                    <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=events') . '</link>
-                    <image>
-                        <url>' . self::xmlencoder($settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png") . '</url>
-                        <title>Snowflakes Event Rss</title>
-                        <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=events') . '</link>
-                        <width>120</width>
-                        <height>40</height>
-                    </image>';
+        
+        // build parent element
+        $rss = new SimpleXMLElement("<rss version='2.0'></rss>");
+        $channel = $rss->addChild('channel');
+        $channel->addChild('title', 'Snowflakes Event Rss');
+        $channel->addChild('description', 'A ' . $headers['Host'] . ' snowflakes event rss feed');
+        $channel->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=events');
 
+        $image = $channel->addChild('image');
+        $image->addChild('url', $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png");
+        $image->addChild('title', "Snowflakes Rss image");
+        $image->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=events');
+        $image->addChild('width', '120');
+        $image->addChild('height', '40');
+        
         foreach ($eventList as $key => $value) {
             $eventStruct = $value;
-            $BodyString = self::xmlencoder($eventStruct->m_body_text);
             $eventtime = new DateTime($eventStruct->m_event_date);
             $endtime = new DateTime($eventStruct->m_end_date);
-            $rssString .= '
-                    <item>
-                        <title>' . $eventStruct->m_title . '</title>
-                        <description>' . substr($BodyString, 0, 280) . '</description>
-                        <link>' . $itemUrl . "?Eventid=" . $eventStruct->m_id . '</link>
-                        <date>' . date(" F j, Y", $eventStruct->m_created) . '</date>
-                        <eventdatetime>' . $eventtime->format(" F j, Y") . " " . self::toAmPmTime($eventStruct->m_event_time) . '</eventdatetime>
-                        <enddatetime>' . $endtime->format(" F j, Y") . " " . self::toAmPmTime($eventStruct->m_end_time) . '</enddatetime>
-                        <location>' . $eventStruct->m_location . '</location>    
-                        <publisher>' . $eventStruct->m_created_by . '</publisher>
-                        <flakes>' . $eventStruct->m_flake_it . '</flakes>
-                    </item>';
+            $BodyString = self::escape(html_entity_decode($eventStruct->m_body_text));
+
+            $item = $channel->addChild('item');
+            $item->addChild('title', self::escape($eventStruct->m_title));
+            $item->addChild('description', substr($BodyString, 0, 280) . '...');
+            $item->addChild('link', $itemUrl . "?Eventid=" . $eventStruct->m_id);
+            $item->addChild('date', date(" F j, Y", $eventStruct->m_created));
+            $item->addChild('eventdatetime', $eventtime->format(" F j, Y") . " " . self::toAmPmTime($eventStruct->m_event_time));
+            $item->addChild('enddatetime', $endtime->format(" F j, Y") . " " . self::toAmPmTime($eventStruct->m_end_time));
+            $item->addChild('location', $eventStruct->m_location);
+            $item->addChild('publisher', $eventStruct->m_created_by);
+            $item->addChild('flakes', $eventStruct->m_flake_it);
         }
-        $rssString .='
-                </channel>
-            </rss>';
-        return $rssString;
+         //format for pretty printing
+        $dom = new DOMDocument('1.0', 'UTF-8');
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $dom->loadXML($rss->asXML());
+
+        return $dom->saveXML();
     }
 
     /**
@@ -3320,45 +3327,46 @@ final class sfUtils {
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['galleryResultUrl']) ? $settingsConfig['galleryResultUrl'] : $settingsConfig['m_sfUrl'] . "Gallery/OneView.php";
         $headers = apache_request_headers();
-        $rssString = '
-            <rss version="2.0">
-                <channel>
-                    <title>Snowflakes Gallery Rss</title>
-                    <description>A ' . $headers['Host'] . ' Snowflakes Gallery Rss feed</description>
-                    <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery') . '</link>
-                    <image>
-                        <url>' . self::xmlencoder($settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png") . '</url>
-                        <title>Snowflakes Gallery Rss</title>
-                        <link>' . self::xmlencoder($settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery') . '</link>
-                        <width>120</width>
-                        <height>40</height>
-                    </image>';
+        
+        $rss = new SimpleXMLElement("<rss version='2.0'></rss>");
+        $channel = $rss->addChild('channel');
+        $channel->addChild('title', 'Snowflakes Gallery Rss');
+        $channel->addChild('description', 'A ' . $headers['Host'] . ' snowflakes Gallery rss feed');
+        $channel->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery');
 
+        $image = $channel->addChild('image');
+        $image->addChild('url', $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png");
+        $image->addChild('title', "Snowflakes Gallery Rss");
+        $image->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery');
+        $image->addChild('width', '120');
+        $image->addChild('height', '40');
+        
         foreach ($galleryList as $key => $value) {
             $galleryStruct = $value;
             $coverimage = explode(",", $galleryStruct->m_thumb_name);
             $covercaption = explode(",", $galleryStruct->m_image_caption);
-            $rssString .= '
-                    <item>
-                        <title>' . $galleryStruct->m_title . '</title>
-                        <link>' . self::xmlencoder($itemUrl . "?Galleryid=" . $galleryStruct->m_id) . '</link>
-                        <date>' . date(" F j, Y", $galleryStruct->m_created) . '</date>
-                        <image>
-                            <title>' . end($covercaption) . '</title>
-                            <url>' . self::xmlencoder($settingsConfig['m_sfGalleryThumbUrl'] . end($coverimage)) . '</url>
-                            <link>' . self::xmlencoder($itemUrl . "?Galleryid=" . $galleryStruct->m_id) . '</link>
-                            <width>' . $settingsConfig['thumbWidth'] . '</width>
-                            <height>' . $settingsConfig['thumbHeight'] . '</height>
-                        </image>
-                        <publisher>' . $galleryStruct->m_created_by . '</publisher>
-                        <flakes>' . $galleryStruct->m_flake_it . '</flakes>
-                    </item>';
+            
+            $item = $channel->addChild('item');
+            $item->addChild('title', self::escape($galleryStruct->m_title));
+            $item->addChild('link', self::xmlencoder($itemUrl . "?Galleryid=" . $galleryStruct->m_id));
+            $item->addChild('date', date(" F j, Y", $galleryStruct->m_created));
+            $cvrimage = $item->addChild('image');
+            $cvrimage->addChild('title', end($covercaption));
+            $cvrimage->addChild('url', self::xmlencoder($settingsConfig['m_sfGalleryThumbUrl'] . end($coverimage)));
+            $cvrimage->addChild('link', self::xmlencoder($itemUrl . "?Galleryid=" . $galleryStruct->m_id));
+            $cvrimage->addChild('width', $settingsConfig['thumbWidth']);
+            $cvrimage->addChild('height', $settingsConfig['thumbHeight']);
+            $item->addChild('publisher', $galleryStruct->m_created_by);
+            $item->addChild('flakes', $galleryStruct->m_flake_it);
+            
         }
-        $rssString .='
-                </channel>
-            </rss>';
+         //format for pretty printing
+        $dom = new DOMDocument('1.0', 'UTF-8');
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $dom->loadXML($rss->asXML());
 
-        return $rssString;
+        return $dom->saveXML();
     }
 
     /**
@@ -4365,10 +4373,10 @@ class sfWebservice {
 
     private function inputs() {
 
-        $this->m_path_info = filter_input(INPUT_SERVER, "ORIG_PATH_INFO"); //e.g. index.php/authors/
+        $this->m_path_info = filter_input(INPUT_SERVER, "PATH_INFO"); //e.g. index.php/authors/
         $this->m_uri_parts = $this->parse_uri($this->m_path_info);
-        $resource_type = $this->m_uri_parts['resource_type']; //e.g. "snowflake"
-        $request = $this->m_uri_parts['request']; //anything after the resource type
+        //$resource_type = $this->m_uri_parts['resource_type']; //e.g. "snowflake"
+        //$request = $this->m_uri_parts['request']; //anything after the resource type
 
         $this->m_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
         var_dump($this->m_method);
@@ -4395,7 +4403,7 @@ class sfWebservice {
 
     public function parse_uri($path_string) {
         // $path_string is something like
-        // 'index.php/authors/'
+        // 'api.php/users/'
         $path_parts = explode("/", $path_string);
         $restype = $path_parts[1];
         $req = $path_parts[2];
@@ -4463,7 +4471,7 @@ class sfWebservice {
      * */
     public function deliverResponseAndExit($data, $code, $status = '', $format = '') {
 
-        if (!$data || !$status || !$format) {
+        if (!$data) {
             return false;
         }
 

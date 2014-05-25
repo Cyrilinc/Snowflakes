@@ -1,6 +1,6 @@
 <?php
 
-header("Content-Type: application/xml; charset=ISO-8859-1");
+header("Content-Type: text/xml; charset=UTF-8");
 require_once 'lib/sf.php';
 require_once 'lib/sfConnect.php';
 require_once 'config/Config.php';
