@@ -3209,7 +3209,7 @@ final class sfUtils {
         if (!$conn || empty($snowflakesList)) {
             return false;
         }
-
+        
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['snowflakesResultUrl']) ? $settingsConfig['snowflakesResultUrl'] : $settingsConfig['m_sfUrl'] . "OneView.php";
         $headers = apache_request_headers();

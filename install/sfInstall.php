@@ -7,10 +7,10 @@
  * Date: Thu, Dec 19 2013 22:56:31 
  */
 
-include_once '../lib/sf.php';
-include_once '../lib/sfConnect.php';
-include_once '../config/Config.php';
-include_once '../lib/sfSetup.php';
+require_once '../lib/sf.php';
+require_once '../lib/sfConnect.php';
+require_once '../config/Config.php';
+require_once '../lib/sfSetup.php';
 //start the session
 session_start();
 //set the return URL

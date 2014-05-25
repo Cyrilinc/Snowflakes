@@ -6,9 +6,9 @@
  * 
  * @author Cyril Adelekan
  */
-include_once '../lib/sf.php';
-include_once '../lib/sfConnect.php';
-include_once '../config/Config.php';
+require_once '../lib/sf.php';
+require_once '../lib/sfConnect.php';
+require_once '../config/Config.php';
 
 class snowflakesSetUp {
 
