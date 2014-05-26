@@ -15,6 +15,7 @@ date_default_timezone_set('Europe/London');
 class snowflakeStruct {
 
     var $m_id;
+    var $m_uuid;
     var $m_title;
     var $m_body_text;
     var $m_publish;
@@ -52,6 +53,7 @@ class snowflakeStruct {
         }
 
         $this->m_id = isset($array['id']) ? $array['id'] : "";
+        $this->m_uuid = isset($array['uuid']) ? $array['uuid'] : "";
         $this->m_title = strlen($array['title']) > 0 ? $array['title'] : "";
         $this->m_body_text = $array['body_text'];
         $this->m_publish = isset($array['publish']) ? $array['publish'] : "";
@@ -73,16 +75,18 @@ class snowflakeStruct {
      * members of this class {@see populate}
      * 
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param int $id {@link snowflakeStruct} the id(identifier) of the snowflake
+     * @param int $id {@link snowflakeStruct} the id(identifier) or uuid(universally 
+     * unique identifier) of the snowflake record
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
     public function getSnowflakesByid($conn, $id) {
-        if (!$conn || !$id) {
+        if (!$conn || !$id || $id == -1) {
             return false;
         }
 
-        $sql = "SELECT * FROM snowflakes WHERE id=$id;";
+        $sql = "SELECT * FROM snowflakes WHERE ";
+        $sql.=strpos($id, '-') ? "uuid='$id';" : "id=$id;";
         if (!$conn->fetch($sql)) {
             return false;
         }
@@ -134,7 +138,8 @@ class snowflakeStruct {
             return false;
         }
 
-        $insertSQL = 'INSERT INTO snowflakes SET title="' . sfUtils::escape($this->m_title) .
+        $insertSQL = 'INSERT INTO snowflakes SET uuid=UPPER(UUID()), ' .
+                'title="' . sfUtils::escape($this->m_title) .
                 '",body_text="' . sfUtils::escape($this->m_body_text) .
                 '",publish="' . $this->m_publish .
                 '",image_name="' . sfUtils::escape($this->m_image_name) .
@@ -256,7 +261,8 @@ class snowflakeStruct {
      * @return String formatted and labeled member values
      */
     public function printsnowlakes() {
-        $str = 'title="' . $this->m_title . '"<br> ';
+        $str = 'uuid="' . $this->m_uuid . '"<br> ';
+        $str.= 'title="' . $this->m_title . '"<br> ';
         $str.='body_text="' . $this->m_body_text . '"<br>';
         $str.='publish="' . $this->m_publish . '"<br>';
         $str.='image_name="' . $this->m_image_name . '"<br>';
@@ -279,14 +285,19 @@ class snowflakeStruct {
     public function toArray() {
         $retArray = array();
         $retArray['id'] = $this->m_id;
+        $retArray['uuid'] = $this->m_uuid;
         $retArray['title'] = $this->m_title;
         $retArray['body_text'] = $this->m_body_text;
         $retArray['publish'] = $this->m_publish;
         $retArray['image_name'] = $this->m_image_name;
         $retArray['gallery'] = $this->m_gallery;
         $retArray['created'] = $this->m_created;
+        $retArray['created']['format'] = 'Y-m-d H:i:s O';
+        $retArray['created']['value'] = date('Y-m-d H:i:s O', $this->m_created);
         $retArray['created_by'] = $this->m_created_by;
         $retArray['edited'] = $this->m_edited;
+        $retArray['edited']['format'] = 'Y-m-d H:i:s O';
+        $retArray['edited']['value'] = date('Y-m-d H:i:s O', $this->m_edited);
         $retArray['edited_by'] = $this->m_edited_by;
         $retArray['deleted'] = $this->m_deleted;
         $retArray['flake_it'] = $this->m_flake_it;
@@ -300,24 +311,37 @@ class snowflakeStruct {
      * @return string The xml string value of {@link snowflakeStruct}
      */
     public function toXml() {
-        $retXml = "<snowflake id='$this->m_id'>";
-        $retXml .= "    <title>" . $this->m_title . "</title>";
-        $retXml .= "    <body_text>" . $this->m_body_text . "</body_text>";
-        $retXml .= "    <publish>" . $this->m_publish . "</publish>";
-        $retXml .= "    <image_name rel='$this->m_image_name' href='#UPLOADIMGURL#$this->m_image_name'/>";
+        $retXml = new SimpleXMLElement("<snowflake id='$this->m_id' publish='$this->m_publish'></snowflake>");
+        $retXml->addChild('uuid', $this->m_uuid);
+        $retXml->addChild('title', $this->m_title);
+        $BodyString = sfUtils::escape(html_entity_decode($this->m_body_text));
+        $retXml->addChild('body_text', $BodyString);
+        $imagename = $retXml->addChild('image_name');
+        $imagename->addAttribute('rel', $this->m_image_name);
+        $imagename->addAttribute('href', "#UPLOADIMGURL#$this->m_image_name");
+
         if (!sfUtils::isEmpty($this->m_gallery)) {
             $Gallery = explode(",", $this->m_gallery);
-            $retXml .= "    <gallery id='$Gallery[0]' />";
+            $Galleryitem = $retXml->addChild('gallery');
+            $Galleryitem->addAttribute('id', $Gallery[0]);
+            $Galleryitem->addAttribute('title', $Gallery[1]);
         }
-        $retXml .= "    <created>" . $this->m_created . "</created>";
-        $retXml .= "    <created_by>" . $this->m_created_by . "</created_by>";
-        $retXml .= "    <edited>" . $this->m_edited . "</edited>";
-        $retXml .= "    <edited_by>" . $this->m_edited_by . "</edited_by>";
-        $retXml .= "    <deleted>" . $this->m_deleted . "</deleted>";
-        $retXml .= "    <flake_it>" . $this->m_flake_it . "</flake_it>";
-        $retXml .= "</snowflake>";
 
-        return $retXml;
+        $created = $retXml->addChild('created');
+        $created->addAttribute('format', 'Y-m-d H:i:s O');
+        $created->addAttribute('value', date('Y-m-d H:i:s O', $this->m_created));
+
+        $retXml->addChild('created_by', $this->m_created_by);
+
+        $edited = $retXml->addChild('edited');
+        $edited->addAttribute('format', 'Y-m-d H:i:s O');
+        $edited->addAttribute('value', date('Y-m-d H:i:s O', $this->m_edited));
+
+        $retXml->addChild('edited_by', $this->m_edited_by);
+        $retXml->addChild('deleted', $this->m_deleted);
+        $retXml->addChild('flake_it', $this->m_flake_it);
+
+        return $retXml->asXML();
     }
 
 }
@@ -325,6 +349,7 @@ class snowflakeStruct {
 class userStruct {
 
     var $m_id;
+    var $m_uuid;
     var $m_username;
     var $m_password;
     var $m_email;
@@ -378,6 +403,7 @@ class userStruct {
             return false;
         }
         $this->m_id = isset($value['id']) ? $value['id'] : "";
+        $this->m_uuid = isset($array['uuid']) ? $array['uuid'] : "";
         $this->m_username = isset($value['username']) ? $value['username'] : "";
         $this->m_password = isset($value['password']) ? $value['password'] : "";
         $this->m_reset_link = isset($value['reset_link']) ? $value['reset_link'] : "";
@@ -449,7 +475,8 @@ class userStruct {
      * {@see populate}
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param int $id {@link userStruct} the id(identifier) of the user record
+     * @param int $id {@link userStruct} the id(identifier) or uuid(universally 
+     * unique identifier) of the user record
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -458,7 +485,8 @@ class userStruct {
             return false;
         }
 
-        $sql = "SELECT * FROM snowflakes_users WHERE id=$id;";
+        $sql = "SELECT * FROM snowflakes_users WHERE ";
+        $sql.=strpos($id, '-') ? "uuid='$id';" : "id=$id;";
         if (!$conn->fetch($sql)) {
             return false;
         }
@@ -549,14 +577,15 @@ class userStruct {
             return false;
         }
 
-        $insertSQL = 'INSERT INTO snowflakes_users 
-      SET username="' . $this->m_username . '", 
-          password="' . $this->m_password . '",  
-          reset_link="' . $this->m_reset_link . '",
-          email="' . $this->m_email . '",
-          image_name="' . $this->m_image_name . '",
-          access_level="' . $this->m_access_level . '",
-          access_name="' . $this->m_access_name . '";';
+        $insertSQL = 'INSERT INTO snowflakes_users SET ' .
+                'uuid=UPPER(UUID()),' .
+                'username="' . $this->m_username . '",' .
+                'password="' . $this->m_password . '",' .
+                'reset_link="' . $this->m_reset_link . '",' .
+                'email="' . $this->m_email . '",' .
+                'image_name="' . $this->m_image_name . '",' .
+                'access_level="' . $this->m_access_level . '",' .
+                'access_name="' . $this->m_access_name . '";';
 
         return $conn->execute($insertSQL);
     }
@@ -687,6 +716,7 @@ class userStruct {
      */
     public function printuser() {
         $str = "id = " . $this->m_id . "<br>";
+        $str .= 'uuid="' . $this->m_uuid . '"<br> ';
         $str .= "username = " . $this->m_username . "<br>";
         $str .= "password = " . $this->m_password . "<br>";
         $str .= "email = " . $this->m_email . "<br>";
@@ -710,18 +740,19 @@ class userStruct {
     public function toArray() {
         $retArray = array();
 
-        $retArray ["id"] = $this->m_id;
-        $retArray ["username"] = $this->m_username;
-        $retArray ["password"] = $this->m_password;
-        $retArray ["email"] = $this->m_email;
-        $retArray ["image_name "] = $this->m_image_name;
-        $retArray ["access_level"] = $this->m_access_level;
-        $retArray ["access_name "] = $this->m_access_name;
-        $retArray ["reset_link"] = $this->m_reset_link;
-        $retArray ["deleted"] = $this->m_deleted;
-        $retArray ["flake_it"] = $this->m_flake_it;
-        $retArray ["logged_in"] = $this->m_logged_in;
-        $retArray ["last_login."] = $this->m_last_login;
+        $retArray["id"] = $this->m_id;
+        $retArray['uuid'] = $this->m_uuid;
+        $retArray["username"] = $this->m_username;
+        $retArray["password"] = $this->m_password;
+        $retArray["email"] = $this->m_email;
+        $retArray["image_name "] = $this->m_image_name;
+        $retArray["access_level"] = $this->m_access_level;
+        $retArray["access_name "] = $this->m_access_name;
+        $retArray["reset_link"] = $this->m_reset_link;
+        $retArray["deleted"] = $this->m_deleted;
+        $retArray["flake_it"] = $this->m_flake_it;
+        $retArray["logged_in"] = $this->m_logged_in;
+        $retArray["last_login."] = $this->m_last_login;
 
         return $retArray;
     }
@@ -732,22 +763,24 @@ class userStruct {
      * @return String The xml string value of {@link userStruct}
      */
     public function toXml() {
-        $retXml = "<user id='$this->m_id'>";
-        $retXml .= "    <username>" . $this->m_username . "</username>";
-        $retXml .= "    <password>" . $this->m_password . "</password>";
-        $retXml .= "    <email>" . $this->m_email . "</email>";
-        $retXml .= "    <image_name rel='$this->m_image_name' href='#UPLOADIMGURL#$this->m_image_name'/>";
-        $retXml .= "    <access_level>" . $this->m_access_level . "</access_level>";
-        $retXml .= "    <access_name>" . $this->m_access_name . "</access_name>";
-        $retXml .= "    <reset_link>" . $this->m_reset_link . "</reset_link>";
-        $retXml .= "    <edited_by>" . $this->m_edited_by . "</edited_by>";
-        $retXml .= "    <deleted>" . $this->m_deleted . "</deleted>";
-        $retXml .= "    <flake_it>" . $this->m_flake_it . "</flake_it>";
-        $retXml .= "    <logged_in>" . $this->m_logged_in . "</logged_in>";
-        $retXml .= "    <last_login>" . $this->m_last_login . "</last_login>";
-        $retXml .= "</user>";
+        $retXml = new SimpleXMLElement("<user id='$this->m_id'></user>");
+        $retXml->addChild('uuid', $this->m_uuid);
+        $retXml->addChild("username", $this->m_username);
+        $retXml->addChild("password", $this->m_password);
+        $retXml->addChild("email", $this->m_email);
+        $retXml->addChild('access_level', $this->m_access_level);
+        $retXml->addChild('access_name', $this->m_access_name);
+        $retXml->addChild('reset_link', $this->m_reset_link);
+        $imagename = $retXml->addChild('image_name');
+        $imagename->addAttribute('rel', $this->m_image_name);
+        $imagename->addAttribute('href', "#UPLOADIMGURL#$this->m_image_name");
+        $retXml->addChild('deleted', $this->m_deleted);
+        $retXml->addChild('flake_it', $this->m_flake_it);
+        $retXml->addChild('logged_in', $this->m_logged_in);
+        $retXml->addChild('last_login', $this->m_last_login);
 
-        return $retXml;
+
+        return $retXml->asXML();
     }
 
 }
@@ -755,6 +788,7 @@ class userStruct {
 class galleryStruct {
 
     var $m_id;
+    var $m_uuid;
     var $m_title;
     var $m_thumb_name;
     var $m_image_name;
@@ -792,6 +826,7 @@ class galleryStruct {
         }
 
         $this->m_id = isset($array['id']) ? $array['id'] : "";
+        $this->m_uuid = isset($array['uuid']) ? $array['uuid'] : "";
         $this->m_title = isset($array['title']) ? $array['title'] : "";
         $this->m_thumb_name = isset($array['thumb_name']) ? $array['thumb_name'] : "";
         $this->m_image_name = isset($array['image_name']) ? $array['image_name'] : "";
@@ -821,7 +856,8 @@ class galleryStruct {
             return false;
         }
 
-        $insertSQL = 'INSERT INTO snowflakes_gallery SET title="' . sfUtils::escape($this->m_title) .
+        $insertSQL = 'INSERT INTO snowflakes_gallery SET uuid=UPPER(UUID()),' .
+                'title="' . sfUtils::escape($this->m_title) .
                 '",thumb_name="' . $this->m_thumb_name .
                 '",image_name="' . $this->m_image_name .
                 '",image_caption="' . sfUtils::escape($this->m_image_caption) .
@@ -894,7 +930,8 @@ class galleryStruct {
      * {@see populate}
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param int $id {@link galleryStruct} the id(identifier) of the user record
+     * @param int $id {@link galleryStruct} the id(identifier) or uuid(universally 
+     * unique identifier) of the gallery record
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -903,7 +940,8 @@ class galleryStruct {
             return false;
         }
 
-        $sql = "SELECT * FROM snowflakes_gallery WHERE id=$id;";
+        $sql = "SELECT * FROM snowflakes_gallery WHERE ";
+        $sql.=strpos($id, '-') ? "uuid='$id';" : "id=$id;";
         if (!$conn->fetch($sql)) {
             return false;
         }
@@ -959,7 +997,8 @@ class galleryStruct {
      * @return String formatted and labeled member values</b>
      */
     public function printGallery() {
-        $str = 'title="' . $this->m_title . '"<br> ';
+        $str = 'uuid="' . $this->m_uuid . '"<br> ';
+        $str.= 'title="' . $this->m_title . '"<br> ';
         $str.='thumb_name="' . $this->m_thumb_name . '"<br>';
         $str.='image_name="' . $this->m_image_name . '"<br>';
         $str.='image_caption="' . $this->m_image_caption . '"<br>';
@@ -982,18 +1021,23 @@ class galleryStruct {
     public function toArray() {
         $retArray = array();
 
-        $retArray ['id'] = $this->m_id;
-        $retArray ['title'] . $this->m_title;
-        $retArray ['thumb_name'] = $this->m_thumb_name;
-        $retArray ['image_name'] = $this->m_image_name;
-        $retArray ['image_caption'] = $this->m_image_caption;
-        $retArray ['publish'] = $this->m_publish;
-        $retArray ['created'] = $this->m_created;
-        $retArray ['created_by'] = $this->m_created_by;
-        $retArray ['edited'] = $this->m_edited;
-        $retArray ['edited_by'] = $this->m_edited_by;
-        $retArray ['deleted'] = $this->m_deleted;
-        $retArray ['flake_it'] = $this->m_flake_it;
+        $retArray['id'] = $this->m_id;
+        $retArray['uuid'] = $this->m_uuid;
+        $retArray['title'] . $this->m_title;
+        $retArray['thumb_name'] = $this->m_thumb_name;
+        $retArray['image_name'] = $this->m_image_name;
+        $retArray['image_caption'] = $this->m_image_caption;
+        $retArray['publish'] = $this->m_publish;
+        $retArray['created'] = $this->m_created;
+        $retArray['created']['format'] = 'Y-m-d H:i:s O';
+        $retArray['created']['value'] = date('Y-m-d H:i:s O', $this->m_created);
+        $retArray['created_by'] = $this->m_created_by;
+        $retArray['edited'] = $this->m_edited;
+        $retArray['edited']['format'] = 'Y-m-d H:i:s O';
+        $retArray['edited']['value'] = date('Y-m-d H:i:s O', $this->m_edited);
+        $retArray['edited_by'] = $this->m_edited_by;
+        $retArray['deleted'] = $this->m_deleted;
+        $retArray['flake_it'] = $this->m_flake_it;
 
         return $retArray;
     }
@@ -1004,20 +1048,33 @@ class galleryStruct {
      * @return String The xml string value of {@link galleryStruct}
      */
     public function toXml() {
-        $retXml = "<gallery id='$this->m_id' publish='$this->m_publish'>";
-        $retXml .= "    <title>" . $this->m_title . "</title>";
-        $retXml .= "    <thumb_name imageurlPrefix='#GALLERYTHUMBURL#'>" . $this->m_thumb_name . "</thumb_name>";
-        $retXml .= "    <image_name imageurlPrefix='#GALLERYIMGURL#'>" . $this->m_image_name . "</image_name>";
-        $retXml .= "    <image_caption>" . $this->m_image_caption . "</image_caption>";
-        $retXml .= "    <created>" . $this->m_created . "</created>";
-        $retXml .= "    <created_by>" . $this->m_created_by . "</created_by>";
-        $retXml .= "    <edited>" . $this->m_edited . "</edited>";
-        $retXml .= "    <edited_by>" . $this->m_edited_by . "</edited_by>";
-        $retXml .= "    <deleted>" . $this->m_deleted . "</deleted>";
-        $retXml .= "    <flake_it>" . $this->m_flake_it . "</flake_it>";
-        $retXml .= "</gallery>";
 
-        return $retXml;
+        $retXml = new SimpleXMLElement("<gallery id='$this->m_id' publish='$this->m_publish'></gallery>");
+        $retXml->addChild('uuid', $this->m_uuid);
+        $retXml->addChild('title', $this->m_title);
+        $thumb = $retXml->addChild('thumb_name', $this->m_thumb_name);
+        $thumb->addAttribute('imageurlPrefix', '#GALLERYIMGURL#');
+
+        $img = $retXml->addChild('image_name', $this->m_image_name);
+        $img->addAttribute('imageurlPrefix', '#GALLERYIMGURL#');
+
+        $retXml->addChild('image_caption', $this->m_image_caption);
+
+        $created = $retXml->addChild('created');
+        $created->addAttribute('format', 'Y-m-d H:i:s O');
+        $created->addAttribute('value', date('Y-m-d H:i:s O', $this->m_created));
+
+        $retXml->addChild('created_by', $this->m_created_by);
+
+        $edited = $retXml->addChild('edited');
+        $edited->addAttribute('format', 'Y-m-d H:i:s O');
+        $edited->addAttribute('value', date('Y-m-d H:i:s O', $this->m_edited));
+
+        $retXml->addChild('edited_by', $this->m_edited_by);
+        $retXml->addChild('deleted', $this->m_deleted);
+        $retXml->addChild('flake_it', $this->m_flake_it);
+
+        return $retXml->asXML();
     }
 
 }
@@ -1025,6 +1082,7 @@ class galleryStruct {
 class eventStruct {
 
     var $m_id;
+    var $m_uuid;
     var $m_title;
     var $m_body_text;
     var $m_publish;
@@ -1064,6 +1122,7 @@ class eventStruct {
             return false;
         }
         $this->m_id = isset($array['id']) ? $array['id'] : "";
+        $this->m_uuid = isset($array['uuid']) ? $array['uuid'] : "";
         $this->m_title = isset($array['title']) ? $array['title'] : "";
         $this->m_body_text = isset($array['body_text']) ? $array['body_text'] : "";
         $this->m_publish = isset($array['publish']) ? $array['publish'] : "";
@@ -1088,7 +1147,8 @@ class eventStruct {
      * {@see populate}
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param int $id {@link eventStruct} the id(identifier) of the user record
+     * @param int $id {@link eventStruct} the id(identifier) or uuid(universally 
+     * unique identifier) of the event record
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
@@ -1097,7 +1157,8 @@ class eventStruct {
             return false;
         }
 
-        $sql = "SELECT * FROM snowflakes_events WHERE id=$id;";
+        $sql = "SELECT * FROM snowflakes_events WHERE ";
+        $sql.=strpos($id, '-') ? "uuid='$id';" : "id=$id;";
         if (!$conn->fetch($sql)) {
             return false;
         }
@@ -1112,7 +1173,7 @@ class eventStruct {
      * Get {@link eventStruct} image name   given the id(identifier)
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param int $id {@link eventStruct} the id(identifier) of the user record
+     * @param int $id {@link eventStruct} the id(identifier) of the event record
      * 
      * @return bool <b>image name</b> on success or <b>FALSE</b> otherwise
      */
@@ -1147,7 +1208,8 @@ class eventStruct {
             return false;
         }
 
-        $sql = 'INSERT INTO snowflakes_events SET title="' . sfUtils::escape($this->m_title) .
+        $sql = 'INSERT INTO snowflakes_events SET uuid=UPPER(UUID()),' .
+                'title="' . sfUtils::escape($this->m_title) .
                 '",body_text="' . sfUtils::escape($this->m_body_text) .
                 '",publish="' . $this->m_publish .
                 '",image_name="' . sfUtils::escape($this->m_image_name) .
@@ -1277,7 +1339,8 @@ class eventStruct {
      * @return String formatted and labeled member values</b>
      */
     public function printEvents() {
-        $str = 'title="' . $this->m_title . '"<br> ';
+        $str = 'uuid="' . $this->m_uuid . '"<br> ';
+        $str.= 'title="' . $this->m_title . '"<br> ';
         $str.='body_text="' . $this->m_body_text . '"<br>';
         $str.='publish="' . $this->m_publish . '"<br>';
         $str.='image_name="' . $this->m_image_name . '"<br>';
@@ -1305,23 +1368,32 @@ class eventStruct {
     public function toArray() {
         $retArray = array();
 
-        $retArray ["id"] = $this->m_id;
-        $retArray ['title'] = $this->m_title;
-        $retArray ['body_text'] = $this->m_body_text;
-        $retArray ['publish'] = $this->m_publish;
-        $retArray ['image_name'] = $this->m_image_name;
-        $retArray ['event_time'] = $this->m_event_time;
-        $retArray ['event_date'] = $this->m_event_date;
-        $retArray ['end_time'] = $this->m_end_time;
-        $retArray ['end_date'] = $this->m_end_date;
-        $retArray ['location'] = $this->m_location;
-        $retArray ['lat_long'] = $this->m_lat_long;
-        $retArray ['created'] = $this->m_created;
-        $retArray ['created_by'] = $this->m_created_by;
-        $retArray ['edited'] = $this->m_edited;
-        $retArray ['edited_by'] = $this->m_edited_by;
-        $retArray ['deleted'] = $this->m_deleted;
-        $retArray ['flake_it'] = $this->m_flake_it;
+        $retArray["id"] = $this->m_id;
+        $retArray['uuid'] = $this->m_uuid;
+        $retArray['title'] = $this->m_title;
+        $retArray['body_text'] = $this->m_body_text;
+        $retArray['publish'] = $this->m_publish;
+        $retArray['image_name'] = $this->m_image_name;
+        $retArray['event_time'] = $this->m_event_time;
+        $retArray['event_time']['format'] = 'H:i:s O';
+        $retArray['event_time']['value'] = date('H:i:s O', $this->m_event_time);
+        $retArray['event_date'] = $this->m_event_date;
+        $retArray['end_time'] = $this->m_end_time;
+        $retArray['end_time']['format'] = 'H:i:s O';
+        $retArray['end_time']['value'] = date('H:i:s O', $this->m_end_time);
+        $retArray['end_date'] = $this->m_end_date;
+        $retArray['location'] = $this->m_location;
+        $retArray['lat_long'] = $this->m_lat_long;
+        $retArray['created'] = $this->m_created;
+        $retArray['created']['format'] = 'Y-m-d H:i:s O';
+        $retArray['created']['value'] = date('Y-m-d H:i:s O', $this->m_created);
+        $retArray['created_by'] = $this->m_created_by;
+        $retArray['edited'] = $this->m_edited;
+        $retArray['edited']['format'] = 'Y-m-d H:i:s O';
+        $retArray['edited']['value'] = date('Y-m-d H:i:s O', $this->m_edited);
+        $retArray['edited_by'] = $this->m_edited_by;
+        $retArray['deleted'] = $this->m_deleted;
+        $retArray['flake_it'] = $this->m_flake_it;
 
         return $retArray;
     }
@@ -1332,25 +1404,40 @@ class eventStruct {
      * @return String The xml string value of {@link eventStruct}
      */
     public function toXml() {
-        $retXml = "<event id='$this->m_id' publish='$this->m_publish'>";
-        $retXml .= "    <title>" . $this->m_title . "</title>";
-        $retXml .= "    <body_text>" . $this->m_body_text . "</body_text>";
-        $retXml .= "    <image_name rel='$this->m_image_name' href='#UPLOADIMGURL#$this->m_image_name'/>";
-        $retXml .= "    <event_time>" . $this->m_event_time . "</event_time>";
-        $retXml .= "    <event_date>" . $this->m_event_date . "</event_date>";
-        $retXml .= "    <end_time>" . $this->m_end_time . "</end_time>";
-        $retXml .= "    <end_date>" . $this->m_end_date . "</end_date>";
-        $retXml .= "    <location>" . $this->m_location . "</location>";
-        $retXml .= "    <lat_long>" . $this->m_lat_long . "</lat_long>";
-        $retXml .= "    <created>" . $this->m_created . "</created>";
-        $retXml .= "    <created_by>" . $this->m_created_by . "</created_by>";
-        $retXml .= "    <edited>" . $this->m_edited . "</edited>";
-        $retXml .= "    <edited_by>" . $this->m_edited_by . "</edited_by>";
-        $retXml .= "    <deleted>" . $this->m_deleted . "</deleted>";
-        $retXml .= "    <flake_it>" . $this->m_flake_it . "</flake_it>";
-        $retXml .= "</event>";
 
-        return $retXml;
+        $retXml = new SimpleXMLElement("<event id='$this->m_id' publish='$this->m_publish'></event>");
+        $retXml->addChild('uuid', $this->m_uuid);
+        $retXml->addChild('title', $this->m_title);
+
+        $BodyString = sfUtils::escape(html_entity_decode($this->m_body_text));
+        $retXml->addChild('body_text', $BodyString);
+
+        $imagename = $retXml->addChild('image_name');
+        $imagename->addAttribute('rel', $this->m_image_name);
+        $imagename->addAttribute('href', "#UPLOADIMGURL#$this->m_image_name");
+
+        $retXml->addChild('event_time', $this->m_event_time);
+        $retXml->addChild('event_date', $this->m_event_date);
+        $retXml->addChild('end_time', $this->m_end_time);
+        $retXml->addChild('end_date', $this->m_end_date);
+        $retXml->addChild('location', $this->m_location);
+        $retXml->addChild('lat_long', $this->m_lat_long);
+
+        $created = $retXml->addChild('created');
+        $created->addAttribute('format', 'Y-m-d H:i:s O');
+        $created->addAttribute('value', date('Y-m-d H:i:s O', $this->m_created));
+
+        $retXml->addChild('created_by', $this->m_created_by);
+
+        $edited = $retXml->addChild('edited');
+        $edited->addAttribute('format', 'Y-m-d H:i:s O');
+        $edited->addAttribute('value', date('Y-m-d H:i:s O', $this->m_edited));
+
+        $retXml->addChild('edited_by', $this->m_edited_by);
+        $retXml->addChild('deleted', $this->m_deleted);
+        $retXml->addChild('flake_it', $this->m_flake_it);
+
+        return $retXml->asXML();
     }
 
 }
@@ -3209,7 +3296,7 @@ final class sfUtils {
         if (!$conn || empty($snowflakesList)) {
             return false;
         }
-        
+
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['snowflakesResultUrl']) ? $settingsConfig['snowflakesResultUrl'] : $settingsConfig['m_sfUrl'] . "OneView.php";
         $headers = apache_request_headers();
@@ -3238,7 +3325,6 @@ final class sfUtils {
             $item->addChild('date', date(" F j, Y", $flakeStruct->m_created));
             $item->addChild('publisher', $flakeStruct->m_created_by);
             $item->addChild('flakes', $flakeStruct->m_flake_it);
-            
         }
 
         //format for pretty printing
@@ -3268,7 +3354,7 @@ final class sfUtils {
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['eventsResultUrl']) ? $settingsConfig['eventsResultUrl'] : $settingsConfig['m_sfUrl'] . "Events/OneView.php";
         $headers = apache_request_headers();
-        
+
         // build parent element
         $rss = new SimpleXMLElement("<rss version='2.0'></rss>");
         $channel = $rss->addChild('channel');
@@ -3282,7 +3368,7 @@ final class sfUtils {
         $image->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=events');
         $image->addChild('width', '120');
         $image->addChild('height', '40');
-        
+
         foreach ($eventList as $key => $value) {
             $eventStruct = $value;
             $eventtime = new DateTime($eventStruct->m_event_date);
@@ -3300,7 +3386,7 @@ final class sfUtils {
             $item->addChild('publisher', $eventStruct->m_created_by);
             $item->addChild('flakes', $eventStruct->m_flake_it);
         }
-         //format for pretty printing
+        //format for pretty printing
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->preserveWhiteSpace = false;
         $dom->formatOutput = true;
@@ -3327,7 +3413,7 @@ final class sfUtils {
         $settingsConfig = Config::getConfig("settings", $inifile);
         $itemUrl = isset($settingsConfig['galleryResultUrl']) ? $settingsConfig['galleryResultUrl'] : $settingsConfig['m_sfUrl'] . "Gallery/OneView.php";
         $headers = apache_request_headers();
-        
+
         $rss = new SimpleXMLElement("<rss version='2.0'></rss>");
         $channel = $rss->addChild('channel');
         $channel->addChild('title', 'Snowflakes Gallery Rss');
@@ -3340,12 +3426,12 @@ final class sfUtils {
         $image->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery');
         $image->addChild('width', '120');
         $image->addChild('height', '40');
-        
+
         foreach ($galleryList as $key => $value) {
             $galleryStruct = $value;
             $coverimage = explode(",", $galleryStruct->m_thumb_name);
             $covercaption = explode(",", $galleryStruct->m_image_caption);
-            
+
             $item = $channel->addChild('item');
             $item->addChild('title', self::escape($galleryStruct->m_title));
             $item->addChild('link', self::xmlencoder($itemUrl . "?Galleryid=" . $galleryStruct->m_id));
@@ -3358,9 +3444,8 @@ final class sfUtils {
             $cvrimage->addChild('height', $settingsConfig['thumbHeight']);
             $item->addChild('publisher', $galleryStruct->m_created_by);
             $item->addChild('flakes', $galleryStruct->m_flake_it);
-            
         }
-         //format for pretty printing
+        //format for pretty printing
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->preserveWhiteSpace = false;
         $dom->formatOutput = true;
@@ -3709,6 +3794,21 @@ final class sfUtils {
         //echo "\n memory limit adjusted dynamically - $total";
         sleep(1);
         return true;
+    }
+
+    public static function processSFAPI($type, $method, $param, $rettype = 'json') {
+        if (!$type || !$method || !$param) {
+            return false;
+        }
+        if ($type == 'snowflakes') {
+            
+        } else if ($type == 'event') {
+            
+        } else if ($type == 'gallery') {
+            
+        } else if ($type == 'user') {
+            
+        }
     }
 
 }

@@ -146,7 +146,7 @@ if (!isset($_SESSION['form'])) {
 
                             <span id="spryDBUName">
                                 <span class="textfieldRequiredMsg">Database username is required.<br/></span>
-                                <input name="dbUsername" type="text" class="inputtext2" value="" placeholder=" Database Username"  />
+                                <input name="dbUsername" type="text" class="inputtext2" value="" placeholder="Database Username"  />
                             </span><br />
 
                             <span id="spryDBPass">
