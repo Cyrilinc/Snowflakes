@@ -344,6 +344,7 @@ class snowflakesSetUp {
         deleted         TINYINT(1) unsigned NOT NULL DEFAULT '0',
         flake_it        INT(11) NOT NULL DEFAULT 0,
 	PRIMARY KEY (id),
+        KEY (uuid),
         KEY (title),
         KEY (deleted),
         FULLTEXT snowflakes_search(title,created_by,edited_by,body_text)
@@ -383,6 +384,7 @@ class snowflakesSetUp {
         ip              VARCHAR(40) NOT NULL DEFAULT '',
 	PRIMARY KEY (id),
         UNIQUE KEY user_email (username, email),
+        KEY (uuid),
         KEY (deleted),
         FULLTEXT users_search(username,email)
 	)ENGINE = MYISAM;";
@@ -470,6 +472,7 @@ class snowflakesSetUp {
 	deleted         TINYINT(1) unsigned NOT NULL DEFAULT '0',
         flake_it        INT(11) NOT NULL DEFAULT 0,
 	PRIMARY KEY (id),
+        KEY (uuid),
         KEY (deleted),
         KEY (title),
         FULLTEXT events_search(title,created_by,edited_by,location,body_text)
@@ -506,6 +509,7 @@ class snowflakesSetUp {
 	deleted         TINYINT(1) unsigned NOT NULL DEFAULT '0',
         flake_it        INT(11) NOT NULL DEFAULT 0,
 	PRIMARY KEY (id),
+        KEY (uuid),
         KEY (deleted),
         KEY (title),
         FULLTEXT search_gallery (title,created_by,edited_by,image_caption)
