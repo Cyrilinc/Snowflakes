@@ -4524,7 +4524,7 @@ final class sfUtils
      */
     public static function setHeaders($code = 500, $content_type = "html")
     {
-        if (strcasecmp($content_type, 'json') == 0)
+        if (strcasecmp($content_type, 'json') == 0 || strcasecmp($content_type, 'jsonhtml') == 0)
         {
             $content_type = "application/json; charset=utf-8";
         }
@@ -4573,6 +4573,11 @@ final class sfUtils
             $json_response = json_encode($data);
             // Deliver formatted data
             echo $json_response;
+        }
+        elseif (strcasecmp($m_content_type, 'jsonhtml') == 0)
+        {
+            $startedAt = time();
+            self::sendSSEMsg($startedAt, $data);
         }
         elseif (strcasecmp($m_content_type, 'xml') == 0)
         {
