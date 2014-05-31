@@ -7,7 +7,8 @@
  * 
  * @author Cyril Adelekan
  */
-final class Config {
+final class Config
+{
 
     /** @var array config data */
     private static $m_data = null;
@@ -20,10 +21,11 @@ final class Config {
      * @return bool <b>TRUE</b> if the config file or directory specified by
      * <i>filename</i> exists; <b>FALSE</b> otherwise.
      */
-    public static function checkConfig($inifile = '../config/config.ini') {
+    public static function checkConfig($inifile = '../config/config.ini')
+    {
         return file_exists($inifile);
     }
-    
+
     /**
      * Checks if a configuration file exists and create is according to the 
      * creat it flag raised.
@@ -35,9 +37,12 @@ final class Config {
      * @return bool <b>TRUE</b> if the config file or directory specified by
      * <i>filename</i> exists; <b>FALSE</b> otherwise.
      */
-    public static function createConfig($inifile = '../config/config.ini', $createit = false) {
-        if (!file_exists($inifile)) {
-            if ($createit) {
+    public static function createConfig($inifile = '../config/config.ini', $createit = false)
+    {
+        if (!file_exists($inifile))
+        {
+            if ($createit)
+            {
                 $fp = fopen($inifile, "w");
                 return fclose($fp);
             }
@@ -53,17 +58,21 @@ final class Config {
      * 
      * @return array The specific configuration data in form of an array
      */
-    public static function getConfig($section = null, $inifile = '../config/config.ini') {
-        if ($section === null) {
+    public static function getConfig($section = null, $inifile = '../config/config.ini')
+    {
+        if ($section === null)
+        {
             return self::getData($inifile);
         }
 
         $m_data = self::getData($inifile);
-        if (!$m_data) {
+        if (!$m_data)
+        {
             return $m_data;
         }
 
-        if (!array_key_exists($section, $m_data)) {
+        if (!array_key_exists($section, $m_data))
+        {
             trigger_error('Unknown config section: ' . $section);
         }
 
@@ -78,13 +87,16 @@ final class Config {
      * 
      * @return array The combination of all the configuration data in form of an array
      */
-    public static function addSection($section, $inifile = '../config/config.ini') {
-        if (!$section) {
+    public static function addSection($section, $inifile = '../config/config.ini')
+    {
+        if (!$section)
+        {
             return false;
         }
 
         $m_data = self::getData($inifile);
-        if (array_key_exists($section, $m_data)) {
+        if (array_key_exists($section, $m_data))
+        {
             return true;
         }
 
@@ -103,13 +115,16 @@ final class Config {
      * 
      * @return array The rest of the configuration data in form of an array
      */
-    public static function deleteSection($section, $inifile = '../config/config.ini') {
-        if (!$section) {
+    public static function deleteSection($section, $inifile = '../config/config.ini')
+    {
+        if (!$section)
+        {
             return false;
         }
 
         $m_data = self::getData($inifile);
-        if (!array_key_exists($section, $m_data)) {
+        if (!array_key_exists($section, $m_data))
+        {
             return false;
         }
 
@@ -130,16 +145,19 @@ final class Config {
      * 
      * @return array The configuration data in form of an array
      */
-    public static function addConfig($value, $tag, $section, $inifile = '../config/config.ini') {
+    public static function addConfig($value, $tag, $section, $inifile = '../config/config.ini')
+    {
 
-        if (!$section || !$tag) {
+        if (!$section || !$tag)
+        {
             return false;
         }
 
         $m_data = self::getData($inifile);
         $m_data[$section][$tag] = $value;
 
-        if (!self::saveConfig($m_data, $inifile)) {
+        if (!self::saveConfig($m_data, $inifile))
+        {
             return false;
         }
 
@@ -158,14 +176,17 @@ final class Config {
      * 
      * @return array The configuration data in form of an array
      */
-    public static function setConfig($value, $tag, $section, $inifile = '../config/config.ini') {
+    public static function setConfig($value, $tag, $section, $inifile = '../config/config.ini')
+    {
 
-        if (!$section || !$tag) {
+        if (!$section || !$tag)
+        {
             return false;
         }
 
         $m_data = self::getData($inifile);
-        if (!array_key_exists($section, $m_data)) {
+        if (!array_key_exists($section, $m_data))
+        {
             self::addSection($section, $inifile);
         }
 
@@ -183,18 +204,22 @@ final class Config {
      * 
      * @return String The configuration data in string form
      */
-    public static function arrayToConfig($m_data) {
+    public static function arrayToConfig($m_data)
+    {
 
-        if (!$m_data) {
+        if (!$m_data)
+        {
             return false;
         }
 
         $configString = "";
 
-        foreach ($m_data as $section => $value) {
+        foreach ($m_data as $section => $value)
+        {
             $configString.="[" . $section . "]\n";
 
-            foreach ($value as $tag => $val) {
+            foreach ($value as $tag => $val)
+            {
                 $configString.=$tag . ' = "' . $val . "\"\n";
             }
 
@@ -212,7 +237,8 @@ final class Config {
      * 
      * @return array The configuration data in form of an array
      */
-    public static function saveConfig($m_data, $inifile = '../config/config.ini') {
+    public static function saveConfig($m_data, $inifile = '../config/config.ini')
+    {
 
         $config = self::arrayToConfig($m_data);
         return file_put_contents($inifile, $config);
@@ -226,9 +252,11 @@ final class Config {
      * @return mixed The <b>configuration data </b> in form of an array on success 
      * or <b>FALSE</b> on failure usually because the file doesn't exists.
      */
-    private static function getData($inifile) {
+    private static function getData($inifile)
+    {
 
-        if (!$inifile || !file_exists($inifile)) {
+        if (!$inifile || !file_exists($inifile))
+        {
             return false;
         }
 

@@ -14,8 +14,8 @@ $UploadDir = $datadir->m_uploadGalleryDir;
 $UploadImgDir = $datadir->m_galleryImgDir;
 $UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
 $UploadThumbDir = $datadir->m_galleryThumbDir;
-$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
-$imageMissing = $UploadThumbUrl . "missing_default.png";
+$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 ?>
 
 <?php
@@ -308,7 +308,7 @@ $totalRows_rsSFGallery = $SFconnects->recordCount();
 
                                 // Loop through the array and add directory prefix to each item in array	
                                 foreach ($DBImageThumbFiles as &$value) {
-                                    $value = $UploadThumbUrl . $value;
+                                    $value = $sfGalleryThumbUrl . $value;
                                 }
 
                                 //DataList

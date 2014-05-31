@@ -16,7 +16,8 @@ session_start();
 //set the return URL
 $MM_setup = filter_input(INPUT_POST, 'MM_setup');
 $obj = new snowflakesSetUp();
-if ((isset($MM_setup)) && ($MM_setup == "setupform")) {
+if ((isset($MM_setup)) && ($MM_setup == "setupform"))
+{
     $return_url = "index.php";
     $LogIn_url = "../login.php";
     $Host_Name = filter_input(INPUT_POST, "hostName");
@@ -61,7 +62,8 @@ $MM_migrate = filter_input(INPUT_POST, "MM_migrate");
 $dbName = filter_input(INPUT_POST, "dbName");
 $oldUpdloadDir = filter_input(INPUT_POST, "oldUpdloadDir");
 $Username = filter_input(INPUT_POST, "username");
-if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName))) {
+if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
+{
 
     $getspace = str_replace(" ", "_", $dbName);
     $Database_Name = trim($getspace);
@@ -73,9 +75,12 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
     $migrated = sfUtils::migrate($SFconnects, $Database_Name, $Username, $migrateMessage);
     $somem_Message = $migrateMessage;
 
-    if (!sfUtils::migrateUpdir($oldUpdloadDir, '../config/config.ini')) {
+    if (!sfUtils::migrateUpdir($oldUpdloadDir, '../config/config.ini'))
+    {
         $somem_Message.=sfUtils::sfPromptMessage('Snowflakes Could not Copy/Migrate old snowflakes data from' . $oldUpdloadDir . '.<br /> Please check that the directory exists.', 'error');
-    } else {
+    }
+    else
+    {
         $somem_Message.=sfUtils::sfPromptMessage('Snowflakes Copied/Migrated old snowflakes data from' . $oldUpdloadDir . '.', 'success');
     }
 }
@@ -88,9 +93,12 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
         <meta name="viewport" content="width=device-width, maximum-scale = 1, minimum-scale=1" />
         <!-- InstanceBeginEditable name="doctitle" -->
         <title><?php
-            if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful")) {
+            if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful"))
+            {
                 echo 'Migrate old Snowflakes';
-            } else {
+            }
+            else
+            {
                 echo "Snowflakes Setup Results";
             }
             ?></title>
@@ -208,12 +216,15 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
             <!-- Content -->
             <div class="Content"> <!-- InstanceBeginEditable name="BodyRegion" -->
                 <h1><?php
-                    if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful")) {
-                        echo 'Migrate old Snowflakes';
-                    } else {
-                        echo "Snowflakes Set up Results";
-                    }
-                    ?></h1>
+            if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful"))
+            {
+                echo 'Migrate old Snowflakes';
+            }
+            else
+            {
+                echo "Snowflakes Set up Results";
+            }
+            ?></h1>
 
                 <!-- Break -->
                 <div class="clear"></div>
@@ -225,27 +236,33 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
                     <?php
                     echo '<div id="dialog" title="View snowflakes configuration">' . $somem_Message . '</div>'
                     . '<div class="NewButton" id="setupOpener">View Config</div>';
-                    if (isset($obj->m_Message) || isset($obj->m_outcomeMessage)) {
+                    if (isset($obj->m_Message) || isset($obj->m_outcomeMessage))
+                    {
                         ?>
                         <div id="setupdialog" title="Setup Log"> <?php echo $obj->m_Message . "<br/><br/>"; ?></div>
                         <div class="NewButton" id="setupLogOpener">Setup Log</div>
                         <?php
                         echo sfUtils::dialogMessage("Snowflakes Set up", $obj->m_outcomeMessage . "");
-                        if (strpos($obj->m_outcomeMessage, "Set Up Unsuccessful")) {
+                        if (strpos($obj->m_outcomeMessage, "Set Up Unsuccessful"))
+                        {
                             echo '<div class="NewButton"><a href="' . $obj->m_returnUrl . '"> Back to Form </a></div>';
-                        } else {
+                        }
+                        else
+                        {
                             echo '<div class="NewButton"><a href="' . $obj->m_logInUrl . '"> Admin Log In  <img src="../resources/images/Icons/User.png" height="22" width="22" alt="Admin" /></a></div><br/>';
                         }
                         ?>
                         <div class="clear"></div>
-                        <?php
-                        if (strpos($obj->m_outcomeMessage, "Set Up Successful")) {
-                            echo '<h2> OR </h2>';
-                        }
-                    }
-                    if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful")) {
-                        $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
-                        ?>
+    <?php
+    if (strpos($obj->m_outcomeMessage, "Set Up Successful"))
+    {
+        echo '<h2> OR </h2>';
+    }
+}
+if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful"))
+{
+    $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
+    ?>
                         <h4> Migrate Old Snowflakes</h4>
                         <form id="installForm" action="<?php echo $php_self; ?>" method="post" class="updateForm" enctype="multipart/form-data" autocomplete="on">
                             <span id="spryDBName">
@@ -262,7 +279,7 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
                             <input type="hidden" name="MM_migrate" value="migrateform" />
 
                         </form>
-                    <?php } ?>
+<?php } ?>
                     <!-- Break -->
                     <div class="clear"></div>
                     <div class="Break"></div>

@@ -6,20 +6,23 @@ require_once 'lib/sfImageProcessor.php';
 ?>
 <?php
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
 $query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
-if ((isset($query_string)) && ($query_string != "")) {
+if ((isset($query_string)) && ($query_string != ""))
+{
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
 $settingsConfig = Config::getConfig("settings", 'config/config.ini');
 $doLogout = filter_input(INPUT_GET, 'doLogout');
 
-if ((isset($doLogout)) && ($doLogout == "true")) {
+if ((isset($doLogout)) && ($doLogout == "true"))
+{
     //to fully log out a visitor we need to clear the session varialbles
     $_SESSION['MM_Username'] = NULL;
     $_SESSION['MM_UserGroup'] = NULL;
@@ -29,30 +32,35 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['PrevUrl']);
 
     $logoutGoTo = $settingsConfig['loginUrl'];
-    if (isset($logoutGoTo)) {
+    if (isset($logoutGoTo))
+    {
         header("Location: $logoutGoTo");
         exit;
     }
 }
 ?>
 <?php
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
 $MM_restrictGoTo = "login.php";
-if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
+if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup']))))
+{
 
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
 
-    if (strpos($MM_restrictGoTo, "?")) {
+    if (strpos($MM_restrictGoTo, "?"))
+    {
         $MM_qsChar = "&";
     }
 
-    if (isset($query_string) && strlen($query_string) > 0) {
+    if (isset($query_string) && strlen($query_string) > 0)
+    {
         $MM_referrer .= "?" . $query_string;
     }
 
@@ -65,9 +73,12 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
 //The Default image
 $targetFile = "default.png";
 $formmessage = "";
-if (empty($_FILES["uploadImage"]["name"])) {
+if (empty($_FILES["uploadImage"]["name"]))
+{
     $File_is_Uploaded = True;
-} else {
+}
+else
+{
     $File_is_Uploaded = sfImageProcessor::uploadSingleImage($_FILES['uploadImage'], 'config/config.ini', $targetFile, $formmessage, false);
     //$formmessage .=" <br>" . $targetFile;
 }
@@ -78,7 +89,8 @@ $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 $colname_rsAdmin = "-1";
-if (isset($_SESSION['MM_Username'])) {
+if (isset($_SESSION['MM_Username']))
+{
     $colname_rsAdmin = $_SESSION['MM_Username'];
 }
 $user = new userStruct();
@@ -90,13 +102,15 @@ $row_rsGallery = $SFconnects->getResultArray();
 ?>
 <?php
 $editFormAction = $php_self;
-if (isset($query_string)) {
+if (isset($query_string))
+{
     $editFormAction .= "?" . htmlentities($query_string);
 }
 
 $MM_insert = filter_input(INPUT_POST, 'MM_insert');
 $viewLink = "#";
-if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE)) {
+if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE))
+{
 
     $_POST['image_name'] = $targetFile;
     $_POST['publish'] = isset($_POST['publish']) ? "1" : "0";
@@ -104,9 +118,12 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
     $snowflakeStruct = new snowflakeStruct();
     $snowflakeStruct->populate($_POST);
 
-    if (!$snowflakeStruct->addSnowflake($SFconnects)) {
+    if (!$snowflakeStruct->addSnowflake($SFconnects))
+    {
         $formmessage.= "Could not insert the new snowflake. <br>" . $SFconnects->getMessage() . '<br>';
-    } else {
+    }
+    else
+    {
         $snowflakeID = $snowflakeStruct->getSnowflakeID($SFconnects);
         $viewLink = "Viewflake.php?pageid=$snowflakeID";
         // Check Trigger exist , if not then use manual trigger
@@ -216,7 +233,8 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                                     </ul>
                                 </li>
                                 <?php
-                                if ($user->m_access_level == 5 || $user->m_access_level == 4) {
+                                if ($user->m_access_level == 5 || $user->m_access_level == 4)
+                                {
                                     ?>
                                     <li>
                                         <a href="SiteSetting/index.php" title="Settings"> <img src="resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
@@ -227,15 +245,17 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                                             <li><a href="<?php echo $logoutAction ?>" title="Log out"> <img src="resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a></li>
                                         </ul>
                                     </li>
-                                    <?php
-                                } else {
-                                    ?>
+    <?php
+}
+else
+{
+    ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
                                     </li>
-                                    <?php
-                                }
-                                ?>
+    <?php
+}
+?>
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
@@ -265,12 +285,13 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
-                    <?php
-                    if (!empty($formmessage)) {
-                        $Message = str_replace("../resources/", "resources/", $formmessage);
-                        echo sfUtils::dialogMessage("Add Snowflakes", $Message);
-                    }
-                    ?>
+<?php
+if (!empty($formmessage))
+{
+    $Message = str_replace("../resources/", "resources/", $formmessage);
+    echo sfUtils::dialogMessage("Add Snowflakes", $Message);
+}
+?>
                     <!--contactform-->
                     <div class="contactform">
                         <form action="<?php echo $editFormAction; ?>" method="post" enctype="multipart/form-data" name="form1" id="installForm">
@@ -361,15 +382,16 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
 
                             <select name="gallery" class="inputtext2 controls">
                                 <option value="">Add Gallery</option>
-                                <?php
-                                $i = 0;
-                                do {
-                                    ?>
+                            <?php
+                                   $i = 0;
+                                   do
+                                   {
+                                       ?>
                                     <option value="<?php echo $row_rsGallery[$i]['id'] . "," . $row_rsGallery[$i]['title']; ?>"><?php echo $row_rsGallery[$i]['title']; ?></option>
-                                    <?php
-                                    $i++;
-                                } while ($i < count($row_rsGallery));
-                                ?>
+    <?php
+    $i++;
+} while ($i < count($row_rsGallery));
+?>
                             </select>
 
 
@@ -377,13 +399,16 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                             <br/>
                             <input class="NewButton" type="submit" value="Add New Flake" onClick="transferEditorData('form1');" />
                             <input type="hidden" name="image_name" value="<?php
-                                if (empty($targetFile)) {
-                                    $targetFile = "default.png";
-                                    echo $targetFile;
-                                } else {
-                                    echo $targetFile;
-                                }
-                                ?>" />
+if (empty($targetFile))
+{
+    $targetFile = "default.png";
+    echo $targetFile;
+}
+else
+{
+    echo $targetFile;
+}
+?>" />
                             <input type="hidden" name="created" value="<?php echo time(); ?>" />
                             <input type="hidden" name="edited" value="<?php echo time(); ?>" />
                             <input type="hidden" name="created_by" value="<?php echo $_SESSION['MM_Username']; ?>" />

@@ -37,8 +37,8 @@ $Powerlink = $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png";
 
 $UploadDir = $settingsConfig['m_sfGalleryUrl'];
 //The upload Image directory
-$UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 ?>
 <!-- PageWrap -->
 <div class="PageWrap">
@@ -75,7 +75,7 @@ $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 
                     <?php
                     if ($flakeStruct->m_gallery == NULL) {
-                        $imageMissing = $UploadImgUrl . "missing_default.png";
+                        $imageMissing = $sfGalleryImgUrl . "missing_default.png";
                         ?> 
                         <div class="SnowflakeImage">
                             <a class="colorbox" href="<?php echo $UploadDir . $flakeStruct->m_image_name; ?>"  onerror="this.href='<?php echo $imageMissing; ?>'"  title="<?php echo $flakeStruct->m_title; ?>" >
@@ -92,7 +92,7 @@ $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
                     <!--Place Gallery Here if its not null-->
                     <?php
                     if ($flakeStruct->m_gallery != NULL) {
-                        $imageMissing = $UploadThumbUrl . "missing_default.png";
+                        $imageMissing = $sfGalleryThumbUrl . "missing_default.png";
                         $GalleryName = explode(",", $flakeStruct->m_gallery);
 
                         $query_rsGallery = "SELECT * FROM snowflakes_gallery WHERE id=" . $GalleryName[0] . " AND title ='" . sfUtils::escape($GalleryName[1]) . "'";
@@ -117,11 +117,11 @@ $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 
                                     // Loop through the array and add directory prefix to each item in array
                                     foreach ($DBImageFiles as &$value) {
-                                        $value = $UploadImgUrl . $value;
+                                        $value = $sfGalleryImgUrl . $value;
                                     }
                                     // Loop through the array and add directory prefix to each item in array	
                                     foreach ($DBImageThumbFiles as &$value) {
-                                        $value = $UploadThumbUrl . $value;
+                                        $value = $sfGalleryThumbUrl . $value;
                                     }
                                     //DataList
                                     $counter = 0;

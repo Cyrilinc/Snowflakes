@@ -12,9 +12,9 @@ $datadir = new dataDirParam("../config/config.ini");
 $UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory
 $UploadImgDir = $datadir->m_galleryImgDir;
-$UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
 $UploadThumbDir = $datadir->m_galleryThumbDir;
-$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 $thumbWidth = $settingsConfig['thumbWidth'];
 $thumbHeight = $settingsConfig['thumbHeight'];
 ?>
@@ -215,8 +215,8 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                     $_SESSION['ImageFile'] = $_SESSION['ImageFiles'][$index];
                     $_SESSION['ImageThumbFile'] = $_SESSION['ImageThumbFiles'][$index];
                     $_SESSION['ImageCaption'] = $_SESSION['ImageCaptions'][$index];
-                    $imageFileUrl = str_replace($UploadImgDir, $UploadImgUrl, $TargetFileImageLoc);
-                    $imageThumbUrl = str_replace($UploadThumbDir, $UploadThumbUrl, $_SESSION['ImageThumbFile']);
+                    $imageFileUrl = str_replace($UploadImgDir, $sfGalleryImgUrl, $TargetFileImageLoc);
+                    $imageThumbUrl = str_replace($UploadThumbDir, $sfGalleryThumbUrl, $_SESSION['ImageThumbFile']);
 
                     //echo $_SESSION['ImageThumbFile'];
 

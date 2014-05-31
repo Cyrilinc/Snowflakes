@@ -11,9 +11,9 @@ $datadir=new dataDirParam("../config/config.ini");
 $UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory
 $UploadImgDir = $datadir->m_galleryImgDir;
-$UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
 $UploadThumbDir = $datadir->m_galleryThumbDir;
-$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 $GalleryMessage = '';
 
 $Post_upload = filter_input(INPUT_POST, 'upload');
@@ -355,8 +355,8 @@ if ((isset($MM_insert)) && ($MM_insert == "AddGallery") && $viewLink != "#") {
 
                                 $GalleryImages = $_SESSION['ImageFiles'];
                                 $GalleryThumbImages = $_SESSION['ImageThumbFiles'];
-                                $GalleryDisplayImages = str_replace($UploadImgDir, $UploadImgUrl, $GalleryImages);
-                                $GalleryDisplayThumb = str_replace($UploadThumbDir, $UploadThumbUrl, $GalleryThumbImages);
+                                $GalleryDisplayImages = str_replace($UploadImgDir, $sfGalleryImgUrl, $GalleryImages);
+                                $GalleryDisplayThumb = str_replace($UploadThumbDir, $sfGalleryThumbUrl, $GalleryThumbImages);
 
                                 $DBGalleryImages = $DBGalleryThumbImages = str_replace($UploadImgDir, "", $GalleryImages);
                                 $DBImageCaptions = $_SESSION['ImageCaptions'];

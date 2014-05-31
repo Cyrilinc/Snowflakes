@@ -5,19 +5,22 @@ require_once '../config/Config.php';
 require_once '../lib/sfImageProcessor.php';
 
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
 $query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
-if ((isset($query_string)) && ($query_string != "")) {
+if ((isset($query_string)) && ($query_string != ""))
+{
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
 $doLogout = filter_input(INPUT_GET, 'doLogout');
-if ((isset($doLogout)) && ($doLogout == "true")) {
+if ((isset($doLogout)) && ($doLogout == "true"))
+{
     //to fully log out a visitor we need to clear the session varialbles
     $_SESSION['MM_Username'] = NULL;
     $_SESSION['MM_UserGroup'] = NULL;
@@ -27,21 +30,24 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['PrevUrl']);
 
     $logoutGoTo = $settingsConfig['loginUrl'];
-    if ($logoutGoTo) {
+    if ($logoutGoTo)
+    {
         header("Location: $logoutGoTo");
         exit;
     }
 }
 ?>
 <?php
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
 $MM_restrictGoTo = "../login.php";
-if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
+if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup']))))
+{
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
     if (strpos($MM_restrictGoTo, "?"))
@@ -56,10 +62,13 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
 <?php
 //The Default image
 $targetFile = "default.png";
-$formmessage="";
-if (empty($_FILES["uploadImage"]["name"])) {
+$formmessage = "";
+if (empty($_FILES["uploadImage"]["name"]))
+{
     $File_is_Uploaded = True;
-} else {
+}
+else
+{
     $File_is_Uploaded = sfImageProcessor::uploadSingleImage($_FILES['uploadImage'], '../config/config.ini', $targetFile, $formmessage, false);
     //$formmessage .=" <br>" . $targetFile;
 }
@@ -73,27 +82,34 @@ $loginFoundUser = 0;
 $MM_insert_flag = filter_input(INPUT_POST, $MM_flag);
 $postUsername = filter_input(INPUT_POST, 'username');
 $viewLink = "#";
-if (isset($MM_insert_flag)) {
+if (isset($MM_insert_flag))
+{
     $loginUsername = $postUsername;
     $loginFoundUser = sfUtils::userExits($SFconnects, $loginUsername);
-    if ($loginFoundUser >= 1) {
+    if ($loginFoundUser >= 1)
+    {
         $viewLink = "Account.php?userName=$loginUsername";
     }
 }
 
 $editFormAction = $php_self;
-if (isset($query_string)) {
+if (isset($query_string))
+{
     $editFormAction .= "?" . htmlentities($query_string);
 }
 $MM_insert = filter_input(INPUT_POST, "MM_insert");
-if ((isset($MM_insert)) && ($MM_insert == "form1") && $loginFoundUser <= 0 && ($File_is_Uploaded == TRUE)) {
+if ((isset($MM_insert)) && ($MM_insert == "form1") && $loginFoundUser <= 0 && ($File_is_Uploaded == TRUE))
+{
 
     $userStruct = new userStruct();
     $userStruct->init($postUsername, $_POST['password2'], $_POST['email'], $_POST['access_level'], $targetFile);
 
-    if (!$userStruct->AddUser($SFconnects)) {
-        $formmessage.=  sfUtils::sfPromptMessage("Could not insert the new User. <br>" . $SFconnects->getMessage() . '<br>','error');
-    } else {
+    if (!$userStruct->AddUser($SFconnects))
+    {
+        $formmessage.= sfUtils::sfPromptMessage("Could not insert the new User. <br>" . $SFconnects->getMessage() . '<br>', 'error');
+    }
+    else
+    {
 
         $newUserID = $userStruct->getUserID($SFconnects);
         $viewLink = "Account.php?userId=$newUserID";
@@ -101,12 +117,13 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && $loginFoundUser <= 0 && ($
         // Check Trigger exist , if not then use manual trigger
         sfUtils::checkTrigger($SFconnects, $newUserID, 'user', "INSERT");
 
-        $formmessage.=sfUtils::sfPromptMessage('<a href="' . $viewLink . '" title="view it">"' . $userStruct->m_username . '"</a> was added successfully. ','success');
+        $formmessage.=sfUtils::sfPromptMessage('<a href="' . $viewLink . '" title="view it">"' . $userStruct->m_username . '"</a> was added successfully. ', 'success');
     }
 }
 
 $colname_rsAdmin = "-1";
-if (isset($_SESSION['MM_Username'])) {
+if (isset($_SESSION['MM_Username']))
+{
     $colname_rsAdmin = $_SESSION['MM_Username'];
 }
 
@@ -157,32 +174,34 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
         <link href="../resources/css/jquery-ui-1.10.4.snowflakes.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Js/jquery-ui-1.10.4.snowflakes.js"></script>
         <script>
-            $(function() {
-                $(".dialog-message").dialog({
+                    $(function() {
+                    $(".dialog-message").dialog({
                     modal: true,
-                    buttons: {
-                        <?php if ($loginFoundUser >= 1) { ?>
-                        "Change": function() {
-                            $(this).dialog("close"); 
-                        }
-                        <?php } else { ?>
-                        "Add more": function() {
-                            $(this).dialog("close"); 
-                            window.location = "<?php echo $php_self ?>";
-                        }
-                        <?php }  ?>
-                        ,
-                        "View": function() {
-                            window.location = "<?php echo $viewLink ?>";
-                        }
-                        
-                    }
-                });
-            });
-            $(document).ready(function() {
-                snowflakesCount("../sse/snowflakesCount.php");
-            });
-        </script>
+                            buttons: {
+<?php if ($loginFoundUser >= 1)
+{ ?>
+                                "Change": function() {
+                                $(this).dialog("close");
+                                }
+<?php }
+else
+{ ?>
+                                "Add more": function() {
+                                $(this).dialog("close");
+                                        window.location = "<?php echo $php_self ?>";
+                                }
+<?php } ?>
+                            ,
+                                    "View": function() {
+                                    window.location = "<?php echo $viewLink ?>";
+                                    }
+
+                            }
+                    });
+                    });
+                    $(document).ready(function() {
+            snowflakesCount("../sse/snowflakesCount.php");
+            });        </script>
         <!-- InstanceEndEditable -->
     </head>
     <body> 
@@ -228,7 +247,8 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                 </li>
 
                                 <?php
-                                if ($user->m_access_level == 5 || $user->m_access_level == 4) {
+                                if ($user->m_access_level == 5 || $user->m_access_level == 4)
+                                {
                                     ?>
                                     <li>
                                         <a href="../SiteSetting/index.php" title="Settings"> <img src="../resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
@@ -239,15 +259,17 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                             <li><a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a></li>
                                         </ul>
                                     </li>
-                                    <?php
-                                } else {
-                                    ?>
+    <?php
+}
+else
+{
+    ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
                                     </li>
-                                    <?php
-                                }
-                                ?>
+    <?php
+}
+?>
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
@@ -275,17 +297,19 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                 <!-- End of Break -->
                 <!-- PageWrap -->
                 <div class="PageWrap">
-                    <?php
-                    //if there is a row in the database, the username was found - can not add the requested username
-                    if ($loginFoundUser >= 1) {
-                        $msg= sfUtils::sfPromptMessage('The username "<a href="'.$viewLink.'">' . $postUsername . '</a>" already exists','error');
-                        echo sfUtils::dialogMessage("Add User",$msg);
-                    }
+                                       <?php
+                                       //if there is a row in the database, the username was found - can not add the requested username
+                                       if ($loginFoundUser >= 1)
+                                       {
+                                           $msg = sfUtils::sfPromptMessage('The username "<a href="' . $viewLink . '">' . $postUsername . '</a>" already exists', 'error');
+                                           echo sfUtils::dialogMessage("Add User", $msg);
+                                       }
 
-                    if (!empty($formmessage)) {
-                        echo sfUtils::dialogMessage("Add User", $formmessage);
-                    }
-                    ?>
+                                       if (!empty($formmessage))
+                                       {
+                                           echo sfUtils::dialogMessage("Add User", $formmessage);
+                                       }
+                                       ?>
                     <!--contactform-->
                     <div class="contactform">
                         <form action="<?php echo $editFormAction; ?>" method="post" enctype="multipart/form-data" name="form1" id="installForm">
@@ -295,10 +319,11 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                 <span class="textfieldMinCharsMsg">Minimum number of characters not met.<br /></span>
                                 <span class="textfieldMaxCharsMsg">Exceeded maximum number of characters.<br /></span>
                                 <input class="inputtext2 controls" type="text" name="username" value="<?php
-                                if (isset($postUsername)) {
-                                    echo $postUsername;
-                                }
-                                ?>" placeholder="Admin Username must be between 8 and 20 characters" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required/>
+                                       if (isset($postUsername))
+                                       {
+                                           echo $postUsername;
+                                       }
+                                       ?>" placeholder="Admin Username must be between 8 and 20 characters" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required/>
                             </span><br />
 
 
@@ -323,12 +348,12 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                             <br />
                             <span id="SelectAcLvl">
 
-                                <?php
-                                if (isset($_POST['access_level']))
-                                    $value = $_POST['access_level'];
-                                else
-                                    $value = 3;
-                                ?>
+<?php
+if (isset($_POST['access_level']))
+    $value = $_POST['access_level'];
+else
+    $value = 3;
+?>
                                 <select name="access_level" class="inputtext2 controls">
                                     <option value="1" <?php if ($value == 1) echo 'selected'; ?> >Author/ Editor 1</option>
                                     <option value="2" <?php if ($value == 2) echo 'selected'; ?> >Publisher 2</option>
@@ -386,11 +411,11 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" -->
         <script type="text/javascript">
-            var sprytextfield1 = new Spry.Widget.ValidationTextField("spryAdminName", "none", {validateOn: ["blur"], minChars: 8, maxChars: 20});
-            var sprypassword1 = new Spry.Widget.ValidationPassword("spryAdminPass", {validateOn: ["blur"]});
-            var spryconfirm1 = new Spry.Widget.ValidationConfirm("spryPassconfirm", "Password", {validateOn: ["blur", "change"]});
-            var sprytextfield2 = new Spry.Widget.ValidationTextField("spryAdminEmail", "email", {validateOn: ["blur"]});
-            var spryselect1 = new Spry.Widget.ValidationSelect("SelectAcLvl");
+                    var sprytextfield1 = new Spry.Widget.ValidationTextField("spryAdminName", "none", {validateOn: ["blur"], minChars: 8, maxChars: 20});
+                    var sprypassword1 = new Spry.Widget.ValidationPassword("spryAdminPass", {validateOn: ["blur"]});
+                    var spryconfirm1 = new Spry.Widget.ValidationConfirm("spryPassconfirm", "Password", {validateOn: ["blur", "change"]});
+                    var sprytextfield2 = new Spry.Widget.ValidationTextField("spryAdminEmail", "email", {validateOn: ["blur"]});
+                    var spryselect1 = new Spry.Widget.ValidationSelect("SelectAcLvl");
         </script>
 
         <!-- InstanceEndEditable -->

@@ -4,12 +4,15 @@ require_once 'lib/sfConnect.php';
 require_once 'config/Config.php';
 ?>
 <?php
+$contentType = filter_input(INPUT_GET, 'type') ? filter_input(INPUT_GET, 'type') : 'html';
+
 $currentPage = filter_input(INPUT_SERVER, 'PHP_SELF');
 
 $maxRows_rsOut = 5;
 $pageNum_rsOut = 0;
 $rsOut = filter_input(INPUT_GET, 'pageNum_rsOut');
-if (isset($rsOut)) {
+if (isset($rsOut))
+{
     $pageNum_rsOut = $rsOut;
 }
 $startRow_rsOut = $pageNum_rsOut * $maxRows_rsOut;
@@ -20,7 +23,8 @@ $SFconnects->connect(); // Connect to database
 
 $pageid = filter_input(INPUT_GET, 'pageid');
 $flakeit = filter_input(INPUT_GET, 'flakeit');
-if (isset($flakeit) && isset($pageid)) {
+if (isset($flakeit) && isset($pageid))
+{
     sfUtils::flakeIt($SFconnects, $pageid, "snowflake");
 }
 
@@ -29,15 +33,19 @@ $query_limit_rsOut = sprintf("%s LIMIT %d, %d", $query_rsOut, $startRow_rsOut, $
 $SFconnects->fetch($query_limit_rsOut);
 $row_rsOut = $SFconnects->getResultArray();
 $flakeStructList = array();
-foreach ($row_rsOut as $key => $value) {
+foreach ($row_rsOut as $key => $value)
+{
     $flakeStructList[$key] = new snowflakeStruct();
     $flakeStructList[$key]->populate($value);
 }
 
 $total_rsOut = filter_input(INPUT_GET, 'totalRows_rsOut');
-if (isset($total_rsOut)) {
+if (isset($total_rsOut))
+{
     $totalRows_rsOut = $total_rsOut;
-} else {
+}
+else
+{
     $SFconnects->fetch("SELECT COUNT(id) count FROM snowflakes WHERE publish = 1 ORDER BY created DESC");
     $result = $SFconnects->getResultArray();
     $totalRows_rsOut = $result[0]['count'];
@@ -51,16 +59,20 @@ $row_SiteSettings = $result2[0];
 
 $queryString_rsOut = "";
 $query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
-if (!empty($query_string)) {
+if (!empty($query_string))
+{
     $params = explode("&", $query_string);
     $newParams = array();
-    foreach ($params as $param) {
+    foreach ($params as $param)
+    {
         if (stristr($param, "pageNum_rsOut") == false &&
-                stristr($param, "totalRows_rsOut") == false) {
+                stristr($param, "totalRows_rsOut") == false)
+        {
             array_push($newParams, $param);
         }
     }
-    if (count($newParams) != 0) {
+    if (count($newParams) != 0)
+    {
         $queryString_rsOut = "&amp;" . htmlentities(implode("&", $newParams));
     }
 }
@@ -75,20 +87,23 @@ $Shareurl = $row_SiteSettings['sf_url'] . "OneView.php";
 $rsslink = $row_SiteSettings['sf_url'] . "resources/images/Icons/Rss.png";
 
 $settingsConfig = Config::getConfig("settings", 'config/config.ini');
-$UploadImgUrl = $settingsConfig['m_sfGalleryUrl'];
-$imageMissing = $UploadImgUrl . "missing_default.png";
+$UploadUrl = $settingsConfig['m_sfGalleryUrl'];
+$imageMissing = $UploadUrl . "missing_default.png";
 
-if (strlen($SnowflakesResultUrl) > 0) {/// if user provides result page in snowflakes settings
+if (strlen($SnowflakesResultUrl) > 0)
+{/// if user provides result page in snowflakes settings
     $Shareurl = $SnowflakesResultUrl;
 }
 
-if (isset($row_SiteSettings['out_url'])) {
+if (isset($row_SiteSettings['out_url']))
+{
     $currentPage = $row_SiteSettings['out_url'];
 }
 
 $sflogo = "transparent";
 $rssflogo = filter_input(INPUT_GET, 'sflogo');
-if (isset($rssflogo)) {
+if (isset($rssflogo))
+{
     $sflogo = "#" . $rssflogo;
 }
 ?>
@@ -100,22 +115,29 @@ if (isset($rssflogo)) {
 <div style="float: right; background-color:<?php echo $sflogo; ?>;" class="NewButton"><a href="<?php echo $row_SiteSettings['sf_url']; ?>rss.php?ty=snowflakes" title="Snowflakes rss"> <img src="<?php echo $rsslink; ?>" height="22" width="22"  alt="Add" /></a></div>
 <div class="clear"></div>
 
-<?php if ($pageNum_rsOut > 0) { // Show if not first page    ?>
+<?php
+if ($pageNum_rsOut > 0)
+{ // Show if not first page     
+    ?>
     <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsOut=%d%s", $currentPage, 0, $queryString_rsOut); ?>">First</a></div>
     <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsOut=%d%s", $currentPage, max(0, $pageNum_rsOut - 1), $queryString_rsOut); ?>">Previous</a></div>
-<?php } // Show if not first page  ?>
-<?php if ($pageNum_rsOut < $totalPages_rsOut) { // Show if not last page    ?>
+<?php } // Show if not first page   ?>
+<?php
+if ($pageNum_rsOut < $totalPages_rsOut)
+{ // Show if not last page     
+    ?>
     <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsOut=%d%s", $currentPage, min($totalPages_rsOut, $pageNum_rsOut + 1), $queryString_rsOut); ?>">Next</a></div>
     <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsOut=%d%s", $currentPage, $totalPages_rsOut, $queryString_rsOut); ?>">Last</a></div>
-<?php } // Show if not last page    ?>
-
+<?php } // Show if not last page     ?>
 
 <?php
-if ($totalRows_rsOut > 0) {
+if ($totalRows_rsOut > 0)
+{
     $i = 0;
-    ?>
-    <!-- Snowflake -->
-    <?php do { ?>
+    do
+    {
+        ?>
+        <!-- Snowflake -->
         <div class="Snowflake">
             <div class="SnowflakeHead"><a href="<?php echo $Shareurl; ?>?pageid=<?php echo $flakeStructList[$i]->m_id; ?>"><?php echo $flakeStructList[$i]->m_title; ?></a> </div>
 
@@ -138,8 +160,8 @@ if ($totalRows_rsOut > 0) {
             <div class="SnowflakeDescr">
 
                 <div class="SnowflakeImage">
-                    <a class="colorbox" href="<?php echo $UploadImgUrl . $flakeStructList[$i]->m_image_name; ?>"  onerror="this.href='<?php echo $imageMissing; ?>'"  title="<?php echo $flakeStructList[$i]->m_title; ?>" >
-                        <img src="<?php echo $UploadImgUrl . $flakeStructList[$i]->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'"  alt="<?php echo $flakeStructList[$i]->m_image_name; ?>" />
+                    <a class="colorbox" href="<?php echo $UploadUrl . $flakeStructList[$i]->m_image_name; ?>"  onerror="this.href='<?php echo $imageMissing; ?>'"  title="<?php echo $flakeStructList[$i]->m_title; ?>" >
+                        <img src="<?php echo $UploadUrl . $flakeStructList[$i]->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'"  alt="<?php echo $flakeStructList[$i]->m_image_name; ?>" />
                     </a>
                 </div>
 
@@ -159,9 +181,10 @@ if ($totalRows_rsOut > 0) {
         <?php
         $i++;
     } while ($i < count($flakeStructList));
-    ?>
-
-<?php } else { ?> 
+}
+else
+{
+    ?> 
     <h4 class="SummaryHead">There are no published Snowflakes </h4>
 <?php } ?> 
 

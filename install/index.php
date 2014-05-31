@@ -11,15 +11,18 @@ session_start();
 // Set a key, checked in mailer, prevents against spammers trying to hijack the mailer.
 $security_token = $_SESSION['security_token'] = uniqid(rand());
 
-if (!isset($_SESSION['formMessage'])) {
+if (!isset($_SESSION['formMessage']))
+{
     $_SESSION['formMessage'] = 'Fill in the form Below to set up your Snowflake.';
 }
 
-if (!isset($_SESSION['formFooter'])) {
+if (!isset($_SESSION['formFooter']))
+{
     $_SESSION['formFooter'] = '';
 }
 
-if (!isset($_SESSION['form'])) {
+if (!isset($_SESSION['form']))
+{
     $_SESSION['form'] = array();
 }
 ?>
@@ -174,7 +177,8 @@ if (!isset($_SESSION['form'])) {
                                     <?php
                                     require_once '../lib/sf.php';
                                     $tzlist = sfUtils::getTimeZoneList();
-                                    foreach ($tzlist as $timeZone) {
+                                    foreach ($tzlist as $timeZone)
+                                    {
                                         $selected = $timeZone == 'Europe/London' ? 'selected="selected"' : "";
                                         echo '<option value="' . $timeZone . '" ' . $selected . '>' . sfUtils::escape($timeZone) . '</option>';
                                     }
@@ -215,10 +219,10 @@ if (!isset($_SESSION['form'])) {
                         </form>
 
                         <div class="form-footer">
-                            <?php
-                            echo $_SESSION['formFooter'];
-                            unset($_SESSION['formFooter']);
-                            ?>
+<?php
+echo $_SESSION['formFooter'];
+unset($_SESSION['formFooter']);
+?>
                         </div>
                     </div>
                     <!--END of contactform-->

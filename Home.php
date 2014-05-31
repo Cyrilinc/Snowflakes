@@ -6,9 +6,9 @@ require_once 'config/Config.php';
 //The upload directory
 $settingsConfig = Config::getConfig("settings", 'config/config.ini');
 //The upload Image directory
-$UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
-$imageMissing = $UploadThumbUrl . "missing_default.png";
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 
 //initialize the session
 if (!isset($_SESSION)) {
@@ -504,12 +504,12 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                                                         $DBImageThumbFiles = explode(",", $row_rsSFGallery[$i]['thumb_name']);
                                                         // Loop through the array and add directory prefix to each item in array
                                                         foreach ($DBImageFiles as &$value) {
-                                                            $value = $UploadImgUrl . $value;
+                                                            $value = $sfGalleryImgUrl . $value;
                                                         }
 
                                                         // Loop through the array and add directory prefix to each item in array	
                                                         foreach ($DBImageThumbFiles as &$value) {
-                                                            $value = $UploadThumbUrl . $value;
+                                                            $value = $sfGalleryThumbUrl . $value;
                                                         }
                                                         ?>
                                                         <li> <span class="tp-title" ><?php echo $row_rsSFGallery[$i]['title']; ?></span>

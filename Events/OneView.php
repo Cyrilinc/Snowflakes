@@ -6,8 +6,8 @@ require_once '../config/Config.php';
 <?php
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
 //The upload Image directory
-$UploadImgDir = $settingsConfig['m_sfGalleryImgUrl'];
-$imageMissing = $UploadImgDir . "missing_default.png";
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$imageMissing = $sfGalleryImgUrl . "missing_default.png";
 
 $config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());

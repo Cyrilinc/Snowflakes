@@ -5,19 +5,22 @@ require_once '../config/Config.php';
 ?>
 <?php
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
 $query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
-if ((isset($query_string)) && ($query_string != "")) {
+if ((isset($query_string)) && ($query_string != ""))
+{
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
 $doLogout = filter_input(INPUT_GET, 'doLogout');
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
-if ((isset($doLogout)) && ($doLogout == "true")) {
+if ((isset($doLogout)) && ($doLogout == "true"))
+{
     //to fully log out a visitor we need to clear the session varialbles
     $_SESSION['MM_Username'] = NULL;
     $_SESSION['MM_UserGroup'] = NULL;
@@ -27,21 +30,24 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['PrevUrl']);
 
     $logoutGoTo = $settingsConfig['loginUrl'];
-    if ($logoutGoTo) {
+    if ($logoutGoTo)
+    {
         header("Location: $logoutGoTo");
         exit;
     }
 }
 ?>
 <?php
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
 $MM_restrictGoTo = "../login.php";
-if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
+if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup']))))
+{
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
     if (strpos($MM_restrictGoTo, "?"))
@@ -59,7 +65,8 @@ $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 $Message = "";
 $colname_rsAdmin = "-1";
-if (isset($_SESSION['MM_Username'])) {
+if (isset($_SESSION['MM_Username']))
+{
     $colname_rsAdmin = $_SESSION['MM_Username'];
 }
 
@@ -72,7 +79,8 @@ $logDir = $datadir->m_logdir;
 
 $logfile = filter_input(INPUT_GET, 'logfile');
 $deletefile = filter_input(INPUT_GET, 'delfile');
-if (isset($deletefile) && !$logfile) {
+if (isset($deletefile) && !$logfile)
+{
     sfUtils::Deletefile($logDir . $deletefile);
 }
 ?>
@@ -113,18 +121,20 @@ if (isset($deletefile) && !$logfile) {
             });
         </script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <?php if (!$logfile) { ?>
+<?php if (!$logfile)
+{ ?>
             <script type='text/javascript'>
-                google.load('visualization', '1', {packages: ['table']});
-                google.setOnLoadCallback(drawTable);
-                function drawTable() {
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('date', 'Log date');
-                    data.addColumn('string', 'Log Files');
-                    data.addRows([
+            google.load('visualization', '1', {packages: ['table']});
+            google.setOnLoadCallback(drawTable);
+            function drawTable() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('date', 'Log date');
+                data.addColumn('string', 'Log Files');
+                data.addRows([
     <?php
     $logArray = sfUtils::getfileList2($logDir);
-    foreach ($logArray as $key => $file) {
+    foreach ($logArray as $key => $file)
+    {
         $date = explode("-", $file['Date']);
         $date[1] = $date[1] - 1;
         $loglink = $file['LogFile'];
@@ -132,26 +142,28 @@ if (isset($deletefile) && !$logfile) {
         echo "[new Date($newdate), '$loglink'],";
     }
     ?>
-                    ]);
+                ]);
 
-                    var formatter = new google.visualization.PatternFormat('<div>\n\
+                var formatter = new google.visualization.PatternFormat('<div>\n\
                     <a href="LogViewer.php?logfile={1}" data-log-date="{0}">{1}</a>\n\
                     <a href="LogViewer.php?delfile={1}" title="Delete this Logfile"><img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /></a>\n\
                     </div>');
-                    formatter.format(data, [1, 1]);
+                formatter.format(data, [1, 1]);
 
-                    //var formatter2 = new google.visualization.PatternFormat('');
-                    //formatter2.format(data, [2, 2]);
+                //var formatter2 = new google.visualization.PatternFormat('');
+                //formatter2.format(data, [2, 2]);
 
 
-                    var table = new google.visualization.Table(document.getElementById('table_div'));
-                    table.draw(data, {allowHtml: true});
-                }
+                var table = new google.visualization.Table(document.getElementById('table_div'));
+                table.draw(data, {allowHtml: true});
+            }
             </script>
-            <?php
-        } else {
-            $info = sfUtils::viewLogFile($logDir . $logfile);
-            ?>
+    <?php
+}
+else
+{
+    $info = sfUtils::viewLogFile($logDir . $logfile);
+    ?>
             <script type='text/javascript'>
                 google.load('visualization', '1', {packages: ['table']});
                 google.setOnLoadCallback(drawTable);
@@ -173,7 +185,8 @@ if (isset($deletefile) && !$logfile) {
     unset($info['warningCount']);
     unset($info['successCount']);
     $count = 1;
-    foreach ($info as $key => $value) {
+    foreach ($info as $key => $value)
+    {
         $date = str_replace(" ", ",", str_replace("-", ",", str_replace(":", ",", trim($value['datetime']))));
         $expdate = explode(",", $date);
         $expdate[1] = $expdate[1] - 1;
@@ -193,7 +206,7 @@ if (isset($deletefile) && !$logfile) {
                     table.draw(data, {allowHtml: true});
                 }
             </script>
-        <?php } ?>
+<?php } ?>
         <!-- InstanceEndEditable -->
     </head>
     <body> 
@@ -237,7 +250,8 @@ if (isset($deletefile) && !$logfile) {
                                     </ul>
                                 </li>
                                 <?php
-                                if ($user->m_access_level == 5 || $user->m_access_level == 4) {
+                                if ($user->m_access_level == 5 || $user->m_access_level == 4)
+                                {
                                     ?>
                                     <li class="active" id="AtvNewButton">
                                         <a href="../SiteSetting/index.php" title="Settings"> <img src="../resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
@@ -248,15 +262,17 @@ if (isset($deletefile) && !$logfile) {
                                             <li><a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a></li>
                                         </ul>
                                     </li>
-                                    <?php
-                                } else {
-                                    ?>
+    <?php
+}
+else
+{
+    ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
                                     </li>
-                                    <?php
-                                }
-                                ?>
+    <?php
+}
+?>
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
@@ -277,17 +293,20 @@ if (isset($deletefile) && !$logfile) {
         <div class="ContentWrapper"> 
             <!-- Content -->
             <div class="Content"> <!-- InstanceBeginEditable name="BodyRegion" -->
-                <?php
-                echo sfUtils::dialogMessage("Log Message", $Message);
-                if (!$logfile) {
-                    ?>
+<?php
+echo sfUtils::dialogMessage("Log Message", $Message);
+if (!$logfile)
+{
+    ?>
                     <header>
                         <h1>Snowflakes Log Viewer </h1>	
                     </header>
-                    <?php
-                } else {
-                    echo sfUtils::dialogMessage("Viewer", $Message);
-                    ?>
+    <?php
+}
+else
+{
+    echo sfUtils::dialogMessage("Viewer", $Message);
+    ?>
                     <header>
                         <h1>Snowflakes Log Viewer(<?php echo count($info); ?>)
                             <span class="success"> <?php echo $successCount; ?> Successes</span>
@@ -295,7 +314,7 @@ if (isset($deletefile) && !$logfile) {
                             <span class="error"> <?php echo $errorcount; ?> Errors</span>
                         </h1>	
                     </header>
-                <?php } ?>
+<?php } ?>
                 <!-- Break -->
                 <div class="clear"></div>
                 <div class="Break"></div>

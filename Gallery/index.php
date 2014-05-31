@@ -8,25 +8,28 @@ require_once '../lib/sfImageProcessor.php';
 //The upload directory
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
 //The upload base Image url
-$UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 
-$imageMissing = $UploadThumbUrl . "missing_default.png";
+$imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 ?>
 <?php
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
 $query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
-if ((isset($query_string)) && ($query_string != "")) {
+if ((isset($query_string)) && ($query_string != ""))
+{
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
 $doLogout = filter_input(INPUT_GET, 'doLogout');
-if ((isset($doLogout)) && ($doLogout == "true")) {
+if ((isset($doLogout)) && ($doLogout == "true"))
+{
     //to fully log out a visitor we need to clear the session varialbles
     $_SESSION['MM_Username'] = NULL;
     $_SESSION['MM_UserGroup'] = NULL;
@@ -36,13 +39,15 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['PrevUrl']);
 
     $logoutGoTo = $settingsConfig['loginUrl'];
-    if ($logoutGoTo) {
+    if ($logoutGoTo)
+    {
         header("Location: $logoutGoTo");
         exit;
     }
 }
 
-if (isset($_SESSION['ImageFiles']) || isset($_SESSION['ImageThumbFiles'])) {
+if (isset($_SESSION['ImageFiles']) || isset($_SESSION['ImageThumbFiles']))
+{
     sfImageProcessor::ResetAll();
 }
 ?>
@@ -51,13 +56,16 @@ $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
 $MM_restrictGoTo = $settingsConfig['loginUrl'];
-if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
+if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup']))))
+{
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
-    if (strpos($MM_restrictGoTo, "?")) {
+    if (strpos($MM_restrictGoTo, "?"))
+    {
         $MM_qsChar = "&amp;";
     }
-    if (isset($query_string) && strlen($query_string) > 0) {
+    if (isset($query_string) && strlen($query_string) > 0)
+    {
         $MM_referrer .= "?" . $query_string;
     }
     $MM_restrictGoTo = $MM_restrictGoTo . $MM_qsChar . "accesscheck=" . urlencode($MM_referrer);
@@ -67,7 +75,8 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
 ?>
 <?php
 $colname_rsAdmin = "-1";
-if (isset($_SESSION['MM_Username'])) {
+if (isset($_SESSION['MM_Username']))
+{
     $colname_rsAdmin = $_SESSION['MM_Username'];
 }
 
@@ -76,7 +85,8 @@ $currentPage = filter_input(INPUT_SERVER, 'PHP_SELF');
 $maxRows_GalleryRs = 6;
 $pageNum_GalleryRs = 0;
 $GalleryRs = filter_input(INPUT_GET, 'pageNum_GalleryRs');
-if (isset($GalleryRs)) {
+if (isset($GalleryRs))
+{
     $pageNum_GalleryRs = $GalleryRs;
 }
 $startRow_GalleryRs = $pageNum_GalleryRs * $maxRows_GalleryRs;
@@ -91,14 +101,16 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
 $query_rsSFGallery = "SELECT * FROM snowflakes_gallery";
 $publish = -1;
 $publishRs = filter_input(INPUT_GET, 'publish');
-if (isset($publishRs)) {
+if (isset($publishRs))
+{
     $publish = $publishRs;
     $query_rsSFGallery.=" WHERE publish=" . $publish;
 }
 $publishStatus = sfUtils::getPublishStatus($publish);
 
 $userSnowflakes = filter_input(INPUT_GET, 'userSf');
-if (isset($userSnowflakes)) {
+if (isset($userSnowflakes))
+{
     $publish = $userSnowflakes;
     $prefix = strpos($query_rsSFGallery, " WHERE ") === false ? " WHERE " : " AND ";
     $query_rsSFGallery.=$prefix . 'created_by="' . sfUtils::escape($userSnowflakes) . '"';
@@ -106,7 +118,8 @@ if (isset($userSnowflakes)) {
     $userSnowflakes.="'s ";
 }
 $sfuser = $colname_rsAdmin . "'s ";
-if ($userSnowflakes === $sfuser) {
+if ($userSnowflakes === $sfuser)
+{
     $userSnowflakes = "Your ";
 }
 
@@ -115,16 +128,20 @@ $query_limit_GalleryRs = sprintf("%s LIMIT %d, %d", $query_rsSFGallery, $startRo
 $SFconnects->fetch($query_limit_GalleryRs);
 $row_rsSFGallery = $SFconnects->getResultArray();
 $galleryStructList = array();
-foreach ($row_rsSFGallery as $key => $value) {
+foreach ($row_rsSFGallery as $key => $value)
+{
     $galleryStructList[$key] = new galleryStruct();
     $galleryStructList[$key]->populate($value);
 }
 $totalRows_rsSFGallery = $SFconnects->recordCount();
 
 $total_GalleryRs = filter_input(INPUT_GET, 'totalRows_GalleryRs');
-if (isset($total_GalleryRs)) {
+if (isset($total_GalleryRs))
+{
     $totalRows_GalleryRs = $total_GalleryRs;
-} else {
+}
+else
+{
     $countQuery = str_replace("SELECT * FROM", "SELECT COUNT(id) count FROM", $query_rsSFGallery);
     $SFconnects->fetch($countQuery);
     $result = $SFconnects->getResultArray();
@@ -132,16 +149,20 @@ if (isset($total_GalleryRs)) {
 }
 $totalPages_GalleryRs = ceil($totalRows_GalleryRs / $maxRows_GalleryRs) - 1;
 $queryString_GalleryRs = "";
-if (!empty($query_string)) {
+if (!empty($query_string))
+{
     $params = explode("&", $query_string);
     $newParams = array();
-    foreach ($params as $param) {
+    foreach ($params as $param)
+    {
         if (stristr($param, "pageNum_GalleryRs") == false &&
-                stristr($param, "totalRows_GalleryRs") == false) {
+                stristr($param, "totalRows_GalleryRs") == false)
+        {
             array_push($newParams, $param);
         }
     }
-    if (count($newParams) != 0) {
+    if (count($newParams) != 0)
+    {
         $queryString_GalleryRs = "&amp;" . htmlentities(implode("&", $newParams));
     }
 }
@@ -250,7 +271,8 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                                     </ul>
                                 </li>
                                 <?php
-                                if ($user->m_access_level == 5 || $user->m_access_level == 4) {
+                                if ($user->m_access_level == 5 || $user->m_access_level == 4)
+                                {
                                     ?>
                                     <li>
                                         <a href="../SiteSetting/index.php" title="Settings"> <img src="../resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
@@ -262,7 +284,9 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                                         </ul>
                                     </li>
                                     <?php
-                                } else {
+                                }
+                                else
+                                {
                                     ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
@@ -319,14 +343,18 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                 <!-- End of Break -->
                 <!--wrapper-->
                 <div class="wrapper"> 
-                    <?php if ($pageNum_GalleryRs > 0) { // Show if not first page      ?>
+                    <?php if ($pageNum_GalleryRs > 0)
+                    { // Show if not first page      
+                        ?>
                         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_GalleryRs=%d%s", $currentPage, 0, $queryString_GalleryRs); ?>">First</a></div>
                         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_GalleryRs=%d%s", $currentPage, max(0, $pageNum_GalleryRs - 1), $queryString_GalleryRs); ?>">Previous</a></div>
                     <?php } // Show if not first page       ?>
-                    <?php if ($pageNum_GalleryRs < $totalPages_GalleryRs) { // Show if not last page     ?>
+                    <?php if ($pageNum_GalleryRs < $totalPages_GalleryRs)
+                    { // Show if not last page     
+                        ?>
                         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_GalleryRs=%d%s", $currentPage, min($totalPages_GalleryRs, $pageNum_GalleryRs + 1), $queryString_GalleryRs); ?>">Next</a></div>
                         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_GalleryRs=%d%s", $currentPage, $totalPages_GalleryRs, $queryString_GalleryRs); ?>">Last</a></div>
-                    <?php } // Show if not last page       ?>
+<?php } // Show if not last page        ?>
                     <div class=" clear Break2"></div>
 
 
@@ -339,10 +367,13 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                     <!--tp-grid-->
                     <ul id="tp-grid" class="tp-grid">
                         <?php
-                        if ($totalRows_rsSFGallery > 0) {
+                        if ($totalRows_rsSFGallery > 0)
+                        {
                             $i = 0;
                             ?>
-                            <?php do { ?>
+                            <?php do
+                            {
+                                ?>
                                 <?php
                                 // Get all the image name from database
                                 $DBImageFiles = explode(",", $galleryStructList[$i]->m_image_name);
@@ -351,18 +382,23 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
 
                                 // Loop through the array and add directory prefix to each item in array
                                 foreach ($DBImageFiles as &$value)
-                                    $value = $UploadImgUrl . $value;
+                                {
+                                    $value = $sfGalleryImgUrl . $value;
+                                }
 
 
                                 // Loop through the array and add directory prefix to each item in array	
                                 foreach ($DBImageThumbFiles as &$value)
-                                    $value = $UploadThumbUrl . $value;
+                                {
+                                    $value = $sfGalleryThumbUrl . $value;
+                                }
 
                                 //DataList
-                                foreach ($DBImageThumbFiles as $counter => $imageThumbLink) {
+                                foreach ($DBImageThumbFiles as $counter => $imageThumbLink)
+                                {
                                     ?>
                                     <li data-pile="<?php echo htmlentities($galleryStructList[$i]->m_title . " <br/><div class=\"owner\"> By -" . $galleryStructList[$i]->m_created_by . "</div> "); ?>"> 
-                                        <a class="colorbox" href="<?php echo $DBImageFiles[$counter]; ?>" onerror="this.href='<?php echo $UploadImgUrl . "missing_default.png"; ?>'" title="<?php echo htmlentities($DBImageCaption[$counter]); ?>"> 
+                                        <a class="colorbox" href="<?php echo $DBImageFiles[$counter]; ?>" onerror="this.href='<?php echo $sfGalleryImgUrl . "missing_default.png"; ?>'" title="<?php echo htmlentities($DBImageCaption[$counter]); ?>"> 
                                             <span class="tp-info"><span><?php echo htmlentities($DBImageCaption[$counter]); ?></span></span> 
                                             <img src="<?php echo $imageThumbLink; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo htmlentities($DBImageCaption[$counter]); ?>"> 
                                         </a>
@@ -376,12 +412,16 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                             } while ($i < count($galleryStructList));
                             ?>
 
-                        <?php } else { ?> 
+<?php
+}
+else
+{
+    ?> 
                             <!-- Snowflakes -->
                             <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>No Images in Gallery</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
                             <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>No Images in Gallery</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
                             <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>No Images in Gallery</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
-                        <?php } ?>     
+<?php } ?>     
 
                     </ul>
                     <!--tp-grid Ends--> 

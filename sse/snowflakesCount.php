@@ -42,10 +42,10 @@ do {
 	flush();
 
     $SFconnects->close();
-    sleep(5);
+    sleep(10);
 
     // If we didn't use a while loop, the browser would essentially do polling
-    // every 3seconds. Using the while, we keep the connection open and only make
+    // every 3 seconds. Using the while, we keep the connection open and only make
     // one request.
 } while (true);
 ?>

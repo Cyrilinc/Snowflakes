@@ -24,9 +24,9 @@ $url = $otherurl = sfUtils::curPageURL();
 $settingsConfig = Config::getConfig("settings", 'config/config.ini');
 $Powerlink = "resources/images/Snowflakes2.png";
 //The upload base Image url
-$UploadImgDir = $settingsConfig['m_sfGalleryImgUrl'];
-$UploadThumbDir = $settingsConfig['m_sfGalleryThumbUrl'];
-$imageMissing = $UploadImgDir . "missing_default.png";
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$imageMissing = $sfGalleryImgUrl . "missing_default.png";
 ?>
 <!DOCTYPE HTML>
 <html ><!-- InstanceBegin template="/Templates/index.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -203,12 +203,12 @@ $imageMissing = $UploadImgDir . "missing_default.png";
 
                                                     // Loop through the array and add directory prefix to each item in array
                                                     foreach ($DBImageFiles as &$value) {
-                                                        $value = $UploadImgDir . $value;
+                                                        $value = $sfGalleryImgUrl . $value;
                                                     }
 
                                                     // Loop through the array and add directory prefix to each item in array	
                                                     foreach ($DBImageThumbFiles as &$value) {
-                                                        $value = $UploadThumbDir . $value;
+                                                        $value = $sfGalleryThumbUrl . $value;
                                                     }
 
                                                     //DataList

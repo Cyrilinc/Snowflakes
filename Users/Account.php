@@ -4,19 +4,22 @@ require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
 
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
 $query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
-if ((isset($query_string)) && ($query_string != "")) {
+if ((isset($query_string)) && ($query_string != ""))
+{
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
 $doLogout = filter_input(INPUT_GET, 'doLogout');
-if ((isset($doLogout)) && ($doLogout == "true")) {
+if ((isset($doLogout)) && ($doLogout == "true"))
+{
     //to fully log out a visitor we need to clear the session varialbles
     $_SESSION['MM_Username'] = NULL;
     $_SESSION['MM_UserGroup'] = NULL;
@@ -26,7 +29,8 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['PrevUrl']);
 
     $logoutGoTo = $settingsConfig['loginUrl'];
-    if ($logoutGoTo) {
+    if ($logoutGoTo)
+    {
         header("Location: $logoutGoTo");
         exit;
     }
@@ -35,14 +39,16 @@ $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 $imageMissing = $UploadThumbUrl . "missing_default.png";
 ?>
 <?php
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
 $MM_restrictGoTo = "../login.php";
-if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
+if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup']))))
+{
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
     if (strpos($MM_restrictGoTo, "?"))
@@ -57,12 +63,14 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
 <?php
 $colname_userName = "-1";
 $userName = filter_input(INPUT_GET, 'userName');
-if (isset($userName)) {
+if (isset($userName))
+{
     $colname_userName = $userName;
 }
 $colname_id = -1;
 $userId = filter_input(INPUT_GET, 'userId');
-if (isset($userId)) {
+if (isset($userId))
+{
     $colname_id = $userId;
 }
 
@@ -71,9 +79,12 @@ $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 $sfuser = new userStruct();
-if (isset($userName)) {
+if (isset($userName))
+{
     $sfuser->getUserByUsername($SFconnects, $userName);
-} else if ($colname_id != -1) {
+}
+else if ($colname_id != -1)
+{
     $sfuser->getUserByid($SFconnects, $colname_id);
 }
 $levelname = sfUtils::UserLevelName($sfuser->m_access_level);
@@ -82,7 +93,8 @@ sfUtils::getAllCounts($SFconnects, $sfuser->m_username);
 $activities = sfUtils::getActivities($SFconnects, $sfuser->m_username, '../config/config.ini');
 
 $colname_rsAdmin = "-1";
-if (isset($_SESSION['MM_Username'])) {
+if (isset($_SESSION['MM_Username']))
+{
     $colname_rsAdmin = $_SESSION['MM_Username'];
 }
 
@@ -143,7 +155,7 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
             });
         </script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <?php ?>
+<?php ?>
         <script type="text/javascript">
             google.load("visualization", "1", {packages: ["corechart"]});
             google.setOnLoadCallback(drawChart);
@@ -231,7 +243,8 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
                                 </li>
 
                                 <?php
-                                if ($user->m_access_level == 5 || $user->m_access_level == 4) {
+                                if ($user->m_access_level == 5 || $user->m_access_level == 4)
+                                {
                                     ?>
                                     <li>
                                         <a href="../SiteSetting/index.php" title="Settings"> <img src="../resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
@@ -242,15 +255,17 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
                                             <li><a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a></li>
                                         </ul>
                                     </li>
-                                    <?php
-                                } else {
-                                    ?>
+    <?php
+}
+else
+{
+    ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
                                     </li>
-                                    <?php
-                                }
-                                ?>
+    <?php
+}
+?>
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
@@ -274,21 +289,25 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
-                    <?php if ($userName != Null || $userId != Null || $colname_id != -1) { ?>
+<?php if ($userName != Null || $userId != Null || $colname_id != -1)
+{ ?>
                         <div class="Snowflake">
 
                             <!--SnowflakeDescr-->
                             <div class="SnowflakeDescr">
-                                <?php if ($sfuser->m_username == $user->m_username) { ?>
+    <?php if ($sfuser->m_username == $user->m_username)
+    { ?>
                                     <div class="SnowflakeHead">
                                         <a href="EditUser.php?adminid=<?php echo $sfuser->m_id; ?>" title="Edit your profile" onclick="ConfirmDelete();">
-                                            <?php echo $sfuser->m_username; ?>
+                                        <?php echo $sfuser->m_username; ?>
                                             <img src="../resources/images/Icons/Edit.png" height="25" width="25" alt="Edit your profile" />
                                         </a>
                                     </div>
-                                <?php } else { ?>
+    <?php }
+    else
+    { ?>
                                     <div class="SnowflakeHead"><?php echo $sfuser->m_username; ?></div>
-                                <?php } ?>
+    <?php } ?>
                                 <div class="SnowflakeImage">
                                     <a class="colorbox" href="../Uploads/<?php echo $sfuser->m_image_name; ?>" title="<?php echo $sfuser->m_username; ?>" >
                                         <img src="../Uploads/<?php echo $sfuser->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo $sfuser->m_username . "'s"; ?> profile" />
@@ -298,9 +317,9 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
                                 <p> Access  : <?php echo $levelname; ?></p>
                                 <p> Email   : <?php echo $sfuser->m_email; ?></p>
                                 <p> Last in : <?php
-                                    $lastin = new DateTime($sfuser->m_last_login);
-                                    echo $lastin->format(" F j, Y g:h a");
-                                    ?></p>
+    $lastin = new DateTime($sfuser->m_last_login);
+    echo $lastin->format(" F j, Y g:h a");
+    ?></p>
                                 <p> Status  : <?php echo $sfuser->m_logged_in == 1 ? "Online" : "Offline"; ?></p>
                                 <p> Flakes  : <?php echo $sfuser->m_flake_it; ?></p>
 
@@ -321,7 +340,7 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
                                 <div class="SummaryDescription">
                                     <h4 class="SummaryHead">Recent Activities</h4>
                                     <div id="activities">
-                                        <?php echo $activities; ?>
+    <?php echo $activities; ?>
                                     </div>
                                 </div><!--SummaryDescription Ends-->
 
@@ -329,10 +348,12 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
                         </div>
                         <!-- End of Snowflake -->
 
-                    <?php } else {
-                        ?>
+<?php }
+else
+{
+    ?>
                         <h1>No User to view</h1>
-                    <?php } ?>
+<?php } ?>
 
                 </div><!-- End of PageWrap --> 
                 <!-- InstanceEndEditable -->  </div>

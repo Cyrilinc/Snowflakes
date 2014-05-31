@@ -32,7 +32,7 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
         exit;
     }
 }
-$UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
 $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 $imageMissing = $UploadThumbUrl . "missing_default.png";
 ?>
@@ -326,7 +326,7 @@ foreach ($latlong as $key => $value) {
                                 <div class="clear PageBreak"></div>
                                 <div class="SnowflakeDescr">
                                     <div class="SnowflakeImage">
-                                        <a class="colorbox" href="../Uploads/<?php echo $eventStruct->m_image_name; ?>"  onerror="this.href='<?php echo $UploadImgUrl . "missing_default.png"; ?>'"  title="<?php echo $eventStruct->m_title; ?>" >
+                                        <a class="colorbox" href="../Uploads/<?php echo $eventStruct->m_image_name; ?>"  onerror="this.href='<?php echo $sfGalleryImgUrl . "missing_default.png"; ?>'"  title="<?php echo $eventStruct->m_title; ?>" >
                                             <img src="../Uploads/<?php echo $eventStruct->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'"  alt="Image" />
                                         </a> 
                                     </div>

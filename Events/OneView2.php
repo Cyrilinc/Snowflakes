@@ -34,8 +34,8 @@ $SnowflakesUrl = $row_SiteSettings['sf_url'];
 $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
 
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
-$UploadImgDir = $settingsConfig['m_sfGalleryImgUrl'];
-$imageMissing = $UploadImgDir . "missing_default.png";
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$imageMissing = $sfGalleryImgUrl . "missing_default.png";
 ?>
 <style>
     #map_canvas {

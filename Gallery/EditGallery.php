@@ -16,12 +16,12 @@ $datadir=new dataDirParam("../config/config.ini");
 $UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory
 $UploadImgDir = $datadir->m_galleryImgDir;
-$UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
 $UploadThumbDir = $datadir->m_galleryThumbDir;
-$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 $GalleryMessage = '';
 
-$imageMissing = $UploadThumbUrl . "missing_default.png";
+$imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
@@ -441,8 +441,8 @@ if ((isset($MM_update)) && ($MM_update == "EditGallery") && $viewLink != "#") {
                                         $GalleryCaption = $_SESSION['ImageCaptions'];
 
                                         //print_r($GalleryThumbImages);
-                                        $GalleryDisplayImages = str_replace($UploadImgDir, $UploadImgUrl, $GalleryImages);
-                                        $GalleryDisplayThumb = str_replace($UploadThumbDir, $UploadThumbUrl, $GalleryThumbImages);
+                                        $GalleryDisplayImages = str_replace($UploadImgDir, $sfGalleryImgUrl, $GalleryImages);
+                                        $GalleryDisplayThumb = str_replace($UploadThumbDir, $sfGalleryThumbUrl, $GalleryThumbImages);
                                     }
                                     // if the image files have not already been set and is not equal to the database images
                                     elseif (($arraysAreEqual != TRUE)) {
@@ -465,15 +465,15 @@ if ((isset($MM_update)) && ($MM_update == "EditGallery") && $viewLink != "#") {
                                             $GalleryImages = $_SESSION['ImageFiles'];
                                             $GalleryThumbImages = $_SESSION['ImageThumbFiles'];
                                             $GalleryCaption = $_SESSION['ImageCaptions'];
-                                            $GalleryDisplayImages = str_replace($UploadImgDir, $UploadImgUrl, $GalleryImages);
-                                            $GalleryDisplayThumb = str_replace($UploadThumbDir, $UploadThumbUrl, $GalleryThumbImages);
+                                            $GalleryDisplayImages = str_replace($UploadImgDir, $sfGalleryImgUrl, $GalleryImages);
+                                            $GalleryDisplayThumb = str_replace($UploadThumbDir, $sfGalleryThumbUrl, $GalleryThumbImages);
                                         } elseif ($containAnyDBValue) {
                                             $GalleryImages = $_SESSION['ImageFiles'];
                                             $GalleryThumbImages = $_SESSION['ImageThumbFiles'];
                                             //print_r($GalleryThumbImages);
                                             $GalleryCaption = $_SESSION['ImageCaptions'];
-                                            $GalleryDisplayImages = str_replace($UploadImgDir, $UploadImgUrl, $GalleryImages);
-                                            $GalleryDisplayThumb = str_replace($UploadThumbDir, $UploadThumbUrl, $GalleryThumbImages);
+                                            $GalleryDisplayImages = str_replace($UploadImgDir, $sfGalleryImgUrl, $GalleryImages);
+                                            $GalleryDisplayThumb = str_replace($UploadThumbDir, $sfGalleryThumbUrl, $GalleryThumbImages);
                                         }
                                         /// if none of the values in the ImageFiles session contains the image in the database 
                                         elseif (($containAnyDBValue == False) && !empty($_SESSION['ImageFiles'])) {

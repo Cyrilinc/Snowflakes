@@ -5,19 +5,22 @@ require_once '../config/Config.php';
 require_once '../lib/sfImageProcessor.php';
 
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
 $query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
-if ((isset($query_string)) && ($query_string != "")) {
+if ((isset($query_string)) && ($query_string != ""))
+{
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
 $doLogout = filter_input(INPUT_GET, 'doLogout');
-if ((isset($doLogout)) && ($doLogout == "true")) {
+if ((isset($doLogout)) && ($doLogout == "true"))
+{
     //to fully log out a visitor we need to clear the session varialbles
     $_SESSION['MM_Username'] = NULL;
     $_SESSION['MM_UserGroup'] = NULL;
@@ -27,7 +30,8 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['PrevUrl']);
 
     $logoutGoTo = $settingsConfig['loginUrl'];
-    if ($logoutGoTo) {
+    if ($logoutGoTo)
+    {
         header("Location: $logoutGoTo");
         exit;
     }
@@ -36,20 +40,24 @@ $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 $imageMissing = $UploadThumbUrl . "missing_default.png";
 ?>
 <?php
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
 $MM_restrictGoTo = "../login.php";
-if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
+if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup']))))
+{
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
-    if (strpos($MM_restrictGoTo, "?")) {
+    if (strpos($MM_restrictGoTo, "?"))
+    {
         $MM_qsChar = "&";
     }
-    if (isset($query_string) && strlen($query_string) > 0) {
+    if (isset($query_string) && strlen($query_string) > 0)
+    {
         $MM_referrer .= "?" . $query_string;
     }
     $MM_restrictGoTo = $MM_restrictGoTo . $MM_qsChar . "accesscheck=" . urlencode($MM_referrer);
@@ -63,15 +71,19 @@ $File_is_Uploaded = False;
 $uploadedFile = "";
 // check if the upload file array is not empty
 $formmessage = "";
-if (empty($_FILES["uploadImage"]["name"])) {
+if (empty($_FILES["uploadImage"]["name"]))
+{
     $File_is_Uploaded = True;
-} else {
+}
+else
+{
     $File_is_Uploaded = sfImageProcessor::uploadSingleImage($_FILES['uploadImage'], '../config/config.ini', $uploadedFile, $formmessage, false);
     //$formmessage .=" <br>" . $uploadedFile;
 }
 
 $editFormAction = $php_self;
-if (isset($query_string)) {
+if (isset($query_string))
+{
     $editFormAction .= "?" . htmlentities($query_string);
 }
 
@@ -81,7 +93,8 @@ $SFconnects->connect(); // Connect to database
 
 $MM_update = filter_input(INPUT_POST, 'MM_update');
 $viewLink = "";
-if ((isset($MM_update)) && ($MM_update == "form1") && ($File_is_Uploaded == TRUE)) {
+if ((isset($MM_update)) && ($MM_update == "form1") && ($File_is_Uploaded == TRUE))
+{
 
     $oldImage = userStruct::getImageNameById($SFconnects, $_POST['id']);
     $image_name = strlen($uploadedFile) == 0 ? $oldImage : $uploadedFile;
@@ -89,11 +102,15 @@ if ((isset($MM_update)) && ($MM_update == "form1") && ($File_is_Uploaded == TRUE
     $userStruct->init($_POST['username'], $_POST['password2'], $_POST['email'], $_POST['access_level'], $image_name);
     $userStruct->m_id = $_POST['id'];
 
-    if (!$userStruct->UpdateUser($SFconnects)) {
+    if (!$userStruct->UpdateUser($SFconnects))
+    {
         $formmessage.= "Could not change the user info. <br>" . $SFconnects->getMessage() . '<br>';
-    } else {
+    }
+    else
+    {
         $datadir = new dataDirParam("../config/config.ini");
-        if ($userStruct->m_image_name != $oldImage) {
+        if ($userStruct->m_image_name != $oldImage)
+        {
             sfUtils::Deletefile($datadir->m_uploadGalleryDir . $oldImage);
         }
 
@@ -109,7 +126,8 @@ if ((isset($MM_update)) && ($MM_update == "form1") && ($File_is_Uploaded == TRUE
 
 $colname_rsUpdateAdmin = -1;
 $adminid = filter_input(INPUT_GET, 'adminid');
-if (isset($adminid)) {
+if (isset($adminid))
+{
     $colname_rsUpdateAdmin = $adminid;
 }
 
@@ -117,7 +135,8 @@ $edituserStruct = new userStruct();
 $edituserStruct->getUserByid($SFconnects, $colname_rsUpdateAdmin);
 
 $colname_rsAdmin = "-1";
-if (isset($_SESSION['MM_Username'])) {
+if (isset($_SESSION['MM_Username']))
+{
     $colname_rsAdmin = $_SESSION['MM_Username'];
 }
 
@@ -168,7 +187,8 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                 snowflakesCount("../sse/snowflakesCount.php");
             });
         </script>
-        <?php if (isset($adminid)) { ?>
+<?php if (isset($adminid))
+{ ?>
             <script src="../SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
             <script src="../SpryAssets/SpryValidationPassword.js" type="text/javascript"></script>
             <script src="../SpryAssets/SpryValidationConfirm.js" type="text/javascript"></script>
@@ -180,21 +200,21 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
             <link href="../resources/css/jquery-ui-1.10.4.snowflakes.css" rel="stylesheet" type="text/css" />
             <script src="../resources/Js/jquery-ui-1.10.4.snowflakes.js"></script>
             <script>
-                $(function() {
-                    $(".dialog-message").dialog({
-                        modal: true,
-                        buttons: {
-                            "Change again": function() {
-                                $(this).dialog("close");
-                            },
-                            "View": function() {
-                                window.location = "<?php echo $viewLink ?>";
-                            }
+            $(function() {
+                $(".dialog-message").dialog({
+                    modal: true,
+                    buttons: {
+                        "Change again": function() {
+                            $(this).dialog("close");
+                        },
+                        "View": function() {
+                            window.location = "<?php echo $viewLink ?>";
                         }
-                    });
+                    }
                 });
+            });
             </script>
-        <?php } ?>
+<?php } ?>
         <!-- InstanceEndEditable -->
     </head>
     <body> 
@@ -242,7 +262,8 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
 
 
                                 <?php
-                                if ($user->m_access_level == 5 || $user->m_access_level == 4) {
+                                if ($user->m_access_level == 5 || $user->m_access_level == 4)
+                                {
                                     ?>
                                     <li>
                                         <a href="../SiteSetting/index.php" title="Settings"> <img src="../resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
@@ -253,15 +274,17 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                             <li><a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a></li>
                                         </ul>
                                     </li>
-                                    <?php
-                                } else {
-                                    ?>
+    <?php
+}
+else
+{
+    ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
                                     </li>
-                                    <?php
-                                }
-                                ?>
+    <?php
+}
+?>
 
                                 <!-- InstanceEndEditable -->
                             </ul>
@@ -284,10 +307,15 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
             <!-- Content -->
             <div class="Content"> <!-- InstanceBeginEditable name="BodyRegion" -->
                 <h1>Edit <?php
-                    if (isset($edituserStruct->m_username) && $edituserStruct->m_username !== $user->m_username) {
+                    if (isset($edituserStruct->m_username) && $edituserStruct->m_username !== $user->m_username)
+                    {
                         echo $edituserStruct->m_username . "'s";
-                    }else if (isset($edituserStruct->m_username) && $edituserStruct->m_username === $user->m_username) {echo "your";}
-                    ?> account</h1>
+                    }
+                    else if (isset($edituserStruct->m_username) && $edituserStruct->m_username === $user->m_username)
+                    {
+                        echo "your";
+                    }
+?> account</h1>
 
                 <!-- Break -->
                 <div class="clear"></div>
@@ -296,13 +324,15 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
-                    <?php
-                    if (isset($adminid)) {
+<?php
+if (isset($adminid))
+{
 
-                        if (!empty($formmessage)) {
-                            echo sfUtils::dialogMessage("Edit User", $formmessage);
-                        }
-                        ?>
+    if (!empty($formmessage))
+    {
+        echo sfUtils::dialogMessage("Edit User", $formmessage);
+    }
+    ?>
                         <!--contactform-->
                         <div class="contactform">
 
@@ -339,30 +369,35 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                 <span id="sprySelectAcLv">
                                     <select name="access_level" class="inputtext3 controls">
                                         <option value="1" <?php
-                                        if (!(strcmp(1, $edituserStruct->m_access_level))) {
-                                            echo " selected=\"selected\"";
-                                        }
-                                        ?>>Author/ Editor 1</option>
+                                    if (!(strcmp(1, $edituserStruct->m_access_level)))
+                                    {
+                                        echo " selected=\"selected\"";
+                                    }
+                                    ?>>Author/ Editor 1</option>
                                         <option value="2" <?php
-                                        if (!(strcmp(2, $edituserStruct->m_access_level))) {
-                                            echo "selected=\"selected\"";
-                                        }
-                                        ?>>Publisher 2</option>
+                                    if (!(strcmp(2, $edituserStruct->m_access_level)))
+                                    {
+                                        echo "selected=\"selected\"";
+                                    }
+                                    ?>>Publisher 2</option>
                                         <option value="3" <?php
-                                        if (!(strcmp(3, $edituserStruct->m_access_level))) {
-                                            echo " selected=\"selected\"";
-                                        }
-                                        ?>>Manager 3</option>
+                                    if (!(strcmp(3, $edituserStruct->m_access_level)))
+                                    {
+                                        echo " selected=\"selected\"";
+                                    }
+                                    ?>>Manager 3</option>
                                         <option value="4" <?php
-                                        if (!(strcmp(4, $edituserStruct->m_access_level))) {
-                                            echo " selected=\"selected\"";
-                                        }
-                                        ?>>Administrator 4</option>
+                                    if (!(strcmp(4, $edituserStruct->m_access_level)))
+                                    {
+                                        echo " selected=\"selected\"";
+                                    }
+                                    ?>>Administrator 4</option>
                                         <option value="5" <?php
-                                        if (!(strcmp(5, $edituserStruct->m_access_level))) {
-                                            echo " selected=\"selected\"";
-                                        }
-                                        ?>>Super Administrator 5</option>
+                                    if (!(strcmp(5, $edituserStruct->m_access_level)))
+                                    {
+                                        echo " selected=\"selected\"";
+                                    }
+                                    ?>>Super Administrator 5</option>
                                     </select>
                                     <span class="selectRequiredMsg">Please select an access level.</span></span><br />
                                 <br />
@@ -374,7 +409,9 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
 
                         </div>
                         <!--End of contactform-->
-                    <?php } else { ?>
+<?php }
+else
+{ ?>
                         <h2 class="SummaryHead">No User id provided</h2>
 <?php } ?>
 
@@ -419,7 +456,8 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
 
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" -->
-<?php if (isset($adminid)) { ?>
+<?php if (isset($adminid))
+{ ?>
             <script type="text/javascript">
                 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryAdminName", "none", {validateOn: ["blur"]});
                 var sprypassword1 = new Spry.Widget.ValidationPassword("spryAdminPass", {validateOn: ["blur"]});

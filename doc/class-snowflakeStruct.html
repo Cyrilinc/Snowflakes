@@ -93,6 +93,11 @@
 	<h1>Class snowflakeStruct</h1>
 
 
+	<div class="description">
+	
+<p>Class thats stores infromation for Snowflakes</p>
+
+	</div>
 
 
 
@@ -110,7 +115,7 @@
 
 				<b>Author:</b>
 				Cyril Adelekan<br />
-		<b>Located at</b> <a href="source-class-snowflakeStruct.html#13-271" title="Go to source code">lib/sf.php</a><br />
+		<b>Located at</b> <a href="source-class-snowflakeStruct.html#15-448" title="Go to source code">lib/sf.php</a><br />
 	</div>
 
 
@@ -128,7 +133,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isSfPopulated">#</a>
-		<code><a href="source-class-snowflakeStruct.html#29-37" title="Go to source code">isSfPopulated</a>( )</code>
+		<code><a href="source-class-snowflakeStruct.html#38-47" title="Go to source code">isSfPopulated</a>( )</code>
 
 		<div class="description short">
 			
@@ -167,7 +172,7 @@ populated</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_populate">#</a>
-		<code><a href="source-class-snowflakeStruct.html#39-65" title="Go to source code">populate</a>( <span>array <var>$array</var></span> )</code>
+		<code><a href="source-class-snowflakeStruct.html#49-79" title="Go to source code">populate</a>( <span>array <var>$array</var></span> )</code>
 
 		<div class="description short">
 			
@@ -211,7 +216,7 @@ parameters</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSnowflakesByid">#</a>
-		<code><a href="source-class-snowflakeStruct.html#67-92" title="Go to source code">getSnowflakesByid</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span> )</code>
+		<code><a href="source-class-snowflakeStruct.html#81-112" title="Go to source code">getSnowflakesByid</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -234,7 +239,8 @@ used to populate the members of this class <code><a href="class-snowflakeStruct.
 					<dt><var>$conn</var></dt>
 					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
 					<dt><var>$id</var></dt>
-					<dd><code>integer</code><br>$id <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code> the id(identifier) of the snowflake</dd>
+					<dd><code>integer</code><br>$id <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code> the id(identifier) or uuid(universally unique
+identifier) of the snowflake record</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -259,7 +265,7 @@ used to populate the members of this class <code><a href="class-snowflakeStruct.
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getImageNameById">#</a>
-		<code><a href="source-class-snowflakeStruct.html#94-118" title="Go to source code">getImageNameById</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span> )</code>
+		<code><a href="source-class-snowflakeStruct.html#114-142" title="Go to source code">getImageNameById</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -305,7 +311,7 @@ data is obtained from the database and then the result returned</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addSnowflake">#</a>
-		<code><a href="source-class-snowflakeStruct.html#120-144" title="Go to source code">addSnowflake</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
+		<code><a href="source-class-snowflakeStruct.html#144-171" title="Go to source code">addSnowflake</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -349,7 +355,7 @@ snowflake provided that all the mandatory members of this class is populated</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_updateSnowflake">#</a>
-		<code><a href="source-class-snowflakeStruct.html#146-170" title="Go to source code">updateSnowflake</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
+		<code><a href="source-class-snowflakeStruct.html#173-199" title="Go to source code">updateSnowflake</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -393,7 +399,7 @@ snowflake provided that all the mandatory members of this class is populated</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteSnowflake">#</a>
-		<code><a href="source-class-snowflakeStruct.html#172-206" title="Go to source code">deleteSnowflake</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>boolean <var>$setDelete</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-snowflakeStruct.html#201-242" title="Go to source code">deleteSnowflake</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>boolean <var>$setDelete</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -442,7 +448,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSnowflakeID">#</a>
-		<code><a href="source-class-snowflakeStruct.html#208-248" title="Go to source code">getSnowflakeID</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
+		<code><a href="source-class-snowflakeStruct.html#244-289" title="Go to source code">getSnowflakeID</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -486,7 +492,7 @@ class are populated the id(identifier) is selected from the database</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_printsnowlakes">#</a>
-		<code><a href="source-class-snowflakeStruct.html#250-269" title="Go to source code">printsnowlakes</a>( )</code>
+		<code><a href="source-class-snowflakeStruct.html#291-312" title="Go to source code">printsnowlakes</a>( )</code>
 
 		<div class="description short">
 			
@@ -504,6 +510,156 @@ class are populated the id(identifier) is selected from the database</p>
 				<h4>Returns</h4>
 				<div class="list">
 					<code>String</code><br>formatted and labeled member values<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toHTML" id="_toHTML">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toHTML">#</a>
+		<code><a href="source-class-snowflakeStruct.html#314-365" title="Go to source code">toHTML</a>( )</code>
+
+		<div class="description short">
+			
+<p>Convert all the members of <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code> to a structured html
+string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convert all the members of <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code> to a structured html
+string</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>The html value of <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toArray" id="_toArray">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toArray">#</a>
+		<code><a href="source-class-snowflakeStruct.html#367-394" title="Go to source code">toArray</a>( )</code>
+
+		<div class="description short">
+			
+<p>Convert all the members of <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code> to an array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convert all the members of <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code> to an array</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>The array value of <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toJson" id="_toJson">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toJson">#</a>
+		<code><a href="source-class-snowflakeStruct.html#396-405" title="Go to source code">toJson</a>( )</code>
+
+		<div class="description short">
+			
+<p>Convert all the members of <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code> to a Json</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convert all the members of <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code> to a Json</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br>The json value of <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toXml" id="_toXml">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toXml">#</a>
+		<code><a href="source-class-snowflakeStruct.html#407-446" title="Go to source code">toXml</a>( )</code>
+
+		<div class="description short">
+			
+<p>Convert all the members of <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code> to an xml format</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convert all the members of <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code> to an xml format</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The xml string value of <code><a href="class-snowflakeStruct.html">snowflakeStruct</a></code><br />
 				</div>
 
 
@@ -534,11 +690,34 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#15" title="Go to source code"><var>$m_id</var></a>
+				<a href="source-class-snowflakeStruct.html#23" title="Go to source code"><var>$m_id</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
 			<a href="#$m_id" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="m_uuid" id="$m_uuid">
+		<td class="attributes"><code>
+			public  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-snowflakeStruct.html#24" title="Go to source code"><var>$m_uuid</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$m_uuid" class="anchor">#</a>
 
 			<div class="description short">
 				
@@ -557,7 +736,7 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#16" title="Go to source code"><var>$m_title</var></a>
+				<a href="source-class-snowflakeStruct.html#25" title="Go to source code"><var>$m_title</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -580,7 +759,7 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#17" title="Go to source code"><var>$m_body_text</var></a>
+				<a href="source-class-snowflakeStruct.html#26" title="Go to source code"><var>$m_body_text</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -603,7 +782,7 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#18" title="Go to source code"><var>$m_publish</var></a>
+				<a href="source-class-snowflakeStruct.html#27" title="Go to source code"><var>$m_publish</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -626,7 +805,7 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#19" title="Go to source code"><var>$m_image_name</var></a>
+				<a href="source-class-snowflakeStruct.html#28" title="Go to source code"><var>$m_image_name</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -649,7 +828,7 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#20" title="Go to source code"><var>$m_gallery</var></a>
+				<a href="source-class-snowflakeStruct.html#29" title="Go to source code"><var>$m_gallery</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -672,7 +851,7 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#21" title="Go to source code"><var>$m_created</var></a>
+				<a href="source-class-snowflakeStruct.html#30" title="Go to source code"><var>$m_created</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -695,7 +874,7 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#22" title="Go to source code"><var>$m_created_by</var></a>
+				<a href="source-class-snowflakeStruct.html#31" title="Go to source code"><var>$m_created_by</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -718,7 +897,7 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#23" title="Go to source code"><var>$m_edited</var></a>
+				<a href="source-class-snowflakeStruct.html#32" title="Go to source code"><var>$m_edited</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -741,7 +920,7 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#24" title="Go to source code"><var>$m_edited_by</var></a>
+				<a href="source-class-snowflakeStruct.html#33" title="Go to source code"><var>$m_edited_by</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -764,7 +943,7 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#25" title="Go to source code"><var>$m_deleted</var></a>
+				<a href="source-class-snowflakeStruct.html#34" title="Go to source code"><var>$m_deleted</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -787,7 +966,7 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#26" title="Go to source code"><var>$m_flake_it</var></a>
+				<a href="source-class-snowflakeStruct.html#35" title="Go to source code"><var>$m_flake_it</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -810,7 +989,7 @@ class are populated the id(identifier) is selected from the database</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-snowflakeStruct.html#27" title="Go to source code"><var>$m_image_dir</var></a>
+				<a href="source-class-snowflakeStruct.html#36" title="Go to source code"><var>$m_image_dir</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>

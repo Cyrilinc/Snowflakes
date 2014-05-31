@@ -9,11 +9,13 @@
 //require_once 'config/Config.php';
 ///////// Image Session start AND GLOBAL variables
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 } //Do not remove this
 //only assign a new timestamps if the session variable is empty
-if (!isset($_SESSION['ImageFile']) && !isset($_SESSION['ImageThumbFile']) && !isset($_SESSION['ImageCaption']) && !isset($_SESSION['ImageFiles']) && !isset($_SESSION['ImageThumbFiles']) && !isset($_SESSION['ImageCaptions'])) {
+if (!isset($_SESSION['ImageFile']) && !isset($_SESSION['ImageThumbFile']) && !isset($_SESSION['ImageCaption']) && !isset($_SESSION['ImageFiles']) && !isset($_SESSION['ImageThumbFiles']) && !isset($_SESSION['ImageCaptions']))
+{
     $_SESSION['ImageFile'] = "";
     $_SESSION['ImageThumbFile'] = "";
     $_SESSION['ImageCaption'] = "";
@@ -38,7 +40,8 @@ if (!isset($_SESSION['ImageFile']) && !isset($_SESSION['ImageThumbFile']) && !is
 /**
  * Class to process images in Snowflakes
  */
-class sfGalleryImage {
+class sfGalleryImage
+{
 
     var $m_FileName; // The image name
     var $m_FileTmpName; // the temporary image name
@@ -73,16 +76,20 @@ class sfGalleryImage {
      * <p> gallery upload generates two images, one a thumb and the other as the original image
      *  as set by system administrator.</p> 
      */
-    public function __construct($inifile = '../config/config.ini', $forGallery = true) {
+    public function __construct($inifile = '../config/config.ini', $forGallery = true)
+    {
         $settingsConfig = Config::getConfig("settings", $inifile);
         $datadir = new dataDirParam($inifile);
         $this->m_UploadImgDir = $datadir->m_galleryImgDir;
         $this->m_UploadThumbDir = $datadir->m_galleryThumbDir;
         $this->m_MaxSize = $settingsConfig['maxImageSize'];
         $this->m_MaxImageWidth = $settingsConfig['maxImageWidth'];
-        if ($forGallery) {
+        if ($forGallery)
+        {
             $this->setThumbinit($settingsConfig['thumbWidth'], $settingsConfig['thumbHeight']);
-        } else {
+        }
+        else
+        {
 
             $this->m_UploadImgDir = $datadir->m_uploadGalleryDir;
         }
@@ -103,7 +110,8 @@ class sfGalleryImage {
      * 
      * 
      */
-    public function init($FileName, $FileTmpName, $FileSize, $FileType) {
+    public function init($FileName, $FileTmpName, $FileSize, $FileType)
+    {
         $this->m_FileName = $FileName;
         $this->m_FileTmpName = $FileTmpName;
         $this->m_FileSize = $FileSize;
@@ -128,8 +136,10 @@ class sfGalleryImage {
      * @param int $thumbWidth <p> The  image thumbnail width </p> 
      * @param int $thumbHeight <p> The  image thumbnail height </p> 
      */
-    public function setThumbinit($thumbWidth, $thumbHeight) {
-        if (!$thumbWidth && !$thumbHeight) {
+    public function setThumbinit($thumbWidth, $thumbHeight)
+    {
+        if (!$thumbWidth && !$thumbHeight)
+        {
             return false;
         }
 
@@ -144,8 +154,10 @@ class sfGalleryImage {
      * 
      * @return mixed <b>the image height</b> on success or <b>FALSE</b> on failure.
      */
-    public static function getImageHeight($image) {
-        if (!$image) {
+    public static function getImageHeight($image)
+    {
+        if (!$image)
+        {
             return false;
         }
 
@@ -161,8 +173,10 @@ class sfGalleryImage {
      * 
      * @return mixed <b>the image width</b> on success or <b>FALSE</b> on failure.
      */
-    public static function getImageWidth($image) {
-        if (!$image) {
+    public static function getImageWidth($image)
+    {
+        if (!$image)
+        {
             return false;
         }
 
@@ -178,7 +192,8 @@ class sfGalleryImage {
      * 
      * @return String The <b> new image name</b> is returned.
      */
-    function nameImage($imgExtension) {
+    function nameImage($imgExtension)
+    {
         return time() . substr(md5(microtime()), 0, rand(5, 12)) . $imgExtension;
     }
 
@@ -188,7 +203,8 @@ class sfGalleryImage {
      * 
      * @return String The <b> success or failure </b> message is returned.
      */
-    function getMessage() {
+    function getMessage()
+    {
         return $this->m_errorCode . " ==> " . $this->m_Message;
     }
 
@@ -203,13 +219,15 @@ class sfGalleryImage {
      *
      * @return image The <b>Resized</b> image on success.
      */
-    public static function resizeImage($image, $width, $height, $scale) {
+    public static function resizeImage($image, $width, $height, $scale)
+    {
         list($imagewidth, $imageheight, $imageType) = getimagesize($image);
         $imageType = image_type_to_mime_type($imageType);
         $newImageWidth = ceil($width * $scale);
         $newImageHeight = ceil($height * $scale);
 
-        switch ($imageType) {
+        switch ($imageType)
+        {
             case "image/gif":
                 $source = imagecreatefromgif($image);
                 break;
@@ -226,14 +244,16 @@ class sfGalleryImage {
         $newImage = imagecreatetruecolor($newImageWidth, $newImageHeight);
 
 
-        if (($imageType == "image/gif") || ($imageType == "image/png") || ($imageType == "image/x-png")) {
+        if (($imageType == "image/gif") || ($imageType == "image/png") || ($imageType == "image/x-png"))
+        {
 
             $colourTotal = imagecolorstotal($source);
             imagetruecolortopalette($newImage, true, $colourTotal <= 0 ? 1 : $colourTotal);
             $currentTransparent = imagecolortransparent($source);
 
             // If we have a specific transparent color
-            if ($currentTransparent >= 0) {
+            if ($currentTransparent >= 0)
+            {
 
                 // Get the original image's transparent color's RGB values
                 $transparentColor = imagecolorsforindex($source, $currentTransparent);
@@ -248,7 +268,8 @@ class sfGalleryImage {
                 imagecolortransparent($newImage, $currentTransparent);
             }
             // Always make a transparent background color for PNGs that don't have one allocated already
-            elseif (($imageType == "image/png") || ($imageType == "image/x-png")) {
+            elseif (($imageType == "image/png") || ($imageType == "image/x-png"))
+            {
 
                 // Turn off transparency blending (temporarily)
                 imagealphablending($newImage, false);
@@ -266,7 +287,8 @@ class sfGalleryImage {
 
         imagecopyresampled($newImage, $source, 0, 0, 0, 0, $newImageWidth, $newImageHeight, $width, $height);
 
-        switch ($imageType) {
+        switch ($imageType)
+        {
             case "image/gif":
                 imagegif($newImage, $image);
                 break;
@@ -299,7 +321,8 @@ class sfGalleryImage {
      *
      * @return image The <b>Resized</b> thumbnail image on success.
      */
-    public static function resizeThumbnailImage($ThumbImageName, $image, $width, $height, $start_width, $start_height, $scale) {
+    public static function resizeThumbnailImage($ThumbImageName, $image, $width, $height, $start_width, $start_height, $scale)
+    {
         list($imagewidth, $imageheight, $imageType) = getimagesize($image);
         $imageType = image_type_to_mime_type($imageType);
 
@@ -307,7 +330,8 @@ class sfGalleryImage {
         $newImageHeight = ceil($height * $scale);
         $newImage = imagecreatetruecolor($newImageWidth, $newImageHeight);
 
-        switch ($imageType) {
+        switch ($imageType)
+        {
             case "image/gif":
                 $source = imagecreatefromgif($image);
                 break;
@@ -325,13 +349,15 @@ class sfGalleryImage {
                 break;
         }
 
-        if (($imageType == "image/gif") || ($imageType == "image/png") || ($imageType == "image/x-png")) {
+        if (($imageType == "image/gif") || ($imageType == "image/png") || ($imageType == "image/x-png"))
+        {
             $colourTotal = imagecolorstotal($source);
             imagetruecolortopalette($newImage, true, $colourTotal <= 0 ? 1 : $colourTotal);
             $currentTransparent = imagecolortransparent($source);
 
             // If we have a specific transparent color
-            if ($currentTransparent >= 0) {
+            if ($currentTransparent >= 0)
+            {
 
                 // Get the original image's transparent color's RGB values
                 $transparentColor = imagecolorsforindex($source, $currentTransparent);
@@ -346,7 +372,8 @@ class sfGalleryImage {
                 imagecolortransparent($newImage, $currentTransparent);
             }
             // Always make a transparent background color for PNGs that don't have one allocated already
-            elseif (($imageType == "image/png") || ($imageType == "image/x-png")) {
+            elseif (($imageType == "image/png") || ($imageType == "image/x-png"))
+            {
 
                 // Turn off transparency blending (temporarily)
                 imagealphablending($newImage, false);
@@ -364,7 +391,8 @@ class sfGalleryImage {
 
 
         imagecopyresampled($newImage, $source, 0, 0, $start_width, $start_height, $newImageWidth, $newImageHeight, $width, $height);
-        switch ($imageType) {
+        switch ($imageType)
+        {
             case "image/gif":
                 imagegif($newImage, $ThumbImageName);
                 break;
@@ -394,7 +422,8 @@ class sfGalleryImage {
      *
      * @return image The <b>Resized</b> thumbnail image on success.
      */
-    public function CreateThumb($x1, $y1, $x2, $y2, $w, $h) {
+    public function CreateThumb($x1, $y1, $x2, $y2, $w, $h)
+    {
         //Scale the image to the thumb_width set above
         $scale = $this->m_thumbWidth / $w;
         $cropped = self::resizeThumbnailImage($this->m_TargetFileThumbLoc, $this->m_TargetFileImageLoc, $w, $h, $x1, $y1, $scale);
@@ -407,7 +436,8 @@ class sfGalleryImage {
      * 
      * @return String The <b> filename </b> for target image is returned.
      */
-    public function TargetFileImageLoc() {
+    public function TargetFileImageLoc()
+    {
         return $this->m_TargetFileImageLoc;
     }
 
@@ -417,7 +447,8 @@ class sfGalleryImage {
      * 
      * @return String The <b> filename </b> for target thumbnail image is returned.
      */
-    public function TargetFileThumbLoc() {
+    public function TargetFileThumbLoc()
+    {
         return $this->m_TargetFileThumbLoc;
     }
 
@@ -427,7 +458,8 @@ class sfGalleryImage {
      * 
      *  @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function imageUploaded() {
+    public function imageUploaded()
+    {
         return $this->m_File_is_Uploaded;
     }
 
@@ -437,7 +469,8 @@ class sfGalleryImage {
      * 
      *  @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function thumbUploaded() {
+    public function thumbUploaded()
+    {
         return $this->m_Thumb_is_Uploaded;
     }
 
@@ -446,31 +479,35 @@ class sfGalleryImage {
      *
      *  @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function UploadImage() {
+    public function UploadImage()
+    {
 
         $fileSizeString = sfUtils::formatSizeUnits($this->m_MaxSize);
         // Check if the file size is greater that the Maximum file size
-        if ($this->m_FileSize > $this->m_MaxSize) {
-            $this->m_Message .= sfUtils::sfPromptMessage( $this->m_FileName . " is larger than the required " . $fileSizeString . " . Image must be ".
-            $fileSizeString . "  or less than " . $fileSizeString . ' in size.','error');
+        if ($this->m_FileSize > $this->m_MaxSize)
+        {
+            $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . " is larger than the required " . $fileSizeString . " . Image must be " .
+                            $fileSizeString . "  or less than " . $fileSizeString . ' in size.', 'error');
             $this->m_errorCode = 1;
             return false;
         }
 
-        $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . ' Size ' . sfUtils::formatSizeUnits($this->m_FileSize).' is Okay.','success');
+        $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . ' Size ' . sfUtils::formatSizeUnits($this->m_FileSize) . ' is Okay.', 'success');
 
-        if (!in_array($this->m_FileType, $this->m_ImageTypesList) && !in_array($this->m_FileExtension, $this->m_ImageExtList)) {
-            $this->m_Message .= sfUtils::sfPromptMessage("Invalid file. Only <strong>" . implode(",", $this->m_ImageExtList).'</strong> images accepted for upload.','error');
+        if (!in_array($this->m_FileType, $this->m_ImageTypesList) && !in_array($this->m_FileExtension, $this->m_ImageExtList))
+        {
+            $this->m_Message .= sfUtils::sfPromptMessage("Invalid file. Only <strong>" . implode(",", $this->m_ImageExtList) . '</strong> images accepted for upload.', 'error');
             $this->m_errorCode = 2;
             return false;
         }
         // Check for the Image type and its extension
-        $this->m_Message .= sfUtils::sfPromptMessage( $this->m_FileName . " Type " . $this->m_FileExtension.' is Okay.','success');
+        $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . " Type " . $this->m_FileExtension . ' is Okay.', 'success');
 
         //echo "1 -> I was here in the make image section<br>";//DEBUG
         // Check if the image Exists
-        if (file_exists($this->m_UploadImgDir . $this->m_FileName)) {
-            $this->m_Message .=sfUtils::sfPromptMessage(  $this->m_FileName.' File already exists. ','error');
+        if (file_exists($this->m_UploadImgDir . $this->m_FileName))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage($this->m_FileName . ' File already exists. ', 'error');
             //echo "2 -> I was here in the image Exits Section<br>";//DEBUG
             $this->m_errorCode = 3;
             return false;
@@ -481,8 +518,9 @@ class sfGalleryImage {
 
         // Move the original image from the temporary directory to the our default image Directory
         $isMoved = move_uploaded_file($this->m_FileTmpName, $this->m_TargetFileImageLoc);
-        if (!$isMoved) {
-            $this->m_Message .= sfUtils::sfPromptMessage( $this->m_FileName. ' File Could not be moved.','error');
+        if (!$isMoved)
+        {
+            $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . ' File Could not be moved.', 'error');
             //echo "2 -> I was here in the image Exits Section<br>";//DEBUG
             $this->m_errorCode = 4;
             return false;
@@ -492,9 +530,10 @@ class sfGalleryImage {
         // if we havent set the thumbnail width and height
         // meaning tha we havent uploaded this image for gallery purposes 
         // because gallery images always have a thumb version
-        if (!$this->m_thumbHeight && !$this->m_thumbHeight) {
+        if (!$this->m_thumbHeight && !$this->m_thumbHeight)
+        {
             $this->m_File_is_Uploaded = True;
-            $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . ' Upload successful...','success');
+            $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . ' Upload successful...', 'success');
             return true;
         }
 
@@ -514,45 +553,59 @@ class sfGalleryImage {
         $_SESSION['ImageFiles'][] = $this->m_TargetFileImageLoc;
         $_SESSION['ImageThumbFiles'][] = $this->m_TargetFileThumbLoc;
         //echo "4 -> I was here in the image Has been saved successfully section<br> saved at ".$_SESSION['ImageFile'] ." <br>";//DEBUG
-        $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . ' Upload successful...','success');
+        $this->m_Message .= sfUtils::sfPromptMessage($this->m_FileName . ' Upload successful...', 'success');
 
         // now automatically Create a thumbnail file
         //Get the new coordinates to crop the image.
-        if (($width > $this->m_thumbWidth) && ($height > $this->m_thumbHeight)) {
+        if (($width > $this->m_thumbWidth) && ($height > $this->m_thumbHeight))
+        {
             //Scale the image to the thumb_width set above
             $scale = $this->m_thumbWidth / $this->m_thumbWidth;
 
             $cropped = $this->resizeThumbnailImage($this->m_TargetFileThumbLoc, $this->m_TargetFileImageLoc, $this->m_thumbWidth, $this->m_thumbHeight, 0, 0, $scale);
-            if ($cropped) {
+            if ($cropped)
+            {
                 $this->m_Thumb_is_Uploaded = True;
             }
-        } elseif (($width > $this->m_thumbWidth) && ($height < $this->m_thumbHeight)) {
+        }
+        elseif (($width > $this->m_thumbWidth) && ($height < $this->m_thumbHeight))
+        {
             //Scale the image to the thumb_width set above
             $scale = $this->m_thumbWidth / $this->m_thumbWidth;
             $cropped = $this->resizeThumbnailImage($this->m_TargetFileThumbLoc, $this->m_TargetFileImageLoc, $this->m_thumbWidth, $height, 0, 0, $scale);
-            if ($cropped) {
+            if ($cropped)
+            {
                 $this->m_Thumb_is_Uploaded = True;
             }
-        } elseif (($width < $this->m_thumbWidth) && ($height > $this->m_thumbHeight)) {
+        }
+        elseif (($width < $this->m_thumbWidth) && ($height > $this->m_thumbHeight))
+        {
             //Scale the image to the thumb_width set above
             $scale = $this->m_thumbWidth / $this->m_thumbWidth;
             $cropped = $this->resizeThumbnailImage($this->m_TargetFileThumbLoc, $this->m_TargetFileImageLoc, $width, $this->m_thumbHeight, 0, 0, $scale);
-            if ($cropped) {
+            if ($cropped)
+            {
                 $this->m_Thumb_is_Uploaded = True;
             }
-        } elseif (($width < $this->m_thumbWidth) && ($height < $this->m_thumbHeight)) {
+        }
+        elseif (($width < $this->m_thumbWidth) && ($height < $this->m_thumbHeight))
+        {
             //Scale the image to the thumb_width set above
             $scale = $this->m_thumbWidth / $this->m_thumbWidth;
             $cropped = $this->resizeThumbnailImage($this->m_TargetFileThumbLoc, $this->m_TargetFileImageLoc, $width, $height, 0, 0, $scale);
-            if ($cropped) {
+            if ($cropped)
+            {
                 $this->m_Thumb_is_Uploaded = True;
             }
         }
         $Caption = "";
 
-        if (empty($_REQUEST["Caption"])) {
+        if (empty($_REQUEST["Caption"]))
+        {
             $Caption = addslashes($this->m_FileBaseName);
-        } else {
+        }
+        else
+        {
             $Caption = addslashes($_REQUEST["Caption"]);
         }
 
@@ -564,7 +617,8 @@ class sfGalleryImage {
 
 }
 
-class sfImageProcessor {
+class sfImageProcessor
+{
 
     /**
      * Upload a multiple images image to the upload directory for this API
@@ -576,14 +630,17 @@ class sfImageProcessor {
      * 
      * @return String <b>Success message</b> on success or <b>failure message</b> on failure.
      */
-    public static function UploadMultiImages($imageFiles, $inifile = '../config/config.ini', &$message = "") {
+    public static function UploadMultiImages($imageFiles, $inifile = '../config/config.ini', &$message = "")
+    {
         //Check if the image field is not empty
-        if (!empty($imageFiles)) {
+        if (!empty($imageFiles))
+        {
             $TotalFiles = count($imageFiles['name']);
             $successCount = 0;
             $failureCount = 0;
 
-            for ($i = 0; $i < $TotalFiles; $i++) {
+            for ($i = 0; $i < $TotalFiles; $i++)
+            {
                 $FileName = $imageFiles["name"][$i];
                 $FileTmpName = $imageFiles['tmp_name'][$i];
                 $FileSize = $imageFiles['size'][$i];
@@ -596,7 +653,8 @@ class sfImageProcessor {
                 //$message.= $i."   |Name = ".$FileName."| Temp Name = " .$FileTmpName."| File Size = ".  sfUtils::formatSizeUnits($FileSize)."| File Type = ".$FileType;// DEBUG
                 // $message.= "| Base Name = ".$FileBaseName."| File Extension = ".$FileExtension." AND Max Size =".  formatSizeUnits($sfimage->m_MaxSize)."<br />";// DEBUG
                 //echo  $sfimage->m_Message."<br>";
-                switch ($sfimage->m_errorCode) {
+                switch ($sfimage->m_errorCode)
+                {
                     case 0:
                         $successCount++;
                         break;
@@ -607,18 +665,21 @@ class sfImageProcessor {
                 //TODO log this message
                 //$message.= $sfimage->m_Message . "<br>";
             }
-            if ($successCount > 0 || $failureCount > 0) {
-                $message.=sfUtils::sfPromptMessage('<strong>[' . $successCount . ']</strong> Successful.','success');
-                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsuccessful'.'error');
+            if ($successCount > 0 || $failureCount > 0)
+            {
+                $message.=sfUtils::sfPromptMessage('<strong>[' . $successCount . ']</strong> Successful.', 'success');
+                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsuccessful' . 'error');
             }
-        } else {
+        }
+        else
+        {
             $message .= "<p>Please select an image to upload.<p>";
         }
 
         //echo $message;
         return $message;
     }
-    
+
     /**
      * Upload a single image to the upload directory for this API
      * 
@@ -633,11 +694,12 @@ class sfImageProcessor {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-
-    public static function uploadSingleImage($imageFile, $inifile = '../config/config.ini', &$imageLoc = "", &$message = "", $forGallery = true) {
+    public static function uploadSingleImage($imageFile, $inifile = '../config/config.ini', &$imageLoc = "", &$message = "", $forGallery = true)
+    {
 
         //Check if the image field is not empty
-        if (!empty($imageFile)) {
+        if (!empty($imageFile))
+        {
             $successCount = 0;
             $failureCount = 0;
 
@@ -648,7 +710,8 @@ class sfImageProcessor {
 
             $sfimage = new sfGalleryImage($inifile, $forGallery);
             $sfimage->init($FileName, $FileTmpName, $FileSize, $FileType);
-            if (!$sfimage->UploadImage()) {
+            if (!$sfimage->UploadImage())
+            {
                 $message.= $sfimage->m_Message . "<br>";
                 return false;
             }
@@ -657,7 +720,8 @@ class sfImageProcessor {
             //$message.= $i."   |Name = ".$FileName."| Temp Name = " .$FileTmpName."| File Size = ".formatSizeUnits($FileSize)."| File Type = ".$FileType;// DEBUG
             //$message.= "| Base Name = ".$FileBaseName."| File Extension = ".$FileExtension." AND Max Size =".  formatSizeUnits($sfimage->m_MaxSize)."<br />";// DEBUG
             //$message.  $sfimage->m_Message."<br>";
-            switch ($sfimage->m_errorCode) {
+            switch ($sfimage->m_errorCode)
+            {
                 case 0:
                     $successCount++;
                     break;
@@ -667,11 +731,14 @@ class sfImageProcessor {
             }
             $message.= $sfimage->m_Message;
 
-            $message.=sfUtils::sfPromptMessage('<strong>[' . $successCount . ']</strong> Successful.','success');
-            if ($failureCount > 0) {
-                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsuccessful','error');
+            $message.=sfUtils::sfPromptMessage('<strong>[' . $successCount . ']</strong> Successful.', 'success');
+            if ($failureCount > 0)
+            {
+                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsuccessful', 'error');
             }
-        } else {
+        }
+        else
+        {
             $message .= "<p>Please select an image to upload.<p>";
             return false;
         }
@@ -684,7 +751,8 @@ class sfImageProcessor {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function saveThumbImage() {
+    public static function saveThumbImage()
+    {
 
         $x1 = $_POST["x1"];
         $y1 = $_POST["y1"];
@@ -700,7 +768,8 @@ class sfImageProcessor {
 
         //Scale the image to the thumb_width set above
         $scale = $_POST["thumbWidth"] / $w;
-        if (!sfGalleryImage::resizeThumbnailImage($TargetFileThumbLoc, $TargetFileImageLoc, $w, $h, $x1, $y1, $scale)) {
+        if (!sfGalleryImage::resizeThumbnailImage($TargetFileThumbLoc, $TargetFileImageLoc, $w, $h, $x1, $y1, $scale))
+        {
             return false;
         }
 
@@ -713,7 +782,8 @@ class sfImageProcessor {
     /**
      * Resets all image session
      */
-    public static function ResetAll() {
+    public static function ResetAll()
+    {
 
         $_SESSION['ImageFiles'] = NULL;
         $_SESSION['ImageThumbFiles'] = NULL;
@@ -735,13 +805,16 @@ class sfImageProcessor {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function RemoveAll() {
+    public static function RemoveAll()
+    {
 
-        foreach ($_SESSION['ImageFiles'] as $DeleteimageLink) {
+        foreach ($_SESSION['ImageFiles'] as $DeleteimageLink)
+        {
             sfUtils::Deletefile($DeleteimageLink);
         }
 
-        foreach ($_SESSION['ImageThumbFiles'] as $DeleteThumbLink) {
+        foreach ($_SESSION['ImageThumbFiles'] as $DeleteThumbLink)
+        {
             sfUtils::Deletefile($DeleteThumbLink);
         }
 
@@ -757,17 +830,21 @@ class sfImageProcessor {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function RemoveOne($Index) {
+    public static function RemoveOne($Index)
+    {
 
-        if (!$Index) {
+        if (!$Index)
+        {
             return false;
         }
 
-        if (!sfUtils::Deletefile($_SESSION['ImageFiles'][$Index])) {
+        if (!sfUtils::Deletefile($_SESSION['ImageFiles'][$Index]))
+        {
             return false;
         }
 
-        if (!sfUtils::Deletefile($_SESSION['ImageThumbFiles'][$Index])) {
+        if (!sfUtils::Deletefile($_SESSION['ImageThumbFiles'][$Index]))
+        {
             return false;
         }
 
@@ -787,9 +864,11 @@ class sfImageProcessor {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function deleteFileDBGallery($conn, $galleryID, $inifile = '../config/config.ini') {
+    public static function deleteFileDBGallery($conn, $galleryID, $inifile = '../config/config.ini')
+    {
 
-        if (!$conn || !$galleryID) {
+        if (!$conn || !$galleryID)
+        {
             return false;
         }
 
@@ -803,12 +882,14 @@ class sfImageProcessor {
         $_SESSION['ImageFiles'] = explode(",", $deleteSFGallery['image_name']);
         $_SESSION['ImageThumbFiles'] = explode(",", $deleteSFGallery['thumb_name']);
         // Loop through the array and add directory prefix to each item in array
-        foreach ($_SESSION['ImageFiles'] as &$value) {
+        foreach ($_SESSION['ImageFiles'] as &$value)
+        {
             $value = $datadir->m_galleryImgDir . $value;
         }
 
         // Loop through the array and add directory prefix to each item in array	
-        foreach ($_SESSION['ImageThumbFiles'] as &$value) {
+        foreach ($_SESSION['ImageThumbFiles'] as &$value)
+        {
             $value = $datadir->m_galleryThumbDir . $value;
         }
 
@@ -827,9 +908,11 @@ class sfImageProcessor {
      * 
      * @return mixed <b>number of image resized</b> on success or <b>FALSE</b> otherwise.
      */
-    public static function resizeGalleryImages($conn, $inifile = '../config/config.ini') {
+    public static function resizeGalleryImages($conn, $inifile = '../config/config.ini')
+    {
 
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
@@ -847,15 +930,18 @@ class sfImageProcessor {
 
         $i = 0;
         $resized = 0;
-        do {
+        do
+        {
             $oneRec = explode(",", $row_rsImages[$i]['image_name']);
-            foreach ($oneRec as $value) {
+            foreach ($oneRec as $value)
+            {
                 $m_TargetFileImageLoc = $UploadImgDir . $value;
                 // get the width and the height of the image
                 $width = sfGalleryImage::getImageWidth($m_TargetFileImageLoc);
                 $height = sfGalleryImage::getImageHeight($m_TargetFileImageLoc);
                 //Scale the image if it is greater than the width or lesser that width scale to maximum width
-                if ($width >= $maxImageWidth) {
+                if ($width >= $maxImageWidth)
+                {
                     continue;
                 }
 
@@ -877,8 +963,10 @@ class sfImageProcessor {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function makeCover($index) {
-        if (sfUtils::isEmpty($index) || empty($_SESSION['ImageFiles'])) {
+    public static function makeCover($index)
+    {
+        if (sfUtils::isEmpty($index) || empty($_SESSION['ImageFiles']))
+        {
             return false;
         }
         $imagefile = $_SESSION['ImageFiles'][$index];
@@ -903,10 +991,12 @@ class sfImageProcessor {
      * 
      * @return mixed <b>number of image cleaned</b> on success or <b>FALSE</b> otherwise.
      */
-    public static function cleanUploadDir($conn, $inifile = '../config/config.ini') {
+    public static function cleanUploadDir($conn, $inifile = '../config/config.ini')
+    {
 
         //sanity Check
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
@@ -930,7 +1020,8 @@ class sfImageProcessor {
         $row_total = $conn->recordCount();
 
         $i = 0;
-        do {
+        do
+        {
             $dbImageList [] = $row_rsImages[$i]['image_name'];
             $i++;
         } while ($i < $row_total);
@@ -941,7 +1032,8 @@ class sfImageProcessor {
         $row_total = $conn->recordCount();
 
         $i = 0;
-        do {
+        do
+        {
             $dbImageList [] = $row_rsImages[$i]['image_name'];
             $i++;
         } while ($i < $row_total);
@@ -952,14 +1044,17 @@ class sfImageProcessor {
         $row_total = $conn->recordCount();
 
         $i = 0;
-        do {
+        do
+        {
             $dbImageList [] = $row_rsImages[$i]['image_name'];
             $i++;
         } while ($i < $row_total);
 
         $remaining = array_diff($dirImageList, $dbImageList);
-        foreach ($remaining as $value) {
-            if (!is_dir($UploadDir . $value)) {
+        foreach ($remaining as $value)
+        {
+            if (!is_dir($UploadDir . $value))
+            {
                 sfUtils::Deletefile($UploadDir . $value);
                 $cleaned++;
             }
@@ -971,9 +1066,11 @@ class sfImageProcessor {
         $row_total = $conn->recordCount();
 
         $i = 0;
-        do {
+        do
+        {
             $oneRec = explode(",", $row_rsImages[$i]['image_name']);
-            foreach ($oneRec as $key => $value) {
+            foreach ($oneRec as $key => $value)
+            {
                 $dbImageList [] = $value;
             }
 
@@ -983,8 +1080,10 @@ class sfImageProcessor {
         $dbImageList = array_unique($dbImageList);
         $dirImageList = scandir($UploadImgDir);
         $remaining = array_diff($dirImageList, $dbImageList);
-        foreach ($remaining as $value) {
-            if (!is_dir($UploadImgDir . $value)) {
+        foreach ($remaining as $value)
+        {
+            if (!is_dir($UploadImgDir . $value))
+            {
                 sfUtils::Deletefile($UploadImgDir . $value);
                 $cleaned++;
             }
@@ -992,8 +1091,10 @@ class sfImageProcessor {
 
         $dirImageList = scandir($UploadThumbDir);
         $remaining = array_diff($dirImageList, $dbImageList);
-        foreach ($remaining as $value) {
-            if (!is_dir($UploadThumbDir . $value)) {
+        foreach ($remaining as $value)
+        {
+            if (!is_dir($UploadThumbDir . $value))
+            {
                 sfUtils::Deletefile($UploadThumbDir . $value);
                 $cleaned++;
             }
@@ -1005,21 +1106,26 @@ class sfImageProcessor {
      * Undo changes made to files recorded in session
      * This is still a prototype
      */
-    public static function UndoChanges() {
+    public static function UndoChanges()
+    {
 
         ///loop through the database image files
-        foreach ($_SESSION['DBImageFiles'] as $key => $containValue) {
+        foreach ($_SESSION['DBImageFiles'] as $key => $containValue)
+        {
             /// check id the value of image files in the database exist in the imagefiles
-            if (in_array($containValue, $_SESSION['ImageFiles'])) {
+            if (in_array($containValue, $_SESSION['ImageFiles']))
+            {
                 sfUtils::removeElement($_SESSION['ImageFiles'], $key); // successfully remove an element from the array
             }
         }
         //print_r($_SESSION['ImageFiles']);
         //echo "<br />";
         ///loop through the database image files
-        foreach ($_SESSION['DBImageThumbFiles'] as $key => $containValue) {
+        foreach ($_SESSION['DBImageThumbFiles'] as $key => $containValue)
+        {
             /// check id the value of image files in the database exist in the imagefiles
-            if (in_array($containValue, $_SESSION['ImageThumbFiles'])) {
+            if (in_array($containValue, $_SESSION['ImageThumbFiles']))
+            {
                 sfUtils::removeElement($_SESSION['ImageThumbFiles'], $key); // successfully remove an element from the array
             }
         }
@@ -1028,9 +1134,11 @@ class sfImageProcessor {
         //print_r($_SESSION['ImageThumbFiles']);
         //echo "<br />";
         ///loop through the database image files
-        foreach ($_SESSION['DBImageCaptions'] as $key => $containValue) {
+        foreach ($_SESSION['DBImageCaptions'] as $key => $containValue)
+        {
             /// check id the value of image files in the database exist in the imagefiles
-            if (in_array($containValue, $_SESSION['ImageCaptions'])) {
+            if (in_array($containValue, $_SESSION['ImageCaptions']))
+            {
                 remove_element($_SESSION['ImageCaptions'], $key); // successfully remove an element from the array
             }
         }

@@ -4,19 +4,22 @@ require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
 
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
 $query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
-if ((isset($query_string)) && ($query_string != "")) {
+if ((isset($query_string)) && ($query_string != ""))
+{
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
 $doLogout = filter_input(INPUT_GET, 'doLogout');
-if ((isset($doLogout)) && ($doLogout == "true")) {
+if ((isset($doLogout)) && ($doLogout == "true"))
+{
     //to fully log out a visitor we need to clear the session varialbles
     $_SESSION['MM_Username'] = NULL;
     $_SESSION['MM_UserGroup'] = NULL;
@@ -26,7 +29,8 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['PrevUrl']);
 
     $logoutGoTo = $settingsConfig['loginUrl'];
-    if ($logoutGoTo) {
+    if ($logoutGoTo)
+    {
         header("Location: $logoutGoTo");
         exit;
     }
@@ -35,13 +39,15 @@ $UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
 $imageMissing = $UploadThumbUrl . "missing_default.png";
 ?>
 <?php
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 $MM_restrictGoTo = "../login.php";
-if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
+if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup']))))
+{
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
     if (strpos($MM_restrictGoTo, "?"))
@@ -58,7 +64,8 @@ $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 // check for delete id first before selecting
 $delete_Id = filter_input(INPUT_GET, 'deleteId');
-if (isset($delete_Id)) {
+if (isset($delete_Id))
+{
     $datadir = new dataDirParam("../config/config.ini");
     $userStruct = new userStruct();
     $userStruct->getUserByid($SFconnects, $delete_Id);
@@ -73,13 +80,15 @@ $SFconnects->fetch($query_reAdminUsers);
 $row_reAdminUsers = $SFconnects->getResultArray();
 $totalRows_reAdminUsers = $SFconnects->recordCount();
 $userStructList = array();
-foreach ($row_reAdminUsers as $key => $value) {
+foreach ($row_reAdminUsers as $key => $value)
+{
     $userStructList[$key] = new userStruct();
     $userStructList[$key]->populate($value);
 }
 
 $colname_rsAdmin = "-1";
-if (isset($_SESSION['MM_Username'])) {
+if (isset($_SESSION['MM_Username']))
+{
     $colname_rsAdmin = $_SESSION['MM_Username'];
 }
 $user = new userStruct();
@@ -164,9 +173,10 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                         <li><a href="../Gallery/OutputView.php" title="View output Gallery" class="green" id="SfGallery_published2" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['published']); ?>"><img src="../resources/images/Icons/Output.png" height="22" width="22" alt="Output" /> View Output</a></li>
                                     </ul>
                                 </li>
-                                <?php
-                                if ($user->m_access_level == 5 || $user->m_access_level == 4) {
-                                    ?>
+<?php
+if ($user->m_access_level == 5 || $user->m_access_level == 4)
+{
+    ?>
                                     <li>
                                         <a href="../SiteSetting/index.php" title="Settings"> <img src="../resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
                                         <ul>
@@ -176,15 +186,17 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                             <li><a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a></li>
                                         </ul>
                                     </li>
-                                    <?php
-                                } else {
-                                    ?>
+    <?php
+}
+else
+{
+    ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
                                     </li>
-                                    <?php
-                                }
-                                ?>
+    <?php
+}
+?>
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
@@ -228,15 +240,16 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
-                    <?php
-                    $i = 0;
-                    do {
-                        ?>
+<?php
+$i = 0;
+do
+{
+    ?>
                         <!--Summary starts-->
                         <div class="Summary userBlock">
-                            <?php $thedeletelink = "index.php?deleteId=" . $userStructList[$i]->m_id; ?>
+    <?php $thedeletelink = "index.php?deleteId=" . $userStructList[$i]->m_id; ?>
 
-                                                    <!--a class="edits colorboxLink" href="SendPassword.php?adminid=<?php //echo $userStructList[$i]->m_id';       ?>" title="Mail Password"> <img src="../resources/images/Icons/Mail.png" height="22" width="22" alt="Mail" /></a-->
+                                                        <!--a class="edits colorboxLink" href="SendPassword.php?adminid=<?php //echo $userStructList[$i]->m_id';        ?>" title="Mail Password"> <img src="../resources/images/Icons/Mail.png" height="22" width="22" alt="Mail" /></a-->
                             <a class="edits" href="#" onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $userStructList[$i]->m_username; ?>');" title="Delete User"> <img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /></a>
                             <a class="edits" href="EditUser.php?adminid=<?php echo $userStructList[$i]->m_id; ?>" title="Edit" onclick="ConfirmDelete();"> <img src="../resources/images/Icons/Edit.png" height="22" width="22" alt="Edit" /></a>
 
@@ -253,17 +266,17 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                             <div class="Userside">
                                 <p> Access: <?php echo $userStructList[$i]->m_access_name; ?></p>
                                 <p> Email : <?php echo $userStructList[$i]->m_email; ?></p>
-                                <?php $lastin = new DateTime($userStructList[$i]->m_last_login); ?>
+    <?php $lastin = new DateTime($userStructList[$i]->m_last_login); ?>
                                 <p> Last in : <?php echo $lastin->format(" F j, Y g:h a"); ?></p>
                                 <p> Status  : <?php echo $userStructList[$i]->m_logged_in == 1 ? "Online" : "Offline"; ?></p>
                                 <p> Flakes  : <?php echo $userStructList[$i]->m_flake_it; ?></p>
                             </div><!--Userside Ends-->
 
                         </div><!--Summary Ends-->
-                        <?php
-                        $i++;
-                    } while ($i < count($userStructList));
-                    ?>
+    <?php
+    $i++;
+} while ($i < count($userStructList));
+?>
                 </div>
                 <!-- End of PageWrap --> 
 

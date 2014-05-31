@@ -6,7 +6,8 @@
  * 
  * @author Cyril Adelekan
  */
-class sfConnect {
+class sfConnect
+{
 
     var $attributes = array('status' => true);
     var $sqlLite;
@@ -21,16 +22,21 @@ class sfConnect {
      * @param array $attributes that contains all the data needed to connect to the database.
      * 
      */
-    function sfConnect($attributes = array()) {
-        if (count($attributes) >= 1) {
-            foreach ($attributes as $key => $value) {
+    function sfConnect($attributes = array())
+    {
+        if (count($attributes) >= 1)
+        {
+            foreach ($attributes as $key => $value)
+            {
                 $this->setAttribute($key, $value);
             }
         }
         $defaults = array();
         $defaults['fetch'] = 'associative';
-        foreach ($defaults as $key => $value) {
-            if (!array_key_exists($key, $this->attributes)) {
+        foreach ($defaults as $key => $value)
+        {
+            if (!array_key_exists($key, $this->attributes))
+            {
                 $this->setAttribute($key, $value);
             }
         }
@@ -43,20 +49,28 @@ class sfConnect {
      * 
      * @return String the value of the attribute 
      */
-    function getAttribute($attribute) {
-        if ($this->getStatus() == true) {
-            if (array_key_exists($attribute, $this->attributes)) {
+    function getAttribute($attribute)
+    {
+        if ($this->getStatus() == true)
+        {
+            if (array_key_exists($attribute, $this->attributes))
+            {
                 return $this->attributes[$attribute];
-            } else {
+            }
+            else
+            {
                 $this->setStatus(false);
                 $this->setMessage("Attribute: '" . $attribute . "' does not exist");
                 return $this->getStatus();
             }
         }
 
-        if (array_key_exists('message', $this->attributes)) {
+        if (array_key_exists('message', $this->attributes))
+        {
             return $this->attributes['message'];
-        } else {
+        }
+        else
+        {
             "Status is false";
         }
     }
@@ -68,8 +82,10 @@ class sfConnect {
      * @param String $value the value of the attribute.
      * 
      */
-    function setAttribute($attribute, $value) {
-        if ($this->getStatus() == true) {
+    function setAttribute($attribute, $value)
+    {
+        if ($this->getStatus() == true)
+        {
             $this->deleteAttribute($attribute);
             $this->attributes[$attribute] = $value;
         }
@@ -81,8 +97,10 @@ class sfConnect {
      * @param String $attribute the attribute to delete.
      * 
      */
-    function deleteAttribute($attribute) {
-        if (array_key_exists($attribute, $this->attributes) == true) {
+    function deleteAttribute($attribute)
+    {
+        if (array_key_exists($attribute, $this->attributes) == true)
+        {
             unset($this->attributes[$attribute]);
         }
     }
@@ -92,7 +110,8 @@ class sfConnect {
      * 
      * @return bool the value of the attribute['status'] 
      */
-    function getStatus() {
+    function getStatus()
+    {
         return $this->attributes['status'];
     }
 
@@ -101,7 +120,8 @@ class sfConnect {
      * 
      * @param String $status the status value to set.
      */
-    function setStatus($status) {
+    function setStatus($status)
+    {
         $this->attributes['status'] = $status;
     }
 
@@ -110,7 +130,8 @@ class sfConnect {
      * 
      * @return String the value of the attribute['message'] 
      */
-    function getMessage() {
+    function getMessage()
+    {
         return $this->getAttribute('message');
     }
 
@@ -120,8 +141,10 @@ class sfConnect {
      * @param String $message the message value to set.
      * @param bool $log if set to true also log the message.
      */
-    function setMessage($message, $log = true) {
-        if ($log == true) {
+    function setMessage($message, $log = true)
+    {
+        if ($log == true)
+        {
             sfLogError::sfLogEntry($message);
         }
         $this->setAttribute('message', $message);
@@ -132,11 +155,16 @@ class sfConnect {
      * 
      * @return array the value of the attribute['result'] 
      */
-    function getResultArray() {
-        if ($this->getStatus() == true) {
-            if (array_key_exists('result', $this->attributes)) {
+    function getResultArray()
+    {
+        if ($this->getStatus() == true)
+        {
+            if (array_key_exists('result', $this->attributes))
+            {
                 return $this->getAttribute('result');
-            } else {
+            }
+            else
+            {
                 $this->setStatus(false);
                 $this->setMessage("Attribute: 'result' does not exist");
                 return $this->getStatus();
@@ -149,14 +177,16 @@ class sfConnect {
      * to the database is populated
      * 
      */
-    function connect() {
+    function connect()
+    {
 
         $user = $this->getAttribute('username');
         $pass = $this->getAttribute('password');
         $host = $this->getAttribute('host');
         $dbname = $this->getAttribute('database');
 
-        if (!$user || !$pass || !$host) {
+        if (!$user || !$pass || !$host)
+        {
             $this->setStatus(false);
             return false;
         }
@@ -164,34 +194,43 @@ class sfConnect {
         $type = $this->getAttribute('type');
         //echo $type . "= Connection Type <br>";
 
-        if ($type <> false) {
+        if ($type <> false)
+        {
             $this->setStatus(true);
-            try {
-                switch ($type) {
+            try
+            {
+                switch ($type)
+                {
                     case 'MySQL';
 
                         $this->m_sfConnect = new PDO('mysql:host=' . $host, $user, $pass);
-                        if ($dbname) {
+                        if ($dbname)
+                        {
                             $this->selectDatabase($dbname);
                         }
                         break;
                     case 'SQLite';
                         $dbdatapath = $this->getAttribute('datapath');
-                        if ($dbname) {
+                        if ($dbname)
+                        {
                             $this->m_sfConnect = new PDO("sqlite:" . $dbdatapath . $dbname . ".db");
-                        } else {
+                        }
+                        else
+                        {
                             $this->m_sfConnect = new PDO("sqlite:" . $dbdatapath . "snowflakes.db");
                         }
                         break;
                     case 'MSSQL';
                         $this->m_sfConnect = new PDO('mssql:host=' . $host, $user, $pass);
-                        if ($dbname) {
+                        if ($dbname)
+                        {
                             $this->selectDatabase($dbname);
                         }
                         break;
                     case 'Sybase';
                         $this->m_sfConnect = new PDO('sybase:host=' . $host, $user, $pass);
-                        if ($dbname) {
+                        if ($dbname)
+                        {
                             $this->selectDatabase($dbname);
                         }
                         break;
@@ -205,19 +244,23 @@ class sfConnect {
                         $this->setMessage("Database type:" . $type . " is invalid");
                         $this->setStatus(false);
                 }
-            } catch (PDOException $e) {
+            }
+            catch (PDOException $e)
+            {
                 $this->setMessage($e->getMessage());
                 $this->setStatus(false);
             }
 
-            if ($this->getStatus() === false) {
+            if ($this->getStatus() === false)
+            {
                 return false;
             }
 
             $this->setAttribute('link', $this->m_sfConnect);
             $this->fetch("SHOW VARIABLES LIKE 'version'", false);
             $ver = $this->getResultArray();
-            if ($ver) {
+            if ($ver)
+            {
                 $this->setAttribute('version', $ver[0]['Value']);
             }
         }
@@ -227,9 +270,11 @@ class sfConnect {
      * Close the sfConnect connection to the database.
      * 
      */
-    function close() {
+    function close()
+    {
         $type = $this->getAttribute('type');
-        if ($type <> false) {
+        if ($type <> false)
+        {
             $this->setAttribute('link', NULL);
             $this->m_sfConnect = NULL;
         }
@@ -242,21 +287,25 @@ class sfConnect {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    function selectDatabase($database, $userAccess = false) {
-        if (!$database) {
+    function selectDatabase($database, $userAccess = false)
+    {
+        if (!$database)
+        {
             return false;
         }
         $user = $this->getAttribute('username');
         $pass = $this->getAttribute('password');
         $host = $this->getAttribute('host');
 
-        if (!$user || !$pass || !$host) {
+        if (!$user || !$pass || !$host)
+        {
             return false;
         }
 
         $this->setAttribute('database', $database);
         $this->m_sfConnect->exec("CREATE DATABASE IF NOT EXISTS " . $database);
-        if ($userAccess) {
+        if ($userAccess)
+        {
             $this->m_sfConnect->exec("CREATE USER '" . $user . "'@'" . $host . "' IDENTIFIED BY '" . $pass . "'");
             $this->m_sfConnect->exec("GRANT ALL ON " . $database . ".* TO '" . $user . "'@'" . $host . "'");
             $this->m_sfConnect->exec("FLUSH PRIVILEGES;");
@@ -272,26 +321,32 @@ class sfConnect {
      * 
      * @return mixed <b>Array  of results</b> on success or <b>FALSE</b> on failure.
      */
-    function fetch($sql, $log = true) {
+    function fetch($sql, $log = true)
+    {
         $type = $this->getAttribute('type');
         //echo $type." Connection Type <br>";
         //echo $sql .'<br>';
-        if ($type <> false) {
+        if ($type <> false)
+        {
             $this->setAttribute('result', array());
             $this->setStatus(true);
 
             $this->execute($sql, $log);
 
-            if ($this->getStatus() == false) {
+            if ($this->getStatus() == false)
+            {
                 return false;
-            } else {
+            }
+            else
+            {
                 $numrows = $this->m_sfStmt->rowCount();
                 $numfields = $this->m_sfStmt->columnCount();
                 $this->setAttribute('recordcount', $numrows);
                 $this->setAttribute('fieldcount', $numfields);
 
                 $fields = array();
-                for ($iField = 0; $iField < $numfields; $iField++) {
+                for ($iField = 0; $iField < $numfields; $iField++)
+                {
                     $meta = $this->m_sfStmt->getColumnMeta($iField);
                     $fields[] = $meta;
                 }
@@ -299,7 +354,8 @@ class sfConnect {
 
                 $fetch = 0;
                 $fetch_type = $this->getAttribute('fetch');
-                switch ($fetch_type) {
+                switch ($fetch_type)
+                {
                     case 'associative';
                         $fetch = PDO::FETCH_ASSOC;
                         break;
@@ -313,11 +369,14 @@ class sfConnect {
                         $this->setMessage("attribute['fetch'] must be either 'associative', 'numeric' or 'both' e.g. object->setAttribute['fetch'] = 'numeric';");
                         $this->setStatus(false);
                 }
-                if ($this->getStatus() == true) {
+                if ($this->getStatus() == true)
+                {
                     $this->deleteAttribute('result');
                     $this->setAttribute('result', array());
                     $this->setAttribute('result', $this->m_sfStmt->fetchAll($fetch));
-                } else {
+                }
+                else
+                {
                     $this->setStatus(false);
                 }
             }
@@ -334,13 +393,15 @@ class sfConnect {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    function execute($sql, $log = true) {
+    function execute($sql, $log = true)
+    {
 
         $sqlError = "[Execute] ¦=>  " . $sql;
 
         $type = $this->getAttribute('type');
 
-        if ($type == false) {
+        if ($type == false)
+        {
             $this->setStatus(false);
             $sqlError.= "[Query Error] ¦=> database type is not set.";
             $this->setMessage($sqlError, $log);
@@ -351,7 +412,8 @@ class sfConnect {
 
         $this->m_sfStmt = $this->m_sfConnect->prepare($sql);
 
-        if (!$this->m_sfStmt) {
+        if (!$this->m_sfStmt)
+        {
             $this->setStatus(false);
             $sqlError.= "[Query Error] ¦=> Could not prepare the sql statement .";
             $this->setMessage($sqlError, $log);
@@ -360,7 +422,8 @@ class sfConnect {
 
         $status = $this->m_sfStmt->execute();
 
-        if ($status == false) {
+        if ($status == false)
+        {
             $errArray = $this->m_sfStmt->errorInfo();
             $sqlError.= "[Query Error] ¦=>  " . $errArray[1] . " ¦ " . $errArray[2];
             $this->setMessage($sqlError, $log);
@@ -368,7 +431,8 @@ class sfConnect {
             return $status;
         }
 
-        if ($log == true) {
+        if ($log == true)
+        {
             sfLogError::sfLogEntry($sqlError);
         }
         $this->setStatus($status);
@@ -380,7 +444,8 @@ class sfConnect {
      *
      * @return int the record count of an sql query.
      */
-    function recordCount() {
+    function recordCount()
+    {
         return $this->getAttribute('recordcount');
     }
 
@@ -389,7 +454,8 @@ class sfConnect {
      * 
      * @return int the Identifier generated by the sql operation afte an INSERT statement.
      */
-    function lastInsertId() {
+    function lastInsertId()
+    {
         return $this->m_sfConnect->lastInsertId();
     }
 

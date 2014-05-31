@@ -10,7 +10,8 @@ require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
 
-class snowflakesSetUp {
+class snowflakesSetUp
+{
 
     var $m_hostName;
     var $m_dbUsername;
@@ -68,8 +69,10 @@ class snowflakesSetUp {
      * generates success or failure messages to be displayed to the user.
      * 
      */
-    public function Setup() {
-        if (!$this->createTables()) {
+    public function Setup()
+    {
+        if (!$this->createTables())
+        {
             $this->m_outcomeMessage = '<div class="SnowflakeHead">Set Up Unsuccessful <span class="icon error"></span></div>';
             return false;
         }
@@ -111,10 +114,13 @@ class snowflakesSetUp {
         $settingsStruct->SetgalleryImgDir($galleryimg);
         $settingsStruct->SetgalleryThumbDir($gallerythumb);
 
-        if (!$settingsStruct->setConfigItems($inifile)) {
-            $this->m_Message .= sfUtils::sfPromptMessage('Could not open or write CMS configuration file.','error');
-        } else {
-            $this->m_Message .= sfUtils::sfPromptMessage('CMS configuration file written successfully.','success');
+        if (!$settingsStruct->setConfigItems($inifile))
+        {
+            $this->m_Message .= sfUtils::sfPromptMessage('Could not open or write CMS configuration file.', 'error');
+        }
+        else
+        {
+            $this->m_Message .= sfUtils::sfPromptMessage('CMS configuration file written successfully.', 'success');
         }
         $this->m_outcomeMessage = '<div class="SnowflakeHead">Set Up Successful <span class="icon success"></span></div>';
     }
@@ -126,20 +132,23 @@ class snowflakesSetUp {
      * 
      * @return sfConnect The database connection.
      */
-    public function dbConnect() {
+    public function dbConnect()
+    {
         $sqlArray = array('type' => $this->m_dbType, 'host' => $this->m_hostName, 'username' => $this->m_dbUsername, 'password' => $this->m_dbPassword, 'database' => $this->m_dbName, 'datapath' => realpath("../") . "/data/");
 
         $conn = new sfConnect($sqlArray);
         $conn->connect(); // Connect to database via writer connection
 
-        if ($conn->getStatus() == false) {
-            $this->m_Message .=sfUtils::sfPromptMessage("Database Connection Unsuccessful. Could not connect." . $conn->getMessage() . '.','error');
+        if ($conn->getStatus() == false)
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage("Database Connection Unsuccessful. Could not connect." . $conn->getMessage() . '.', 'error');
             return false;
         }
 
-        $this->m_Message .=sfUtils::sfPromptMessage('Database Connection Successful.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('Database Connection Successful.', 'success');
 
-        if (!$this->createSfDB($conn)) {
+        if (!$this->createSfDB($conn))
+        {
             return false;
         }
 
@@ -153,52 +162,61 @@ class snowflakesSetUp {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function createTables() {
+    public function createTables()
+    {
         /// Check 1 Start connection
         $conn = $this->dbConnect();
 
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
         // Create change log table 
-        if ($this->createChangeLog($conn) == false) {
+        if ($this->createChangeLog($conn) == false)
+        {
             return false;
         }
 
         //Create Flake it Table and trigger 
-        if ($this->createFlakeItTable($conn) == false) {
+        if ($this->createFlakeItTable($conn) == false)
+        {
             return false;
         }
 
         /// Check 2 Create Snowflakes table
-        if ($this->createSfTable($conn) == false) {
+        if ($this->createSfTable($conn) == false)
+        {
             return false;
         }
         $this->insertDefaultSnowflakes($conn);
 
         // Check 3 Create Admin
-        if ($this->createUserTable($conn) == false) {
+        if ($this->createUserTable($conn) == false)
+        {
             return false;
         }
         $this->insertSuperUser($conn);
 
         // Check 4  Create events
-        if ($this->createEventsTable($conn) == false) {
+        if ($this->createEventsTable($conn) == false)
+        {
             return false;
         }
         // Insert snowflakes events
         $this->insertDefaultEvents($conn);
 
         // Check 5  Create Gallery
-        if ($this->createGalleryTable($conn) == false) {
+        if ($this->createGalleryTable($conn) == false)
+        {
             return false;
         }
         // Insert snowflakes gallery
         $this->insertDefaultGallery($conn);
 
         // Check 6  Create Snowflakes Setting
-        if ($this->createSettingsTable($conn) == false) {
+        if ($this->createSettingsTable($conn) == false)
+        {
             return false;
         }
         // Insert Snowflakes settings
@@ -208,23 +226,28 @@ class snowflakesSetUp {
         return true;
     }
 
-    private function createSfDB($conn) {
+    private function createSfDB($conn)
+    {
         //sanity check
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
         $sql = "CREATE DATABASE IF NOT EXISTS " . $this->m_dbName . ";";
-        if (!$conn->execute($sql)) {
-            $this->m_Message .= sfUtils::sfPromptMessage("Could not select/Create database" . $this->m_dbName . ".<br/> " . $conn->getMessage() . '.'.'error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .= sfUtils::sfPromptMessage("Could not select/Create database" . $this->m_dbName . ".<br/> " . $conn->getMessage() . '.' . 'error');
             return false;
         }
         return true;
     }
 
-    private function createChangeLog($conn) {
+    private function createChangeLog($conn)
+    {
         //sanity check
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
@@ -242,20 +265,23 @@ class snowflakesSetUp {
 	KEY changetime (change_datetime)
 	)ENGINE = MYISAM;");
 
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Change log table named "' . $this->m_changeLogTable . '" cannot be created.' . ".<br/> " . $conn->getMessage() . ' .','error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Change log table named "' . $this->m_changeLogTable . '" cannot be created.' . ".<br/> " . $conn->getMessage() . ' .', 'error');
             return false;
         }
 
-        $this->m_Message .=sfUtils::sfPromptMessage('Change log table named "' . $this->m_changeLogTable . '" has been created.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('Change log table named "' . $this->m_changeLogTable . '" has been created.', 'success');
 
         return true;
     }
 
-    private function createIUDTriggers($conn, $tablename, $Name) {
+    private function createIUDTriggers($conn, $tablename, $Name)
+    {
 
         //sanity check
-        if (!$conn || !$tablename || !$Name) {
+        if (!$conn || !$tablename || !$Name)
+        {
             return false;
         }
 
@@ -314,18 +340,21 @@ class snowflakesSetUp {
                 INSERT INTO " . $this->m_changeLogTable . " SET change_action=log_action,change_on=log_change_on,created_by=OLD.created_by,change_by=OLD.edited_by,action_id=OLD.id;
                 DELETE FROM " . $this->m_flakeItTable . " WHERE flake_on_id=OLD.id AND flake_on=log_change_on;
             END;");
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not create ' . $Name . ' trigger due to error.' . ".<br/> " . $conn->getMessage() . '.','error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not create ' . $Name . ' trigger due to error.' . ".<br/> " . $conn->getMessage() . '.', 'error');
             return false;
         }
-        $this->m_Message .=sfUtils::sfPromptMessage( $Name . ' trigger has been created.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage($Name . ' trigger has been created.', 'success');
         return true;
     }
 
-    private function createSfTable($conn) {
+    private function createSfTable($conn)
+    {
 
         //sanity check
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
@@ -350,20 +379,23 @@ class snowflakesSetUp {
         FULLTEXT snowflakes_search(title,created_by,edited_by,body_text)
 	) ENGINE = MYISAM;");
 
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('CMS table named "' . $this->m_sfTable . '" cannot be created.' . ".<br/> " . $conn->getMessage() . '.','error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('CMS table named "' . $this->m_sfTable . '" cannot be created.' . ".<br/> " . $conn->getMessage() . '.', 'error');
             return false;
         }
 
-        $this->m_Message .=sfUtils::sfPromptMessage('CMS table named "' . $this->m_sfTable . '" has been created.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('CMS table named "' . $this->m_sfTable . '" has been created.', 'success');
 
         return $this->createIUDTriggers($conn, $this->m_sfTable, 'snowflake');
     }
 
-    private function createUserTable($conn) {
+    private function createUserTable($conn)
+    {
 
         //sanity check
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
@@ -389,12 +421,13 @@ class snowflakesSetUp {
         FULLTEXT users_search(username,email)
 	)ENGINE = MYISAM;";
 
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not create users table named "' . $this->m_usersTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.','error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not create users table named "' . $this->m_usersTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.', 'error');
             return false;
         }
 
-        $this->m_Message .=sfUtils::sfPromptMessage('Users table named "' . $this->m_usersTable . '" Has been Created.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('Users table named "' . $this->m_usersTable . '" Has been Created.', 'success');
         //echo $this->$Message;
 
         $sql = trim("DROP TRIGGER IF EXISTS " . $this->m_usersTable . "_in_trig;");
@@ -436,19 +469,22 @@ class snowflakesSetUp {
 
             END;");
 
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not create Users trigger due to error.' . ".<br/> " . $conn->getMessage() . '.','error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not create Users trigger due to error.' . ".<br/> " . $conn->getMessage() . '.', 'error');
             return false;
         }
-        $this->m_Message .=sfUtils::sfPromptMessage('Users trigger has been created.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('Users trigger has been created.', 'success');
 
         return true;
     }
 
-    private function createEventsTable($conn) {
+    private function createEventsTable($conn)
+    {
 
         //sanity check
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
@@ -477,20 +513,23 @@ class snowflakesSetUp {
         KEY (title),
         FULLTEXT events_search(title,created_by,edited_by,location,body_text)
 	) ENGINE = MYISAM;";
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not create Event table named "' . $this->m_eventsTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.'.'error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not create Event table named "' . $this->m_eventsTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.' . 'error');
             return false;
         }
 
-        $this->m_Message .=sfUtils::sfPromptMessage('Events table named "' . $this->m_eventsTable . '" Has been Created.'.'success');
+        $this->m_Message .=sfUtils::sfPromptMessage('Events table named "' . $this->m_eventsTable . '" Has been Created.' . 'success');
 
         return $this->createIUDTriggers($conn, $this->m_eventsTable, 'event');
     }
 
-    private function createGalleryTable($conn) {
+    private function createGalleryTable($conn)
+    {
 
         //sanity check
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
@@ -514,21 +553,24 @@ class snowflakesSetUp {
         KEY (title),
         FULLTEXT search_gallery (title,created_by,edited_by,image_caption)
 	) ENGINE = MYISAM;";
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not create Gallery table named "' . $this->m_galleryTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.','error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not create Gallery table named "' . $this->m_galleryTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.', 'error');
             return false;
         }
-        $this->m_Message .=sfUtils::sfPromptMessage('Gallery table named "' . $this->m_galleryTable . '" Has been Created.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('Gallery table named "' . $this->m_galleryTable . '" Has been Created.', 'success');
 
         if (!$this->createIUDTriggers($conn, $this->m_galleryTable, 'gallery'))
             return false;
         return true;
     }
 
-    private function createFlakeItTable($conn) {
+    private function createFlakeItTable($conn)
+    {
 
         //sanity check
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
@@ -540,19 +582,22 @@ class snowflakesSetUp {
 	PRIMARY KEY (id),
         UNIQUE KEY unique_flake_it (flake_on, flake_on_id)
 	)ENGINE = MYISAM;";
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not create flakeIt table named "' . $this->m_flakeItTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.','error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not create flakeIt table named "' . $this->m_flakeItTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.', 'error');
             return false;
         }
-        $this->m_Message .=sfUtils::sfPromptMessage('flakeIt table named "' . $this->m_flakeItTable . '" Has been Created.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('flakeIt table named "' . $this->m_flakeItTable . '" Has been Created.', 'success');
 
         return true;
     }
 
-    private function createSettingsTable($conn) {
+    private function createSettingsTable($conn)
+    {
 
         //sanity check
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
@@ -575,19 +620,22 @@ class snowflakesSetUp {
         time_zone           VARCHAR(200) NOT NULL DEFAULT 'Europe/London',
 	PRIMARY KEY (setting_id) 
 	)ENGINE = MYISAM;";
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not create Snowflakes Setting table named "' . $this->m_settingTable . '" due to error.<br/>' . $conn->getMessage() . '.','error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not create Snowflakes Setting table named "' . $this->m_settingTable . '" due to error.<br/>' . $conn->getMessage() . '.', 'error');
             return false;
         }
 
-        $this->m_Message .=sfUtils::sfPromptMessage('Snowflakes Setting table named "' . $this->m_settingTable . '" Has been Created.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('Snowflakes Setting table named "' . $this->m_settingTable . '" Has been Created.', 'success');
         return true;
     }
 
-    private function insertSnowflakesSettings($conn) {
+    private function insertSnowflakesSettings($conn)
+    {
 
         //sanity check
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
         $key = "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
@@ -602,19 +650,22 @@ class snowflakesSetUp {
 		sf_url='" . $this->m_sfUrl . "',
                 time_zone='" . $this->m_timeZone . "';";
 
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into Snowflakes Setting table named "' . $this->m_settingTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.','error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into Snowflakes Setting table named "' . $this->m_settingTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.', 'error');
             return false;
         }
 
-        $this->m_Message .=sfUtils::sfPromptMessage('Snowflakes Setting successfully added.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('Snowflakes Setting successfully added.', 'success');
         return true;
     }
 
-    private function insertSuperUser($conn) {
+    private function insertSuperUser($conn)
+    {
 
         //sanity check
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
@@ -628,18 +679,21 @@ class snowflakesSetUp {
 		access_level=5,
                 access_name='Super Administrator',
                 image_name='default.png'";
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into admin table named "' . $this->m_usersTable . '" due to error.<br/> ' . $conn->getMessage() . '.'.'error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into admin table named "' . $this->m_usersTable . '" due to error.<br/> ' . $conn->getMessage() . '.' . 'error');
             return false;
         }
 
-        $this->m_Message .=sfUtils::sfPromptMessage('Administrator username and password successfully added.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('Administrator username and password successfully added.', 'success');
         return true;
     }
 
-    private function insertDefaultEvents($conn) {
+    private function insertDefaultEvents($conn)
+    {
 
-        if (!$conn) {//sanity check
+        if (!$conn)
+        {//sanity check
             return false;
         }
         $eventDate = date('Y-m-d');
@@ -653,18 +707,21 @@ class snowflakesSetUp {
                 end_time='$endtimeNumber',end_date='$eventDate',location='Houston, Texas, United States',
                 lat_long='29.7601927,-95.36938959999998',created='$create',created_by='$loginUsername',
                 edited='$create',edited_by='$loginUsername',flake_it=1";
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into Events table named "' . $this->m_eventsTable . '" due to error.<br/> ' . $conn->getMessage() . '.','error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into Events table named "' . $this->m_eventsTable . '" due to error.<br/> ' . $conn->getMessage() . '.', 'error');
             return false;
         }
 
-        $this->m_Message .=sfUtils::sfPromptMessage('First Event successfully added.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('First Event successfully added.', 'success');
         return true;
     }
 
-    private function insertDefaultGallery($conn) {
-
-        if (!$conn) {//sanity check
+    private function insertDefaultGallery($conn)
+    {
+        //sanity check
+        if (!$conn)
+        {
             return false;
         }
 
@@ -678,18 +735,21 @@ class snowflakesSetUp {
 		image_caption='About, Demo, Features, Logo',
                 publish=0,created='$create',created_by='$loginUsername',edited='$create',
 		edited_by='$loginUsername',flake_it=1";
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into Gallery table named "' . $this->m_galleryTable . '" due to error.<br/> ' . $conn->getMessage() . '.'.'error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into Gallery table named "' . $this->m_galleryTable . '" due to error.<br/> ' . $conn->getMessage() . '.' . 'error');
             return false;
         }
-        $this->m_Message .=sfUtils::sfPromptMessage('First Gallery successfully added.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('First Gallery successfully added.', 'success');
         return true;
     }
 
-    private function insertDefaultSnowflakes($conn) {
+    private function insertDefaultSnowflakes($conn)
+    {
 
         //sanity check
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
@@ -702,12 +762,13 @@ class snowflakesSetUp {
 		(3,UPPER(UUID()),'Snowflakes Features', 'You can add a snowflake without an image and the default snowflake icon will appear in the snowflake. This is so because a snowflake always has an image to go with it.  you can also share a flake on social sites, it has already been pre-configured to be shared and you can customise it by including it removing images, description, title and link.<br><br> \r\nSnowflake is an ultimate Content management System design for news on your website  and uses mysql database. Manage flakes and have them shared by your viewers, You can also customise your output to better suit the theme of your website by including the generated output on one of your site pages. Snowflakes is able to generate php code or javascript code to post your flakes on.\r\n<br><br>\r\n<p> This can be done by using a php code \"  include \"http://www.Yoursite.com/Snowflakes/Out.php\";  \" in the page that you want your snow to appear in and use css to customise how it looks.</p>  \r\n<br><br>\r\na flake class structure for css is thus:\r\n<br>\r\nSnowflake class- for the whole flake\r\n<br>SnowflakeHead class - for the title\r\n<br>SnowflakePanel class for the view and share icons\r\n<br>PageBreak class - for the white  break line \r\n<br>	 SnowflakeDescr class - for the body text of a flake\r\n<br>		 SnowflakeImage class - is the div that contains the image of a snowflake. contained within the SnowflakeDescr class\r\n<br> PageBreak Class - another white break line\r\n<br> SnowflakeDate - the snowflake date of modification & create\r\n<br><br>\r\nyou can choose to hide any of the features such as the box panel and date or the image by writing your own css for the snowflake structure. ', 0, 'default.png','1,Snowflakes', '$create', '$loginUsername', '$create', '$loginUsername',1),		
 		(4,UPPER(UUID()),'Snowflakes Features 2', '<p> Given the that you have added and published snowflakes, you can get a generated code to add anywhere on the website at the settings menu of snowflakes, follow the instructions there at the <a href=\"#\">Snowflakes Generator</a>. </p>\r\n<br />\r\n<p>Once you have Set up your Snowflakes and display the custom Output Snowflakes on your website, given that there are sharing icons on the output Snowflakes you need to dedicate a page to viewing Snowflakes for when your website vistor decides to view your snowflakes. The <a href=\"#\">Snowflakes Generator</a> will generate the code once you have installed added and published snowflakes. make sure you follow the instructions on the   <a href=\"#\">Snowflakes Generator</a> to the later to ensure that it works. </p>\r\n<br />\r\n<p> Visit <a href=\"http://cyrilinc.co.uk/ \"> Cyril Inc Website </a> and contact us if you spot a bug or require technical help.</p>', 0, 'default.png','1,Snowflakes', '$create', '$loginUsername', '$create', '$loginUsername',1)";
 
-        if (!$conn->execute($sql)) {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert first snowflake due to Error.<br/> ' . $conn->getMessage() . '.','error');
+        if (!$conn->execute($sql))
+        {
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert first snowflake due to Error.<br/> ' . $conn->getMessage() . '.', 'error');
             return false;
         }
 
-        $this->m_Message .=sfUtils::sfPromptMessage('First snowflake has been added successfully.','success');
+        $this->m_Message .=sfUtils::sfPromptMessage('First snowflake has been added successfully.', 'success');
         return true;
     }
 

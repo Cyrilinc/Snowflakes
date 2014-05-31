@@ -12,10 +12,10 @@ $datadir=new dataDirParam("../config/config.ini");
 $UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory
 $UploadImgDir = $datadir->m_galleryImgDir;
-$UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
 $UploadThumbDir = $datadir->m_galleryThumbDir;
-$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
-$imageMissing = $UploadThumbUrl . "missing_default.png";
+$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 ?>
 <?php
 $colname_rsSFGallery = -1;
@@ -185,12 +185,12 @@ $Powerlink = "../resources/images/Snowflakes2.png";
                                     $DBImageCaption = explode(",", $galleryStruct->m_image_caption);
                                     // Loop through the array and add directory prefix to each item in array
                                     foreach ($DBImageFiles as &$value) {
-                                        $value = $UploadImgUrl . $value;
+                                        $value = $sfGalleryImgUrl . $value;
                                     }
 
                                     // Loop through the array and add directory prefix to each item in array	
                                     foreach ($DBImageThumbFiles as &$value) {
-                                        $value = $UploadThumbUrl . $value;
+                                        $value = $sfGalleryThumbUrl . $value;
                                     }
 
                                     //DataList
@@ -198,7 +198,7 @@ $Powerlink = "../resources/images/Snowflakes2.png";
                                         ?>
                                         <li> 
                                             <span class="tp-title" ><?php echo htmlentities($DBImageCaption [$counter]); ?></span>
-                                            <a class="colorbox" href="<?php echo $DBImageFiles[$counter]; ?>" onerror="this.href='<?php echo $UploadImgUrl . "missing_default.png"; ?>'" title="<?php echo htmlentities($DBImageCaption[$counter]); ?>"> 
+                                            <a class="colorbox" href="<?php echo $DBImageFiles[$counter]; ?>" onerror="this.href='<?php echo $sfGalleryImgUrl . "missing_default.png"; ?>'" title="<?php echo htmlentities($DBImageCaption[$counter]); ?>"> 
                                                 <span class="tp-info"><span><?php echo htmlentities($DBImageCaption[$counter]); ?></span></span> 
                                                 <img src="<?php echo $imageThumbLink; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo htmlentities($DBImageCaption [$counter]); ?>"> 
                                             </a>

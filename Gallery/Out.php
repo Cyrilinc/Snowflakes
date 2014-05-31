@@ -71,10 +71,10 @@ $settingsConfig = Config::getConfig("settings", '../config/config.ini');
 $datadir=new dataDirParam("../config/config.ini");
 $UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory
-$UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
 $UploadThumbDir = $datadir->m_galleryThumbDir;
-$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
-$imageMissing = $UploadThumbUrl . "missing_default.png";
+$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 ?>
 <?php
 $url = $otherurl = sfUtils::curPageURL();
@@ -136,12 +136,12 @@ if (isset($rssflogo)) {
 
                 // Loop through the array and add directory prefix to each item in array
                 foreach ($DBImageFiles as &$value) {
-                    $value = $UploadImgUrl . $value;
+                    $value = $sfGalleryImgUrl . $value;
                 }
 
                 // Loop through the array and add directory prefix to each item in array	
                 foreach ($DBImageThumbFiles as &$value) {
-                    $value = $UploadThumbUrl . $value;
+                    $value = $sfGalleryThumbUrl . $value;
                 }
 
                 //DataList
@@ -151,7 +151,7 @@ if (isset($rssflogo)) {
                     echo htmlentities($galleryStructList[$i]->m_title . " "
                             . '<br/><div class="owner"> By -' . $galleryStructList[$i]->m_created_by . '</div> ');
                     ?>"> 
-                        <a class="colorbox" href="<?php echo $DBImageFiles[$counter]; ?>" onerror="this.href='<?php echo $UploadImgUrl . "missing_default.png"; ?>'" title="<?php echo htmlentities($DBImageCaption[$counter]); ?>"> 
+                        <a class="colorbox" href="<?php echo $DBImageFiles[$counter]; ?>" onerror="this.href='<?php echo $sfGalleryImgUrl . "missing_default.png"; ?>'" title="<?php echo htmlentities($DBImageCaption[$counter]); ?>"> 
                             <span class="tp-info"><span><?php echo htmlentities($DBImageCaption[$counter]); ?></span></span> 
                             <img src="<?php echo $imageThumbLink; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo htmlentities($DBImageCaption[$counter]); ?>"> 
                         </a>

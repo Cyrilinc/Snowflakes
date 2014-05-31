@@ -6,19 +6,22 @@ require_once '../lib/sfImageProcessor.php';
 ?>
 <?php
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
 $query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
-if ((isset($query_string)) && ($query_string != "")) {
+if ((isset($query_string)) && ($query_string != ""))
+{
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
 $doLogout = filter_input(INPUT_GET, 'doLogout');
 $settingsConfig = Config::getConfig("settings", '../config/config.ini');
-if ((isset($doLogout)) && ($doLogout == "true")) {
+if ((isset($doLogout)) && ($doLogout == "true"))
+{
     //to fully log out a visitor we need to clear the session varialbles
     $_SESSION['MM_Username'] = NULL;
     $_SESSION['MM_UserGroup'] = NULL;
@@ -28,21 +31,24 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['PrevUrl']);
 
     $logoutGoTo = $settingsConfig['loginUrl'];
-    if ($logoutGoTo) {
+    if ($logoutGoTo)
+    {
         header("Location: $logoutGoTo");
         exit;
     }
 }
 ?>
 <?php
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
 $MM_restrictGoTo = "../login.php";
-if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
+if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup']))))
+{
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
     if (strpos($MM_restrictGoTo, "?"))
@@ -56,7 +62,8 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
 ?>
 <?php
 $editFormAction = $php_self;
-if (isset($query_string)) {
+if (isset($query_string))
+{
     $editFormAction .= "?" . htmlentities($query_string);
 }
 
@@ -65,7 +72,8 @@ $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 $Message = "";
 $MM_update = filter_input(INPUT_POST, 'MM_update');
-if ((isset($MM_update)) && ($MM_update == "form1")) {
+if ((isset($MM_update)) && ($MM_update == "form1"))
+{
     $updateSQL = 'UPDATE snowflakes_settings ' .
             'SET result_url="' . sfUtils::escape($_POST['result_url']) . '",' .
             'out_url="' . sfUtils::escape($_POST['out_url']) . '",' .
@@ -77,9 +85,12 @@ if ((isset($MM_update)) && ($MM_update == "form1")) {
             'time_zone="' . $_POST['time_zone'] . '" ' .
             'WHERE setting_id=' . $_POST['Settingid'];
 
-    if (!$SFconnects->execute($updateSQL)) {
+    if (!$SFconnects->execute($updateSQL))
+    {
         $Message.=$SFconnects->getMessage();
-    } else {
+    }
+    else
+    {
         $settingsStruct = new settingsStruct();
         $settingsStruct->init('../config/config.ini');
         $settingsStruct->SetsnowflakesResultUrl($_POST['result_url']);
@@ -92,14 +103,16 @@ if ((isset($MM_update)) && ($MM_update == "form1")) {
         $settingsStruct->SettimeZone($_POST['time_zone']);
         $settingsStruct->setConfigItems('../config/config.ini');
 
-        if (!sfUtils::settimezone($config->m_time_zone)) {
-            $loginMessage.=sfUtils::sfPromptMessage('Snowflakes could not set the site timezone.','error');
+        if (!sfUtils::settimezone($config->m_time_zone))
+        {
+            $loginMessage.=sfUtils::sfPromptMessage('Snowflakes could not set the site timezone.', 'error');
         }
     }
 }
 
 $colname_rsAdmin = "-1";
-if (isset($_SESSION['MM_Username'])) {
+if (isset($_SESSION['MM_Username']))
+{
     $colname_rsAdmin = $_SESSION['MM_Username'];
 }
 
@@ -114,19 +127,26 @@ $row_SiteSettings = $SFconnects->getResultArray();
 
 $Message .= filter_input(INPUT_GET, 'Message');
 $MainTain = filter_input(INPUT_GET, 'mt');
-if (isset($MainTain) && $MainTain == "True") {
+if (isset($MainTain) && $MainTain == "True")
+{
 
     $cleaned = sfImageProcessor::cleanUploadDir($SFconnects, '../config/config.ini');
-    if ($cleaned >= 1) {
-        $Message .= sfUtils::sfPromptMessage("Cleaned $cleaned images.",'success');
-    } else {
-        $Message.=sfUtils::sfPromptMessage("Cleaned $cleaned images.",'error');
+    if ($cleaned >= 1)
+    {
+        $Message .= sfUtils::sfPromptMessage("Cleaned $cleaned images.", 'success');
+    }
+    else
+    {
+        $Message.=sfUtils::sfPromptMessage("Cleaned $cleaned images.", 'error');
     }
     $resized = sfImageProcessor::resizeGalleryImages($SFconnects, '../config/config.ini');
-    if ($resized >= 1) {
-        $Message .= sfUtils::sfPromptMessage("$resized images re-sized.",'success');
-    } else {
-        $Message .= sfUtils::sfPromptMessage("$resized images re-sized.",'error');
+    if ($resized >= 1)
+    {
+        $Message .= sfUtils::sfPromptMessage("$resized images re-sized.", 'success');
+    }
+    else
+    {
+        $Message .= sfUtils::sfPromptMessage("$resized images re-sized.", 'error');
     }
 }
 ?>
@@ -225,7 +245,8 @@ if (isset($MainTain) && $MainTain == "True") {
                                     </ul>
                                 </li>
                                 <?php
-                                if ($user->m_access_level == 5 || $user->m_access_level == 4) {
+                                if ($user->m_access_level == 5 || $user->m_access_level == 4)
+                                {
                                     ?>
                                     <li class="active" id="AtvNewButton">
                                         <a href="../SiteSetting/index.php" title="Settings"> <img src="../resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
@@ -236,15 +257,17 @@ if (isset($MainTain) && $MainTain == "True") {
                                             <li><a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a></li>
                                         </ul>
                                     </li>
-                                    <?php
-                                } else {
-                                    ?>
+    <?php
+}
+else
+{
+    ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
                                     </li>
-                                    <?php
-                                }
-                                ?>
+    <?php
+}
+?>
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
@@ -274,11 +297,12 @@ if (isset($MainTain) && $MainTain == "True") {
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
-                    <?php
-                    if (strlen($Message) > 0) {
-                        echo sfUtils::dialogMessage("Settings/Maintenance", $Message);
-                    }
-                    ?>
+<?php
+if (strlen($Message) > 0)
+{
+    echo sfUtils::dialogMessage("Settings/Maintenance", $Message);
+}
+?>
                     <!--contactform-->
                     <div class="contactform"> 
                         <form action="<?php echo $editFormAction; ?>" method="POST" name="form1" id="installForm">
@@ -320,13 +344,14 @@ if (isset($MainTain) && $MainTain == "True") {
                             <fieldset>
                                 <legend>Site Time zone</legend>
                                 <select class="inputtext controls" name="time_zone">
-                                    <?php
-                                    $tzlist = sfUtils::getTimeZoneList();
-                                    foreach ($tzlist as $timeZone) {
-                                        $selected = $row_SiteSettings[0]['time_zone'] == $timeZone ? 'selected="selected"' : "";
-                                        echo '<option value="' . $timeZone . '" ' . $selected . '>' . sfUtils::escape($timeZone) . '</option>';
-                                    }
-                                    ?>                                   
+<?php
+$tzlist = sfUtils::getTimeZoneList();
+foreach ($tzlist as $timeZone)
+{
+    $selected = $row_SiteSettings[0]['time_zone'] == $timeZone ? 'selected="selected"' : "";
+    echo '<option value="' . $timeZone . '" ' . $selected . '>' . sfUtils::escape($timeZone) . '</option>';
+}
+?>                                   
                                 </select>
                             </fieldset>
 

@@ -6,9 +6,9 @@ require_once 'config/Config.php';
 //The upload directory
 $settingsConfig = Config::getConfig("settings", 'config/config.ini');
 //The upload Image directory
-$UploadImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$UploadThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
-$imageMissing = $UploadThumbUrl . "missing_default.png";
+$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 
 //initialize the session
 if (!isset($_SESSION)) {

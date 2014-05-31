@@ -12,7 +12,13 @@ error_reporting(0);
 set_error_handler("sfLogError::sfErrorHandler");
 date_default_timezone_set('Europe/London');
 
-class snowflakeStruct {
+/**
+ * Class thats stores infromation for Snowflakes
+ *
+ * @author Cyril Adelekan
+ */
+class snowflakeStruct
+{
 
     var $m_id;
     var $m_uuid;
@@ -35,7 +41,8 @@ class snowflakeStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function isSfPopulated() {
+    public function isSfPopulated()
+    {
         return isset($this->m_title) && isset($this->m_body_text) && (isset($this->m_created_by) || isset($this->m_edited_by)) && (isset($this->m_created) || isset($this->m_edited));
     }
 
@@ -46,9 +53,11 @@ class snowflakeStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function populate($array) {
+    public function populate($array)
+    {
 
-        if (empty($array) && !is_array($array)) {
+        if (empty($array) && !is_array($array))
+        {
             return false;
         }
 
@@ -80,19 +89,23 @@ class snowflakeStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function getSnowflakesByid($conn, $id) {
-        if (!$conn || !$id || $id == -1) {
+    public function getSnowflakesByid($conn, $id)
+    {
+        if (!$conn || !$id || $id == -1)
+        {
             return false;
         }
 
         $sql = "SELECT * FROM snowflakes WHERE ";
         $sql.=strpos($id, '-') ? "uuid='$id';" : "id=$id;";
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
 
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $this->populate($result[0]);
@@ -107,18 +120,22 @@ class snowflakeStruct {
      * 
      * @return bool <b>Image name</b> on success or <b>FALSE</b> otherwise
      */
-    public static function getImageNameById($conn, $id) {
+    public static function getImageNameById($conn, $id)
+    {
 
-        if (!$conn || !$id || $id == -1) {
+        if (!$conn || !$id || $id == -1)
+        {
             return false;
         }
 
         $sql = "SELECT image_name FROM snowflakes WHERE id=$id;";
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $result[0]['image_name'];
@@ -132,9 +149,11 @@ class snowflakeStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function addSnowflake($conn) {
+    public function addSnowflake($conn)
+    {
 
-        if (!$this->isSfPopulated() || !$conn) {
+        if (!$this->isSfPopulated() || !$conn)
+        {
             return false;
         }
 
@@ -159,9 +178,11 @@ class snowflakeStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function updateSnowflake($conn) {
+    public function updateSnowflake($conn)
+    {
 
-        if (!$this->isSfPopulated() || !$conn || sfUtils::isEmpty($this->m_id)) {
+        if (!$this->isSfPopulated() || !$conn || sfUtils::isEmpty($this->m_id))
+        {
             return false;
         }
 
@@ -187,25 +208,32 @@ class snowflakeStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function deleteSnowflake($conn, $setDelete = false) {
+    public function deleteSnowflake($conn, $setDelete = false)
+    {
 
-        if (sfUtils::isEmpty($this->m_id) || !$conn) {
+        if (sfUtils::isEmpty($this->m_id) || !$conn)
+        {
             return false;
         }
 
         $sql = "";
-        if ($setDelete == false) {
+        if ($setDelete == false)
+        {
             $sql = "DELETE FROM snowflakes ";
-        } else {
+        }
+        else
+        {
             $sql = "UPDATE snowflakes SET deleted=1 "; // if the user
-            if (isset($_SESSION['MM_Username'])) {
+            if (isset($_SESSION['MM_Username']))
+            {
                 $sql.=',edited_by="' . $_SESSION['MM_Username'] . '",edited="' . time() . '" ';
             }
         }
 
         $sql.="WHERE id=" . $this->m_id . ";";
 
-        if (strlen($this->m_image_dir) > 0 && $setDelete == false) {
+        if (strlen($this->m_image_dir) > 0 && $setDelete == false)
+        {
             $imagename = $this->m_image_dir . $this->m_image_name;
             return $conn->execute($sql) && sfUtils::Deletefile($imagename);
         }
@@ -221,14 +249,17 @@ class snowflakeStruct {
      * 
      * @return bool/int <b>id(identifier)</b> on success or <b>FALSE</b> otherwise
      */
-    public function getSnowflakeID($conn) {
+    public function getSnowflakeID($conn)
+    {
 
         /// Sanity Checks
-        if (!$this->isSfPopulated() || !$conn) {
+        if (!$this->isSfPopulated() || !$conn)
+        {
             return false;
         }
 
-        if (!sfUtils::isEmpty($this->m_id)) {
+        if (!sfUtils::isEmpty($this->m_id))
+        {
             return $this->m_id;
         }
 
@@ -244,11 +275,13 @@ class snowflakeStruct {
         $sql.=isset($this->m_edited_by) ? ' AND edited_by="' . $this->m_edited_by . '"' : " ";
         $sql.=";";
 
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         $this->m_id = $result[0]['id'];
@@ -260,7 +293,8 @@ class snowflakeStruct {
      * 
      * @return String formatted and labeled member values
      */
-    public function printsnowlakes() {
+    public function printsnowlakes()
+    {
         $str = 'uuid="' . $this->m_uuid . '"<br> ';
         $str.= 'title="' . $this->m_title . '"<br> ';
         $str.='body_text="' . $this->m_body_text . '"<br>';
@@ -278,26 +312,80 @@ class snowflakeStruct {
     }
 
     /**
+     * Convert all the members of {@link snowflakeStruct} to a structured html string
+     * 
+     * @return array The html value of {@link snowflakeStruct}
+     */
+    public function toHTML()
+    {
+        $retHtml = '
+            <!--Snowflake-->
+            <div class="Snowflake">
+            <div class="SnowflakeHead"><a href="#SHAREURL#?pageid=' . $this->m_id . '">' . $this->m_title . '</a> </div>
+
+            <!--SnowflakePanel-->
+            <div class="SnowflakePanel"> <span> View </span> 
+                <a href="#SHAREURL#?pageid=' . $this->m_id . '" title="View this post"> <img src="#SNOWFLAKESURL#resources/images/Icons/View.png" height="22" width="22" alt="Edit" /> </a>
+                <span>Share </span> 
+                <a href="http://twitter.com/home?status=' . htmlentities(rawurlencode($this->m_title)) . '%20#SHAREURL#?pageid=' . $this->m_id . '" title="Twitter" target="_blank"> <img src="#SNOWFLAKESURL#resources/images/Icons/Twitter.png" height="22" width="22" alt="Twitter" /> </a> 
+                <a href="http://www.facebook.com/sharer.php?u=#SHAREURL#?pageid=' . $this->m_id . '" title="Facebook" target="_blank"> <img src="#SNOWFLAKESURL#resources/images/Icons/Facebook.png" height="22" width="22" alt="Facebook" /> </a> 
+                <a href="https://plus.google.com/share?url=#SHAREURL#?pageid=' . $this->m_id . '&amp;title=' . htmlentities(rawurlencode($this->m_title)) . '" title="GooglePlus" target="_blank"> <img src="#SNOWFLAKESURL#resources/images/Icons/GooglePlus.png" height="22" width="22" alt="GooglePlus" /> </a> 
+                <a href="http://digg.com/submit?phase=2&amp;url=#SHAREURL#?pageid=' . $this->m_id . '&amp;title=' . htmlentities(rawurlencode($this->m_title)) . '" title="Digg" target="_blank"> <img src="#SNOWFLAKESURL#resources/images/Icons/Digg.png" height="22" width="22" alt="Digg" /> </a> 
+                <a href="http://stumbleupon.com/submit?url=#SHAREURL#?pageid=' . $this->m_id . '&amp;title=' . htmlentities(rawurlencode($this->m_title)) . '" title="stumbleupon" target="_blank"> <img src="#SNOWFLAKESURL#resources/images/Icons/stumbleupon.png" height="22" width="22" alt="stumbleupon" /> </a> 
+                <a href="http://del.icio.us/post?url=#SHAREURL#?pageid=' . $this->m_id . '&amp;title=' . htmlentities(rawurlencode($this->m_title)) . '" title="delicious" target="_blank"> <img src="#SNOWFLAKESURL#resources/images/Icons/delicious.png" height="22" width="22" alt="delicious" /> </a> 
+                <a class="flakeit" id="flakeit' . $this->m_id . '" title="flake it" data-type="snowflake"> <span>Flake it</span> <img src="#SNOWFLAKESURL#resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> </a> 
+            </div><!--End of SnowflakePanel-->
+
+            <div class="PageBreak"></div>
+            <div class="clear"></div>
+            <!--SnowflakeDescr-->
+            <div class="SnowflakeDescr">
+
+                <div class="SnowflakeImage">
+                    <a class="colorbox" href="' . $this->m_image_dir . $this->m_image_name . '"  onerror="this.href=\'#MISSINGIMG#\'"  title="' . $this->m_title . '" >
+                        <img src="' . $this->m_image_dir . $this->m_image_name . '" onerror="this.src=\'#MISSINGIMG#\'"  alt="' . $this->m_image_name . '" />
+                    </a>
+                </div>
+
+        ' . html_entity_decode($this->m_body_text) . ' 
+
+            </div><!--SnowflakeDescr Ends-->
+            <div class="clear"></div>
+            <div class="PageBreak"></div>
+            <div class="SnowflakeDate"> Posted |: ' . date(" F j, Y", $this->m_created) . '  | By - ' . $this->m_created_by . ' </div>
+            <div class="SnowflakeIt">
+                <img src="#SNOWFLAKESURL#resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> 
+                <span class="flakeitParam" id="flakecount' . $this->m_id . '"> ' . $this->m_flake_it . ' </span>
+            </div>
+            <div class="SharePost"> </div>
+        </div>
+        <!-- End of Snowflake -->
+        ';
+        return $retHtml;
+    }
+
+    /**
      * Convert all the members of {@link snowflakeStruct} to an array
      * 
      * @return array The array value of {@link snowflakeStruct}
      */
-    public function toArray() {
+    public function toArray()
+    {
         $retArray = array();
         $retArray['id'] = $this->m_id;
         $retArray['uuid'] = $this->m_uuid;
         $retArray['title'] = $this->m_title;
         $retArray['body_text'] = $this->m_body_text;
         $retArray['publish'] = $this->m_publish;
-        $retArray['image_name'] = $this->m_image_name;
+        $retArray['image_name'] = $this->m_image_dir . $this->m_image_name;
         $retArray['gallery'] = $this->m_gallery;
         $retArray['created'] = $this->m_created;
-        $retArray['created']['format'] = 'Y-m-d H:i:s O';
-        $retArray['created']['value'] = date('Y-m-d H:i:s O', $this->m_created);
+        $retArray['created_format'] = 'Y-m-d H:i:s O';
+        $retArray['created_value'] = date('Y-m-d H:i:s O', $this->m_created);
         $retArray['created_by'] = $this->m_created_by;
         $retArray['edited'] = $this->m_edited;
-        $retArray['edited']['format'] = 'Y-m-d H:i:s O';
-        $retArray['edited']['value'] = date('Y-m-d H:i:s O', $this->m_edited);
+        $retArray['edited_format'] = 'Y-m-d H:i:s O';
+        $retArray['edited_value'] = date('Y-m-d H:i:s O', $this->m_edited);
         $retArray['edited_by'] = $this->m_edited_by;
         $retArray['deleted'] = $this->m_deleted;
         $retArray['flake_it'] = $this->m_flake_it;
@@ -306,11 +394,23 @@ class snowflakeStruct {
     }
 
     /**
+     * Convert all the members of {@link snowflakeStruct} to a Json 
+     * 
+     * @return String The json value of {@link snowflakeStruct}
+     */
+    public function toJson()
+    {
+        $retArray = $this->toArray();
+        return json_encode($retArray);
+    }
+
+    /**
      * Convert all the members of {@link snowflakeStruct} to an xml format
      * 
      * @return string The xml string value of {@link snowflakeStruct}
      */
-    public function toXml() {
+    public function toXml()
+    {
         $retXml = new SimpleXMLElement("<snowflake id='$this->m_id' publish='$this->m_publish'></snowflake>");
         $retXml->addChild('uuid', $this->m_uuid);
         $retXml->addChild('title', $this->m_title);
@@ -318,9 +418,10 @@ class snowflakeStruct {
         $retXml->addChild('body_text', $BodyString);
         $imagename = $retXml->addChild('image_name');
         $imagename->addAttribute('rel', $this->m_image_name);
-        $imagename->addAttribute('href', "#UPLOADIMGURL#$this->m_image_name");
+        $imagename->addAttribute('href', "$this->m_image_dir$this->m_image_name");
 
-        if (!sfUtils::isEmpty($this->m_gallery)) {
+        if (!sfUtils::isEmpty($this->m_gallery))
+        {
             $Gallery = explode(",", $this->m_gallery);
             $Galleryitem = $retXml->addChild('gallery');
             $Galleryitem->addAttribute('id', $Gallery[0]);
@@ -341,12 +442,13 @@ class snowflakeStruct {
         $retXml->addChild('deleted', $this->m_deleted);
         $retXml->addChild('flake_it', $this->m_flake_it);
 
-        return $retXml->asXML();
+        return str_replace('<?xml version="1.0"?>', '', $retXml->asXML());
     }
 
 }
 
-class userStruct {
+class userStruct
+{
 
     var $m_id;
     var $m_uuid;
@@ -372,7 +474,8 @@ class userStruct {
      * @param int $access_level {@link userStruct} the user's access level
      * @param int $image_name {@link userStruct} the user's image name
      */
-    public function init($username, $password, $email, $access_level, $image_name = 'default.png') {
+    public function init($username, $password, $email, $access_level, $image_name = 'default.png')
+    {
         $this->m_username = $username;
         $this->m_password = md5($password);
         $this->m_email = $email;
@@ -387,7 +490,8 @@ class userStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function isPopulated() {
+    public function isPopulated()
+    {
         return isset($this->m_username) && isset($this->m_password) && isset($this->m_email) && isset($this->m_access_level) && isset($this->m_access_name);
     }
 
@@ -398,8 +502,10 @@ class userStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function populate($value) {
-        if (empty($value) && !is_array($value)) {
+    public function populate($value)
+    {
+        if (empty($value) && !is_array($value))
+        {
             return false;
         }
         $this->m_id = isset($value['id']) ? $value['id'] : "";
@@ -428,18 +534,22 @@ class userStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function getUserByUsername($conn, $username) {
-        if (!$conn || !$username) {
+    public function getUserByUsername($conn, $username)
+    {
+        if (!$conn || !$username)
+        {
             return false;
         }
 
         $sql = 'SELECT * FROM snowflakes_users WHERE username ="' . $username . '"';
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
 
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $this->populate($result[0]);
@@ -453,18 +563,22 @@ class userStruct {
      * 
      * @return bool <b>image name</b> on success or <b>FALSE</b> otherwise
      */
-    public static function getImageNameById($conn, $id) {
+    public static function getImageNameById($conn, $id)
+    {
 
-        if (!$conn || !$id || $id == -1) {
+        if (!$conn || !$id || $id == -1)
+        {
             return false;
         }
 
         $sql = "SELECT image_name FROM snowflakes_users WHERE id=$id";
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $result[0]['image_name'];
@@ -480,18 +594,22 @@ class userStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function getUserByid($conn, $id) {
-        if (!$conn || !$id || $id == -1) {
+    public function getUserByid($conn, $id)
+    {
+        if (!$conn || !$id || $id == -1)
+        {
             return false;
         }
 
         $sql = "SELECT * FROM snowflakes_users WHERE ";
         $sql.=strpos($id, '-') ? "uuid='$id';" : "id=$id;";
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $this->populate($result[0]);
@@ -506,8 +624,10 @@ class userStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function changeUserFlakeit($conn, $flakeit) {
-        if (!$this->isPopulated() || !$conn || !$flakeit) {
+    public function changeUserFlakeit($conn, $flakeit)
+    {
+        if (!$this->isPopulated() || !$conn || !$flakeit)
+        {
             return false;
         }
         $sql = "UPDATE snowflakes_users SET flake_it=$flakeit"
@@ -524,17 +644,21 @@ class userStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function getUserByResetLink($conn, $resetLink) {
-        if (!$conn || !$resetLink) {
+    public function getUserByResetLink($conn, $resetLink)
+    {
+        if (!$conn || !$resetLink)
+        {
             return false;
         }
 
         $sql = "SELECT * FROM snowflakes_users WHERE reset_link = \"$resetLink\";";
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $this->populate($result[0]);
@@ -549,15 +673,18 @@ class userStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function loginUser($conn, $username, $password) {
-        if (!$conn || !$username || !$password) {
+    public function loginUser($conn, $username, $password)
+    {
+        if (!$conn || !$username || !$password)
+        {
             return false;
         }
 
         $sql = "SELECT * FROM snowflakes_users WHERE username='" . $username . "' AND password='" . $password . "';";
         $conn->fetch($sql, false);
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $this->populate($result[0]);
@@ -571,9 +698,11 @@ class userStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function AddUser($conn) {
+    public function AddUser($conn)
+    {
 
-        if (!$this->isPopulated() || !$conn) {
+        if (!$this->isPopulated() || !$conn)
+        {
             return false;
         }
 
@@ -598,9 +727,11 @@ class userStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function UpdateUser($conn) {
+    public function UpdateUser($conn)
+    {
 
-        if (!$this->isPopulated() || !$conn || sfUtils::isEmpty($this->m_id)) {
+        if (!$this->isPopulated() || !$conn || sfUtils::isEmpty($this->m_id))
+        {
             return false;
         }
 
@@ -626,21 +757,27 @@ class userStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function deleteUser($conn, $setDelete = false) {
+    public function deleteUser($conn, $setDelete = false)
+    {
 
-        if (sfUtils::isEmpty($this->m_id) || !$conn) {
+        if (sfUtils::isEmpty($this->m_id) || !$conn)
+        {
             return false;
         }
 
-        if ($setDelete == false) {
+        if ($setDelete == false)
+        {
             $sql = "DELETE FROM snowflakes_users ";
-        } else {
+        }
+        else
+        {
             $sql = "UPDATE snowflakes_users SET deleted=1 ";
         }
 
         $sql.="WHERE id=" . $this->m_id . ";";
 
-        if (strlen($this->m_image_dir) > 0 && $setDelete == false) {
+        if (strlen($this->m_image_dir) > 0 && $setDelete == false)
+        {
             $imagename = $this->m_image_dir . $this->m_image_name;
             return $conn->execute($sql) && sfUtils::Deletefile($imagename);
         }
@@ -656,14 +793,17 @@ class userStruct {
      * 
      * @return bool/int <b>TRUE / >=1</b> on success or <b>FALSE</b> otherwise
      */
-    public function userExits($conn, $username) {
+    public function userExits($conn, $username)
+    {
 
-        if (!$username || !$conn) {
+        if (!$username || !$conn)
+        {
             return false;
         }
 
         $sql = "SELECT username FROM snowflakes_users WHERE username='" . $username . "';";
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
         return $conn->recordCount();
@@ -677,14 +817,17 @@ class userStruct {
      * 
      * @return bool/int <b>id(identifier)</b> on success or <b>FALSE</b> otherwise
      */
-    public function getUserID($conn) {
+    public function getUserID($conn)
+    {
 
         /// Sanity Checks
-        if (!$this->isPopulated() || !$conn) {
+        if (!$this->isPopulated() || !$conn)
+        {
             return false;
         }
 
-        if (!sfUtils::isEmpty($this->m_id)) {
+        if (!sfUtils::isEmpty($this->m_id))
+        {
             return $this->m_id;
         }
 
@@ -698,11 +841,13 @@ class userStruct {
         $sql.=isset($this->m_reset_link) ? ' AND reset_link="' . $this->m_reset_link . '"' : " ";
         $sql.=";";
 
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         $this->m_id = $result[0]['id'];
@@ -714,7 +859,8 @@ class userStruct {
      * 
      * @return String formatted and labeled member values</b>
      */
-    public function printuser() {
+    public function printuser()
+    {
         $str = "id = " . $this->m_id . "<br>";
         $str .= 'uuid="' . $this->m_uuid . '"<br> ';
         $str .= "username = " . $this->m_username . "<br>";
@@ -737,7 +883,8 @@ class userStruct {
      * 
      * @return array The array value of {@link userStruct}
      */
-    public function toArray() {
+    public function toArray()
+    {
         $retArray = array();
 
         $retArray["id"] = $this->m_id;
@@ -758,11 +905,23 @@ class userStruct {
     }
 
     /**
+     * Convert all the members of {@link userStruct} to a Json 
+     * 
+     * @return String The json value of {@link userStruct}
+     */
+    public function toJson()
+    {
+        $retArray = $this->toArray();
+        return json_encode($retArray);
+    }
+
+    /**
      * Convert all the members of {@link userStruct} to an xml format
      * 
      * @return String The xml string value of {@link userStruct}
      */
-    public function toXml() {
+    public function toXml()
+    {
         $retXml = new SimpleXMLElement("<user id='$this->m_id'></user>");
         $retXml->addChild('uuid', $this->m_uuid);
         $retXml->addChild("username", $this->m_username);
@@ -773,19 +932,20 @@ class userStruct {
         $retXml->addChild('reset_link', $this->m_reset_link);
         $imagename = $retXml->addChild('image_name');
         $imagename->addAttribute('rel', $this->m_image_name);
-        $imagename->addAttribute('href', "#UPLOADIMGURL#$this->m_image_name");
+        $imagename->addAttribute('href', "#SFGALLERYURL#$this->m_image_name");
         $retXml->addChild('deleted', $this->m_deleted);
         $retXml->addChild('flake_it', $this->m_flake_it);
         $retXml->addChild('logged_in', $this->m_logged_in);
         $retXml->addChild('last_login', $this->m_last_login);
 
 
-        return $retXml->asXML();
+        return str_replace('<?xml version="1.0"?>', '', $retXml->asXML());
     }
 
 }
 
-class galleryStruct {
+class galleryStruct
+{
 
     var $m_id;
     var $m_uuid;
@@ -809,7 +969,8 @@ class galleryStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function isSfGPopulated() {
+    public function isSfGPopulated()
+    {
         return isset($this->m_title) && isset($this->m_thumb_name) && strlen($this->m_thumb_name) > 0 && isset($this->m_image_name) && strlen($this->m_image_name) > 0 && (isset($this->m_created_by) || isset($this->m_edited_by)) && (isset($this->m_created) || isset($this->m_edited));
     }
 
@@ -820,8 +981,10 @@ class galleryStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function populate($array) {
-        if (empty($array) && !is_array($array)) {
+    public function populate($array)
+    {
+        if (empty($array) && !is_array($array))
+        {
             return false;
         }
 
@@ -850,9 +1013,11 @@ class galleryStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function addSfGallery($conn) {
+    public function addSfGallery($conn)
+    {
 
-        if (!$this->isSfGPopulated() || !$conn) {
+        if (!$this->isSfGPopulated() || !$conn)
+        {
             return false;
         }
 
@@ -878,9 +1043,11 @@ class galleryStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function updateGallery($conn) {
+    public function updateGallery($conn)
+    {
 
-        if (!$this->isSfGPopulated() || !$conn || sfUtils::isEmpty($this->m_id)) {
+        if (!$this->isSfGPopulated() || !$conn || sfUtils::isEmpty($this->m_id))
+        {
             return false;
         }
 
@@ -906,17 +1073,23 @@ class galleryStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function deleteGallery($conn, $setDelete = false) {
+    public function deleteGallery($conn, $setDelete = false)
+    {
 
-        if (sfUtils::isEmpty($this->m_id) || !$conn) {
+        if (sfUtils::isEmpty($this->m_id) || !$conn)
+        {
             return false;
         }
 
-        if ($setDelete == false) {
+        if ($setDelete == false)
+        {
             $sql = "DELETE FROM snowflakes_gallery ";
-        } else {
+        }
+        else
+        {
             $sql = "UPDATE snowflakes_gallery SET deleted=1 ";
-            if (isset($_SESSION['MM_Username'])) {
+            if (isset($_SESSION['MM_Username']))
+            {
                 $sql.=',edited_by="' . $_SESSION['MM_Username'] . '",edited="' . time() . '" ';
             }
         }
@@ -935,18 +1108,22 @@ class galleryStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function getGalleryByid($conn, $id) {
-        if (!$conn || !$id || $id == -1) {
+    public function getGalleryByid($conn, $id)
+    {
+        if (!$conn || !$id || $id == -1)
+        {
             return false;
         }
 
         $sql = "SELECT * FROM snowflakes_gallery WHERE ";
         $sql.=strpos($id, '-') ? "uuid='$id';" : "id=$id;";
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $this->populate($result[0]);
@@ -960,12 +1137,15 @@ class galleryStruct {
      * 
      * @return bool/int <b>id(identifier)</b> on success or <b>FALSE</b> otherwise
      */
-    public function getGalleryID($conn) {
+    public function getGalleryID($conn)
+    {
 
-        if (!$this->isSfGPopulated() || !$conn) {
+        if (!$this->isSfGPopulated() || !$conn)
+        {
             return false;
         }
-        if (!sfUtils::isEmpty($this->m_id)) {
+        if (!sfUtils::isEmpty($this->m_id))
+        {
             return $this->m_id;
         }
         $sql = 'SELECT id FROM snowflakes_gallery WHERE ' .
@@ -980,11 +1160,13 @@ class galleryStruct {
         $sql.=isset($this->m_edited_by) ? 'AND edited_by="' . $this->m_edited_by . '"' : " ";
         $sql.=";";
 
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         $this->m_id = $result[0]['id'];
@@ -996,7 +1178,8 @@ class galleryStruct {
      * 
      * @return String formatted and labeled member values</b>
      */
-    public function printGallery() {
+    public function printGallery()
+    {
         $str = 'uuid="' . $this->m_uuid . '"<br> ';
         $str.= 'title="' . $this->m_title . '"<br> ';
         $str.='thumb_name="' . $this->m_thumb_name . '"<br>';
@@ -1014,11 +1197,53 @@ class galleryStruct {
     }
 
     /**
+     * Convert all the members of {@link galleryStruct} to a structured html string
+     * 
+     * @return array The html value of {@link galleryStruct}
+     */
+    public function toHTML()
+    {
+        // Get all the image name from database
+        $DBImageFiles = explode(",", $this->m_image_name);
+        $DBImageThumbFiles = explode(",", $this->m_thumb_name);
+        $DBImageCaption = explode(",", $this->m_image_caption);
+
+        // Loop through the array and add directory prefix to each item in array
+        foreach ($DBImageFiles as &$value)
+        {
+            $value = '#SFGALLERYIMGURL#' . $value;
+        }
+
+        // Loop through the array and add directory prefix to each item in array	
+        foreach ($DBImageThumbFiles as &$value)
+        {
+            $value = '#SFGALLERYTHUMBURL#' . $value;
+        }
+
+        $retHtml = '';
+        //DataList
+        foreach ($DBImageThumbFiles as $counter => $imageThumbLink)
+        {
+            $retHtml .= '
+                    <li data-pile="' . htmlentities($this->m_title . '<br/><div class="owner"> By -' . $this->m_created_by . '</div>') . '"> 
+                        <a class="colorbox" href="' . $DBImageFiles[$counter] . '" onerror="this.href=\'' . $UploadImgUrl . 'missing_default.png\'"  title="' . htmlentities($DBImageCaption[$counter]) . '"> 
+                            <span class="tp-info"><span>' . htmlentities($DBImageCaption[$counter]) . '</span></span> 
+                            <img src="' . $imageThumbLink . '" onerror="this.src=\'#MISSINGIMG#\'" alt="' . htmlentities($DBImageCaption[$counter]) . '"> 
+                        </a>
+                    </li>';
+        }
+
+
+        return $retHtml;
+    }
+
+    /**
      * Convert all the members of {@link galleryStruct} to an array
      * 
      * @return array The array value of {@link galleryStruct}
      */
-    public function toArray() {
+    public function toArray()
+    {
         $retArray = array();
 
         $retArray['id'] = $this->m_id;
@@ -1026,15 +1251,18 @@ class galleryStruct {
         $retArray['title'] . $this->m_title;
         $retArray['thumb_name'] = $this->m_thumb_name;
         $retArray['image_name'] = $this->m_image_name;
+        $retArray['imageurl_Prefix'] = '#SFGALLERYTHUMBURL#';
+        $retArray['thumburl_Prefix'] = '#SFGALLERYTHUMBURL#';
+
         $retArray['image_caption'] = $this->m_image_caption;
         $retArray['publish'] = $this->m_publish;
         $retArray['created'] = $this->m_created;
-        $retArray['created']['format'] = 'Y-m-d H:i:s O';
-        $retArray['created']['value'] = date('Y-m-d H:i:s O', $this->m_created);
+        $retArray['created_format'] = 'Y-m-d H:i:s O';
+        $retArray['created_value'] = date('Y-m-d H:i:s O', $this->m_created);
         $retArray['created_by'] = $this->m_created_by;
         $retArray['edited'] = $this->m_edited;
-        $retArray['edited']['format'] = 'Y-m-d H:i:s O';
-        $retArray['edited']['value'] = date('Y-m-d H:i:s O', $this->m_edited);
+        $retArray['edited_format'] = 'Y-m-d H:i:s O';
+        $retArray['edited_value'] = date('Y-m-d H:i:s O', $this->m_edited);
         $retArray['edited_by'] = $this->m_edited_by;
         $retArray['deleted'] = $this->m_deleted;
         $retArray['flake_it'] = $this->m_flake_it;
@@ -1043,20 +1271,32 @@ class galleryStruct {
     }
 
     /**
+     * Convert all the members of {@link galleryStruct} to a Json 
+     * 
+     * @return String The json value of {@link galleryStruct}
+     */
+    public function toJson()
+    {
+        $retArray = $this->toArray();
+        return json_encode($retArray);
+    }
+
+    /**
      * Convert all the members of {@link galleryStruct} to an xml format
      * 
      * @return String The xml string value of {@link galleryStruct}
      */
-    public function toXml() {
+    public function toXml()
+    {
 
         $retXml = new SimpleXMLElement("<gallery id='$this->m_id' publish='$this->m_publish'></gallery>");
         $retXml->addChild('uuid', $this->m_uuid);
         $retXml->addChild('title', $this->m_title);
         $thumb = $retXml->addChild('thumb_name', $this->m_thumb_name);
-        $thumb->addAttribute('imageurlPrefix', '#GALLERYIMGURL#');
+        $thumb->addAttribute('imageurlPrefix', '#SFGALLERYIMGURL#');
 
         $img = $retXml->addChild('image_name', $this->m_image_name);
-        $img->addAttribute('imageurlPrefix', '#GALLERYIMGURL#');
+        $img->addAttribute('thumburlPrefix', '#SFGALLERYTHUMBURL#');
 
         $retXml->addChild('image_caption', $this->m_image_caption);
 
@@ -1074,12 +1314,13 @@ class galleryStruct {
         $retXml->addChild('deleted', $this->m_deleted);
         $retXml->addChild('flake_it', $this->m_flake_it);
 
-        return $retXml->asXML();
+        return str_replace('<?xml version="1.0"?>', '', $retXml->asXML());
     }
 
 }
 
-class eventStruct {
+class eventStruct
+{
 
     var $m_id;
     var $m_uuid;
@@ -1106,7 +1347,8 @@ class eventStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function isPopulated() {
+    public function isPopulated()
+    {
         return isset($this->m_title) && isset($this->m_body_text) && isset($this->m_event_time) && isset($this->m_event_date) && (isset($this->m_created_by) || isset($this->m_edited_by)) && (isset($this->m_created) || isset($this->m_edited));
     }
 
@@ -1117,8 +1359,10 @@ class eventStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function populate($array) {
-        if (empty($array)) {
+    public function populate($array)
+    {
+        if (empty($array))
+        {
             return false;
         }
         $this->m_id = isset($array['id']) ? $array['id'] : "";
@@ -1152,18 +1396,22 @@ class eventStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function getEventByid($conn, $id) {
-        if (!$conn || !$id || $id == -1) {
+    public function getEventByid($conn, $id)
+    {
+        if (!$conn || !$id || $id == -1)
+        {
             return false;
         }
 
         $sql = "SELECT * FROM snowflakes_events WHERE ";
         $sql.=strpos($id, '-') ? "uuid='$id';" : "id=$id;";
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $this->populate($result[0]);
@@ -1177,18 +1425,22 @@ class eventStruct {
      * 
      * @return bool <b>image name</b> on success or <b>FALSE</b> otherwise
      */
-    public static function getImageNameById($conn, $id) {
+    public static function getImageNameById($conn, $id)
+    {
 
-        if (!$conn || !$id || $id == -1) {
+        if (!$conn || !$id || $id == -1)
+        {
             return false;
         }
 
         $sql = "SELECT image_name FROM snowflakes_events WHERE id=$id;";
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $result[0]['image_name'];
@@ -1202,9 +1454,11 @@ class eventStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function AddEvent($conn) {
+    public function AddEvent($conn)
+    {
 
-        if (!$this->isPopulated() || !$conn) {
+        if (!$this->isPopulated() || !$conn)
+        {
             return false;
         }
 
@@ -1235,9 +1489,11 @@ class eventStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function UpdateEvent($conn) {
+    public function UpdateEvent($conn)
+    {
 
-        if (!$this->isPopulated() || !$conn || sfUtils::isEmpty($this->m_id)) {
+        if (!$this->isPopulated() || !$conn || sfUtils::isEmpty($this->m_id))
+        {
             return false;
         }
 
@@ -1267,24 +1523,31 @@ class eventStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function deleteEvent($conn, $setDelete = false) {
+    public function deleteEvent($conn, $setDelete = false)
+    {
 
-        if (sfUtils::isEmpty($this->m_id) || !$conn) {
+        if (sfUtils::isEmpty($this->m_id) || !$conn)
+        {
             return false;
         }
 
-        if ($setDelete == false) {
+        if ($setDelete == false)
+        {
             $sql = "DELETE FROM snowflakes_events ";
-        } else {
+        }
+        else
+        {
             $sql = "UPDATE snowflakes_events SET deleted=1";
-            if (isset($_SESSION['MM_Username'])) {
+            if (isset($_SESSION['MM_Username']))
+            {
                 $sql.=',edited_by="' . $_SESSION['MM_Username'] . '",edited="' . time() . '" ';
             }
         }
 
         $sql.="WHERE id=" . $this->m_id . ";";
 
-        if (strlen($this->m_image_dir) > 0 && $setDelete == false) {
+        if (strlen($this->m_image_dir) > 0 && $setDelete == false)
+        {
             $imagename = $this->m_image_dir . $this->m_image_name;
             return $conn->execute($sql) && sfUtils::Deletefile($imagename);
         }
@@ -1300,12 +1563,15 @@ class eventStruct {
      * 
      * @return bool/int <b>id(identifier)</b> on success or <b>FALSE</b> otherwise
      */
-    public function getEventID($conn) {
+    public function getEventID($conn)
+    {
         // Sanity check
-        if (!$this->isPopulated() || !$conn) {
+        if (!$this->isPopulated() || !$conn)
+        {
             return false;
         }
-        if (!sfUtils::isEmpty($this->m_id)) {
+        if (!sfUtils::isEmpty($this->m_id))
+        {
             return $this->m_id;
         }
 
@@ -1322,11 +1588,13 @@ class eventStruct {
         $sql.=isset($this->m_edited_by) ? 'AND edited_by="' . $this->m_edited_by . '"' : " ";
         $sql.=";";
 
-        if (!$conn->fetch($sql)) {
+        if (!$conn->fetch($sql))
+        {
             return false;
         }
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         $this->m_id = $result[0]['id'];
@@ -1338,7 +1606,8 @@ class eventStruct {
      * 
      * @return String formatted and labeled member values</b>
      */
-    public function printEvents() {
+    public function printEvents()
+    {
         $str = 'uuid="' . $this->m_uuid . '"<br> ';
         $str.= 'title="' . $this->m_title . '"<br> ';
         $str.='body_text="' . $this->m_body_text . '"<br>';
@@ -1365,7 +1634,8 @@ class eventStruct {
      * 
      * @return array The array value of {@link eventStruct}
      */
-    public function toArray() {
+    public function toArray()
+    {
         $retArray = array();
 
         $retArray["id"] = $this->m_id;
@@ -1375,22 +1645,22 @@ class eventStruct {
         $retArray['publish'] = $this->m_publish;
         $retArray['image_name'] = $this->m_image_name;
         $retArray['event_time'] = $this->m_event_time;
-        $retArray['event_time']['format'] = 'H:i:s O';
-        $retArray['event_time']['value'] = date('H:i:s O', $this->m_event_time);
+        $retArray['event_time_format'] = 'H:i:s O';
+        $retArray['event_time_value'] = date('H:i:s O', $this->m_event_time);
         $retArray['event_date'] = $this->m_event_date;
         $retArray['end_time'] = $this->m_end_time;
-        $retArray['end_time']['format'] = 'H:i:s O';
-        $retArray['end_time']['value'] = date('H:i:s O', $this->m_end_time);
+        $retArray['end_time_format'] = 'H:i:s O';
+        $retArray['end_time_value'] = date('H:i:s O', $this->m_end_time);
         $retArray['end_date'] = $this->m_end_date;
         $retArray['location'] = $this->m_location;
         $retArray['lat_long'] = $this->m_lat_long;
         $retArray['created'] = $this->m_created;
-        $retArray['created']['format'] = 'Y-m-d H:i:s O';
-        $retArray['created']['value'] = date('Y-m-d H:i:s O', $this->m_created);
+        $retArray['created_format'] = 'Y-m-d H:i:s O';
+        $retArray['created_value'] = date('Y-m-d H:i:s O', $this->m_created);
         $retArray['created_by'] = $this->m_created_by;
         $retArray['edited'] = $this->m_edited;
-        $retArray['edited']['format'] = 'Y-m-d H:i:s O';
-        $retArray['edited']['value'] = date('Y-m-d H:i:s O', $this->m_edited);
+        $retArray['edited_format'] = 'Y-m-d H:i:s O';
+        $retArray['edited_value'] = date('Y-m-d H:i:s O', $this->m_edited);
         $retArray['edited_by'] = $this->m_edited_by;
         $retArray['deleted'] = $this->m_deleted;
         $retArray['flake_it'] = $this->m_flake_it;
@@ -1399,11 +1669,86 @@ class eventStruct {
     }
 
     /**
+     * Convert all the members of {@link eventStruct} to a Json 
+     * 
+     * @return String The json value of {@link eventStruct}
+     */
+    public function toJson()
+    {
+        $retArray = $this->toArray();
+        return json_encode($retArray);
+    }
+
+    /**
+     * Convert all the members of {@link eventStruct} to a structured html string
+     * 
+     * @return array The html value of {@link eventStruct}
+     */
+    public function toHTML()
+    {
+        $eventdate = new DateTime($this->m_event_date);
+        $enddate = new DateTime($this->m_end_date);
+
+        $retHtml = '
+        <!--eventWrapper-->
+        <div class="eventWrapper fl"> 
+            <!--SnowflakePanel-->
+            <div class="SnowflakePanel"> 
+                <span>View </span>
+                <a href="#SHAREURL#?Eventid=' . $this->m_id . '" title="View this Event"> <img src="#SNOWFLAKESURL#resources/images/Icons/View.png" height="22" width="22" alt="Edit" /> </a>  
+                <span>Share </span> 
+                <a href="http://twitter.com/home?status=' . htmlentities(rawurlencode($this->m_title)) . '%20#SHAREURL#?Eventid=' . $this->m_id . '" title="Twitter" target="_blank"> <img src="#SNOWFLAKESURL#resources/images/Icons/Twitter.png" height="22" width="22" alt="Twitter" /> </a> 
+                <a href="http://www.facebook.com/sharer.php?u=#SHAREURL#?Eventid=' . $this->m_id . '" title="Facebook" target="_blank"> <img src="#SNOWFLAKESURL#resources/images/Icons/Facebook.png" height="22" width="22" alt="Facebook" /> </a> 
+                <a href="https://plus.google.com/share?url=#SHAREURL#?Eventid=' . $this->m_id . '&amp;title=' . htmlentities(rawurlencode($this->m_title)) . '" title="GooglePlus" target="_blank"> <img src="#SNOWFLAKESURL#resources/images/Icons/GooglePlus.png" height="22" width="22" alt="GooglePlus" /> </a> 
+                <a href="http://digg.com/submit?phase=2&amp;url=#SHAREURL#?Eventid=' . $this->m_id . '&amp;title=' . htmlentities(rawurlencode($this->m_title)) . '" title="Digg" target="_blank"> <img src="#SNOWFLAKESURL#resources/images/Icons/Digg.png" height="22" width="22" alt="Digg" /> </a> 
+                <a href="http://stumbleupon.com/submit?url=#SHAREURL#?Eventid=' . $this->m_id . '&amp;title=' . htmlentities(rawurlencode($this->m_title)) . '" title="stumbleupon" target="_blank"> <img src="#SNOWFLAKESURL#resources/images/Icons/stumbleupon.png" height="22" width="22" alt="stumbleupon" /> </a> 
+                <a href="http://del.icio.us/post?url=#SHAREURL#?Eventid=' . $this->m_id . '&amp;title=' . htmlentities(rawurlencode($this->m_title)) . '" title="delicious" target="_blank"> <img src="#SNOWFLAKESURL#resources/images/Icons/delicious.png" height="22" width="22" alt="delicious" /> </a>
+                <a class="flakeit" id="flakeit' . $this->m_id . '" title="flake it" data-type="event"><span>Flake it</span><img src="#SNOWFLAKESURL#resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> </a> 
+            </div>
+            <!--End of SnowflakePanel-->
+
+            <div class="Break2"></div>
+            <!--SFEvent-->
+            <div class="SFEvent">
+                <div class="SFEvent-date">
+
+                    <ul class="startDate">
+                        <li class="month"> ' . $eventdate->format(" M") . '</li>
+                        <li class="day">' . $eventdate->format("d") . '</li>
+                        <li class="year">' . $eventdate->format(" Y") . '</li>
+                        <li class="time">' . sfUtils::toAmPmTime($this->m_event_time) . '</li>
+                    </ul>
+                    <ul class="eventTitle">
+                        <li><a href="#SHAREURL#?Eventid=' . $this->m_id . '" rel="bookmark" title="' . $this->m_title . '">' . $this->m_title . '</a></li>
+                        <li><a href="#SHAREURL#?Eventid=' . $this->m_id . '" rel="bookmark" title="location">' . $this->m_location . '</a></li>
+                    </ul>
+                    <ul class="endDate">
+                        <li class="month"> ' . $enddate->format(" M") . '</li>
+                        <li class="day">' . $enddate->format("d") . '</li>
+                        <li class="year">' . $enddate->format(" Y") . '</li>
+                        <li class="time">' . sfUtils::toAmPmTime($this->m_end_time) . '</li>
+                    </ul>
+                </div>
+            </div>
+            <!--SFEvent Ends--> 
+            <div class="clear"></div>
+            <div class="SnowflakeDate"> Posted |: ' . date(" F j, Y", $this->m_created) . '  | By - ' . $this->m_created_by . ' </div>
+            <div class="SnowflakeIt"> 
+                <img src="#SNOWFLAKESURL#resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> 
+                <span class="flakeitParam" id="flakecount' . $this->m_id . '"> ' . $this->m_flake_it . ' </span>
+            </div>
+        </div>
+        <!--eventWrapper Ends-->';
+        return $retHtml;
+    }
+
+    /**
      * Convert all the members of {@link eventStruct} to an xml format
      * 
      * @return String The xml string value of {@link eventStruct}
      */
-    public function toXml() {
+    public function toXml()
+    {
 
         $retXml = new SimpleXMLElement("<event id='$this->m_id' publish='$this->m_publish'></event>");
         $retXml->addChild('uuid', $this->m_uuid);
@@ -1414,7 +1759,7 @@ class eventStruct {
 
         $imagename = $retXml->addChild('image_name');
         $imagename->addAttribute('rel', $this->m_image_name);
-        $imagename->addAttribute('href', "#UPLOADIMGURL#$this->m_image_name");
+        $imagename->addAttribute('href', "#SFGALLERYIMGURL#$this->m_image_name");
 
         $retXml->addChild('event_time', $this->m_event_time);
         $retXml->addChild('event_date', $this->m_event_date);
@@ -1437,12 +1782,13 @@ class eventStruct {
         $retXml->addChild('deleted', $this->m_deleted);
         $retXml->addChild('flake_it', $this->m_flake_it);
 
-        return $retXml->asXML();
+        return str_replace('<?xml version="1.0"?>', '', $retXml->asXML());
     }
 
 }
 
-class sfLogError {
+class sfLogError
+{
 
     /**
      * Send a bug message to the author of the API so that bugs fixes could be
@@ -1452,10 +1798,12 @@ class sfLogError {
      *
      * @return bool <b>TRUE</b> if the mail was successfully accepted for delivery, <b>FALSE</b> otherwise.
      */
-    public static function SendBugMessage($bugMessage) {
+    public static function SendBugMessage($bugMessage)
+    {
 
         //sanity Check
-        if (!isset($bugMessage)) {
+        if (!isset($bugMessage))
+        {
             return false;
         }
 
@@ -1479,9 +1827,11 @@ class sfLogError {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function sfLogEntry($message, $user = "Snowflakes", $show = false, $dataDir = "../data") {
+    public static function sfLogEntry($message, $user = "Snowflakes", $show = false, $dataDir = "../data")
+    {
 
-        if (!isset($message)) {
+        if (!isset($message))
+        {
             return false;
         }
 
@@ -1490,13 +1840,15 @@ class sfLogError {
         $datetimelog = date("Y-m-d H:i:s");
         $datelog = date("Y-m-d");
         $logEntryValue = "[ $datetimelog ] ¦=> [$username] ¦=> $message \n";
-        if ($show === true) {
+        if ($show === true)
+        {
             echo $logEntryValue;
         }
 
         $logFilename = "$dataDir/$username-LOG-$datelog.log";
         $logResource = fopen($logFilename, "a+");
-        if ($logResource === false) {
+        if ($logResource === false)
+        {
             return $logResource;
         }
 
@@ -1513,8 +1865,10 @@ class sfLogError {
      * @param String $errline the line in the filename where the error occured.
      *
      */
-    public static function sfErrorHandler($errno, $errstr, $errfile, $errline) {
-        switch ($errno) {
+    public static function sfErrorHandler($errno, $errstr, $errfile, $errline)
+    {
+        switch ($errno)
+        {
             case E_USER_ERROR:
                 $errorMessage = "Please report the following error to Cyril Inc, there is either a";
                 $errorMessage .= "problem with your snowflakes or you have discovered an error ";
@@ -1535,21 +1889,35 @@ class sfLogError {
  * Miscellaneous snowflakes utility  methods for carrying out operations to 
  * files and data in snowflakes API .
  */
-final class sfUtils {
+final class sfUtils
+{
 
-    private function __construct() {
+    const XML = 'application/xml';
+    const JSON = 'application/json';
+    const HTML = 'text/html';
+
+    static public $formats = array(
+        'xml' => sfUtils::XML,
+        'html' => sfUtils::HTML,
+        'json' => sfUtils::JSON,
+    );
+
+    private function __construct()
+    {
         $this->init();
     }
 
     /**
      * Snowflakes utilities configuration initialisation.
      */
-    public function init() {
+    public function init()
+    {
         // error reporting - all errors for development (ensure you have display_errors = On in your php.ini file)
         error_reporting(E_ALL | E_STRICT);
         set_exception_handler(array($this, 'handleException'));
         // session
-        if (!isset($_SESSION)) {
+        if (!isset($_SESSION))
+        {
             session_start();
         }
     }
@@ -1559,12 +1927,16 @@ final class sfUtils {
      * 
      * @param Exception $ex The exception to be handled {@link Exception}
      */
-    public function handleException(Exception $ex) {
+    public function handleException(Exception $ex)
+    {
         $extra = array('message' => $ex->getMessage());
-        if ($ex instanceof NotFoundException) {
+        if ($ex instanceof NotFoundException)
+        {
             header('HTTP/1.0 404 Not Found');
             $this->runPage('404', $extra);
-        } else {
+        }
+        else
+        {
             // TODO log exception
             header('HTTP/1.1 500 Internal Server Error');
             $this->runPage('500', $extra);
@@ -1579,8 +1951,10 @@ final class sfUtils {
      * 
      * @return String created from page and parameters.
      */
-    public static function createLink($page, array $params = array()) {
-        if (!$page) {
+    public static function createLink($page, array $params = array())
+    {
+        if (!$page)
+        {
             return false;
         }
         return $page . http_build_query($params);
@@ -1593,8 +1967,10 @@ final class sfUtils {
      * 
      * @return String formatted date
      */
-    public static function formatDate(DateTime $date = null) {
-        if ($date === null) {
+    public static function formatDate(DateTime $date = null)
+    {
+        if ($date === null)
+        {
             return '';
         }
         return $date->format('d/m/Y');
@@ -1607,8 +1983,10 @@ final class sfUtils {
      * 
      * @return String formatted date and time
      */
-    public static function formatDateTime(DateTime $date = null) {
-        if ($date === null) {
+    public static function formatDateTime(DateTime $date = null)
+    {
+        if ($date === null)
+        {
             return '';
         }
         return $date->format('d/m/Y H:i');
@@ -1620,7 +1998,8 @@ final class sfUtils {
      * @param type $page target page
      * @param array $params page parameters
      */
-    public static function redirect($page, array $params = array()) {
+    public static function redirect($page, array $params = array())
+    {
         header('Location: ' . self::createLink($page, $params));
         die();
     }
@@ -1631,8 +2010,10 @@ final class sfUtils {
      * @return String parameter value
      * @throws NotFoundException if the param is not found in the URL
      */
-    public static function getUrlParam($name) {
-        if (!array_key_exists($name, $_GET)) {
+    public static function getUrlParam($name)
+    {
+        if (!array_key_exists($name, $_GET))
+        {
             throw new NotFoundException('URL parameter "' . $name . '" not found.');
         }
         return $_GET[$name];
@@ -1645,7 +2026,8 @@ final class sfUtils {
      * 
      * @return String capitalized string
      */
-    public static function capitalize($string) {
+    public static function capitalize($string)
+    {
         return ucfirst(mb_strtolower($string));
     }
 
@@ -1656,8 +2038,10 @@ final class sfUtils {
      * 
      * @return String escaped string
      */
-    public static function escape($string) {
-        if (defined('ENT_SUBSTITUTE')) {
+    public static function escape($string)
+    {
+        if (defined('ENT_SUBSTITUTE'))
+        {
             return htmlspecialchars($string, ENT_QUOTES | ENT_SUBSTITUTE);
         }
 
@@ -1671,7 +2055,8 @@ final class sfUtils {
      * 
      * @return String escaped string
      */
-    public static function sfescape($string) {
+    public static function sfescape($string)
+    {
         $retValue = str_replace("'", "\'", $string);
         $retValue1 = str_replace("\n", "\\n", $retValue);
         $retValue2 = str_replace("\r", "\\r", $retValue1);
@@ -1685,19 +2070,24 @@ final class sfUtils {
      * 
      * @return String current page URL 
      */
-    public static function curPageURL() {
+    public static function curPageURL()
+    {
         $pageURL = "http";
         $https = filter_input(INPUT_SERVER, 'HTTPS');
         $server_port = filter_input(INPUT_SERVER, 'SERVER_PORT');
         $server_name = filter_input(INPUT_SERVER, 'SERVER_NAME');
         $request_uri = filter_input(INPUT_SERVER, 'REQUEST_URI');
-        if ($https == "on") {
+        if ($https == "on")
+        {
             $pageURL .= "s";
         }
         $pageURL .= "://";
-        if ($server_port != "80") {
+        if ($server_port != "80")
+        {
             $pageURL .= $server_name . ":" . $server_port . $request_uri;
-        } else {
+        }
+        else
+        {
             $pageURL .= $server_name . $request_uri;
         }
         return $pageURL;
@@ -1710,7 +2100,8 @@ final class sfUtils {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function isEmpty($data) {
+    public static function isEmpty($data)
+    {
         return (trim($data) === "" || $data === null);
     }
 
@@ -1722,17 +2113,21 @@ final class sfUtils {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function CreateDirectory($Dir, $permissions) {
-        if (self::isEmpty($Dir)) {
+    public static function CreateDirectory($Dir, $permissions)
+    {
+        if (self::isEmpty($Dir))
+        {
             return false;
         }
 
         //Create  a directory with the right permissions if it doesn't exist
-        if (!is_dir($Dir)) {
+        if (!is_dir($Dir))
+        {
             mkdir($Dir);
         }
 
-        if (!self::isEmpty($permissions)) {
+        if (!self::isEmpty($permissions))
+        {
             chmod($Dir, $permissions);
         }
 
@@ -1746,18 +2141,30 @@ final class sfUtils {
      * 
      * @return String the value of the byte in GB,MB,KB.
      */
-    public static function formatSizeUnits($bytes) {
-        if ($bytes >= 1073741824) {
+    public static function formatSizeUnits($bytes)
+    {
+        if ($bytes >= 1073741824)
+        {
             $bytes = number_format($bytes / 1073741824, 2) . ' GB';
-        } elseif ($bytes >= 1048576) {
+        }
+        elseif ($bytes >= 1048576)
+        {
             $bytes = number_format($bytes / 1048576, 2) . ' MB';
-        } elseif ($bytes >= 1024) {
+        }
+        elseif ($bytes >= 1024)
+        {
             $bytes = number_format($bytes / 1024, 2) . ' KB';
-        } elseif ($bytes > 1) {
+        }
+        elseif ($bytes > 1)
+        {
             $bytes = $bytes . ' bytes';
-        } elseif ($bytes == 1) {
+        }
+        elseif ($bytes == 1)
+        {
             $bytes = $bytes . ' byte';
-        } else {
+        }
+        else
+        {
             $bytes = '0 bytes';
         }
 
@@ -1771,17 +2178,21 @@ final class sfUtils {
      * 
      * @return int the value of the GB,MB,KB... in bytes.
      */
-    public static function toByteSize($bytevalue) {
+    public static function toByteSize($bytevalue)
+    {
         $aUnits = array('B' => 0, 'KB' => 1, 'MB' => 2, 'GB' => 3, 'TB' => 4, 'PB' => 5, 'EB' => 6, 'ZB' => 7, 'YB' => 8);
         $sUnit = strtoupper(trim(substr($bytevalue, -2)));
-        if (intval($sUnit) !== 0) {
+        if (intval($sUnit) !== 0)
+        {
             $sUnit = 'B';
         }
-        if (!in_array($sUnit, array_keys($aUnits))) {
+        if (!in_array($sUnit, array_keys($aUnits)))
+        {
             return false;
         }
         $iUnits = trim(substr($bytevalue, 0, strlen($bytevalue) - 2));
-        if (!intval($iUnits) == $iUnits) {
+        if (!intval($iUnits) == $iUnits)
+        {
             return false;
         }
         return $iUnits * pow(1024, $aUnits[$sUnit]);
@@ -1795,8 +2206,10 @@ final class sfUtils {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function removeElement(&$array, $key) { // pass array by reference
-        if (!$array || !$key) {
+    public static function removeElement(&$array, $key)
+    { // pass array by reference
+        if (!$array || !$key)
+        {
             return false;
         }
 
@@ -1811,18 +2224,23 @@ final class sfUtils {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function Deletefile($file) {
-        if (strlen($file) == 0) {
+    public static function Deletefile($file)
+    {
+        if (strlen($file) == 0)
+        {
             return false;
         }
 
-        if (!file_exists($file) && is_dir($file)) {
+        if (!file_exists($file) && is_dir($file))
+        {
             return false;
         }
 
         $exceptionFiles = array("default.png", "Snowflakes.png", "Snowflakes1.png", "Snowflakes2.png", "Snowflakes3.png", "missing_default.png");
-        foreach ($exceptionFiles as $value) {
-            if (strpos($file, $value) !== false) {
+        foreach ($exceptionFiles as $value)
+        {
+            if (strpos($file, $value) !== false)
+            {
                 return true;
             }
         }
@@ -1836,9 +2254,11 @@ final class sfUtils {
      * 
      * @return String <b>User Level name</b> on success or <b>nothing</b> on failure.
      */
-    public static function UserLevelName($number) {
+    public static function UserLevelName($number)
+    {
         $userName = " ";
-        switch ($number) {
+        switch ($number)
+        {
             case 1:
                 $userName = "Author/Editor"; /// Create snowflakes Events and gallery but but not publish
                 break;
@@ -1866,7 +2286,8 @@ final class sfUtils {
      * 
      * @return String the current date time.
      */
-    public static function todaysDate() {
+    public static function todaysDate()
+    {
         return time();
     }
 
@@ -1875,7 +2296,8 @@ final class sfUtils {
      * 
      * @return String the 7 days date time from current date time.
      */
-    public static function TodaysDate7() {
+    public static function TodaysDate7()
+    {
         return strtotime("+7 day", time());
     }
 
@@ -1884,7 +2306,8 @@ final class sfUtils {
      * 
      * @return String the maximum days in this month.
      */
-    public static function maxDays() {
+    public static function maxDays()
+    {
         return date("t");
     }
 
@@ -1893,7 +2316,8 @@ final class sfUtils {
      * 
      * @return String the month's date time from current date time.
      */
-    public static function TodaysDateMonth() {
+    public static function TodaysDateMonth()
+    {
         return strtotime("+" . date("t") . " day", time());
     }
 
@@ -1902,7 +2326,8 @@ final class sfUtils {
      * 
      * @return String three month's date time from current date time.
      */
-    public static function TodayDateThreeMonths() {
+    public static function TodayDateThreeMonths()
+    {
         return strtotime(" + 3 month", time());
     }
 
@@ -1911,7 +2336,8 @@ final class sfUtils {
      * 
      * @return String six month's date time from current date time.
      */
-    public static function TodayDateSixMonths() {
+    public static function TodayDateSixMonths()
+    {
         return strtotime(" + 6 month", time());
     }
 
@@ -1921,27 +2347,32 @@ final class sfUtils {
      * @return bool <b>TRUE</b> on valid user or <b>FALSE</b> on invalid user.
      * 
      */
-    public static function isAuthorized($strUsers, $strGroups, $UserName, $UserGroup) {
+    public static function isAuthorized($strUsers, $strGroups, $UserName, $UserGroup)
+    {
         // For security, start by assuming the visitor is NOT authorized. 
         $isValid = False;
 
         // When a visitor has logged into this site, the Session variable MM_Username set equal to their username. 
         // Therefore, we know that a user is NOT logged in if that Session variable is blank. 
-        if (!empty($UserName)) {
+        if (!empty($UserName))
+        {
             // Besides being logged in, you may restrict access to only certain users based on an ID established when they login. 
             // Parse the strings into arrays. 
             $arrUsers = Explode(",", $strUsers);
             $arrGroups = Explode(",", $strGroups);
-            if (in_array($UserName, $arrUsers)) {
+            if (in_array($UserName, $arrUsers))
+            {
                 $isValid = true;
             }
 
             // Or, you may restrict access to only certain users based on their username. 
-            if (in_array($UserGroup, $arrGroups)) {
+            if (in_array($UserGroup, $arrGroups))
+            {
                 $isValid = true;
             }
 
-            if (($strUsers == "") && true) {
+            if (($strUsers == "") && true)
+            {
                 $isValid = true;
             }
         }
@@ -1953,7 +2384,8 @@ final class sfUtils {
      * 
      * @return String UUID String.
      */
-    public static function UUID() {
+    public static function UUID()
+    {
         return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
                 // 32 bits for "time_low"
                 mt_rand(0, 0xffff), mt_rand(0, 0xffff),
@@ -1976,13 +2408,16 @@ final class sfUtils {
      * 
      * @return String database compactible String.
      */
-    public static function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") {
-        if (PHP_VERSION < 6) {
+    public static function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
+    {
+        if (PHP_VERSION < 6)
+        {
             $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
         }
 
         $theValue = $this->escape($theValue);
-        switch ($theType) {
+        switch ($theType)
+        {
             case "text": $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
                 break;
             case "long":
@@ -2003,21 +2438,35 @@ final class sfUtils {
      * 
      * @return String the client IP address.
      */
-    public static function getClientIp() {
+    public static function getClientIp()
+    {
         $ipaddress = '';
-        if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+        if (isset($_SERVER['HTTP_CLIENT_IP']))
+        {
             $ipaddress = filter_input(INPUT_SERVER, "HTTP_CLIENT_IP");
-        } else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        }
+        else if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+        {
             $ipaddress = filter_input(INPUT_SERVER, "HTTP_X_FORWARDED_FOR");
-        } else if (isset($_SERVER['HTTP_X_FORWARDED'])) {
+        }
+        else if (isset($_SERVER['HTTP_X_FORWARDED']))
+        {
             $ipaddress = filter_input(INPUT_SERVER, "HTTP_X_FORWARDED");
-        } else if (isset($_SERVER['HTTP_FORWARDED_FOR'])) {
+        }
+        else if (isset($_SERVER['HTTP_FORWARDED_FOR']))
+        {
             $ipaddress = filter_input(INPUT_SERVER, "HTTP_FORWARDED_FOR");
-        } else if (isset($_SERVER['HTTP_FORWARDED'])) {
+        }
+        else if (isset($_SERVER['HTTP_FORWARDED']))
+        {
             $ipaddress = filter_input(INPUT_SERVER, "HTTP_FORWARDED");
-        } else if (isset($_SERVER['REMOTE_ADDR'])) {
+        }
+        else if (isset($_SERVER['REMOTE_ADDR']))
+        {
             $ipaddress = filter_input(INPUT_SERVER, "REMOTE_ADDR");
-        } else {
+        }
+        else
+        {
             $ipaddress = 'UNKNOWN';
         }
         return $ipaddress;
@@ -2041,29 +2490,46 @@ final class sfUtils {
      * 
      * @return String <b>TRUE</b> on valid input or <b>FALSE</b> on invalid input.
      */
-    public static function validateFiterInput($INPUT, $tag, $FILTER_VALIDATE) {
+    public static function validateFiterInput($INPUT, $tag, $FILTER_VALIDATE)
+    {
 
         $validate = filter_input($INPUT, $tag, $FILTER_VALIDATE);
         $tagtype = "";
-        if ($FILTER_VALIDATE == FILTER_VALIDATE_BOOLEAN) {
+        if ($FILTER_VALIDATE == FILTER_VALIDATE_BOOLEAN)
+        {
             $tagtype = 'boolean';
-        } else if ($FILTER_VALIDATE == FILTER_VALIDATE_EMAIL) {
+        }
+        else if ($FILTER_VALIDATE == FILTER_VALIDATE_EMAIL)
+        {
             $tagtype = 'email address';
-        } else if ($FILTER_VALIDATE == FILTER_VALIDATE_FLOAT) {
+        }
+        else if ($FILTER_VALIDATE == FILTER_VALIDATE_FLOAT)
+        {
             $tagtype = 'float';
-        } else if ($FILTER_VALIDATE == FILTER_VALIDATE_INT) {
+        }
+        else if ($FILTER_VALIDATE == FILTER_VALIDATE_INT)
+        {
             $tagtype = 'int';
-        } else if ($FILTER_VALIDATE == FILTER_VALIDATE_IP) {
+        }
+        else if ($FILTER_VALIDATE == FILTER_VALIDATE_IP)
+        {
             $tagtype = 'Ip address';
-        } else if ($FILTER_VALIDATE == FILTER_VALIDATE_REGEXP) {
+        }
+        else if ($FILTER_VALIDATE == FILTER_VALIDATE_REGEXP)
+        {
             $tagtype = 'regexp';
-        } else if ($FILTER_VALIDATE == FILTER_VALIDATE_URL) {
+        }
+        else if ($FILTER_VALIDATE == FILTER_VALIDATE_URL)
+        {
             $tagtype = 'url';
         }
         $returnsql = '';
-        if ($validate) {
+        if ($validate)
+        {
             $returnsql.= sfUtils::sfPromptMessage('<b>' . filter_input($INPUT, $tag) . '</b> is a valid ' . $tagtype . '.', 'success');
-        } else {
+        }
+        else
+        {
             $returnsql.= sfUtils::sfPromptMessage('<b>' . filter_input($INPUT, $tag) . '</b> is not a valid ' . $tagtype . '.', 'failure');
         }
         return $returnsql;
@@ -2085,14 +2551,17 @@ final class sfUtils {
      * 
      * @return String The appropriate link given the type.
      */
-    public static function createSfLink($type, $id, $inifile = '../config/config.ini') {
-        if (!isset($type) || !isset($id)) {
+    public static function createSfLink($type, $id, $inifile = '../config/config.ini')
+    {
+        if (!isset($type) || !isset($id))
+        {
             return false;
         }
         $settingsConfig = Config::getConfig("settings", $inifile);
         $link = "";
 
-        switch ($type) {
+        switch ($type)
+        {
             case "gallery": $link = $settingsConfig['m_sfUrl'] . "Gallery/ViewOne.php?Galleryid=" . $id;
                 break;
             case "event": $link = $settingsConfig['m_sfUrl'] . "Events/ViewEvent.php?Eventid=" . $id;
@@ -2114,12 +2583,15 @@ final class sfUtils {
      * @param String $msg Line of text that should be transmitted.
      * @param int $retry the retry value in millisecconds. 1000ms = 1 second.
      */
-    public static function sendSSEMsg($id, $msg, $retry = "") {
-        if (!$id || !$msg) {// sanity check
+    public static function sendSSEMsg($id, $msg, $retry = "")
+    {
+        if (!$id || !$msg)
+        {// sanity check
             return false;
         }
         echo "id: $id" . PHP_EOL;
-        if ($retry !== "") {
+        if ($retry !== "")
+        {
             echo "retry: $retry" . PHP_EOL;
         }
         echo "data: {\n";
@@ -2142,9 +2614,11 @@ final class sfUtils {
      * 
      * @return String The formatted/Structured and linked html style of the activitied of a user.
      */
-    public static function getActivities($conn, $userName, $inifile = '../config/config.ini', $limitstart = 0, $limitend = 10) {
+    public static function getActivities($conn, $userName, $inifile = '../config/config.ini', $limitstart = 0, $limitend = 10)
+    {
 
-        if (!$userName || !$conn || $limitstart < 0 || $limitend < $limitstart) {
+        if (!$userName || !$conn || $limitstart < 0 || $limitend < $limitstart)
+        {
             return false;
         }
         $currentUser = $_SESSION['MM_Username'];
@@ -2157,10 +2631,12 @@ final class sfUtils {
         $totalActivities = $conn->recordCount();
 
         $activitiesString = "No activities yet";
-        if ($totalActivities > 0) {
+        if ($totalActivities > 0)
+        {
             $i = 0;
             $activitiesString = '<ul class="sfActivities">';
-            do {
+            do
+            {
                 $datetime = new DateTime($changeActivities[$i]['change_datetime']);
                 $datedisplay = date('Ymd') == $datetime->format('Ymd') ? $datetime->format(" g:h a") : $datetime->format(" M j");
                 $activitiesString.="<li>" . $datedisplay;
@@ -2194,13 +2670,16 @@ final class sfUtils {
      * 
      * @return array The array of the results found in the API database tables.
      */
-    public static function searchString($conn, $searchString, $filter = "snowflakes") {
-        if (!$conn || !$searchString) {
+    public static function searchString($conn, $searchString, $filter = "snowflakes")
+    {
+        if (!$conn || !$searchString)
+        {
             return false;
         }
 
         $searchResult = array();
-        if ($filter == "Whole site" || $filter == "snowflakes") {
+        if ($filter == "Whole site" || $filter == "snowflakes")
+        {
             $sql = "(SELECT id,title FROM snowflakes WHERE MATCH (title,created_by,edited_by,body_text) AGAINST ('" . sfUtils::escape($searchString) . "'))
                 UNION
                 (SELECT id,title FROM snowflakes WHERE LOWER(title) LIKE CONCAT('%',LOWER('" . sfUtils::escape($searchString) . "'),'%') 
@@ -2210,12 +2689,14 @@ final class sfUtils {
 
             $conn->fetch($sql);
             $searchResult["snowflakes"] = $conn->getResultArray();
-            if ($filter == "snowflakes") {
+            if ($filter == "snowflakes")
+            {
                 return $searchResult;
             }
         }
 
-        if ($filter == "Whole site" || $filter == "events") {
+        if ($filter == "Whole site" || $filter == "events")
+        {
             $sql = "(SELECT id,title FROM snowflakes_events WHERE MATCH (title,created_by,edited_by,location,body_text) AGAINST ('" . sfUtils::escape($searchString) . "'))
                 UNION
                 (SELECT id,title FROM snowflakes_events WHERE LOWER(title) LIKE CONCAT('%',LOWER('" . sfUtils::escape($searchString) . "'),'%') 
@@ -2225,7 +2706,8 @@ final class sfUtils {
                   OR LOWER(body_text) LIKE CONCAT('%',LOWER('" . sfUtils::escape($searchString) . "'),'%'));";
             $conn->fetch($sql);
 
-            if ($filter == "events") {
+            if ($filter == "events")
+            {
                 $tag = array();
                 $tag["events"] = $conn->getResultArray();
                 return $tag;
@@ -2233,7 +2715,8 @@ final class sfUtils {
 
             $searchResult["events"] = $conn->getResultArray();
         }
-        if ($filter == "Whole site" || $filter == "gallery") {
+        if ($filter == "Whole site" || $filter == "gallery")
+        {
             $sql = "(SELECT id,title FROM snowflakes_gallery WHERE MATCH (title,created_by,edited_by,image_caption) AGAINST ('" . sfUtils::escape($searchString) . "'))
                 UNION
                 (SELECT id,title FROM snowflakes_gallery WHERE LOWER(title) LIKE CONCAT('%',LOWER('" . sfUtils::escape($searchString) . "'),'%') 
@@ -2243,14 +2726,16 @@ final class sfUtils {
 
             $conn->fetch($sql);
 
-            if ($filter == "gallery") {
+            if ($filter == "gallery")
+            {
                 $tag = array();
                 $tag["gallery"] = $conn->getResultArray();
                 return $tag;
             }
             $searchResult["gallery"] = $conn->getResultArray();
         }
-        if ($filter == "Whole site" || $filter == "users") {
+        if ($filter == "Whole site" || $filter == "users")
+        {
 
             $sql = "(SELECT id,username,email FROM snowflakes_users WHERE MATCH (username,email) AGAINST ('" . sfUtils::escape($searchString) . "'))
                 UNION
@@ -2258,7 +2743,8 @@ final class sfUtils {
                   OR LOWER(email) LIKE CONCAT('%',LOWER('" . sfUtils::escape($searchString) . "'),'%'));";
 
             $conn->fetch($sql);
-            if ($filter == "users") {
+            if ($filter == "users")
+            {
                 $tag = array();
                 $tag["users"] = $conn->getResultArray();
                 return $tag;
@@ -2278,9 +2764,11 @@ final class sfUtils {
      * 
      * @return bool <b>TRUE</b> if user exists or <b>FALSE</b> otherwise.
      */
-    public static function userExits($conn, $username) {
+    public static function userExits($conn, $username)
+    {
 
-        if (!$username || !$conn) {
+        if (!$username || !$conn)
+        {
             return false;
         }
 
@@ -2301,9 +2789,11 @@ final class sfUtils {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function forgottenPassword($conn, $email, $sender, $snowflakesUrl, $errmsg = "") {
+    public static function forgottenPassword($conn, $email, $sender, $snowflakesUrl, $errmsg = "")
+    {
 
-        if (!$conn || !$email || !$sender) {
+        if (!$conn || !$email || !$sender)
+        {
             return false;
         }
 
@@ -2311,12 +2801,14 @@ final class sfUtils {
         $sql = 'Select * FROM snowflakes_users WHERE email="' . $email . '"';
         $conn->fetch($sql);
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         $userStruct->populate($result[0]);
 
-        if ($conn->recordCount() <= 0) {
+        if ($conn->recordCount() <= 0)
+        {
             $errmsg = 'Could not find the account registered to the email ' . $email . ".";
             return false;
         }
@@ -2333,9 +2825,11 @@ final class sfUtils {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function requestResetPassWord($userStruct, $sender, $snowflakesUrl) {
+    public static function requestResetPassWord($userStruct, $sender, $snowflakesUrl)
+    {
 
-        if (!$userStruct->isPopulated() || !$sender || !$snowflakesUrl) {
+        if (!$userStruct->isPopulated() || !$sender || !$snowflakesUrl)
+        {
             return false;
         }
 
@@ -2365,9 +2859,11 @@ final class sfUtils {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function resetPassword($conn, $password, $oldResetLink) {
+    public static function resetPassword($conn, $password, $oldResetLink)
+    {
 
-        if (!$password || !$conn || !$oldResetLink) {
+        if (!$password || !$conn || !$oldResetLink)
+        {
             return false;
         }
 
@@ -2386,7 +2882,8 @@ final class sfUtils {
      *
      * @return String  am/pm version of time.
      */
-    public static function toAmPmTime($stringDate) {
+    public static function toAmPmTime($stringDate)
+    {
         $datetime = new DateTime($stringDate);
         return $datetime->format("g:i a");
     }
@@ -2398,7 +2895,8 @@ final class sfUtils {
      *
      * @return String  sql formatted date 'YYYY-MM-DD'.
      */
-    public static function dateToSql($stringDate) {
+    public static function dateToSql($stringDate)
+    {
         $datetime = new DateTime(str_replace('/', '-', $stringDate));
         return $datetime->format('Y-m-d');
     }
@@ -2410,7 +2908,8 @@ final class sfUtils {
      *
      * @return String  sql formatted date 'DD/MM/YYYY'.
      */
-    public static function dateFromSql($stringDate) {
+    public static function dateFromSql($stringDate)
+    {
         $datetime = new DateTime($stringDate);
         return $datetime->format("d/m/Y");
     }
@@ -2422,20 +2921,32 @@ final class sfUtils {
      *
      * @return String  the Table name of a Snowflakes API type.
      */
-    public static function tablenameFromType($type) {
+    public static function tablenameFromType($type)
+    {
 
-        $tableName = "";
-        if ($type == 'snowflake') {
+        $tableName = "snowflakes";
+        if ($type == 'snowflake' || $type == 'snowflakes')
+        {
             $tableName = "snowflakes";
-        } else if ($type == 'event') {
+        }
+        else if ($type == 'event')
+        {
             $tableName = "snowflakes_events";
-        } else if ($type == 'gallery') {
+        }
+        else if ($type == 'gallery')
+        {
             $tableName = "snowflakes_gallery";
-        } else if ($type == 'user') {
+        }
+        else if ($type == 'user')
+        {
             $tableName = "snowflakes_users";
-        } else if ($type == 'changelog') {
+        }
+        else if ($type == 'changelog')
+        {
             $tableName = "snowflakes_change_log";
-        } else if ($type == 'flakeit') {
+        }
+        else if ($type == 'flakeit')
+        {
             $tableName = "snowflakes_flakeit";
         }
 
@@ -2454,13 +2965,16 @@ final class sfUtils {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function manualFlakeitTrigger($conn, $id, $type, $operation) {
-        if (!$conn || !$id || !$type || !$operation) {
+    public static function manualFlakeitTrigger($conn, $id, $type, $operation)
+    {
+        if (!$conn || !$id || !$type || !$operation)
+        {
             return false;
         }
 
         $tableName = self::tablenameFromType($type);
-        if ($tableName == "") {
+        if ($tableName == "")
+        {
             return false;
         }
 
@@ -2470,21 +2984,29 @@ final class sfUtils {
         $result = $conn->getResultArray();
         /// delete means the record is deleted so it must pass the 
         //condition to delete the flakeit record  associated with it
-        if (empty($result) && $operation != 'DELETE') {
+        if (empty($result) && $operation != 'DELETE')
+        {
             return false;
         }
 
         $flakeCount = $result[0]['flake_it'];
 
-        if ($operation == 'INSERT') {
+        if ($operation == 'INSERT')
+        {
             $sqlOp = "INSERT INTO snowflakes_flakeit SET flake_on='$type',flake_it=$flakeCount,flake_on_id=$id;";
-        } else if ($operation == 'DELETE') {
+        }
+        else if ($operation == 'DELETE')
+        {
             $sqlOp = "DELETE FROM snowflakes_flakeit WHERE flake_on_id=$id AND flake_on='$type';";
-        } else if ($operation == 'UPDATE') {
+        }
+        else if ($operation == 'UPDATE')
+        {
             // Just to make sure the record exists alread
             $sqlOp = "INSERT IGNORE INTO snowflakes_flakeit SET flake_on='$type',flake_it=$flakeCount,flake_on_id=$id;";
             $sqlOp .= "UPDATE snowflakes_flakeit SET flake_it=$flakeCount WHERE flake_on_id=$id AND flake_on='$type';";
-        } else {
+        }
+        else
+        {
             return false;
         }
 
@@ -2503,25 +3025,35 @@ final class sfUtils {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function manualchangeLogTrigger($conn, $id, $type, $operation) {
+    public static function manualchangeLogTrigger($conn, $id, $type, $operation)
+    {
 
-        if (!$conn || !$id || !$type || !$operation) {
+        if (!$conn || !$id || !$type || !$operation)
+        {
             return false;
         }
 
         $tableName = self::tablenameFromType($type);
-        if ($tableName == "") {
+        if ($tableName == "")
+        {
             return false;
         }
 
         $log_action = "'added','modified','requested to delete','deleted','logged on','logged off','published','unpublished'";
-        if ($operation == 'INSERT') {
+        if ($operation == 'INSERT')
+        {
             $log_action = "added";
-        } else if ($operation == 'DELETE') {
+        }
+        else if ($operation == 'DELETE')
+        {
             $log_action = "deleted";
-        } else if ($operation == 'UPDATE') {
+        }
+        else if ($operation == 'UPDATE')
+        {
             $log_action = "modified";
-        } else {
+        }
+        else
+        {
             return false;
         }
 
@@ -2533,8 +3065,10 @@ final class sfUtils {
         // this means that the record has been deleted already if the result is empty and in order for the user 
         // to completely delete a snowflake, event or gallery the user must own it so we add change log using 
         // user session
-        if (empty($result)) {
-            if ($operation == 'DELETE') {
+        if (empty($result))
+        {
+            if ($operation == 'DELETE')
+            {
                 $user = isset($_SESSION['MM_Username']) ? $_SESSION['MM_Username'] : "Snowflakes System";
                 $insertSql = "INSERT INTO snowflakes_change_log SET change_action='$log_action',change_on='$type',"
                         . "created_by='$user',change_by='$user',action_id=$id;";
@@ -2554,16 +3088,21 @@ final class sfUtils {
         $insertSql.= "action_id=$id;";
         $inserted = $conn->execute($insertSql);
 
-        if ($deleted === 1) {
+        if ($deleted === 1)
+        {
             $log_action = 'requested to delete';
             $insertSql = "INSERT INTO snowflakes_change_log SET change_action='$log_action',change_on='$log_change_on',created_by='$created_by',change_by='$edited_by',action_id=$id;";
             $deleted = $conn->execute($insertSql);
         }
 
-        if ($operation != 'DELETE' && $type != 'user' && $publish != "") {
-            if ($publish === 1) {
+        if ($operation != 'DELETE' && $type != 'user' && $publish != "")
+        {
+            if ($publish === 1)
+            {
                 $log_action = 'published';
-            } else {
+            }
+            else
+            {
                 $log_action = 'unpublished';
             }
             $insertSql = "INSERT INTO snowflakes_change_log SET change_action='$log_action',change_on='$log_change_on',created_by='$created_by',change_by='$edited_by',action_id=$id;";
@@ -2585,14 +3124,17 @@ final class sfUtils {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function checkTrigger($conn, $id, $type, $operation) {
+    public static function checkTrigger($conn, $id, $type, $operation)
+    {
 
-        if (!$conn || !$id || !$type || !$operation) {
+        if (!$conn || !$id || !$type || !$operation)
+        {
             return false;
         }
 
         $tableName = self::tablenameFromType($type);
-        if ($tableName == "") {
+        if ($tableName == "")
+        {
             return false;
         }
 
@@ -2600,16 +3142,19 @@ final class sfUtils {
         $sql = "SHOW TRIGGERS LIKE '$tableName'";
         $conn->fetch($sql);
         $countTriggers = $conn->recordCount();
-        if ($countTriggers >= 1) {
+        if ($countTriggers >= 1)
+        {
             return true;
         }
 
-        if (!self::manualchangeLogTrigger($conn, $id, $type, $operation)) {
+        if (!self::manualchangeLogTrigger($conn, $id, $type, $operation))
+        {
             trigger_error("Could not add or implement change log manual triggers", E_USER_NOTICE);
             return false;
         }
 
-        if (!self::manualFlakeitTrigger($conn, $id, $type, $operation)) {
+        if (!self::manualFlakeitTrigger($conn, $id, $type, $operation))
+        {
             trigger_error("Could not add or implement Flake it manual triggers", E_USER_NOTICE);
             return false;
         }
@@ -2629,14 +3174,17 @@ final class sfUtils {
      *
      * @return mixed <b>the flake it value</b> on success or <b>FALSE</b> on failure.
      */
-    public static function flakeIt($conn, $id, $type, $flakeit = "true") {
+    public static function flakeIt($conn, $id, $type, $flakeit = "true")
+    {
 
-        if (!$id || !$conn || !$type) {
+        if (!$id || !$conn || !$type)
+        {
             return false;
         }
 
         $tableName = self::tablenameFromType($type);
-        if ($tableName == "") {
+        if ($tableName == "")
+        {
             return false;
         }
 
@@ -2645,7 +3193,8 @@ final class sfUtils {
         $sql.=" WHERE id=$id";
 
         $updated = $conn->execute($sql);
-        if (!$updated) {
+        if (!$updated)
+        {
             $sqlError.= "Could not update the flake it feild.";
             trigger_error($sqlError, E_USER_NOTICE);
         }
@@ -2657,7 +3206,8 @@ final class sfUtils {
         $sql = "SELECT flake_it from $tableName WHERE id=$id";
         $conn->fetch($sql);
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $result[0]['flake_it'];
@@ -2672,12 +3222,16 @@ final class sfUtils {
      *
      * @return String The <b>url</b> with the key and the query e.g cyrilinc.co.uk?key=value.
      */
-    public static function addQuerystringVar($url, $key, $value) {
+    public static function addQuerystringVar($url, $key, $value)
+    {
         $url = preg_replace('/(.*)(?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&');
         $url = substr($url, 0, -1);
-        if (strpos($url, '?') === false) {
+        if (strpos($url, '?') === false)
+        {
             return ($url . '?' . $key . '=' . $value);
-        } else {
+        }
+        else
+        {
             return ($url . '&' . $key . '=' . $value);
         }
     }
@@ -2692,7 +3246,8 @@ final class sfUtils {
      *
      * @return String The <b>url</b> with the key and the query e.g cyrilinc.co.uk?key=value.
      */
-    public static function removeQuerystringVar($url, $key) {
+    public static function removeQuerystringVar($url, $key)
+    {
         $url = preg_replace('/(.*)(?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&');
         $url = substr($url, 0, -1);
         return ($url);
@@ -2709,17 +3264,23 @@ final class sfUtils {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function deleteGallery($conn, $id, $setDelete = false) {
+    public static function deleteGallery($conn, $id, $setDelete = false)
+    {
 
-        if (!$id || !$conn) {
+        if (!$id || !$conn)
+        {
             return false;
         }
 
-        if ($setDelete == false) {
+        if ($setDelete == false)
+        {
             $sql = "DELETE FROM snowflakes_gallery ";
-        } else {
+        }
+        else
+        {
             $sql = "UPDATE snowflakes_gallery SET deleted=1 ";
-            if (isset($_SESSION['MM_Username'])) {
+            if (isset($_SESSION['MM_Username']))
+            {
                 $sql.=',edited_by="' . $_SESSION['MM_Username'] . '",edited="' . time() . '" ';
             }
         }
@@ -2737,8 +3298,10 @@ final class sfUtils {
      *
      * @return String an encrypted & utf8-encoded string.
      */
-    public static function encrypt($pure_string, $encryption_key) {
-        if (!$pure_string || !$encryption_key) {
+    public static function encrypt($pure_string, $encryption_key)
+    {
+        if (!$pure_string || !$encryption_key)
+        {
             return false;
         }
         $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
@@ -2755,8 +3318,10 @@ final class sfUtils {
      *
      * @return String a decrypted original string.
      */
-    public static function decrypt($encrypted_string, $encryption_key) {
-        if (!$encrypted_string || !$encryption_key) {
+    public static function decrypt($encrypted_string, $encryption_key)
+    {
+        if (!$encrypted_string || !$encryption_key)
+        {
             return false;
         }
         $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
@@ -2775,8 +3340,10 @@ final class sfUtils {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function setUserLoginOut($userName, $value = false, $inifile = '../config/config.ini') {
-        if (!$userName) {
+    public static function setUserLoginOut($userName, $value = false, $inifile = '../config/config.ini')
+    {
+        if (!$userName)
+        {
             return false;
         }
         //host
@@ -2797,15 +3364,18 @@ final class sfUtils {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function snowFlakeItCount($conn, $userName = "") {
+    public static function snowFlakeItCount($conn, $userName = "")
+    {
 
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
         $sql = "SELECT SUM(flake_it)total "
                 . "FROM snowflakes";
-        if (strlen($userName) > 0) {
+        if (strlen($userName) > 0)
+        {
             $sql.= " WHERE created_by='$userName' GROUP BY created_by";
         }
 
@@ -2813,7 +3383,8 @@ final class sfUtils {
 
         $conn->fetch($sql);
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $result[0]['total'];
@@ -2828,15 +3399,18 @@ final class sfUtils {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function eventFlakeItCount($conn, $userName = "") {
+    public static function eventFlakeItCount($conn, $userName = "")
+    {
 
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
         $sql = "SELECT SUM(flake_it)total "
                 . "FROM snowflakes_events";
-        if (strlen($userName) > 0) {
+        if (strlen($userName) > 0)
+        {
             $sql.= " WHERE created_by='$userName' GROUP BY created_by";
         }
 
@@ -2844,7 +3418,8 @@ final class sfUtils {
 
         $conn->fetch($sql);
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $result[0]['total'];
@@ -2859,15 +3434,18 @@ final class sfUtils {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function galleryFlakeItCount($conn, $userName = "") {
+    public static function galleryFlakeItCount($conn, $userName = "")
+    {
 
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
         $sql = "SELECT SUM(flake_it)total "
                 . "FROM snowflakes_gallery";
-        if (strlen($userName) > 0) {
+        if (strlen($userName) > 0)
+        {
             $sql.= " WHERE created_by='$userName' GROUP BY created_by";
         }
 
@@ -2875,7 +3453,8 @@ final class sfUtils {
 
         $conn->fetch($sql);
         $result = $conn->getResultArray();
-        if (empty($result)) {
+        if (empty($result))
+        {
             return false;
         }
         return $result[0]['total'];
@@ -2890,9 +3469,11 @@ final class sfUtils {
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function getAllCounts($conn, $username = '') {
+    public static function getAllCounts($conn, $username = '')
+    {
 
-        if (!$conn) {
+        if (!$conn)
+        {
             return false;
         }
 
@@ -2909,7 +3490,8 @@ final class sfUtils {
         $totalRows_rsPublished = $conn->getResultArray();
         $countSnowflakes ['Snowflakes_published'] = $_SESSION['Snowflakes']['published'] = $totalRows_rsPublished[0]['count'];
 
-        if (strlen($username)) {
+        if (strlen($username))
+        {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userPubSnowflakes = $conn->getResultArray();
@@ -2921,7 +3503,8 @@ final class sfUtils {
         $totalRows_rsUnplublished = $conn->getResultArray();
         $countSnowflakes ['Snowflakes_unpublished'] = $_SESSION['Snowflakes']['unpublished'] = $totalRows_rsUnplublished[0]['count'];
 
-        if (strlen($username)) {
+        if (strlen($username))
+        {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userUnPubSnowflakes = $conn->getResultArray();
@@ -2936,7 +3519,8 @@ final class sfUtils {
         $totalRows_rsPublished = $conn->getResultArray();
         $countSnowflakes ['SfEvents_published'] = $_SESSION['SfEvents']['published'] = $totalRows_rsPublished[0]['count'];
 
-        if (strlen($username)) {
+        if (strlen($username))
+        {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userPubEvent = $conn->getResultArray();
@@ -2948,7 +3532,8 @@ final class sfUtils {
         $totalRows_rsUnplublished = $conn->getResultArray();
         $countSnowflakes ['SfEvents_unpublished'] = $_SESSION['SfEvents']['unpublished'] = $totalRows_rsUnplublished[0]['count'];
 
-        if (strlen($username)) {
+        if (strlen($username))
+        {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userUnPubEvent = $conn->getResultArray();
@@ -2963,7 +3548,8 @@ final class sfUtils {
         $totalRows_galleryUnpublished = $conn->getResultArray();
         $countSnowflakes ['SfGallery_unpublished'] = $_SESSION['SfGallery']['unpublished'] = $totalRows_galleryUnpublished[0]['count'];
 
-        if (strlen($username)) {
+        if (strlen($username))
+        {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userPubGallery = $conn->getResultArray();
@@ -2975,7 +3561,8 @@ final class sfUtils {
         $totalRows_galleryPublished = $conn->getResultArray();
         $countSnowflakes ['SfGallery_published'] = $_SESSION['SfGallery']['published'] = $totalRows_galleryPublished[0]['count'];
 
-        if (strlen($username)) {
+        if (strlen($username))
+        {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userUnPubGallery = $conn->getResultArray();
@@ -3001,13 +3588,16 @@ final class sfUtils {
      *
      * @return mixed <b>The html dialog format</b> on success or <b>FALSE</b> on failure.
      */
-    public static function dialogMessage($title, $message) {
+    public static function dialogMessage($title, $message)
+    {
 
-        if (!strlen($message)) {
+        if (!strlen($message))
+        {
             return false;
         }
 
-        if (!strlen($title)) {
+        if (!strlen($title))
+        {
             $title = 'Message';
         }
         $str = ' <!-- dialog-message Starts-->'
@@ -3026,9 +3616,11 @@ final class sfUtils {
      *
      * @return mixed <b>The html prompt format</b> on success or <b>FALSE</b> on failure.
      */
-    public static function sfPromptMessage($message, $icon) {
+    public static function sfPromptMessage($message, $icon)
+    {
 
-        if (!strlen($message) || !strlen($icon)) {
+        if (!strlen($message) || !strlen($icon))
+        {
             return false;
         }
 
@@ -3049,12 +3641,16 @@ final class sfUtils {
      *
      * @return String The string equivalent of published status.
      */
-    public static function getPublishStatus($publish) {
+    public static function getPublishStatus($publish)
+    {
 
         $retValue = "";
-        if ($publish == 0 || $publish === false) {
+        if ($publish == 0 || $publish === false)
+        {
             $retValue = " Unpublished";
-        } else if ($publish == 1 || $publish === true) {
+        }
+        else if ($publish == 1 || $publish === true)
+        {
             $retValue = " Published";
         }
         return $retValue;
@@ -3071,9 +3667,11 @@ final class sfUtils {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function migrate($conn, $dbname, $adminUsername, &$output) {
+    public static function migrate($conn, $dbname, $adminUsername, &$output)
+    {
 
-        if (!$conn || !$dbname || !$adminUsername) {
+        if (!$conn || !$dbname || !$adminUsername)
+        {
             return false;
         }
 
@@ -3081,7 +3679,8 @@ final class sfUtils {
                 SELECT a.username,a.password,MD5(CONCAT_WS(" ",a.password,a.email,a.username,a.adminid)) reset_link,a.email,a.AcessLevel,IF(a.AcessLevel=5,"Super Administrator",IF(a.AcessLevel=4,"Administrator",IF(a.AcessLevel=3,"Manager",IF(a.AcessLevel=2,"Publisher","Author/Editor"))))
                 FROM ' . $dbname . '.AdminUsers a;';
 
-        if (!$conn->execute($sql)) {
+        if (!$conn->execute($sql))
+        {
             $output.=self::sfPromptMessage("Could Not migrate users from $dbname.AdminUsers <br /> " . $conn->getMessage() . "<br/>", 'error');
             return false;
         }
@@ -3093,7 +3692,8 @@ final class sfUtils {
             FROM ' . $dbname . '.SnowFlakeTable b;';
 
 
-        if (!$conn->execute($sql)) {
+        if (!$conn->execute($sql))
+        {
             $output.=self::sfPromptMessage("Could Not migrate Snowflakes from $dbname.SnowFlakeTable<br /> " . $conn->getMessage() . "<br/>", 'error');
             return false;
         }
@@ -3106,7 +3706,8 @@ final class sfUtils {
             "' . self::escape($adminUsername) . '" created_by,"' . self::escape($adminUsername) . '" edited_by
             FROM ' . $dbname . '.SF_EventsTable c;';
 
-        if (!$conn->execute($sql)) {
+        if (!$conn->execute($sql))
+        {
             $output.=self::sfPromptMessage("Could Not migrate Snowflakes Events from $dbname.SF_EventsTable<br /> " . $conn->getMessage() . "<br/>", 'error');
             return false;
         }
@@ -3117,7 +3718,8 @@ final class sfUtils {
             SELECT d.title,d.Thumbname,d.imagename,d.ImageCaption,d.created,d.createdby,d.created edited,d.createdby edited_by 
             FROM ' . $dbname . '.SF_GalleryTable d;';
 
-        if (!$conn->execute($sql)) {
+        if (!$conn->execute($sql))
+        {
             $output.=self::sfPromptMessage("Could Not migrate Snowflakes Gallery from $dbname.SF_GalleryTable<br /> " . $conn->getMessage() . "<br/>", 'error');
             return false;
         }
@@ -3128,7 +3730,8 @@ final class sfUtils {
             SELECT e.SFHostname, e.SFDatabase,e.SFDBUsername,e.SFDBPassword,"' . $conn->getAttribute('type') . '",e.SnowflakesUrl,e.SnowflakesResultUrl,e.SFOutUrl,e.SFEventsResultUrl,e.SFEventsOutputUrl,e.SFGalleryResultUrl,e.SFGalleryOutUrl,e.UploadGalleryDir
             FROM ' . $dbname . '.SF_SnowflakesSettings e;';
 
-        if (!$conn->execute($sql)) {
+        if (!$conn->execute($sql))
+        {
             $output.=self::sfPromptMessage("Could Not migrate Snowflakes settings from $dbname.SF_SnowflakesSettings <br /> " . $conn->getMessage() . "<br/>", 'error');
             return false;
         }
@@ -3174,33 +3777,40 @@ final class sfUtils {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function copyDirectoryList($source, $dest) {
+    public static function copyDirectoryList($source, $dest)
+    {
 
-        if (!$source || !is_dir($source) || !$dest) {
+        if (!$source || !is_dir($source) || !$dest)
+        {
             return false;
         }
 
         // Make destination directory
-        if (!is_dir($dest)) {
+        if (!is_dir($dest))
+        {
             mkdir($dest);
         }
 
         $sourcefileList = scandir($source);
         $destfileList = scandir($dest);
 
-        foreach ($sourcefileList as $file) {
+        foreach ($sourcefileList as $file)
+        {
 
-            if ($file == '.' || $file == '..' || in_array($file, $destfileList)) {
+            if ($file == '.' || $file == '..' || in_array($file, $destfileList))
+            {
                 continue;
             }
 
             // Simple copy for a file
-            if (is_file("$source/$file")) {
+            if (is_file("$source/$file"))
+            {
                 copy("$source/$file", "$dest/$file");
             }
 
             // Simple copy for a file
-            if (is_dir("$source/$file")) {
+            if (is_dir("$source/$file"))
+            {
                 self::copyDirectoryList("$source/$file", "$dest/$file");
             }
         }
@@ -3217,13 +3827,16 @@ final class sfUtils {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function migrateUpdir($source, $inifile = '../config/config.ini') {
-        if (!$source || !is_dir($source)) {
+    public static function migrateUpdir($source, $inifile = '../config/config.ini')
+    {
+        if (!$source || !is_dir($source))
+        {
             return false;
         }
         $datadir = new dataDirParam($inifile);
         // Check for symlinks
-        if (is_link($source)) {
+        if (is_link($source))
+        {
             return symlink(readlink($source), $datadir->m_uploadGalleryDir);
         }
 
@@ -3237,8 +3850,10 @@ final class sfUtils {
      * 
      * @return mixed <b>Decoded xml string</b> on success or <b>FALSE</b> on failure.
      */
-    public static function xmldecoder($xmltext) {
-        if (!$xmltext) {
+    public static function xmldecoder($xmltext)
+    {
+        if (!$xmltext)
+        {
             return false;
         }
 
@@ -3263,8 +3878,10 @@ final class sfUtils {
      * 
      * @return mixed <b>Encoded xml string</b> on success or <b>FALSE</b> on failure.
      */
-    public static function xmlencoder($xmltext) {
-        if (!$xmltext) {
+    public static function xmlencoder($xmltext)
+    {
+        if (!$xmltext)
+        {
             return false;
         }
 
@@ -3291,9 +3908,11 @@ final class sfUtils {
      * 
      * @return mixed <b>Rss string</b> on success or <b>FALSE</b> on failure.
      */
-    public static function createSnowflakesRss($conn, $snowflakesList, $inifile = '../config/config.ini') {
+    public static function createSnowflakesRss($conn, $snowflakesList, $inifile = '../config/config.ini')
+    {
         /// sanity Check
-        if (!$conn || empty($snowflakesList)) {
+        if (!$conn || empty($snowflakesList))
+        {
             return false;
         }
 
@@ -3314,14 +3933,15 @@ final class sfUtils {
         $image->addChild('width', '120');
         $image->addChild('height', '40');
 
-        foreach ($snowflakesList as $key => $value) {
+        foreach ($snowflakesList as $key => $value)
+        {
             $flakeStruct = $value;
             $BodyString = self::escape(html_entity_decode($flakeStruct->m_body_text));
 
             $item = $channel->addChild('item');
             $item->addChild('title', self::escape($flakeStruct->m_title));
             $item->addChild('description', substr($BodyString, 0, 280) . '...');
-            $item->addChild('link', $itemUrl . "?pageid=" . $flakeStruct->m_id);
+            $item->addChild('link', $itemUrl . '?pageid=' . $flakeStruct->m_id);
             $item->addChild('date', date(" F j, Y", $flakeStruct->m_created));
             $item->addChild('publisher', $flakeStruct->m_created_by);
             $item->addChild('flakes', $flakeStruct->m_flake_it);
@@ -3345,9 +3965,11 @@ final class sfUtils {
      * 
      * @return mixed <b>Rss string</b> on success or <b>FALSE</b> on failure.
      */
-    public static function createEventRss($conn, $eventList, $inifile = '../config/config.ini') {
+    public static function createEventRss($conn, $eventList, $inifile = '../config/config.ini')
+    {
         /// sanity Check
-        if (!$conn || empty($eventList)) {
+        if (!$conn || empty($eventList))
+        {
             return false;
         }
 
@@ -3369,7 +3991,8 @@ final class sfUtils {
         $image->addChild('width', '120');
         $image->addChild('height', '40');
 
-        foreach ($eventList as $key => $value) {
+        foreach ($eventList as $key => $value)
+        {
             $eventStruct = $value;
             $eventtime = new DateTime($eventStruct->m_event_date);
             $endtime = new DateTime($eventStruct->m_end_date);
@@ -3404,9 +4027,11 @@ final class sfUtils {
      * 
      * @return mixed <b>Rss string</b> on success or <b>FALSE</b> on failure.
      */
-    public static function createGalleryRss($conn, $galleryList, $inifile = '../config/config.ini') {
+    public static function createGalleryRss($conn, $galleryList, $inifile = '../config/config.ini')
+    {
         /// sanity Check
-        if (!$conn || empty($galleryList)) {
+        if (!$conn || empty($galleryList))
+        {
             return false;
         }
 
@@ -3427,7 +4052,8 @@ final class sfUtils {
         $image->addChild('width', '120');
         $image->addChild('height', '40');
 
-        foreach ($galleryList as $key => $value) {
+        foreach ($galleryList as $key => $value)
+        {
             $galleryStruct = $value;
             $coverimage = explode(",", $galleryStruct->m_thumb_name);
             $covercaption = explode(",", $galleryStruct->m_image_caption);
@@ -3462,7 +4088,8 @@ final class sfUtils {
      * 
      * @return mixed <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function startsWith($haystack, $needle) {
+    public static function startsWith($haystack, $needle)
+    {
         return $needle === "" || strpos($haystack, $needle) === 0;
     }
 
@@ -3474,7 +4101,8 @@ final class sfUtils {
      * 
      * @return mixed <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function endsWith($haystack, $needle) {
+    public static function endsWith($haystack, $needle)
+    {
         return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
     }
 
@@ -3486,8 +4114,10 @@ final class sfUtils {
      * 
      * @return mixed <b>The log array </b> on success or <b>FALSE</b> on failure.
      */
-    public static function viewLogFile($filename, $Logtype = "All") {
-        if (!$filename || !file_exists($filename)) {
+    public static function viewLogFile($filename, $Logtype = "All")
+    {
+        if (!$filename || !file_exists($filename))
+        {
             return false;
         }
 
@@ -3499,30 +4129,40 @@ final class sfUtils {
         $warningCount = 0;
         $successCount = 0;
 
-        foreach ($lines as $line => $data) {
+        foreach ($lines as $line => $data)
+        {
             $linedata = explode("¦=>", $data);
             $info[$line]['datetime'] = str_replace("[", "", str_replace("]", "", $linedata[0]));
             $info[$line]['User'] = str_replace("[", "", str_replace("]", "", $linedata[1]));
-            if (strpos($linedata[2], "[File]")) {
+            if (strpos($linedata[2], "[File]"))
+            {
                 $info[$line]['File'] = str_replace("[Reason]", "", $linedata[3]);
                 $info[$line]['Reason'] = $linedata[4];
                 $info[$line]['Execute'] = "None";
 
-                if (strpos($linedata[4], "warning") || strpos($linedata[4], "deprecated") || strpos($linedata[4], "is deprecated;")) {
+                if (strpos($linedata[4], "warning") || strpos($linedata[4], "deprecated") || strpos($linedata[4], "is deprecated;"))
+                {
                     $info[$line]['Status'] = '<span class="icon warning"></span>';
                     $warningCount++;
-                } else {
+                }
+                else
+                {
                     $info[$line]['Status'] = '<span class="icon error"></span>';
                     $errorcount++;
                 }
-            } else if (strpos($linedata[2], "[Execute]")) {
+            }
+            else if (strpos($linedata[2], "[Execute]"))
+            {
                 $info[$line]['Execute'] = str_replace("[Query Error]", "", $linedata[3]);
                 $info[$line]['File'] = "None";
                 $info[$line]['Reason'] = strpos($linedata[3], "[Query Error]") ? $linedata[4] : "None";
                 $info[$line]['Status'] = strpos($linedata[3], "[Query Error]") ? '<span class="icon error"></span>' : '<span class="icon success"></span>';
-                if (strpos($linedata[3], "[Query Error]")) {
+                if (strpos($linedata[3], "[Query Error]"))
+                {
                     $errorcount++;
-                } else {
+                }
+                else
+                {
                     $successCount++;
                 }
             }
@@ -3541,10 +4181,12 @@ final class sfUtils {
      * 
      * @return mixed <b>The list string </b> on success or <b>FALSE</b> on failure.
      */
-    public static function getfileList($dir = "../data/") {
+    public static function getfileList($dir = "../data/")
+    {
 
         // check that this $dir is populated and it's a directory
-        if (!$dir || !is_dir($dir)) {
+        if (!$dir || !is_dir($dir))
+        {
             return false;
         }
 
@@ -3557,13 +4199,16 @@ final class sfUtils {
         // Sort in ascending order - this is default
         $files = scandir($dir);
 
-        foreach ($files as $file) {
+        foreach ($files as $file)
+        {
             //sanity Check
-            if ($file == '.' || $file == '..') {
+            if ($file == '.' || $file == '..')
+            {
                 continue;
             }
             $ext = pathinfo($file, PATHINFO_EXTENSION);
-            if ($ext != 'log') {
+            if ($ext != 'log')
+            {
                 continue;
             }
             $datestring = substr($file, -14, -4);
@@ -3585,10 +4230,12 @@ final class sfUtils {
      * 
      * @return mixed <b>The file list in an array </b> on success or <b>FALSE</b> on failure.
      */
-    public static function getfileList2($dir = "../data/") {
+    public static function getfileList2($dir = "../data/")
+    {
 
         // check that this $dir is populated and it's a directory
-        if (!$dir || !is_dir($dir)) {
+        if (!$dir || !is_dir($dir))
+        {
             return false;
         }
 
@@ -3596,13 +4243,16 @@ final class sfUtils {
         // Sort in ascending order - this is default
         $files = scandir($dir);
 
-        foreach ($files as $key => $file) {
+        foreach ($files as $key => $file)
+        {
             //sanity Check
-            if ($file == '.' || $file == '..') {
+            if ($file == '.' || $file == '..')
+            {
                 continue;
             }
             $ext = pathinfo($file, PATHINFO_EXTENSION);
-            if ($ext != 'log') {
+            if ($ext != 'log')
+            {
                 continue;
             }
             $datestring = substr($file, -14, -4);
@@ -3620,12 +4270,15 @@ final class sfUtils {
      * 
      * @return mixed <b>99+</b> on success or <b>FALSE</b> on failure.
      */
-    public static function comapact99($data) {
-        if (!$data) {
+    public static function comapact99($data)
+    {
+        if (!$data)
+        {
             return $data;
         }
 
-        if ($data >= 100) {
+        if ($data >= 100)
+        {
             return '99+';
         }
 
@@ -3638,9 +4291,11 @@ final class sfUtils {
      * 
      * @return array <b>DateTimeZone/b> list.
      */
-    public static function getTimeZoneList() {
+    public static function getTimeZoneList()
+    {
 
-        if (!method_exists("DateTimeZone", "listIdentifiers")) {
+        if (!method_exists("DateTimeZone", "listIdentifiers"))
+        {
             $timezones = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
             return $timezones;
         }
@@ -3743,9 +4398,11 @@ final class sfUtils {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function settimezone($timezones) {
+    public static function settimezone($timezones)
+    {
 
-        if (!$timezones) {
+        if (!$timezones)
+        {
             return false;
         }
         return date_default_timezone_set($timezones);
@@ -3758,8 +4415,10 @@ final class sfUtils {
      * 
      * @return mixed <b>URL Data</b> on success or <b>FALSE</b> on failure.
      */
-    public static function getData($url) {
-        if (!$url) {
+    public static function getData($url)
+    {
+        if (!$url)
+        {
             return false;
         }
         $ch = curl_init();
@@ -3778,14 +4437,16 @@ final class sfUtils {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function memoryTickHandler() {
+    public static function memoryTickHandler()
+    {
 
         $usage = memory_get_usage();
         $Memory = ini_get('memory_limit');
         $Memory = self::toByteSize($Memory);
         $delta = ($usage / $Memory) * 100;
         $threshold = 98; //percent threshold before adding more memory;
-        if ($delta < $threshold) {
+        if ($delta < $threshold)
+        {
             return false;
         }
         $added = bcmul($Memory, 0.3); //add 30% more than the original memory limit
@@ -3796,24 +4457,196 @@ final class sfUtils {
         return true;
     }
 
-    public static function processSFAPI($type, $method, $param, $rettype = 'json') {
-        if (!$type || !$method || !$param) {
+    /**
+     * This is used to get the message satus for snowflake's Read only Restful
+     * webservice API
+     * 
+     * @param int $code The code of the message to return
+     * 
+     * @return String The corresponding status message
+     * 
+     */
+    public static function getStatusMessage($code = 500)
+    {
+        $status = array(
+            100 => 'Continue',
+            101 => 'Switching Protocols',
+            200 => 'OK',
+            201 => 'Created',
+            202 => 'Accepted',
+            203 => 'Non-Authoritative Information',
+            204 => 'No Content',
+            205 => 'Reset Content',
+            206 => 'Partial Content',
+            300 => 'Multiple Choices',
+            301 => 'Moved Permanently',
+            302 => 'Found',
+            303 => 'See Other',
+            304 => 'Not Modified',
+            305 => 'Use Proxy',
+            306 => '(Unused)',
+            307 => 'Temporary Redirect',
+            400 => 'Bad Request',
+            401 => 'Unauthorized',
+            402 => 'Payment Required',
+            403 => 'Forbidden',
+            404 => 'Not Found',
+            405 => 'Method Not Allowed',
+            406 => 'Not Acceptable',
+            407 => 'Proxy Authentication Required',
+            408 => 'Request Timeout',
+            409 => 'Conflict',
+            410 => 'Gone',
+            411 => 'Length Required',
+            412 => 'Precondition Failed',
+            413 => 'Request Entity Too Large',
+            414 => 'Request-URI Too Long',
+            415 => 'Unsupported Media Type',
+            416 => 'Requested Range Not Satisfiable',
+            417 => 'Expectation Failed',
+            500 => 'Internal Server Error',
+            501 => 'Not Implemented',
+            502 => 'Bad Gateway',
+            503 => 'Service Unavailable',
+            504 => 'Gateway Timeout',
+            505 => 'HTTP Version Not Supported');
+
+        return $status[$code];
+    }
+
+    /**
+     * Set the header for a RESTful API depending on the code and 
+     * return content type which might be in html,xml or json
+     * 
+     * @param int $code The code of the message to return
+     * @param String $content_type The content type of the header
+     * 
+     */
+    public static function setHeaders($code = 500, $content_type = "html")
+    {
+        if (strcasecmp($content_type, 'json') == 0)
+        {
+            $content_type = "application/json; charset=utf-8";
+        }
+        elseif (strcasecmp($content_type, 'xml') == 0)
+        {
+            $content_type = "application/xml; charset=utf-8";
+        }
+        elseif (strcasecmp($content_type, 'html') == 0)
+        {
+            $content_type = "text/html; charset=utf-8";
+        }
+        header("Access-Control-Allow-Orgin: *");
+        header("Access-Control-Allow-Methods: *");
+        header("HTTP/1.1 " . $code . " " . self::getStatusMessage($code));
+        header("Content-Type:" . $content_type);
+    }
+
+    /**
+     * Deliver HTTP Response,HTTP Response header and HTTP response content type
+     * for snowflake's RESTful API and exit
+     * 
+     * @param mixed $data The desired HTTP response data 
+     * @param int $code the status code:200,500..., code and data to 
+     * return in the format specified
+     * @param string $content_type This contains format of
+     * The desired HTTP response content type: [json, html, xml]
+     * 
+     * @return mixed <b>HTTP Response Header and Data</b> on success or <b>FALSE</b> on failure.
+     * 
+     * */
+    public static function deliverResponseAndExit($data, $code, $content_type = 'html')
+    {
+
+        if (!$data)
+        {
             return false;
         }
-        if ($type == 'snowflakes') {
-            
-        } else if ($type == 'event') {
-            
-        } else if ($type == 'gallery') {
-            
-        } else if ($type == 'user') {
-            
+        $m_content_type = $content_type;
+        $m_code = ($code) ? $code : 200;
+        // Set HTTP Response and HTTP Response Content Type
+        self::setHeaders($m_code, $m_content_type);
+        // Process different content types
+        if (strcasecmp($m_content_type, 'json') == 0)
+        {
+            // Format data into a JSON response
+            $json_response = json_encode($data);
+            // Deliver formatted data
+            echo $json_response;
+        }
+        elseif (strcasecmp($m_content_type, 'xml') == 0)
+        {
+            // Format data into an XML response (This is only good at handling string data, not arrays)
+            $packages = new SimpleXMLElement("<SnoflakesData></SnoflakesData>");
+            $packages->addChild('code', $code);
+            $packages->addChild('data', $data);
+
+            //format for pretty printing
+            $dom = new DOMDocument('1.0', 'UTF-8');
+            $dom->preserveWhiteSpace = false;
+            $dom->formatOutput = true;
+            $dom->loadXML($packages->asXML());
+            $xmlResponse = $dom->saveXML();
+            header('Content-Length: ' . strlen($xmlResponse));
+            // Deliver formatted data
+            echo $xmlResponse;
+        }
+        elseif (strcasecmp($m_content_type, 'html') == 0)
+        {
+            // Deliver formatted data
+            echo $data;
+        }
+        die();
+    }
+
+    /**
+     * Replace Snowflakes Hash tags within the data string provided with 
+     * snoflakes configuration data
+     *  
+     *
+     * @param String $data that contains the string containing the hash symbols
+     * @param String $inifile <p> The configuration file </p> 
+     * @param String $shareURL <p> A share url for social sites. This value if set 
+     * replaces the #SHAREURL# tag in the data, because this is dynamic data and
+     * might change given if it is snowflakes, snowflake events or snowflake gallery</p>
+     * 
+     * @return mixed <b>Rss string</b> on success or <b>FALSE</b> on failure.
+     */
+    public static function replaceSFHashes(&$data, $inifile = '../config/config.ini', $shareURL = '')
+    {
+        if (!$data)
+        {
+            return false;
+        }
+        if (is_array($data))
+        {
+            foreach ($data as $key => $value)
+            {
+                self::replaceSFHashes($data[$key], $inifile, $shareURL);
+            }
+        }
+
+        $settingsConfig = Config::getConfig("settings", $inifile);
+        $Powerlink = $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png";
+        $UploadImgUrl = $settingsConfig['m_sfGalleryUrl'];
+        $imageMissing = $UploadImgUrl . "missing_default.png";
+
+        $newData = str_replace('#SNOWFLAKESURL#', $settingsConfig['m_sfUrl'], $data);
+        $newData1 = str_replace('#POWERLINK#', $Powerlink, $newData);
+        $newData2 = str_replace('#MISSINGIMG#', $imageMissing, $newData1);
+        $newData3 = str_replace('#SFGALLERYIMGURL#', $settingsConfig['m_sfGalleryImgUrl'], $newData2);
+        $newData4 = str_replace('#SFGALLERYTHUMBURL#', $settingsConfig['m_sfGalleryThumbUrl'], $newData3);
+        $data = $newData4;
+        if (strlen($shareURL) > 0)
+        {
+            $data = str_replace('#SHAREURL#', $shareURL, $newData4);
         }
     }
 
 }
 
-class databaseParam {
+class databaseParam
+{
 
     //Db Info           //config Name [db]
     var $m_hostName;    //host
@@ -3833,7 +4666,8 @@ class databaseParam {
      * 
      */
 
-    public function __construct($inifile = '../config/config.ini') {
+    public function __construct($inifile = '../config/config.ini')
+    {
         $this->init($inifile);
     }
 
@@ -3844,7 +4678,8 @@ class databaseParam {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function init($inifile = '../config/config.ini') {
+    public function init($inifile = '../config/config.ini')
+    {
         $m_data = Config::getConfig("db", $inifile);
         return $this->populate($m_data);
     }
@@ -3856,8 +4691,10 @@ class databaseParam {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function populate($array) {
-        if (empty($array) || !is_array($array)) {
+    public function populate($array)
+    {
+        if (empty($array) || !is_array($array))
+        {
             return false;
         }
         //Db Info           //config Name [db]
@@ -3876,7 +4713,8 @@ class databaseParam {
      * 
      * @return array The array of parameters used to connect to database.
      */
-    public function dbArray() {
+    public function dbArray()
+    {
         $sqlArray = array('type' => $this->m_dbType,
             'host' => $this->m_hostName,
             'username' => $this->m_dbUsername,
@@ -3888,7 +4726,8 @@ class databaseParam {
 
 }
 
-class dataDirParam {
+class dataDirParam
+{
 
     //datadir Info           //config Name [datadir]
     var $m_logdir;  //logdir
@@ -3905,7 +4744,8 @@ class dataDirParam {
      * @param String $inifile the ini config file for snowflakes API
      */
 
-    public function __construct($inifile = '../config/config.ini') {
+    public function __construct($inifile = '../config/config.ini')
+    {
         $this->init($inifile);
     }
 
@@ -3916,7 +4756,8 @@ class dataDirParam {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function init($inifile = '../config/config.ini') {
+    public function init($inifile = '../config/config.ini')
+    {
         $m_data = Config::getConfig("datadir", $inifile);
         return $this->populate($m_data);
     }
@@ -3928,8 +4769,10 @@ class dataDirParam {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function populate($array) {
-        if (empty($array)) {
+    public function populate($array)
+    {
+        if (empty($array))
+        {
             return false;
         }
         //datadir Info           //config Name [datadir]
@@ -3943,7 +4786,8 @@ class dataDirParam {
 
 }
 
-class settingsStruct {
+class settingsStruct
+{
 
     //Db Info           //config Name [db]
     var $m_hostName;    //host
@@ -3990,7 +4834,8 @@ class settingsStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function init($inifile = '../config/config.ini') {
+    public function init($inifile = '../config/config.ini')
+    {
         // create ini file if it doesn't exists
         Config::createConfig($inifile, true);
 
@@ -4006,8 +4851,10 @@ class settingsStruct {
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function populate($array) {
-        if (empty($array)) {
+    public function populate($array)
+    {
+        if (empty($array))
+        {
             return false;
         }
         $this->m_settingsarray = $array;
@@ -4060,8 +4907,10 @@ class settingsStruct {
      * 
      * @return mixed The <b>configuration data </b> in form of an array on success or <b>FALSE</b> on failure.
      */
-    public function setConfigItems($inifile = '../config/config.ini') {
-        if (empty($this->m_settingsarray)) {
+    public function setConfigItems($inifile = '../config/config.ini')
+    {
+        if (empty($this->m_settingsarray))
+        {
             return false;
         }
         return Config::saveConfig($this->m_settingsarray, $inifile);
@@ -4072,7 +4921,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SethostName($value) {
+    public function SethostName($value)
+    {
         //host
         $this->m_settingsarray["db"]["host"] = $value;
     }
@@ -4082,7 +4932,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetdbName($value) {
+    public function SetdbName($value)
+    {
         //dbname
         $this->m_settingsarray["db"]["dbname"] = $value;
     }
@@ -4092,7 +4943,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetdbType($value) {
+    public function SetdbType($value)
+    {
         //type
         $this->m_settingsarray["db"]["type"] = $value;
     }
@@ -4102,7 +4954,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetdbUsername($value) {
+    public function SetdbUsername($value)
+    {
         //username
         $this->m_settingsarray["db"]["username"] = $value;
     }
@@ -4113,15 +4966,20 @@ class settingsStruct {
      * @param String $value <p> The value of  configuration element to set</p> 
      * @param String $key <p> The password encryption key for the password</p> 
      */
-    public function SetdbPassword($value, $key = "") {
-        if (!$value) {
+    public function SetdbPassword($value, $key = "")
+    {
+        if (!$value)
+        {
             return false;
         }
         //password
-        if ($key !== "") {
+        if ($key !== "")
+        {
             $this->m_key = $key;
             $password = sfUtils::encrypt($value, $this->m_key);
-        } else {
+        }
+        else
+        {
             $password = $value;
         }
 
@@ -4133,7 +4991,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p>  
      */
-    public function Setadmin_email($value) {
+    public function Setadmin_email($value)
+    {
         //admin_email
         $this->m_settingsarray["db"]["admin_email"] = $value;
     }
@@ -4143,7 +5002,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SettimeZone($value) {
+    public function SettimeZone($value)
+    {
         //time_zone
         $this->m_settingsarray["db"]["time_zone"] = $value;
     }
@@ -4155,7 +5015,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p>  
      */
-    public function Seturl($value) {
+    public function Seturl($value)
+    {
         //url
         $this->m_settingsarray["settings"]["url"] = $value;
     }
@@ -4165,7 +5026,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetsfUrl($value) {
+    public function SetsfUrl($value)
+    {
         //m_sfUrl
         $this->m_settingsarray["settings"]["m_sfUrl"] = $value;
     }
@@ -4175,7 +5037,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p>  
      */
-    public function SetsfGalleryUrl($value) {
+    public function SetsfGalleryUrl($value)
+    {
         //m_sfGalleryUrl
         $this->m_settingsarray["settings"]["m_sfGalleryUrl"] = $value;
     }
@@ -4185,7 +5048,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetsfGalleryImgUrl($value) {
+    public function SetsfGalleryImgUrl($value)
+    {
         //m_sfGalleryImgUrl
         $this->m_settingsarray["settings"]["m_sfGalleryImgUrl"] = $value;
     }
@@ -4196,7 +5060,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetsfGalleryThumbUrl($value) {
+    public function SetsfGalleryThumbUrl($value)
+    {
         //m_sfGalleryThumbUrl 
         $this->m_settingsarray["settings"]["m_sfGalleryThumbUrl"] = $value;
     }
@@ -4207,7 +5072,8 @@ class settingsStruct {
      * 
      * @param int $value <p> The value of  configuration element to set</p> 
      */
-    public function SetthumbWidth($value) {
+    public function SetthumbWidth($value)
+    {
         //thumbWidth
         $this->m_settingsarray["settings"]["thumbWidth"] = $value;
     }
@@ -4218,7 +5084,8 @@ class settingsStruct {
      * 
      * @param int $value <p> The value of  configuration element to set</p> 
      */
-    public function SetthumbHeight($value) {
+    public function SetthumbHeight($value)
+    {
         //thumbHeight
         $this->m_settingsarray["settings"]["thumbHeight"] = $value;
     }
@@ -4229,7 +5096,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetmaxImageWidth($value) {
+    public function SetmaxImageWidth($value)
+    {
         //maxImageWidth
         $this->m_settingsarray["settings"]["maxImageWidth"] = $value;
     }
@@ -4240,7 +5108,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetimageExtList($value) {
+    public function SetimageExtList($value)
+    {
         //imageExtList
         $this->m_settingsarray["settings"]["imageExtList"] = $value;
     }
@@ -4251,7 +5120,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetimageTypesList($value) {
+    public function SetimageTypesList($value)
+    {
         //imageTypesList
         $this->m_settingsarray["settings"]["imageTypesList"] = $value;
     }
@@ -4262,7 +5132,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetsnowflakesResultUrl($value) {
+    public function SetsnowflakesResultUrl($value)
+    {
         //snowflakesResultUrl   // One snowflakes result
         $this->m_settingsarray["settings"]["snowflakesResultUrl"] = $value;
     }
@@ -4273,7 +5144,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetsnowflakesOutUrl($value) {
+    public function SetsnowflakesOutUrl($value)
+    {
         // snowflakesOutUrl     // All snowflakes output
         $this->m_settingsarray["settings"]["snowflakesOutUrl"] = $value;
     }
@@ -4284,7 +5156,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SeteventsResultUrl($value) {
+    public function SeteventsResultUrl($value)
+    {
         //eventsResultUrl        // One event result
         $this->m_settingsarray["settings"]["eventsResultUrl"] = $value;
     }
@@ -4295,7 +5168,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SeteventsOutputUrl($value) {
+    public function SeteventsOutputUrl($value)
+    {
         //eventsOutputUrl        //All event output
         $this->m_settingsarray["settings"]["eventsOutputUrl"] = $value;
     }
@@ -4306,7 +5180,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetgalleryResultUrl($value) {
+    public function SetgalleryResultUrl($value)
+    {
         //galleryResultUrl      // One gallery result
         $this->m_settingsarray["settings"]["galleryResultUrl"] = $value;
     }
@@ -4317,7 +5192,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p>  
      */
-    public function SetgalleryOutUrl($value) {
+    public function SetgalleryOutUrl($value)
+    {
         //galleryOutUrl           //All gallery output
 
         $this->m_settingsarray["settings"]["galleryOutUrl"] = $value;
@@ -4329,7 +5205,8 @@ class settingsStruct {
      * 
      * @param int $value <p> The value of  configuration element to set</p> 
      */
-    public function SetmaxImageSize($value) {
+    public function SetmaxImageSize($value)
+    {
         //maxImageSize
         $this->m_settingsarray["settings"]["maxImageSize"] = sfUtils::toByteSize($value);
     }
@@ -4342,7 +5219,8 @@ class settingsStruct {
      * @param String $section <p> The tag/element header name of the configuration element to set </p> 
      * 
      */
-    public function setCustom($section, $tag, $value) {
+    public function setCustom($section, $tag, $value)
+    {
         $this->m_settingsarray[$section][$tag] = $value;
     }
 
@@ -4351,7 +5229,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function Setpath($value) {
+    public function Setpath($value)
+    {
         //path
         $this->m_settingsarray["datadir"]["path"] = $value;
     }
@@ -4361,7 +5240,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function Setresources($value) {
+    public function Setresources($value)
+    {
         //resources
         $this->m_settingsarray["datadir"]["resources"] = $value;
     }
@@ -4371,7 +5251,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetuploadGalleryDir($value) {
+    public function SetuploadGalleryDir($value)
+    {
         //uploadGalleryDir
         $this->m_settingsarray["datadir"]["uploadGalleryDir"] = $value;
     }
@@ -4381,7 +5262,8 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p>  
      */
-    public function SetgalleryImgDir($value) {
+    public function SetgalleryImgDir($value)
+    {
         //galleryImgDir
         $this->m_settingsarray["datadir"]["galleryImgDir"] = $value;
     }
@@ -4391,223 +5273,10 @@ class settingsStruct {
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      */
-    public function SetgalleryThumbDir($value) {
+    public function SetgalleryThumbDir($value)
+    {
         //galleryThumbDir
         $this->m_settingsarray["datadir"]["galleryThumbDir"] = $value;
-    }
-
-}
-
-class sfWebservice {
-
-    var $m_allow = array();
-    var $m_content_type;
-    var $m_request = array();
-    var $m_method = "";
-    var $m_format = "json";
-    var $m_status = 404;
-    var $m_code = 0;
-    var $m_data = NULL;
-    var $m_path_info;
-    var $m_uri_parts;
-    // Define whether an HTTPS connection is required
-    var $HTTPS_required = FALSE;
-    // Define whether user authentication is required
-    var $authentication_required = FALSE;
-    // Define API response codes and their related HTTP response
-    var $api_response_code = array(
-        0 => array('HTTP Response' => 400, 'Message' => 'Unknown Error'),
-        1 => array('HTTP Response' => 200, 'Message' => 'Success'),
-        2 => array('HTTP Response' => 403, 'Message' => 'HTTPS Required'),
-        3 => array('HTTP Response' => 401, 'Message' => 'Authentication Required'),
-        4 => array('HTTP Response' => 401, 'Message' => 'Authentication Failed'),
-        5 => array('HTTP Response' => 404, 'Message' => 'Invalid Request'),
-        6 => array('HTTP Response' => 400, 'Message' => 'Invalid Response Format')
-    );
-    var $m_http_response_code = array(
-        100 => 'Continue',
-        101 => 'Switching Protocols',
-        200 => 'OK',
-        201 => 'Created',
-        202 => 'Accepted',
-        203 => 'Non-Authoritative Information',
-        204 => 'No Content',
-        205 => 'Reset Content',
-        206 => 'Partial Content',
-        300 => 'Multiple Choices',
-        301 => 'Moved Permanently',
-        302 => 'Found',
-        303 => 'See Other',
-        304 => 'Not Modified',
-        305 => 'Use Proxy',
-        306 => '(Unused)',
-        307 => 'Temporary Redirect',
-        400 => 'Bad Request',
-        401 => 'Unauthorized',
-        402 => 'Payment Required',
-        403 => 'Forbidden',
-        404 => 'Not Found',
-        405 => 'Method Not Allowed',
-        406 => 'Not Acceptable',
-        407 => 'Proxy Authentication Required',
-        408 => 'Request Timeout',
-        409 => 'Conflict',
-        410 => 'Gone',
-        411 => 'Length Required',
-        412 => 'Precondition Failed',
-        413 => 'Request Entity Too Large',
-        414 => 'Request-URI Too Long',
-        415 => 'Unsupported Media Type',
-        416 => 'Requested Range Not Satisfiable',
-        417 => 'Expectation Failed',
-        500 => 'Internal Server Error',
-        501 => 'Not Implemented',
-        502 => 'Bad Gateway',
-        503 => 'Service Unavailable',
-        504 => 'Gateway Timeout',
-        505 => 'HTTP Version Not Supported');
-
-    public function __construct() {
-        $this->inputs();
-    }
-
-    private function inputs() {
-
-        $this->m_path_info = filter_input(INPUT_SERVER, "PATH_INFO"); //e.g. index.php/authors/
-        $this->m_uri_parts = $this->parse_uri($this->m_path_info);
-        //$resource_type = $this->m_uri_parts['resource_type']; //e.g. "snowflake"
-        //$request = $this->m_uri_parts['request']; //anything after the resource type
-
-        $this->m_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
-        var_dump($this->m_method);
-        switch ($this->m_method) {
-            case "POST":
-                $this->m_request = $this->cleanInputs($_POST);
-                $this->m_format = $this->m_request['fmt'];
-                break;
-            case "GET":
-            case "DELETE":
-                $this->m_request = $this->cleanInputs($_GET);
-                $this->m_format = $this->m_request['fmt'];
-                break;
-            case "PUT":
-                parse_str(file_get_contents("php://input"), $this->m_request);
-                $this->m_request = $this->cleanInputs($this->m_request);
-                $this->m_format = $this->m_request['fmt'];
-                break;
-            default:
-                //$this->response('', 406);
-                break;
-        }
-    }
-
-    public function parse_uri($path_string) {
-        // $path_string is something like
-        // 'api.php/users/'
-        $path_parts = explode("/", $path_string);
-        $restype = $path_parts[1];
-        $req = $path_parts[2];
-
-        $ret_array = array();
-        $ret_array['resource_type'] = $restype;
-        $ret_array['request'] = $req;
-
-        return $ret_array;
-    }
-
-    private function cleanInputs($data) {
-        $clean_input = array();
-        if (is_array($data)) {
-            foreach ($data as $k => $v) {
-                $clean_input[$k] = $this->cleanInputs($v);
-            }
-        } else {
-            if (get_magic_quotes_gpc()) {
-                $data = trim(stripslashes($data));
-            }
-            $data = strip_tags($data);
-            $clean_input = trim($data);
-        }
-        return $clean_input;
-    }
-
-    public function get_referer() {
-        return filter_input(INPUT_SERVER, "HTTP_REFERER");
-    }
-
-    public function response($data, $status) {
-        $this->m_status = ($status) ? $status : 200;
-        $this->set_headers();
-        echo $data;
-        exit;
-    }
-
-    private function get_status_message() {
-        return ($this->m_http_response_code[$this->m_status]) ? $this->m_http_response_code[$this->m_status] : $this->m_http_response_code[500];
-    }
-
-    private function set_headers($content_type = "json") {
-        if (strcasecmp($content_type, 'json') == 0) {
-            $this->m_content_type = "application/json; charset=utf-8";
-        } elseif (strcasecmp($content_type, 'xml') == 0) {
-            $this->m_content_type = "application/xml; charset=utf-8";
-        } else {
-            $this->m_content_type = "text/html; charset=utf-8";
-        }
-        $this->m_content_type = $content_type;
-        header("HTTP/1.1 " . $this->m_status . " " . $this->get_status_message());
-        header("Content-Type:" . $this->m_content_type);
-    }
-
-    /**
-     * Deliver HTTP Response and HTTP response content type
-     * 
-     * @param String $api_response The desired HTTP response data which contains format of
-     * The desired HTTP response content type: [json, html, xml], the status code:200,
-     * 500..., code and data to return in the format specified
-     * 
-     * @return mixed <b>HTTP Response Data</b> on success or <b>FALSE</b> on failure.
-     * 
-     * */
-    public function deliverResponseAndExit($data, $code, $status = '', $format = '') {
-
-        if (!$data) {
-            return false;
-        }
-
-        $this->m_status = $status != '' ? $status : $this->m_status;
-        $this->m_format = $format != '' ? $format : $this->m_format;
-
-        // Set HTTP Response and HTTP Response Content Type
-        $this->set_headers($this->m_format);
-
-        // Process different content types
-        if (strcasecmp($this->m_format, 'json') == 0) {
-
-            // Format data into a JSON response
-            $json_response = json_encode($data);
-
-            // Deliver formatted data
-            echo $json_response;
-        } elseif (strcasecmp($this->m_format, 'xml') == 0) {
-
-            // Format data into an XML response (This is only good at handling string data, not arrays)
-            $xmlResponse = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
-                    '<SnoflakesResponse>' . "\n" .
-                    "\t" . '<code>' . $code . '</code>' . "\n" .
-                    "\t" . '<data>' . "\n" .
-                    $data . "\n" .
-                    "\t" . '</data>' . "\n" .
-                    '</SnoflakesResponse>';
-
-            header('Content-Length: ' . strlen($xmlResponse));
-            // Deliver formatted data
-            echo $xmlResponse;
-        } else {
-            // Deliver formatted data
-            echo $data;
-        }
-        die();
     }
 
 }
