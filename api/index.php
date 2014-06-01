@@ -1,18 +1,16 @@
 <?php
 
-require_once 'lib/sf.php';
-require_once 'lib/sfConnect.php';
-require_once 'config/Config.php';
-?>
-<?php
+require_once '../lib/sf.php';
+require_once '../lib/sfConnect.php';
+require_once '../config/Config.php';
 
 $sfty = filter_input(INPUT_GET, 'sfty') ? filter_input(INPUT_GET, 'sfty') : 'snowflake';
 $contentType = filter_input(INPUT_GET, 'cty') ? filter_input(INPUT_GET, 'cty') : 'html';
-$config = new databaseParam('config/config.ini');
+$config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
-$settingsConfig = Config::getConfig("settings", 'config/config.ini');
+$settingsConfig = Config::getConfig("settings", '../config/config.ini');
 $UploadImgUrl = $settingsConfig['m_sfGalleryUrl'];
 $imageMissing = $UploadImgUrl . "missing_default.png";
 
@@ -55,7 +53,7 @@ else if ($sfty == 'gallery' && ($contentType == 'html' || $contentType == 'jsonh
             <!--topbar End--> ';
 }
 
-sfUtils::replaceSFHashes($data, 'config/config.ini');
+sfUtils::replaceSFHashes($data, '../config/config.ini');
 
 foreach ($row_rsOut as $key => $value)
 {
@@ -83,7 +81,7 @@ foreach ($row_rsOut as $key => $value)
     if (strcasecmp($contentType, 'xml') == 0)
     {
         $some = $snowflakeTypeList[$key]->toXml() . "\n";
-        sfUtils::replaceSFHashes($some, 'config/config.ini', $Shareurl);
+        sfUtils::replaceSFHashes($some, '../config/config.ini', $Shareurl);
         $data .= $some;
     }
     elseif (strcasecmp($contentType, 'json') == 0)
@@ -93,13 +91,13 @@ foreach ($row_rsOut as $key => $value)
             $data = array();
         }
         $arr = $snowflakeTypeList[$key]->toArray();
-        sfUtils::replaceSFHashes($arr, 'config/config.ini', $Shareurl);
+        sfUtils::replaceSFHashes($arr, '../config/config.ini', $Shareurl);
         array_push($data, $arr);
     }
     elseif (strcasecmp($contentType, 'jsonhtml') == 0)
     {
         $some = $snowflakeTypeList[$key]->toHTML();
-        sfUtils::replaceSFHashes($some, 'config/config.ini', $Shareurl);
+        sfUtils::replaceSFHashes($some, '../config/config.ini', $Shareurl);
         $data.= $some;
         if ($sfty == 'gallery')
         {
@@ -111,7 +109,7 @@ foreach ($row_rsOut as $key => $value)
     elseif (strcasecmp($contentType, 'html') == 0)
     {
         $some = $snowflakeTypeList[$key]->toHTML();
-        sfUtils::replaceSFHashes($some, 'config/config.ini', $Shareurl);
+        sfUtils::replaceSFHashes($some, '../config/config.ini', $Shareurl);
         $data.= $some;
         if ($sfty == 'gallery')
         {

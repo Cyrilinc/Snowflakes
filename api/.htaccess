@@ -1,0 +1,6 @@
+# Turn on the rewrite engine
+Options +FollowSymLinks
+RewriteEngine on
+
+# Request routing
+RewriteRule ^([a-zA-Z_-]*)\.(html|json|xml)?$ index.php?sfty=$1&cty=$2 [nc,qsa]
