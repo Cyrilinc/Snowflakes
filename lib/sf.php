@@ -4982,6 +4982,7 @@ class settingsStruct
         {
             $this->m_key = $key;
             $password = sfUtils::encrypt($value, $this->m_key);
+            $this->m_settingsarray["db"]["key"] = $key;
         }
         else
         {
