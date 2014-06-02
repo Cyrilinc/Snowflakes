@@ -72,11 +72,14 @@ if (isset($_SESSION['MM_Username'])) {
 
 $config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
-$SFconnects->connect(); // Connect to database
+$connected = $SFconnects->connect(); // Connect to database
+
+if(!$connected){
+    $formmessage.= sfUtils::sfPromptMessage("Snowflakes could not connect to database.".$SFconnects->getMessage(),'error');
+}
 
 $user = new userStruct();
 $user->getUserByUsername($SFconnects, $colname_rsAdmin);
-
 
 $editFormAction = $php_self;
 if (isset($query_string)) {

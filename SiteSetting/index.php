@@ -66,11 +66,15 @@ if (isset($query_string))
 {
     $editFormAction .= "?" . htmlentities($query_string);
 }
-
+$Message = "";
 $config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
-$SFconnects->connect(); // Connect to database
-$Message = "";
+$connected = $SFconnects->connect(); // Connect to database
+
+if(!$connected){
+    $Message.= sfUtils::sfPromptMessage("Snowflakes could not connect to database.".$SFconnects->getMessage(),'error');
+}
+
 $MM_update = filter_input(INPUT_POST, 'MM_update');
 if ((isset($MM_update)) && ($MM_update == "form1"))
 {

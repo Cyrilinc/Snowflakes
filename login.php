@@ -11,7 +11,11 @@ if (!$config) {
     $setupLink = "install/index.php";
 }
 $SFconnects = new sfConnect($config->dbArray());
-$SFconnects->connect(); // Connect to database
+$connected = $SFconnects->connect(); // Connect to database
+
+if(!$connected){
+    $loginMessage.= sfUtils::sfPromptMessage("Snowflakes could not connect to database.".$SFconnects->getMessage(),'error');
+}
 
 if (!sfUtils::settimezone($config->m_time_zone)) {
     $loginMessage.=sfUtils::sfPromptMessage('Snowflakes could not set the site timezone.','error');
@@ -27,6 +31,7 @@ $loginFormAction = $php_self;
 $accesscheck = filter_input(INPUT_GET, 'accesscheck');
 if (isset($accesscheck)) {
     $_SESSION['PrevUrl'] = $accesscheck;
+    echo $accesscheck;
 }
 $post_username = filter_input(INPUT_POST, 'username');
 

@@ -86,7 +86,11 @@ else
 <?php
 $config = new databaseParam('config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
-$SFconnects->connect(); // Connect to database
+$connected = $SFconnects->connect(); // Connect to database
+
+if(!$connected){
+    $formmessage.= sfUtils::sfPromptMessage("Snowflakes could not connect to database.".$SFconnects->getMessage(),'error');
+}
 
 $colname_rsAdmin = "-1";
 if (isset($_SESSION['MM_Username']))

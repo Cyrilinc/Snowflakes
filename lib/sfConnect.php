@@ -184,7 +184,7 @@ class sfConnect
         $pass = $this->getAttribute('password');
         $host = $this->getAttribute('host');
         $dbname = $this->getAttribute('database');
-
+        
         if (!$user || !$pass || !$host)
         {
             $this->setStatus(false);
@@ -257,12 +257,13 @@ class sfConnect
             }
 
             $this->setAttribute('link', $this->m_sfConnect);
-            $this->fetch("SHOW VARIABLES LIKE 'version'", false);
+            $this->fetch("SHOW VARIABLES LIKE 'version';", false);
             $ver = $this->getResultArray();
             if ($ver)
             {
                 $this->setAttribute('version', $ver[0]['Value']);
             }
+            return $this->getStatus();
         }
     }
 

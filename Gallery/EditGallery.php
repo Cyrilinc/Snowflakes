@@ -120,7 +120,10 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
 <?php
 $config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
-$SFconnects->connect(); // Connect to database
+$connected = $SFconnects->connect(); // Connect to database
+if(!$connected){
+    $GalleryMessage.= sfUtils::sfPromptMessage("Snowflakes could not connect to database.".$SFconnects->getMessage(),'error');
+}
 
 $editFormAction = $php_self;
 if (isset($query_string)) {

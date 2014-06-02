@@ -24,7 +24,10 @@ if (isset($Post_password)) {
 
     $config = new databaseParam('config/config.ini');
     $SFconnects = new sfConnect($config->dbArray());
-    $SFconnects->connect(); // Connect to database
+    $connected = $SFconnects->connect(); // Connect to database
+    if(!$connected){
+        $resetMessage.= sfUtils::sfPromptMessage("Snowflakes could not connect to database.".$SFconnects->getMessage(),'error');
+    }
 
     $passwordReset = sfUtils::resetPassword($SFconnects, $password, $oldResetLink);
     if ($passwordReset) {

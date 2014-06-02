@@ -89,7 +89,11 @@ if (isset($query_string))
 
 $config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
-$SFconnects->connect(); // Connect to database
+$connected = $SFconnects->connect(); // Connect to database
+
+if(!$connected){
+    $formmessage.= sfUtils::sfPromptMessage("Snowflakes could not connect to database.".$SFconnects->getMessage(),'error');
+}
 
 $MM_update = filter_input(INPUT_POST, 'MM_update');
 $viewLink = "";

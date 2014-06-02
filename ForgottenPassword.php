@@ -5,7 +5,12 @@ require_once 'config/Config.php';
 
 $config = new databaseParam('config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
-$SFconnects->connect(); // Connect to database
+$connected = $SFconnects->connect(); // Connect to database
+$forgottenMsg = '';
+if(!$connected){
+    $forgottenMsg.= sfUtils::sfPromptMessage("Snowflakes could not connect to database.".$SFconnects->getMessage(),'error');
+}
+
 ?>
 <?php
 // *** Validate request to login to this site.
@@ -18,7 +23,7 @@ $accesscheck = filter_input(INPUT_GET, 'accesscheck');
 if (isset($accesscheck)) {
     $_SESSION['PrevUrl'] = $accesscheck;
 }
-$forgottenMsg = '';
+
 $resetPass = false;
 $MM_forget = filter_input(INPUT_POST, 'MM_forget');
 $email = filter_input(INPUT_POST, 'email');
