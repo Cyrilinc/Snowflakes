@@ -95,7 +95,7 @@
  * from panels as the user clicks on the tabs within the Accordion.
  */
 .AccordionPanelOpen .AccordionPanelTab {
-	background-color: #40add8;
+	background-color: #2b2b2b;
 }
 
 /* This is an example of how to change the appearance of the panel tab as the
@@ -103,10 +103,10 @@
  * and removed from panel tab containers as the mouse enters and exits the tab container.
  */
 .AccordionPanelTabHover {
-	color: #ffffff;
+	color: #fafafa;
 }
 .AccordionPanelOpen .AccordionPanelTabHover {
-	color: #555555;
+	color: #fafafa;
 }
 
 /* This is an example of how to change the appearance of all the panel tabs when the
