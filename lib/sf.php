@@ -2599,7 +2599,7 @@ final class sfUtils
         echo "data: \"id\": $id\n";
         echo "data: }\n";
         echo PHP_EOL;
-        ob_flush();
+        
         flush();
     }
 
