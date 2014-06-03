@@ -2,11 +2,12 @@ Snowflakes
 ==========
 
 Snowflakes is a Content Management System and Web publishing software.
-###The Features includes:
+###Snowflakes Features
 
 Creating,Editing and managing posts called snowflakes, Snowflakes events and
-Snowflakes gallery keeping in mind Role based access control(RBAC) for users which 
-consists of 
+Snowflakes gallery keeping in mind Role based access control(RBAC) which 
+consists users as mentioned below
+
 **Author/Editor** - Can Create snowflakes,snowflake Events and gallery but not publish
 
 **Publisher** - 
@@ -25,4 +26,19 @@ One can also call the API in correspondence to the above example snowflakesv2.cy
 
 Other parts of the API are in Out.php files in the starting snowflakes directory and is always in html format.
 To see all published snowflakes i will use e.g snowflakesv2.cyrilinc.co.uk/Out.php, snowflakesv2.cyrilinc.co.uk/Events/Out.php for events and snowflakesv2.cyrilinc.co.uk/Gallery/Out.php for Gallery all of which contains pagination with **First**,**Previous**,**Next** and **Last** buttons to allow user to view more data.
+
+**Snowflakes** has tools for Super Administrator and Administrator to run maintenance tools for snowflakes so that excessive images or files can be managed for the gallery,
+the Super Administrator (usually the user that sets up snowflakes) can change the site settings/configuration and manage other users as well as view audited logs of every user using the snowflakes
+installed on one's site.
+
+###Snowflakes Requirements
+Snowflakes API is written Entirely in PHP so requires it Requires **PHP 5.4** at most but has been tested and works on **PHP 5.1** upwards.
+
+Snowflakes also requires MYSQL driver for PHP and **MYSQL version 5.1** and Upwards.
+
+Snowflakes has the potential to be used with different databases, such as SQLite,MSSQL,Sybase,PostgreSQL,Oracle and so on but hasn't been implemented yet.
+
+Snowflakes also requires **Apache version 2.2.19** upwards, as its hasn't been tested in anything lower than **Apache version 2.2.19**.
+
+ 
 
