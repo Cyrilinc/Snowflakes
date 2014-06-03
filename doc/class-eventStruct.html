@@ -93,6 +93,46 @@
 	<h1>Class eventStruct</h1>
 
 
+	<div class="description">
+	Class thats stores information about a Snowflake event from
+<p>The identifier(id) of the snowflake event.</p>
+
+<p>The title of the Snowflake event.</p>
+
+<p>The body text of the snowflake event.</p>
+
+<p>The Image name of the snowflake event usually stored in the default upload
+directory.</p>
+
+<p>The event date.</p>
+
+<p>The event time.</p>
+
+<p>The end event date.</p>
+
+<p>The end event time.</p>
+
+<p>The location of the event/Full address of the event.</p>
+
+<p>The latitude and logitue location of the event.</p>
+
+<p>The date and time the snowflake event was created.</p>
+
+<p>The User userStruct username who created the Snowflake.</p>
+
+<p>The date and time the snowflake was modified.</p>
+
+<p>The User userStruct username who modified the Snowflake</p>
+
+<p>The deleted value if a user who is not the owner of this snowflake has
+requested a delete</p>
+
+<p>The flake it value of a snowflake usually an integer, people who likes or
+supports the snowflake flakes it.</p>
+
+<p>The Image Directory where the snowflake image is stored</p>
+
+	</div>
 
 
 
@@ -110,7 +150,7 @@
 
 				<b>Author:</b>
 				Cyril Adelekan<br />
-		<b>Located at</b> <a href="source-class-eventStruct.html#1322-1788" title="Go to source code">lib/sf.php</a><br />
+		<b>Located at</b> <a href="source-class-eventStruct.html#1380-1870" title="Go to source code">lib/sf.php</a><br />
 	</div>
 
 
@@ -128,7 +168,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isPopulated">#</a>
-		<code><a href="source-class-eventStruct.html#1345-1353" title="Go to source code">isPopulated</a>( )</code>
+		<code><a href="source-class-eventStruct.html#1427-1435" title="Go to source code">isPopulated</a>( )</code>
 
 		<div class="description short">
 			
@@ -165,7 +205,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_populate">#</a>
-		<code><a href="source-class-eventStruct.html#1355-1387" title="Go to source code">populate</a>( <span>array <var>$array</var></span> )</code>
+		<code><a href="source-class-eventStruct.html#1437-1469" title="Go to source code">populate</a>( <span>array <var>$array</var></span> )</code>
 
 		<div class="description short">
 			
@@ -207,7 +247,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getEventByid">#</a>
-		<code><a href="source-class-eventStruct.html#1389-1418" title="Go to source code">getEventByid</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span> )</code>
+		<code><a href="source-class-eventStruct.html#1471-1500" title="Go to source code">getEventByid</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -254,7 +294,7 @@ identifier) of the event record</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getImageNameById">#</a>
-		<code><a href="source-class-eventStruct.html#1420-1447" title="Go to source code">getImageNameById</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span> )</code>
+		<code><a href="source-class-eventStruct.html#1502-1529" title="Go to source code">getImageNameById</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -298,7 +338,7 @@ identifier) of the event record</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_AddEvent">#</a>
-		<code><a href="source-class-eventStruct.html#1449-1482" title="Go to source code">AddEvent</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
+		<code><a href="source-class-eventStruct.html#1531-1564" title="Go to source code">AddEvent</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -342,7 +382,7 @@ provided that all the mandatory members of <code><a href="class-eventStruct.html
 
 		<td class="name"><div>
 		<a class="anchor" href="#_UpdateEvent">#</a>
-		<code><a href="source-class-eventStruct.html#1484-1514" title="Go to source code">UpdateEvent</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
+		<code><a href="source-class-eventStruct.html#1566-1596" title="Go to source code">UpdateEvent</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -386,7 +426,7 @@ provided that all the mandatory members of <code><a href="class-eventStruct.html
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteEvent">#</a>
-		<code><a href="source-class-eventStruct.html#1516-1556" title="Go to source code">deleteEvent</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>boolean <var>$setDelete</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-eventStruct.html#1598-1638" title="Go to source code">deleteEvent</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>boolean <var>$setDelete</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -433,7 +473,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getEventID">#</a>
-		<code><a href="source-class-eventStruct.html#1558-1602" title="Go to source code">getEventID</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
+		<code><a href="source-class-eventStruct.html#1640-1684" title="Go to source code">getEventID</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -475,7 +515,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_printEvents">#</a>
-		<code><a href="source-class-eventStruct.html#1604-1630" title="Go to source code">printEvents</a>( )</code>
+		<code><a href="source-class-eventStruct.html#1686-1712" title="Go to source code">printEvents</a>( )</code>
 
 		<div class="description short">
 			
@@ -512,7 +552,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toArray">#</a>
-		<code><a href="source-class-eventStruct.html#1632-1669" title="Go to source code">toArray</a>( )</code>
+		<code><a href="source-class-eventStruct.html#1714-1751" title="Go to source code">toArray</a>( )</code>
 
 		<div class="description short">
 			
@@ -549,7 +589,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toJson">#</a>
-		<code><a href="source-class-eventStruct.html#1671-1680" title="Go to source code">toJson</a>( )</code>
+		<code><a href="source-class-eventStruct.html#1753-1762" title="Go to source code">toJson</a>( )</code>
 
 		<div class="description short">
 			
@@ -586,7 +626,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toHTML">#</a>
-		<code><a href="source-class-eventStruct.html#1682-1743" title="Go to source code">toHTML</a>( )</code>
+		<code><a href="source-class-eventStruct.html#1764-1825" title="Go to source code">toHTML</a>( )</code>
 
 		<div class="description short">
 			
@@ -625,7 +665,7 @@ string</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toXml">#</a>
-		<code><a href="source-class-eventStruct.html#1745-1786" title="Go to source code">toXml</a>( )</code>
+		<code><a href="source-class-eventStruct.html#1827-1868" title="Go to source code">toXml</a>( )</code>
 
 		<div class="description short">
 			
@@ -673,7 +713,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1325" title="Go to source code"><var>$m_id</var></a>
+				<a href="source-class-eventStruct.html#1407" title="Go to source code"><var>$m_id</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -696,7 +736,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1326" title="Go to source code"><var>$m_uuid</var></a>
+				<a href="source-class-eventStruct.html#1408" title="Go to source code"><var>$m_uuid</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -719,7 +759,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1327" title="Go to source code"><var>$m_title</var></a>
+				<a href="source-class-eventStruct.html#1409" title="Go to source code"><var>$m_title</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -742,7 +782,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1328" title="Go to source code"><var>$m_body_text</var></a>
+				<a href="source-class-eventStruct.html#1410" title="Go to source code"><var>$m_body_text</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -765,7 +805,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1329" title="Go to source code"><var>$m_publish</var></a>
+				<a href="source-class-eventStruct.html#1411" title="Go to source code"><var>$m_publish</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -788,7 +828,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1330" title="Go to source code"><var>$m_image_name</var></a>
+				<a href="source-class-eventStruct.html#1412" title="Go to source code"><var>$m_image_name</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -811,7 +851,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1331" title="Go to source code"><var>$m_event_time</var></a>
+				<a href="source-class-eventStruct.html#1413" title="Go to source code"><var>$m_event_time</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -834,7 +874,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1332" title="Go to source code"><var>$m_event_date</var></a>
+				<a href="source-class-eventStruct.html#1414" title="Go to source code"><var>$m_event_date</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -857,7 +897,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1333" title="Go to source code"><var>$m_end_time</var></a>
+				<a href="source-class-eventStruct.html#1415" title="Go to source code"><var>$m_end_time</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -880,7 +920,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1334" title="Go to source code"><var>$m_end_date</var></a>
+				<a href="source-class-eventStruct.html#1416" title="Go to source code"><var>$m_end_date</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -903,7 +943,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1335" title="Go to source code"><var>$m_location</var></a>
+				<a href="source-class-eventStruct.html#1417" title="Go to source code"><var>$m_location</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -926,7 +966,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1336" title="Go to source code"><var>$m_lat_long</var></a>
+				<a href="source-class-eventStruct.html#1418" title="Go to source code"><var>$m_lat_long</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -949,7 +989,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1337" title="Go to source code"><var>$m_created</var></a>
+				<a href="source-class-eventStruct.html#1419" title="Go to source code"><var>$m_created</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -972,7 +1012,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1338" title="Go to source code"><var>$m_created_by</var></a>
+				<a href="source-class-eventStruct.html#1420" title="Go to source code"><var>$m_created_by</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -995,7 +1035,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1339" title="Go to source code"><var>$m_edited</var></a>
+				<a href="source-class-eventStruct.html#1421" title="Go to source code"><var>$m_edited</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1018,7 +1058,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1340" title="Go to source code"><var>$m_edited_by</var></a>
+				<a href="source-class-eventStruct.html#1422" title="Go to source code"><var>$m_edited_by</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1041,7 +1081,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1341" title="Go to source code"><var>$m_deleted</var></a>
+				<a href="source-class-eventStruct.html#1423" title="Go to source code"><var>$m_deleted</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1064,7 +1104,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1342" title="Go to source code"><var>$m_flake_it</var></a>
+				<a href="source-class-eventStruct.html#1424" title="Go to source code"><var>$m_flake_it</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1087,7 +1127,7 @@ string</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-eventStruct.html#1343" title="Go to source code"><var>$m_image_dir</var></a>
+				<a href="source-class-eventStruct.html#1425" title="Go to source code"><var>$m_image_dir</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>

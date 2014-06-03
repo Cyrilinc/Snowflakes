@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This Contains all the classes and tools for handling data 
+ * This Contains all the classes and tools for handling Snowflakes data 
  *
  * @author Cyril Adelekan
  */
@@ -13,7 +13,22 @@ set_error_handler("sfLogError::sfErrorHandler");
 date_default_timezone_set('Europe/London');
 
 /**
- * Class thats stores infromation for Snowflakes
+ * Class thats stores information about a Snowflake
+ * from 
+ * <p>The identifier(id) of the snowflake.</p>
+ * <p>The title of the Snowflake.</p>
+ * <p>The body text of the snowflake.</p>
+ * <p>The Image name of the snowflake usually stored in the default upload directory.</p>
+ * <p>The gallery {@link galleryStruct identifier and title} attached to this snowflake which usually require the gallery to 
+ * already be created before it is attached to a Snowflake.</p>
+ * <p>The date and time the snowflake was created.</p>
+ * <p>The User {@link userStruct username} who created the Snowflake.</p>
+ * <p>The date and time the snowflake was modified.</p>
+ * <p>The User {@link userStruct username} who modified the Snowflake</p>
+ * <p>The deleted value if a user who is not the owner of this snowflake has requested a delete</p>
+ * <p>The flake it value of a snowflake usually an integer, people who likes or supports the snowflake flakes it.</p>
+ * <p>The Image Directory where the snowflake image is stored</p>
+ * 
  *
  * @author Cyril Adelekan
  */
@@ -446,6 +461,26 @@ class snowflakeStruct
     }
 
 }
+
+/**
+ * Class thats stores information about a User
+ * from 
+ * <p>The identifier(id) of the User.</p>
+ * <p>The username of the User.</p>
+ * <p>The password of the User.</p>
+ * <p>The email of the User.</p>
+ * <p>The access level of User.</p>
+ * <p>The access level name.</p>
+ * <p>The Reset link for the user to reset passwords.</p>
+ * <p>The deleted value if a user who is not the owner of this user has requested a delete.</p>
+ * <p>The flake it value of a snowflake usually an integer, people who likes or supports the snowflake flakes it.</p>
+ * <p>The Log in status of a user.</p>
+ * <p>The last date and time the user logged in.</p>
+ * <p>The Image Directory where the snowflake image is stored.</p>
+ * 
+ *
+ * @author Cyril Adelekan
+ */
 
 class userStruct
 {
@@ -944,6 +979,27 @@ class userStruct
 
 }
 
+/**
+ * Class thats stores information about a Gallery
+ * from 
+ * <p>The identifier(id) of the Gallery.</p>
+ * <p>The title of the Gallery.</p>
+ * <p>The Thumbnail image name to all the images Gallery, usually comma seperated.</p>
+ * <p>The Image name to all the images Gallery, usually comma seperated.</p>
+ * <p>The image caption to all the images Gallery, usually comma seperated.</p>
+ * <p>The date and time the gallery was created.</p>
+ * <p>The User {@link userStruct username} who created the gallery.</p>
+ * <p>The date and time the gallery was modified.</p>
+ * <p>The User {@link userStruct username} who modified the gallery.</p>
+ * <p>The deleted value if a user who is not the owner of this gallery has requested a delete.</p>
+ * <p>The flake it value of a gallery usually an integer, people who likes or supports the gallery flakes it.</p>
+ * <p>The Image Directory where the gallery image is stored.</p>
+ * <p>The Image Directory where the gallery thumb image is stored.</p>
+ * 
+ *
+ * @author Cyril Adelekan
+ */
+
 class galleryStruct
 {
 
@@ -1318,6 +1374,32 @@ class galleryStruct
     }
 
 }
+
+
+/**
+ * Class thats stores information about a Snowflake event
+ * from 
+ * <p>The identifier(id) of the snowflake event.</p>
+ * <p>The title of the Snowflake event.</p>
+ * <p>The body text of the snowflake event.</p>
+ * <p>The Image name of the snowflake event usually stored in the default upload directory.</p>
+ * <p>The event date.</p>
+ * <p>The event time.</p>
+ * <p>The end event date.</p>
+ * <p>The end event time.</p>
+ * <p>The location of the event/Full address of the event.</p>
+ * <p>The latitude and logitue location of the event.</p>
+ * <p>The date and time the snowflake event was created.</p>
+ * <p>The User {@link userStruct username} who created the Snowflake.</p>
+ * <p>The date and time the snowflake was modified.</p>
+ * <p>The User {@link userStruct username} who modified the Snowflake</p>
+ * <p>The deleted value if a user who is not the owner of this snowflake has requested a delete</p>
+ * <p>The flake it value of a snowflake usually an integer, people who likes or supports the snowflake flakes it.</p>
+ * <p>The Image Directory where the snowflake image is stored</p>
+ * 
+ *
+ * @author Cyril Adelekan
+ */
 
 class eventStruct
 {

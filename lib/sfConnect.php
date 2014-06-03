@@ -2,7 +2,7 @@
 
 /**
  * Description of sfConnect
- * sfConnect is used to connect to the database,
+ * <p>sfConnect is used to connect to the database  Usually Mysql Database.</p>
  * 
  * @author Cyril Adelekan
  */
