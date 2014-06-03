@@ -2260,19 +2260,19 @@ final class sfUtils
         switch ($number)
         {
             case 1:
-                $userName = "Author/Editor"; /// Create snowflakes Events and gallery but but not publish
+                $userName = "Author/Editor"; /// Create snowflakes Events and gallery but not publish
                 break;
             case 2:
                 $userName = "Publisher"; /// Can do all the roles of an Author/Editor and publish and unpublish flakes and can only add, edit, veiw or delete own snowflakes
                 break;
             case 3:
-                $userName = "Manager"; //Can do all the role of the publisher and also add, edit, veiw or delete all snowflakes
+                $userName = "Manager"; //Can do all the role of the publisher and also add, edit, view or delete all snowflakes
                 break;
             case 4:
                 $userName = "Administrator"; // Can do everything a manager can do as well as add and remove users
                 break;
             case 5:
-                $userName = "Super Administrator"; // Can do everything an adminstrator can do and also change system settings for snowflake
+                $userName = "Super Administrator"; // Can do everything an Administrator can do and also change system settings for snowflake
                 break;
             default :
                 $userName = "";
