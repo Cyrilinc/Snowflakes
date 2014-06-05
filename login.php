@@ -31,7 +31,6 @@ $loginFormAction = $php_self;
 $accesscheck = filter_input(INPUT_GET, 'accesscheck');
 if (isset($accesscheck)) {
     $_SESSION['PrevUrl'] = $accesscheck;
-    echo $accesscheck;
 }
 $post_username = filter_input(INPUT_POST, 'username');
 

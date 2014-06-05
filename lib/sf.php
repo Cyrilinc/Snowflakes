@@ -4741,6 +4741,7 @@ class databaseParam
     var $m_dbType;      //type
     var $m_dbUsername;  //username
     var $m_dbPassword;  //password
+    var $m_isenc;       //flag to indicate if password is encrypted
     var $m_key;         //key
     var $m_admin_email; //admin_email
     var $m_time_zone;   //time_zone
@@ -4792,6 +4793,7 @@ class databaseParam
         $this->m_dbPassword = $array['password'];
         $this->m_admin_email = $array['admin_email'];
         $this->m_time_zone = $array['time_zone'];
+        $this->m_isenc= $array['isenc'];
         $this->m_key = "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
     }
 
@@ -4805,9 +4807,9 @@ class databaseParam
         $sqlArray = array('type' => $this->m_dbType,
             'host' => $this->m_hostName,
             'username' => $this->m_dbUsername,
-            'password' => sfUtils::decrypt($this->m_dbPassword, $this->m_key),
+            'password' => $this->m_isenc==="Y"?sfUtils::decrypt($this->m_dbPassword, $this->m_key):$this->m_dbPassword,
             'database' => $this->m_dbName);
-
+        
         return $sqlArray;
     }
 
@@ -5052,15 +5054,16 @@ class settingsStruct
      * 
      * @param String $value <p> The value of  configuration element to set</p> 
      * @param String $key <p> The password encryption key for the password</p> 
+     * @param bool $encrypt <p> The flag to detemine if the password should be encrypted or not</p> 
      */
-    public function SetdbPassword($value, $key = "")
+    public function SetdbPassword($value, $key = "",$encrypt = true)
     {
         if (!$value)
         {
             return false;
         }
         //password
-        if ($key !== "")
+        if ($key !== "" && $encrypt =='Y')
         {
             $this->m_key = $key;
             $password = sfUtils::encrypt($value, $this->m_key);
@@ -5070,7 +5073,7 @@ class settingsStruct
         {
             $password = $value;
         }
-
+        $this->m_settingsarray["db"]["isenc"] = $encrypt=='Y'?$encrypt:'N';
         $this->m_settingsarray["db"]["password"] = $password;
     }
 

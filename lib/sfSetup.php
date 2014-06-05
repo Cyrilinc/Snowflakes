@@ -28,6 +28,7 @@ class snowflakesSetUp
     var $m_timeZone;
     public $m_Message = "<b>Snowflakes </b> <br>";
     public $m_outcomeMessage = "<b>Snowflakes </b> <br>";
+    var $m_encrypt;
 
     /*
      * Tables for Snowflakes
@@ -82,6 +83,14 @@ class snowflakesSetUp
         $loginUrl = str_replace("install/sfInstall.php", "login.php", sfUtils::curPageURL());
         $key = "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
         $inifile = '../config/config.ini';
+        if (function_exists('mcrypt_get_iv_size')&& function_exists('mcrypt_create_iv') && function_exists('mcrypt_encrypt'))
+        {
+            $this->m_encrypt='Y';
+        }
+        else
+        {
+            $this->m_encrypt='N';
+        }
 
         $settingsStruct = new settingsStruct();
         $settingsStruct->init($inifile);
@@ -89,7 +98,7 @@ class snowflakesSetUp
         $settingsStruct->SetdbName($this->m_dbName);
         $settingsStruct->SetdbType($this->m_dbType);
         $settingsStruct->SetdbUsername($this->m_dbUsername);
-        $settingsStruct->SetdbPassword($this->m_adminPassword, $key);
+        $settingsStruct->SetdbPassword($this->m_dbPassword, $key, $this->m_encrypt);
         $settingsStruct->Setadmin_email($this->m_adminEmail);
         $settingsStruct->SettimeZone($this->m_timeZone);
         $settingsStruct->setCustom("settings", "Setup", "True");
@@ -773,3 +782,4 @@ class snowflakesSetUp
     }
 
 }
+?>
