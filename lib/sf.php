@@ -481,7 +481,6 @@ class snowflakeStruct
  *
  * @author Cyril Adelekan
  */
-
 class userStruct
 {
 
@@ -999,7 +998,6 @@ class userStruct
  *
  * @author Cyril Adelekan
  */
-
 class galleryStruct
 {
 
@@ -1375,7 +1373,6 @@ class galleryStruct
 
 }
 
-
 /**
  * Class thats stores information about a Snowflake event
  * from 
@@ -1400,7 +1397,6 @@ class galleryStruct
  *
  * @author Cyril Adelekan
  */
-
 class eventStruct
 {
 
@@ -2681,7 +2677,7 @@ final class sfUtils
         echo "data: \"id\": $id\n";
         echo "data: }\n";
         echo PHP_EOL;
-        
+
         flush();
     }
 
@@ -3389,7 +3385,14 @@ final class sfUtils
         $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
         $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
         $encrypted_string = mcrypt_encrypt(MCRYPT_BLOWFISH, $encryption_key, utf8_encode($pure_string), MCRYPT_MODE_ECB, $iv);
-        return $encrypted_string;
+        if (strlen($encrypted_string) >= 1)
+        {
+            return $encrypted_string;
+        }
+        else
+        {
+            return $pure_string;
+        }
     }
 
     /**
@@ -4793,8 +4796,8 @@ class databaseParam
         $this->m_dbPassword = $array['password'];
         $this->m_admin_email = $array['admin_email'];
         $this->m_time_zone = $array['time_zone'];
-        $this->m_isenc= $array['isenc'];
-        $this->m_key = "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
+        $this->m_isenc = $array['isenc'];
+        $this->m_key = str_replace('.', '', "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername");
     }
 
     /**
@@ -4807,9 +4810,9 @@ class databaseParam
         $sqlArray = array('type' => $this->m_dbType,
             'host' => $this->m_hostName,
             'username' => $this->m_dbUsername,
-            'password' => $this->m_isenc==="Y"?sfUtils::decrypt($this->m_dbPassword, $this->m_key):$this->m_dbPassword,
+            'password' => $this->m_isenc === "Y" ? sfUtils::decrypt($this->m_dbPassword, $this->m_key) : $this->m_dbPassword,
             'database' => $this->m_dbName);
-        
+
         return $sqlArray;
     }
 
@@ -5056,24 +5059,31 @@ class settingsStruct
      * @param String $key <p> The password encryption key for the password</p> 
      * @param bool $encrypt <p> The flag to detemine if the password should be encrypted or not</p> 
      */
-    public function SetdbPassword($value, $key = "",$encrypt = true)
+    public function SetdbPassword($value, $key = "", $encrypt = true)
     {
         if (!$value)
         {
             return false;
         }
         //password
-        if ($key !== "" && $encrypt =='Y')
+        if ($key !== "" && $encrypt == 'Y')
         {
             $this->m_key = $key;
             $password = sfUtils::encrypt($value, $this->m_key);
-            $this->m_settingsarray["db"]["key"] = $key;
+            if ($password == $value) // if the encryption returns the same value
+            {
+                $encrypt = 'N';
+            }
+            else
+            {
+                $this->m_settingsarray["db"]["key"] = $key;
+            }
         }
         else
         {
             $password = $value;
         }
-        $this->m_settingsarray["db"]["isenc"] = $encrypt=='Y'?$encrypt:'N';
+        $this->m_settingsarray["db"]["isenc"] = $encrypt == 'Y' ? $encrypt : 'N';
         $this->m_settingsarray["db"]["password"] = $password;
     }
 

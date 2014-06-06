@@ -81,7 +81,7 @@ class snowflakesSetUp
         $galleryimg = $gallery . "GalleryImages/";
         $gallerythumb = $gallery . "GalleryThumbs/";
         $loginUrl = str_replace("install/sfInstall.php", "login.php", sfUtils::curPageURL());
-        $key = "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername";
+        $key = str_replace('.', '', "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername");
         $inifile = '../config/config.ini';
         if (function_exists('mcrypt_get_iv_size')&& function_exists('mcrypt_create_iv') && function_exists('mcrypt_encrypt'))
         {
