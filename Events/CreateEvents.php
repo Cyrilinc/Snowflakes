@@ -9,10 +9,10 @@ require_once '../lib/sfImageProcessor.php';
 if (!isset($_SESSION)) {
     session_start();
 }
-$php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
+$php_self = sfUtils::getFilterServer( 'PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
-$query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
+$query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if ((isset($query_string)) && ($query_string != "")) {
     $logoutAction .="&amp;" . htmlentities($query_string);
 }

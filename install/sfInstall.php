@@ -261,7 +261,7 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
 }
 if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful"))
 {
-    $php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
+    $php_self = sfUtils::getFilterServer( 'PHP_SELF');
     ?>
                         <h4> Migrate Old Snowflakes</h4>
                         <form id="installForm" action="<?php echo $php_self; ?>" method="post" class="updateForm" enctype="multipart/form-data" autocomplete="on">

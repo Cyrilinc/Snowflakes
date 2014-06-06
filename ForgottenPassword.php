@@ -17,7 +17,7 @@ if(!$connected){
 if (!isset($_SESSION)) {
     session_start();
 }
-$php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
+$php_self = sfUtils::getFilterServer( 'PHP_SELF');
 $loginFormAction = $php_self;
 $accesscheck = filter_input(INPUT_GET, 'accesscheck');
 if (isset($accesscheck)) {

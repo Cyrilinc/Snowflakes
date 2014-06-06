@@ -9,10 +9,10 @@ if (!isset($_SESSION)) {
 }
 
 // ** Logout the current user. **
-$php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
+$php_self = sfUtils::getFilterServer( 'PHP_SELF');
 
 $logoutAction = $php_self . "?doLogout=true";
-$query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
+$query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if ((isset($query_string)) && ($query_string != "")) {
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
@@ -55,7 +55,7 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
     header("Location: " . $MM_restrictGoTo);
     exit;
 }
-$currentPage = filter_input(INPUT_SERVER, 'PHP_SELF');
+$currentPage = sfUtils::getFilterServer( 'PHP_SELF');
 
 $maxRows_rsPages = 5;
 $pageNum_rsPages = 0;
@@ -111,7 +111,7 @@ foreach ($row_rsPages as $key => $value) {
     $flakeStructList[$key]->populate($value);
 }
 
-$_SESSION['back'] = htmlentities(filter_input(INPUT_SERVER, 'REQUEST_URI'));
+$_SESSION['back'] = htmlentities(sfUtils::getFilterServer( 'REQUEST_URI'));
 
 $total_rsPages = filter_input(INPUT_GET, 'totalRows_rsPages');
 if (isset($total_rsPages)) {

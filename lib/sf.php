@@ -1887,7 +1887,7 @@ class sfLogError
 
         $body = "Message:\n $bugMessage\n";
         $subject = "Bug found ";
-        $server_name = filter_input(INPUT_SERVER, 'SERVER_NAME');
+        $server_name = sfUtils::getFilterServer('SERVER_NAME');
         $sender = "noreply@$server_name";
         ## SEND MESSAGE ##
         return mail("bugreport@cyrilinc.co.uk", $subject, $body, "From: $sender");
@@ -2144,6 +2144,35 @@ final class sfUtils
     }
 
     /**
+     * Get a server variable using filter_* functions 
+     * Because of the buggy nature of filter_* functions with INPUT_SERVER, this function is necessary
+     * 
+     * @param String $serverVar the server variable/key to get e.g 'SERVER_PROTOCOL',  'HTTP_HOST'...
+     *
+     * @return String The value of the server var passed 
+     */
+    public static function getFilterServer($serverVar)
+    {
+        if (!$serverVar)
+        {
+            return "";
+        }
+
+        $servervalue = "";
+        if (filter_input(INPUT_SERVER, $serverVar))
+        {
+            $servervalue = filter_input(INPUT_SERVER, $serverVar, FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE);
+        }
+        else
+        {
+            if (isset($_SERVER[$serverVar]))
+                $servervalue = filter_var($_SERVER[$serverVar], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE);
+        }
+
+        return $servervalue;
+    }
+
+    /**
      * Get the current page URL 
      * 
      * @return String current page URL 
@@ -2151,10 +2180,10 @@ final class sfUtils
     public static function curPageURL()
     {
         $pageURL = "http";
-        $https = filter_input(INPUT_SERVER, 'HTTPS');
-        $server_port = filter_input(INPUT_SERVER, 'SERVER_PORT');
-        $server_name = filter_input(INPUT_SERVER, 'SERVER_NAME');
-        $request_uri = filter_input(INPUT_SERVER, 'REQUEST_URI');
+        $https = self::getFilterServer('HTTPS');
+        $server_port = self::getFilterServer('SERVER_PORT');
+        $server_name = self::getFilterServer('SERVER_NAME');
+        $request_uri = self::getFilterServer('REQUEST_URI');
         if ($https == "on")
         {
             $pageURL .= "s";
@@ -2521,27 +2550,27 @@ final class sfUtils
         $ipaddress = '';
         if (isset($_SERVER['HTTP_CLIENT_IP']))
         {
-            $ipaddress = filter_input(INPUT_SERVER, "HTTP_CLIENT_IP");
+            $ipaddress = self::getFilterServer("HTTP_CLIENT_IP");
         }
         else if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
         {
-            $ipaddress = filter_input(INPUT_SERVER, "HTTP_X_FORWARDED_FOR");
+            $ipaddress = self::getFilterServer("HTTP_X_FORWARDED_FOR");
         }
         else if (isset($_SERVER['HTTP_X_FORWARDED']))
         {
-            $ipaddress = filter_input(INPUT_SERVER, "HTTP_X_FORWARDED");
+            $ipaddress = self::getFilterServer("HTTP_X_FORWARDED");
         }
         else if (isset($_SERVER['HTTP_FORWARDED_FOR']))
         {
-            $ipaddress = filter_input(INPUT_SERVER, "HTTP_FORWARDED_FOR");
+            $ipaddress = self::getFilterServer("HTTP_FORWARDED_FOR");
         }
         else if (isset($_SERVER['HTTP_FORWARDED']))
         {
-            $ipaddress = filter_input(INPUT_SERVER, "HTTP_FORWARDED");
+            $ipaddress = self::getFilterServer("HTTP_FORWARDED");
         }
         else if (isset($_SERVER['REMOTE_ADDR']))
         {
-            $ipaddress = filter_input(INPUT_SERVER, "REMOTE_ADDR");
+            $ipaddress = self::getFilterServer("REMOTE_ADDR");
         }
         else
         {

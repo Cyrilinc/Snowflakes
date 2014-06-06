@@ -4,7 +4,7 @@ require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
 ?>
 <?php
-$currentPage = filter_input(INPUT_SERVER, 'PHP_SELF');
+$currentPage = sfUtils::getFilterServer( 'PHP_SELF');
 
 $maxRows_EventsRs = 8;
 $pageNum_EventsRs = 0;
@@ -47,7 +47,7 @@ $result = $SFconnects->getResultArray();
 $row_SiteSettings = $result[0];
 
 $queryString_EventsRs = "";
-$query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
+$query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string)) {
     $params = explode("&", $query_string);
     $newParams = array();

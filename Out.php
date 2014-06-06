@@ -6,7 +6,7 @@ require_once 'config/Config.php';
 <?php
 $contentType = filter_input(INPUT_GET, 'type') ? filter_input(INPUT_GET, 'type') : 'html';
 
-$currentPage = filter_input(INPUT_SERVER, 'PHP_SELF');
+$currentPage = sfUtils::getFilterServer( 'PHP_SELF');
 
 $maxRows_rsOut = 5;
 $pageNum_rsOut = 0;
@@ -58,7 +58,7 @@ $result2 = $SFconnects->getResultArray();
 $row_SiteSettings = $result2[0];
 
 $queryString_rsOut = "";
-$query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
+$query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string))
 {
     $params = explode("&", $query_string);

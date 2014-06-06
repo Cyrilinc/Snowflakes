@@ -7,7 +7,7 @@ require_once 'config/Config.php';
 if (!isset($_SESSION)) {
     session_start();
 }
-$php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
+$php_self = sfUtils::getFilterServer( 'PHP_SELF');
 $loginFormAction = $php_self;
 $rs_reset = filter_input(INPUT_GET, 'reset');
 if (isset($rs_reset)) {

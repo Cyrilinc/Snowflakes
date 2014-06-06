@@ -6,7 +6,7 @@ require_once '../lib/sfImageProcessor.php';
 ?>
 
 <?php
-$currentPage = filter_input(INPUT_SERVER, 'PHP_SELF');
+$currentPage = sfUtils::getFilterServer( 'PHP_SELF');
 
 $maxRows_rsSFGallery = 6;
 $pageNum_rsSFGallery = 0;
@@ -48,7 +48,7 @@ $result2 = $SFconnects->getResultArray();
 $row_SiteSettings = $result2[0];
 
 $queryString_rsSFGallery = "";
-$query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
+$query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string)) {
     $params = explode("&", $query_string);
     $newParams = array();

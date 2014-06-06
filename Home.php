@@ -14,10 +14,10 @@ $imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 if (!isset($_SESSION)) {
     session_start();
 }
-$php_self = filter_input(INPUT_SERVER, 'PHP_SELF');
+$php_self = sfUtils::getFilterServer( 'PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
-$query_string = filter_input(INPUT_SERVER, 'QUERY_STRING');
+$query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if ((isset($query_string)) && ($query_string != "")) {
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
@@ -59,7 +59,7 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
     header("Location: " . $MM_restrictGoTo);
     exit;
 }
-$_SESSION['back'] = htmlentities(filter_input(INPUT_SERVER, 'REQUEST_URI'));
+$_SESSION['back'] = htmlentities(sfUtils::getFilterServer( 'REQUEST_URI'));
 
 $maxRows_rsPages = 1;
 $pageNum_rsPages = 0;
