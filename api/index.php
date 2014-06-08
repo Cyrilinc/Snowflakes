@@ -14,12 +14,64 @@ $settingsConfig = Config::getConfig("settings", '../config/config.ini');
 $UploadImgUrl = $settingsConfig['m_sfGalleryUrl'];
 $imageMissing = $UploadImgUrl . "missing_default.png";
 
-$query_rsOut = "SELECT * FROM " . sfUtils::tablenameFromType($sfty) . " WHERE publish = 1 ORDER BY created DESC";
-$SFconnects->fetch($query_rsOut);
-$row_rsOut = $SFconnects->getResultArray();
+$maxRows = 5; // Maximum Number of record per pagination
+$pageNum = 0; // The starting page Number
+$rsmaxOut = filter_input(INPUT_GET, 'maxout'); // get the Maximum output number if otherwise set
+if (isset($rsmaxOut)) // if it is set 
+{
+    $maxRows = $rsmaxOut; // Change the Maximum output number
+}
+$rsOut = filter_input(INPUT_GET, 'pageNum'); // get the page number if otherwise set
+if (isset($rsOut)) // if it is set 
+{
+    $pageNum = $rsOut; // Change the page number
+}
+$startRow = $pageNum * $maxRows;
+
+$tablename = sfUtils::tablenameFromType($sfty);
+
+$query = "SELECT * FROM $tablename WHERE publish = 1 ORDER BY created DESC";
+$query_limit = sprintf("%s LIMIT %d, %d", $query, $startRow, $maxRows);
+$SFconnects->fetch($query_limit);
+$result = $SFconnects->getResultArray();
 $snowflakeTypeList = array();
 $data;
 $Shareurl;
+
+$total = filter_input(INPUT_GET, 'totalRows');
+if (isset($total))
+{
+    $totalRows = $total;
+}
+else
+{
+    $SFconnects->fetch("SELECT COUNT(id) count FROM $tablename WHERE publish = 1;");
+    $countResult = $SFconnects->getResultArray();
+    $totalRows = $countResult[0]['count'];
+}
+$totalPages = ceil($totalRows / $maxRows) - 1;
+
+$queryString = "";
+$query_string = sfUtils::getFilterServer('QUERY_STRING');
+if (!empty($query_string))
+{
+    $params = explode("&", $query_string);
+    $newParams = array();
+    foreach ($params as $param)
+    {
+        if (stristr($param, "pageNum") == false &&
+                stristr($param, "totalRows") == false)
+        {
+            array_push($newParams, $param);
+        }
+    }
+    if (count($newParams) != 0)
+    {
+        $queryString = "&amp;" . htmlentities(implode("&", $newParams));
+    }
+}
+$queryString = sprintf("&amp;totalRows=%d%s", $totalRows, $queryString);
+
 if (($sfty == 'snowflake' || $type == 'snowflakes') && ($contentType == 'html' || $contentType == 'jsonhtml'))
 {
     $Shareurl = isset($settingsConfig["snowflakesResultUrl"]) ? $settingsConfig["snowflakesResultUrl"] : $settingsConfig['m_sfUrl'] . "OneView.php";
@@ -52,10 +104,70 @@ else if ($sfty == 'gallery' && ($contentType == 'html' || $contentType == 'jsonh
             </div>
             <!--topbar End--> ';
 }
+else if ($contentType == 'xml')
+{
+    $xmlData = new SimpleXMLElement('<paging></paging>');
+}
+
+$currentPage = sfUtils::getFilterServer('PHP_SELF');
+$firstLink = $currentPage . "?pageNum=0" . $queryString;
+$previousLink = $currentPage . "?pageNum=" . max(0, $pageNum - 1) . $queryString;
+$nextLink = $currentPage . "?pageNum=" . min($totalPages, $pageNum + 1) . $queryString;
+$lastLink = $currentPage . "?pageNum=" . $totalPages . $queryString;
+
+if ($pageNum > 0)
+{
+    // Show if not first page  
+    if ($contentType == 'html' || $contentType == 'jsonhtml')
+    {
+        $data.='
+    <div class="smallNewButton"><a href="' . $firstLink . '">First</a></div>
+    <div class="smallNewButton"><a href="' . $previousLink . '">Previous</a></div>
+        ';
+    }
+    else if ($contentType == 'json')
+    {
+        $data['paging']['First'] = $firstLink;
+        $data['paging']['Previous'] = $previousLink;
+    }
+    else if ($contentType == 'xml')
+    {
+        $xmlData->addChild('First', $firstLink);
+        $xmlData->addChild('Previous', $previousLink);
+    }
+}
+
+if ($pageNum < $totalPages)
+{
+    // Show if not last page
+    if ($contentType == 'html' || $contentType == 'jsonhtml')
+    {
+        $data.='
+    <div class="smallNewButton"><a href="' . $nextLink . '">Next</a></div>
+    <div class="smallNewButton"><a href="' . $lastLink . '">Last</a></div>
+        ';
+    }
+    else if ($contentType == 'json')
+    {
+        $data['paging']['Next'] = $nextLink;
+        $data['paging']['Last'] = $lastLink;
+    }
+    else if ($contentType == 'xml')
+    {
+        $xmlData->addChild('Next', $nextLink);
+        $xmlData->addChild('Last', $lastLink);
+    }
+}
+
+if ($contentType == 'xml')
+{
+    $xmlData = str_replace('<?xml version="1.0"?>', '', $xmlData->asXML());
+    $data .= $xmlData;
+}
 
 sfUtils::replaceSFHashes($data, '../config/config.ini');
 
-foreach ($row_rsOut as $key => $value)
+foreach ($result as $key => $value)
 {
 
     if ($sfty == 'snowflake' || $type == 'snowflakes')

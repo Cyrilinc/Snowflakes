@@ -76,19 +76,19 @@ class snowflakeStruct
             return false;
         }
 
-        $this->m_id = isset($array['id']) ? $array['id'] : "";
-        $this->m_uuid = isset($array['uuid']) ? $array['uuid'] : "";
-        $this->m_title = strlen($array['title']) > 0 ? $array['title'] : "";
-        $this->m_body_text = $array['body_text'];
-        $this->m_publish = isset($array['publish']) ? $array['publish'] : "";
-        $this->m_image_name = isset($array['image_name']) ? $array['image_name'] : "";
-        $this->m_gallery = isset($array['gallery']) ? $array['gallery'] : "";
-        $this->m_created = isset($array['created']) ? $array['created'] : "";
-        $this->m_created_by = isset($array['created_by']) ? $array['created_by'] : "";
-        $this->m_edited = isset($array['edited']) ? $array['edited'] : "";
-        $this->m_edited_by = isset($array['edited_by']) ? $array['edited_by'] : "";
-        $this->m_deleted = isset($array['deleted']) ? $array['deleted'] : "";
-        $this->m_flake_it = isset($array['flake_it']) ? $array['flake_it'] : "";
+        $this->m_id = array_key_exists('id',$array) ? $array['id'] : "";
+        $this->m_uuid = array_key_exists('uuid',$array) ? $array['uuid'] : "";
+        $this->m_title = array_key_exists('title',$array) ? $array['title'] : "";
+        $this->m_body_text = array_key_exists('body_text',$array) ? $array['body_text'] : "";
+        $this->m_publish = array_key_exists('publish',$array) ? $array['publish'] : "";
+        $this->m_image_name = array_key_exists('image_name',$array) ? $array['image_name'] : "";
+        $this->m_gallery = array_key_exists('gallery',$array) ? $array['gallery'] : "";
+        $this->m_created = array_key_exists('created',$array) ? $array['created'] : "";
+        $this->m_created_by = array_key_exists('created_by',$array) ? $array['created_by'] : "";
+        $this->m_edited = array_key_exists('edited',$array) ? $array['edited'] : "";
+        $this->m_edited_by = array_key_exists('edited_by',$array) ? $array['edited_by'] : "";
+        $this->m_deleted = array_key_exists('deleted',$array) ? $array['deleted'] : "";
+        $this->m_flake_it = array_key_exists('flake_it',$array) ? $array['flake_it'] : "";
 
         return true;
     }
@@ -542,19 +542,19 @@ class userStruct
         {
             return false;
         }
-        $this->m_id = isset($value['id']) ? $value['id'] : "";
-        $this->m_uuid = isset($array['uuid']) ? $array['uuid'] : "";
-        $this->m_username = isset($value['username']) ? $value['username'] : "";
-        $this->m_password = isset($value['password']) ? $value['password'] : "";
-        $this->m_reset_link = isset($value['reset_link']) ? $value['reset_link'] : "";
-        $this->m_email = isset($value['email']) ? $value['email'] : "";
-        $this->m_access_level = isset($value['access_level']) ? $value['access_level'] : "";
-        $this->m_access_name = isset($value['access_name']) ? $value['access_name'] : "";
-        $this->m_image_name = isset($value['image_name']) ? $value['image_name'] : "";
-        $this->m_deleted = isset($value['deleted']) ? $value['deleted'] : "";
-        $this->m_flake_it = isset($value['flake_it']) ? $value['flake_it'] : "";
-        $this->m_logged_in = isset($value['logged_in']) ? $value['logged_in'] : "";
-        $this->m_last_login = isset($value['last_login']) ? $value['last_login'] : "";
+        $this->m_id = array_key_exists('id',$value) ? $value['id'] : "";
+        $this->m_uuid = array_key_exists('uuid',$value) ? $value['uuid'] : "";
+        $this->m_username = array_key_exists('username',$value) ? $value['username'] : "";
+        $this->m_password = array_key_exists('password',$value) ? $value['password'] : "";
+        $this->m_reset_link = array_key_exists('reset_link',$value) ? $value['reset_link'] : "";
+        $this->m_email = array_key_exists('email',$value) ? $value['email'] : ""; 
+        $this->m_access_level = array_key_exists('access_level',$value) ? $value['access_level'] : "";
+        $this->m_access_name = array_key_exists('access_name',$value) ? $value['access_name'] : "";
+        $this->m_image_name = array_key_exists('image_name',$value) ? $value['image_name'] : "";
+        $this->m_deleted = array_key_exists('deleted',$value) ? $value['deleted'] : "";
+        $this->m_flake_it = array_key_exists('flake_it',$value) ? $value['flake_it'] : "";
+        $this->m_logged_in = array_key_exists('logged_in',$value) ? $value['logged_in'] : "";
+        $this->m_last_login = array_key_exists('last_login',$value) ? $value['last_login'] : "";
 
         return true;
     }
@@ -1042,19 +1042,19 @@ class galleryStruct
             return false;
         }
 
-        $this->m_id = isset($array['id']) ? $array['id'] : "";
-        $this->m_uuid = isset($array['uuid']) ? $array['uuid'] : "";
-        $this->m_title = isset($array['title']) ? $array['title'] : "";
-        $this->m_thumb_name = isset($array['thumb_name']) ? $array['thumb_name'] : "";
-        $this->m_image_name = isset($array['image_name']) ? $array['image_name'] : "";
-        $this->m_image_caption = isset($array['image_caption']) ? $array['image_caption'] : "";
-        $this->m_publish = isset($array['publish']) ? $array['publish'] : "";
-        $this->m_created = isset($array['created']) ? $array['created'] : "";
-        $this->m_created_by = isset($array['created_by']) ? $array['created_by'] : "";
-        $this->m_edited = isset($array['edited']) ? $array['edited'] : "";
-        $this->m_edited_by = isset($array['edited_by']) ? $array['edited_by'] : "";
-        $this->m_deleted = isset($array['deleted']) ? $array['deleted'] : "";
-        $this->m_flake_it = isset($array['flake_it']) ? $array['flake_it'] : "";
+        $this->m_id = array_key_exists('id',$array) ? $array['id'] : "";
+        $this->m_uuid = array_key_exists('uuid',$array) ? $array['uuid'] : "";
+        $this->m_title = array_key_exists('title',$array) ? $array['title'] : "";
+        $this->m_thumb_name = array_key_exists('thumb_name',$array) ? $array['thumb_name'] : "";
+        $this->m_image_name = array_key_exists('image_name',$array) ? $array['image_name'] : "";
+        $this->m_image_caption = array_key_exists('image_caption',$array) ? $array['image_caption'] : "";
+        $this->m_publish = array_key_exists('publish',$array) ? $array['publish'] : "";
+        $this->m_created = array_key_exists('created',$array) ? $array['created'] : "";
+        $this->m_created_by = array_key_exists('created_by',$array) ? $array['created_by'] : "";
+        $this->m_edited = array_key_exists('edited',$array) ? $array['edited'] : "";
+        $this->m_edited_by = array_key_exists('edited_by',$array) ? $array['edited_by'] : "";
+        $this->m_deleted = array_key_exists('deleted',$array) ? $array['deleted'] : "";
+        $this->m_flake_it = array_key_exists('flake_it',$array) ? $array['flake_it'] : "";
 
         return true;
     }
@@ -1443,24 +1443,24 @@ class eventStruct
         {
             return false;
         }
-        $this->m_id = isset($array['id']) ? $array['id'] : "";
-        $this->m_uuid = isset($array['uuid']) ? $array['uuid'] : "";
-        $this->m_title = isset($array['title']) ? $array['title'] : "";
-        $this->m_body_text = isset($array['body_text']) ? $array['body_text'] : "";
-        $this->m_publish = isset($array['publish']) ? $array['publish'] : "";
-        $this->m_image_name = isset($array['image_name']) ? $array['image_name'] : "";
-        $this->m_event_time = isset($array['event_time']) ? $array['event_time'] : "";
-        $this->m_event_date = isset($array['event_date']) ? $array['event_date'] : "";
-        $this->m_end_time = isset($array['end_time']) ? $array['end_time'] : "";
-        $this->m_end_date = isset($array['end_date']) ? $array['end_date'] : "";
-        $this->m_location = isset($array['location']) ? $array['location'] : "";
-        $this->m_lat_long = isset($array['lat_long']) ? $array['lat_long'] : "";
-        $this->m_created = isset($array['created']) ? $array['created'] : "";
-        $this->m_created_by = isset($array['created_by']) ? $array['created_by'] : "";
-        $this->m_edited = isset($array['edited']) ? $array['edited'] : "";
-        $this->m_edited_by = isset($array['edited_by']) ? $array['edited_by'] : "";
-        $this->m_deleted = isset($array['deleted']) ? $array['deleted'] : "";
-        $this->m_flake_it = isset($array['flake_it']) ? $array['flake_it'] : "";
+        $this->m_id = array_key_exists('id',$array) ? $array['id'] : "";
+        $this->m_uuid = array_key_exists('uuid',$array) ? $array['uuid'] : "";
+        $this->m_title = array_key_exists('title',$array) ? $array['title'] : "";
+        $this->m_body_text = array_key_exists('body_text',$array) ? $array['body_text'] : "";
+        $this->m_publish = array_key_exists('publish',$array) ? $array['publish'] : "";
+        $this->m_image_name = array_key_exists('image_name',$array) ? $array['image_name'] : "";
+        $this->m_event_time = array_key_exists('event_time',$array) ? $array['event_time'] : "";
+        $this->m_event_date = array_key_exists('event_date',$array) ? $array['event_date'] : "";
+        $this->m_end_time = array_key_exists('end_time',$array) ? $array['end_time'] : "";
+        $this->m_end_date = array_key_exists('end_date',$array) ? $array['end_date'] : "";
+        $this->m_location = array_key_exists('location',$array) ? $array['location'] : "";
+        $this->m_lat_long = array_key_exists('lat_long',$array) ? $array['lat_long'] : "";
+        $this->m_created = array_key_exists('created',$array) ? $array['created'] : "";
+        $this->m_created_by = array_key_exists('created_by',$array) ? $array['created_by'] : "";
+        $this->m_edited = array_key_exists('edited',$array) ? $array['edited'] : "";
+        $this->m_edited_by = array_key_exists('edited_by',$array) ? $array['edited_by'] : "";
+        $this->m_deleted = array_key_exists('deleted',$array) ? $array['deleted'] : "";
+        $this->m_flake_it = array_key_exists('flake_it',$array) ? $array['flake_it'] : "";
         return true;
     }
 
