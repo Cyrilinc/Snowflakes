@@ -6,62 +6,62 @@ require_once '../config/Config.php';
 <?php
 $currentPage = sfUtils::getFilterServer( 'PHP_SELF');
 
-$maxRows_EventsRs = 8;
-$pageNum_EventsRs = 0;
-$EventsRs = filter_input(INPUT_GET, 'pageNum_EventsRs');
+$maxRows = 8;
+$pageNum = 0;
+$EventsRs = filter_input(INPUT_GET, 'pageNum');
 if (isset($EventsRs)) {
-    $pageNum_EventsRs = $EventsRs;
+    $pageNum = $EventsRs;
 }
-$startRow_EventsRs = $pageNum_EventsRs * $maxRows_EventsRs;
+$startRow = $pageNum * $maxRows;
 
 $config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 $TodaysDate = sfUtils::todaysDate();
-$query_EventsRs = "SELECT id,title,event_time,event_date,end_time,end_date,location,created,created_by,flake_it FROM snowflakes_events WHERE publish = 1 AND event_date >= '" . $TodaysDate . "'  ";
-$query_limit_EventsRs = sprintf("%s LIMIT %d, %d", $query_EventsRs, $startRow_EventsRs, $maxRows_EventsRs);
-$SFconnects->fetch($query_limit_EventsRs);
-$row_EventsRs = $SFconnects->getResultArray();
+$query = "SELECT id,title,event_time,event_date,end_time,end_date,location,created,created_by,flake_it FROM snowflakes_events WHERE publish = 1 AND event_date >= '" . $TodaysDate . "'  ";
+$query_limit = sprintf("%s LIMIT %d, %d", $query, $startRow, $maxRows);
+$SFconnects->fetch($query_limit);
+$row = $SFconnects->getResultArray();
 
 $eventStructList = array();
-foreach ($row_EventsRs as $key => $value) {
+foreach ($row as $key => $value) {
     $eventStructList[$key] = new eventStruct();
     $eventStructList[$key]->populate($value);
     //$eventStructList[$key]->printEvents();
 }
 
-$total_EventsRs = filter_input(INPUT_GET, 'totalRows_EventsRs');
-if (isset($total_EventsRs)) {
-    $totalRows_EventsRs = $total_EventsRs;
+$total = filter_input(INPUT_GET, 'totalRows');
+if (isset($total)) {
+    $totalRows = $total;
 } else {
     $SFconnects->fetch("SELECT COUNT(id) count FROM snowflakes_events WHERE publish = 1 AND event_date >= '" . $TodaysDate . "'  ");
     $result = $SFconnects->getResultArray();
-    $totalRows_EventsRs = $result[0]['count'];
+    $totalRows = $result[0]['count'];
 }
-$totalPages_EventsRs = ceil($totalRows_EventsRs / $maxRows_EventsRs) - 1;
+$totalPages = ceil($totalRows / $maxRows) - 1;
 
 $query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
 $SFconnects->fetch($query_SiteSettings);
 $result = $SFconnects->getResultArray();
 $row_SiteSettings = $result[0];
 
-$queryString_EventsRs = "";
+$queryString = "";
 $query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string)) {
     $params = explode("&", $query_string);
     $newParams = array();
     foreach ($params as $param) {
-        if (stristr($param, "pageNum_EventsRs") == false &&
-                stristr($param, "totalRows_EventsRs") == false) {
+        if (stristr($param, "pageNum") == false &&
+                stristr($param, "totalRows") == false) {
             array_push($newParams, $param);
         }
     }
     if (count($newParams) != 0) {
-        $queryString_EventsRs = "&amp;" . htmlentities(implode("&", $newParams));
+        $queryString = "&amp;" . htmlentities(implode("&", $newParams));
     }
 }
-$queryString_EventsRs = sprintf("&amp;totalRows_EventsRs=%d%s", $totalRows_EventsRs, $queryString_EventsRs);
+$queryString = sprintf("&amp;totalRows=%d%s", $totalRows, $queryString);
 ?>
 <?php
 $url = $otherurl = sfUtils::curPageURL();
@@ -97,20 +97,20 @@ $settingsConfig = Config::getConfig("settings", '../config/config.ini');
 <!-- Break -->
 <div class="clear"></div>
 <!-- End of Break --> 
-<?php if ($pageNum_EventsRs > 0) { // Show if not first page       ?>
-    <div class="smallNewButton"><a href="<?php printf("%s?pageNum_EventsRs=%d%s", $currentPage, 0, $queryString_EventsRs); ?>">First</a></div>
-    <div class="smallNewButton"><a href="<?php printf("%s?pageNum_EventsRs=%d%s", $currentPage, max(0, $pageNum_EventsRs - 1), $queryString_EventsRs); ?>">Previous</a></div>
+<?php if ($pageNum > 0) { // Show if not first page       ?>
+    <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, 0, $queryString); ?>">First</a></div>
+    <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, max(0, $pageNum - 1), $queryString); ?>">Previous</a></div>
 <?php } // Show if not first page      ?>
-<?php if ($pageNum_EventsRs < $totalPages_EventsRs) { // Show if not last page    ?>
-    <div class="smallNewButton"><a href="<?php printf("%s?pageNum_EventsRs=%d%s", $currentPage, min($totalPages_EventsRs, $pageNum_EventsRs + 1), $queryString_EventsRs); ?>">Next</a></div>
-    <div class="smallNewButton"><a href="<?php printf("%s?pageNum_EventsRs=%d%s", $currentPage, $totalPages_EventsRs, $queryString_EventsRs); ?>">Last</a></div>
+<?php if ($pageNum < $totalPages) { // Show if not last page    ?>
+    <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, min($totalPages, $pageNum + 1), $queryString); ?>">Next</a></div>
+    <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, $totalPages, $queryString); ?>">Last</a></div>
 <?php } // Show if not last page      ?>
 <!-- Break -->
 <div class="clear"></div>
 <div class="Break2"></div>
 <!-- End of Break --> 
 <?php
-if ($totalRows_EventsRs > 0) {
+if ($totalRows > 0) {
     $i = 0;
     do {
         $eventdate = new DateTime($eventStructList[$i]->m_event_date);

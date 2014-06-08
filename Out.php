@@ -8,14 +8,14 @@ $contentType = filter_input(INPUT_GET, 'type') ? filter_input(INPUT_GET, 'type')
 
 $currentPage = sfUtils::getFilterServer( 'PHP_SELF');
 
-$maxRows_rsOut = 5;
-$pageNum_rsOut = 0;
-$rsOut = filter_input(INPUT_GET, 'pageNum_rsOut');
+$maxRows = 5;
+$pageNum = 0;
+$rsOut = filter_input(INPUT_GET, 'pageNum');
 if (isset($rsOut))
 {
-    $pageNum_rsOut = $rsOut;
+    $pageNum = $rsOut;
 }
-$startRow_rsOut = $pageNum_rsOut * $maxRows_rsOut;
+$startRow = $pageNum * $maxRows;
 
 $config = new databaseParam('config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
@@ -28,36 +28,36 @@ if (isset($flakeit) && isset($pageid))
     sfUtils::flakeIt($SFconnects, $pageid, "snowflake");
 }
 
-$query_rsOut = "SELECT * FROM snowflakes WHERE publish = 1 ORDER BY created DESC";
-$query_limit_rsOut = sprintf("%s LIMIT %d, %d", $query_rsOut, $startRow_rsOut, $maxRows_rsOut);
-$SFconnects->fetch($query_limit_rsOut);
-$row_rsOut = $SFconnects->getResultArray();
+$query = "SELECT * FROM snowflakes WHERE publish = 1 ORDER BY created DESC";
+$query_limit = sprintf("%s LIMIT %d, %d", $query, $startRow, $maxRows);
+$SFconnects->fetch($query_limit);
+$row = $SFconnects->getResultArray();
 $flakeStructList = array();
-foreach ($row_rsOut as $key => $value)
+foreach ($row as $key => $value)
 {
     $flakeStructList[$key] = new snowflakeStruct();
     $flakeStructList[$key]->populate($value);
 }
 
-$total_rsOut = filter_input(INPUT_GET, 'totalRows_rsOut');
-if (isset($total_rsOut))
+$total = filter_input(INPUT_GET, 'totalRows');
+if (isset($total))
 {
-    $totalRows_rsOut = $total_rsOut;
+    $totalRows = $total;
 }
 else
 {
     $SFconnects->fetch("SELECT COUNT(id) count FROM snowflakes WHERE publish = 1 ORDER BY created DESC");
     $result = $SFconnects->getResultArray();
-    $totalRows_rsOut = $result[0]['count'];
+    $totalRows = $result[0]['count'];
 }
-$totalPages_rsOut = ceil($totalRows_rsOut / $maxRows_rsOut) - 1;
+$totalPages = ceil($totalRows / $maxRows) - 1;
 
 $query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
 $SFconnects->fetch($query_SiteSettings);
 $result2 = $SFconnects->getResultArray();
 $row_SiteSettings = $result2[0];
 
-$queryString_rsOut = "";
+$queryString = "";
 $query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string))
 {
@@ -65,18 +65,18 @@ if (!empty($query_string))
     $newParams = array();
     foreach ($params as $param)
     {
-        if (stristr($param, "pageNum_rsOut") == false &&
-                stristr($param, "totalRows_rsOut") == false)
+        if (stristr($param, "pageNum") == false &&
+                stristr($param, "totalRows") == false)
         {
             array_push($newParams, $param);
         }
     }
     if (count($newParams) != 0)
     {
-        $queryString_rsOut = "&amp;" . htmlentities(implode("&", $newParams));
+        $queryString = "&amp;" . htmlentities(implode("&", $newParams));
     }
 }
-$queryString_rsOut = sprintf("&amp;totalRows_rsOut=%d%s", $totalRows_rsOut, $queryString_rsOut);
+$queryString = sprintf("&amp;totalRows=%d%s", $totalRows, $queryString);
 ?>
 <?php
 $url = $otherurl = sfUtils::curPageURL();
@@ -116,22 +116,22 @@ if (isset($rssflogo))
 <div class="clear"></div>
 
 <?php
-if ($pageNum_rsOut > 0)
+if ($pageNum > 0)
 { // Show if not first page     
     ?>
-    <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsOut=%d%s", $currentPage, 0, $queryString_rsOut); ?>">First</a></div>
-    <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsOut=%d%s", $currentPage, max(0, $pageNum_rsOut - 1), $queryString_rsOut); ?>">Previous</a></div>
+    <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, 0, $queryString); ?>">First</a></div>
+    <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, max(0, $pageNum - 1), $queryString); ?>">Previous</a></div>
 <?php } // Show if not first page   ?>
 <?php
-if ($pageNum_rsOut < $totalPages_rsOut)
+if ($pageNum < $totalPages)
 { // Show if not last page     
     ?>
-    <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsOut=%d%s", $currentPage, min($totalPages_rsOut, $pageNum_rsOut + 1), $queryString_rsOut); ?>">Next</a></div>
-    <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsOut=%d%s", $currentPage, $totalPages_rsOut, $queryString_rsOut); ?>">Last</a></div>
+    <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, min($totalPages, $pageNum + 1), $queryString); ?>">Next</a></div>
+    <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, $totalPages, $queryString); ?>">Last</a></div>
 <?php } // Show if not last page     ?>
 
 <?php
-if ($totalRows_rsOut > 0)
+if ($totalRows > 0)
 {
     $i = 0;
     do

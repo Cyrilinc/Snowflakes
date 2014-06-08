@@ -8,61 +8,61 @@ require_once '../lib/sfImageProcessor.php';
 <?php
 $currentPage = sfUtils::getFilterServer( 'PHP_SELF');
 
-$maxRows_rsSFGallery = 6;
-$pageNum_rsSFGallery = 0;
-$pageSFGallery = filter_input(INPUT_GET, 'pageNum_rsSFGallery');
+$maxRows = 6;
+$pageNum = 0;
+$pageSFGallery = filter_input(INPUT_GET, 'pageNum');
 if (isset($pageSFGallery)) {
-    $pageNum_rsSFGallery = $pageSFGallery;
+    $pageNum = $pageSFGallery;
 }
-$startRow_rsSFGallery = $pageNum_rsSFGallery * $maxRows_rsSFGallery;
+$startRow = $pageNum * $maxRows;
 
 $config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
-$query_rsSFGallery = "SELECT * FROM snowflakes_gallery WHERE publish=1 ORDER BY id DESC";
-$query_limit_rsSFGallery = sprintf("%s LIMIT %d, %d", $query_rsSFGallery, $startRow_rsSFGallery, $maxRows_rsSFGallery);
-$SFconnects->fetch($query_limit_rsSFGallery);
-$row_rsSFGallery = $SFconnects->getResultArray();
+$query = "SELECT * FROM snowflakes_gallery WHERE publish=1 ORDER BY id DESC";
+$query_limit = sprintf("%s LIMIT %d, %d", $query, $startRow, $maxRows);
+$SFconnects->fetch($query_limit);
+$row = $SFconnects->getResultArray();
 
 $galleryStructList = array();
-foreach ($row_rsSFGallery as $key => $value) {
+foreach ($row as $key => $value) {
     $galleryStructList[$key] = new galleryStruct();
     $galleryStructList[$key]->populate($value);
 }
 
 
-$totalSFGallery = filter_input(INPUT_GET, 'totalRows_rsSFGallery');
+$totalSFGallery = filter_input(INPUT_GET, 'totalRows');
 if (isset($totalSFGallery)) {
-    $totalRows_rsSFGallery = $totalSFGallery;
+    $totalRows = $totalSFGallery;
 } else {
     $SFconnects->fetch("SELECT COUNT(id) count FROM snowflakes_gallery WHERE publish=1 ORDER BY id DESC");
     $result = $SFconnects->getResultArray();
-    $totalRows_rsSFGallery = $result[0]['count'];
+    $totalRows = $result[0]['count'];
 }
-$totalPages_rsSFGallery = ceil($totalRows_rsSFGallery / $maxRows_rsSFGallery) - 1;
+$totalPages = ceil($totalRows / $maxRows) - 1;
 
 $query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
 $SFconnects->fetch($query_SiteSettings);
 $result2 = $SFconnects->getResultArray();
 $row_SiteSettings = $result2[0];
 
-$queryString_rsSFGallery = "";
+$queryString = "";
 $query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string)) {
     $params = explode("&", $query_string);
     $newParams = array();
     foreach ($params as $param) {
-        if (stristr($param, "pageNum_rsSFGallery") == false &&
-                stristr($param, "totalRows_rsSFGallery") == false) {
+        if (stristr($param, "pageNum") == false &&
+                stristr($param, "totalRows") == false) {
             array_push($newParams, $param);
         }
     }
     if (count($newParams) != 0) {
-        $queryString_rsSFGallery = "&amp;" . htmlentities(implode("&", $newParams));
+        $queryString = "&amp;" . htmlentities(implode("&", $newParams));
     }
 }
-$queryString_rsSFGallery = sprintf("&amp;totalRows_rsSFGallery=%d%s", $totalRows_rsSFGallery, $queryString_rsSFGallery);
+$queryString = sprintf("&amp;totalRows=%d%s", $totalRows, $queryString);
 ?>
 
 <?php
@@ -104,13 +104,13 @@ if (isset($rssflogo)) {
 <div class="clear"></div>
 <!--wrapper-->
 <div class="wrapper"> 
-    <?php if ($pageNum_rsSFGallery > 0) { // Show if not first page    ?>
-        <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsSFGallery=%d%s", $currentPage, 0, $queryString_rsSFGallery); ?>">First</a></div>
-        <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsSFGallery=%d%s", $currentPage, max(0, $pageNum_rsSFGallery - 1), $queryString_rsSFGallery); ?>">Previous</a></div>
+    <?php if ($pageNum > 0) { // Show if not first page    ?>
+        <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, 0, $queryString); ?>">First</a></div>
+        <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, max(0, $pageNum - 1), $queryString); ?>">Previous</a></div>
     <?php } // Show if not first page   ?>
-    <?php if ($pageNum_rsSFGallery < $totalPages_rsSFGallery) { // Show if not last page  ?>
-        <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsSFGallery=%d%s", $currentPage, min($totalPages_rsSFGallery, $pageNum_rsSFGallery + 1), $queryString_rsSFGallery); ?>">Next</a></div>
-        <div class="smallNewButton"><a href="<?php printf("%s?pageNum_rsSFGallery=%d%s", $currentPage, $totalPages_rsSFGallery, $queryString_rsSFGallery); ?>">Last</a></div>
+    <?php if ($pageNum < $totalPages) { // Show if not last page  ?>
+        <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, min($totalPages, $pageNum + 1), $queryString); ?>">Next</a></div>
+        <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, $totalPages, $queryString); ?>">Last</a></div>
     <?php } // Show if not last page    ?>
     <div class=" clear Break2"></div>
 
@@ -124,7 +124,7 @@ if (isset($rssflogo)) {
     <!--tp-grid-->
     <ul id="tp-grid" class="tp-grid">
         <?php
-        if ($totalRows_rsSFGallery > 0) {
+        if ($totalRows > 0) {
             $i = 0;
             ?>
             <?php
