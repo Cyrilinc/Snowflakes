@@ -6,10 +6,10 @@ require_once '../lib/sfImageProcessor.php';
 ?>
 <?php
 //The upload directory
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
+$siteSettings = new settingsStruct('../config/config.ini');
 //The upload Image directory
-$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
+$sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
 $imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 ?>
 <?php
@@ -27,16 +27,12 @@ $galleryStruct = new galleryStruct();
 $galleryStruct->getGalleryByid($SFconnects, $colname_rsSFGallery);
 $totalRows_rsSFGallery = $SFconnects->recordCount();
 
-$query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
-$SFconnects->fetch($query_SiteSettings);
-$result = $SFconnects->getResultArray();
-$row_SiteSettings = $result[0];
 ?>
 <?php
 $url = $otherurl = sfUtils::curPageURL();
-$SnowflakesUrl = $row_SiteSettings['sf_url'];
-if (isset($row_SiteSettings['gallery_result_url'])) {
-    $SFGalleryResultUrl = $row_SiteSettings['gallery_result_url'];
+$SnowflakesUrl = $siteSettings->m_sfUrl;
+if (isset($siteSettings->m_galleryResultUrl)) {
+    $SFGalleryResultUrl = $siteSettings->m_galleryResultUrl;
     $url = $otherurl = $SFGalleryResultUrl . "&amp;Galleryid=" . $Galleryid;
 } else {
     $SFGalleryResultUrl = 'notset';
@@ -45,9 +41,9 @@ if (isset($row_SiteSettings['gallery_result_url'])) {
 $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
 ?>
 <script type="text/javascript">
-    var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
+    var flakeitUrl = "<?php echo $siteSettings->m_flakeItUrl; ?>";
 </script>
-<script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
+<script type="text/javascript" src="<?php echo $siteSettings->m_sfUrl; ?>resources/Js/flakeit.js"></script>
 <!-- PageWrap -->
 <div class="PageWrap">
 

@@ -7,20 +7,22 @@ require_once '../lib/sfImageProcessor.php';
 
 <?php
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
-$php_self = sfUtils::getFilterServer( 'PHP_SELF');
+$php_self = sfUtils::getFilterServer('PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
-$query_string = sfUtils::getFilterServer( 'QUERY_STRING');
-if ((isset($query_string)) && ($query_string != "")) {
+$query_string = sfUtils::getFilterServer('QUERY_STRING');
+if ((isset($query_string)) && ($query_string != ""))
+{
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
-
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
+$siteSettings = new settingsStruct('../config/config.ini');
 $doLogout = filter_input(INPUT_GET, 'doLogout');
-if ((isset($doLogout)) && ($doLogout == "true")) {
+if ((isset($doLogout)) && ($doLogout == "true"))
+{
     //to fully log out a visitor we need to clear the session varialbles
     $_SESSION['MM_Username'] = NULL;
     $_SESSION['MM_UserGroup'] = NULL;
@@ -29,25 +31,30 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['MM_UserGroup']);
     unset($_SESSION['PrevUrl']);
 
-    $logoutGoTo = $settingsConfig['loginUrl'];
-    if ($logoutGoTo) {
+    $logoutGoTo = $siteSettings->m_loginUrl;
+    if ($logoutGoTo)
+    {
         header("Location: $logoutGoTo");
         exit;
     }
 }
 
 if (isset($_SESSION['ImageFiles']) || isset($_SESSION['ImageThumbFiles']))
+{
     sfImageProcessor::ResetAll();
+}
 ?>
 <?php
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
 $MM_restrictGoTo = "../login.php";
-if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
+if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup']))))
+{
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
     if (strpos($MM_restrictGoTo, "?"))
@@ -61,7 +68,8 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
 ?>
 <?php
 $colname_rsAdmin = "-1";
-if (isset($_SESSION['MM_Username'])) {
+if (isset($_SESSION['MM_Username']))
+{
     $colname_rsAdmin = $_SESSION['MM_Username'];
 }
 $config = new databaseParam('../config/config.ini');
@@ -174,9 +182,10 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                     </ul>
                                 </li>
 
-                                <?php
-                                if ($user->m_access_level == 5 || $user->m_access_level == 4) {
-                                    ?>
+<?php
+if ($user->m_access_level == 5 || $user->m_access_level == 4)
+{
+    ?>
                                     <li>
                                         <a href="../SiteSetting/index.php" title="Settings"> <img src="../resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
                                         <ul>
@@ -186,15 +195,17 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                             <li><a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a></li>
                                         </ul>
                                     </li>
-                                    <?php
-                                } else {
-                                    ?>
+    <?php
+}
+else
+{
+    ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
                                     </li>
-                                    <?php
-                                }
-                                ?>
+    <?php
+}
+?>
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
@@ -223,7 +234,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                 <!-- End of Break --> 
                 <!-- PageWrap -->
                 <div class="PageWrap">
-                    <?php include 'Out.php'; ?>
+<?php include 'Out.php'; ?>
                 </div>
                 <!-- End of PageWrap -->  
                 <!-- InstanceEndEditable -->  </div>

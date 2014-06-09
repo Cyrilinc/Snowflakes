@@ -7,14 +7,14 @@ require_once '../lib/sfImageProcessor.php';
 
 <?php
 //The upload directory
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
+$siteSettings = new settingsStruct('../config/config.ini');
 $datadir=new dataDirParam("../config/config.ini");
 $UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory
 $UploadImgDir = $datadir->m_galleryImgDir;
-$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
 $UploadThumbDir = $datadir->m_galleryThumbDir;
-$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
 $imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 ?>
 <?php
@@ -69,9 +69,9 @@ $Powerlink = "../resources/images/Snowflakes2.png";
 
             });
 
-            var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
+            var flakeitUrl = "<?php echo $siteSettings->m_flakeItUrl; ?>";
         </script>
-        <script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
+        <script type="text/javascript" src="<?php echo $siteSettings->m_sfUrl; ?>resources/Js/flakeit.js"></script>
 
         <link rel="stylesheet" type="text/css" href="../resources/css/stapel.css" />
         <script type="text/javascript" src="../resources/Js/jquery.stapel.js"></script>
@@ -142,7 +142,7 @@ $Powerlink = "../resources/images/Snowflakes2.png";
                 <div class="PageWrap">
 
                     <script type="text/javascript">
-                        var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
+                        var flakeitUrl = "<?php echo $siteSettings->m_flakeItUrl; ?>";
                     </script>
                     <script type="text/javascript" src="../resources/Js/flakeit.js"></script>
 

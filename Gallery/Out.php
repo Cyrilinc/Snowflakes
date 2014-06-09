@@ -42,12 +42,8 @@ if (isset($totalSFGallery)) {
 }
 $totalPages = ceil($totalRows / $maxRows) - 1;
 
-$query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
-$SFconnects->fetch($query_SiteSettings);
-$result2 = $SFconnects->getResultArray();
-$row_SiteSettings = $result2[0];
+$siteSettings = new settingsStruct('../config/config.ini');
 
-$queryString = "";
 $query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string)) {
     $params = explode("&", $query_string);
@@ -67,26 +63,25 @@ $queryString = sprintf("&amp;totalRows=%d%s", $totalRows, $queryString);
 
 <?php
 //The upload directory
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
+$siteSettings = new settingsStruct('../config/config.ini');
 $datadir=new dataDirParam("../config/config.ini");
 $UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory
-$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
 $UploadThumbDir = $datadir->m_galleryThumbDir;
-$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
 $imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 ?>
 <?php
 $url = $otherurl = sfUtils::curPageURL();
-$SnowflakesUrl = $row_SiteSettings['sf_url'];
+$SnowflakesUrl = $siteSettings->m_sfUrl;
 
-$SFGalleryResultUrl = $row_SiteSettings['gallery_result_url'];
-$Powerlink = $row_SiteSettings['sf_url'] . "resources/images/Snowflakes2.png";
-$rsslink = $row_SiteSettings['sf_url'] . "resources/images/Icons/Rss.png";
-$Shareurl = $row_SiteSettings['sf_url'] . "Gallery/OneView.php";
+$Powerlink = $siteSettings->m_sfUrl . "resources/images/Snowflakes2.png";
+$rsslink = $siteSettings->m_sfUrl . "resources/images/Icons/Rss.png";
+$Shareurl = $siteSettings->m_sfUrl . "Gallery/OneView.php";
 
-if (strlen($SFGalleryResultUrl) > 0) { /// if user provides result page in snowflakes settings
-    $Shareurl = $SFGalleryResultUrl;
+if (strlen($siteSettings->m_galleryResultUrl) > 0) { /// if user provides result page in snowflakes settings
+    $Shareurl = $siteSettings->m_galleryResultUrl;
 }
 $sflogo = "transparent";
 $rssflogo = filter_input(INPUT_GET, 'sflogo');
@@ -95,12 +90,12 @@ if (isset($rssflogo)) {
 }
 ?>
 <script type="text/javascript">
-    var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
+    var flakeitUrl = "<?php echo $siteSettings->m_flakeItUrl; ?>";
 </script>
-<script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
+<script type="text/javascript" src="<?php echo $siteSettings->m_sfUrl; ?>resources/Js/flakeit.js"></script>
 
 <div style="float: right; background-color:<?php echo $sflogo; ?>; z-index:1000;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="<?php echo $Powerlink; ?>" width="120" height="40" alt="snonwflakes" /></a> </div>
-<div style="float: right; background-color:<?php echo $sflogo; ?>; z-index:1000;" class="NewButton"><a href="<?php echo $row_SiteSettings['sf_url']; ?>rss.php?ty=gallery" title="Snowflakes gallery rss"> <img src="<?php echo $rsslink; ?>" height="22" width="22"  alt="Add" /></a></div>
+<div style="float: right; background-color:<?php echo $sflogo; ?>; z-index:1000;" class="NewButton"><a href="<?php echo $siteSettings->m_sfUrl; ?>rss.php?ty=gallery" title="Snowflakes gallery rss"> <img src="<?php echo $rsslink; ?>" height="22" width="22"  alt="Add" /></a></div>
 <div class="clear"></div>
 <!--wrapper-->
 <div class="wrapper"> 

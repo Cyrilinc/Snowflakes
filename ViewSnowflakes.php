@@ -16,7 +16,7 @@ $query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if ((isset($query_string)) && ($query_string != "")) {
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
-$settingsConfig = Config::getConfig("settings", 'config/config.ini');
+$siteSettings = new settingsStruct('config/config.ini');
 $doLogout = filter_input(INPUT_GET, 'doLogout');
 if ((isset($doLogout)) && ($doLogout == "true")) {
     //to fully log out a visitor we need to clear the session varialbles
@@ -27,7 +27,7 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['MM_UserGroup']);
     unset($_SESSION['PrevUrl']);
 
-    $logoutGoTo = $settingsConfig['loginUrl'];
+    $logoutGoTo = $siteSettings->m_loginUrl;
     if ($logoutGoTo) {
         header("Location: $logoutGoTo");
         exit;
@@ -152,7 +152,7 @@ if (!empty($query_string)) {
 }
 $queryString_rsPages = sprintf("&amp;totalRows_rsPages=%d%s", $totalRows_rsPages, $queryString_rsPages);
 
-$UploadImgUrl = $settingsConfig['m_sfGalleryUrl'];
+$UploadImgUrl = $siteSettings->m_sfGalleryUrl;
 $imageMissing = $UploadImgUrl . "missing_default.png";
 ?>
 <!DOCTYPE HTML>

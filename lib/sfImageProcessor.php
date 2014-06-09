@@ -78,15 +78,15 @@ class sfGalleryImage
      */
     public function __construct($inifile = '../config/config.ini', $forGallery = true)
     {
-        $settingsConfig = Config::getConfig("settings", $inifile);
+        $siteSettings = new settingsStruct($inifile);
         $datadir = new dataDirParam($inifile);
         $this->m_UploadImgDir = $datadir->m_galleryImgDir;
         $this->m_UploadThumbDir = $datadir->m_galleryThumbDir;
-        $this->m_MaxSize = $settingsConfig['maxImageSize'];
-        $this->m_MaxImageWidth = $settingsConfig['maxImageWidth'];
+        $this->m_MaxSize = $siteSettings->m_maxImageSize;
+        $this->m_MaxImageWidth = $siteSettings->m_maxImageWidth;
         if ($forGallery)
         {
-            $this->setThumbinit($settingsConfig['thumbWidth'], $settingsConfig['thumbHeight']);
+            $this->setThumbinit($siteSettings->m_thumbWidth, $siteSettings->m_thumbHeight);
         }
         else
         {
@@ -94,8 +94,8 @@ class sfGalleryImage
             $this->m_UploadImgDir = $datadir->m_uploadGalleryDir;
         }
 
-        $this->m_ImageExtList = explode(",", $settingsConfig['imageExtList']);
-        $this->m_ImageTypesList = explode(",", $settingsConfig['imageTypesList']);
+        $this->m_ImageExtList = explode(",", $siteSettings->m_imageExtList);
+        $this->m_ImageTypesList = explode(",", $siteSettings->m_imageTypesList);
 
         $this->m_errorCode = 0;
     }
@@ -917,11 +917,11 @@ class sfImageProcessor
         }
 
         //The upload directory
-        $settingsConfig = Config::getConfig("settings", $inifile);
+        $siteSettings = new settingsStruct($inifile);
         $datadir = new dataDirParam($inifile);
         //The upload Image directory
         $UploadImgDir = $datadir->m_galleryImgDir;
-        $maxImageWidth = $settingsConfig['maxImageWidth'];
+        $maxImageWidth = $siteSettings->m_maxImageWidth;
 
         $sql = "SELECT image_name FROM snowflakes_gallery";
         $conn->fetch($sql);

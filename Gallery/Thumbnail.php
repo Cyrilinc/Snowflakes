@@ -7,16 +7,16 @@ require_once '../lib/sfImageProcessor.php';
 
 <?php
 //The upload directory
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
+$siteSettings = new settingsStruct('../config/config.ini');
 $datadir = new dataDirParam("../config/config.ini");
 $UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory
 $UploadImgDir = $datadir->m_galleryImgDir;
-$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
 $UploadThumbDir = $datadir->m_galleryThumbDir;
-$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
-$thumbWidth = $settingsConfig['thumbWidth'];
-$thumbHeight = $settingsConfig['thumbHeight'];
+$sfGalleryThumbUrl =$siteSettings->m_sfGalleryThumbUrl;
+$thumbWidth = $siteSettings->m_thumbWidth;
+$thumbHeight = $siteSettings->m_thumbHeight;
 ?>
 
 <?php
@@ -41,7 +41,7 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['MM_UserGroup']);
     unset($_SESSION['PrevUrl']);
 
-    $logoutGoTo = $settingsConfig['loginUrl'];
+    $logoutGoTo = $siteSettings->m_loginUrl;
     if ($logoutGoTo) {
         header("Location: $logoutGoTo");
         exit;

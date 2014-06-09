@@ -101,8 +101,8 @@
                     <div class="contactform2">
                         <?php
                         if (Config::checkConfig('config/config.ini')) {
-                            $settingsConfig = Config::getConfig("settings", 'config/config.ini');
-                            if ($settingsConfig['Setup'] == 'True') {
+                            $siteSettings = new settingsStruct('config/config.ini');
+                            if ($siteSettings->m_setUp == 'True') {
                                 echo '<br /><br />';
                                 echo 'To log in to Snowflakes click <br />';
                                 echo '<div class="NewButton"><a href="login.php"> Log In </a></div>';

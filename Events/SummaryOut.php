@@ -40,17 +40,14 @@ if (isset($total_EventsRs)) {
 }
 $totalPages_EventsRs = ceil($totalRows_EventsRs / $maxRows_EventsRs) - 1;
 
-$query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
-$SFconnects->fetch($query_SiteSettings);
-$result = $SFconnects->getResultArray();
-$row_SiteSettings = $result[0];
+$siteSettings = new settingsStruct('../config/config.ini');
 ?>
 <?php
 $url = $otherurl = strtok(sfUtils::curPageURL(), '?');
-$SnowflakesUrl = $row_SiteSettings['sf_url'];
+$SnowflakesUrl = $siteSettings->m_sfUrl;
 
-if (isset($row_SiteSettings['events_result_url'])) {
-    $SFEventsResultUrl = $row_SiteSettings['events_result_url'];
+if (isset($siteSettings->m_eventsResultUrl)) {
+    $SFEventsResultUrl = $siteSettings->m_eventsResultUrl;
 } else {
     $SFEventsResultUrl = 'notset';
 }

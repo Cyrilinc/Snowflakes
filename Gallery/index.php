@@ -6,11 +6,10 @@ require_once '../lib/sfImageProcessor.php';
 ?>
 <?php
 //The upload directory
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
+$siteSettings = new settingsStruct('../config/config.ini');
 //The upload base Image url
-$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
-
+$sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
+$sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
 $imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 ?>
 <?php
@@ -38,7 +37,7 @@ if ((isset($doLogout)) && ($doLogout == "true"))
     unset($_SESSION['MM_UserGroup']);
     unset($_SESSION['PrevUrl']);
 
-    $logoutGoTo = $settingsConfig['loginUrl'];
+    $logoutGoTo = $siteSettings->m_loginUrl;
     if ($logoutGoTo)
     {
         header("Location: $logoutGoTo");
@@ -55,7 +54,7 @@ if (isset($_SESSION['ImageFiles']) || isset($_SESSION['ImageThumbFiles']))
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
-$MM_restrictGoTo = $settingsConfig['loginUrl'];
+$MM_restrictGoTo = $siteSettings->m_loginUrl;
 if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup']))))
 {
     $MM_qsChar = "?";

@@ -76,19 +76,19 @@ class snowflakeStruct
             return false;
         }
 
-        $this->m_id = array_key_exists('id',$array) ? $array['id'] : "";
-        $this->m_uuid = array_key_exists('uuid',$array) ? $array['uuid'] : "";
-        $this->m_title = array_key_exists('title',$array) ? $array['title'] : "";
-        $this->m_body_text = array_key_exists('body_text',$array) ? $array['body_text'] : "";
-        $this->m_publish = array_key_exists('publish',$array) ? $array['publish'] : "";
-        $this->m_image_name = array_key_exists('image_name',$array) ? $array['image_name'] : "";
-        $this->m_gallery = array_key_exists('gallery',$array) ? $array['gallery'] : "";
-        $this->m_created = array_key_exists('created',$array) ? $array['created'] : "";
-        $this->m_created_by = array_key_exists('created_by',$array) ? $array['created_by'] : "";
-        $this->m_edited = array_key_exists('edited',$array) ? $array['edited'] : "";
-        $this->m_edited_by = array_key_exists('edited_by',$array) ? $array['edited_by'] : "";
-        $this->m_deleted = array_key_exists('deleted',$array) ? $array['deleted'] : "";
-        $this->m_flake_it = array_key_exists('flake_it',$array) ? $array['flake_it'] : "";
+        $this->m_id = array_key_exists('id', $array) ? $array['id'] : "";
+        $this->m_uuid = array_key_exists('uuid', $array) ? $array['uuid'] : "";
+        $this->m_title = array_key_exists('title', $array) ? $array['title'] : "";
+        $this->m_body_text = array_key_exists('body_text', $array) ? $array['body_text'] : "";
+        $this->m_publish = array_key_exists('publish', $array) ? $array['publish'] : "";
+        $this->m_image_name = array_key_exists('image_name', $array) ? $array['image_name'] : "";
+        $this->m_gallery = array_key_exists('gallery', $array) ? $array['gallery'] : "";
+        $this->m_created = array_key_exists('created', $array) ? $array['created'] : "";
+        $this->m_created_by = array_key_exists('created_by', $array) ? $array['created_by'] : "";
+        $this->m_edited = array_key_exists('edited', $array) ? $array['edited'] : "";
+        $this->m_edited_by = array_key_exists('edited_by', $array) ? $array['edited_by'] : "";
+        $this->m_deleted = array_key_exists('deleted', $array) ? $array['deleted'] : "";
+        $this->m_flake_it = array_key_exists('flake_it', $array) ? $array['flake_it'] : "";
 
         return true;
     }
@@ -542,19 +542,19 @@ class userStruct
         {
             return false;
         }
-        $this->m_id = array_key_exists('id',$value) ? $value['id'] : "";
-        $this->m_uuid = array_key_exists('uuid',$value) ? $value['uuid'] : "";
-        $this->m_username = array_key_exists('username',$value) ? $value['username'] : "";
-        $this->m_password = array_key_exists('password',$value) ? $value['password'] : "";
-        $this->m_reset_link = array_key_exists('reset_link',$value) ? $value['reset_link'] : "";
-        $this->m_email = array_key_exists('email',$value) ? $value['email'] : ""; 
-        $this->m_access_level = array_key_exists('access_level',$value) ? $value['access_level'] : "";
-        $this->m_access_name = array_key_exists('access_name',$value) ? $value['access_name'] : "";
-        $this->m_image_name = array_key_exists('image_name',$value) ? $value['image_name'] : "";
-        $this->m_deleted = array_key_exists('deleted',$value) ? $value['deleted'] : "";
-        $this->m_flake_it = array_key_exists('flake_it',$value) ? $value['flake_it'] : "";
-        $this->m_logged_in = array_key_exists('logged_in',$value) ? $value['logged_in'] : "";
-        $this->m_last_login = array_key_exists('last_login',$value) ? $value['last_login'] : "";
+        $this->m_id = array_key_exists('id', $value) ? $value['id'] : "";
+        $this->m_uuid = array_key_exists('uuid', $value) ? $value['uuid'] : "";
+        $this->m_username = array_key_exists('username', $value) ? $value['username'] : "";
+        $this->m_password = array_key_exists('password', $value) ? $value['password'] : "";
+        $this->m_reset_link = array_key_exists('reset_link', $value) ? $value['reset_link'] : "";
+        $this->m_email = array_key_exists('email', $value) ? $value['email'] : "";
+        $this->m_access_level = array_key_exists('access_level', $value) ? $value['access_level'] : "";
+        $this->m_access_name = array_key_exists('access_name', $value) ? $value['access_name'] : "";
+        $this->m_image_name = array_key_exists('image_name', $value) ? $value['image_name'] : "";
+        $this->m_deleted = array_key_exists('deleted', $value) ? $value['deleted'] : "";
+        $this->m_flake_it = array_key_exists('flake_it', $value) ? $value['flake_it'] : "";
+        $this->m_logged_in = array_key_exists('logged_in', $value) ? $value['logged_in'] : "";
+        $this->m_last_login = array_key_exists('last_login', $value) ? $value['last_login'] : "";
 
         return true;
     }
@@ -1042,19 +1042,19 @@ class galleryStruct
             return false;
         }
 
-        $this->m_id = array_key_exists('id',$array) ? $array['id'] : "";
-        $this->m_uuid = array_key_exists('uuid',$array) ? $array['uuid'] : "";
-        $this->m_title = array_key_exists('title',$array) ? $array['title'] : "";
-        $this->m_thumb_name = array_key_exists('thumb_name',$array) ? $array['thumb_name'] : "";
-        $this->m_image_name = array_key_exists('image_name',$array) ? $array['image_name'] : "";
-        $this->m_image_caption = array_key_exists('image_caption',$array) ? $array['image_caption'] : "";
-        $this->m_publish = array_key_exists('publish',$array) ? $array['publish'] : "";
-        $this->m_created = array_key_exists('created',$array) ? $array['created'] : "";
-        $this->m_created_by = array_key_exists('created_by',$array) ? $array['created_by'] : "";
-        $this->m_edited = array_key_exists('edited',$array) ? $array['edited'] : "";
-        $this->m_edited_by = array_key_exists('edited_by',$array) ? $array['edited_by'] : "";
-        $this->m_deleted = array_key_exists('deleted',$array) ? $array['deleted'] : "";
-        $this->m_flake_it = array_key_exists('flake_it',$array) ? $array['flake_it'] : "";
+        $this->m_id = array_key_exists('id', $array) ? $array['id'] : "";
+        $this->m_uuid = array_key_exists('uuid', $array) ? $array['uuid'] : "";
+        $this->m_title = array_key_exists('title', $array) ? $array['title'] : "";
+        $this->m_thumb_name = array_key_exists('thumb_name', $array) ? $array['thumb_name'] : "";
+        $this->m_image_name = array_key_exists('image_name', $array) ? $array['image_name'] : "";
+        $this->m_image_caption = array_key_exists('image_caption', $array) ? $array['image_caption'] : "";
+        $this->m_publish = array_key_exists('publish', $array) ? $array['publish'] : "";
+        $this->m_created = array_key_exists('created', $array) ? $array['created'] : "";
+        $this->m_created_by = array_key_exists('created_by', $array) ? $array['created_by'] : "";
+        $this->m_edited = array_key_exists('edited', $array) ? $array['edited'] : "";
+        $this->m_edited_by = array_key_exists('edited_by', $array) ? $array['edited_by'] : "";
+        $this->m_deleted = array_key_exists('deleted', $array) ? $array['deleted'] : "";
+        $this->m_flake_it = array_key_exists('flake_it', $array) ? $array['flake_it'] : "";
 
         return true;
     }
@@ -1443,24 +1443,24 @@ class eventStruct
         {
             return false;
         }
-        $this->m_id = array_key_exists('id',$array) ? $array['id'] : "";
-        $this->m_uuid = array_key_exists('uuid',$array) ? $array['uuid'] : "";
-        $this->m_title = array_key_exists('title',$array) ? $array['title'] : "";
-        $this->m_body_text = array_key_exists('body_text',$array) ? $array['body_text'] : "";
-        $this->m_publish = array_key_exists('publish',$array) ? $array['publish'] : "";
-        $this->m_image_name = array_key_exists('image_name',$array) ? $array['image_name'] : "";
-        $this->m_event_time = array_key_exists('event_time',$array) ? $array['event_time'] : "";
-        $this->m_event_date = array_key_exists('event_date',$array) ? $array['event_date'] : "";
-        $this->m_end_time = array_key_exists('end_time',$array) ? $array['end_time'] : "";
-        $this->m_end_date = array_key_exists('end_date',$array) ? $array['end_date'] : "";
-        $this->m_location = array_key_exists('location',$array) ? $array['location'] : "";
-        $this->m_lat_long = array_key_exists('lat_long',$array) ? $array['lat_long'] : "";
-        $this->m_created = array_key_exists('created',$array) ? $array['created'] : "";
-        $this->m_created_by = array_key_exists('created_by',$array) ? $array['created_by'] : "";
-        $this->m_edited = array_key_exists('edited',$array) ? $array['edited'] : "";
-        $this->m_edited_by = array_key_exists('edited_by',$array) ? $array['edited_by'] : "";
-        $this->m_deleted = array_key_exists('deleted',$array) ? $array['deleted'] : "";
-        $this->m_flake_it = array_key_exists('flake_it',$array) ? $array['flake_it'] : "";
+        $this->m_id = array_key_exists('id', $array) ? $array['id'] : "";
+        $this->m_uuid = array_key_exists('uuid', $array) ? $array['uuid'] : "";
+        $this->m_title = array_key_exists('title', $array) ? $array['title'] : "";
+        $this->m_body_text = array_key_exists('body_text', $array) ? $array['body_text'] : "";
+        $this->m_publish = array_key_exists('publish', $array) ? $array['publish'] : "";
+        $this->m_image_name = array_key_exists('image_name', $array) ? $array['image_name'] : "";
+        $this->m_event_time = array_key_exists('event_time', $array) ? $array['event_time'] : "";
+        $this->m_event_date = array_key_exists('event_date', $array) ? $array['event_date'] : "";
+        $this->m_end_time = array_key_exists('end_time', $array) ? $array['end_time'] : "";
+        $this->m_end_date = array_key_exists('end_date', $array) ? $array['end_date'] : "";
+        $this->m_location = array_key_exists('location', $array) ? $array['location'] : "";
+        $this->m_lat_long = array_key_exists('lat_long', $array) ? $array['lat_long'] : "";
+        $this->m_created = array_key_exists('created', $array) ? $array['created'] : "";
+        $this->m_created_by = array_key_exists('created_by', $array) ? $array['created_by'] : "";
+        $this->m_edited = array_key_exists('edited', $array) ? $array['edited'] : "";
+        $this->m_edited_by = array_key_exists('edited_by', $array) ? $array['edited_by'] : "";
+        $this->m_deleted = array_key_exists('deleted', $array) ? $array['deleted'] : "";
+        $this->m_flake_it = array_key_exists('flake_it', $array) ? $array['flake_it'] : "";
         return true;
     }
 
@@ -2664,21 +2664,21 @@ final class sfUtils
         {
             return false;
         }
-        $settingsConfig = Config::getConfig("settings", $inifile);
+        $siteSettings = new settingsStruct($inifile);
         $link = "";
 
         switch ($type)
         {
-            case "gallery": $link = $settingsConfig['m_sfUrl'] . "Gallery/ViewOne.php?Galleryid=" . $id;
+            case "gallery": $link = $siteSettings->m_sfUrl . "Gallery/ViewOne.php?Galleryid=" . $id;
                 break;
-            case "event": $link = $settingsConfig['m_sfUrl'] . "Events/ViewEvent.php?Eventid=" . $id;
+            case "event": $link = $siteSettings->m_sfUrl . "Events/ViewEvent.php?Eventid=" . $id;
                 break;
-            case "user": $link = $settingsConfig['m_sfUrl'] . "Users/Account.php?userId=" . $id;
+            case "user": $link = $siteSettings->m_sfUrl . "Users/Account.php?userId=" . $id;
                 break;
-            case "snowflake": $link = $settingsConfig['m_sfUrl'] . "Viewflake.php?pageid=" . $id;
+            case "snowflake": $link = $siteSettings->m_sfUrl . "Viewflake.php?pageid=" . $id;
                 break;
             default :
-                $link = $settingsConfig['m_sfUrl'] . "#";
+                $link = $siteSettings->m_sfUrl . "#";
         }
         return $link;
     }
@@ -2729,7 +2729,7 @@ final class sfUtils
             return false;
         }
         $currentUser = $_SESSION['MM_Username'];
-        $settingsConfig = Config::getConfig("settings", $inifile);
+        $siteSettings = new settingsStruct($inifile);
 
         $sql = 'SELECT * FROM snowflakes_change_log WHERE change_on!="user" AND (created_by="' . $userName . '" OR change_by="' . $userName . '")  ORDER BY change_datetime DESC';
         $sql .=$limitend > 0 ? " LIMIT $limitstart, $limitend ;" : ";";
@@ -2747,7 +2747,7 @@ final class sfUtils
                 $datetime = new DateTime($changeActivities[$i]['change_datetime']);
                 $datedisplay = date('Ymd') == $datetime->format('Ymd') ? $datetime->format(" g:h a") : $datetime->format(" M j");
                 $activitiesString.="<li>" . $datedisplay;
-                $activitiesString.= " <a href=\"" . $settingsConfig['m_sfUrl'] . "Users/Account.php?userName=" . $changeActivities[$i]['change_by'] . "\">";
+                $activitiesString.= " <a href=\"" . $siteSettings->m_sfUrl . "Users/Account.php?userName=" . $changeActivities[$i]['change_by'] . "\">";
                 $activitiesString.= $changeActivities[$i]['change_by'] == $userName && $currentUser == $userName ? "You" : $changeActivities[$i]['change_by'];
                 $activitiesString.="</a> ";
 
@@ -4030,20 +4030,20 @@ final class sfUtils
             return false;
         }
 
-        $settingsConfig = Config::getConfig("settings", $inifile);
-        $itemUrl = isset($settingsConfig['snowflakesResultUrl']) ? $settingsConfig['snowflakesResultUrl'] : $settingsConfig['m_sfUrl'] . "OneView.php";
+        $siteSettings = new settingsStruct($inifile);
+        $itemUrl = isset($siteSettings->m_snowflakesResultUrl) ? $siteSettings->m_snowflakesResultUrl : $siteSettings->m_sfUrl . "OneView.php";
         $headers = apache_request_headers();
         // build parent element
         $rss = new SimpleXMLElement("<rss version='2.0'></rss>");
         $channel = $rss->addChild('channel');
         $channel->addChild('title', 'Snowflakes Rss');
         $channel->addChild('description', 'A ' . $headers['Host'] . ' Snowflakes Rss feed');
-        $channel->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=snowflakes');
+        $channel->addChild('link', $siteSettings->m_sfUrl . 'rss.php?ty=snowflakes');
 
         $image = $channel->addChild('image');
-        $image->addChild('url', $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png");
+        $image->addChild('url', $siteSettings->m_sfUrl . "resources/images/Snowflakes2.png");
         $image->addChild('title', "Snowflakes Rss image");
-        $image->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=snowflakes');
+        $image->addChild('link', $siteSettings->m_sfUrl . 'rss.php?ty=snowflakes');
         $image->addChild('width', '120');
         $image->addChild('height', '40');
 
@@ -4087,8 +4087,8 @@ final class sfUtils
             return false;
         }
 
-        $settingsConfig = Config::getConfig("settings", $inifile);
-        $itemUrl = isset($settingsConfig['eventsResultUrl']) ? $settingsConfig['eventsResultUrl'] : $settingsConfig['m_sfUrl'] . "Events/OneView.php";
+        $siteSettings = new settingsStruct($inifile);
+        $itemUrl = isset($siteSettings->m_eventsResultUrl) ? $siteSettings->m_eventsResultUrl : $siteSettings->m_sfUrl . "Events/OneView.php";
         $headers = apache_request_headers();
 
         // build parent element
@@ -4096,12 +4096,12 @@ final class sfUtils
         $channel = $rss->addChild('channel');
         $channel->addChild('title', 'Snowflakes Event Rss');
         $channel->addChild('description', 'A ' . $headers['Host'] . ' snowflakes event rss feed');
-        $channel->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=events');
+        $channel->addChild('link', $siteSettings->m_sfUrl . 'rss.php?ty=events');
 
         $image = $channel->addChild('image');
-        $image->addChild('url', $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png");
+        $image->addChild('url', $siteSettings->m_sfUrl . "resources/images/Snowflakes2.png");
         $image->addChild('title', "Snowflakes Rss image");
-        $image->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=events');
+        $image->addChild('link',$siteSettings->m_sfUrl . 'rss.php?ty=events');
         $image->addChild('width', '120');
         $image->addChild('height', '40');
 
@@ -4149,20 +4149,20 @@ final class sfUtils
             return false;
         }
 
-        $settingsConfig = Config::getConfig("settings", $inifile);
-        $itemUrl = isset($settingsConfig['galleryResultUrl']) ? $settingsConfig['galleryResultUrl'] : $settingsConfig['m_sfUrl'] . "Gallery/OneView.php";
+        $siteSettings = new settingsStruct($inifile);
+        $itemUrl = isset($siteSettings->m_galleryResultUrl) ? $siteSettings->m_galleryResultUrl : $siteSettings->m_sfUrl . "Gallery/OneView.php";
         $headers = apache_request_headers();
 
         $rss = new SimpleXMLElement("<rss version='2.0'></rss>");
         $channel = $rss->addChild('channel');
         $channel->addChild('title', 'Snowflakes Gallery Rss');
         $channel->addChild('description', 'A ' . $headers['Host'] . ' snowflakes Gallery rss feed');
-        $channel->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery');
+        $channel->addChild('link', $siteSettings->m_sfUrl . 'rss.php?ty=gallery');
 
         $image = $channel->addChild('image');
-        $image->addChild('url', $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png");
+        $image->addChild('url', $siteSettings->m_sfUrl . "resources/images/Snowflakes2.png");
         $image->addChild('title', "Snowflakes Gallery Rss");
-        $image->addChild('link', $settingsConfig['m_sfUrl'] . 'rss.php?ty=gallery');
+        $image->addChild('link', $siteSettings->m_sfUrl . 'rss.php?ty=gallery');
         $image->addChild('width', '120');
         $image->addChild('height', '40');
 
@@ -4178,10 +4178,10 @@ final class sfUtils
             $item->addChild('date', date(" F j, Y", $galleryStruct->m_created));
             $cvrimage = $item->addChild('image');
             $cvrimage->addChild('title', end($covercaption));
-            $cvrimage->addChild('url', self::xmlencoder($settingsConfig['m_sfGalleryThumbUrl'] . end($coverimage)));
+            $cvrimage->addChild('url', self::xmlencoder($siteSettings->m_sfGalleryThumbUrl . end($coverimage)));
             $cvrimage->addChild('link', self::xmlencoder($itemUrl . "?Galleryid=" . $galleryStruct->m_id));
-            $cvrimage->addChild('width', $settingsConfig['thumbWidth']);
-            $cvrimage->addChild('height', $settingsConfig['thumbHeight']);
+            $cvrimage->addChild('width', $siteSettings->m_thumbWidth);
+            $cvrimage->addChild('height', $siteSettings->m_thumbHeight);
             $item->addChild('publisher', $galleryStruct->m_created_by);
             $item->addChild('flakes', $galleryStruct->m_flake_it);
         }
@@ -4745,16 +4745,16 @@ final class sfUtils
             }
         }
 
-        $settingsConfig = Config::getConfig("settings", $inifile);
-        $Powerlink = $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png";
-        $UploadImgUrl = $settingsConfig['m_sfGalleryUrl'];
+        $siteSettings = new settingsStruct($inifile);
+        $Powerlink = $siteSettings->m_sfUrl . "resources/images/Snowflakes2.png";
+        $UploadImgUrl = $siteSettings->m_sfGalleryUrl;
         $imageMissing = $UploadImgUrl . "missing_default.png";
 
-        $newData = str_replace('#SNOWFLAKESURL#', $settingsConfig['m_sfUrl'], $data);
+        $newData = str_replace('#SNOWFLAKESURL#', $siteSettings->m_sfUrl , $data);
         $newData1 = str_replace('#POWERLINK#', $Powerlink, $newData);
         $newData2 = str_replace('#MISSINGIMG#', $imageMissing, $newData1);
-        $newData3 = str_replace('#SFGALLERYIMGURL#', $settingsConfig['m_sfGalleryImgUrl'], $newData2);
-        $newData4 = str_replace('#SFGALLERYTHUMBURL#', $settingsConfig['m_sfGalleryThumbUrl'], $newData3);
+        $newData3 = str_replace('#SFGALLERYIMGURL#', $siteSettings->m_sfGalleryImgUrl, $newData2);
+        $newData4 = str_replace('#SFGALLERYTHUMBURL#', $siteSettings->m_sfGalleryThumbUrl, $newData3);
         $data = $newData4;
         if (strlen($shareURL) > 0)
         {
@@ -4920,6 +4920,7 @@ class settingsStruct
     var $m_admin_email; //admin_email
     var $m_time_zone;   //time_zone
     //Settings Info     //[settings]
+    var $m_setUp;         //Setup
     var $m_url;         //url
     var $m_sfUrl;       //m_sfUrl
     var $m_loginUrl;    //loginUrl
@@ -4947,6 +4948,20 @@ class settingsStruct
     var $m_galleryImgDir; //galleryImgDir
     var $m_galleryThumbDir; //galleryThumbDir
     var $m_settingsarray;
+
+    /**
+     * Initialize the data directory parameter by loading data from the 
+     * configuration file 
+     * 
+     * @param String $inifile the ini config file for snowflakes API
+     */
+    public function __construct($inifile)
+    {
+        if ($inifile)
+        {
+            $this->init($inifile);
+        }
+    }
 
     /**
      * Initialize the settings struct by loading data from the config file
@@ -4990,6 +5005,7 @@ class settingsStruct
         $this->m_admin_email = $this->m_settingsarray['db']['admin_email'];
         $this->m_time_zone = $this->m_settingsarray['db']['time_zone'];
         //Settings Info     //[settings]
+        $this->m_setUp=$this->m_settingsarray['settings']['Setup'];
         $this->m_url = $this->m_settingsarray['settings']['url'];
         $this->m_sfUrl = $this->m_settingsarray['settings']['m_sfUrl'];
         $this->m_loginUrl = $this->m_settingsarray['settings']['loginUrl'];

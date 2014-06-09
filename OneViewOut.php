@@ -17,35 +17,30 @@ $flakeStruct = new snowflakeStruct();
 $flakeStruct->getSnowflakesByid($SFconnects, $colname_rsOut);
 $totalRows_rsOut = $SFconnects->recordCount();
 
-$query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
-$SFconnects->fetch($query_SiteSettings);
-$result = $SFconnects->getResultArray();
-$row_SiteSettings = $result[0];
+$siteSettings = new settingsStruct('config/config.ini');
 ?>
-
 <?php
 $url = $otherurl = sfUtils::curPageURL();
-$SnowflakesUrl = $row_SiteSettings['sf_url'];
-$settingsConfig = Config::getConfig("settings", 'config/config.ini');
-if (isset($row_SiteSettings['result_url'])) {
-    $SnowflakesResultUrl = $row_SiteSettings['result_url'];
+$SnowflakesUrl = $siteSettings->m_sfUrl;
+if (isset($siteSettings->m_snowflakesResultUrl)) {
+    $SnowflakesResultUrl = $siteSettings->m_snowflakesResultUrl;
     $url = $otherurl = $SnowflakesResultUrl . "&amp;pageid=" . $pageid;
 } else {
     $SnowflakesResultUrl = 'notset';
 }
-$Powerlink = $settingsConfig['m_sfUrl'] . "resources/images/Snowflakes2.png";
+$Powerlink = $siteSettings->m_sfUrl . "resources/images/Snowflakes2.png";
 
-$UploadDir = $settingsConfig['m_sfGalleryUrl'];
+$UploadDir = $siteSettings->m_sfGalleryUrl;
 //The upload Image directory
-$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
+$sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
 ?>
 <!-- PageWrap -->
 <div class="PageWrap">
     <script type="text/javascript">
-        var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
+        var flakeitUrl = "<?php echo $siteSettings->m_flakeItUrl; ?>";
     </script>
-    <script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
+    <script type="text/javascript" src="<?php echo $siteSettings->m_sfUrl; ?>resources/Js/flakeit.js"></script>
 
     <div style="float: right; background-color:transparent;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="<?php echo $Powerlink; ?>" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
 

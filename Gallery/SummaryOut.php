@@ -7,10 +7,10 @@ require_once '../lib/sfImageProcessor.php';
 
 <?php
 //The upload directory
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
+$siteSettings = new settingsStruct('../config/config.ini');
 //The upload Image directory
-$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
+$sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
 $imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 ?>
 
@@ -53,16 +53,13 @@ else
 }
 $totalPages_rsSFGallery = ceil($totalRows_rsSFGallery / $maxRows_rsSFGallery) - 1;
 
-$query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
-$SFconnects->fetch($query_SiteSettings);
-$result2 = $SFconnects->getResultArray();
-$row_SiteSettings = $result2[0];
-$SnowflakesUrl = $row_SiteSettings['sf_url'];
+$SnowflakesUrl = $siteSettings->m_sfUrl;
 ?>
 
 <!-- PageWrap -->
 <div class="PageWrap">
-    <?php if ($maxRows_rsSFGallery != Null)
+    <?php
+    if ($maxRows_rsSFGallery != Null)
     {
         ?>   
         <!--wrapper-->
@@ -82,7 +79,8 @@ $SnowflakesUrl = $row_SiteSettings['sf_url'];
                     $i = 0;
                     ?>
 
-                    <?php do
+                    <?php
+                    do
                     {
                         ?>
                         <?php
@@ -121,28 +119,27 @@ $SnowflakesUrl = $row_SiteSettings['sf_url'];
                         $i++;
                     } while ($i < count($galleryStructList));
                     ?>
-    <?php
-    }
-    else
-    {
-        ?> 
+                    <?php
+                }
+                else
+                {
+                    ?> 
 
                     <!-- Snowflakes -->
                     <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="<?php echo $SnowflakesUrl . 'Uploads/GalleryImages/Snowflakes.png'; ?>" > <span class="tp-info"><span> No images yet</span></span> <img src="<?php echo $SnowflakesUrl . 'Uploads/GalleryThumbs/Snowflakes.png'; ?>"  alt="Snowflakes"> </a> </li>
                     <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="<?php echo $SnowflakesUrl . 'Uploads/GalleryImages/Snowflakes.png'; ?>" > <span class="tp-info"><span> No images yet</span></span> <img src="<?php echo $SnowflakesUrl . 'Uploads/GalleryThumbs/Snowflakes.png'; ?>"  alt="Snowflakes"> </a> </li>
                     <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="<?php echo $SnowflakesUrl . 'Uploads/GalleryImages/Snowflakes.png'; ?>" > <span class="tp-info"><span> No images yet</span></span> <img src="<?php echo $SnowflakesUrl . 'Uploads/GalleryThumbs/Snowflakes.png'; ?>"  alt="Snowflakes"> </a> </li>
-        <?php } ?>     
+    <?php } ?>     
 
             </ul>
             <!--tp-grid Ends--> 
         </div>
         <!--wrapper Ends-->
-    <?php
+        <?php
     }
     else
     {
         ?>
-
         <h4 class="SummaryHead">No Max number Snowflakes Gallery indicated </h4>
 
 <?php }

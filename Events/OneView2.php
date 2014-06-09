@@ -18,23 +18,19 @@ $eventStruct = new eventStruct();
 $eventStruct->getEventByid($SFconnects, $colname_EventsRs);
 $totalRows_EventsRs = $SFconnects->recordCount();
 
-$query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
-$SFconnects->fetch($query_SiteSettings);
-$result = $SFconnects->getResultArray();
-$row_SiteSettings = $result[0];
+$siteSettings = new settingsStruct('../config/config.ini');
 
 $url = $otherurl = sfUtils::curPageURL();
-if (isset($row_SiteSettings['events_result_url'])) {
-    $events_result_url = $row_SiteSettings['events_result_url'];
+if (isset($siteSettings->m_eventsResultUrl)) {
+    $events_result_url = $siteSettings->m_eventsResultUrl;
     $url = $otherurl = $events_result_url . "&amp;Eventid=" . $Eventid;
 } else {
     $SFEventsResultUrl = 'notset';
 }
-$SnowflakesUrl = $row_SiteSettings['sf_url'];
+$SnowflakesUrl = $siteSettings->m_sfUrl;
 $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
 
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
-$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
 $imageMissing = $sfGalleryImgUrl . "missing_default.png";
 ?>
 <style>
@@ -44,9 +40,9 @@ $imageMissing = $sfGalleryImgUrl . "missing_default.png";
 </style>
 <script type="text/javascript" src="../resources/Js/jquery-1.11.0.js"></script>
 <script type="text/javascript">
-    var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
+    var flakeitUrl = "<?php echo $siteSettings->m_flakeItUrl; ?>";
 </script>
-<script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
+<script type="text/javascript" src="<?php echo $siteSettings->m_sfUrl; ?>resources/Js/flakeit.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
     function initialize() {

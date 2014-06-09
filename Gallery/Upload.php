@@ -5,7 +5,7 @@ require_once '../config/Config.php';
 require_once '../lib/sfImageProcessor.php';
 //ini_set('max_file_uploads', 50);
 
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
+$siteSettings = new settingsStruct('../config/config.ini');
 
 $Post_upload = filter_input(INPUT_POST, 'upload');
 if (isset($Post_upload)) {
@@ -78,9 +78,9 @@ if (isset($Post_upload)) {
                         <div id="dropzone">
                             <h3>Drop Images Here</h3>
                         </div>
-                        <label>Maximum allowed for each file size is <?php echo sfUtils::formatSizeUnits($settingsConfig['maxImageSize']); ?></label><br /> 
+                        <label>Maximum allowed for each file size is <?php echo sfUtils::formatSizeUnits($siteSettings->m_maxImageSize); ?></label><br /> 
                         <label>Maximum number of images to upload at once is <?php echo ini_get('max_file_uploads'); ?></label><br /> 
-                        <input type="hidden" name="MaxSize" value="<?php echo $settingsConfig['maxImageSize']; ?>">
+                        <input type="hidden" name="MaxSize" value="<?php echo $siteSettings->m_maxImageSize; ?>">
                         <input class="NewButton" type="submit" name="upload" value="Upload" />
                         <div id="progressNumber"></div>
                     </form>

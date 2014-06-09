@@ -6,10 +6,10 @@ require_once '../lib/sfImageProcessor.php';
 ?>
 <?php
 //The upload directory
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
+$siteSettings = new settingsStruct('../config/config.ini');
 //The upload Image directory
-$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
+$sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
 $imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 ?>
 <?php
@@ -34,7 +34,7 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['MM_UserGroup']);
     unset($_SESSION['PrevUrl']);
 
-    $logoutGoTo = $settingsConfig['loginUrl'];
+    $logoutGoTo = $siteSettings->m_loginUrl;
     header("Location: $logoutGoTo");
     exit;
 }

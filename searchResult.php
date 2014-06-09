@@ -4,10 +4,10 @@ require_once 'lib/sfConnect.php';
 require_once 'config/Config.php';
 
 //The upload directory
-$settingsConfig = Config::getConfig("settings", 'config/config.ini');
+$siteSettings = new settingsStruct('config/config.ini');
 //The upload Image directory
-$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
+$sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
 $imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 
 //initialize the session
@@ -33,7 +33,7 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['MM_UserGroup']);
     unset($_SESSION['PrevUrl']);
 
-    $logoutGoTo = $settingsConfig['loginUrl'];
+    $logoutGoTo = $siteSettings->m_loginUrl;
     if ($logoutGoTo) {
         header("Location: $logoutGoTo");
         exit;
@@ -275,7 +275,7 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                         while ($i < count($snowflakeResult) && $snowflakeResult != "") {
                             $record = $snowflakeResult[$i];
                             if (!empty($record)) {
-                                $searchResultString.= "<li>" . '<a href="' . $settingsConfig['m_sfUrl'] . "Viewflake.php?pageid=" . $record['id'] . '">' . $record['title'] . "</a></li>";
+                                $searchResultString.= "<li>" . '<a href="' . $siteSettings->m_sfUrl . "Viewflake.php?pageid=" . $record['id'] . '">' . $record['title'] . "</a></li>";
                             }
                             $i++;
                         }
@@ -302,7 +302,7 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                         while ($i < count($eventsResult) && $eventsResult != "") {
                             $record = $eventsResult[$i];
                             if (!empty($record)) {
-                                $searchResultString.= "<li>" . '<a href="' . $settingsConfig['m_sfUrl'] . "Events/ViewEvent.php?Eventid=" . $record['id'] . '">' . $record['title'] . "</a></li>";
+                                $searchResultString.= "<li>" . '<a href="' . $siteSettings->m_sfUrl . "Events/ViewEvent.php?Eventid=" . $record['id'] . '">' . $record['title'] . "</a></li>";
                             }
                             $i++;
                         }
@@ -329,7 +329,7 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                         while ($i < count($galleryResult) && $galleryResult != "") {
                             $record = $galleryResult[$i];
                             if (!empty($record)) {
-                                $searchResultString.= "<li>" . '<a href="' . $settingsConfig['m_sfUrl'] . "Gallery/ViewOne.php?Galleryid=" . $record['id'] . '">' . $record['title'] . "</a></li>";
+                                $searchResultString.= "<li>" . '<a href="' . $siteSettings->m_sfUrl . "Gallery/ViewOne.php?Galleryid=" . $record['id'] . '">' . $record['title'] . "</a></li>";
                             }
                             $i++;
                         }
@@ -357,7 +357,7 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                         while ($i < count($usersResult) && $usersResult != "") {
                             $record = $usersResult[$i];
                             if (!empty($record)) {
-                                $searchResultString.= "<li>" . '<a href="' . $settingsConfig['m_sfUrl'] . "Users/Account.php?userName=" . $record['username'] . '">' . $record['username'] . "</a> with email " . $record['email'] . "</li>";
+                                $searchResultString.= "<li>" . '<a href="' . $siteSettings->m_sfUrl . "Users/Account.php?userName=" . $record['username'] . '">' . $record['username'] . "</a> with email " . $record['email'] . "</li>";
                             }
                             $i++;
                         }

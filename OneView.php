@@ -21,11 +21,11 @@ $totalRows_rsOut = $SFconnects->recordCount();
 
 <?php
 $url = $otherurl = sfUtils::curPageURL();
-$settingsConfig = Config::getConfig("settings", 'config/config.ini');
+$siteSettings = new settingsStruct('config/config.ini');
 $Powerlink = "resources/images/Snowflakes2.png";
 //The upload base Image url
-$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
-$sfGalleryThumbUrl = $settingsConfig['m_sfGalleryThumbUrl'];
+$sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
+$sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
 $imageMissing = $sfGalleryImgUrl . "missing_default.png";
 ?>
 <!DOCTYPE HTML>
@@ -66,9 +66,9 @@ $imageMissing = $sfGalleryImgUrl . "missing_default.png";
 
             });
 
-            var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
+            var flakeitUrl = "<?php echo $siteSettings->m_flakeItUrl; ?>";
         </script>
-        <script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
+        <script type="text/javascript" src="<?php echo $siteSettings->m_sfUrl; ?>resources/Js/flakeit.js"></script>
 
         <link rel="stylesheet" type="text/css" href="resources/css/stapel.css" />
         <script type="text/javascript" src="resources/Js/jquery.stapel.js"></script>

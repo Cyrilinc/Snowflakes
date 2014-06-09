@@ -31,9 +31,9 @@ if ((isset($MM_forget)) && ($MM_forget == "form1")) {
     $MM_email = $email;
     $MM_redirectLoginSuccess = "login.php";
 
-    $settingsConfig = Config::getConfig("settings", 'config/config.ini');
+    $siteSettings = new settingsStruct('../config/config.ini');
     $errMsg = "";
-    $resetPass = sfUtils::forgottenPassword($SFconnects, $MM_email, $config->m_admin_email, $settingsConfig['m_sfUrl'], $errMsg);
+    $resetPass = sfUtils::forgottenPassword($SFconnects, $MM_email, $config->m_admin_email, $siteSettings->m_sfUrl, $errMsg);
     
     if ($resetPass) {
         $msg= 'An email has been sent to ' . $MM_email . ', to reset your password click the link provided in the email.';

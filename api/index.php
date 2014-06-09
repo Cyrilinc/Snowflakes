@@ -10,8 +10,8 @@ $config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
-$UploadImgUrl = $settingsConfig['m_sfGalleryUrl'];
+$siteSettings = new settingsStruct('../config/config.ini');
+$UploadImgUrl = $siteSettings->m_sfGalleryUrl;
 $imageMissing = $UploadImgUrl . "missing_default.png";
 
 $maxRows = 5; // Maximum Number of record per pagination
@@ -74,7 +74,7 @@ $queryString = sprintf("&amp;totalRows=%d%s", $totalRows, $queryString);
 
 if (($sfty == 'snowflake' || $type == 'snowflakes') && ($contentType == 'html' || $contentType == 'jsonhtml'))
 {
-    $Shareurl = isset($settingsConfig["snowflakesResultUrl"]) ? $settingsConfig["snowflakesResultUrl"] : $settingsConfig['m_sfUrl'] . "OneView.php";
+    $Shareurl = isset($siteSettings->m_snowflakesResultUrl) ? $siteSettings->m_snowflakesResultUrl : $siteSettings->m_sfUrl . "OneView.php";
 
     $data = '
         <div style="float: right; background-color:transparent;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="#POWERLINK#" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
@@ -83,7 +83,7 @@ if (($sfty == 'snowflake' || $type == 'snowflakes') && ($contentType == 'html' |
 }
 else if (($sfty == 'event' || $type == 'events') && ($contentType == 'html' || $contentType == 'jsonhtml'))
 {
-    $Shareurl = isset($settingsConfig["eventsResultUrl"]) ? $settingsConfig["eventsResultUrl"] : $settingsConfig['m_sfUrl'] . "Events/OneView.php";
+    $Shareurl = isset($siteSettings->m_eventsResultUrl) ? $siteSettings->m_eventsResultUrl : $siteSettings->m_sfUrl . "Events/OneView.php";
     $data = '
         <div style="float: right; background-color:transparent;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="#POWERLINK#" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
         <div style="float: right; background-color:transparent;" class="NewButton"><a href="#SNOWFLAKESURL#rss.php?ty=events" title="Snowflakes event rss"> <img src="#SNOWFLAKESURL#resources/images/Icons/Rss.png" height="22" width="22"  alt="Add" /></a></div>
@@ -91,7 +91,7 @@ else if (($sfty == 'event' || $type == 'events') && ($contentType == 'html' || $
 }
 else if ($sfty == 'gallery' && ($contentType == 'html' || $contentType == 'jsonhtml'))
 {
-    $Shareurl = isset($settingsConfig["galleryResultUrl"]) ? $settingsConfig["galleryResultUrl"] : $settingsConfig['m_sfUrl'] . "Gallery/OneView.php";
+    $Shareurl = isset($siteSettings->m_galleryResultUrl) ? $siteSettings->m_galleryResultUrl : $siteSettings->m_sfUrl . "Gallery/OneView.php";
     $data = '
         <div style="float: right; background-color:transparent;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="#POWERLINK#" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
         <div style="float: right; background-color:transparent;" class="NewButton"><a href="#SNOWFLAKESURL#rss.php?ty=gallery" title="Snowflakes gallery rss"> <img src="#SNOWFLAKESURL#resources/images/Icons/Rss.png" height="22" width="22"  alt="Add" /></a></div>

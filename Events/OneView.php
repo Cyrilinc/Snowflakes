@@ -4,9 +4,9 @@ require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
 ?>
 <?php
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
+$siteSettings = new settingsStruct('../config/config.ini');
 //The upload Image directory
-$sfGalleryImgUrl = $settingsConfig['m_sfGalleryImgUrl'];
+$sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
 $imageMissing = $sfGalleryImgUrl . "missing_default.png";
 
 $config = new databaseParam('../config/config.ini');
@@ -65,9 +65,9 @@ $Powerlink = "../resources/images/Snowflakes2.png";
             });
         </script>
         <script type="text/javascript">
-            var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
+            var flakeitUrl = "<?php echo $siteSettings->m_flakeItUrl; ?>";
         </script>
-        <script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
+        <script type="text/javascript" src="<?php echo $siteSettings->m_sfUrl; ?>resources/Js/flakeit.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
 

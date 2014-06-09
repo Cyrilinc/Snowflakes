@@ -52,12 +52,8 @@ else
 }
 $totalPages = ceil($totalRows / $maxRows) - 1;
 
-$query_SiteSettings = "SELECT sf_url, result_url, out_url, events_result_url, events_output_url, gallery_result_url, gallery_out_url FROM snowflakes_settings";
-$SFconnects->fetch($query_SiteSettings);
-$result2 = $SFconnects->getResultArray();
-$row_SiteSettings = $result2[0];
+$siteSettings = new settingsStruct('config/config.ini');
 
-$queryString = "";
 $query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string))
 {
@@ -80,14 +76,13 @@ $queryString = sprintf("&amp;totalRows=%d%s", $totalRows, $queryString);
 ?>
 <?php
 $url = $otherurl = sfUtils::curPageURL();
-$SnowflakesUrl = $row_SiteSettings['sf_url'];
-$SnowflakesResultUrl = $row_SiteSettings['result_url'];
-$Powerlink = $row_SiteSettings['sf_url'] . "resources/images/Snowflakes2.png";
-$Shareurl = $row_SiteSettings['sf_url'] . "OneView.php";
-$rsslink = $row_SiteSettings['sf_url'] . "resources/images/Icons/Rss.png";
+$SnowflakesUrl =$siteSettings->m_sfUrl;
+$SnowflakesResultUrl = $siteSettings->m_snowflakesResultUrl;
+$Powerlink = $siteSettings->m_sfUrl . "resources/images/Snowflakes2.png";
+$Shareurl = $siteSettings->m_sfUrl . "OneView.php";
+$rsslink = $siteSettings->m_sfUrl . "resources/images/Icons/Rss.png";
 
-$settingsConfig = Config::getConfig("settings", 'config/config.ini');
-$UploadUrl = $settingsConfig['m_sfGalleryUrl'];
+$UploadUrl =$siteSettings->m_sfGalleryUrl;
 $imageMissing = $UploadUrl . "missing_default.png";
 
 if (strlen($SnowflakesResultUrl) > 0)
@@ -95,9 +90,9 @@ if (strlen($SnowflakesResultUrl) > 0)
     $Shareurl = $SnowflakesResultUrl;
 }
 
-if (isset($row_SiteSettings['out_url']))
+if (isset($siteSettings->m_snowflakesOutUrl))
 {
-    $currentPage = $row_SiteSettings['out_url'];
+    $currentPage = $siteSettings->m_snowflakesOutUrl;
 }
 
 $sflogo = "transparent";
@@ -108,11 +103,11 @@ if (isset($rssflogo))
 }
 ?>
 <script type="text/javascript">
-    var flakeitUrl = "<?php echo $settingsConfig['flakeItUrl']; ?>";
+    var flakeitUrl = "<?php echo $siteSettings->m_flakeItUrl; ?>";
 </script>
-<script type="text/javascript" src="<?php echo $settingsConfig['m_sfUrl']; ?>resources/Js/flakeit.js"></script>
+<script type="text/javascript" src="<?php echo $siteSettings->m_sfUrl; ?>resources/Js/flakeit.js"></script>
 <div style="float: right; background-color:<?php echo $sflogo; ?>;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="<?php echo $Powerlink; ?>" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
-<div style="float: right; background-color:<?php echo $sflogo; ?>;" class="NewButton"><a href="<?php echo $row_SiteSettings['sf_url']; ?>rss.php?ty=snowflakes" title="Snowflakes rss"> <img src="<?php echo $rsslink; ?>" height="22" width="22"  alt="Add" /></a></div>
+<div style="float: right; background-color:<?php echo $sflogo; ?>;" class="NewButton"><a href="<?php echo $siteSettings->m_sfUrl; ?>rss.php?ty=snowflakes" title="Snowflakes rss"> <img src="<?php echo $rsslink; ?>" height="22" width="22"  alt="Add" /></a></div>
 <div class="clear"></div>
 
 <?php

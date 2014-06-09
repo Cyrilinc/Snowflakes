@@ -17,7 +17,8 @@ if ((isset($query_string)) && ($query_string != "")) {
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
 $doLogout = filter_input(INPUT_GET, 'doLogout');
-$settingsConfig = Config::getConfig("settings", '../config/config.ini');
+$siteSettings = new settingsStruct('../config/config.ini');
+
 if ((isset($doLogout)) && ($doLogout == "true")) {
     //to fully log out a visitor we need to clear the session varialbles
     $_SESSION['MM_Username'] = NULL;
@@ -27,7 +28,7 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['MM_UserGroup']);
     unset($_SESSION['PrevUrl']);
 
-    $logoutGoTo = $settingsConfig['loginUrl'];
+    $logoutGoTo = $siteSettings->m_loginUrl;
     if ($logoutGoTo) {
         header("Location: $logoutGoTo");
         exit;
@@ -41,7 +42,7 @@ if (!isset($_SESSION)) {
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
-$MM_restrictGoTo = $settingsConfig['loginUrl'];
+$MM_restrictGoTo = $siteSettings->m_loginUrl;
 if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
