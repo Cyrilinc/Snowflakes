@@ -43,7 +43,7 @@ if (isset($totalSFGallery)) {
 $totalPages = ceil($totalRows / $maxRows) - 1;
 
 $siteSettings = new settingsStruct('../config/config.ini');
-
+$queryString="";
 $query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string)) {
     $params = explode("&", $query_string);
@@ -63,7 +63,6 @@ $queryString = sprintf("&amp;totalRows=%d%s", $totalRows, $queryString);
 
 <?php
 //The upload directory
-$siteSettings = new settingsStruct('../config/config.ini');
 $datadir=new dataDirParam("../config/config.ini");
 $UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory

@@ -1,5 +1,7 @@
-<?php require_once 'config/Config.php'; ?>
-
+<?php
+require_once 'lib/sf.php';
+require_once 'config/Config.php';
+?>
 <!DOCTYPE HTML>
 <html lang="en" ><!-- InstanceBegin template="/Templates/index.dwt" codeOutsideHTMLIsLocked="false" -->
     <head>
@@ -88,6 +90,15 @@
                                     <!--HalfPage1-->
                                     <div class="HalfSliderPage" id="Halfpage1"> <img src="resources/images/SnowflakesBanner.png" alt="Snowflakes" /> </div>
                                     <!--End HalfPage1 --> 
+                                    <!--HalfPage2-->
+                                    <div class="HalfSliderPage" id="HalfPage2"> <img src="resources/images/SnowflakesBanner2.png" alt="Snowflakes" /> </div>
+                                    <!--End HalfPage2 -->
+                                    <!--HalfPage3-->
+                                    <div class="HalfSliderPage" id="HalfPage3"> <img src="resources/images/SnowflakesBanner3.png" alt="Snowflakes" /> </div>
+                                    <!--End HalfPage3 -->
+                                    <!--HalfPage4-->
+                                    <div class="HalfSliderPage" id="HalfPage4"> <img src="resources/images/SnowflakesBanner4.png" alt="Snowflakes" /> </div>
+                                    <!--End HalfPage4 -->
                                 </div>
                                 <!--End of HalfSliderMain--> 
                             </div>

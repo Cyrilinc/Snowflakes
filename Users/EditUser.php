@@ -363,8 +363,8 @@ if (isset($adminid))
                                 </span><br />
 
                                 <div class="SnowflakeImageSmall">
-                                    <a class="colorbox" href="<?php echo $settingsConfig['m_sfGalleryUrl'] . $edituserStruct->m_image_name; ?>" title="<?php echo $edituserStruct->m_username; ?>" > 
-                                        <img src="<?php echo $settingsConfig['m_sfGalleryUrl'] . $edituserStruct->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="User Image" />
+                                    <a class="colorbox" href="<?php echo $siteSettings->m_sfGalleryUrl . $edituserStruct->m_image_name; ?>" title="<?php echo $edituserStruct->m_username; ?>" > 
+                                        <img src="<?php echo $siteSettings->m_sfGalleryUrl . $edituserStruct->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="User Image" />
                                     </a>
                                 </div>
                                 <input type="file" class="inputtext3 controls" name="uploadImage" />

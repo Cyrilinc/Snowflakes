@@ -4,19 +4,23 @@ require_once 'lib/sfConnect.php';
 require_once 'config/Config.php';
 
 // *** Validate request to login to this site.
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
-$php_self = sfUtils::getFilterServer( 'PHP_SELF');
+$php_self = sfUtils::getFilterServer('PHP_SELF');
 $loginFormAction = $php_self;
 $rs_reset = filter_input(INPUT_GET, 'reset');
-if (isset($rs_reset)) {
+if (isset($rs_reset))
+{
     $oldResetLink = $rs_reset;
 }
 
 $Post_password = filter_input(INPUT_POST, 'password');
 $resetMessage = "";
-if (isset($Post_password)) {
+$passwordReset='';
+if (isset($Post_password))
+{
     $password = filter_input(INPUT_POST, 'password2');
     $oldResetLink = filter_input(INPUT_POST, 'reset_link');
     $MM_redirectLoginSuccess = "login.php";
@@ -25,15 +29,19 @@ if (isset($Post_password)) {
     $config = new databaseParam('config/config.ini');
     $SFconnects = new sfConnect($config->dbArray());
     $connected = $SFconnects->connect(); // Connect to database
-    if(!$connected){
-        $resetMessage.= sfUtils::sfPromptMessage("Snowflakes could not connect to database.".$SFconnects->getMessage(),'error');
+    if (!$connected)
+    {
+        $resetMessage.= sfUtils::sfPromptMessage("Snowflakes could not connect to database." . $SFconnects->getMessage(), 'error');
     }
 
     $passwordReset = sfUtils::resetPassword($SFconnects, $password, $oldResetLink);
-    if ($passwordReset) {
-        $resetMessage.=sfUtils::sfPromptMessage("Your password has been reset Successfully!",'success');
-    } else {
-        $resetMessage.=sfUtils::sfPromptMessage("Your password could not reset properly!<br/>".$SFconnects->getMessage() . "<br/>",'error');
+    if (strlen($passwordReset)>0)
+    {
+        $resetMessage.=sfUtils::sfPromptMessage("Your password has been reset Successfully!", 'success');
+    }
+    else
+    {
+        $resetMessage.=sfUtils::sfPromptMessage("Your password could not reset properly!<br/>" . $SFconnects->getMessage() . "<br/>", 'error');
     }
 }
 ?>
@@ -68,13 +76,14 @@ if (isset($Post_password)) {
         <!--[if IEMobile]> 
            <link rel="stylesheet" type="text/css" href="resources/css/Mobile.css"/>
         <![endif]-->
-        <?php if (isset($rs_reset)) { ?>
+<?php if (isset($rs_reset))
+{ ?>
             <script src="SpryAssets/SpryValidationPassword.js" type="text/javascript"></script>
             <script src="SpryAssets/SpryValidationConfirm.js" type="text/javascript"></script>
             <link href="SpryAssets/SpryValidationPassword.css" rel="stylesheet" type="text/css" />
             <link href="SpryAssets/SpryValidationConfirm.css" rel="stylesheet" type="text/css" />
 
-        <?php } ?>
+<?php } ?>
         <link href="resources/css/jquery-ui-1.10.4.snowflakes.css" rel="stylesheet" type="text/css" />
         <script src="resources/Js/jquery-ui-1.10.4.snowflakes.js"></script>
         <script>
@@ -82,12 +91,15 @@ if (isset($Post_password)) {
                     $(".dialog-message").dialog({
                     modal: true,
                             buttons: {
-<?php if ($passwordReset) { ?>
+<?php if (strlen($passwordReset)>0)
+{ ?>
                                 "Log In"
                                         : function() {
                                         window.location = "<?php echo $MM_redirectLoginSuccess ?>";
                                         }
-<?php } else { ?>
+<?php }
+else
+{ ?>
                                 "Ok": function() {
                                 $(this).dialog("close");
                                 }
@@ -165,12 +177,14 @@ if (isset($Post_password)) {
 
                     <!--contactform-->
                     <div class="contactform2">
-                        <?php
-                        if (strlen($resetMessage) > 0) {
-                            echo sfUtils::dialogMessage("Reset Password", $resetMessage);
-                        }
-                        ?>
-                        <?php if (isset($rs_reset)) { ?>
+<?php
+if (strlen($resetMessage) > 0)
+{
+    echo sfUtils::dialogMessage("Reset Password", $resetMessage);
+}
+?>
+<?php if (isset($rs_reset))
+{ ?>
 
                             <form action="<?php echo $loginFormAction; ?>" method="POST" class="loginform" id="loginform">
                                 <input type="hidden" name="reset_link" value="<?php echo $oldResetLink; ?>">
@@ -189,10 +203,11 @@ if (isset($Post_password)) {
                                 <input class="NewButton" id="button" type="submit" value="Reset Password" />
                             </form>
 
-                        <?php } else { ?>
+<?php } else
+{ ?>
                             <h2 class="SummaryHead">No reset link provided</h2>
                             <label class="right"><a href="ForgottenPassword.php">Forgotten password?</a></label>
-                        <?php } ?>
+<?php } ?>
                     </div>
                     <!--END of contactform--> 
 
@@ -235,15 +250,19 @@ if (isset($Post_password)) {
 
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" --> 
-        <?php if (isset($rs_reset)) { ?>
+<?php if (isset($rs_reset))
+{ ?>
             <script type="text/javascript">
                         var sprypassword1 = new Spry.Widget.ValidationPassword("spryAdminPass", {validateOn: ["blur"]});
                         var spryconfirm1 = new Spry.Widget.ValidationConfirm("spryPassconfirm", "Password", {validateOn: ["blur", "change"]});
             </script> 
-        <?php } ?>
+<?php } ?>
         <!-- InstanceEndEditable -->
     </body>
     <!-- InstanceEnd --></html>
 <?php
-$SFconnects->close();
+if (isset($Post_password))
+{
+    $SFconnects->close();
+}
 ?>
