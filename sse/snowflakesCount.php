@@ -38,7 +38,6 @@ do {
 	echo "data: \"msg\": \"$msg\", \n";
 	echo "data: \"id\": $startedAt\n";
 	echo "data: }\n\n";
-	ob_flush();
 	flush();
 
     $SFconnects->close();

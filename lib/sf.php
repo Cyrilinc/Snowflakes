@@ -9,6 +9,7 @@
 error_reporting(0);
 //declare(ticks = 5);
 //register_tick_function('sfUtils::memoryTickHandler');
+//unregister_tick_function('sfUtils::memoryTickHandler');
 set_error_handler("sfLogError::sfErrorHandler");
 date_default_timezone_set('Europe/London');
 
@@ -4566,7 +4567,6 @@ final class sfUtils
         $added = bcmul($Memory, 0.3); //add 30% more than the original memory limit
         $total = $added + $Memory;
         ini_set('memory_limit', (int) $total);
-        //echo "\n memory limit adjusted dynamically - $total";
         sleep(1);
         return true;
     }

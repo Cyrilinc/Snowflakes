@@ -258,7 +258,7 @@ do
                             <div class="Break2"></div>
                             <div class="userImage">
                                 <a class="colorbox" href="../Uploads/<?php echo $userStructList[$i]->m_image_name; ?>" title="<?php echo $userStructList[$i]->m_username; ?>" > 
-                                    <img src="../Uploads/<?php echo $userStructList[$i]->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo $sfuser->m_username . "'s"; ?> profile" />
+                                    <img src="../Uploads/<?php echo $userStructList[$i]->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo $user->m_username . "'s"; ?> profile" />
                                 </a>
                             </div>
 

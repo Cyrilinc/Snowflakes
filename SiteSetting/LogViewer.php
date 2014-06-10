@@ -312,7 +312,7 @@ else
     echo sfUtils::dialogMessage("Viewer", $Message);
     ?>
                     <header>
-                        <h1>Snowflakes Log Viewer(<?php echo count($info); ?>)
+                        <h1>Snowflakes Log Viewer (<?php echo count($info); ?>)
                             <span class="success"> <?php echo $successCount; ?> Successes</span>
                             <span class="warning"> <?php echo $warningCount; ?> Warnings</span>
                             <span class="error"> <?php echo $errorcount; ?> Errors</span>

@@ -53,7 +53,7 @@ else
 $totalPages = ceil($totalRows / $maxRows) - 1;
 
 $siteSettings = new settingsStruct('config/config.ini');
-
+$queryString='';
 $query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string))
 {

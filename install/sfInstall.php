@@ -16,6 +16,7 @@ session_start();
 //set the return URL
 $MM_setup = filter_input(INPUT_POST, 'MM_setup');
 $obj = new snowflakesSetUp();
+$somem_Message="";
 if ((isset($MM_setup)) && ($MM_setup == "setupform"))
 {
     $return_url = "index.php";
@@ -62,9 +63,9 @@ $MM_migrate = filter_input(INPUT_POST, "MM_migrate");
 $dbName = filter_input(INPUT_POST, "dbName");
 $oldUpdloadDir = filter_input(INPUT_POST, "oldUpdloadDir");
 $Username = filter_input(INPUT_POST, "username");
+
 if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
 {
-
     $getspace = str_replace(" ", "_", $dbName);
     $Database_Name = trim($getspace);
 

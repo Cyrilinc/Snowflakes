@@ -668,7 +668,7 @@ class sfImageProcessor
             if ($successCount > 0 || $failureCount > 0)
             {
                 $message.=sfUtils::sfPromptMessage('<strong>[' . $successCount . ']</strong> Successful.', 'success');
-                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsuccessful' . 'error');
+                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsuccessful.', 'error');
             }
         }
         else
