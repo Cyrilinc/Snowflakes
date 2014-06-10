@@ -1,7 +1,9 @@
 <?php
 /*
  * Snowflakes 2.0 - CMS & Web Publishing
+ * Installation process handler 
  * http://cyrilinc.co.uk/snowflakes/
+ * 
  * Copyright (c) 2013 Cyril inc
  * Licensed under MIT and GPL
  * Date: Thu, Dec 19 2013 22:56:31 
@@ -16,7 +18,7 @@ session_start();
 //set the return URL
 $MM_setup = filter_input(INPUT_POST, 'MM_setup');
 $obj = new snowflakesSetUp();
-$somem_Message="";
+$somem_Message = "";
 if ((isset($MM_setup)) && ($MM_setup == "setupform"))
 {
     $return_url = "index.php";
@@ -66,6 +68,7 @@ $Username = filter_input(INPUT_POST, "username");
 
 if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
 {
+
     $getspace = str_replace(" ", "_", $dbName);
     $Database_Name = trim($getspace);
 
@@ -217,15 +220,15 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
             <!-- Content -->
             <div class="Content"> <!-- InstanceBeginEditable name="BodyRegion" -->
                 <h1><?php
-            if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful"))
-            {
-                echo 'Migrate old Snowflakes';
-            }
-            else
-            {
-                echo "Snowflakes Set up Results";
-            }
-            ?></h1>
+                    if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful"))
+                    {
+                        echo 'Migrate old Snowflakes';
+                    }
+                    else
+                    {
+                        echo "Snowflakes Set up Results";
+                    }
+                    ?></h1>
 
                 <!-- Break -->
                 <div class="clear"></div>
@@ -254,16 +257,16 @@ if ((isset($MM_migrate)) && ($MM_migrate == "migrateform") && ( isset($dbName)))
                         }
                         ?>
                         <div class="clear"></div>
-    <?php
-    if (strpos($obj->m_outcomeMessage, "Set Up Successful"))
-    {
-        echo '<h2> OR </h2>';
-    }
-}
-if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful"))
-{
-    $php_self = sfUtils::getFilterServer( 'PHP_SELF');
-    ?>
+                        <?php
+                        if (strpos($obj->m_outcomeMessage, "Set Up Successful"))
+                        {
+                            echo '<h2> OR </h2>';
+                        }
+                    }
+                    if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up Successful"))
+                    {
+                        $php_self = sfUtils::getFilterServer('PHP_SELF');
+                        ?>
                         <h4> Migrate Old Snowflakes</h4>
                         <form id="installForm" action="<?php echo $php_self; ?>" method="post" class="updateForm" enctype="multipart/form-data" autocomplete="on">
                             <span id="spryDBName">
@@ -280,7 +283,7 @@ if ((!$migrated || $migrated == false) && strpos($obj->m_outcomeMessage, "Set Up
                             <input type="hidden" name="MM_migrate" value="migrateform" />
 
                         </form>
-<?php } ?>
+                    <?php } ?>
                     <!-- Break -->
                     <div class="clear"></div>
                     <div class="Break"></div>
