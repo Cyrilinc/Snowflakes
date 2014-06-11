@@ -173,10 +173,10 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                         <li><a href="../Gallery/OutputView.php" title="View output Gallery" class="green" id="SfGallery_published2" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['published']); ?>"><img src="../resources/images/Icons/Output.png" height="22" width="22" alt="Output" /> View Output</a></li>
                                     </ul>
                                 </li>
-<?php
-if ($user->m_access_level == 5 || $user->m_access_level == 4)
-{
-    ?>
+                                <?php
+                                if ($user->m_access_level == 5 || $user->m_access_level == 4)
+                                {
+                                    ?>
                                     <li>
                                         <a href="../SiteSetting/index.php" title="Settings"> <img src="../resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
                                         <ul>
@@ -186,17 +186,17 @@ if ($user->m_access_level == 5 || $user->m_access_level == 4)
                                             <li><a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a></li>
                                         </ul>
                                     </li>
-    <?php
-}
-else
-{
-    ?>
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
                                     </li>
-    <?php
-}
-?>
+                                    <?php
+                                }
+                                ?>
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
@@ -240,14 +240,14 @@ else
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
-<?php
-$i = 0;
-do
-{
-    ?>
+                <?php
+                $i = 0;
+                do
+                {
+                    ?>
                         <!--Summary starts-->
                         <div class="Summary userBlock">
-    <?php $thedeletelink = "index.php?deleteId=" . $userStructList[$i]->m_id; ?>
+                    <?php $thedeletelink = "index.php?deleteId=" . $userStructList[$i]->m_id; ?>
 
                                                         <!--a class="edits colorboxLink" href="SendPassword.php?adminid=<?php //echo $userStructList[$i]->m_id';        ?>" title="Mail Password"> <img src="../resources/images/Icons/Mail.png" height="22" width="22" alt="Mail" /></a-->
                             <a class="edits" href="#" onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $userStructList[$i]->m_username; ?>');" title="Delete User"> <img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /></a>
@@ -266,17 +266,17 @@ do
                             <div class="Userside">
                                 <p> Access: <?php echo $userStructList[$i]->m_access_name; ?></p>
                                 <p> Email : <?php echo $userStructList[$i]->m_email; ?></p>
-    <?php $lastin = new DateTime($userStructList[$i]->m_last_login); ?>
+                            <?php $lastin = new DateTime($userStructList[$i]->m_last_login); ?>
                                 <p> Last in : <?php echo $lastin->format(" F j, Y g:h a"); ?></p>
                                 <p> Status  : <?php echo $userStructList[$i]->m_logged_in == 1 ? "Online" : "Offline"; ?></p>
                                 <p> Flakes  : <?php echo $userStructList[$i]->m_flake_it; ?></p>
                             </div><!--Userside Ends-->
 
                         </div><!--Summary Ends-->
-    <?php
-    $i++;
-} while ($i < count($userStructList));
-?>
+                    <?php
+                    $i++;
+                } while ($i < count($userStructList));
+                ?>
                 </div>
                 <!-- End of PageWrap --> 
 

@@ -18,10 +18,10 @@ if (!isset($_SESSION))
 {
     session_start();
 }
-$php_self = sfUtils::getFilterServer( 'PHP_SELF');
+$php_self = sfUtils::getFilterServer('PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
-$query_string = sfUtils::getFilterServer( 'QUERY_STRING');
+$query_string = sfUtils::getFilterServer('QUERY_STRING');
 if ((isset($query_string)) && ($query_string != ""))
 {
     $logoutAction .="&amp;" . htmlentities($query_string);
@@ -79,7 +79,7 @@ if (isset($_SESSION['MM_Username']))
     $colname_rsAdmin = $_SESSION['MM_Username'];
 }
 
-$currentPage = sfUtils::getFilterServer( 'PHP_SELF');
+$currentPage = sfUtils::getFilterServer('PHP_SELF');
 
 $maxRows_GalleryRs = 6;
 $pageNum_GalleryRs = 0;
@@ -242,31 +242,30 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                                 <li><a href="../Home.php" title="Snowflake Home"> <img src="../resources/images/Icons/Home.png" height="22" width="22"  alt="Add" /> Home </a>
                                     <ul>
                                         <li><a href="../ViewSnowflakes.php?userSf=<?php echo $user->m_username; ?>" title="My Snowflakes" class="blue" id="Snowflakes_user_total" data-bubble="<?php echo sfUtils::comapact99($_SESSION['Snowflakes']['user_total']); ?>"> <img src="../resources/images/Icons/Snowflakes.png" height="22" width="22" alt="View" /> My Snowflakes </a></li>
-                                        <li><a href="../Events/index.php?userSf=<?php echo $user->m_username; ?>" title="My Events" class="yellow" data-bubble="<?php echo $_SESSION['SfEvents']['user_total']; ?>"> <img src="../resources/images/Icons/Events.png" height="22" width="22" alt="View" /> My Events </a></li>
-                                        <li><a href="../Gallery/index.php?userSf=<?php echo $user->m_username; ?>" title="My Gallery" class="green" data-bubble="<?php echo $_SESSION['SfGallery']['user_total']; ?>"> <img src="../resources/images/Icons/Gallery.png" height="22" width="22" alt="View" /> My Gallery </a></li>
+                                        <li><a href="../Events/index.php?userSf=<?php echo $user->m_username; ?>" title="My Events" class="yellow" id="SfEvents_user_total" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfEvents']['user_total']); ?>"> <img src="../resources/images/Icons/Events.png" height="22" width="22" alt="View" /> My Events </a></li>
+                                        <li><a href="../Gallery/index.php?userSf=<?php echo $user->m_username; ?>" title="My Gallery" class="green" id="SfGallery_user_total" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['user_total']); ?>"> <img src="../resources/images/Icons/Gallery.png" height="22" width="22" alt="View" /> My Gallery </a></li>
                                     </ul>
                                 </li>
-                                <li><a href="../ViewSnowflakes.php" title="Snowflakes" class="blue" data-bubble="<?php echo $_SESSION['Snowflakes']['total']; ?>"> <img src="../resources/images/Icons/Snowflakes.png" height="22" width="22"  alt="Snowflakes" /> Snowflakes </a>
+                                <li><a href="../ViewSnowflakes.php" title="Snowflakes" class="blue" data-bubble="<?php echo sfUtils::comapact99($_SESSION['Snowflakes']['total']); ?>"> <img src="../resources/images/Icons/Snowflakes.png" height="22" width="22"  alt="Snowflakes" /> Snowflakes </a>
                                     <ul>
-                                     <!--<li><a href="../AddFlake.php" title="Add a New flake"> <img src="../resources/images/Icons/Add.png" height="22" width="22"  alt="Add" /> Add New Flake </a></li>-->
-                                        <li><a href="../ViewSnowflakes.php?publish=1" title="View Published flakes" class="blue" data-bubble="<?php echo $_SESSION['Snowflakes']['published']; ?>"> <img src="../resources/images/Icons/Publish.png" height="22" width="22" alt="View" /> Published </a></li>
-                                        <li><a href="../ViewSnowflakes.php?publish=0" title="View Unublished flakes" class="blue" data-bubble="<?php echo $_SESSION['Snowflakes']['unpublished']; ?>"><img src="../resources/images/Icons/UnPublish.png" height="22" width="22" alt="unpublish" /> UnPublished </a></li>
-                                        <li><a href="../OutputView.php" title="View output flakes" class="blue" data-bubble="<?php echo $_SESSION['Snowflakes']['published']; ?>"><img src="../resources/images/Icons/Output.png" height="22" width="22" alt="Output" /> View Output</a></li>
+                                      <!--<li><a href="../AddFlake.php" title="Add a New flake"> <img src="../resources/images/Icons/Add.png" height="22" width="22"  alt="Add" /> Add New Flake </a></li>-->
+                                        <li><a href="../ViewSnowflakes.php?publish=1" title="View Published flakes" class="blue" id="Snowflakes_published" data-bubble="<?php echo sfUtils::comapact99($_SESSION['Snowflakes']['published']); ?>"><img src="../resources/images/Icons/Publish.png" height="22" width="22" alt="View" /> Published </a></li>
+                                        <li><a href="../ViewSnowflakes.php?publish=0" title="View Unublished flakes" class="blue" id="Snowflakes_unpublished" data-bubble="<?php echo sfUtils::comapact99($_SESSION['Snowflakes']['unpublished']); ?>"><img src="../resources/images/Icons/UnPublish.png" height="22" width="22" alt="unpublish" /> UnPublished </a></li>
+                                        <li><a href="../OutputView.php" title="View output flakes" class="blue" id="Snowflakes_published2" data-bubble="<?php echo sfUtils::comapact99($_SESSION['Snowflakes']['published']); ?>"><img src="../resources/images/Icons/Output.png" height="22" width="22" alt="Output" /> View Output</a></li>
                                     </ul>
                                 </li>
-
-                                <li><a href="../Events/index.php" title="Snowflake Events" class="yellow" data-bubble="<?php echo $_SESSION['SfEvents']['total']; ?>"> <img src="../resources/images/Icons/Events.png" height="22" width="22"  alt="Events" /> Events </a>
+                                <li class="active" id="AtvNewButton"><a href="index.php" title="Snowflake Events" class="yellow" id="SfEvents_total" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfEvents']['total']); ?>"> <img src="../resources/images/Icons/Events.png" height="22" width="22"  alt="Events" /> Events </a>
                                     <ul>
-                                        <li><a href="../Events/index.php?publish=1" title="View Published Events" class="yellow" data-bubble="<?php echo $_SESSION['SfEvents']['published']; ?>"><img src="../resources/images/Icons/EventsPublished.png" height="22" width="22" alt="Published" /> Published </a></li>
-                                        <li><a href="../Events/index.php?publish=0" title="View Unublished Events" class="yellow" data-bubble="<?php echo $_SESSION['SfEvents']['unpublished']; ?>"><img src="../resources/images/Icons/EventsUnpublished.png" height="22" width="22" alt="UnPublished" /> UnPublished </a></li>
-                                        <li><a href="../Events/OutputView.php" title="View output Events" class="yellow" data-bubble="<?php echo $_SESSION['SfEvents']['published']; ?>"><img src="../resources/images/Icons/Output.png" height="22" width="22" alt="Output" /> View Output</a></li>
+                                        <li><a href="index.php?publish=1" title="View Published Events" class="yellow" id="SfEvents_published" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfEvents']['published']); ?>"><img src="../resources/images/Icons/EventsPublished.png" height="22" width="22" alt="Published" /> Published </a></li>
+                                        <li><a href="index.php?publish=0" title="View Unublished Events" class="yellow" id="SfEvents_unpublished" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfEvents']['unpublished']); ?>"><img src="../resources/images/Icons/EventsUnpublished.png" height="22" width="22" alt="UnPublished" /> UnPublished </a></li>
+                                        <li><a href="OutputView.php" title="View output Events" class="yellow" id="SfEvents_published2" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfEvents']['published']); ?>"><img src="../resources/images/Icons/Output.png" height="22" width="22" alt="Output" /> View Output</a></li>
                                     </ul>
                                 </li>
-                                <li class="active" id="AtvNewButton"><a href="index.php"  title="Snowflakes Gallery" class="green" data-bubble="<?php echo $_SESSION['SfGallery']['total']; ?>"> <img src="../resources/images/Icons/Gallery.png" height="22" width="22"  alt="+ " /> Gallery</a>
+                                <li><a href="../Gallery/index.php"  title="Snowflakes Gallery" class="green" id="SfGallery_total" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['total']); ?>"> <img src="../resources/images/Icons/Gallery.png" height="22" width="22"  alt="+ " /> Gallery</a>
                                     <ul>
-                                        <li><a href="index.php?publish=1" title="View Published Gallery" class="green" data-bubble="<?php echo $_SESSION['SfGallery']['published']; ?>"><img src="../resources/images/Icons/GalleryPublished.png" height="22" width="22" alt="View" /> Published </a></li>
-                                        <li><a href="index.php?publish=0" title="View Unublished Gallery" class="green" data-bubble="<?php echo $_SESSION['SfGallery']['unpublished']; ?>"><img src="../resources/images/Icons/GalleryUnpublished.png" height="22" width="22" alt="unpublish" /> UnPublished </a></li>
-                                        <li><a href="OutputView.php" title="View Output Gallery" class="green" data-bubble="<?php echo $_SESSION['SfGallery']['published']; ?>"><img src="../resources/images/Icons/Output.png" height="22" width="22" alt="Output" /> View Output</a></li>
+                                        <li><a href="../Gallery/index.php?publish=1" title="View Published Gallery" class="green" id="SfGallery_published" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['published']); ?>"><img src="../resources/images/Icons/GalleryPublished.png" height="22" width="22" alt="View" /> Published </a></li>
+                                        <li><a href="../Gallery/index.php?publish=0" title="View Unublished Gallery" class="green" id="SfGallery_unpublished" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['unpublished']); ?>"><img src="../resources/images/Icons/GalleryUnpublished.png" height="22" width="22" alt="unpublish" /> UnPublished </a></li>
+                                        <li><a href="../Gallery/OutputView.php" title="View Output Gallery" class="green" id="SfGallery_published2" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['published']); ?>"><img src="../resources/images/Icons/Output.png" height="22" width="22" alt="Output" /> View Output</a></li>
                                     </ul>
                                 </li>
                                 <?php
@@ -276,7 +275,7 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                                     <li>
                                         <a href="../SiteSetting/index.php" title="Settings"> <img src="../resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
                                         <ul>
-                                            <li><a href="../Users/index.php" title="Users" class="pink" data-bubble="<?php echo $_SESSION['SFUsers']['total']; ?>"> <img src="../resources/images/Icons/User.png" height="22" width="22" alt="Admin" /> Admin Users </a></li> 
+                                            <li><a href="../Users/index.php" title="Users" class="pink" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SFUsers']['total']); ?>"> <img src="../resources/images/Icons/User.png" height="22" width="22" alt="Admin" /> Admin Users </a></li> 
                                             <li><a href="../SiteSetting/LogViewer.php" title="Code Generator"> <img src="../resources/images/Icons/Log.png" height="22" width="22" alt="Log" /> Log Viewer </a></li>
                                             <li><a href="../Generator.php" title="Code Generator"> <img src="../resources/images/Icons/Key.png" height="22" width="22" alt="Code Generator" /> Code Generator </a></li>
                                             <li><a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a></li>
@@ -342,18 +341,20 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                 <!-- End of Break -->
                 <!--wrapper-->
                 <div class="wrapper"> 
-                    <?php if ($pageNum_GalleryRs > 0)
+                    <?php
+                    if ($pageNum_GalleryRs > 0)
                     { // Show if not first page      
                         ?>
                         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_GalleryRs=%d%s", $currentPage, 0, $queryString_GalleryRs); ?>">First</a></div>
                         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_GalleryRs=%d%s", $currentPage, max(0, $pageNum_GalleryRs - 1), $queryString_GalleryRs); ?>">Previous</a></div>
                     <?php } // Show if not first page       ?>
-                    <?php if ($pageNum_GalleryRs < $totalPages_GalleryRs)
+                    <?php
+                    if ($pageNum_GalleryRs < $totalPages_GalleryRs)
                     { // Show if not last page     
                         ?>
                         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_GalleryRs=%d%s", $currentPage, min($totalPages_GalleryRs, $pageNum_GalleryRs + 1), $queryString_GalleryRs); ?>">Next</a></div>
                         <div class="smallNewButton"><a href="<?php printf("%s?pageNum_GalleryRs=%d%s", $currentPage, $totalPages_GalleryRs, $queryString_GalleryRs); ?>">Last</a></div>
-<?php } // Show if not last page        ?>
+<?php } // Show if not last page          ?>
                     <div class=" clear Break2"></div>
 
 
@@ -370,7 +371,8 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                         {
                             $i = 0;
                             ?>
-                            <?php do
+                            <?php
+                            do
                             {
                                 ?>
                                 <?php
@@ -411,11 +413,11 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                             } while ($i < count($galleryStructList));
                             ?>
 
-<?php
-}
-else
-{
-    ?> 
+                            <?php
+                        }
+                        else
+                        {
+                            ?> 
                             <!-- Snowflakes -->
                             <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>No Images in Gallery</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>
                             <li data-pile="Snowflakes : No images yet"> <a class="colorbox" href="../Uploads/GalleryImages/Snowflakes.png" > <span class="tp-info"><span>No Images in Gallery</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"  alt="Snowflakes"> </a> </li>

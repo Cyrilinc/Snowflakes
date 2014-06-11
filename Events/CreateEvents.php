@@ -6,20 +6,23 @@ require_once '../lib/sfImageProcessor.php';
 ?>
 <?php
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
-$php_self = sfUtils::getFilterServer( 'PHP_SELF');
+$php_self = sfUtils::getFilterServer('PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
-$query_string = sfUtils::getFilterServer( 'QUERY_STRING');
-if ((isset($query_string)) && ($query_string != "")) {
+$query_string = sfUtils::getFilterServer('QUERY_STRING');
+if ((isset($query_string)) && ($query_string != ""))
+{
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
 $doLogout = filter_input(INPUT_GET, 'doLogout');
 $siteSettings = new settingsStruct('../config/config.ini');
 
-if ((isset($doLogout)) && ($doLogout == "true")) {
+if ((isset($doLogout)) && ($doLogout == "true"))
+{
     //to fully log out a visitor we need to clear the session varialbles
     $_SESSION['MM_Username'] = NULL;
     $_SESSION['MM_UserGroup'] = NULL;
@@ -29,21 +32,24 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['PrevUrl']);
 
     $logoutGoTo = $siteSettings->m_loginUrl;
-    if ($logoutGoTo) {
+    if ($logoutGoTo)
+    {
         header("Location: $logoutGoTo");
         exit;
     }
 }
 ?>
 <?php
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
 $MM_restrictGoTo = $siteSettings->m_loginUrl;
-if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
+if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup']))))
+{
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
     if (strpos($MM_restrictGoTo, "?"))
@@ -61,13 +67,15 @@ $targetFile = "default.png";
 $formmessage = "";
 if (empty($_FILES["uploadImage"]["name"]))
     $File_is_Uploaded = True;
-else {
+else
+{
     $File_is_Uploaded = sfImageProcessor::uploadSingleImage($_FILES['uploadImage'], '../config/config.ini', $targetFile, $formmessage, false);
     //$formmessage .=" <br>" . $targetFile;
 }
 
 $colname_rsAdmin = "-1";
-if (isset($_SESSION['MM_Username'])) {
+if (isset($_SESSION['MM_Username']))
+{
     $colname_rsAdmin = $_SESSION['MM_Username'];
 }
 
@@ -75,21 +83,24 @@ $config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $connected = $SFconnects->connect(); // Connect to database
 
-if(!$connected){
-    $formmessage.= sfUtils::sfPromptMessage("Snowflakes could not connect to database.".$SFconnects->getMessage(),'error');
+if (!$connected)
+{
+    $formmessage.= sfUtils::sfPromptMessage("Snowflakes could not connect to database." . $SFconnects->getMessage(), 'error');
 }
 
 $user = new userStruct();
 $user->getUserByUsername($SFconnects, $colname_rsAdmin);
 
 $editFormAction = $php_self;
-if (isset($query_string)) {
+if (isset($query_string))
+{
     $editFormAction .= "?" . htmlentities($query_string);
 }
 
 $MM_insert = filter_input(INPUT_POST, 'MM_insert');
 $viewLink = $EditLink = "#";
-if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE)) {
+if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE))
+{
 
     $_POST['image_name'] = $targetFile;
     $_POST['publish'] = isset($_POST['publish']) ? "1" : "0";
@@ -99,15 +110,18 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
     $eventStruct = new eventStruct();
     $eventStruct->populate($_POST);
 
-    if (!$eventStruct->AddEvent($SFconnects)) {
+    if (!$eventStruct->AddEvent($SFconnects))
+    {
         $formmessage.= " <br>" . $SFconnects->getMessage() . '<br>';
-    } else {
+    }
+    else
+    {
         $eventID = $eventStruct->getEventID($SFconnects);
         $viewLink = "ViewEvent.php?Eventid=$eventID";
         $EditLink = "EditEvent.php?Eventid=$eventID";
         // Check Trigger exist , if not then use manual trigger
         sfUtils::checkTrigger($SFconnects, $eventID, 'event', "INSERT");
-        $formmessage.=sfUtils::sfPromptMessage('<a href="' . $viewLink . '" title="view it">"' . $eventStruct->m_title . '"</a> was added successfully.','success');
+        $formmessage.=sfUtils::sfPromptMessage('<a href="' . $viewLink . '" title="view it">"' . $eventStruct->m_title . '"</a> was added successfully.', 'success');
     }
 }
 ?>
@@ -235,12 +249,13 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                                 <li><a href="../Gallery/index.php"  title="Snowflakes Gallery" class="green" id="SfGallery_total" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['total']); ?>"> <img src="../resources/images/Icons/Gallery.png" height="22" width="22"  alt="+ " /> Gallery</a>
                                     <ul>
                                         <li><a href="../Gallery/index.php?publish=1" title="View Published Gallery" class="green" id="SfGallery_published" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['published']); ?>"><img src="../resources/images/Icons/GalleryPublished.png" height="22" width="22" alt="View" /> Published </a></li>
-                                        <li><a href="../Gallery/index.php?publish=0" title="View Unublished Gallery" class="green" id="SfGallery_published" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['published']); ?>"><img src="../resources/images/Icons/GalleryUnpublished.png" height="22" width="22" alt="unpublish" /> UnPublished </a></li>
+                                        <li><a href="../Gallery/index.php?publish=0" title="View Unublished Gallery" class="green" id="SfGallery_unpublished" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['unpublished']); ?>"><img src="../resources/images/Icons/GalleryUnpublished.png" height="22" width="22" alt="unpublish" /> UnPublished </a></li>
                                         <li><a href="../Gallery/OutputView.php" title="View Output Gallery" class="green" id="SfGallery_published2" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['published']); ?>"><img src="../resources/images/Icons/Output.png" height="22" width="22" alt="Output" /> View Output</a></li>
                                     </ul>
                                 </li>
                                 <?php
-                                if ($user->m_access_level == 5 || $user->m_access_level == 4) {
+                                if ($user->m_access_level == 5 || $user->m_access_level == 4)
+                                {
                                     ?>
                                     <li>
                                         <a href="../SiteSetting/index.php" title="Settings"> <img src="../resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
@@ -252,7 +267,9 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                                         </ul>
                                     </li>
                                     <?php
-                                } else {
+                                }
+                                else
+                                {
                                     ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
@@ -289,11 +306,12 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
-                    <?php
-                    if (!empty($formmessage)) {
-                        echo sfUtils::dialogMessage("Create Event", $formmessage);
-                    }
-                    ?>
+<?php
+if (!empty($formmessage))
+{
+    echo sfUtils::dialogMessage("Create Event", $formmessage);
+}
+?>
 
                     <!--contactform-->
                     <div class="contactform">
@@ -426,13 +444,16 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && ($File_is_Uploaded == TRUE
                             <input type="hidden" name="created_by" value="<?php echo $_SESSION['MM_Username']; ?>">
                             <input type="hidden" name="edited_by" value="<?php echo $_SESSION['MM_Username']; ?>">
                             <input type="hidden" name="image_name" value="<?php
-                            if (empty($targetFile)) {
-                                $targetFile = "default.png";
-                                echo $targetFile;
-                            } else {
-                                echo $targetFile;
-                            }
-                            ?>" />
+if (empty($targetFile))
+{
+    $targetFile = "default.png";
+    echo $targetFile;
+}
+else
+{
+    echo $targetFile;
+}
+?>" />
                             <input type="hidden" name="MM_insert" value="form1">
                         </form>
                         <p>&nbsp;</p>
