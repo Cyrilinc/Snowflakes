@@ -25,7 +25,7 @@ do {
     $config = new databaseParam('../config/config.ini');
     $SFconnects = new sfConnect($config->dbArray());
     $SFconnects->connect(); // Connect to database
-	$thedata = sfUtils::getAllCounts($SFconnects, $_SESSION['MM_Username']);
+	$thedata = sfUtils::getAllCounts($SFconnects, $_SESSION['MM_Username'], true);
     $msg = $thedata ? "Count Successful" : "Count Unsuccessful";
     //var_dump($thedata);
 

@@ -3581,10 +3581,12 @@ final class sfUtils
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
      * @param String $username {@link userStruct} the user name to check
+     * @param bool $showCompact This is a flag to suggest if it is set the function 
+     * {@see sfUtils::comapact99} is used to make a compact count of data in snowflakes.
      *
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public static function getAllCounts($conn, $username = '')
+    public static function getAllCounts($conn, $username = '', $showCompact = false)
     {
 
         if (!$conn)
@@ -3603,94 +3605,94 @@ final class sfUtils
         $sql = $origSql . "publish = 1";
         $conn->fetch($sql);
         $totalRows_rsPublished = $conn->getResultArray();
-        $countSnowflakes ['Snowflakes_published'] = $_SESSION['Snowflakes']['published'] = $totalRows_rsPublished[0]['count'];
+        $countSnowflakes ['Snowflakes_published'] = $_SESSION['Snowflakes']['published'] = $showCompact ? self::comapact99($totalRows_rsPublished[0]['count']) : $totalRows_rsPublished[0]['count'];
 
         if (strlen($username))
         {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userPubSnowflakes = $conn->getResultArray();
-            $countSnowflakes ['Snowflakes_user_published'] = $_SESSION['Snowflakes']['user_published'] = $userPubSnowflakes[0]['count'];
+            $countSnowflakes ['Snowflakes_user_published'] = $_SESSION['Snowflakes']['user_published'] = $showCompact ? self::comapact99($userPubSnowflakes[0]['count']) : $userPubSnowflakes[0]['count'];
         }
 
         $sql = $origSql . "publish = 0";
         $conn->fetch($sql);
         $totalRows_rsUnplublished = $conn->getResultArray();
-        $countSnowflakes ['Snowflakes_unpublished'] = $_SESSION['Snowflakes']['unpublished'] = $totalRows_rsUnplublished[0]['count'];
+        $countSnowflakes ['Snowflakes_unpublished'] = $_SESSION['Snowflakes']['unpublished'] = $showCompact ? self::comapact99($totalRows_rsUnplublished[0]['count']) : $totalRows_rsUnplublished[0]['count'];
 
         if (strlen($username))
         {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userUnPubSnowflakes = $conn->getResultArray();
-            $countSnowflakes ['Snowflakes_user_unpublished'] = $_SESSION['Snowflakes']['user_unpublished'] = $userUnPubSnowflakes[0]['count'];
-            $countSnowflakes ['Snowflakes_user_total'] = $_SESSION['Snowflakes']['user_total'] = $userUnPubSnowflakes[0]['count'] + $userPubSnowflakes[0]['count'];
+            $countSnowflakes ['Snowflakes_user_unpublished'] = $_SESSION['Snowflakes']['user_unpublished'] = $showCompact ? self::comapact99($userUnPubSnowflakes[0]['count']) : $userUnPubSnowflakes[0]['count'];
+            $countSnowflakes ['Snowflakes_user_total'] = $_SESSION['Snowflakes']['user_total'] = $showCompact ? self::comapact99($userUnPubSnowflakes[0]['count'] + $userPubSnowflakes[0]['count']) : $userUnPubSnowflakes[0]['count'] + $userPubSnowflakes[0]['count'];
         }
 
-        $countSnowflakes ['Snowflakes_total'] = $_SESSION['Snowflakes']['total'] = $totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count'];
+        $countSnowflakes ['Snowflakes_total'] = $_SESSION['Snowflakes']['total'] = $showCompact ? self::comapact99($totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count']) : $totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count'];
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_events WHERE publish = 1";
         $conn->fetch($sql);
         $totalRows_rsPublished = $conn->getResultArray();
-        $countSnowflakes ['SfEvents_published'] = $_SESSION['SfEvents']['published'] = $totalRows_rsPublished[0]['count'];
+        $countSnowflakes ['SfEvents_published'] = $_SESSION['SfEvents']['published'] = $showCompact ? self::comapact99($totalRows_rsPublished[0]['count']) : $totalRows_rsPublished[0]['count'];
 
         if (strlen($username))
         {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userPubEvent = $conn->getResultArray();
-            $countSnowflakes ['SfEvents_user_published'] = $_SESSION['SfEvents']['user_published'] = $userPubEvent[0]['count'];
+            $countSnowflakes ['SfEvents_user_published'] = $_SESSION['SfEvents']['user_published'] = $showCompact ? self::comapact99($userPubEvent[0]['count']) : $userPubEvent[0]['count'];
         }
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_events WHERE publish = 0";
         $conn->fetch($sql);
         $totalRows_rsUnplublished = $conn->getResultArray();
-        $countSnowflakes ['SfEvents_unpublished'] = $_SESSION['SfEvents']['unpublished'] = $totalRows_rsUnplublished[0]['count'];
+        $countSnowflakes ['SfEvents_unpublished'] = $_SESSION['SfEvents']['unpublished'] = $showCompact ? self::comapact99($totalRows_rsUnplublished[0]['count']) : $totalRows_rsUnplublished[0]['count'];
 
         if (strlen($username))
         {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userUnPubEvent = $conn->getResultArray();
-            $countSnowflakes ['SfEvents_user_unpublished'] = $_SESSION['SfEvents']['user_unpublished'] = $userUnPubEvent[0]['count'];
-            $countSnowflakes ['SfEvents_user_total'] = $_SESSION['SfEvents']['user_total'] = $userUnPubEvent[0]['count'] + $userPubEvent[0]['count'];
+            $countSnowflakes ['SfEvents_user_unpublished'] = $_SESSION['SfEvents']['user_unpublished'] = $showCompact ? self::comapact99($userUnPubEvent[0]['count']) : $userUnPubEvent[0]['count'];
+            $countSnowflakes ['SfEvents_user_total'] = $_SESSION['SfEvents']['user_total'] = $showCompact ? self::comapact99($userUnPubEvent[0]['count'] + $userPubEvent[0]['count']) : $userUnPubEvent[0]['count'] + $userPubEvent[0]['count'];
         }
 
-        $countSnowflakes ['SfEvents_total'] = $_SESSION['SfEvents']['total'] = $totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count'];
+        $countSnowflakes ['SfEvents_total'] = $_SESSION['SfEvents']['total'] = $showCompact ? self::comapact99($totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count']) : $totalRows_rsPublished[0]['count'] + $totalRows_rsUnplublished[0]['count'];
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_gallery WHERE publish = 0";
         $conn->fetch($sql);
         $totalRows_galleryUnpublished = $conn->getResultArray();
-        $countSnowflakes ['SfGallery_unpublished'] = $_SESSION['SfGallery']['unpublished'] = $totalRows_galleryUnpublished[0]['count'];
+        $countSnowflakes ['SfGallery_unpublished'] = $_SESSION['SfGallery']['unpublished'] = $showCompact ? self::comapact99($totalRows_galleryUnpublished[0]['count']) : $totalRows_galleryUnpublished[0]['count'];
 
         if (strlen($username))
         {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userPubGallery = $conn->getResultArray();
-            $countSnowflakes ['SfGallery_user_unpublished'] = $_SESSION['SfGallery']['user_unpublished'] = $userPubGallery[0]['count'];
+            $countSnowflakes ['SfGallery_user_unpublished'] = $_SESSION['SfGallery']['user_unpublished'] = $showCompact ? self::comapact99($userPubGallery[0]['count']) : $userPubGallery[0]['count'];
         }
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_gallery WHERE publish = 1";
         $conn->fetch($sql);
         $totalRows_galleryPublished = $conn->getResultArray();
-        $countSnowflakes ['SfGallery_published'] = $_SESSION['SfGallery']['published'] = $totalRows_galleryPublished[0]['count'];
+        $countSnowflakes ['SfGallery_published'] = $_SESSION['SfGallery']['published'] = $showCompact ? self::comapact99($totalRows_galleryPublished[0]['count']) : $totalRows_galleryPublished[0]['count'];
 
         if (strlen($username))
         {
             $sql = $sql . ' AND created_by="' . self::escape($username) . '"';
             $conn->fetch($sql);
             $userUnPubGallery = $conn->getResultArray();
-            $countSnowflakes ['SfGallery_user_published'] = $_SESSION['SfGallery']['user_published'] = $userUnPubGallery[0]['count'];
-            $countSnowflakes ['SfGallery_user_total'] = $_SESSION['SfGallery']['user_total'] = $userUnPubGallery[0]['count'] + $userPubGallery[0]['count'];
+            $countSnowflakes ['SfGallery_user_published'] = $_SESSION['SfGallery']['user_published'] = $showCompact ? self::comapact99($userUnPubGallery[0]['count']) : $userUnPubGallery[0]['count'];
+            $countSnowflakes ['SfGallery_user_total'] = $_SESSION['SfGallery']['user_total'] = $showCompact ? self::comapact99($userUnPubGallery[0]['count'] + $userPubGallery[0]['count']) : $userUnPubGallery[0]['count'] + $userPubGallery[0]['count'];
         }
 
-        $countSnowflakes ['SfGallery_total'] = $_SESSION['SfGallery']['total'] = $totalRows_galleryPublished[0]['count'] + $totalRows_galleryUnpublished[0]['count'];
+        $countSnowflakes ['SfGallery_total'] = $_SESSION['SfGallery']['total'] = $showCompact ? self::comapact99($totalRows_galleryPublished[0]['count'] + $totalRows_galleryUnpublished[0]['count']) : $totalRows_galleryPublished[0]['count'] + $totalRows_galleryUnpublished[0]['count'];
 
         $sql = "SELECT COUNT(id) count FROM snowflakes_users";
         $conn->fetch($sql);
         $totalRows_users = $conn->getResultArray();
-        $countSnowflakes ['SFUsers_total'] = $_SESSION['SFUsers']['total'] = $totalRows_users[0]['count'];
+        $countSnowflakes ['SFUsers_total'] = $_SESSION['SFUsers']['total'] = $showCompact ? self::comapact99($totalRows_users[0]['count']) : $totalRows_users[0]['count'];
 
         return $countSnowflakes;
     }
@@ -4102,7 +4104,7 @@ final class sfUtils
         $image = $channel->addChild('image');
         $image->addChild('url', $siteSettings->m_sfUrl . "resources/images/Snowflakes2.png");
         $image->addChild('title', "Snowflakes Rss image");
-        $image->addChild('link',$siteSettings->m_sfUrl . 'rss.php?ty=events');
+        $image->addChild('link', $siteSettings->m_sfUrl . 'rss.php?ty=events');
         $image->addChild('width', '120');
         $image->addChild('height', '40');
 
@@ -4750,7 +4752,7 @@ final class sfUtils
         $UploadImgUrl = $siteSettings->m_sfGalleryUrl;
         $imageMissing = $UploadImgUrl . "missing_default.png";
 
-        $newData = str_replace('#SNOWFLAKESURL#', $siteSettings->m_sfUrl , $data);
+        $newData = str_replace('#SNOWFLAKESURL#', $siteSettings->m_sfUrl, $data);
         $newData1 = str_replace('#POWERLINK#', $Powerlink, $newData);
         $newData2 = str_replace('#MISSINGIMG#', $imageMissing, $newData1);
         $newData3 = str_replace('#SFGALLERYIMGURL#', $siteSettings->m_sfGalleryImgUrl, $newData2);
@@ -5005,7 +5007,7 @@ class settingsStruct
         $this->m_admin_email = $this->m_settingsarray['db']['admin_email'];
         $this->m_time_zone = $this->m_settingsarray['db']['time_zone'];
         //Settings Info     //[settings]
-        $this->m_setUp=$this->m_settingsarray['settings']['Setup'];
+        $this->m_setUp = $this->m_settingsarray['settings']['Setup'];
         $this->m_url = $this->m_settingsarray['settings']['url'];
         $this->m_sfUrl = $this->m_settingsarray['settings']['m_sfUrl'];
         $this->m_loginUrl = $this->m_settingsarray['settings']['loginUrl'];
