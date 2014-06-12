@@ -246,7 +246,7 @@ class snowflakesSetUp
         $sql = "CREATE DATABASE IF NOT EXISTS " . $this->m_dbName . ";";
         if (!$conn->execute($sql))
         {
-            $this->m_Message .= sfUtils::sfPromptMessage("Could not select/Create database" . $this->m_dbName . ".<br/> " . $conn->getMessage() . '.' . 'error');
+            $this->m_Message .= sfUtils::sfPromptMessage("Could not select/Create database" . $this->m_dbName . ".<br/> " . $conn->getMessage() . '.' , 'error');
             return false;
         }
         return true;
@@ -524,7 +524,7 @@ class snowflakesSetUp
 	) ENGINE = MYISAM;";
         if (!$conn->execute($sql))
         {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not create Event table named "' . $this->m_eventsTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.' . 'error');
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not create Event table named "' . $this->m_eventsTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.' , 'error');
             return false;
         }
 
@@ -690,7 +690,7 @@ class snowflakesSetUp
                 image_name='default.png'";
         if (!$conn->execute($sql))
         {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into admin table named "' . $this->m_usersTable . '" due to error.<br/> ' . $conn->getMessage() . '.' . 'error');
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into admin table named "' . $this->m_usersTable . '" due to error.<br/> ' . $conn->getMessage() . '.' , 'error');
             return false;
         }
 
@@ -746,7 +746,7 @@ class snowflakesSetUp
 		edited_by='$loginUsername',flake_it=1";
         if (!$conn->execute($sql))
         {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into Gallery table named "' . $this->m_galleryTable . '" due to error.<br/> ' . $conn->getMessage() . '.' . 'error');
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into Gallery table named "' . $this->m_galleryTable . '" due to error.<br/> ' . $conn->getMessage() . '.' , 'error');
             return false;
         }
         $this->m_Message .=sfUtils::sfPromptMessage('First Gallery successfully added.', 'success');
