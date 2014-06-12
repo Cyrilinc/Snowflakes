@@ -1,50 +1,42 @@
 <?php
+
 header("Content-Type: text/event-stream");
-header("Cache-Control:no-cache");
+header("Cache-Control:no-cache"); // recommended to prevent caching of event data.
 /// Get all count Server Sent Event
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
 
+if (!isset($_SESSION['MM_Username']))
+{
+    die();
+}
+
+require_once '../lib/sf.php';
+require_once '../lib/sfConnect.php';
+require_once '../config/Config.php';
 $startedAt = time();
-do {
-    // Cap connections at 10 seconds. The browser will reopen the connection on close
-    if ((time() - $startedAt) > 10) {
-        die();
-    }
 
-    if (!isset($_SESSION['MM_Username'])) {
-        die();
-    }
+$config = new databaseParam('../config/config.ini');
+$SFconnects = new sfConnect($config->dbArray());
+$SFconnects->connect(); // Connect to database
+$thedata = sfUtils::getAllCounts($SFconnects, $_SESSION['MM_Username'], true);
+$msg = $thedata ? "Count Successful" : "Count Unsuccessful";
+//var_dump($thedata);
+echo "retry: 30000\n"; // reconnect after 30 seconds
+echo "id: $startedAt" . PHP_EOL;
+echo "data: {\n";
 
-    require_once '../lib/sf.php';
-    require_once '../lib/sfConnect.php';
-    require_once '../config/Config.php';
+foreach ($thedata as $key => $value)
+{
+    echo "data: \"$key\": \"$value\", \n";
+}
+echo "data: \"msg\": \"$msg\", \n";
+echo "data: \"id\": $startedAt\n";
+echo "data: }\n\n";
+flush();
 
-    $config = new databaseParam('../config/config.ini');
-    $SFconnects = new sfConnect($config->dbArray());
-    $SFconnects->connect(); // Connect to database
-	$thedata = sfUtils::getAllCounts($SFconnects, $_SESSION['MM_Username'], true);
-    $msg = $thedata ? "Count Successful" : "Count Unsuccessful";
-    //var_dump($thedata);
-
-	echo "id: $startedAt" . PHP_EOL;
-	echo "data: {\n";
-
-	foreach($thedata as $key => $value){
-		echo "data: \"$key\": \"$value\", \n";
-	}
-	echo "data: \"msg\": \"$msg\", \n";
-	echo "data: \"id\": $startedAt\n";
-	echo "data: }\n\n";
-	flush();
-
-    $SFconnects->close();
-    sleep(10);
-
-    // If we didn't use a while loop, the browser would essentially do polling
-    // every 3 seconds. Using the while, we keep the connection open and only make
-    // one request.
-} while (true);
+$SFconnects->close();
 ?>

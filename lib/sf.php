@@ -2697,11 +2697,12 @@ final class sfUtils
         {// sanity check
             return false;
         }
-        echo "id: $id" . PHP_EOL;
+        
         if ($retry !== "")
         {
             echo "retry: $retry" . PHP_EOL;
         }
+        echo "id: $id" . PHP_EOL;
         echo "data: {\n";
         echo "data: \"msg\": " . json_encode($msg) . ", \n";
         echo "data: \"id\": $id\n";
