@@ -2697,7 +2697,7 @@ final class sfUtils
         {// sanity check
             return false;
         }
-        
+
         if ($retry !== "")
         {
             echo "retry: $retry" . PHP_EOL;
@@ -2941,22 +2941,48 @@ final class sfUtils
         {
             return false;
         }
-
+        
         # SUBJECT (Subscribe/Remove)
         $subject = "Reset your snowflakes password";
 
-        echo $subject . "<br>";
 
+        $headers = "From: " . strip_tags($sender) . "\r\n";
+        $headers .= "Reply-To: " . strip_tags($sender) . "\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=utf-8\r\n";
+
+        $message = '<!DOCTYPE HTML>
+            <html lang="en" >
+            <head>
+                <link rel="stylesheet" type="text/css" href="'.$snowflakesUrl.'resources/css/style.css" />
+            </head>
+            <body>';
+        $message .= '
+                    <!--Snowflake starts-->
+                        <div class="Snowflake">
+                            <div class="Logo"><img alt="Snowflakes" class="logo" src="'.$snowflakesUrl.'resources/images/Snowflakes.png" width="180" height="60" /></div>
+                            <div class="clear"></div>
+                            <div class="Break2"></div>
+                            <div class="SnowflakeHead">'.$subject.'</div>
+                            <div class="clear"></div>
+                            <!--SnowflakeDescr-->
+                            <div class="SnowflakeDescr">    ';
+        
+        $resetlink = $snowflakesUrl . "/ResetPassword.php?reset=" . $userStruct->m_reset_link;
         # MAIL BODY
-        $body = "You have been sent this mail because you requested a reset on your password.\n\n";
-        $body .= "Username: " . $userStruct->m_username . " \n";
-        $body .= "Email: " . $userStruct->m_email . " \n\n";
-        $body .= "If you haven't asked for a password reset then ignore this message.\n";
-        $body .= "If you requested to reset your password then click the link below.\n ";
-        $body .= $snowflakesUrl . "/ResetPassword.php?reset=" . $userStruct->m_reset_link;
-
+        $message .= "<p>You have been sent this mail because you requested a reset on your password.</p>";
+        $message .= "<p>Username:  $userStruct->m_username  </p>";
+        $message .= "<p>Email:  $userStruct->m_email  </p>";
+        $message .= "<p>If you haven't asked for a password reset then ignore and delete this message.";
+        $message .= "If you requested to reset your password then click the rset link below. </p>";
+        $message .= "<h4 class=\"SummaryHead\"><a style=\"color:white;\" class=\"NewButton\" href=\"$resetlink\">Reset link</a></h4>";
+        $message .='</div><!--SnowflakeDescr Ends-->
+                    </div>
+                    <!--Snowflake Ends-->';
+        $message .= '</body></html>';
+        
         ## SEND MESSAGE ##
-        return mail($userStruct->m_email, $subject, $body, "From: $sender");
+        return mail($userStruct->m_email, $subject, $message, $header);
     }
 
     /**
