@@ -2941,33 +2941,145 @@ final class sfUtils
         {
             return false;
         }
-        
+
         # SUBJECT (Subscribe/Remove)
         $subject = "Reset your snowflakes password";
 
+        // To send HTML mail, the Content-type header must be set
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=ISO-8859-1' . "\r\n";
+        // Additional headers
+        $headers .= "From: $sender\r\n";
+        $headers .= "Reply-To: $sender\r\n";
 
-        $headers = "From: " . strip_tags($sender) . "\r\n";
-        $headers .= "Reply-To: " . strip_tags($sender) . "\r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=utf-8\r\n";
-
-        $message = '<!DOCTYPE HTML>
-            <html lang="en" >
+        $message = '
+            <html>
             <head>
-                <link rel="stylesheet" type="text/css" href="'.$snowflakesUrl.'resources/css/style.css" />
+                <style>
+                @charset "UTF-8";
+                @import url(http://fonts.googleapis.com/css?family=Strait);
+                /*--------General elements  */
+                * {
+                    border:0;
+                    font:inherit;
+                    font-size:100%;
+                    margin:0;
+                    padding:0;
+                    vertical-align:baseline;
+                    font-family:\'Strait\', "sans-serif";
+                }
+                a {
+                    color:#fafafa;
+                    text-decoration:none;
+                }
+                .Snowflake{
+                    width:98%;
+                    min-height:200px;
+                    border: 1px dashed #AAA;
+                    -moz-border-radius: 8px;
+                    -webkit-border-radius: 8px;
+                    -khtml-border-radius: 8px;
+                    border-radius: 8px;
+                    background:#2b2b2b;
+                    filter: alpha(opacity=90);
+                    opacity: 0.9;
+                    float:left;
+                    position: relative;
+                    padding-top: 8px;
+                    padding-bottom:10px;
+                    margin:5px 5px;
+                }
+
+                .SnowflakeHead{
+
+                    text-align:center;
+                    color: #40add8;
+                    font-size:22px;
+                    margin-top: 5px;
+                    margin-bottom:5px;
+                }
+                .SnowflakeDescr {
+                    min-height:150px;
+                    text-align:justify;
+                    font-size:15px;
+                    padding-top: 10px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    padding-bottom:40px;
+                    color:#fafafa;
+                    -moz-border-radius: 10px;
+                    -webkit-border-radius: 10px;
+                    -khtml-border-radius: 10px;
+                    border-radius: 10px;
+                }
+                .SummaryHead{
+                    text-align:center;
+                    color: #40add8;
+                    font-size:22px;
+                    margin-top: 5px;
+                    margin-bottom:5px;
+                }
+
+                .smallNewButton{
+                    height:30px;
+                    width: 80px;
+                    -moz-border-radius: 4px;
+                    -webkit-border-radius: 4px;
+                    -khtml-border-radius: 4px;
+                    border-radius: 4px;
+                    font-size:14px;
+                    filter: alpha(opacity=90);
+                    opacity: 0.9;
+                    background-color:#40add8;
+                    text-align:center;
+                    line-height:30px;
+                    padding-left: 1px;
+                    color:#fafafa;
+                    float:left;
+                    margin: 2px;
+                }
+
+                .smallNewButton a{
+                    color:#fafafa;
+                    font-family: Strait, sans-serif;
+                }
+
+                .smallNewButton img{
+                    height:20px;
+                    width:15px;
+                    padding-top: 2px;
+                    float:right;
+                }
+
+                .smallNewButton:hover {
+                    background-color:#40add8;
+                    /* IE 8 */
+                    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+                    /* IE 5-7 */
+                    filter: alpha(opacity=100);
+                    /* Netscape */
+                    -moz-opacity: 1;
+                    -webkit-opacity:1;
+                    /* Safari 1.x */
+                    -khtml-opacity: 1;
+                    /* Good browsers */
+                    opacity: 1;
+                    cursor:pointer;
+                }
+                </style>
             </head>
             <body>';
         $message .= '
                     <!--Snowflake starts-->
                         <div class="Snowflake">
-                            <div class="Logo"><img alt="Snowflakes" class="logo" src="'.$snowflakesUrl.'resources/images/Snowflakes.png" width="180" height="60" /></div>
+                            <div class="Logo"><img alt="Snowflakes" class="logo" src="' . $snowflakesUrl . 'resources/images/Snowflakes.png" width="180" height="60" /></div>
                             <div class="clear"></div>
                             <div class="Break2"></div>
-                            <div class="SnowflakeHead">'.$subject.'</div>
+                            <div class="SnowflakeHead">' . $subject . '</div>
                             <div class="clear"></div>
                             <!--SnowflakeDescr-->
                             <div class="SnowflakeDescr">    ';
-        
+
         $resetlink = $snowflakesUrl . "/ResetPassword.php?reset=" . $userStruct->m_reset_link;
         # MAIL BODY
         $message .= "<p>You have been sent this mail because you requested a reset on your password.</p>";
@@ -2975,14 +3087,15 @@ final class sfUtils
         $message .= "<p>Email:  $userStruct->m_email  </p>";
         $message .= "<p>If you haven't asked for a password reset then ignore and delete this message.";
         $message .= "If you requested to reset your password then click the rset link below. </p>";
-        $message .= "<h4 class=\"SummaryHead\"><a style=\"color:white;\" class=\"NewButton\" href=\"$resetlink\">Reset link</a></h4>";
+        $message .= "<h4 class=\"SummaryHead\"><a class=\"smallNewButton\" href=\"$resetlink\">Reset link</a></h4>";
         $message .='</div><!--SnowflakeDescr Ends-->
                     </div>
                     <!--Snowflake Ends-->';
-        $message .= '</body></html>';
+        $message .= '</body>
+            </html>';
         
         ## SEND MESSAGE ##
-        return mail($userStruct->m_email, $subject, $message, $header);
+        return mail($userStruct->m_email, $subject, $message, $headers);
     }
 
     /**
