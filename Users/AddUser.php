@@ -106,7 +106,8 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && $loginFoundUser <= 0 && ($
 {
 
     $userStruct = new userStruct();
-    $userStruct->init($postUsername, $_POST['password2'], $_POST['email'], $_POST['access_level'], $targetFile);
+    $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
+    $userStruct->init($postUsername, $_POST['password2'], $email, $_POST['access_level'], $targetFile);
 
     if (!$userStruct->AddUser($SFconnects))
     {

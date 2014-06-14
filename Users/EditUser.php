@@ -103,7 +103,8 @@ if ((isset($MM_update)) && ($MM_update == "form1") && ($File_is_Uploaded == TRUE
     $oldImage = userStruct::getImageNameById($SFconnects, $_POST['id']);
     $image_name = strlen($uploadedFile) == 0 ? $oldImage : $uploadedFile;
     $userStruct = new userStruct();
-    $userStruct->init($_POST['username'], $_POST['password2'], $_POST['email'], $_POST['access_level'], $image_name);
+    $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
+    $userStruct->init($_POST['username'], $_POST['password2'], $email, $_POST['access_level'], $image_name);
     $userStruct->m_id = $_POST['id'];
 
     if (!$userStruct->UpdateUser($SFconnects))

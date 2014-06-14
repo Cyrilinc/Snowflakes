@@ -26,7 +26,7 @@ if (isset($accesscheck)) {
 
 $resetPass = false;
 $MM_forget = filter_input(INPUT_POST, 'MM_forget');
-$email = filter_input(INPUT_POST, 'email');
+$email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
 if ((isset($MM_forget)) && ($MM_forget == "form1")) {
     $MM_email = $email;
     $MM_redirectLoginSuccess = "login.php";
