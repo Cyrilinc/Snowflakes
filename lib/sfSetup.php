@@ -122,6 +122,9 @@ class snowflakesSetUp
         $settingsStruct->SetuploadGalleryDir($gallery);
         $settingsStruct->SetgalleryImgDir($galleryimg);
         $settingsStruct->SetgalleryThumbDir($gallerythumb);
+        $settingsStruct->SetsnowflakesResultUrl($this->m_sfUrl . "OneView.php");
+        $settingsStruct->SeteventsResultUrl($this->m_sfUrl . "Events/OneView.php");
+        $settingsStruct->SetgalleryResultUrl($this->m_sfUrl . "Gallery/OneView.php");
 
         if (!$settingsStruct->setConfigItems($inifile))
         {

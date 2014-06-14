@@ -78,12 +78,26 @@ if(!$connected){
 $MM_update = filter_input(INPUT_POST, 'MM_update');
 if ((isset($MM_update)) && ($MM_update == "form1"))
 {
+    $result_url= filter_input(INPUT_POST, 'result_url',FILTER_SANITIZE_URL);
+    if(strlen($result_url) == 0){
+        $result_url=$siteSettings->m_sfUrl . "OneView.php";
+    }
+    $events_result_url= filter_input(INPUT_POST, 'events_result_url',FILTER_SANITIZE_URL);
+    if(strlen($events_result_url) == 0){
+        $events_result_url=$siteSettings->m_sfUrl . "Events/OneView.php";
+    }
+    $gallery_result_url= filter_input(INPUT_POST, 'gallery_result_url',FILTER_SANITIZE_URL);
+    
+    if(strlen($gallery_result_url) == 0){
+        $gallery_result_url=$siteSettings->m_sfUrl . "Gallery/OneView.php";
+    }
+    
     $updateSQL = 'UPDATE snowflakes_settings ' .
-            'SET result_url="' . sfUtils::escape($_POST['result_url']) . '",' .
+            'SET result_url="' . sfUtils::escape($result_url) . '",' .
             'out_url="' . sfUtils::escape($_POST['out_url']) . '",' .
-            'events_result_url="' . sfUtils::escape($_POST['events_result_url']) . '",' .
+            'events_result_url="' . sfUtils::escape($events_result_url) . '",' .
             'events_output_url="' . sfUtils::escape($_POST['events_output_url']) . '",' .
-            'gallery_result_url="' . sfUtils::escape($_POST['gallery_result_url']) . '",' .
+            'gallery_result_url="' . sfUtils::escape($gallery_result_url) . '",' .
             'gallery_out_url="' . sfUtils::escape($_POST['gallery_out_url']) . '",' .
             'max_upload_size=' . $_POST['max_upload_size'] . ',' .
             'time_zone="' . $_POST['time_zone'] . '" ' .
@@ -96,11 +110,11 @@ if ((isset($MM_update)) && ($MM_update == "form1"))
     else
     {
         $settingsStruct = new settingsStruct('../config/config.ini');
-        $settingsStruct->SetsnowflakesResultUrl($_POST['result_url']);
+        $settingsStruct->SetsnowflakesResultUrl($result_url);
         $settingsStruct->SetsnowflakesOutUrl($_POST['out_url']);
-        $settingsStruct->SeteventsResultUrl($_POST['events_result_url']);
+        $settingsStruct->SeteventsResultUrl($events_result_url);
         $settingsStruct->SeteventsOutputUrl($_POST['events_output_url']);
-        $settingsStruct->SetgalleryResultUrl($_POST['gallery_result_url']);
+        $settingsStruct->SetgalleryResultUrl($gallery_result_url);
         $settingsStruct->SetgalleryOutUrl($_POST['gallery_out_url']);
         $settingsStruct->SetmaxImageSize($_POST['max_upload_size'] . 'MB');
         $settingsStruct->SettimeZone($_POST['time_zone']);

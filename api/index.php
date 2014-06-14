@@ -74,7 +74,7 @@ $queryString = sprintf("&amp;totalRows=%d%s", $totalRows, $queryString);
 
 if (($sfty == 'snowflake' || $type == 'snowflakes') && ($contentType == 'html' || $contentType == 'jsonhtml'))
 {
-    $Shareurl = isset($siteSettings->m_snowflakesResultUrl) ? $siteSettings->m_snowflakesResultUrl : $siteSettings->m_sfUrl . "OneView.php";
+    $Shareurl = strlen($siteSettings->m_snowflakesResultUrl) > 0 ? $siteSettings->m_snowflakesResultUrl : $siteSettings->m_sfUrl . "OneView.php";
 
     $data = '
         <div style="float: right; background-color:transparent;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="#POWERLINK#" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
@@ -83,7 +83,7 @@ if (($sfty == 'snowflake' || $type == 'snowflakes') && ($contentType == 'html' |
 }
 else if (($sfty == 'event' || $type == 'events') && ($contentType == 'html' || $contentType == 'jsonhtml'))
 {
-    $Shareurl = isset($siteSettings->m_eventsResultUrl) ? $siteSettings->m_eventsResultUrl : $siteSettings->m_sfUrl . "Events/OneView.php";
+    $Shareurl = strlen($siteSettings->m_eventsResultUrl) > 0 ? $siteSettings->m_eventsResultUrl : $siteSettings->m_sfUrl . "Events/OneView.php";
     $data = '
         <div style="float: right; background-color:transparent;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="#POWERLINK#" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
         <div style="float: right; background-color:transparent;" class="NewButton"><a href="#SNOWFLAKESURL#rss.php?ty=events" title="Snowflakes event rss"> <img src="#SNOWFLAKESURL#resources/images/Icons/Rss.png" height="22" width="22"  alt="Add" /></a></div>
@@ -91,7 +91,7 @@ else if (($sfty == 'event' || $type == 'events') && ($contentType == 'html' || $
 }
 else if ($sfty == 'gallery' && ($contentType == 'html' || $contentType == 'jsonhtml'))
 {
-    $Shareurl = isset($siteSettings->m_galleryResultUrl) ? $siteSettings->m_galleryResultUrl : $siteSettings->m_sfUrl . "Gallery/OneView.php";
+    $Shareurl = strlen($siteSettings->m_galleryResultUrl) > 0 ? $siteSettings->m_galleryResultUrl : $siteSettings->m_sfUrl . "Gallery/OneView.php";
     $data = '
         <div style="float: right; background-color:transparent;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="#POWERLINK#" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
         <div style="float: right; background-color:transparent;" class="NewButton"><a href="#SNOWFLAKESURL#rss.php?ty=gallery" title="Snowflakes gallery rss"> <img src="#SNOWFLAKESURL#resources/images/Icons/Rss.png" height="22" width="22"  alt="Add" /></a></div>
