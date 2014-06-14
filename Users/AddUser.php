@@ -108,6 +108,11 @@ if ((isset($MM_insert)) && ($MM_insert == "form1") && $loginFoundUser <= 0 && ($
     $userStruct = new userStruct();
     $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
     $userStruct->init($postUsername, $_POST['password2'], $email, $_POST['access_level'], $targetFile);
+ 
+    if(!sfUtils::emailValidation($email))
+    {
+        $formmessage.= sfUtils::sfPromptMessage("Invalid Email : $email <br>", 'error');
+    }
 
     if (!$userStruct->AddUser($SFconnects))
     {

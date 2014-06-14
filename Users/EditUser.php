@@ -106,6 +106,12 @@ if ((isset($MM_update)) && ($MM_update == "form1") && ($File_is_Uploaded == TRUE
     $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
     $userStruct->init($_POST['username'], $_POST['password2'], $email, $_POST['access_level'], $image_name);
     $userStruct->m_id = $_POST['id'];
+    
+    if(!sfUtils::emailValidation($email))
+    {
+        $formmessage.= sfUtils::sfPromptMessage("Invalid Email : $email <br>", 'error');
+    }
+
 
     if (!$userStruct->UpdateUser($SFconnects))
     {

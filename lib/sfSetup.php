@@ -72,6 +72,15 @@ class snowflakesSetUp
      */
     public function Setup()
     {
+        // this may never be necessary because of the email validation in the 
+        // install/index.php but just in case
+        if (!sfUtils::emailValidation($this->m_adminEmail))
+        {
+            $this->m_Message.= sfUtils::sfPromptMessage("Invalid Admin Email : $this->m_adminEmail <br>", 'error');
+            $this->m_outcomeMessage = '<div class="SnowflakeHead">Set Up Unsuccessful <span class="icon error"></span></div>';
+            return false;
+        }
+
         if (!$this->createTables())
         {
             $this->m_outcomeMessage = '<div class="SnowflakeHead">Set Up Unsuccessful <span class="icon error"></span></div>';
@@ -83,13 +92,13 @@ class snowflakesSetUp
         $loginUrl = str_replace("install/sfInstall.php", "login.php", sfUtils::curPageURL());
         $key = str_replace('.', '', "$this->m_hostName$this->m_dbName$this->m_dbType$this->m_dbUsername");
         $inifile = '../config/config.ini';
-        if (function_exists('mcrypt_get_iv_size')&& function_exists('mcrypt_create_iv') && function_exists('mcrypt_encrypt'))
+        if (function_exists('mcrypt_get_iv_size') && function_exists('mcrypt_create_iv') && function_exists('mcrypt_encrypt'))
         {
-            $this->m_encrypt='Y';
+            $this->m_encrypt = 'Y';
         }
         else
         {
-            $this->m_encrypt='N';
+            $this->m_encrypt = 'N';
         }
 
         $settingsStruct = new settingsStruct();
@@ -249,7 +258,7 @@ class snowflakesSetUp
         $sql = "CREATE DATABASE IF NOT EXISTS " . $this->m_dbName . ";";
         if (!$conn->execute($sql))
         {
-            $this->m_Message .= sfUtils::sfPromptMessage("Could not select/Create database" . $this->m_dbName . ".<br/> " . $conn->getMessage() . '.' , 'error');
+            $this->m_Message .= sfUtils::sfPromptMessage("Could not select/Create database" . $this->m_dbName . ".<br/> " . $conn->getMessage() . '.', 'error');
             return false;
         }
         return true;
@@ -527,7 +536,7 @@ class snowflakesSetUp
 	) ENGINE = MYISAM;";
         if (!$conn->execute($sql))
         {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not create Event table named "' . $this->m_eventsTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.' , 'error');
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not create Event table named "' . $this->m_eventsTable . '" due to error.' . ".<br/> " . $conn->getMessage() . '.', 'error');
             return false;
         }
 
@@ -693,7 +702,7 @@ class snowflakesSetUp
                 image_name='default.png'";
         if (!$conn->execute($sql))
         {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into admin table named "' . $this->m_usersTable . '" due to error.<br/> ' . $conn->getMessage() . '.' , 'error');
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into admin table named "' . $this->m_usersTable . '" due to error.<br/> ' . $conn->getMessage() . '.', 'error');
             return false;
         }
 
@@ -749,7 +758,7 @@ class snowflakesSetUp
 		edited_by='$loginUsername',flake_it=1";
         if (!$conn->execute($sql))
         {
-            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into Gallery table named "' . $this->m_galleryTable . '" due to error.<br/> ' . $conn->getMessage() . '.' , 'error');
+            $this->m_Message .=sfUtils::sfPromptMessage('Could not insert into Gallery table named "' . $this->m_galleryTable . '" due to error.<br/> ' . $conn->getMessage() . '.', 'error');
             return false;
         }
         $this->m_Message .=sfUtils::sfPromptMessage('First Gallery successfully added.', 'success');
@@ -785,4 +794,5 @@ class snowflakesSetUp
     }
 
 }
+
 ?>

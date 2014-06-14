@@ -735,8 +735,8 @@ class userStruct
      */
     public function AddUser($conn)
     {
-
-        if (!$this->isPopulated() || !$conn)
+        // sanity checks
+        if (!$this->isPopulated() || !$conn || !sfUtils::emailValidation($this->m_email))
         {
             return false;
         }
@@ -764,8 +764,8 @@ class userStruct
      */
     public function UpdateUser($conn)
     {
-
-        if (!$this->isPopulated() || !$conn || sfUtils::isEmpty($this->m_id))
+        // sanity checks
+        if (!$this->isPopulated() || !$conn || sfUtils::isEmpty($this->m_id) || !sfUtils::emailValidation($this->m_email))
         {
             return false;
         }
@@ -2901,7 +2901,7 @@ final class sfUtils
     public static function forgottenPassword($conn, $email, $sender, $snowflakesUrl, $errmsg = "")
     {
 
-        if (!$conn || !$email || !$sender)
+        if (!$conn || !$email || !self::emailValidation($email) || !$sender)
         {
             return false;
         }
@@ -2946,7 +2946,7 @@ final class sfUtils
         $subject = "Reset your snowflakes password";
 
         // To send HTML mail, the Content-type header must be set
-        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=ISO-8859-1' . "\r\n";
         // Additional headers
         $headers .= "From: $sender\r\n";
@@ -3093,7 +3093,7 @@ final class sfUtils
                     <!--Snowflake Ends-->';
         $message .= '</body>
             </html>';
-        
+
         ## SEND MESSAGE ##
         return mail($userStruct->m_email, $subject, $message, $headers);
     }
@@ -4902,6 +4902,32 @@ final class sfUtils
         {
             $data = str_replace('#SHAREURL#', $shareURL, $newData4);
         }
+    }
+
+    /**
+     * Validate emails to make it more secure thereby  Stopping E-mail Injections
+     *  
+     *
+     * @param String $email The email to validate
+     * 
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
+    function emailValidation($email)
+    {
+        if (!$email)
+        {
+            return true;
+        }
+
+        // Sanitize e-mail address
+        $field = filter_var($email, FILTER_SANITIZE_EMAIL);
+        // Validate e-mail address
+        if (!filter_var($field, FILTER_VALIDATE_EMAIL))
+        {
+            return false;
+        }
+
+        return true;
     }
 
 }
