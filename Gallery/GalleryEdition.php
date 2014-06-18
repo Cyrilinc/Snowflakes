@@ -321,7 +321,7 @@ $totalRows_rsSFGallery = $SFconnects->recordCount();
                                     if ($notTheOwner == false || $user->m_access_level == 5) {
                                         $thedeletelink = "GalleryEdition.php?DeleteId=" . $galleryStructList[$i]->m_id . "&amp;setDel=" . $notTheOwner;
                                         ?>
-                                        <a onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $galleryStructList[$i]->m_title; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  class="DeleteImage" title="Delete Gallery" href="#"><img src="../resources/images/Icons/Delete.png" alt=" X " /> </a> 
+                                    <a onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo htmlentities($galleryStructList[$i]->m_title); ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  class="DeleteImage" title="Delete Gallery" href="#"><img src="../resources/images/Icons/Delete.png" alt=" X " /> </a> 
 
                                     <?php } ?>
 

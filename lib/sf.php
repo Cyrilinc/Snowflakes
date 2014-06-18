@@ -2955,6 +2955,7 @@ final class sfUtils
         $message = '
             <html>
             <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
                 <style>
                 @charset "UTF-8";
                 @import url(http://fonts.googleapis.com/css?family=Strait);
@@ -3086,7 +3087,7 @@ final class sfUtils
         $message .= "<p>Username:  $userStruct->m_username  </p>";
         $message .= "<p>Email:  $userStruct->m_email  </p>";
         $message .= "<p>If you haven't asked for a password reset then ignore and delete this message.";
-        $message .= "If you requested to reset your password then click the rset link below. </p>";
+        $message .= "If you requested to reset your password then click the reset link below. </p>";
         $message .= "<h4 class=\"SummaryHead\"><a class=\"smallNewButton\" href=\"$resetlink\">Reset link</a></h4>";
         $message .='</div><!--SnowflakeDescr Ends-->
                     </div>

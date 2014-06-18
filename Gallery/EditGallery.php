@@ -387,7 +387,7 @@ if ((isset($MM_update)) && ($MM_update == "EditGallery") && $viewLink != "#") {
                         $theRemoveGallery = "EditGallery.php?DeleteId=" . $galleryStruct->m_id . "&amp;setDel=" . $notTheOwner;
                         ?>
                         <div class="NewButton">
-                            <a  onclick="deleteConfirmation('<?php echo $theRemoveGallery; ?>', '<?php echo "This Gallery (" . $galleryStruct->m_title . ")"; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>);" href="#" title="Delete Gallery"> 
+                            <a  onclick="deleteConfirmation('<?php echo $theRemoveGallery; ?>', '<?php echo "This Gallery (" . htmlentities($galleryStruct->m_title) . ")"; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>);" href="#" title="Delete Gallery"> 
                                 <img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="-" />Delete Gallery
                             </a>
                         </div>
@@ -551,7 +551,7 @@ if ((isset($MM_update)) && ($MM_update == "EditGallery") && $viewLink != "#") {
                                                 <?php } ?>
                                                 <a class="EditThumb" title="Edit Thumbnail" href="Thumbnail.php?index=<?php echo $counter; ?>&amp;ActionPage=<?php echo sfUtils::curPageURL(); ?>"> <img src="../resources/images/Icons/Edit.png" alt="Edit" /></a>
                                                 <?php $thedeletelink = "EditGallery.php?Galleryid=" . $galleryStruct->m_id . "&amp;DeleteOne=" . $counter; ?>
-                                                <a onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $GalleryCaption[$counter]; ?>');"  class="DeleteImage" title="Remove image" href="#"><img src="../resources/images/Icons/Delete.png" alt="Delete" /> </a> 
+                                                <a onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo htmlentities($GalleryCaption[$counter]); ?>');"  class="DeleteImage" title="Remove image" href="#"><img src="../resources/images/Icons/Delete.png" alt="Delete" /> </a> 
                                                 <a class="colorbox" href="<?php echo $GalleryDisplayImages[$counter]; ?>" onerror="this.href='<?php echo $imageMissing; ?>'" title="<?php echo htmlentities($GalleryCaption[$counter]); ?>"> 
                                                     <img src="<?php echo $imageThumbLink; ?>"  onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo $galleryStruct->m_title; ?>"> </a> 
                                             </li>

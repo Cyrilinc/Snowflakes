@@ -337,9 +337,9 @@ $imageMissing = $UploadImgUrl . "missing_default.png";
                                     if ($notTheOwner == false || $user->m_access_level == 5) {
                                         $thedeletelink = "ViewSnowflakes.php?deleteId=" . $flakeStructList[$i]->m_id . "&amp;setDel=" . $notTheOwner;
                                         ?>
-                                        <a onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $flakeStructList[$i]->m_title; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  title="Delete this snowflake"><img src="resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /> </a> 
+                                        <a onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo htmlentities($flakeStructList[$i]->m_title); ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  title="Delete this snowflake"><img src="resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /> </a> 
                                         <?php if ($flakeStructList[$i]->m_deleted) { ?>
-                                            <a  href="#" onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $flakeStructList[$i]->m_title; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  title="Request delete by <?php echo $flakeStructList[$i]->m_edited_by; ?>">R<img src="resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /> </a>
+                                            <a  href="#" onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo htmlentities($flakeStructList[$i]->m_title); ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  title="Request delete by <?php echo $flakeStructList[$i]->m_edited_by; ?>">R<img src="resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /> </a>
                                         <?php } ?>
                                     <?php } ?>
                                 </div>

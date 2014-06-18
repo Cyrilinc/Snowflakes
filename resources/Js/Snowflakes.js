@@ -70,9 +70,16 @@ $(document).ready(function() {
         }
     });
 });
+
+ function decodeHtmlEntity(str) {
+  return str.replace(/&#(\d+);/g, function(match, dec) {
+    return String.fromCharCode(dec);
+  });
+};
+
 function deleteConfirmation(deletelink, nameto, notOwner) {
     notOwner = typeof notOwner !== 'undefined' && notOwner === true ? "\n Note: Because you do not own \"" + nameto + "\" , a request will be sent to the creator to either accept or reject \"" + nameto + "\" being deleted, " : '';
-    var answer = confirm("Are you sure you wan't to delete \"" + nameto + "\"?" + notOwner)
+    var answer = confirm("Are you sure you wan't to delete \"" + decodeHtmlEntity(nameto) + "\"?" + notOwner)
 
     if (answer) {
         window.location = deletelink;

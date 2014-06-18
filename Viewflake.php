@@ -283,9 +283,9 @@ $sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
                                 if ($notTheOwner == false || $user->m_access_level == 5) {
                                     $thedeletelink = "Viewflake.php?deleteId=" . $flakeStruct->m_id . "&amp;setDel=" . $notTheOwner;
                                     ?>
-                                    <a onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $flakeStruct->m_title; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  title="Delete this snowflake"><img src="resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /> </a> 
+                                    <a onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo htmlentities($flakeStruct->m_title); ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  title="Delete this snowflake"><img src="resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /> </a> 
                                     <?php if ($flakeStruct->m_deleted) { ?>
-                                        <a  href="#" onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $flakeStruct->m_title; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  title="Request delete by <?php echo $flakeStruct->m_edited_by; ?>">R<img src="resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /> </a>
+                                        <a  href="#" onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo htmlentities($flakeStruct->m_title); ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>)"  title="Request delete by <?php echo $flakeStruct->m_edited_by; ?>">R<img src="resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /> </a>
                                     <?php } ?>
                                 <?php } ?>
 

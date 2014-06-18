@@ -250,7 +250,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                     <?php $thedeletelink = "index.php?deleteId=" . $userStructList[$i]->m_id; ?>
 
                                                         <!--a class="edits colorboxLink" href="SendPassword.php?adminid=<?php //echo $userStructList[$i]->m_id';        ?>" title="Mail Password"> <img src="../resources/images/Icons/Mail.png" height="22" width="22" alt="Mail" /></a-->
-                            <a class="edits" href="#" onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo $userStructList[$i]->m_username; ?>');" title="Delete User"> <img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /></a>
+                            <a class="edits" href="#" onclick="deleteConfirmation('<?php echo $thedeletelink; ?>', '<?php echo htmlentities($userStructList[$i]->m_username); ?>');" title="Delete User"> <img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="Delete" /></a>
                             <a class="edits" href="EditUser.php?adminid=<?php echo $userStructList[$i]->m_id; ?>" title="Edit" onclick="ConfirmDelete();"> <img src="../resources/images/Icons/Edit.png" height="22" width="22" alt="Edit" /></a>
 
                             <h4 class="SummaryHead"><a href="Account.php?userName=<?php echo $userStructList[$i]->m_username; ?>"><?php echo $userStructList[$i]->m_username; ?></a></h4>

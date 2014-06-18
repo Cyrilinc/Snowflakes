@@ -247,7 +247,7 @@ $Powerlink = "../resources/images/Snowflakes2.png";
                     if ($notTheOwner == false || $user->m_access_level == 5) {
                         $theRemoveGallery = "EditGallery.php?DeleteId=" . $galleryStruct->m_id . "&amp;setDel=" . $notTheOwner;
                         ?>
-                        <div class="NewButton"><a  onclick="deleteConfirmation('<?php echo $theRemoveGallery; ?>', '<?php echo "This Gallery (" . $galleryStruct->m_title . ")"; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>);" href="#" title="Delete"> <img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="-" />Delete</a></div>
+                        <div class="NewButton"><a  onclick="deleteConfirmation('<?php echo $theRemoveGallery; ?>', '<?php echo "This Gallery (" .htmlentities( $galleryStruct->m_title ). ")"; ?>',<?php echo $notTheOwner == false ? "false" : "true"; ?>);" href="#" title="Delete"> <img src="../resources/images/Icons/Delete.png" height="22" width="22" alt="-" />Delete</a></div>
                     <?php } ?>
                     <!-- Break -->
                     <div class="clear"></div>
