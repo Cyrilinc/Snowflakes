@@ -1306,7 +1306,7 @@ class galleryStruct
         $retArray['title'] . $this->m_title;
         $retArray['thumb_name'] = $this->m_thumb_name;
         $retArray['image_name'] = $this->m_image_name;
-        $retArray['imageurl_Prefix'] = '#SFGALLERYTHUMBURL#';
+        $retArray['imageurl_Prefix'] = '#SFGALLERYIMGURL#';
         $retArray['thumburl_Prefix'] = '#SFGALLERYTHUMBURL#';
 
         $retArray['image_caption'] = $this->m_image_caption;
