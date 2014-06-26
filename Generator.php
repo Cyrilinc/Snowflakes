@@ -4,19 +4,22 @@ require_once 'lib/sfConnect.php';
 require_once 'config/Config.php';
 
 //initialize the session
-if (!isset($_SESSION)) {
+if (!isset($_SESSION))
+{
     session_start();
 }
-$php_self = sfUtils::getFilterServer( 'PHP_SELF');
+$php_self = sfUtils::getFilterServer('PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
-$query_string = sfUtils::getFilterServer( 'QUERY_STRING');
-if ((isset($query_string)) && ($query_string != "")) {
+$query_string = sfUtils::getFilterServer('QUERY_STRING');
+if ((isset($query_string)) && ($query_string != ""))
+{
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
 $doLogout = filter_input(INPUT_GET, 'doLogout');
 $siteSettings = new settingsStruct('config/config.ini');
-if ((isset($doLogout)) && ($doLogout == "true")) {
+if ((isset($doLogout)) && ($doLogout == "true"))
+{
     //to fully log out a visitor we need to clear the session varialbles
     $_SESSION['MM_Username'] = NULL;
     $_SESSION['MM_UserGroup'] = NULL;
@@ -26,7 +29,8 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     unset($_SESSION['PrevUrl']);
 
     $logoutGoTo = $siteSettings->m_loginUrl;
-    if ($logoutGoTo) {
+    if ($logoutGoTo)
+    {
         header("Location: $logoutGoTo");
         exit;
     }
@@ -36,7 +40,8 @@ $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
 $MM_restrictGoTo = "login.php";
-if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
+if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup']))))
+{
     $MM_qsChar = "?";
     $MM_referrer = $php_self;
     if (strpos($MM_restrictGoTo, "?"))
@@ -49,7 +54,8 @@ if (!((isset($_SESSION['MM_Username'])) && (sfUtils::isAuthorized("", $MM_author
 }
 
 $colname_rscheckAdmin = "-1";
-if (isset($_SESSION['MM_Username'])) {
+if (isset($_SESSION['MM_Username']))
+{
     $colname_rscheckAdmin = $_SESSION['MM_Username'];
 }
 
@@ -113,7 +119,7 @@ $ShareGallerysurl = str_replace("Generator.php", "Gallery/Out.php", $url);
                 GeneratedLocation = NewgeneratorLink;
                 return NewgeneratorLink;
             });
-            
+
             $(document).ready(function() {
                 snowflakesCount("sse/snowflakesCount.php");
             });
@@ -162,9 +168,10 @@ $ShareGallerysurl = str_replace("Generator.php", "Gallery/Out.php", $url);
                                         <li><a href="Gallery/OutputView.php" title="View output Gallery" class="green" id="SfGallery_published2" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['published']); ?>"> <img src="resources/images/Icons/Output.png" height="22" width="22" alt="Output" /> View Output</a></li>
                                     </ul>
                                 </li>
-                                <?php
-                                if ($user->m_access_level == 5 || $user->m_access_level == 4) {
-                                    ?>
+<?php
+if ($user->m_access_level == 5 || $user->m_access_level == 4)
+{
+    ?>
                                     <li class="active" id="AtvNewButton">
                                         <a href="SiteSetting/index.php" title="Settings"> <img src="resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
                                         <ul>
@@ -175,14 +182,16 @@ $ShareGallerysurl = str_replace("Generator.php", "Gallery/Out.php", $url);
                                         </ul>
                                     </li>
                                     <?php
-                                } else {
+                                }
+                                else
+                                {
                                     ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
                                     </li>
-                                    <?php
-                                }
-                                ?>
+    <?php
+}
+?>
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
@@ -265,15 +274,21 @@ Copy &amp; paste the javascript below in Head tag of your webpage
            $(document).ready(
             function loadSnowflakes() {
             	var QueryString =GetQuery();
-                 var output; 
-				 for (property in QueryString) {
-  				output += property + ': ' + QueryString[property]+'; ';
-				}
-                if(output.indexOf("undefined: undefined") !== -1){
-                $('#Snowflakes').load('<?php echo $Shareurl; ?>');
-                } else{
-                $('#Snowflakes').load('<?php echo $Shareurl; ?>?pageNum_rsOut='+QueryString.pageNum_rsOut+'&amp;totalRows_rsOut=' + QueryString.totalRows_rsOut);
+                var output; 
+                for (property in QueryString) {
+                    output += property + ': ' + QueryString[property]+'; ';
                 }
+                var snowflakesUrl;
+                if(output.indexOf("undefined: undefined") !== -1)
+                {
+                    snowflakesUrl='<?php echo $Shareurl; ?>';
+                } else{
+                    snowflakesUrl='<?php echo $Shareurl; ?>?pageNum='+QueryString.pageNum+'&amp;totalRows=' + QueryString.totalRows;
+                }
+                $.get( snowflakesUrl, function( data ) {
+			$( "#Snowflakes" ).html( data );
+		});
+                
             });
             
     &lt;/script&gt;
@@ -444,16 +459,22 @@ Copy &amp; paste the javascript below in Head tag of your webpage
     
            $(document).ready(
             function loadSFEvents() {
-            var QueryString =GetQuery();
-                 var output; 
-				 for (property in QueryString) {
-  				output += property + ': ' + QueryString[property]+'; ';
-				}
-                if(output.indexOf("undefined: undefined") !== -1){
-                $('#SFEvents').load('<?php echo $ShareEventsurl; ?>');
-                }else{
-                	$('#SFEvents').load('<?php echo $ShareEventsurl; ?>?pageNum_rsOut='+QueryString.pageNum_rsOut+'&amp;totalRows_rsOut=' + QueryString.totalRows_rsOut);
+                var QueryString =GetQuery();
+                var output; 
+                for (property in QueryString) 
+                {
+                    output += property + ': ' + QueryString[property]+'; ';
                 }
+                var snowflakesEventsUrl;
+                if(output.indexOf("undefined: undefined") !== -1)
+                {
+                    snowflakesEventsUrl='<?php echo $ShareEventsurl; ?>');
+                }else{
+                    snowflakesEventsUrl='<?php echo $ShareEventsurl; ?>?pageNum='+QueryString.pageNum+'&amp;totalRows=' + QueryString.totalRows;
+                }
+                $.get( snowflakesEventsUrl, function( data ) {
+			$( "#SFEvents" ).html( data );
+		});
             });
             
     &lt;/script&gt;
@@ -585,17 +606,62 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;SFGallery&quot;&gt; &lt;/div&gt;
+
+Copy &amp; paste the javascript below in Head tag of your webpage
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    
+    		function GetQuery(){
+    		// This function is anonymous, is executed immediately and 
+			  // the return value is assigned to QueryString!
+			  var query_string = {};
+			  var query = window.location.search.substring(1);
+			  var vars = query.split("&amp;");
+			  for (var i=0;i&lt;vars.length;i++) {
+				var pair = vars[i].split("=");
+					// If first entry with this name
+				if (typeof query_string[pair[0]] === "undefined") {
+				  query_string[pair[0]] = pair[1];
+					// If second entry with this name
+				} else if (typeof query_string[pair[0]] === "string") {
+				  var arr = [ query_string[pair[0]], pair[1] ];
+				  query_string[pair[0]] = arr;
+					// If third or later entry with this name
+				} else {
+				  query_string[pair[0]].push(pair[1]);
+				}
+			  } 
+				return query_string;
+			} 
+			
+    
+           $(document).ready(
+            function loadSFGallery() {
+                var QueryString =GetQuery();
+                var output; 
+                for (property in QueryString) 
+                {
+                    output += property + ': ' + QueryString[property]+'; ';
+                }
+                var snowflakesGalUrl;
+                if(output.indexOf("undefined: undefined") !== -1)
+                {
+                    snowflakesGalUrl='<?php echo $ShareGallerysurl; ?>');
+                }else{
+                    snowflakesGalUrl='<?php echo $ShareGallerysurl; ?>?pageNum='+QueryString.pageNum+'&amp;totalRows=' + QueryString.totalRows;
+                }
+                $.get( snowflakesGalUrl, function( data ) {
+			$( "#SFGallery" ).html( data );
+		});
+            });
+            
+    &lt;/script&gt;
                                 </pre>
                                 <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
 &lt;script type="text/javascript" src=&quot;<?php echo $JSlink . "jquery.stapel.js"; ?>&quot;&gt;&lt;/script&gt;
     &lt;script type=&quot;text/javascript&quot;&gt;
-           $(document).ready(
-            function loadSFGallery() {
-                $('#SFGallery').load('<?php echo $ShareGallerysurl; ?>');
-            });
-            
             $(function() {
 
 				var $grid = $( '#tp-grid' ),

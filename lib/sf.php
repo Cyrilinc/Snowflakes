@@ -4882,9 +4882,9 @@ final class sfUtils
         }
         if (is_array($data))
         {
-            foreach ($data as $key => $value)
+            foreach ($data as $value)
             {
-                self::replaceSFHashes($data[$key], $inifile, $shareURL);
+                self::replaceSFHashes($value, $inifile, $shareURL);
             }
         }
 

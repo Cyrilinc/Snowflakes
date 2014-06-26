@@ -1399,7 +1399,7 @@
 </span><span id="1306" class="l"><a class="l" href="#1306">1306: </a>        <span class="php-var">$retArray</span>[<span class="php-quote">'title'</span>] . <span class="php-var">$this</span>-&gt;m_title;
 </span><span id="1307" class="l"><a class="l" href="#1307">1307: </a>        <span class="php-var">$retArray</span>[<span class="php-quote">'thumb_name'</span>] = <span class="php-var">$this</span>-&gt;m_thumb_name;
 </span><span id="1308" class="l"><a class="l" href="#1308">1308: </a>        <span class="php-var">$retArray</span>[<span class="php-quote">'image_name'</span>] = <span class="php-var">$this</span>-&gt;m_image_name;
-</span><span id="1309" class="l"><a class="l" href="#1309">1309: </a>        <span class="php-var">$retArray</span>[<span class="php-quote">'imageurl_Prefix'</span>] = <span class="php-quote">'#SFGALLERYTHUMBURL#'</span>;
+</span><span id="1309" class="l"><a class="l" href="#1309">1309: </a>        <span class="php-var">$retArray</span>[<span class="php-quote">'imageurl_Prefix'</span>] = <span class="php-quote">'#SFGALLERYIMGURL#'</span>;
 </span><span id="1310" class="l"><a class="l" href="#1310">1310: </a>        <span class="php-var">$retArray</span>[<span class="php-quote">'thumburl_Prefix'</span>] = <span class="php-quote">'#SFGALLERYTHUMBURL#'</span>;
 </span><span id="1311" class="l"><a class="l" href="#1311">1311: </a>
 </span><span id="1312" class="l"><a class="l" href="#1312">1312: </a>        <span class="php-var">$retArray</span>[<span class="php-quote">'image_caption'</span>] = <span class="php-var">$this</span>-&gt;m_image_caption;
@@ -4975,9 +4975,9 @@
 </span><span id="4882" class="l"><a class="l" href="#4882">4882: </a>        }
 </span><span id="4883" class="l"><a class="l" href="#4883">4883: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$data</span>))
 </span><span id="4884" class="l"><a class="l" href="#4884">4884: </a>        {
-</span><span id="4885" class="l"><a class="l" href="#4885">4885: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$data</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>)
+</span><span id="4885" class="l"><a class="l" href="#4885">4885: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$data</span> <span class="php-keyword1">as</span> <span class="php-var">$value</span>)
 </span><span id="4886" class="l"><a class="l" href="#4886">4886: </a>            {
-</span><span id="4887" class="l"><a class="l" href="#4887">4887: </a>                self::replaceSFHashes(<span class="php-var">$data</span>[<span class="php-var">$key</span>], <span class="php-var">$inifile</span>, <span class="php-var">$shareURL</span>);
+</span><span id="4887" class="l"><a class="l" href="#4887">4887: </a>                self::replaceSFHashes(<span class="php-var">$value</span>, <span class="php-var">$inifile</span>, <span class="php-var">$shareURL</span>);
 </span><span id="4888" class="l"><a class="l" href="#4888">4888: </a>            }
 </span><span id="4889" class="l"><a class="l" href="#4889">4889: </a>        }
 </span><span id="4890" class="l"><a class="l" href="#4890">4890: </a>
