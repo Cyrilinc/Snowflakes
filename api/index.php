@@ -3,6 +3,7 @@
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
+require_once '../lib/sfSettings.php';
 
 $sfty = filter_input(INPUT_GET, 'sfty') ? filter_input(INPUT_GET, 'sfty') : 'snowflake';
 $contentType = filter_input(INPUT_GET, 'cty') ? filter_input(INPUT_GET, 'cty') : 'html';
@@ -10,7 +11,7 @@ $config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
-$siteSettings = new settingsStruct('../config/config.ini');
+$siteSettings = new sfSettings('../config/config.ini');
 $UploadImgUrl = $siteSettings->m_sfGalleryUrl;
 $imageMissing = $UploadImgUrl . "missing_default.png";
 

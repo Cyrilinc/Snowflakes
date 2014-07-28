@@ -2,11 +2,12 @@
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
+require_once '../lib/sfSettings.php';
 require_once '../lib/sfImageProcessor.php';
 ?>
 <?php
 //The upload directory
-$siteSettings = new settingsStruct('../config/config.ini');
+$siteSettings = new sfSettings('../config/config.ini');
 //The upload base Image url
 $sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
 $sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
@@ -338,7 +339,7 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                 <!-- Break -->
                 <div class="clear"></div>
                 <div class="Break"></div>
-                <!-- End of Break -->
+                <!--/Break -->
                 <!--wrapper-->
                 <div class="wrapper"> 
                     <?php
@@ -432,11 +433,11 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                 <!-- Break -->
                 <div class="clear"></div>
                 <div class="Break2"></div>
-                <!-- End of Break --> 
+                <!--/Break --> 
                 <!-- InstanceEndEditable -->  </div>
-            <!-- end of Content --> 
+            <!--/Content --> 
         </div>
-        <!-- end of ContentWrapper -->
+        <!--/ContentWrapper -->
 
         <footer id="SnowFooter"> 
             <!-- CMSFooterWrapper -->
@@ -446,7 +447,7 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                 <div class="CopyRight">
                     <p>&copy; 2013 Cyril Inc. All Rights Reserved. | <a href="http://cyrilinc.co.uk/Legal.html"> Legal information</a> | <a href="mailto:contactus@cyrilinc.co.uk" id="CopyRContactus">Contact Us </a>|</p>
                 </div>
-                <!--END of  CopyRight--> 
+                <!--/CopyRight--> 
 
                 <!--SocialBar-->
                 <div class="SocialBar"> 
@@ -463,12 +464,12 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
                             <li><a href="http://www.youtube.com/CyrilIncBroadcast" target="_blank" title="Cyril Inc on YouTube"><span class="icon-youtube youtube"></span></a></li>
                         </ul>
                     </div>
-                    <!--End Socialtable--> 
+                    <!--/Socialtable--> 
                 </div>
-                <!--End SocialBar--> 
+                <!--/SocialBar--> 
 
             </div>
-            <!-- End of CMSFooterWrapper --> 
+            <!--/CMSFooterWrapper --> 
 
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" --> <!-- InstanceEndEditable -->

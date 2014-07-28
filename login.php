@@ -177,24 +177,24 @@ if (isset($post_username)) {
                                 <div class="HalfSliderMain"> 
                                     <!--HalfPage1-->
                                     <div class="HalfSliderPage" id="Halfpage1"> <img src="resources/images/SnowflakesBanner.png" alt="Snowflakes" /> </div>
-                                    <!--End HalfPage1 -->
+                                    <!--/HalfPage1 -->
                                     <!--HalfPage2-->
                                     <div class="HalfSliderPage" id="HalfPage2"> <img src="resources/images/SnowflakesBanner2.png" alt="Snowflakes" /> </div>
-                                    <!--End HalfPage2 --> 
+                                    <!--/HalfPage2 --> 
                                     <!--HalfPage3-->
                                     <div class="HalfSliderPage" id="HalfPage3"> <img src="resources/images/SnowflakesBanner3.png" alt="Snowflakes" /> </div>
-                                    <!--End HalfPage3 --> 
+                                    <!--/HalfPage3 --> 
                                     <!--HalfPage4-->
                                     <div class="HalfSliderPage" id="HalfPage4"> <img src="resources/images/SnowflakesBanner4.png" alt="Snowflakes" /> </div>
-                                    <!--End HalfPage4 --> 
+                                    <!--/HalfPage4 --> 
                                 </div>
-                                <!--End of HalfSliderMain--> 
+                                <!--/HalfSliderMain--> 
                             </div>
-                            <!--End of HalfSlider--> 
+                            <!--/HalfSlider--> 
                         </div>
-                        <!--End HalfBanner--> 
+                        <!--/HalfBanner--> 
                     </div>
-                    <!-- End of HalfBannerWrapper -->
+                    <!--/HalfBannerWrapper -->
 
                     <!--contactform-->
                     <div class="contactform2">
@@ -219,14 +219,14 @@ if (isset($post_username)) {
                             <label class="right"><a href="ForgottenPassword.php">Forgotten password?</a></label>
                         </form>
                     </div>
-                    <!--END of contactform--> 
+                    <!--/contactform--> 
 
                 </div>
-                <!--END of PageWrap--> 
+                <!--/PageWrap--> 
                 <!-- InstanceEndEditable -->  </div>
-            <!-- end of Content --> 
+            <!--/Content --> 
         </div>
-        <!-- end of ContentWrapper -->
+        <!--/ContentWrapper -->
 
         <footer id="SnowFooter"> 
             <!-- CMSFooterWrapper -->
@@ -235,7 +235,7 @@ if (isset($post_username)) {
                 <div class="CopyRight">
                     <p>&copy; 2013 Cyril Inc. All Rights Reserved. | <a href="http://cyrilinc.co.uk/Legal.html"> Legal information</a> | <a href="mailto:contactus@cyrilinc.co.uk" id="CopyRContactus">Contact Us </a>|</p>
                 </div>
-                <!--END of  CopyRight--> 
+                <!--/ CopyRight--> 
                 <!--SocialBar-->
                 <div class="SocialBar"> 
                     <!--Socialtable-->
@@ -251,12 +251,12 @@ if (isset($post_username)) {
                             <li><a href="http://www.youtube.com/CyrilIncBroadcast" target="_blank" title="Cyril Inc on YouTube"><span class="icon-youtube youtube"></span></a></li>
                         </ul>
                     </div>
-                    <!--End Socialtable--> 
+                    <!--/Socialtable--> 
                 </div>
-                <!--End SocialBar--> 
+                <!--/SocialBar--> 
 
             </div>
-            <!-- End of CMSFooterWrapper --> 
+            <!--/CMSFooterWrapper --> 
 
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" --> 

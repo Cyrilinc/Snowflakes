@@ -2,6 +2,7 @@
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
+require_once '../lib/sfSettings.php';
 ?>
 <?php
 //initialize the session
@@ -15,7 +16,7 @@ $query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if ((isset($query_string)) && ($query_string != "")) {
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
-$siteSettings = new settingsStruct('../config/config.ini');
+$siteSettings = new sfSettings('../config/config.ini');
 
 $doLogout = filter_input(INPUT_GET, 'doLogout');
 if ((isset($doLogout)) && ($doLogout == "true")) {
@@ -285,7 +286,7 @@ $queryString_EventsRs = sprintf("&totalRows_EventsRs=%d%s", $totalRows_EventsRs,
                 <!-- Break -->
                 <div class="clear"></div>
                 <div class="Break"></div>
-                <!-- End of Break --> 
+                <!--/Break --> 
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
@@ -312,7 +313,7 @@ $queryString_EventsRs = sprintf("&totalRows_EventsRs=%d%s", $totalRows_EventsRs,
                                 <!--SnowflakePanel-->
                                 <div class="SnowflakePanel"> <a href="ViewEvent.php?Eventid=<?php echo $eventStructList[$i]->m_id; ?>" title="View this Event"> <img src="../resources/images/Icons/View.png" height="22" width="22" alt="Edit" /> </a>  
                                 </div>
-                                <!--End of SnowflakePanel-->
+                                <!--/SnowflakePanel-->
                                 <!--SFEvent-->
                                 <div class="SFEvent">
                                     <div class="SFEvent-date">
@@ -356,12 +357,12 @@ $queryString_EventsRs = sprintf("&totalRows_EventsRs=%d%s", $totalRows_EventsRs,
                         <div class="NewButton"><a href="CreateEvents.php"> Create One <img src="../resources/images/Icons/Add.png" height="22" width="22" alt="Create" /></a></div>
                     <?php } ?> 
                 </div>
-                <!--END of PageWrap--> 
+                <!--/PageWrap--> 
 
                 <!-- InstanceEndEditable -->  </div>
-            <!-- end of Content --> 
+            <!--/Content --> 
         </div>
-        <!-- end of ContentWrapper -->
+        <!--/ContentWrapper -->
 
         <footer id="SnowFooter"> 
             <!-- CMSFooterWrapper -->
@@ -371,7 +372,7 @@ $queryString_EventsRs = sprintf("&totalRows_EventsRs=%d%s", $totalRows_EventsRs,
                 <div class="CopyRight">
                     <p>&copy; 2013 Cyril Inc. All Rights Reserved. | <a href="http://cyrilinc.co.uk/Legal.html"> Legal information</a> | <a href="mailto:contactus@cyrilinc.co.uk" id="CopyRContactus">Contact Us </a>|</p>
                 </div>
-                <!--END of  CopyRight--> 
+                <!--/CopyRight--> 
 
                 <!--SocialBar-->
                 <div class="SocialBar"> 
@@ -388,12 +389,12 @@ $queryString_EventsRs = sprintf("&totalRows_EventsRs=%d%s", $totalRows_EventsRs,
                             <li><a href="http://www.youtube.com/CyrilIncBroadcast" target="_blank" title="Cyril Inc on YouTube"><span class="icon-youtube youtube"></span></a></li>
                         </ul>
                     </div>
-                    <!--End Socialtable--> 
+                    <!--/Socialtable--> 
                 </div>
-                <!--End SocialBar--> 
+                <!--/SocialBar--> 
 
             </div>
-            <!-- End of CMSFooterWrapper --> 
+            <!--/CMSFooterWrapper --> 
 
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" --> <!-- InstanceEndEditable -->

@@ -2,6 +2,7 @@
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
+require_once '../lib/sfSettings.php';
 ?>
 <?php
 $config = new databaseParam('../config/config.ini');
@@ -18,7 +19,7 @@ $eventStruct = new eventStruct();
 $eventStruct->getEventByid($SFconnects, $colname_EventsRs);
 $totalRows_EventsRs = $SFconnects->recordCount();
 
-$siteSettings = new settingsStruct('../config/config.ini');
+$siteSettings = new sfSettings('../config/config.ini');
 
 $url = $otherurl = sfUtils::curPageURL();
 if (isset($siteSettings->m_eventsResultUrl)) {
@@ -87,7 +88,7 @@ $imageMissing = $sfGalleryImgUrl . "missing_default.png";
                 <a href="http://del.icio.us/post?url=<? echo htmlentities(rawurlencode($url)); ?>&amp;title=<?php echo $eventStruct->m_title; ?>" title="delicious" target="_blank"> <img src="<?php echo $SnowflakesUrl . 'resources/images/Icons/delicious.png'; ?>" height="22" width="22" alt="delicious" /> </a> 
                 <a class="flakeit" id="flakeit<?php echo $eventStruct->m_id; ?>" title="flake it" data-type="event"> <span>Flake it</span> <img src="<?php echo $SnowflakesUrl . "resources/images/Icons/Snowflakes.png"; ?>" height="22" width="22" alt="flake it" /> </a> 
             </div>
-            <!--End of SnowflakePanel-->
+            <!--/SnowflakePanel-->
 
             <div class="Break2"></div>
             <!--SFEvent-->
@@ -153,7 +154,7 @@ $imageMissing = $sfGalleryImgUrl . "missing_default.png";
     ?>
 
 </div>
-<!-- End of PageWrap --> 
+<!--/PageWrap --> 
 <?php
 $SFconnects->close();
 ?>

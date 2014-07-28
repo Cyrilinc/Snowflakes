@@ -2,6 +2,7 @@
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
+require_once '../lib/sfSettings.php';
 ?>
 <?php
 $currentPage = sfUtils::getFilterServer( 'PHP_SELF');
@@ -41,7 +42,7 @@ if (isset($total)) {
 }
 $totalPages = ceil($totalRows / $maxRows) - 1;
 
-$siteSettings = new settingsStruct('../config/config.ini');
+$siteSettings = new sfSettings('../config/config.ini');
 $queryString='';
 $query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string)) {
@@ -89,7 +90,7 @@ if (isset($rssflogo)) {
 <div style="float: right; background-color:<?php echo $sflogo; ?>;" class="NewButton"><a href="<?php echo $siteSettings->m_sfUrl; ?>rss.php?ty=events" title="Snowflakes event rss"> <img src="<?php echo $rsslink; ?>" height="22" width="22"  alt="Add" /></a></div>
 <!-- Break -->
 <div class="clear"></div>
-<!-- End of Break --> 
+<!--/Break --> 
 <?php if ($pageNum > 0) { // Show if not first page       ?>
     <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, 0, $queryString); ?>">First</a></div>
     <div class="smallNewButton"><a href="<?php printf("%s?pageNum=%d%s", $currentPage, max(0, $pageNum - 1), $queryString); ?>">Previous</a></div>
@@ -101,7 +102,7 @@ if (isset($rssflogo)) {
 <!-- Break -->
 <div class="clear"></div>
 <div class="Break2"></div>
-<!-- End of Break --> 
+<!--/Break --> 
 <?php
 if ($totalRows > 0) {
     $i = 0;
@@ -126,7 +127,7 @@ if ($totalRows > 0) {
                 <a href="http://del.icio.us/post?url=<? echo "" . $Shareurl . "?Eventid=" . $eventStructList[$i]->m_id; ?>&amp;title=<?php echo htmlentities(rawurlencode($eventStructList[$i]->m_title)); ?>" title="delicious" target="_blank"> <img src="<?php echo $SnowflakesUrl . "resources/images/Icons/delicious.png"; ?>" height="22" width="22" alt="delicious" /> </a>
                 <a class="flakeit" id="flakeit<?php echo $eventStructList[$i]->m_id; ?>" title="flake it" data-type="event"><span>Flake it</span><img src="<?php echo $SnowflakesUrl . "resources/images/Icons/Snowflakes.png"; ?>" height="22" width="22" alt="flake it" /> </a> 
             </div>
-            <!--End of SnowflakePanel-->
+            <!--/SnowflakePanel-->
 
             <div class="Break2"></div>
             <!--SFEvent-->

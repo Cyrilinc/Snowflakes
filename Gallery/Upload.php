@@ -2,10 +2,11 @@
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
+require_once '../lib/sfSettings.php';
 require_once '../lib/sfImageProcessor.php';
 //ini_set('max_file_uploads', 50);
 
-$siteSettings = new settingsStruct('../config/config.ini');
+$siteSettings = new sfSettings('../config/config.ini');
 
 $Post_upload = filter_input(INPUT_POST, 'upload');
 if (isset($Post_upload)) {

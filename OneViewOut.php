@@ -2,6 +2,7 @@
 require_once 'lib/sf.php';
 require_once 'lib/sfConnect.php';
 require_once 'config/Config.php';
+require_once 'lib/sfSettings.php';
 ?>
 <?php
 $colname_rsOut = -1;
@@ -17,7 +18,7 @@ $flakeStruct = new snowflakeStruct();
 $flakeStruct->getSnowflakesByid($SFconnects, $colname_rsOut);
 $totalRows_rsOut = $SFconnects->recordCount();
 
-$siteSettings = new settingsStruct('config/config.ini');
+$siteSettings = new sfSettings('config/config.ini');
 ?>
 <?php
 $url = $otherurl = sfUtils::curPageURL();
@@ -59,7 +60,7 @@ $sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
                 <a href="http://del.icio.us/post?url=<? echo "" . $url; ?>&amp;title=<?php echo htmlentities(rawurlencode($flakeStruct->m_title)); ?>" title="delicious" target="_blank"> <img src="<?php echo $SnowflakesUrl . 'resources/images/Icons/delicious.png'; ?>" height="22" width="22" alt="delicious" /> </a> 
                 <a class="flakeit" id="flakeit<?php echo $row_rsOut[$i]['id']; ?>" title="flake it" data-type="snowflake"> <span>Flake it</span> <img src="<?php echo $SnowflakesUrl . "resources/images/Icons/Snowflakes.png"; ?>" height="22" width="22" alt="flake it" /> </a> 
             </div>
-            <!--End of SnowflakePanel-->
+            <!--/SnowflakePanel-->
 
             <div class="PageBreak"></div>
             <div class="clear"></div>
@@ -151,14 +152,14 @@ $sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
         <?php } else { ?> 
             <h4>This snowflake doesn't exist </h4>
         <?php } ?> 
-        <!-- End of Snowflake -->
+        <!--/Snowflake -->
     <?php } else {
         ?>
         <h4>No Snowflake to view </h4>
     <?php }
     ?>
 </div>
-<!-- End of PageWrap --> 
+<!--/PageWrap --> 
 <?php
 $SFconnects->close();
 ?>

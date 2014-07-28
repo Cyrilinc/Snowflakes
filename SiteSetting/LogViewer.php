@@ -2,6 +2,7 @@
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
+require_once '../lib/sfSettings.php';
 ?>
 <?php
 //initialize the session
@@ -18,7 +19,7 @@ if ((isset($query_string)) && ($query_string != ""))
     $logoutAction .="&amp;" . htmlentities($query_string);
 }
 $doLogout = filter_input(INPUT_GET, 'doLogout');
-$siteSettings = new settingsStruct('../config/config.ini');
+$siteSettings = new sfSettings('../config/config.ini');
 if ((isset($doLogout)) && ($doLogout == "true"))
 {
     //to fully log out a visitor we need to clear the session varialbles
@@ -322,7 +323,7 @@ else
                 <!-- Break -->
                 <div class="clear"></div>
                 <div class="Break"></div>
-                <!-- End of Break --> 
+                <!--/Break --> 
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
@@ -330,16 +331,16 @@ else
                         <div id='table_div'></div>
                     </div>
                 </div>
-                <!-- End of PageWrap --> 
+                <!--/PageWrap --> 
                 <!-- Break -->
                 <div class="clear"></div>
                 <div class="Break2"></div>
-                <!-- End of Break --> 
+                <!--/Break --> 
 
                 <!-- InstanceEndEditable -->  </div>
-            <!-- end of Content --> 
+            <!--/Content --> 
         </div>
-        <!-- end of ContentWrapper -->
+        <!--/ContentWrapper -->
 
         <footer id="SnowFooter"> 
             <!-- CMSFooterWrapper -->
@@ -349,7 +350,7 @@ else
                 <div class="CopyRight">
                     <p>&copy; 2013 Cyril Inc. All Rights Reserved. | <a href="http://cyrilinc.co.uk/Legal.html"> Legal information</a> | <a href="mailto:contactus@cyrilinc.co.uk" id="CopyRContactus">Contact Us </a>|</p>
                 </div>
-                <!--END of  CopyRight--> 
+                <!--/ CopyRight--> 
 
                 <!--SocialBar-->
                 <div class="SocialBar"> 
@@ -366,12 +367,12 @@ else
                             <li><a href="http://www.youtube.com/CyrilIncBroadcast" target="_blank" title="Cyril Inc on YouTube"><span class="icon-youtube youtube"></span></a></li>
                         </ul>
                     </div>
-                    <!--End Socialtable--> 
+                    <!--/Socialtable--> 
                 </div>
-                <!--End SocialBar--> 
+                <!--/SocialBar--> 
 
             </div>
-            <!-- End of CMSFooterWrapper --> 
+            <!--/CMSFooterWrapper --> 
 
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" --> <!-- InstanceEndEditable -->

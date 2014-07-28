@@ -105,7 +105,7 @@ if (!isset($_SESSION['form']))
                 <!-- Break -->
                 <div class="clear"></div>
                 <div class="Break"></div>
-                <!-- End of Break -->
+                <!--/Break -->
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
@@ -120,22 +120,22 @@ if (!isset($_SESSION['form']))
                                 <div class="HalfSliderMain"> 
                                     <!--HalfPage1-->
                                     <div class="HalfSliderPage" id="Halfpage1"> <img src="../resources/images/SnowflakesBanner.png" alt="Snowflakes" /> </div>
-                                    <!--End HalfPage1 --> 
+                                    <!--/HalfPage1 --> 
                                 </div>
-                                <!--End of HalfSliderMain--> 
+                                <!--/HalfSliderMain--> 
                             </div>
-                            <!--End of HalfSlider--> 
+                            <!--/HalfSlider--> 
                         </div>
-                        <!--End HalfBanner--> 
+                        <!--/HalfBanner--> 
                     </div>
-                    <!-- End of HalfBannerWrapper -->
+                    <!--/HalfBannerWrapper -->
 
                     <!--contactform-->
                     <div class="contactform2">
                         <div class="message-text"><?php echo $_SESSION['formMessage']; ?></div>
                         <!-- Break -->
                         <div class="Break"></div>
-                        <!-- End of Break --> 
+                        <!--/Break --> 
 
                         <form id="installForm" action="sfInstall.php" method="post" class="updateForm" enctype="multipart/form-data" autocomplete="on">
 
@@ -225,13 +225,13 @@ unset($_SESSION['formFooter']);
 ?>
                         </div>
                     </div>
-                    <!--END of contactform-->
+                    <!--/contactform-->
                 </div>
-                <!--END of PageWrap-->
+                <!--/PageWrap-->
                 <!-- InstanceEndEditable -->  </div>
-            <!-- end of Content --> 
+            <!--/Content --> 
         </div>
-        <!-- end of ContentWrapper -->
+        <!--/ContentWrapper -->
 
         <footer id="SnowFooter"> 
             <!-- CMSFooterWrapper -->
@@ -241,7 +241,7 @@ unset($_SESSION['formFooter']);
                 <div class="CopyRight">
                     <p>&copy; 2013 Cyril Inc. All Rights Reserved. | <a href="http://cyrilinc.co.uk/Legal.html"> Legal information</a> | <a href="mailto:contactus@cyrilinc.co.uk" id="CopyRContactus">Contact Us </a>|</p>
                 </div>
-                <!--END of  CopyRight--> 
+                <!--/ CopyRight--> 
 
                 <!--SocialBar-->
                 <div class="SocialBar"> 
@@ -258,12 +258,12 @@ unset($_SESSION['formFooter']);
                             <li><a href="http://www.youtube.com/CyrilIncBroadcast" target="_blank" title="Cyril Inc on YouTube"><span class="icon-youtube youtube"></span></a></li>
                         </ul>
                     </div>
-                    <!--End Socialtable--> 
+                    <!--/Socialtable--> 
                 </div>
-                <!--End SocialBar--> 
+                <!--/SocialBar--> 
 
             </div>
-            <!-- End of CMSFooterWrapper --> 
+            <!--/CMSFooterWrapper --> 
 
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" -->

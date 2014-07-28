@@ -2,12 +2,13 @@
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
+require_once '../lib/sfSettings.php';
 require_once '../lib/sfImageProcessor.php';
 ?>
 
 <?php
 //The upload directory
-$siteSettings = new settingsStruct('../config/config.ini');
+$siteSettings = new sfSettings('../config/config.ini');
 //The upload Image directory
 $sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
 $sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
@@ -145,7 +146,7 @@ $SnowflakesUrl = $siteSettings->m_sfUrl;
 <?php }
 ?>            
 </div>
-<!-- End of PageWrap --> 
+<!--/PageWrap --> 
 <?php
 $SFconnects->close();
 ?>

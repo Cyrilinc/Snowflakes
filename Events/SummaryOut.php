@@ -2,6 +2,7 @@
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
+require_once '../lib/sfSettings.php';
 ?>
 <?php
 $maxRows_EventsRs = filter_input(INPUT_GET, 'MaxNumber');
@@ -40,7 +41,7 @@ if (isset($total_EventsRs)) {
 }
 $totalPages_EventsRs = ceil($totalRows_EventsRs / $maxRows_EventsRs) - 1;
 
-$siteSettings = new settingsStruct('../config/config.ini');
+$siteSettings = new sfSettings('../config/config.ini');
 ?>
 <?php
 $url = $otherurl = strtok(sfUtils::curPageURL(), '?');

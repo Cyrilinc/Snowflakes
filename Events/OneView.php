@@ -2,9 +2,10 @@
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
+require_once '../lib/sfSettings.php';
 ?>
 <?php
-$siteSettings = new settingsStruct('../config/config.ini');
+$siteSettings = new sfSettings('../config/config.ini');
 //The upload Image directory
 $sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
 $imageMissing = $sfGalleryImgUrl . "missing_default.png";
@@ -152,7 +153,7 @@ $Powerlink = "../resources/images/Snowflakes2.png";
                                 <a href="http://del.icio.us/post?url=<? echo "" . $url; ?>&amp;title=<?php echo htmlentities(rawurlencode($eventStruct->m_title)); ?>" title="delicious" target="_blank"> <img src="../resources/images/Icons/delicious.png" height="30" width="30" alt="delicious" /> </a> 
                                 <a class="flakeit" id="flakeit<?php echo $eventStruct->m_id; ?>" title="flake it" data-type="event"> <span>Flake it</span> <img src="../resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> </a> 
                             </div>
-                            <!--End of SnowflakePanel-->
+                            <!--/SnowflakePanel-->
 
                             <div class="Break2"></div>
 
@@ -219,12 +220,12 @@ $Powerlink = "../resources/images/Snowflakes2.png";
                     ?>
 
                 </div>
-                <!-- End of PageWrap --> 
-                <!-- End of Break --> 
+                <!--/PageWrap --> 
+                <!--/Break --> 
                 <!-- InstanceEndEditable -->  </div>
-            <!-- end of Content --> 
+            <!--/Content --> 
         </div>
-        <!-- end of ContentWrapper -->
+        <!--/ContentWrapper -->
 
         <footer id="SnowFooter"> 
             <!-- CMSFooterWrapper -->
@@ -234,7 +235,7 @@ $Powerlink = "../resources/images/Snowflakes2.png";
                 <div class="CopyRight">
                     <p>&copy; 2013 Cyril Inc. All Rights Reserved. | <a href="http://cyrilinc.co.uk/Legal.html"> Legal information</a> | <a href="mailto:contactus@cyrilinc.co.uk" id="CopyRContactus">Contact Us </a>|</p>
                 </div>
-                <!--END of  CopyRight--> 
+                <!--/ CopyRight--> 
 
                 <!--SocialBar-->
                 <div class="SocialBar"> 
@@ -251,12 +252,12 @@ $Powerlink = "../resources/images/Snowflakes2.png";
                             <li><a href="http://www.youtube.com/CyrilIncBroadcast" target="_blank" title="Cyril Inc on YouTube"><span class="icon-youtube youtube"></span></a></li>
                         </ul>
                     </div>
-                    <!--End Socialtable--> 
+                    <!--/Socialtable--> 
                 </div>
-                <!--End SocialBar--> 
+                <!--/SocialBar--> 
 
             </div>
-            <!-- End of CMSFooterWrapper --> 
+            <!--/CMSFooterWrapper --> 
 
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" --> <!-- InstanceEndEditable -->

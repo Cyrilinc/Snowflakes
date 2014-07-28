@@ -2,6 +2,7 @@
 require_once 'lib/sf.php';
 require_once 'lib/sfConnect.php';
 require_once 'config/Config.php';
+require_once 'lib/sfSettings.php';
 
 
 $colname_rsOut = -1;
@@ -21,7 +22,7 @@ $totalRows_rsOut = $SFconnects->recordCount();
 
 <?php
 $url = $otherurl = sfUtils::curPageURL();
-$siteSettings = new settingsStruct('config/config.ini');
+$siteSettings = new sfSettings('config/config.ini');
 $Powerlink = "resources/images/Snowflakes2.png";
 //The upload base Image url
 $sfGalleryImgUrl = $siteSettings->m_sfGalleryImgUrl;
@@ -154,7 +155,7 @@ $imageMissing = $sfGalleryImgUrl . "missing_default.png";
                                 <a href="http://stumbleupon.com/submit?url=<? echo "" . $url; ?>&amp;title=<?php echo htmlentities(rawurlencode($flakeStruct->m_title)); ?>" title="stumbleupon" target="_blank"> <img src="resources/images/Icons/stumbleupon.png" height="30" width="30" alt="stumbleupon" /> </a> 
                                 <a href="http://del.icio.us/post?url=<? echo "" . $url; ?>&amp;title=<?php echo htmlentities(rawurlencode($flakeStruct->m_title)); ?>" title="delicious" target="_blank"> <img src="resources/images/Icons/delicious.png" height="30" width="30" alt="delicious" /> </a> 
                                 <a class="flakeit" id="flakeit<?php echo $flakeStruct->m_id; ?>" title="flake it" data-type="snowflake"> <span>Flake it</span> <img src="resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> </a> 
-                            </div><!--End of SnowflakePanel-->
+                            </div><!--/SnowflakePanel-->
 
                             <div class="PageBreak"></div>
                             <div class="clear"></div>
@@ -247,7 +248,7 @@ $imageMissing = $sfGalleryImgUrl . "missing_default.png";
                                 <h1 style="color:#fafafa;">This snowflake doesn't exist </h1>
                             <?php } ?> 
                         </div>
-                        <!-- End of Snowflake -->
+                        <!--/Snowflake -->
                     <?php } else {
                         ?>
                         <h1>No Snowflakes to view </h1>
@@ -255,11 +256,11 @@ $imageMissing = $sfGalleryImgUrl . "missing_default.png";
                     ?>
 
                 </div>
-                <!-- End of PageWrap --> 
+                <!--/PageWrap --> 
                 <!-- InstanceEndEditable -->  </div>
-            <!-- end of Content --> 
+            <!--/Content --> 
         </div>
-        <!-- end of ContentWrapper -->
+        <!--/ContentWrapper -->
 
         <footer id="SnowFooter"> 
             <!-- CMSFooterWrapper -->
@@ -269,7 +270,7 @@ $imageMissing = $sfGalleryImgUrl . "missing_default.png";
                 <div class="CopyRight">
                     <p>&copy; 2013 Cyril Inc. All Rights Reserved. | <a href="http://cyrilinc.co.uk/Legal.html"> Legal information</a> | <a href="mailto:contactus@cyrilinc.co.uk" id="CopyRContactus">Contact Us </a>|</p>
                 </div>
-                <!--END of  CopyRight--> 
+                <!--/CopyRight--> 
 
                 <!--SocialBar-->
                 <div class="SocialBar"> 
@@ -286,12 +287,12 @@ $imageMissing = $sfGalleryImgUrl . "missing_default.png";
                             <li><a href="http://www.youtube.com/CyrilIncBroadcast" target="_blank" title="Cyril Inc on YouTube"><span class="icon-youtube youtube"></span></a></li>
                         </ul>
                     </div>
-                    <!--End Socialtable--> 
+                    <!--/Socialtable--> 
                 </div>
-                <!--End SocialBar--> 
+                <!--/SocialBar--> 
 
             </div>
-            <!-- End of CMSFooterWrapper --> 
+            <!--/CMSFooterWrapper --> 
 
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" -->

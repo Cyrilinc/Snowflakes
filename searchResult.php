@@ -261,7 +261,7 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                         <!-- Break -->
                         <div class="clear"></div>
                         <div class="Break"></div>
-                        <!-- End of Break --> 
+                        <!--/Break --> 
                         <h3><?php
                             if (count($snowflakeResult) > 0) {
                                 echo count($snowflakeResult);
@@ -288,7 +288,7 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                         <!-- Break -->
                         <div class="clear"></div>
                         <div class="Break"></div>
-                        <!-- End of Break --> 
+                        <!--/Break --> 
                         <h3><?php
                             if (count($eventsResult) > 0) {
                                 echo count($eventsResult);
@@ -315,7 +315,7 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                         <!-- Break -->
                         <div class="clear"></div>
                         <div class="Break"></div>
-                        <!-- End of Break --> 
+                        <!--/Break --> 
                         <h3><?php
                             if (count($galleryResult) > 0) {
                                 echo count($galleryResult);
@@ -342,7 +342,7 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                         <!-- Break -->
                         <div class="clear"></div>
                         <div class="Break"></div>
-                        <!-- End of Break -->   
+                        <!--/Break -->   
                         <h3><?php
                             if (count($usersResult) > 0) {
                                 echo count($usersResult);
@@ -370,15 +370,15 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                     <!-- Break -->
                     <div class="clear"></div>
                     <div class="Break2"></div>
-                    <!-- End of Break -->
+                    <!--/Break -->
 
                 </div>
-                <!-- End of PageWrap --> 
+                <!--/PageWrap --> 
 
                 <!-- InstanceEndEditable -->  </div>
-            <!-- end of Content --> 
+            <!--/Content --> 
         </div>
-        <!-- end of ContentWrapper -->
+        <!--/ContentWrapper -->
 
         <footer id="SnowFooter"> 
             <!-- CMSFooterWrapper -->
@@ -388,7 +388,7 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                 <div class="CopyRight">
                     <p>&copy; 2013 Cyril Inc. All Rights Reserved. | <a href="http://cyrilinc.co.uk/Legal.html"> Legal information</a> | <a href="mailto:contactus@cyrilinc.co.uk" id="CopyRContactus">Contact Us </a>|</p>
                 </div>
-                <!--END of  CopyRight--> 
+                <!--/CopyRight--> 
 
                 <!--SocialBar-->
                 <div class="SocialBar"> 
@@ -405,12 +405,12 @@ if ((isset($post_search)) && ($post_search == "searchform")) {
                             <li><a href="http://www.youtube.com/CyrilIncBroadcast" target="_blank" title="Cyril Inc on YouTube"><span class="icon-youtube youtube"></span></a></li>
                         </ul>
                     </div>
-                    <!--End Socialtable--> 
+                    <!--/Socialtable--> 
                 </div>
-                <!--End SocialBar--> 
+                <!--/SocialBar--> 
 
             </div>
-            <!-- End of CMSFooterWrapper --> 
+            <!--/CMSFooterWrapper --> 
 
         </footer>
         <!-- InstanceBeginEditable name="FootEdit" --> <!-- InstanceEndEditable -->

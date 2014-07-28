@@ -2,6 +2,7 @@
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
+require_once '../lib/sfSettings.php';
 require_once '../lib/sfImageProcessor.php';
 ?>
 
@@ -42,7 +43,7 @@ if (isset($totalSFGallery)) {
 }
 $totalPages = ceil($totalRows / $maxRows) - 1;
 
-$siteSettings = new settingsStruct('../config/config.ini');
+$siteSettings = new sfSettings('../config/config.ini');
 $queryString="";
 $query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string)) {

@@ -2,6 +2,7 @@
 require_once 'lib/sf.php';
 require_once 'lib/sfConnect.php';
 require_once 'config/Config.php';
+require_once 'lib/sfSettings.php';
 ?>
 <?php
 $contentType = filter_input(INPUT_GET, 'type') ? filter_input(INPUT_GET, 'type') : 'html';
@@ -52,7 +53,7 @@ else
 }
 $totalPages = ceil($totalRows / $maxRows) - 1;
 
-$siteSettings = new settingsStruct('config/config.ini');
+$siteSettings = new sfSettings('config/config.ini');
 $queryString='';
 $query_string = sfUtils::getFilterServer( 'QUERY_STRING');
 if (!empty($query_string))
@@ -147,7 +148,7 @@ if ($totalRows > 0)
                 <a href="http://stumbleupon.com/submit?url=<? echo "" . $Shareurl . "?pageid=" . $flakeStructList[$i]->m_id; ?>&amp;title=<?php echo htmlentities(rawurlencode($flakeStructList[$i]->m_title)); ?>" title="stumbleupon" target="_blank"> <img src="<?php echo $SnowflakesUrl . "resources/images/Icons/stumbleupon.png"; ?>" height="22" width="22" alt="stumbleupon" /> </a> 
                 <a href="http://del.icio.us/post?url=<? echo "" . $Shareurl . "?pageid=" . $flakeStructList[$i]->m_id; ?>&amp;title=<?php echo htmlentities(rawurlencode($flakeStructList[$i]->m_title)); ?>" title="delicious" target="_blank"> <img src="<?php echo $SnowflakesUrl . "resources/images/Icons/delicious.png"; ?>" height="22" width="22" alt="delicious" /> </a> 
                 <a class="flakeit" id="flakeit<?php echo $flakeStructList[$i]->m_id; ?>" title="flake it" data-type="snowflake"> <span>Flake it</span> <img src="<?php echo $SnowflakesUrl . "resources/images/Icons/Snowflakes.png"; ?>" height="22" width="22" alt="flake it" /> </a> 
-            </div><!--End of SnowflakePanel-->
+            </div><!--/SnowflakePanel-->
 
             <div class="PageBreak"></div>
             <div class="clear"></div>
@@ -172,7 +173,7 @@ if ($totalRows > 0)
             </div>
             <div class="SharePost"> </div>
         </div>
-        <!-- End of Snowflake -->
+        <!--/Snowflake -->
         <?php
         $i++;
     } while ($i < count($flakeStructList));

@@ -127,6 +127,7 @@ class snowflakesSetUp
         $settingsStruct->setCustom('datadir', 'logdir', realpath("../data/") . "/");
         $settingsStruct->Setresources(realpath("../resources/") . "/");
         $settingsStruct->Setpath(realpath("../") . "/");
+        $settingsStruct->setCustom('datadir', 'backupPath', realpath("../backup/") . "/");
         $settingsStruct->setCustom('datadir', 'datapath', realpath("../data/") . "/");
         $settingsStruct->SetuploadGalleryDir($gallery);
         $settingsStruct->SetgalleryImgDir($galleryimg);
@@ -264,7 +265,7 @@ class snowflakesSetUp
         return true;
     }
 
-    private function createChangeLog($conn)
+    private function createChangeLog(sfConnect $conn)
     {
         //sanity check
         if (!$conn)
@@ -297,7 +298,7 @@ class snowflakesSetUp
         return true;
     }
 
-    private function createIUDTriggers($conn, $tablename, $Name)
+    private function createIUDTriggers(sfConnect $conn, $tablename, $Name)
     {
 
         //sanity check
@@ -370,7 +371,7 @@ class snowflakesSetUp
         return true;
     }
 
-    private function createSfTable($conn)
+    private function createSfTable(sfConnect $conn)
     {
 
         //sanity check
@@ -411,7 +412,7 @@ class snowflakesSetUp
         return $this->createIUDTriggers($conn, $this->m_sfTable, 'snowflake');
     }
 
-    private function createUserTable($conn)
+    private function createUserTable(sfConnect $conn)
     {
 
         //sanity check
@@ -500,7 +501,7 @@ class snowflakesSetUp
         return true;
     }
 
-    private function createEventsTable($conn)
+    private function createEventsTable(sfConnect $conn)
     {
 
         //sanity check
@@ -545,7 +546,7 @@ class snowflakesSetUp
         return $this->createIUDTriggers($conn, $this->m_eventsTable, 'event');
     }
 
-    private function createGalleryTable($conn)
+    private function createGalleryTable(sfConnect $conn)
     {
 
         //sanity check
@@ -586,7 +587,7 @@ class snowflakesSetUp
         return true;
     }
 
-    private function createFlakeItTable($conn)
+    private function createFlakeItTable(sfConnect $conn)
     {
 
         //sanity check
@@ -613,7 +614,7 @@ class snowflakesSetUp
         return true;
     }
 
-    private function createSettingsTable($conn)
+    private function createSettingsTable(sfConnect $conn)
     {
 
         //sanity check
@@ -651,7 +652,7 @@ class snowflakesSetUp
         return true;
     }
 
-    private function insertSnowflakesSettings($conn)
+    private function insertSnowflakesSettings(sfConnect $conn)
     {
 
         //sanity check
@@ -681,7 +682,7 @@ class snowflakesSetUp
         return true;
     }
 
-    private function insertSuperUser($conn)
+    private function insertSuperUser(sfConnect $conn)
     {
 
         //sanity check
@@ -710,7 +711,7 @@ class snowflakesSetUp
         return true;
     }
 
-    private function insertDefaultEvents($conn)
+    private function insertDefaultEvents(sfConnect $conn)
     {
 
         if (!$conn)
@@ -738,7 +739,7 @@ class snowflakesSetUp
         return true;
     }
 
-    private function insertDefaultGallery($conn)
+    private function insertDefaultGallery(sfConnect $conn)
     {
         //sanity check
         if (!$conn)
@@ -765,7 +766,7 @@ class snowflakesSetUp
         return true;
     }
 
-    private function insertDefaultSnowflakes($conn)
+    private function insertDefaultSnowflakes(sfConnect $conn)
     {
 
         //sanity check

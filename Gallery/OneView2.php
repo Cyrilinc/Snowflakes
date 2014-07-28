@@ -2,12 +2,13 @@
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
+require_once '../lib/sfSettings.php';
 require_once '../lib/sfImageProcessor.php';
 ?>
 
 <?php
 //The upload directory
-$siteSettings = new settingsStruct('../config/config.ini');
+$siteSettings = new sfSettings('../config/config.ini');
 $datadir = new dataDirParam("../config/config.ini");
 $UploadDir = $datadir->m_uploadGalleryDir;
 //The upload Image directory
@@ -66,7 +67,7 @@ $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
             <a href="http://del.icio.us/post?url=<? echo "" . $url; ?>&amp;title=<?php echo $galleryStruct->m_title; ?>" title="delicious" target="_blank"> <img src="<?php echo $SnowflakesUrl . 'resources/images/Icons/delicious.png'; ?>" height="22" width="22" alt="delicious" /> </a> 
             <a class="flakeit" id="flakeit<?php echo $galleryStruct->m_id; ?>" title="flake it" data-type="gallery"> <span>Flake it</span> <img src="<?php echo $SnowflakesUrl . 'resources/images/Icons/Snowflakes.png'; ?>" height="22" width="22" alt="flake it" /> </a> 
         </div>
-        <!--End of SnowflakePanel-->
+        <!--/SnowflakePanel-->
 
 
         <!--wrapper-->
@@ -133,7 +134,7 @@ $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
 <?php } ?>
 
 </div>
-<!-- End of PageWrap --> 
+<!--/PageWrap --> 
 <?php
 $SFconnects->close();
 ?>
