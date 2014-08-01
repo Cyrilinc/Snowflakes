@@ -43,7 +43,7 @@ if (isset($post_username)) {
     $loginUser = new userStruct();
 
     if ($loginUser->loginUser($SFconnects, $loginUsername, $password)) {
-        sfUtils::setUserLoginOut($loginUsername, true, 'config/config.ini');
+        sfUtils::setUserLoginOut($loginUser->m_username, true, 'config/config.ini');
 
         $loginStrGroup = "";
 
@@ -53,7 +53,7 @@ if (isset($post_username)) {
             session_regenerate_id();
         }
         //declare two session variables and assign them
-        $_SESSION['MM_Username'] = $loginUsername;
+        $_SESSION['MM_Username'] = $loginUser->m_username;
         $_SESSION['MM_UserGroup'] = $loginStrGroup;
 
         if (isset($_SESSION['PrevUrl']) && false) {
