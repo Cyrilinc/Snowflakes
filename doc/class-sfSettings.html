@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class settingsStruct | Snowflakes</title>
+	<title>Class sfSettings | Snowflakes</title>
 
 	<script type="text/javascript" src="resources/combined.js?774890837"></script>
-	<script type="text/javascript" src="elementlist.js?4233389632"></script>
+	<script type="text/javascript" src="elementlist.js?328919904"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -39,11 +39,11 @@
 				<li><a href="class-dataDirParam.html">dataDirParam</a></li>
 				<li><a href="class-eventStruct.html">eventStruct</a></li>
 				<li><a href="class-galleryStruct.html">galleryStruct</a></li>
-				<li class="active"><a href="class-settingsStruct.html">settingsStruct</a></li>
 				<li><a href="class-sfConnect.html">sfConnect</a></li>
 				<li><a href="class-sfGalleryImage.html">sfGalleryImage</a></li>
 				<li><a href="class-sfImageProcessor.html">sfImageProcessor</a></li>
 				<li><a href="class-sfLogError.html">sfLogError</a></li>
+				<li class="active"><a href="class-sfSettings.html">sfSettings</a></li>
 				<li><a href="class-sfUtils.html">sfUtils</a></li>
 				<li><a href="class-snowflakesSetUp.html">snowflakesSetUp</a></li>
 				<li><a href="class-snowflakeStruct.html">snowflakeStruct</a></li>
@@ -90,7 +90,7 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class settingsStruct</h1>
+	<h1>Class sfSettings</h1>
 
 
 
@@ -108,9 +108,7 @@
 		
 		
 
-				<b>Author:</b>
-				Cyril Adelekan<br />
-		<b>Located at</b> <a href="source-class-settingsStruct.html#5079-5597" title="Go to source code">lib/sf.php</a><br />
+		<b>Located at</b> <a href="source-class-sfSettings.html#4-522" title="Go to source code">lib/sfSettings.php</a><br />
 	</div>
 
 
@@ -128,7 +126,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-settingsStruct.html#5121-5133" title="Go to source code">__construct</a>( <span>String <var>$inifile</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#46-58" title="Go to source code">__construct</a>( <span>String <var>$inifile</var></span> )</code>
 
 		<div class="description short">
 			
@@ -168,7 +166,7 @@ configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_init">#</a>
-		<code><a href="source-class-settingsStruct.html#5135-5150" title="Go to source code">init</a>( <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-sfSettings.html#60-75" title="Go to source code">init</a>( <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -210,24 +208,24 @@ configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_populate">#</a>
-		<code><a href="source-class-settingsStruct.html#5152-5207" title="Go to source code">populate</a>( <span>array <var>$array</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#77-132" title="Go to source code">populate</a>( <span>array <var>$array</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Populate each member of <code><a href="class-settingsStruct.html">settingsStruct</a></code> given the input parameters</p>
+<p>Populate each member of <code><a href="class-sfSettings.html">sfSettings</a></code> given the input parameters</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Populate each member of <code><a href="class-settingsStruct.html">settingsStruct</a></code> given the input parameters</p>
+<p>Populate each member of <code><a href="class-sfSettings.html">sfSettings</a></code> given the input parameters</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$array</var></dt>
-					<dd><code>array</code><br>$array to be used to populate members of <code><a href="class-settingsStruct.html">settingsStruct</a></code></dd>
+					<dd><code>array</code><br>$array to be used to populate members of <code><a href="class-sfSettings.html">sfSettings</a></code></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -252,7 +250,7 @@ configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setConfigItems">#</a>
-		<code><a href="source-class-settingsStruct.html#5209-5223" title="Go to source code">setConfigItems</a>( <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-sfSettings.html#134-148" title="Go to source code">setConfigItems</a>( <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -297,7 +295,7 @@ failure.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SethostName">#</a>
-		<code><a href="source-class-settingsStruct.html#5225-5234" title="Go to source code">SethostName</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#150-159" title="Go to source code">SethostName</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -337,7 +335,7 @@ failure.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetdbName">#</a>
-		<code><a href="source-class-settingsStruct.html#5236-5245" title="Go to source code">SetdbName</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#161-170" title="Go to source code">SetdbName</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -377,7 +375,7 @@ failure.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetdbType">#</a>
-		<code><a href="source-class-settingsStruct.html#5247-5256" title="Go to source code">SetdbType</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#172-181" title="Go to source code">SetdbType</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -417,7 +415,7 @@ failure.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetdbUsername">#</a>
-		<code><a href="source-class-settingsStruct.html#5258-5267" title="Go to source code">SetdbUsername</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#183-192" title="Go to source code">SetdbUsername</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -457,7 +455,7 @@ failure.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetdbPassword">#</a>
-		<code><a href="source-class-settingsStruct.html#5269-5302" title="Go to source code">SetdbPassword</a>( <span>String <var>$value</var></span>, <span>String <var>$key</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>boolean <var>$encrypt</var> = <span class="php-keyword1">true</span></span> )</code>
+		<code><a href="source-class-sfSettings.html#194-227" title="Go to source code">SetdbPassword</a>( <span>String <var>$value</var></span>, <span>String <var>$key</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>boolean <var>$encrypt</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -505,7 +503,7 @@ failure.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Setadmin_email">#</a>
-		<code><a href="source-class-settingsStruct.html#5304-5313" title="Go to source code">Setadmin_email</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#229-238" title="Go to source code">Setadmin_email</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -545,7 +543,7 @@ failure.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SettimeZone">#</a>
-		<code><a href="source-class-settingsStruct.html#5315-5324" title="Go to source code">SettimeZone</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#240-249" title="Go to source code">SettimeZone</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -585,7 +583,7 @@ failure.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Seturl">#</a>
-		<code><a href="source-class-settingsStruct.html#5328-5337" title="Go to source code">Seturl</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#253-262" title="Go to source code">Seturl</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -627,7 +625,7 @@ file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetsfUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#5339-5348" title="Go to source code">SetsfUrl</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#264-273" title="Go to source code">SetsfUrl</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -667,7 +665,7 @@ file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetsfGalleryUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#5350-5359" title="Go to source code">SetsfGalleryUrl</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#275-284" title="Go to source code">SetsfGalleryUrl</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -707,7 +705,7 @@ file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetsfGalleryImgUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#5361-5370" title="Go to source code">SetsfGalleryImgUrl</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#286-295" title="Go to source code">SetsfGalleryImgUrl</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -749,7 +747,7 @@ file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetsfGalleryThumbUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#5372-5382" title="Go to source code">SetsfGalleryThumbUrl</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#297-307" title="Go to source code">SetsfGalleryThumbUrl</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -791,7 +789,7 @@ configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetthumbWidth">#</a>
-		<code><a href="source-class-settingsStruct.html#5384-5394" title="Go to source code">SetthumbWidth</a>( <span>integer <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#309-319" title="Go to source code">SetthumbWidth</a>( <span>integer <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -833,7 +831,7 @@ configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetthumbHeight">#</a>
-		<code><a href="source-class-settingsStruct.html#5396-5406" title="Go to source code">SetthumbHeight</a>( <span>integer <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#321-331" title="Go to source code">SetthumbHeight</a>( <span>integer <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -875,7 +873,7 @@ configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetmaxImageWidth">#</a>
-		<code><a href="source-class-settingsStruct.html#5408-5418" title="Go to source code">SetmaxImageWidth</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#333-343" title="Go to source code">SetmaxImageWidth</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -917,7 +915,7 @@ configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetimageExtList">#</a>
-		<code><a href="source-class-settingsStruct.html#5420-5430" title="Go to source code">SetimageExtList</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#345-355" title="Go to source code">SetimageExtList</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -959,7 +957,7 @@ the configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetimageTypesList">#</a>
-		<code><a href="source-class-settingsStruct.html#5432-5442" title="Go to source code">SetimageTypesList</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#357-367" title="Go to source code">SetimageTypesList</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1001,7 +999,7 @@ configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetsnowflakesResultUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#5444-5454" title="Go to source code">SetsnowflakesResultUrl</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#369-379" title="Go to source code">SetsnowflakesResultUrl</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1043,7 +1041,7 @@ snowflakes published of the settings in the configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetsnowflakesOutUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#5456-5466" title="Go to source code">SetsnowflakesOutUrl</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#381-391" title="Go to source code">SetsnowflakesOutUrl</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1085,7 +1083,7 @@ snowflakes published of the settings in the configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SeteventsResultUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#5468-5478" title="Go to source code">SeteventsResultUrl</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#393-403" title="Go to source code">SeteventsResultUrl</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1127,7 +1125,7 @@ published of the settings in the configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SeteventsOutputUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#5480-5490" title="Go to source code">SeteventsOutputUrl</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#405-415" title="Go to source code">SeteventsOutputUrl</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1169,7 +1167,7 @@ published of the settings in the configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetgalleryResultUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#5492-5502" title="Go to source code">SetgalleryResultUrl</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#417-427" title="Go to source code">SetgalleryResultUrl</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1211,7 +1209,7 @@ published of the settings in the configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetgalleryOutUrl">#</a>
-		<code><a href="source-class-settingsStruct.html#5504-5515" title="Go to source code">SetgalleryOutUrl</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#429-440" title="Go to source code">SetgalleryOutUrl</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1253,7 +1251,7 @@ published of the settings in the configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetmaxImageSize">#</a>
-		<code><a href="source-class-settingsStruct.html#5517-5527" title="Go to source code">SetmaxImageSize</a>( <span>integer <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#442-452" title="Go to source code">SetmaxImageSize</a>( <span>integer <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1295,7 +1293,7 @@ configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCustom">#</a>
-		<code><a href="source-class-settingsStruct.html#5529-5540" title="Go to source code">setCustom</a>( <span>String <var>$section</var></span>, <span>String <var>$tag</var></span>, <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#454-465" title="Go to source code">setCustom</a>( <span>String <var>$section</var></span>, <span>String <var>$tag</var></span>, <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1343,7 +1341,7 @@ configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Setpath">#</a>
-		<code><a href="source-class-settingsStruct.html#5542-5551" title="Go to source code">Setpath</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#467-476" title="Go to source code">Setpath</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1383,7 +1381,7 @@ configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Setresources">#</a>
-		<code><a href="source-class-settingsStruct.html#5553-5562" title="Go to source code">Setresources</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#478-487" title="Go to source code">Setresources</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1423,7 +1421,7 @@ configuration file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetuploadGalleryDir">#</a>
-		<code><a href="source-class-settingsStruct.html#5564-5573" title="Go to source code">SetuploadGalleryDir</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#489-498" title="Go to source code">SetuploadGalleryDir</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1465,7 +1463,7 @@ file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetgalleryImgDir">#</a>
-		<code><a href="source-class-settingsStruct.html#5575-5584" title="Go to source code">SetgalleryImgDir</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#500-509" title="Go to source code">SetgalleryImgDir</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1507,7 +1505,7 @@ file</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SetgalleryThumbDir">#</a>
-		<code><a href="source-class-settingsStruct.html#5586-5595" title="Go to source code">SetgalleryThumbDir</a>( <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfSettings.html#511-520" title="Go to source code">SetgalleryThumbDir</a>( <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1560,7 +1558,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5083" title="Go to source code"><var>$m_hostName</var></a>
+				<a href="source-class-sfSettings.html#8" title="Go to source code"><var>$m_hostName</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1583,7 +1581,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5084" title="Go to source code"><var>$m_dbName</var></a>
+				<a href="source-class-sfSettings.html#9" title="Go to source code"><var>$m_dbName</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1606,7 +1604,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5085" title="Go to source code"><var>$m_dbType</var></a>
+				<a href="source-class-sfSettings.html#10" title="Go to source code"><var>$m_dbType</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1629,7 +1627,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5086" title="Go to source code"><var>$m_dbUsername</var></a>
+				<a href="source-class-sfSettings.html#11" title="Go to source code"><var>$m_dbUsername</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1652,7 +1650,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5087" title="Go to source code"><var>$m_dbPassword</var></a>
+				<a href="source-class-sfSettings.html#12" title="Go to source code"><var>$m_dbPassword</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1675,7 +1673,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5088" title="Go to source code"><var>$m_key</var></a>
+				<a href="source-class-sfSettings.html#13" title="Go to source code"><var>$m_key</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1698,7 +1696,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5089" title="Go to source code"><var>$m_admin_email</var></a>
+				<a href="source-class-sfSettings.html#14" title="Go to source code"><var>$m_admin_email</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1721,7 +1719,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5090" title="Go to source code"><var>$m_time_zone</var></a>
+				<a href="source-class-sfSettings.html#15" title="Go to source code"><var>$m_time_zone</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1744,7 +1742,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5092" title="Go to source code"><var>$m_setUp</var></a>
+				<a href="source-class-sfSettings.html#17" title="Go to source code"><var>$m_setUp</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1767,7 +1765,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5093" title="Go to source code"><var>$m_url</var></a>
+				<a href="source-class-sfSettings.html#18" title="Go to source code"><var>$m_url</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1790,7 +1788,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5094" title="Go to source code"><var>$m_sfUrl</var></a>
+				<a href="source-class-sfSettings.html#19" title="Go to source code"><var>$m_sfUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1813,7 +1811,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5095" title="Go to source code"><var>$m_loginUrl</var></a>
+				<a href="source-class-sfSettings.html#20" title="Go to source code"><var>$m_loginUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1836,7 +1834,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5096" title="Go to source code"><var>$m_flakeItUrl</var></a>
+				<a href="source-class-sfSettings.html#21" title="Go to source code"><var>$m_flakeItUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1859,7 +1857,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5097" title="Go to source code"><var>$m_sfGalleryUrl</var></a>
+				<a href="source-class-sfSettings.html#22" title="Go to source code"><var>$m_sfGalleryUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1882,7 +1880,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5098" title="Go to source code"><var>$m_sfGalleryImgUrl</var></a>
+				<a href="source-class-sfSettings.html#23" title="Go to source code"><var>$m_sfGalleryImgUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1905,7 +1903,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5099" title="Go to source code"><var>$m_sfGalleryThumbUrl</var></a>
+				<a href="source-class-sfSettings.html#24" title="Go to source code"><var>$m_sfGalleryThumbUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1928,7 +1926,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5100" title="Go to source code"><var>$m_thumbWidth</var></a>
+				<a href="source-class-sfSettings.html#25" title="Go to source code"><var>$m_thumbWidth</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1951,7 +1949,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5101" title="Go to source code"><var>$m_thumbHeight</var></a>
+				<a href="source-class-sfSettings.html#26" title="Go to source code"><var>$m_thumbHeight</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1974,7 +1972,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5102" title="Go to source code"><var>$m_maxImageWidth</var></a>
+				<a href="source-class-sfSettings.html#27" title="Go to source code"><var>$m_maxImageWidth</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1997,7 +1995,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5103" title="Go to source code"><var>$m_imageExtList</var></a>
+				<a href="source-class-sfSettings.html#28" title="Go to source code"><var>$m_imageExtList</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2020,7 +2018,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5104" title="Go to source code"><var>$m_imageTypesList</var></a>
+				<a href="source-class-sfSettings.html#29" title="Go to source code"><var>$m_imageTypesList</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2043,7 +2041,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5105" title="Go to source code"><var>$m_snowflakesResultUrl</var></a>
+				<a href="source-class-sfSettings.html#30" title="Go to source code"><var>$m_snowflakesResultUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2066,7 +2064,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5106" title="Go to source code"><var>$m_snowflakesOutUrl</var></a>
+				<a href="source-class-sfSettings.html#31" title="Go to source code"><var>$m_snowflakesOutUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2089,7 +2087,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5107" title="Go to source code"><var>$m_eventsResultUrl</var></a>
+				<a href="source-class-sfSettings.html#32" title="Go to source code"><var>$m_eventsResultUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2112,7 +2110,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5108" title="Go to source code"><var>$m_eventsOutputUrl</var></a>
+				<a href="source-class-sfSettings.html#33" title="Go to source code"><var>$m_eventsOutputUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2135,7 +2133,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5109" title="Go to source code"><var>$m_galleryResultUrl</var></a>
+				<a href="source-class-sfSettings.html#34" title="Go to source code"><var>$m_galleryResultUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2158,7 +2156,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5110" title="Go to source code"><var>$m_galleryOutUrl</var></a>
+				<a href="source-class-sfSettings.html#35" title="Go to source code"><var>$m_galleryOutUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2181,7 +2179,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5111" title="Go to source code"><var>$m_maxImageSize</var></a>
+				<a href="source-class-sfSettings.html#36" title="Go to source code"><var>$m_maxImageSize</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2204,7 +2202,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5113" title="Go to source code"><var>$m_logdir</var></a>
+				<a href="source-class-sfSettings.html#38" title="Go to source code"><var>$m_logdir</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2227,7 +2225,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5114" title="Go to source code"><var>$m_path</var></a>
+				<a href="source-class-sfSettings.html#39" title="Go to source code"><var>$m_path</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2250,7 +2248,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5115" title="Go to source code"><var>$m_resources</var></a>
+				<a href="source-class-sfSettings.html#40" title="Go to source code"><var>$m_resources</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2273,7 +2271,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5116" title="Go to source code"><var>$m_uploadGalleryDir</var></a>
+				<a href="source-class-sfSettings.html#41" title="Go to source code"><var>$m_uploadGalleryDir</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2296,7 +2294,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5117" title="Go to source code"><var>$m_galleryImgDir</var></a>
+				<a href="source-class-sfSettings.html#42" title="Go to source code"><var>$m_galleryImgDir</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2319,7 +2317,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5118" title="Go to source code"><var>$m_galleryThumbDir</var></a>
+				<a href="source-class-sfSettings.html#43" title="Go to source code"><var>$m_galleryThumbDir</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -2342,7 +2340,7 @@ configuration file</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-settingsStruct.html#5119" title="Go to source code"><var>$m_settingsarray</var></a>
+				<a href="source-class-sfSettings.html#44" title="Go to source code"><var>$m_settingsarray</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>

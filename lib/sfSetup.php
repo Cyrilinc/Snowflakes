@@ -8,6 +8,7 @@
  */
 require_once '../lib/sf.php';
 require_once '../lib/sfConnect.php';
+require_once '../lib/sfSettings.php';
 require_once '../config/Config.php';
 
 class snowflakesSetUp
@@ -101,7 +102,7 @@ class snowflakesSetUp
             $this->m_encrypt = 'N';
         }
 
-        $settingsStruct = new settingsStruct();
+        $settingsStruct = new sfSettings();
         $settingsStruct->init($inifile);
         $settingsStruct->SethostName($this->m_hostName);
         $settingsStruct->SetdbName($this->m_dbName);

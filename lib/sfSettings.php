@@ -75,9 +75,9 @@ class sfSettings
     }
 
     /**
-     * Populate each member of {@link settingsStruct} given the input parameters
+     * Populate each member of {@link sfSettings} given the input parameters
      *
-     * @param array $array to be used to populate members of {@link settingsStruct}
+     * @param array $array to be used to populate members of {@link sfSettings}
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */

@@ -7,7 +7,7 @@
 	<title>Class userStruct | Snowflakes</title>
 
 	<script type="text/javascript" src="resources/combined.js?774890837"></script>
-	<script type="text/javascript" src="elementlist.js?4233389632"></script>
+	<script type="text/javascript" src="elementlist.js?328919904"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -39,11 +39,11 @@
 				<li><a href="class-dataDirParam.html">dataDirParam</a></li>
 				<li><a href="class-eventStruct.html">eventStruct</a></li>
 				<li><a href="class-galleryStruct.html">galleryStruct</a></li>
-				<li><a href="class-settingsStruct.html">settingsStruct</a></li>
 				<li><a href="class-sfConnect.html">sfConnect</a></li>
 				<li><a href="class-sfGalleryImage.html">sfGalleryImage</a></li>
 				<li><a href="class-sfImageProcessor.html">sfImageProcessor</a></li>
 				<li><a href="class-sfLogError.html">sfLogError</a></li>
+				<li><a href="class-sfSettings.html">sfSettings</a></li>
 				<li><a href="class-sfUtils.html">sfUtils</a></li>
 				<li><a href="class-snowflakesSetUp.html">snowflakesSetUp</a></li>
 				<li><a href="class-snowflakeStruct.html">snowflakeStruct</a></li>
@@ -139,7 +139,7 @@ supports the snowflake flakes it.</p>
 
 				<b>Author:</b>
 				Cyril Adelekan<br />
-		<b>Located at</b> <a href="source-class-userStruct.html#466-980" title="Go to source code">lib/sf.php</a><br />
+		<b>Located at</b> <a href="source-class-userStruct.html#466-990" title="Go to source code">lib/sf.php</a><br />
 	</div>
 
 
@@ -511,19 +511,19 @@ link,</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loginUser">#</a>
-		<code><a href="source-class-userStruct.html#702-726" title="Go to source code">loginUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$username</var></span>, <span>String <var>$password</var></span> )</code>
+		<code><a href="source-class-userStruct.html#702-736" title="Go to source code">loginUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$usernameOrEmail</var></span>, <span>String <var>$password</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Get all the values of all members of <code><a href="class-userStruct.html">userStruct</a></code> given the user name
-and passoword,</p>
+<p>Get all the values of all members of <code><a href="class-userStruct.html">userStruct</a></code> given the user
+name/Email and passoword,</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Get all the values of all members of <code><a href="class-userStruct.html">userStruct</a></code> given the user name
-and passoword,</p>
+<p>Get all the values of all members of <code><a href="class-userStruct.html">userStruct</a></code> given the user
+name/Email and passoword,</p>
 
 
 
@@ -531,8 +531,8 @@ and passoword,</p>
 				<div class="list"><dl>
 					<dt><var>$conn</var></dt>
 					<dd><code><code><a href="class-sfConnect.html">sfConnect</a></code></code><br>$conn <code><a href="class-sfConnect.html">sfConnect</a></code> used for database connections</dd>
-					<dt><var>$username</var></dt>
-					<dd><code>String</code><br>$username <code><a href="class-userStruct.html">userStruct</a></code> the username value of the user record</dd>
+					<dt><var>$usernameOrEmail</var></dt>
+					<dd><code>String</code><br>$usernameOrEmail <code><a href="class-userStruct.html">userStruct</a></code> the username value of the user record</dd>
 					<dt><var>$password</var></dt>
 					<dd><code>String</code><br>$password <code><a href="class-userStruct.html">userStruct</a></code> the password value of the user record</dd>
 				</dl></div>
@@ -559,7 +559,7 @@ and passoword,</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_AddUser">#</a>
-		<code><a href="source-class-userStruct.html#728-755" title="Go to source code">AddUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
+		<code><a href="source-class-userStruct.html#738-765" title="Go to source code">AddUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -603,7 +603,7 @@ provided that all the mandatory members of <code><a href="class-userStruct.html"
 
 		<td class="name"><div>
 		<a class="anchor" href="#_UpdateUser">#</a>
-		<code><a href="source-class-userStruct.html#757-783" title="Go to source code">UpdateUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
+		<code><a href="source-class-userStruct.html#767-793" title="Go to source code">UpdateUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -647,7 +647,7 @@ provided that all the mandatory members of <code><a href="class-userStruct.html"
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteUser">#</a>
-		<code><a href="source-class-userStruct.html#785-821" title="Go to source code">deleteUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>boolean <var>$setDelete</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-userStruct.html#795-831" title="Go to source code">deleteUser</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>boolean <var>$setDelete</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -694,7 +694,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_userExits">#</a>
-		<code><a href="source-class-userStruct.html#823-845" title="Go to source code">userExits</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$username</var></span> )</code>
+		<code><a href="source-class-userStruct.html#833-855" title="Go to source code">userExits</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$username</var></span> )</code>
 
 		<div class="description short">
 			
@@ -738,7 +738,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserID">#</a>
-		<code><a href="source-class-userStruct.html#847-890" title="Go to source code">getUserID</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
+		<code><a href="source-class-userStruct.html#857-900" title="Go to source code">getUserID</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -780,7 +780,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_printuser">#</a>
-		<code><a href="source-class-userStruct.html#892-914" title="Go to source code">printuser</a>( )</code>
+		<code><a href="source-class-userStruct.html#902-924" title="Go to source code">printuser</a>( )</code>
 
 		<div class="description short">
 			
@@ -817,7 +817,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toArray">#</a>
-		<code><a href="source-class-userStruct.html#916-940" title="Go to source code">toArray</a>( )</code>
+		<code><a href="source-class-userStruct.html#926-950" title="Go to source code">toArray</a>( )</code>
 
 		<div class="description short">
 			
@@ -854,7 +854,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toJson">#</a>
-		<code><a href="source-class-userStruct.html#942-951" title="Go to source code">toJson</a>( )</code>
+		<code><a href="source-class-userStruct.html#952-961" title="Go to source code">toJson</a>( )</code>
 
 		<div class="description short">
 			
@@ -891,7 +891,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toXml">#</a>
-		<code><a href="source-class-userStruct.html#953-978" title="Go to source code">toXml</a>( )</code>
+		<code><a href="source-class-userStruct.html#963-988" title="Go to source code">toXml</a>( )</code>
 
 		<div class="description short">
 			

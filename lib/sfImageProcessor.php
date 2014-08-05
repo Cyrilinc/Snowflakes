@@ -5,8 +5,9 @@
  *
  * @author Cyril Adelekan
  */
-//require_once 'sf.php';
-//require_once 'config/Config.php';
+require_once 'sf.php';
+require_once 'sfSettings.php';
+require_once 'config/Config.php';
 ///////// Image Session start AND GLOBAL variables
 //initialize the session
 if (!isset($_SESSION))
@@ -78,7 +79,7 @@ class sfGalleryImage
      */
     public function __construct($inifile = '../config/config.ini', $forGallery = true)
     {
-        $siteSettings = new settingsStruct($inifile);
+        $siteSettings = new sfSettings($inifile);
         $datadir = new dataDirParam($inifile);
         $this->m_UploadImgDir = $datadir->m_galleryImgDir;
         $this->m_UploadThumbDir = $datadir->m_galleryThumbDir;
@@ -717,9 +718,6 @@ class sfImageProcessor
             }
 
             $imageLoc = $sfimage->m_TargetFileName;
-            //$message.= $i."   |Name = ".$FileName."| Temp Name = " .$FileTmpName."| File Size = ".formatSizeUnits($FileSize)."| File Type = ".$FileType;// DEBUG
-            //$message.= "| Base Name = ".$FileBaseName."| File Extension = ".$FileExtension." AND Max Size =".  formatSizeUnits($sfimage->m_MaxSize)."<br />";// DEBUG
-            //$message.  $sfimage->m_Message."<br>";
             switch ($sfimage->m_errorCode)
             {
                 case 0:
@@ -729,12 +727,16 @@ class sfImageProcessor
                     $failureCount++;
                     break;
             }
-            $message.= $sfimage->m_Message;
-
-            $message.=sfUtils::sfPromptMessage('<strong>[' . $successCount . ']</strong> Successful.', 'success');
+           
             if ($failureCount > 0)
             {
-                $message.=sfUtils::sfPromptMessage('<strong>[' . $failureCount . ']</strong> Unsuccessful', 'error');
+                $message.= $sfimage->m_Message;
+                $message.=sfUtils::sfPromptMessage('<strong>Unsuccessful.</strong> ', 'error');
+            }else
+            {
+                $siteSettings = new sfSettings($inifile);
+                $message .= sfUtils::sfPromptMessage('<div class="imageSuccess"><img src="'.$siteSettings->m_sfGalleryUrl.$imageLoc.'" alt="Uploaded Image"></div>', 'success');
+            
             }
         }
         else
@@ -917,7 +919,7 @@ class sfImageProcessor
         }
 
         //The upload directory
-        $siteSettings = new settingsStruct($inifile);
+        $siteSettings = new sfSettings($inifile);
         $datadir = new dataDirParam($inifile);
         //The upload Image directory
         $UploadImgDir = $datadir->m_galleryImgDir;

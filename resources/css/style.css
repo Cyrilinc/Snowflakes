@@ -2313,6 +2313,17 @@ table.responsive-table{
     float: right;
     padding: 0.1em;
 }
+.imageSuccess
+{
+    width: 50%;
+    height: auto;
+}
+.imageSuccess img
+{
+    width: 100%;
+    height: auto;
+}
+
 // Upload style
 .uploadContainer{
     min-width: 350px;

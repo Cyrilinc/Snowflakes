@@ -700,22 +700,32 @@ class userStruct
     }
 
     /**
-     * Get all the values of all members of {@link userStruct} given the user name and passoword,
+     * Get all the values of all members of {@link userStruct} given the user name/Email and passoword,
      *
      * @param sfConnect $conn {@link sfConnect} used for database connections
-     * @param String $username {@link userStruct} the username value of the user record
+     * @param String $usernameOrEmail {@link userStruct} the username value of the user record
      * @param String $password {@link userStruct} the password value of the user record
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function loginUser($conn, $username, $password)
+    public function loginUser($conn, $usernameOrEmail, $password)
     {
-        if (!$conn || !$username || !$password)
+        if (!$conn || !$usernameOrEmail || !$password)
         {
             return false;
         }
+  
+        $sql = "SELECT * FROM snowflakes_users WHERE ";
+        if (strpos($usernameOrEmail, "@"))
+        {
+            $sql.="email='" . $usernameOrEmail . "'";
+        }
+        else
+        {
+            $sql.="username='" . $usernameOrEmail . "'";
+        }
 
-        $sql = "SELECT * FROM snowflakes_users WHERE username='" . $username . "' AND password='" . $password . "';";
+        $sql.=" AND password='" . $password . "';";
         $conn->fetch($sql, false);
         $result = $conn->getResultArray();
         if (empty($result))
