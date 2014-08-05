@@ -5,9 +5,9 @@
  *
  * @author Cyril Adelekan
  */
-require_once 'sf.php';
-require_once 'sfSettings.php';
-require_once 'config/Config.php';
+//require_once 'sf.php';
+//require_once 'sfSettings.php';
+//require_once 'config/Config.php';
 ///////// Image Session start AND GLOBAL variables
 //initialize the session
 if (!isset($_SESSION))
