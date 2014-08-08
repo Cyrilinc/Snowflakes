@@ -9,6 +9,7 @@ require_once '../lib/sfImageProcessor.php';
 //initialize the session
 if (!isset($_SESSION))
 {
+    session_name("Snowflakes");
     session_start();
 }
 $php_self = sfUtils::getFilterServer( 'PHP_SELF');
@@ -40,10 +41,6 @@ if ((isset($doLogout)) && ($doLogout == "true"))
 }
 ?>
 <?php
-if (!isset($_SESSION))
-{
-    session_start();
-}
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 

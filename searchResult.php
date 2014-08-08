@@ -13,6 +13,7 @@ $imageMissing = $sfGalleryThumbUrl . "missing_default.png";
 
 //initialize the session
 if (!isset($_SESSION)) {
+    session_name("Snowflakes");
     session_start();
 }
 $php_self = sfUtils::getFilterServer( 'PHP_SELF');
@@ -41,9 +42,6 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
     }
 }
 
-if (!isset($_SESSION)) {
-    session_start();
-}
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 $MM_restrictGoTo = "login.php";

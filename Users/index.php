@@ -7,6 +7,7 @@ require_once '../lib/sfSettings.php';
 //initialize the session
 if (!isset($_SESSION))
 {
+    session_name("Snowflakes");
     session_start();
 }
 $php_self = sfUtils::getFilterServer( 'PHP_SELF');
@@ -40,10 +41,6 @@ $UploadThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
 $imageMissing = $UploadThumbUrl . "missing_default.png";
 ?>
 <?php
-if (!isset($_SESSION))
-{
-    session_start();
-}
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 $MM_restrictGoTo = "../login.php";

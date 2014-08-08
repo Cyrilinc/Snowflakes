@@ -7,6 +7,7 @@ require_once 'lib/sfSettings.php';
 //initialize the session
 if (!isset($_SESSION))
 {
+    session_name("Snowflakes");
     session_start();
 }
 $php_self = sfUtils::getFilterServer('PHP_SELF');

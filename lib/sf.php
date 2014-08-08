@@ -1998,8 +1998,10 @@ final class sfUtils
 
     /**
      * Snowflakes utilities configuration initialisation.
+     * 
+     * @param String $sessionName The session name to  be set, must not contain digits
      */
-    public function init()
+    public function init($sessionName)
     {
         // error reporting - all errors for development (ensure you have display_errors = On in your php.ini file)
         error_reporting(E_ALL | E_STRICT);
@@ -2007,6 +2009,7 @@ final class sfUtils
         // session
         if (!isset($_SESSION))
         {
+            session_name($sessionName);
             session_start();
         }
     }
@@ -4924,7 +4927,7 @@ final class sfUtils
      * 
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    function emailValidation($email)
+    public static function emailValidation($email)
     {
         if (!$email)
         {

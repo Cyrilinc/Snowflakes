@@ -12,6 +12,7 @@
 //initialize the session
 if (!isset($_SESSION))
 {
+    session_name("Snowflakes");
     session_start();
 } //Do not remove this
 //only assign a new timestamps if the session variable is empty

@@ -6,6 +6,7 @@ header("Cache-Control:no-cache"); // recommended to prevent caching of event dat
 //initialize the session
 if (!isset($_SESSION))
 {
+    session_name("Snowflakes");
     session_start();
 }
 

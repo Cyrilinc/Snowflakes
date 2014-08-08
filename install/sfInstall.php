@@ -14,6 +14,7 @@ require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
 require_once '../lib/sfSetup.php';
 //start the session
+session_name("Snowflakes");
 session_start();
 //set the return URL
 $MM_setup = filter_input(INPUT_POST, 'MM_setup');

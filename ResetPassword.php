@@ -6,6 +6,7 @@ require_once 'config/Config.php';
 // *** Validate request to login to this site.
 if (!isset($_SESSION))
 {
+    session_name("Snowflakes");
     session_start();
 }
 $php_self = sfUtils::getFilterServer('PHP_SELF');

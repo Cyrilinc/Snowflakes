@@ -9,6 +9,7 @@ require_once 'lib/sfImageProcessor.php';
 <?php
 //initialize the session
 if (!isset($_SESSION)) {
+    session_name("Snowflakes");
     session_start();
 }
 $php_self = sfUtils::getFilterServer( 'PHP_SELF');
@@ -51,9 +52,6 @@ if (empty($_FILES["uploadImage"]["name"])) {
 ?>
 
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-}
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 

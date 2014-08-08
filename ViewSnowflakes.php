@@ -6,6 +6,7 @@ require_once 'lib/sfSettings.php';
 
 //initialize the session
 if (!isset($_SESSION)) {
+    session_name("Snowflakes");
     session_start();
 }
 
@@ -36,9 +37,6 @@ if ((isset($doLogout)) && ($doLogout == "true")) {
 }
 ?>
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-}
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 

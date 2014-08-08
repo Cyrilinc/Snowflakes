@@ -6,6 +6,7 @@
  * Date: Thur, Dec 26 2013 11:33:31 -1100 
  */
 // Start session.
+session_name("Snowflakes");
 session_start();
 
 // Set a key, checked in mailer, prevents against spammers trying to hijack the mailer.

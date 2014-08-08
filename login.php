@@ -24,6 +24,7 @@ if (!sfUtils::settimezone($config->m_time_zone)) {
 <?php
 // *** Validate request to login to this site.
 if (!isset($_SESSION)) {
+    session_name("Snowflakes");
     session_start();
 }
 $php_self = sfUtils::getFilterServer( 'PHP_SELF');
@@ -205,8 +206,8 @@ if (isset($post_username)) {
                         ?>
                         <form action="<?php echo $loginFormAction; ?>" method="POST" class="loginform" id="loginform">
                             <span id="sprytUserName">
-                                <span class="textfieldRequiredMsg">Your Username is required.<br /></span>
-                                <input id="username" name="username" type="text" value="" placeholder="Username" class="inputtext2" />
+                                <span class="textfieldRequiredMsg">Your Username or Email is required.<br /></span>
+                                <input id="username" name="username" type="text" value="" placeholder="Username or Email" class="inputtext2" />
                             </span><br />
                             <span id="sprypassword">
                                 <span class="passwordRequiredMsg">Your Password is required.<br /></span>
