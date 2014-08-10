@@ -1995,13 +1995,13 @@ final class sfUtils
     {
         $this->init();
     }
-
+    
     /**
      * Snowflakes utilities configuration initialisation.
      * 
      * @param String $sessionName The session name to  be set, must not contain digits
      */
-    public function init($sessionName)
+    public function init($sessionName = 'Snowflakes')
     {
         // error reporting - all errors for development (ensure you have display_errors = On in your php.ini file)
         error_reporting(E_ALL | E_STRICT);
@@ -2009,9 +2009,34 @@ final class sfUtils
         // session
         if (!isset($_SESSION))
         {
-            session_name($sessionName);
-            session_start();
+            self::snowflakesSessionStart($sessionName);
         }
+    }
+    
+    /**
+     * Snowflakes utilities session initialisation.
+     * 
+     * @param String $sessionName The session name to  be set, must not contain 
+     * digits, used to Set a custom session name
+     */
+    public static function snowflakesSessionStart($sessionName = 'Snowflakes')
+    {
+        $secure = true;
+        // This stops JavaScript being able to access the session id.
+        $httponly = true;
+        // Forces sessions to only use cookies.
+        if (ini_set('session.use_only_cookies', 1) === FALSE)
+        {
+            $formmessage = self::sfPromptMessage("Snowflakes Could not initiate a safe session (ini_set).", 'error');
+            return $formmessage;
+        }
+        // Gets current cookies params.
+        $cookieParams = session_get_cookie_params();
+        session_set_cookie_params($cookieParams["lifetime"], $cookieParams["path"], $cookieParams["domain"], $secure, $httponly);
+        // Sets the session name to the one set above.
+        session_name($sessionName);
+        session_start();            // Start the PHP session 
+        session_regenerate_id();    // regenerated the session, delete the old one. 
     }
 
     /**
