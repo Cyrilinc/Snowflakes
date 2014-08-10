@@ -116,7 +116,7 @@ and data in snowflakes API .</p>
 
 				<b>Author:</b>
 				Cyril Adelekan<br />
-		<b>Located at</b> <a href="source-class-sfUtils.html#1977-4948" title="Go to source code">lib/sf.php</a><br />
+		<b>Located at</b> <a href="source-class-sfUtils.html#1977-4973" title="Go to source code">lib/sf.php</a><br />
 	</div>
 
 
@@ -134,7 +134,7 @@ and data in snowflakes API .</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_init">#</a>
-		<code><a href="source-class-sfUtils.html#1999-2015" title="Go to source code">init</a>( <span>String <var>$sessionName</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#1999-2014" title="Go to source code">init</a>( <span>String <var>$sessionName</var> = <span class="php-quote">'Snowflakes'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -161,6 +161,45 @@ and data in snowflakes API .</p>
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="snowflakesSessionStart" id="_snowflakesSessionStart">
+
+		<td class="attributes"><code>
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_snowflakesSessionStart">#</a>
+		<code><a href="source-class-sfUtils.html#2016-2040" title="Go to source code">snowflakesSessionStart</a>( <span>String <var>$sessionName</var> = <span class="php-quote">'Snowflakes'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Snowflakes utilities session initialisation.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Snowflakes utilities session initialisation.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sessionName</var></dt>
+					<dd><code>String</code><br>$sessionName The session name to be set, must not contain digits, used to Set a
+custom session name</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="handleException" id="_handleException">
 
 		<td class="attributes"><code>
@@ -172,7 +211,7 @@ and data in snowflakes API .</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_handleException">#</a>
-		<code><a href="source-class-sfUtils.html#2017-2036" title="Go to source code">handleException</a>( <span><code><a href="class-Exception.html">Exception</a></code> <var>$ex</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2042-2061" title="Go to source code">handleException</a>( <span><code><a href="class-Exception.html">Exception</a></code> <var>$ex</var></span> )</code>
 
 		<div class="description short">
 			
@@ -210,7 +249,7 @@ and data in snowflakes API .</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createLink">#</a>
-		<code><a href="source-class-sfUtils.html#2038-2053" title="Go to source code">createLink</a>( <span>String <var>$page</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-sfUtils.html#2063-2078" title="Go to source code">createLink</a>( <span>String <var>$page</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -254,7 +293,7 @@ and data in snowflakes API .</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_formatDate">#</a>
-		<code><a href="source-class-sfUtils.html#2055-2069" title="Go to source code">formatDate</a>( <span><code><a href="class-DateTime.html">DateTime</a></code> <var>$date</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#2080-2094" title="Go to source code">formatDate</a>( <span><code><a href="class-DateTime.html">DateTime</a></code> <var>$date</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -296,7 +335,7 @@ and data in snowflakes API .</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_formatDateTime">#</a>
-		<code><a href="source-class-sfUtils.html#2071-2085" title="Go to source code">formatDateTime</a>( <span><code><a href="class-DateTime.html">DateTime</a></code> <var>$date</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#2096-2110" title="Go to source code">formatDateTime</a>( <span><code><a href="class-DateTime.html">DateTime</a></code> <var>$date</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -338,7 +377,7 @@ and data in snowflakes API .</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_redirect">#</a>
-		<code><a href="source-class-sfUtils.html#2087-2097" title="Go to source code">redirect</a>( <span>type <var>$page</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-sfUtils.html#2112-2122" title="Go to source code">redirect</a>( <span>type <var>$page</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -378,7 +417,7 @@ and data in snowflakes API .</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUrlParam">#</a>
-		<code><a href="source-class-sfUtils.html#2099-2112" title="Go to source code">getUrlParam</a>( <span>mixed <var>$name</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2124-2137" title="Go to source code">getUrlParam</a>( <span>mixed <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -419,7 +458,7 @@ and data in snowflakes API .</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_capitalize">#</a>
-		<code><a href="source-class-sfUtils.html#2114-2124" title="Go to source code">capitalize</a>( <span>String <var>$string</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2139-2149" title="Go to source code">capitalize</a>( <span>String <var>$string</var></span> )</code>
 
 		<div class="description short">
 			
@@ -461,7 +500,7 @@ and data in snowflakes API .</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_escape">#</a>
-		<code><a href="source-class-sfUtils.html#2126-2141" title="Go to source code">escape</a>( <span>String <var>$string</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2151-2166" title="Go to source code">escape</a>( <span>String <var>$string</var></span> )</code>
 
 		<div class="description short">
 			
@@ -503,7 +542,7 @@ and data in snowflakes API .</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_sfescape">#</a>
-		<code><a href="source-class-sfUtils.html#2143-2158" title="Go to source code">sfescape</a>( <span>String <var>$string</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2168-2183" title="Go to source code">sfescape</a>( <span>String <var>$string</var></span> )</code>
 
 		<div class="description short">
 			
@@ -545,7 +584,7 @@ and data in snowflakes API .</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getFilterServer">#</a>
-		<code><a href="source-class-sfUtils.html#2160-2187" title="Go to source code">getFilterServer</a>( <span>String <var>$serverVar</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2185-2212" title="Go to source code">getFilterServer</a>( <span>String <var>$serverVar</var></span> )</code>
 
 		<div class="description short">
 			
@@ -589,7 +628,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_curPageURL">#</a>
-		<code><a href="source-class-sfUtils.html#2189-2215" title="Go to source code">curPageURL</a>( )</code>
+		<code><a href="source-class-sfUtils.html#2214-2240" title="Go to source code">curPageURL</a>( )</code>
 
 		<div class="description short">
 			
@@ -626,7 +665,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isEmpty">#</a>
-		<code><a href="source-class-sfUtils.html#2217-2227" title="Go to source code">isEmpty</a>( <span>String <var>$data</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2242-2252" title="Go to source code">isEmpty</a>( <span>String <var>$data</var></span> )</code>
 
 		<div class="description short">
 			
@@ -668,7 +707,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_CreateDirectory">#</a>
-		<code><a href="source-class-sfUtils.html#2229-2256" title="Go to source code">CreateDirectory</a>( <span>String <var>$Dir</var></span>, <span>String <var>$permissions</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2254-2281" title="Go to source code">CreateDirectory</a>( <span>String <var>$Dir</var></span>, <span>String <var>$permissions</var></span> )</code>
 
 		<div class="description short">
 			
@@ -712,7 +751,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_formatSizeUnits">#</a>
-		<code><a href="source-class-sfUtils.html#2258-2293" title="Go to source code">formatSizeUnits</a>( <span>String <var>$bytes</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2283-2318" title="Go to source code">formatSizeUnits</a>( <span>String <var>$bytes</var></span> )</code>
 
 		<div class="description short">
 			
@@ -754,7 +793,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toByteSize">#</a>
-		<code><a href="source-class-sfUtils.html#2295-2320" title="Go to source code">toByteSize</a>( <span>String <var>$bytevalue</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2320-2345" title="Go to source code">toByteSize</a>( <span>String <var>$bytevalue</var></span> )</code>
 
 		<div class="description short">
 			
@@ -796,7 +835,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_removeElement">#</a>
-		<code><a href="source-class-sfUtils.html#2322-2339" title="Go to source code">removeElement</a>( <span>array <var>&amp; $array</var></span>, <span>String <var>$key</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2347-2364" title="Go to source code">removeElement</a>( <span>array <var>&amp; $array</var></span>, <span>String <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -840,7 +879,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Deletefile">#</a>
-		<code><a href="source-class-sfUtils.html#2341-2369" title="Go to source code">Deletefile</a>( <span>String <var>$file</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2366-2394" title="Go to source code">Deletefile</a>( <span>String <var>$file</var></span> )</code>
 
 		<div class="description short">
 			
@@ -882,7 +921,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_UserLevelName">#</a>
-		<code><a href="source-class-sfUtils.html#2371-2403" title="Go to source code">UserLevelName</a>( <span>integer <var>$number</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2396-2428" title="Go to source code">UserLevelName</a>( <span>integer <var>$number</var></span> )</code>
 
 		<div class="description short">
 			
@@ -924,7 +963,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_todaysDate">#</a>
-		<code><a href="source-class-sfUtils.html#2405-2413" title="Go to source code">todaysDate</a>( )</code>
+		<code><a href="source-class-sfUtils.html#2430-2438" title="Go to source code">todaysDate</a>( )</code>
 
 		<div class="description short">
 			
@@ -961,7 +1000,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_TodaysDate7">#</a>
-		<code><a href="source-class-sfUtils.html#2415-2423" title="Go to source code">TodaysDate7</a>( )</code>
+		<code><a href="source-class-sfUtils.html#2440-2448" title="Go to source code">TodaysDate7</a>( )</code>
 
 		<div class="description short">
 			
@@ -998,7 +1037,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_maxDays">#</a>
-		<code><a href="source-class-sfUtils.html#2425-2433" title="Go to source code">maxDays</a>( )</code>
+		<code><a href="source-class-sfUtils.html#2450-2458" title="Go to source code">maxDays</a>( )</code>
 
 		<div class="description short">
 			
@@ -1035,7 +1074,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_TodaysDateMonth">#</a>
-		<code><a href="source-class-sfUtils.html#2435-2443" title="Go to source code">TodaysDateMonth</a>( )</code>
+		<code><a href="source-class-sfUtils.html#2460-2468" title="Go to source code">TodaysDateMonth</a>( )</code>
 
 		<div class="description short">
 			
@@ -1072,7 +1111,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_TodayDateThreeMonths">#</a>
-		<code><a href="source-class-sfUtils.html#2445-2453" title="Go to source code">TodayDateThreeMonths</a>( )</code>
+		<code><a href="source-class-sfUtils.html#2470-2478" title="Go to source code">TodayDateThreeMonths</a>( )</code>
 
 		<div class="description short">
 			
@@ -1109,7 +1148,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_TodayDateSixMonths">#</a>
-		<code><a href="source-class-sfUtils.html#2455-2463" title="Go to source code">TodayDateSixMonths</a>( )</code>
+		<code><a href="source-class-sfUtils.html#2480-2488" title="Go to source code">TodayDateSixMonths</a>( )</code>
 
 		<div class="description short">
 			
@@ -1146,7 +1185,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isAuthorized">#</a>
-		<code><a href="source-class-sfUtils.html#2465-2501" title="Go to source code">isAuthorized</a>( <span>mixed <var>$strUsers</var></span>, <span>mixed <var>$strGroups</var></span>, <span>mixed <var>$UserName</var></span>, <span>mixed <var>$UserGroup</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2490-2526" title="Go to source code">isAuthorized</a>( <span>mixed <var>$strUsers</var></span>, <span>mixed <var>$strGroups</var></span>, <span>mixed <var>$UserName</var></span>, <span>mixed <var>$UserGroup</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1183,7 +1222,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_UUID">#</a>
-		<code><a href="source-class-sfUtils.html#2503-2525" title="Go to source code">UUID</a>( )</code>
+		<code><a href="source-class-sfUtils.html#2528-2550" title="Go to source code">UUID</a>( )</code>
 
 		<div class="description short">
 			
@@ -1220,7 +1259,7 @@ filter_* functions with INPUT_SERVER, this function is necessary</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_GetSQLValueString">#</a>
-		<code><a href="source-class-sfUtils.html#2527-2555" title="Go to source code">GetSQLValueString</a>( <span>mixed <var>$theValue</var></span>, <span>mixed <var>$theType</var></span>, <span>mixed <var>$theDefinedValue</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>mixed <var>$theNotDefinedValue</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#2552-2580" title="Go to source code">GetSQLValueString</a>( <span>mixed <var>$theValue</var></span>, <span>mixed <var>$theType</var></span>, <span>mixed <var>$theDefinedValue</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>mixed <var>$theNotDefinedValue</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1259,7 +1298,7 @@ the value</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getClientIp">#</a>
-		<code><a href="source-class-sfUtils.html#2557-2594" title="Go to source code">getClientIp</a>( )</code>
+		<code><a href="source-class-sfUtils.html#2582-2619" title="Go to source code">getClientIp</a>( )</code>
 
 		<div class="description short">
 			
@@ -1296,7 +1335,7 @@ the value</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_validateFiterInput">#</a>
-		<code><a href="source-class-sfUtils.html#2596-2657" title="Go to source code">validateFiterInput</a>( <span>integer <var>$INPUT</var></span>, <span>String <var>$tag</var></span>, <span>integer <var>$FILTER_VALIDATE</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2621-2682" title="Go to source code">validateFiterInput</a>( <span>integer <var>$INPUT</var></span>, <span>String <var>$tag</var></span>, <span>integer <var>$FILTER_VALIDATE</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1350,7 +1389,7 @@ filters.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createSfLink">#</a>
-		<code><a href="source-class-sfUtils.html#2659-2698" title="Go to source code">createSfLink</a>( <span>String <var>$type</var></span>, <span>String <var>$id</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#2684-2723" title="Go to source code">createSfLink</a>( <span>String <var>$type</var></span>, <span>String <var>$id</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1412,7 +1451,7 @@ as a user' and the 'gallery' the activity log is referring to.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_sendSSEMsg">#</a>
-		<code><a href="source-class-sfUtils.html#2700-2726" title="Go to source code">sendSSEMsg</a>( <span>String <var>$id</var></span>, <span>String <var>$msg</var></span>, <span>integer <var>$retry</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#2725-2751" title="Go to source code">sendSSEMsg</a>( <span>String <var>$id</var></span>, <span>String <var>$msg</var></span>, <span>integer <var>$retry</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1454,7 +1493,7 @@ as a user' and the 'gallery' the activity log is referring to.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getActivities">#</a>
-		<code><a href="source-class-sfUtils.html#2728-2784" title="Go to source code">getActivities</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$userName</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>integer <var>$limitstart</var> = <span class="php-num">0</span></span>, <span>integer <var>$limitend</var> = <span class="php-num">10</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#2753-2809" title="Go to source code">getActivities</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$userName</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>integer <var>$limitstart</var> = <span class="php-num">0</span></span>, <span>integer <var>$limitend</var> = <span class="php-num">10</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1513,7 +1552,7 @@ gotten</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_searchString">#</a>
-		<code><a href="source-class-sfUtils.html#2786-2879" title="Go to source code">searchString</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$searchString</var></span>, <span>String <var>$filter</var> = <span class="php-quote">&quot;snowflakes&quot;</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#2811-2904" title="Go to source code">searchString</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$searchString</var></span>, <span>String <var>$filter</var> = <span class="php-quote">&quot;snowflakes&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1563,7 +1602,7 @@ gotten</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_userExits">#</a>
-		<code><a href="source-class-sfUtils.html#2881-2900" title="Go to source code">userExits</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$username</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2906-2925" title="Go to source code">userExits</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$username</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1607,7 +1646,7 @@ gotten</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_forgottenPassword">#</a>
-		<code><a href="source-class-sfUtils.html#2902-2939" title="Go to source code">forgottenPassword</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$email</var></span>, <span>String <var>$sender</var></span>, <span>String <var>$snowflakesUrl</var></span>, <span>String <var>$errmsg</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#2927-2964" title="Go to source code">forgottenPassword</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$email</var></span>, <span>String <var>$sender</var></span>, <span>String <var>$snowflakesUrl</var></span>, <span>String <var>$errmsg</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1659,7 +1698,7 @@ to reset the password by email</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_requestResetPassWord">#</a>
-		<code><a href="source-class-sfUtils.html#2941-3113" title="Go to source code">requestResetPassWord</a>( <span><code><a href="class-userStruct.html">userStruct</a></code> <var>$userStruct</var></span>, <span>String <var>$sender</var></span>, <span>String <var>$snowflakesUrl</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#2966-3138" title="Go to source code">requestResetPassWord</a>( <span><code><a href="class-userStruct.html">userStruct</a></code> <var>$userStruct</var></span>, <span>String <var>$sender</var></span>, <span>String <var>$snowflakesUrl</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1707,7 +1746,7 @@ user</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_resetPassword">#</a>
-		<code><a href="source-class-sfUtils.html#3115-3138" title="Go to source code">resetPassword</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$password</var></span>, <span>String <var>$oldResetLink</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3140-3163" title="Go to source code">resetPassword</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$password</var></span>, <span>String <var>$oldResetLink</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1754,7 +1793,7 @@ reset</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toAmPmTime">#</a>
-		<code><a href="source-class-sfUtils.html#3140-3151" title="Go to source code">toAmPmTime</a>( <span>String <var>$stringDate</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3165-3176" title="Go to source code">toAmPmTime</a>( <span>String <var>$stringDate</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1796,7 +1835,7 @@ reset</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_dateToSql">#</a>
-		<code><a href="source-class-sfUtils.html#3153-3164" title="Go to source code">dateToSql</a>( <span>String <var>$stringDate</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3178-3189" title="Go to source code">dateToSql</a>( <span>String <var>$stringDate</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1838,7 +1877,7 @@ reset</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_dateFromSql">#</a>
-		<code><a href="source-class-sfUtils.html#3166-3177" title="Go to source code">dateFromSql</a>( <span>String <var>$stringDate</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3191-3202" title="Go to source code">dateFromSql</a>( <span>String <var>$stringDate</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1880,7 +1919,7 @@ reset</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_tablenameFromType">#</a>
-		<code><a href="source-class-sfUtils.html#3179-3216" title="Go to source code">tablenameFromType</a>( <span>String <var>$type</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3204-3241" title="Go to source code">tablenameFromType</a>( <span>String <var>$type</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1922,7 +1961,7 @@ reset</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_manualFlakeitTrigger">#</a>
-		<code><a href="source-class-sfUtils.html#3218-3276" title="Go to source code">manualFlakeitTrigger</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>String <var>$type</var></span>, <span>String <var>$operation</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3243-3301" title="Go to source code">manualFlakeitTrigger</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>String <var>$type</var></span>, <span>String <var>$operation</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1973,7 +2012,7 @@ snowflake data base on its identifier</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_manualchangeLogTrigger">#</a>
-		<code><a href="source-class-sfUtils.html#3278-3375" title="Go to source code">manualchangeLogTrigger</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>String <var>$type</var></span>, <span>String <var>$operation</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3303-3400" title="Go to source code">manualchangeLogTrigger</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>String <var>$type</var></span>, <span>String <var>$operation</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2024,7 +2063,7 @@ snowflake data base on its identifier</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_checkTrigger">#</a>
-		<code><a href="source-class-sfUtils.html#3377-3425" title="Go to source code">checkTrigger</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>String <var>$type</var></span>, <span>String <var>$operation</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3402-3450" title="Go to source code">checkTrigger</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>String <var>$type</var></span>, <span>String <var>$operation</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2075,7 +2114,7 @@ snowflake data base on its identifier</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_flakeIt">#</a>
-		<code><a href="source-class-sfUtils.html#3427-3476" title="Go to source code">flakeIt</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>String <var>$type</var></span>, <span>boolean <var>$flakeit</var> = <span class="php-quote">&quot;true&quot;</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#3452-3501" title="Go to source code">flakeIt</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>String <var>$type</var></span>, <span>boolean <var>$flakeit</var> = <span class="php-quote">&quot;true&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -2125,7 +2164,7 @@ decrement the flake_it field of that data type</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addQuerystringVar">#</a>
-		<code><a href="source-class-sfUtils.html#3478-3499" title="Go to source code">addQuerystringVar</a>( <span>String <var>$url</var></span>, <span>String <var>$key</var></span>, <span>String <var>$value</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3503-3524" title="Go to source code">addQuerystringVar</a>( <span>String <var>$url</var></span>, <span>String <var>$key</var></span>, <span>String <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2171,7 +2210,7 @@ decrement the flake_it field of that data type</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_removeQuerystringVar">#</a>
-		<code><a href="source-class-sfUtils.html#3501-3516" title="Go to source code">removeQuerystringVar</a>( <span>String <var>$url</var></span>, <span>String <var>$key</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3526-3541" title="Go to source code">removeQuerystringVar</a>( <span>String <var>$url</var></span>, <span>String <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2216,7 +2255,7 @@ cyrilinc.co.uk?key=value&amp;key2=value2</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteGallery">#</a>
-		<code><a href="source-class-sfUtils.html#3518-3553" title="Go to source code">deleteGallery</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>boolean <var>$setDelete</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#3543-3578" title="Go to source code">deleteGallery</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>integer <var>$id</var></span>, <span>boolean <var>$setDelete</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -2265,7 +2304,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_encrypt">#</a>
-		<code><a href="source-class-sfUtils.html#3555-3580" title="Go to source code">encrypt</a>( <span>String <var>$pure_string</var></span>, <span>integer <var>$encryption_key</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3580-3605" title="Go to source code">encrypt</a>( <span>String <var>$pure_string</var></span>, <span>integer <var>$encryption_key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2309,7 +2348,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_decrypt">#</a>
-		<code><a href="source-class-sfUtils.html#3582-3600" title="Go to source code">decrypt</a>( <span>String <var>$encrypted_string</var></span>, <span>integer <var>$encryption_key</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3607-3625" title="Go to source code">decrypt</a>( <span>String <var>$encrypted_string</var></span>, <span>integer <var>$encryption_key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2353,7 +2392,7 @@ table or set the delete field</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setUserLoginOut">#</a>
-		<code><a href="source-class-sfUtils.html#3602-3625" title="Go to source code">setUserLoginOut</a>( <span>String <var>$userName</var></span>, <span>boolean <var>$value</var> = <span class="php-keyword1">false</span></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#3627-3650" title="Go to source code">setUserLoginOut</a>( <span>String <var>$userName</var></span>, <span>boolean <var>$value</var> = <span class="php-keyword1">false</span></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -2403,7 +2442,7 @@ in to the API or not</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_snowFlakeItCount">#</a>
-		<code><a href="source-class-sfUtils.html#3627-3660" title="Go to source code">snowFlakeItCount</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$userName</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#3652-3685" title="Go to source code">snowFlakeItCount</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$userName</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -2449,7 +2488,7 @@ the user selected</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_eventFlakeItCount">#</a>
-		<code><a href="source-class-sfUtils.html#3662-3695" title="Go to source code">eventFlakeItCount</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$userName</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#3687-3720" title="Go to source code">eventFlakeItCount</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$userName</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -2495,7 +2534,7 @@ user selected</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_galleryFlakeItCount">#</a>
-		<code><a href="source-class-sfUtils.html#3697-3730" title="Go to source code">galleryFlakeItCount</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$userName</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#3722-3755" title="Go to source code">galleryFlakeItCount</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$userName</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -2541,7 +2580,7 @@ user selected</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAllCounts">#</a>
-		<code><a href="source-class-sfUtils.html#3732-3852" title="Go to source code">getAllCounts</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$username</var> = <span class="php-quote">''</span></span>, <span>boolean <var>$showCompact</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#3757-3877" title="Go to source code">getAllCounts</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$username</var> = <span class="php-quote">''</span></span>, <span>boolean <var>$showCompact</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -2589,7 +2628,7 @@ selected</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_dialogMessage">#</a>
-		<code><a href="source-class-sfUtils.html#3854-3880" title="Go to source code">dialogMessage</a>( <span>String <var>$title</var></span>, <span>String <var>$message</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3879-3905" title="Go to source code">dialogMessage</a>( <span>String <var>$title</var></span>, <span>String <var>$message</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2633,7 +2672,7 @@ selected</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_sfPromptMessage">#</a>
-		<code><a href="source-class-sfUtils.html#3882-3906" title="Go to source code">sfPromptMessage</a>( <span>String <var>$message</var></span>, <span>String <var>$icon</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3907-3931" title="Go to source code">sfPromptMessage</a>( <span>String <var>$message</var></span>, <span>String <var>$icon</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2677,7 +2716,7 @@ selected</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getPublishStatus">#</a>
-		<code><a href="source-class-sfUtils.html#3908-3928" title="Go to source code">getPublishStatus</a>( <span>boolean <var>$publish</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3933-3953" title="Go to source code">getPublishStatus</a>( <span>boolean <var>$publish</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2719,7 +2758,7 @@ selected</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_migrate">#</a>
-		<code><a href="source-class-sfUtils.html#3930-4039" title="Go to source code">migrate</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$dbname</var></span>, <span>String <var>$adminUsername</var></span>, <span>String <var>&amp; $output</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#3955-4064" title="Go to source code">migrate</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>String <var>$dbname</var></span>, <span>String <var>$adminUsername</var></span>, <span>String <var>&amp; $output</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2769,7 +2808,7 @@ and copy the associated data (images) to the required folders</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_copyDirectoryList">#</a>
-		<code><a href="source-class-sfUtils.html#4041-4090" title="Go to source code">copyDirectoryList</a>( <span>String <var>$source</var></span>, <span>String <var>$dest</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#4066-4115" title="Go to source code">copyDirectoryList</a>( <span>String <var>$source</var></span>, <span>String <var>$dest</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2817,7 +2856,7 @@ directory</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_migrateUpdir">#</a>
-		<code><a href="source-class-sfUtils.html#4092-4116" title="Go to source code">migrateUpdir</a>( <span>String <var>$source</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#4117-4141" title="Go to source code">migrateUpdir</a>( <span>String <var>$source</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -2867,7 +2906,7 @@ directory although there shouldn't be any.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_xmldecoder">#</a>
-		<code><a href="source-class-sfUtils.html#4118-4144" title="Go to source code">xmldecoder</a>( <span>String <var>$xmltext</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#4143-4169" title="Go to source code">xmldecoder</a>( <span>String <var>$xmltext</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2911,7 +2950,7 @@ directory although there shouldn't be any.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_xmlencoder">#</a>
-		<code><a href="source-class-sfUtils.html#4146-4172" title="Go to source code">xmlencoder</a>( <span>String <var>$xmltext</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#4171-4197" title="Go to source code">xmlencoder</a>( <span>String <var>$xmltext</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2955,7 +2994,7 @@ directory although there shouldn't be any.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createSnowflakesRss">#</a>
-		<code><a href="source-class-sfUtils.html#4174-4229" title="Go to source code">createSnowflakesRss</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>array <var>$snowflakesList</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#4199-4254" title="Go to source code">createSnowflakesRss</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>array <var>$snowflakesList</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -3003,7 +3042,7 @@ directory although there shouldn't be any.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createEventRss">#</a>
-		<code><a href="source-class-sfUtils.html#4231-4291" title="Go to source code">createEventRss</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>array <var>$eventList</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#4256-4316" title="Go to source code">createEventRss</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>array <var>$eventList</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -3051,7 +3090,7 @@ directory although there shouldn't be any.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createGalleryRss">#</a>
-		<code><a href="source-class-sfUtils.html#4293-4353" title="Go to source code">createGalleryRss</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>array <var>$galleryList</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#4318-4378" title="Go to source code">createGalleryRss</a>( <span><code><a href="class-sfConnect.html">sfConnect</a></code> <var>$conn</var></span>, <span>array <var>$galleryList</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -3099,7 +3138,7 @@ directory although there shouldn't be any.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_startsWith">#</a>
-		<code><a href="source-class-sfUtils.html#4355-4366" title="Go to source code">startsWith</a>( <span>String <var>$haystack</var></span>, <span>array <var>$needle</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#4380-4391" title="Go to source code">startsWith</a>( <span>String <var>$haystack</var></span>, <span>array <var>$needle</var></span> )</code>
 
 		<div class="description short">
 			
@@ -3143,7 +3182,7 @@ directory although there shouldn't be any.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_endsWith">#</a>
-		<code><a href="source-class-sfUtils.html#4368-4379" title="Go to source code">endsWith</a>( <span>String <var>$haystack</var></span>, <span>array <var>$needle</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#4393-4404" title="Go to source code">endsWith</a>( <span>String <var>$haystack</var></span>, <span>array <var>$needle</var></span> )</code>
 
 		<div class="description short">
 			
@@ -3187,7 +3226,7 @@ directory although there shouldn't be any.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_viewLogFile">#</a>
-		<code><a href="source-class-sfUtils.html#4381-4446" title="Go to source code">viewLogFile</a>( <span>String <var>$filename</var></span>, <span>array <var>$Logtype</var> = <span class="php-quote">&quot;All&quot;</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#4406-4471" title="Go to source code">viewLogFile</a>( <span>String <var>$filename</var></span>, <span>array <var>$Logtype</var> = <span class="php-quote">&quot;All&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -3231,7 +3270,7 @@ directory although there shouldn't be any.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getfileList">#</a>
-		<code><a href="source-class-sfUtils.html#4448-4495" title="Go to source code">getfileList</a>( <span>String <var>$dir</var> = <span class="php-quote">&quot;../data/&quot;</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#4473-4520" title="Go to source code">getfileList</a>( <span>String <var>$dir</var> = <span class="php-quote">&quot;../data/&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -3275,7 +3314,7 @@ string</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getfileList2">#</a>
-		<code><a href="source-class-sfUtils.html#4497-4536" title="Go to source code">getfileList2</a>( <span>String <var>$dir</var> = <span class="php-quote">&quot;../data/&quot;</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#4522-4561" title="Go to source code">getfileList2</a>( <span>String <var>$dir</var> = <span class="php-quote">&quot;../data/&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -3319,7 +3358,7 @@ the directory</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_comapact99">#</a>
-		<code><a href="source-class-sfUtils.html#4538-4558" title="Go to source code">comapact99</a>( <span>String <var>$data</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#4563-4583" title="Go to source code">comapact99</a>( <span>String <var>$data</var></span> )</code>
 
 		<div class="description short">
 			
@@ -3363,7 +3402,7 @@ is</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getTimeZoneList">#</a>
-		<code><a href="source-class-sfUtils.html#4560-4664" title="Go to source code">getTimeZoneList</a>( )</code>
+		<code><a href="source-class-sfUtils.html#4585-4689" title="Go to source code">getTimeZoneList</a>( )</code>
 
 		<div class="description short">
 			
@@ -3402,7 +3441,7 @@ exists else return the hardcoded list of DateTimeZone</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_settimezone">#</a>
-		<code><a href="source-class-sfUtils.html#4666-4681" title="Go to source code">settimezone</a>( <span>String <var>$timezones</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#4691-4706" title="Go to source code">settimezone</a>( <span>String <var>$timezones</var></span> )</code>
 
 		<div class="description short">
 			
@@ -3444,7 +3483,7 @@ exists else return the hardcoded list of DateTimeZone</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getData">#</a>
-		<code><a href="source-class-sfUtils.html#4683-4704" title="Go to source code">getData</a>( <span>String <var>$url</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#4708-4729" title="Go to source code">getData</a>( <span>String <var>$url</var></span> )</code>
 
 		<div class="description short">
 			
@@ -3486,7 +3525,7 @@ exists else return the hardcoded list of DateTimeZone</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_memoryTickHandler">#</a>
-		<code><a href="source-class-sfUtils.html#4706-4729" title="Go to source code">memoryTickHandler</a>( )</code>
+		<code><a href="source-class-sfUtils.html#4731-4754" title="Go to source code">memoryTickHandler</a>( )</code>
 
 		<div class="description short">
 			
@@ -3525,7 +3564,7 @@ depending on the threshold set in this function</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getStatusMessage">#</a>
-		<code><a href="source-class-sfUtils.html#4731-4786" title="Go to source code">getStatusMessage</a>( <span>integer <var>$code</var> = <span class="php-num">500</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#4756-4811" title="Go to source code">getStatusMessage</a>( <span>integer <var>$code</var> = <span class="php-num">500</span></span> )</code>
 
 		<div class="description short">
 			
@@ -3569,7 +3608,7 @@ webservice API</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setHeaders">#</a>
-		<code><a href="source-class-sfUtils.html#4788-4814" title="Go to source code">setHeaders</a>( <span>integer <var>$code</var> = <span class="php-num">500</span></span>, <span>String <var>$content_type</var> = <span class="php-quote">&quot;html&quot;</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#4813-4839" title="Go to source code">setHeaders</a>( <span>integer <var>$code</var> = <span class="php-num">500</span></span>, <span>String <var>$content_type</var> = <span class="php-quote">&quot;html&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -3611,7 +3650,7 @@ type which might be in html,xml or json</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deliverResponseAndExit">#</a>
-		<code><a href="source-class-sfUtils.html#4816-4876" title="Go to source code">deliverResponseAndExit</a>( <span>mixed <var>$data</var></span>, <span>integer <var>$code</var></span>, <span>string <var>$content_type</var> = <span class="php-quote">'html'</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#4841-4901" title="Go to source code">deliverResponseAndExit</a>( <span>mixed <var>$data</var></span>, <span>integer <var>$code</var></span>, <span>string <var>$content_type</var> = <span class="php-quote">'html'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -3661,7 +3700,7 @@ specified</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_replaceSFHashes">#</a>
-		<code><a href="source-class-sfUtils.html#4878-4920" title="Go to source code">replaceSFHashes</a>( <span>String <var>&amp; $data</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>String <var>$shareURL</var> = <span class="php-quote">''</span></span> )</code>
+		<code><a href="source-class-sfUtils.html#4903-4945" title="Go to source code">replaceSFHashes</a>( <span>String <var>&amp; $data</var></span>, <span>String <var>$inifile</var> = <span class="php-quote">'../config/config.ini'</span></span>, <span>String <var>$shareURL</var> = <span class="php-quote">''</span></span> )</code>
 
 		<div class="description short">
 			
@@ -3715,7 +3754,7 @@ snowflakes, snowflake events or snowflake gallery</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_emailValidation">#</a>
-		<code><a href="source-class-sfUtils.html#4922-4946" title="Go to source code">emailValidation</a>( <span>String <var>$email</var></span> )</code>
+		<code><a href="source-class-sfUtils.html#4947-4971" title="Go to source code">emailValidation</a>( <span>String <var>$email</var></span> )</code>
 
 		<div class="description short">
 			
