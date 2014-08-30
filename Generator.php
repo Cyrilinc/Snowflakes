@@ -170,10 +170,10 @@ $ShareGallerysurl = str_replace("Generator.php", "Gallery/Out.php", $url);
                                         <li><a href="Gallery/OutputView.php" title="View output Gallery" class="green" id="SfGallery_published2" data-bubble="<?php echo sfUtils::comapact99($_SESSION['SfGallery']['published']); ?>"> <img src="resources/images/Icons/Output.png" height="22" width="22" alt="Output" /> View Output</a></li>
                                     </ul>
                                 </li>
-<?php
-if ($user->m_access_level == 5 || $user->m_access_level == 4)
-{
-    ?>
+                                <?php
+                                if ($user->m_access_level == 5 || $user->m_access_level == 4)
+                                {
+                                    ?>
                                     <li class="active" id="AtvNewButton">
                                         <a href="SiteSetting/index.php" title="Settings"> <img src="resources/images/Icons/Settings.png" height="22" width="22" alt="Settings" /> Settings </a>
                                         <ul>
@@ -191,9 +191,9 @@ if ($user->m_access_level == 5 || $user->m_access_level == 4)
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
                                     </li>
-    <?php
-}
-?>
+                                    <?php
+                                }
+                                ?>
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
@@ -241,11 +241,11 @@ if ($user->m_access_level == 5 || $user->m_access_level == 4)
                                 <p>This is Ideal for HTML files, first create a div with id called Snowflakes then add the code below inside the Head tag of the page you want to display your published snowflakes. This code is generated provided that you have installed snowflakes on your Hosting server and the location is uniquely generated to point directly to your snowflake output file.</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
-Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code
+Copy &amp; paste Id tag below to the body tag of your web page or optionally use the Php Code
 
 	&lt;div id=&quot;Snowflakes&quot;&gt; &lt;/div&gt;
 
-Copy &amp; paste the javascript below in Head tag of your webpage
+Copy &amp; paste the javascript below in Head tag of your web page
 
     &lt;script type=&quot;text/javascript&quot;&gt;
     
@@ -327,7 +327,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <h2>PHP code</h2>
                                 <p></p>
                                 <p>This is Ideal for Php files, first create a div with id called Snowflakes then add the code below inside the id tag you've just created on the page you want to display your published snowflakes.</p>
-                                <p>Copy &amp; paste Id tag in the body tag of your webpage</p>
+                                <p>Copy &amp; paste Id tag in the body tag of your web page</p>
                                 <pre class='code'>
 <a style="float:right"><span class="icon success"></span></a>
        &lt;div id=&quot;Snowflakes&quot;&gt;
@@ -337,14 +337,14 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <p></p>
                                 <h2>Custom Output </h2>
                                 <p></p>
-                                <p>If you wish to add snowflakes to a custom output or a result page that you have created yourself to view and share a single snowflake. Enter the url address of your result page in the settings page in snowflakes and save it. Then load the page with javascript or php as described above.  But change Out.php to OneView2.php?pageid= so that pageid will be queried automatically by snowflakes.  Thus</p>
+                                <p>If you wish to add snowflakes to a custom output or a result page that you have created yourself to view and share a single snowflake. Enter the url address of your result page in the settings page in snowflakes and save it. Then load the page with javascript or php as described above.  But change Out.php to OneViewOut.php?pageid= so that pageid will be queried automatically by snowflakes.  Thus</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
-Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code
+Copy &amp; paste Id tag below to the body tag of your web page or optionally use the Php Code
 
 	&lt;div id=&quot;Snowflakes&quot;&gt; &lt;/div&gt;
                                 </pre>
-                                <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
+                                <p>Copy &amp; paste the javascript below in Head tag of your web page</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
     &lt;script type=&quot;text/javascript&quot;&gt;
@@ -376,31 +376,30 @@ Copy &amp; paste Id tag below to the body tag of your webpage or optionally use 
 			
             function loadSnowflakes() {	
 			var QueryString =GetQuery();
-                $('#Snowflakes').load('<?php echo str_replace("Out.php", "OneView2.php?pageid=", $Shareurl); ?>'+QueryString.pageid);
+                $('#Snowflakes').load('<?php echo str_replace("Out.php", "OneViewOut.php?pageid=", $Shareurl); ?>'+QueryString.pageid);
             }
 		);
     &lt;/script&gt;
                                 </pre>
 
                                 <p>Because single custom result view page may contain snowflakes gallery, Add the CSS and javascript code in the Gallery section of this generator to display the gallery in snowflakes theme.</p>
-
-
+                                
                                 <h4>php</h4>
-                                <p>Copy &amp; paste Id tag in the body tag of your webpage </p>
+                                <p>Copy &amp; paste Id tag in the body tag of your web page </p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
            &lt;div id=&quot;Snowflakes&quot;&gt;
-                &lt;?php  include '<?php echo str_replace("Out.php", "OneView2.php?pageid=", $Shareurl); ?>filter_input(INPUT_GET, 'pageid')'; ?&gt;
+                &lt;?php  include '<?php echo str_replace("Out.php", "OneViewOut.php?pageid=", $Shareurl); ?>filter_input(INPUT_GET, 'pageid')'; ?&gt;
             &lt;/div&gt;
                                 </pre>
                                 <p> if you are loading snowflakes on a front page that requires minimum number of snowflakes in our case 3 summary snowflakes in the front page Change the Out.php to SummaryOut.php and then query for the maximum number of snowflakes to be any number you want making it "SummaryOut.php?MaxNumber=3" meaning that only 3 summary flakes will be shown. </p>
                                 <h4>Javascript</h4>
-                                <p>Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code </p>
+                                <p>Copy &amp; paste Id tag below to the body tag of your web page or optionally use the Php Code </p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;Snowflakes&quot;&gt; &lt;/div&gt;
                                 </pre>
-                                <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
+                                <p>Copy &amp; paste the javascript below in Head tag of your web page</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
     &lt;script type=&quot;text/javascript&quot;&gt;
@@ -412,7 +411,7 @@ Copy &amp; paste Id tag below to the body tag of your webpage or optionally use 
     &lt;/script&gt;
                                 </pre>
                                 <h4>php</h4>
-                                <p>Copy &amp; paste Id tag in the body tag of your webpage </p>
+                                <p>Copy &amp; paste Id tag in the body tag of your web page </p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
            &lt;div id=&quot;Snowflakes&quot;&gt;
@@ -427,11 +426,11 @@ Copy &amp; paste Id tag below to the body tag of your webpage or optionally use 
                                 <p></p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
-Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code
+Copy &amp; paste Id tag below to the body tag of your web page or optionally use the Php Code
 
 	&lt;div id=&quot;SFEvents&quot;&gt; &lt;/div&gt;
 
-Copy &amp; paste the javascript below in Head tag of your webpage
+Copy &amp; paste the javascript below in Head tag of your web page
 
     &lt;script type=&quot;text/javascript&quot;&gt;
     
@@ -509,7 +508,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <h2>PHP code</h2>
                                 <p></p>
                                 <p>This is Ideal for Php files, first create a div with id called <span class="code">SFEvents</span> then add the code below inside the id tag you've just created on the page you want to display your published Events.</p>
-                                <p>Copy &amp; paste Id tag in the body tag of your webpage</p>
+                                <p>Copy &amp; paste Id tag in the body tag of your web page</p>
                                 <pre class='code'>
 <a style="float:right"><span class="icon success"></span></a>
 	
@@ -522,12 +521,12 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <h2>Custom Output </h2>
                                 <p></p>
                                 <p>If you wish to add Events to a custom output or a result page that you have created yourself to view and share a single Event. Enter the url address of your result page in the settings page and save it. Then load the page with javascript or php as described above.  But change Out.php to OneView2.php?Eventid= so that Eventid will be queried automatically by snowflakes. Thus</p>
-                                <p>Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code </p>
+                                <p>Copy &amp; paste Id tag below to the body tag of your web page or optionally use the Php Code </p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;SFEvents&quot;&gt; &lt;/div&gt;
                                 </pre>
-                                <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
+                                <p>Copy &amp; paste the javascript below in Head tag of your web page</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
     &lt;script type=&quot;text/javascript&quot;&gt;
@@ -566,7 +565,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
     &lt;/script&gt;
                                 </pre>
                                 <h4>php</h4>
-                                <p>Copy &amp; paste Id tag in the body tag of your webpage</p>
+                                <p>Copy &amp; paste Id tag in the body tag of your web page</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>    
            &lt;div id=&quot;SFEvents&quot;&gt;
@@ -575,12 +574,12 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 </pre>
                                 <p> if you are loading Events on a front page that requires minimum number of Events in our case 3 summary Events in the front page Change the Out.php to SummaryOut.php and then query for the maximum number of Events to be any number you want making it "SummaryOut.php?MaxNumber=3" meaning that only 3 summary Events will be shown. </p>
                                 <h4>Javascript</h4>
-                                <p>Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code</p>
+                                <p>Copy &amp; paste Id tag below to the body tag of your web page or optionally use the Php Code</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;SFEvents&quot;&gt; &lt;/div&gt;
                                 </pre>
-                                <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
+                                <p>Copy &amp; paste the javascript below in Head tag of your web page</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
     &lt;script type=&quot;text/javascript&quot;&gt;
@@ -592,7 +591,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
     &lt;/script&gt;
                                 </pre>
                                 <h4>php</h4>
-                                <p>Copy &amp; paste Id tag in the body tag of your webpage</p>
+                                <p>Copy &amp; paste Id tag in the body tag of your web page</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>    
            &lt;div id=&quot;SFEvents&quot;&gt;
@@ -604,12 +603,12 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <h2>Gallery Javascript Code</h2>
                                 <p></p>
                                 <p>Follow the same technique for Snowflakes for this Gallery to work but with addition of some code to display Snowflake style Gallery.</p>
-                                <p>Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code</p>
+                                <p>Copy &amp; paste Id tag below to the body tag of your web page or optionally use the Php Code</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;SFGallery&quot;&gt; &lt;/div&gt;
 
-Copy &amp; paste the javascript below in Head tag of your webpage
+Copy &amp; paste the javascript below in Head tag of your web page
 
     &lt;script type=&quot;text/javascript&quot;&gt;
     
@@ -659,7 +658,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
             
     &lt;/script&gt;
                                 </pre>
-                                <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
+                                <p>Copy &amp; paste the javascript below in Head tag of your web page</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
 &lt;script type="text/javascript" src=&quot;<?php echo $JSlink . "jquery.stapel.js"; ?>&quot;&gt;&lt;/script&gt;
@@ -705,7 +704,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <h2>PHP code</h2>
                                 <p></p>
                                 <p>This is Ideal for Php files, first create a div with id called <span class="code">SFGallery</span> then add the code below inside the id tag you've just created on the page you want to display your published Gallery.</p>
-                                <p>Copy &amp; paste Id tag in the body tag of your webpage</p>
+                                <p>Copy &amp; paste Id tag in the body tag of your web page</p>
                                 <pre class='code'>
 <a style="float:right"><span class="icon success"></span></a>
 	     &lt;div id=&quot;SFGallery&quot;&gt;
@@ -717,12 +716,12 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <h2>Custom Output </h2>
                                 <p></p>
                                 <p>If you wish to add <span class="code">SFGallery</span> to a custom output or a result page that you have created yourself to view and share a single snowflake Gallery. Enter the url address of your result page in the settings page and save it. Then load the page with javascript or php as described below by changing Out.php to OneView2.php?Galleryid= so that Galleryid will be queried automatically by snowflakes. Thus</p>
-                                <p>Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code</p>
+                                <p>Copy &amp; paste Id tag below to the body tag of your web page or optionally use the Php Code</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;SFGallery&quot;&gt; &lt;/div&gt;
                                 </pre>
-                                <p>Copy &amp; paste the javascript below in Head tag of your webpage</p>
+                                <p>Copy &amp; paste the javascript below in Head tag of your web page</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
     &lt;script type=&quot;text/javascript&quot;&gt;
@@ -771,12 +770,12 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 </pre>
                                 <p> if you are loading <span class="code">SFGallery</span> on a front page that requires minimum number of <span class="code">SFGallery</span> in our case 3 summary <span class="code">SFGallery</span> in the front page Change the Out.php to SummaryOut.php and then query for the maximum number of <span class="code">SFGallery</span> to be any number you want making it "SummaryOut.php?MaxNumber=3" meaning that only 3 summary <span class="code">SFGallery</span> will be shown. </p>
                                 <h4>Javascript</h4>
-                                <p>Copy &amp; paste Id tag below to the body tag of your webpage or optionally use the Php Code</p>
+                                <p>Copy &amp; paste Id tag below to the body tag of your web page or optionally use the Php Code</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
 	&lt;div id=&quot;SFGallery&quot;&gt; &lt;/div&gt;
                                 </pre>
-                                <p>Copy &amp; paste the javascript below in Head tag of your webpage </p>
+                                <p>Copy &amp; paste the javascript below in Head tag of your web page </p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
     &lt;script type=&quot;text/javascript&quot;&gt;
@@ -788,7 +787,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
     &lt;/script&gt;
                                 </pre>
                                 <h4>php</h4>
-                                <p>Copy &amp; paste Id tag in the body tag of your webpage</p>
+                                <p>Copy &amp; paste Id tag in the body tag of your web page</p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>    
            &lt;div id=&quot;SFGallery&quot;&gt;
@@ -809,7 +808,7 @@ Copy &amp; paste the javascript below in Head tag of your webpage
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
       
-Copy &amp; paste the CSS below Stylesheet of your webpage
+Copy &amp; paste the CSS below Stylesheet of your web page
 
 
 /* CSS Document */
@@ -1204,7 +1203,7 @@ Copy &amp; paste the CSS below Stylesheet of your webpage
                                 <p> Displays Smaller than 999px: </p>
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
-Copy & paste the CSS below Stylesheet of your webpage
+Copy & paste the CSS below Stylesheet of your web page
 
 
 /* CSS Document */
@@ -1540,7 +1539,7 @@ Copy & paste the CSS below Stylesheet of your webpage
                                 <pre class='code'> 
 <a style="float:right"><span class="icon success"></span></a>
       
-Copy &amp; paste the CSS below Stylesheet of your webpage
+Copy &amp; paste the CSS below Stylesheet of your web page
 
 
 /* Custom elements style */

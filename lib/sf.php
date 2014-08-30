@@ -4873,7 +4873,12 @@ final class sfUtils
         elseif (strcasecmp($m_content_type, 'jsonhtml') == 0)
         {
             $startedAt = time();
-            self::sendSSEMsg($startedAt, $data);
+            echo '{"data":';
+            echo " {\n";
+            echo '"id":'. $startedAt.',';
+            echo '"msg": '. json_encode($data) . " \n";
+            echo "}\n}";
+            echo PHP_EOL;
         }
         elseif (strcasecmp($m_content_type, 'xml') == 0)
         {
