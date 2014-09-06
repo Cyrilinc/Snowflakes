@@ -5,10 +5,11 @@ require_once '../config/Config.php';
 require_once '../lib/sfSettings.php';
 ?>
 <?php
-$maxRows_EventsRs = filter_input(INPUT_GET, 'MaxNumber');
+$maxRows_EventsRs = filter_input(INPUT_GET, 'MaxNumber', FILTER_VALIDATE_INT);
 $pageNum_EventsRs = 0;
 $EventsRs = filter_input(INPUT_GET, 'pageNum_EventsRs');
-if (isset($EventsRs)) {
+if (isset($EventsRs))
+{
     $pageNum_EventsRs = $EventsRs;
 }
 
@@ -24,16 +25,20 @@ $query_limit_EventsRs = sprintf("%s LIMIT %d, %d", $query_EventsRs, $startRow_Ev
 $SFconnects->fetch($query_limit_EventsRs);
 $row_EventsRs = $SFconnects->getResultArray();
 $eventStructList = array();
-foreach ($row_EventsRs as $key => $value) {
+foreach ($row_EventsRs as $key => $value)
+{
     $eventStructList[$key] = new eventStruct();
     $eventStructList[$key]->populate($value);
     //$eventStructList[$key]->printEvents();
 }
 
-$total_EventsRs = filter_input(INPUT_GET, 'totalRows_EventsRs');
-if (isset($total_EventsRs)) {
+$total_EventsRs = filter_input(INPUT_GET, 'totalRows_EventsRs', FILTER_VALIDATE_INT);
+if (isset($total_EventsRs))
+{
     $totalRows_EventsRs = $total_EventsRs;
-} else {
+}
+else
+{
     $sql = str_replace("SELECT id,title,event_time,event_date,end_time,end_date,location,created,created_by,flake_it FROM", "SELECT COUNT(id) count FROM", $query_EventsRs);
     $SFconnects->fetch($sql);
     $result = $SFconnects->getResultArray();
@@ -47,45 +52,56 @@ $siteSettings = new sfSettings('../config/config.ini');
 $url = $otherurl = strtok(sfUtils::curPageURL(), '?');
 $SnowflakesUrl = $siteSettings->m_sfUrl;
 
-if (isset($siteSettings->m_eventsResultUrl)) {
+if (isset($siteSettings->m_eventsResultUrl))
+{
     $SFEventsResultUrl = $siteSettings->m_eventsResultUrl;
-} else {
+}
+else
+{
     $SFEventsResultUrl = 'notset';
 }
 // if viewing from Snowflakes's OutputView.php file
-if (strpos($otherurl, 'OutputView.php') !== false) {
+if (strpos($otherurl, 'OutputView.php') !== false)
+{
     $Shareurl = str_replace("OutputView.php", "OneView.php", $url);
     $Powerlink = str_replace("OutputView.php", "../resources/images/Snowflakes2.png", $otherurl);
-} else if (strpos($otherurl, 'SummaryOut.php') !== false) {// else if viewing from Snowflakes's SummaryOut.php file
+}
+else if (strpos($otherurl, 'SummaryOut.php') !== false)
+{// else if viewing from Snowflakes's SummaryOut.php file
     $Shareurl = str_replace("SummaryOut.php", "OneView.php", $url);
     $Powerlink = str_replace("SummaryOut.php", "../resources/images/Snowflakes2.png", $otherurl);
-    if ($SFEventsResultUrl !== 'notset') { /// if user provides result page in snowflakes settings
+    if ($SFEventsResultUrl !== 'notset')
+    { /// if user provides result page in snowflakes settings
         $Shareurl = $SFEventsResultUrl;
     }
-} else {// else if viewing Snowflakes from another file outside snowflakes
+}
+else
+{// else if viewing Snowflakes from another file outside snowflakes
     $Shareurl = $SnowflakesUrl . "OneView.php";
-    if ($SFEventsResultUrl !== 'notset') { /// if user provides result page in snowflakes settings
+    if ($SFEventsResultUrl !== 'notset')
+    { /// if user provides result page in snowflakes settings
         $Shareurl = $SFEventsResultUrl;
     }
 
     $Powerlink = $SnowflakesUrl . "../resources/images/Snowflakes2.png";
 }
 ?>
-<?php if ($maxRows_EventsRs != Null) { ?>  
+<?php if ($maxRows_EventsRs != Null)
+{ ?>  
     <?php
-    if ($totalRows_EventsRs > 0) {
+    if ($totalRows_EventsRs > 0)
+    {
         $i = 0;
         ?>
         <?php
-        do {
+        do
+        {
             $eventdate = new DateTime($eventStructList[$i]->m_event_date);
             $enddate = new DateTime($eventStructList[$i]->m_end_date);
             ?>   
             <!--eventWrapper-->
             <div class="eventWrapper fl"> 
-
                 <div class="Break2"></div>
-
                 <!--SFEvent-->
                 <div class="SFEvent clearfix">
                     <div class="SFEvent-date">
@@ -121,12 +137,16 @@ if (strpos($otherurl, 'OutputView.php') !== false) {
         } while ($i < count($eventStructList));
         ?>
 
-    <?php } else { ?> 
+    <?php }
+    else
+    { ?> 
         <h4 class="SummaryHead">There are no Events </h4>
     <?php } ?> 
 
 
-<?php } else {
+<?php }
+else
+{
     ?>
 
     <h4 class="SummaryHead">No Max number of Snowflakes Events indicated </h4>

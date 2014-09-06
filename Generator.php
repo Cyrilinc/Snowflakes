@@ -69,6 +69,7 @@ $user = new userStruct();
 $user->getUserByUsername($SFconnects, $colname_rscheckAdmin);
 
 $url = sfUtils::curPageURL();
+$APIurl = str_replace("Generator.php", "api/?", $url);
 $Shareurl = str_replace("Generator.php", "Out.php", $url);
 $csslink = str_replace("Generator.php", "resources/css/", $url);
 $JSlink = str_replace("Generator.php", "resources/Js/", $url);
@@ -469,7 +470,7 @@ Copy &amp; paste the javascript below in Head tag of your web page
                 var snowflakesEventsUrl;
                 if(output.indexOf("undefined: undefined") !== -1)
                 {
-                    snowflakesEventsUrl='<?php echo $ShareEventsurl; ?>');
+                    snowflakesEventsUrl='<?php echo $ShareEventsurl; ?>';
                 }else{
                     snowflakesEventsUrl='<?php echo $ShareEventsurl; ?>?pageNum='+QueryString.pageNum+'&amp;totalRows=' + QueryString.totalRows;
                 }
@@ -647,7 +648,7 @@ Copy &amp; paste the javascript below in Head tag of your web page
                 var snowflakesGalUrl;
                 if(output.indexOf("undefined: undefined") !== -1)
                 {
-                    snowflakesGalUrl='<?php echo $ShareGallerysurl; ?>');
+                    snowflakesGalUrl='<?php echo $ShareGallerysurl; ?>';
                 }else{
                     snowflakesGalUrl='<?php echo $ShareGallerysurl; ?>?pageNum='+QueryString.pageNum+'&amp;totalRows=' + QueryString.totalRows;
                 }
