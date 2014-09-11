@@ -351,14 +351,14 @@ $sfGalleryThumbUrl = $siteSettings->m_sfGalleryThumbUrl;
                                                 }
                                                 ?>
                                             </ul>
-                                            <!--tp-grid Ends--> 
+                                            <!--/tp-grid--> 
                                         </div>
-                                        <!--wrapper Ends--> 
+                                        <!--/wrapper--> 
                                         <?php
                                     }
                                 }
                                 ?>
-                            </div><!--SnowflakeDescr Ends-->
+                            </div><!--/SnowflakeDescr-->
                             <div class="clear"></div>
                             <div class="PageBreak"></div>
                             <div class="SnowflakeDate"> Date Created |: <?php echo date(" F j, Y", $flakeStruct->m_created); ?>  | By - <?php echo $flakeStruct->m_created_by; ?> </div>

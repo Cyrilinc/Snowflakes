@@ -336,7 +336,7 @@ $queryString_EventsRs = sprintf("&totalRows_EventsRs=%d%s", $totalRows_EventsRs,
 
                                     </div>
                                 </div>
-                                <!--SFEvent Ends--> 
+                                <!--/SFEvent--> 
                                 <div class="clear"></div>
                                 <div class="SnowflakeDate"> Posted |: <?php echo date(" F j, Y", $eventStructList[$i]->m_created); ?>  | By - <?php echo $eventStructList[$i]->m_created_by; ?> </div>
                                 <div class="SnowflakeIt">  
@@ -344,7 +344,7 @@ $queryString_EventsRs = sprintf("&totalRows_EventsRs=%d%s", $totalRows_EventsRs,
                                     <span  class="flakeitParam" id="flakecount<?php echo $eventStructList[$i]->m_id; ?>"> <?php echo $eventStructList[$i]->m_flake_it; ?> </span>
                                 </div>
                             </div>
-                            <!--eventWrapper Ends-->
+                            <!--/eventWrapper-->
                             <?php
                             $i++;
                         } while ($i < count($eventStructList));

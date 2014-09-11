@@ -163,7 +163,7 @@ if ($totalRows > 0)
 
                 <?php echo html_entity_decode($flakeStructList[$i]->m_body_text); ?> 
 
-            </div><!--SnowflakeDescr Ends-->
+            </div><!--/SnowflakeDescr-->
             <div class="clear"></div>
             <div class="PageBreak"></div>
             <div class="SnowflakeDate"> Posted |: <?php echo date(" F j, Y", $flakeStructList[$i]->m_created); ?>  | By - <?php echo $flakeStructList[$i]->m_created_by; ?> </div>

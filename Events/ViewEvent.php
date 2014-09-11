@@ -334,14 +334,14 @@ foreach ($latlong as $key => $value) {
                                 <div class="clear"></div>
                                 <div id="map-canvas2"></div>
                             </div>
-                            <!--SFEvent Ends--> 
+                            <!--/SFEvent--> 
                             <div class="SnowflakeDate"> Date Created |: <?php echo date(" F j, Y", $eventStruct->m_created); ?>  | By - <?php echo $eventStruct->m_created_by; ?> </div>
                             <div class="SnowflakeIt">  
                                 <img src="../resources/images/Icons/Snowflakes.png" height="22" width="22" alt="flake it" /> 
                                 <span class="flakeitParam" id="flakecount<?php echo $eventStruct->m_id; ?>"> <?php echo $eventStruct->m_flake_it; ?> </span>
                             </div>
                         </div>
-                        <!--eventWrapper Ends--> 
+                        <!--/eventWrapper--> 
                     </div>
                     <!--/PageWrap--> 
                 <?php } else {

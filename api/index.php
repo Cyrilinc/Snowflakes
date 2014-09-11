@@ -5,8 +5,10 @@ require_once '../lib/sfConnect.php';
 require_once '../config/Config.php';
 require_once '../lib/sfSettings.php';
 
-$sfty = filter_input(INPUT_GET, 'sfty') ? filter_input(INPUT_GET, 'sfty') : 'snowflake';
-$contentType = filter_input(INPUT_GET, 'cty') ? filter_input(INPUT_GET, 'cty') : 'html';
+$sftyval = filter_input(INPUT_GET, 'sfty');
+$sfty = isset($sftyval) && $sftyval ? $sftyval : 'snowflake';
+$cty = filter_input(INPUT_GET, 'cty');
+$contentType = isset($cty) && $cty ? $cty : 'html';
 $config = new databaseParam('../config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
@@ -17,12 +19,12 @@ $imageMissing = $UploadImgUrl . "missing_default.png";
 
 $maxRows = 5; // Maximum Number of record per pagination
 $pageNum = 0; // The starting page Number
-$rsmaxOut = filter_input(INPUT_GET, 'maxout'); // get the Maximum output number if otherwise set
+$rsmaxOut = filter_input(INPUT_GET, 'maxout', FILTER_VALIDATE_INT); // get the Maximum output number if otherwise set
 if (isset($rsmaxOut)) // if it is set 
 {
     $maxRows = $rsmaxOut; // Change the Maximum output number
 }
-$rsOut = filter_input(INPUT_GET, 'pageNum'); // get the page number if otherwise set
+$rsOut = filter_input(INPUT_GET, 'pageNum', FILTER_VALIDATE_INT); // get the page number if otherwise set
 if (isset($rsOut)) // if it is set 
 {
     $pageNum = $rsOut; // Change the page number
@@ -39,14 +41,14 @@ $snowflakeTypeList = array();
 $data;
 $Shareurl;
 
-$total = filter_input(INPUT_GET, 'totalRows');
+$total = filter_input(INPUT_GET, 'totalRows', FILTER_VALIDATE_INT);
 if (isset($total))
 {
     $totalRows = $total;
 }
 else
 {
-    $SFconnects->fetch("SELECT COUNT(id) count FROM $tablename WHERE publish = 1;");
+    $SFconnects->fetch("SELECT COUNT(id) count FROM $tablename WHERE publish = 1 ORDER BY id DESC;");
     $countResult = $SFconnects->getResultArray();
     $totalRows = $countResult[0]['count'];
 }
@@ -60,8 +62,7 @@ if (!empty($query_string))
     $newParams = array();
     foreach ($params as $param)
     {
-        if (stristr($param, "pageNum") == false &&
-                stristr($param, "totalRows") == false)
+        if (stristr($param, "pageNum") == false &&  stristr($param, "totalRows") == false)
         {
             array_push($newParams, $param);
         }
@@ -73,37 +74,61 @@ if (!empty($query_string))
 }
 $queryString = sprintf("&amp;totalRows=%d%s", $totalRows, $queryString);
 
-if (($sfty == 'snowflake' || $type == 'snowflakes') && ($contentType == 'html' || $contentType == 'jsonhtml'))
+if (($sfty == 'snowflake' || $sfty == 'snowflakes') && ($contentType == 'html' || $contentType == 'jsonhtml'))
 {
     $Shareurl = strlen($siteSettings->m_snowflakesResultUrl) > 0 ? $siteSettings->m_snowflakesResultUrl : $siteSettings->m_sfUrl . "OneView.php";
 
-    $data = '
+    $val = '
         <div style="float: right; background-color:transparent;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="#POWERLINK#" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
         <div style="float: right; background-color:transparent;" class="NewButton"><a href="#SNOWFLAKESURL#rss.php?ty=snowflakes" title="Snowflakes rss"> <img src="#SNOWFLAKESURL#resources/images/Icons/Rss.png" height="22" width="22"  alt="Add" /></a></div>
         <div class="clear"></div>';
+    if ($contentType == 'html')
+    {
+        $data = $val;
+    }
+    else
+    {
+        $data["html"] = $val;
+    }
 }
-else if (($sfty == 'event' || $type == 'events') && ($contentType == 'html' || $contentType == 'jsonhtml'))
+else if (($sfty == 'event' || $sfty == 'events') && ($contentType == 'html' || $contentType == 'jsonhtml'))
 {
     $Shareurl = strlen($siteSettings->m_eventsResultUrl) > 0 ? $siteSettings->m_eventsResultUrl : $siteSettings->m_sfUrl . "Events/OneView.php";
-    $data = '
+    $val = '
         <div style="float: right; background-color:transparent;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="#POWERLINK#" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
         <div style="float: right; background-color:transparent;" class="NewButton"><a href="#SNOWFLAKESURL#rss.php?ty=events" title="Snowflakes event rss"> <img src="#SNOWFLAKESURL#resources/images/Icons/Rss.png" height="22" width="22"  alt="Add" /></a></div>
         <div class="clear"></div>';
+
+    if ($contentType == 'html')
+    {
+        $data = $val;
+    }
+    else
+    {
+        $data["html"] = $val;
+    }
 }
 else if ($sfty == 'gallery' && ($contentType == 'html' || $contentType == 'jsonhtml'))
 {
     $Shareurl = strlen($siteSettings->m_galleryResultUrl) > 0 ? $siteSettings->m_galleryResultUrl : $siteSettings->m_sfUrl . "Gallery/OneView.php";
-    $data = '
+    $val = '
         <div style="float: right; background-color:transparent;"><a href="http://cyrilinc.co.uk/snowflakes/" target="_blank"><img src="#POWERLINK#" width="120" height="40" alt="Powered by Snowflakes" /></a> </div>
         <div style="float: right; background-color:transparent;" class="NewButton"><a href="#SNOWFLAKESURL#rss.php?ty=gallery" title="Snowflakes gallery rss"> <img src="#SNOWFLAKESURL#resources/images/Icons/Rss.png" height="22" width="22"  alt="Add" /></a></div>
         <div class="clear"></div>
         <!--wrapper-->
         <div class="wrapper">
-            <!--topbar-->
-            <div class="topbar"> <span id="close" class="back">&larr;</span>
-                <div class="galleryName" id="name"></div>
-            </div>
-            <!--topbar End--> ';
+        ';
+
+    if ($contentType == 'html')
+    {
+        $data = $val;
+    }
+    else
+    {
+        $data["topHtml"] = $val;
+        $deduct = array('<!--wrapper-->', '<div class="wrapper">');
+        $data["rssAndSnowflakes"] = str_replace($deduct, "", $val);
+    }
 }
 else if ($contentType == 'xml')
 {
@@ -119,12 +144,21 @@ $lastLink = $currentPage . "?pageNum=" . $totalPages . $queryString;
 if ($pageNum > 0)
 {
     // Show if not first page  
-    if ($contentType == 'html' || $contentType == 'jsonhtml')
+    if ($contentType == 'html')
     {
+        
         $data.='
-    <div class="smallNewButton"><a href="' . $firstLink . '">First</a></div>
-    <div class="smallNewButton"><a href="' . $previousLink . '">Previous</a></div>
+    <div id="sfFirst" class="smallNewButton"><a href="' . $firstLink . '">First</a></div>
+    <div  id="sfPrevious" class="smallNewButton"><a href="' . $previousLink . '">Previous</a></div>
         ';
+    }
+    else if($contentType == 'jsonhtml')
+    {
+        $data["paging"] .= '
+    <div id="sfFirst" class="smallNewButton"><a onclick="loadSnowflakesApi(\'' . $firstLink . '\')">First</a></div>
+    <div id="sfPrevious" class="smallNewButton"><a onclick="loadSnowflakesApi(\'' . $previousLink . '\')">Previous</a></div>
+        ';
+        
     }
     else if ($contentType == 'json')
     {
@@ -141,11 +175,19 @@ if ($pageNum > 0)
 if ($pageNum < $totalPages)
 {
     // Show if not last page
-    if ($contentType == 'html' || $contentType == 'jsonhtml')
+    if ($contentType == 'html')
     {
+  
         $data.='
-    <div class="smallNewButton"><a href="' . $nextLink . '">Next</a></div>
-    <div class="smallNewButton"><a href="' . $lastLink . '">Last</a></div>
+    <div id="sfNext" class="smallNewButton"><a href="' . $nextLink . '">Next</a></div>
+    <div id="sfLast" class="smallNewButton"><a href="' . $lastLink . '">Last</a></div>
+        ';
+    }
+    else if ($contentType == 'jsonhtml')
+    {
+        $data["paging"].='
+    <div id="sfNext" class="smallNewButton"><a onclick="loadSnowflakesApi(\'' . $nextLink . '\')">Next</a></div>
+    <div id="sfLast" class="smallNewButton"><a onclick="loadSnowflakesApi(\'' . $lastLink . '\')">Last</a></div>
         ';
     }
     else if ($contentType == 'json')
@@ -160,6 +202,27 @@ if ($pageNum < $totalPages)
     }
 }
 
+if ($sfty == 'gallery' && ($contentType == 'html' || $contentType == 'jsonhtml'))
+{
+    $val = '<div class=" clear Break2"></div>
+            <div class="topbar"> <span id="close" class="back">&larr;</span>
+                <div class="galleryName" id="name"></div>
+            </div>
+            <!--/topbar--> 
+            <ul id="tp-grid" class="tp-grid">';
+
+    if ($contentType == 'html')
+    {
+        $data.=$val;
+    }
+    else
+    {
+        $data["topHtml2"] =$val;
+        $data['imagelist']='';
+        $data["bottomHtml"]='';
+    }
+}
+
 if ($contentType == 'xml')
 {
     $xmlData = str_replace('<?xml version="1.0"?>', '', $xmlData->asXML());
@@ -171,11 +234,11 @@ sfUtils::replaceSFHashes($data, '../config/config.ini');
 foreach ($result as $key => $value)
 {
 
-    if ($sfty == 'snowflake' || $type == 'snowflakes')
+    if ($sfty == 'snowflake' || $sfty == 'snowflakes')
     {
         $snowflakeTypeList[$key] = new snowflakeStruct();
     }
-    else if ($sfty == 'event' || $type == 'events')
+    else if ($sfty == 'event' || $sfty == 'events')
     {
         $snowflakeTypeList[$key] = new eventStruct();
     }
@@ -211,12 +274,14 @@ foreach ($result as $key => $value)
     {
         $some = $snowflakeTypeList[$key]->toHTML();
         sfUtils::replaceSFHashes($some, '../config/config.ini', $Shareurl);
-        $data.= $some;
+
         if ($sfty == 'gallery')
         {
-            $data.='
-        </div>
-        <!--wrapper Ends-->';
+            $data['imagelist'] .= $some;
+        }
+        else
+        {
+            $data['html'].= $some;
         }
     }
     elseif (strcasecmp($contentType, 'html') == 0)
@@ -224,12 +289,20 @@ foreach ($result as $key => $value)
         $some = $snowflakeTypeList[$key]->toHTML();
         sfUtils::replaceSFHashes($some, '../config/config.ini', $Shareurl);
         $data.= $some;
-        if ($sfty == 'gallery')
-        {
-            $data.='
-        </div>
-        <!--wrapper Ends-->';
-        }
+    }
+}
+
+if ($sfty == 'gallery' && ($contentType == 'html' || $contentType == 'jsonhtml'))
+{
+    $val = '</ul><!--/tp-grid--> 
+        </div><!--/wrapper-->';
+    if ($contentType == 'html')
+    {
+        $data .= $val;
+    }
+    else
+    {
+        $data["bottomHtml"].=$val;
     }
 }
 

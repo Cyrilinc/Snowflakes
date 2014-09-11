@@ -343,9 +343,9 @@ $totalRows_rsSFGallery = $SFconnects->recordCount();
                         <?php } ?>     
 
                     </ul>
-                    <!--tp-grid Ends--> 
+                    <!--/tp-grid--> 
                 </div>
-                <!--wrapper Ends--> 
+                <!--/wrapper--> 
 
                 <!-- Break -->
                 <div class="clear"></div>

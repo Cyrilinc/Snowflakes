@@ -124,9 +124,9 @@ $Powerlink = $SnowflakesUrl . "resources/images/Snowflakes2.png";
     <?php } ?>     
 
             </ul>
-            <!--tp-grid Ends--> 
+            <!--/tp-grid--> 
         </div>
-        <!--wrapper Ends--> 
+        <!--/wrapper--> 
 
 
     <?php } else { ?>

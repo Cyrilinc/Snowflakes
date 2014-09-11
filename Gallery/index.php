@@ -427,9 +427,9 @@ $queryString_GalleryRs = sprintf("&amp;totalRows_GalleryRs=%d%s", $totalRows_Gal
 <?php } ?>     
 
                     </ul>
-                    <!--tp-grid Ends--> 
+                    <!--/tp-grid--> 
                 </div>
-                <!--wrapper Ends--> 
+                <!--/wrapper--> 
 
                 <!-- Break -->
                 <div class="clear"></div>

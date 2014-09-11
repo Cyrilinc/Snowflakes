@@ -142,9 +142,9 @@ $imageMissing = $sfGalleryImgUrl . "missing_default.png";
                     <h4>This snowflake event doesn't exist </h4>
                 <?php } ?> 
             </div>
-            <!--SFEvent Ends--> 
+            <!--/SFEvent-->
         </div>
-        <!--eventWrapper Ends--> 
+        <!--/eventWrapper--> 
     <?php } else {
         ?>
 

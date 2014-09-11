@@ -392,9 +392,9 @@ if ((isset($MM_insert)) && ($MM_insert == "AddGallery") && $viewLink != "#") {
                                     }
                                     ?>
                                 </ul>
-                                <!--tp-grid Ends--> 
+                                <!--/tp-grid--> 
                             </div>
-                            <!--wrapper Ends--> 
+                            <!--/wrapper--> 
                             <br />
                             <input class="NewButton" type="submit" value="Save Gallery"  name="AddGallery">
                             <input type="hidden" name="image_name" value="<?php echo implode(",", $DBGalleryImages); ?>">
@@ -408,10 +408,10 @@ if ((isset($MM_insert)) && ($MM_insert == "AddGallery") && $viewLink != "#") {
                         </form>
                         <p>&nbsp;</p>
                     </div>
-                    <!--contactform Ends--> 
+                    <!--/contactform--> 
 
                 </div>
-                <!-- PageWrap Ends --> 
+                <!--/PageWrap--> 
 
                 <!-- InstanceEndEditable -->  </div>
             <!--/Content --> 

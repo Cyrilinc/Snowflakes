@@ -233,6 +233,7 @@ $ShareGallerysurl = str_replace("Generator.php", "Gallery/Out.php", $url);
                             <li class="TabbedPanelsTab" tabindex="0"> CSS &gt; 999px</li>
                             <li class="TabbedPanelsTab" tabindex="0"> CSS &lt; 999px</li>
                             <li class="TabbedPanelsTab" tabindex="0">Gallery CSS</li>
+                            <li class="TabbedPanelsTab" tabindex="0">Snowflakes API</li>
                         </ul>
                         <div class="TabbedPanelsContentGroup">
                             <div class="TabbedPanelsContent">
@@ -277,10 +278,10 @@ Copy &amp; paste the javascript below in Head tag of your web page
            $(document).ready(
             function loadSnowflakes() {
             	var QueryString =GetQuery();
-                var output; 
-                for (property in QueryString) {
-                    output += property + ': ' + QueryString[property]+'; ';
-                }
+                 var output; 
+				 for (property in QueryString) {
+  				output += property + ': ' + QueryString[property]+'; ';
+				}
                 var snowflakesUrl;
                 if(output.indexOf("undefined: undefined") !== -1)
                 {
@@ -290,8 +291,8 @@ Copy &amp; paste the javascript below in Head tag of your web page
                 }
                 $.get( snowflakesUrl, function( data ) {
 			$( "#Snowflakes" ).html( data );
-		});
-                
+            });
+            
             });
             
     &lt;/script&gt;
@@ -384,7 +385,7 @@ Copy &amp; paste Id tag below to the body tag of your web page or optionally use
                                 </pre>
 
                                 <p>Because single custom result view page may contain snowflakes gallery, Add the CSS and javascript code in the Gallery section of this generator to display the gallery in snowflakes theme.</p>
-                                
+
                                 <h4>php</h4>
                                 <p>Copy &amp; paste Id tag in the body tag of your web page </p>
                                 <pre class='code'> 
@@ -461,12 +462,12 @@ Copy &amp; paste the javascript below in Head tag of your web page
     
            $(document).ready(
             function loadSFEvents() {
-                var QueryString =GetQuery();
-                var output; 
+            var QueryString =GetQuery();
+                 var output; 
                 for (property in QueryString) 
                 {
-                    output += property + ': ' + QueryString[property]+'; ';
-                }
+  				output += property + ': ' + QueryString[property]+'; ';
+				}
                 var snowflakesEventsUrl;
                 if(output.indexOf("undefined: undefined") !== -1)
                 {
@@ -476,7 +477,7 @@ Copy &amp; paste the javascript below in Head tag of your web page
                 }
                 $.get( snowflakesEventsUrl, function( data ) {
 			$( "#SFEvents" ).html( data );
-		});
+                });
             });
             
     &lt;/script&gt;
@@ -664,6 +665,11 @@ Copy &amp; paste the javascript below in Head tag of your web page
 <a style="float:right"><span class="icon success"></span></a>
 &lt;script type="text/javascript" src=&quot;<?php echo $JSlink . "jquery.stapel.js"; ?>&quot;&gt;&lt;/script&gt;
     &lt;script type=&quot;text/javascript&quot;&gt;
+           $(document).ready(
+            function loadSFGallery() {
+                $('#SFGallery').load('<?php echo $ShareGallerysurl; ?>');
+            });
+            
             $(function() {
 
 				var $grid = $( '#tp-grid' ),
@@ -1832,6 +1838,162 @@ Copy &amp; paste the CSS below Stylesheet of your web page
 
                                 </pre>
                                 <p> </p>
+                            </div>
+                            <div class="TabbedPanelsContent">
+                                <p></p>
+                                <h2>Snowflakes API code</h2>
+                                <p></p>
+                                <p>This is Ideal for getting snowflakes, events and gallery from snowflakes outside snowflakes to a page just 
+                                    like the Snowflakes,Events and gallery JPC codes 
+                                    in the previous tabs, first create a div with id 
+                                    called Snowflakes then add the code below inside the 
+                                    Head tag of the page you want to display your published 
+                                    snowflakes. This code is generated provided that you have 
+                                    installed snowflakes on your Hosting server and the location 
+                                    is uniquely generated to point directly to your snowflake API.
+                                </p>
+                                <p>&nbsp;</p>
+                                <p>There are four to consider when calling the snowflakes API and the parameters to the API will describe the outputs in detail.</p>
+                                <ul>
+                                    <li>1. <b>sfty</b> means snowflakes types [snowflake,event,gallery]</li>
+                                    <li>2. <b>cty</b> Signifies content types [json,htm,xml &amp; jsonhtml]</li>
+                                    <li>3. <b>maxout</b> Signifies the maximum amount of snowflakes, events or gallery to return.</li>
+                                    <li>4. <b>pageNum</b> The page number of the output thereby using navigation.</li>
+                                </ul>
+                                <pre class='code'> 
+<a style="float:right"><span class="icon success"></span></a>
+Copy &amp; paste Id tag below to the body tag of your web page to use a <b>sfty</b>=gallery, <b>cty</b>=jsonhtml and <b>maxout</b>=6 
+
+    &lt;!--SFGallery--&gt;
+      &lt;div id="SFGallery"&gt;
+        &lt;div id="bySnowflakes"&gt;&lt;/div&gt;
+        &lt;!--wrapper--&gt;
+        &lt;div id="sfoutterGrid" class="wrapper"&gt;
+          &lt;div id="paging"&gt;&lt;/div&gt;
+          &lt;div class=" clear Break2"&gt;&lt;/div&gt;
+          
+          &lt;!--topbar--&gt;
+          &lt;div class="topbar"&gt; &lt;span id="close" class="back"&gt;&larr;&lt;/span&gt;
+            &lt;div class="galleryName" id="name"&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;!--topbar End--&gt; 
+          
+          
+          &lt;!--tp-grid--&gt;
+          &lt;ul id="tp-grid" class="tp-grid"&gt;
+          &lt;/ul&gt;
+          &lt;!--tp-grid Ends--&gt; 
+          
+        &lt;/div&gt;
+        &lt;!--wrapper Ends--&gt; 
+        
+      &lt;/div&gt;
+      &lt;!--SFGallery Ends--&gt; 
+
+Copy &amp; paste the javascript below in Head tag of your webpage
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    
+           $(document).ready(
+            function loadSnowflakesApi() {
+            var snowflakesAPI = "<?php echo $APIurl; ?>";
+            $.getJSON( snowflakesAPI, {sfty: "snowflake",cty: "jsonhtml",	maxout: "3"})
+		.done(function( data ) {
+			$('#Snowflakes').html(data.data.msg);
+		});
+            });
+
+            function GetQuery(){
+    		// This function is anonymous, is executed immediately and 
+                // the return value is assigned to QueryString!
+                var query_string = {};
+                var query = window.location.search.substring(1);
+                var vars = query.split("&");
+                for (var i=0;i < vars.length;i++) {
+                      var pair = vars[i].split("=");
+                              // If first entry with this name
+                      if (typeof query_string[pair[0]] === "undefined") {
+                        query_string[pair[0]] = pair[1];
+                              // If second entry with this name
+                      } else if (typeof query_string[pair[0]] === "string") {
+                        var arr = [ query_string[pair[0]], pair[1] ];
+                        query_string[pair[0]] = arr;
+                              // If third or later entry with this name
+                      } else {
+                        query_string[pair[0]].push(pair[1]);
+                      }
+                } 
+                      return query_string;
+              }   
+			
+            function loadSnowflakesApi(pagingElement) {
+
+                var snowflakesAPI ="";
+                if(typeof pagingElement == "string")
+                {
+                        snowflakesAPI= pagingElement;
+                }
+
+                var defaultQuery;
+                if(snowflakesAPI.length === 0)
+                {
+                    snowflakesAPI ="<?php echo $APIurl; ?>";
+
+                    var QueryString =GetQuery();
+                    var output; 
+                    for (property in QueryString) 
+                    {
+                            output += property + ': ' + QueryString[property]+'; ';
+                    }
+
+                    if(output.indexOf("undefined: undefined") !== -1)
+                    {
+                            defaultQuery=
+                            {
+                                    sfty: "gallery",
+                                    cty: "jsonhtml",	
+                                    maxout: "6"
+                            }
+                    }
+                    else
+                    {
+                            defaultQuery=
+                            {
+                                    sfty: "gallery",
+                                    cty: "jsonhtml",	
+                                    maxout: "6",
+                                    pageNum: QueryString.pageNum,
+                                    totalRows :QueryString.totalRows
+                            }
+                    }
+
+                }
+
+                $.getJSON( snowflakesAPI, defaultQuery)
+                .done(function( data ) {
+
+                        $('#bySnowflakes').html(data.rssAndSnowflakes);
+                        $('#paging').html(data.paging);
+                        //alert(data.paging);
+                        $('#sfoutterGrid ul').html(data.msg);
+                        //alert(data.msg);
+                })
+                  .fail(function( jqxhr, textStatus, error ) {
+                        var err = textStatus + ", " + error;
+                        console.log( "Request Failed: " + err );
+                });
+            }
+			
+            $(document).ready(
+            function(){
+                    var d = loadSnowflakesApi();
+            });
+            
+    &lt;/script&gt;
+    
+                                </pre>
+                                <p></p>
+
                             </div>
                         </div>
                     </div>

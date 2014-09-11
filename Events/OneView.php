@@ -208,9 +208,9 @@ $Powerlink = "../resources/images/Snowflakes2.png";
 
                                 <?php } ?> 
                             </div>
-                            <!--SFEvent Ends--> 
+                            <!--/SFEvent--> 
                         </div>
-                        <!--eventWrapper Ends--> 
+                        <!--/eventWrapper--> 
                     <?php } else {
                         ?>
 

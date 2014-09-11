@@ -365,7 +365,7 @@ class snowflakeStruct
 
         ' . html_entity_decode($this->m_body_text) . ' 
 
-            </div><!--SnowflakeDescr Ends-->
+            </div><!--/SnowflakeDescr-->
             <div class="clear"></div>
             <div class="PageBreak"></div>
             <div class="SnowflakeDate"> Posted |: ' . date(" F j, Y", $this->m_created) . '  | By - ' . $this->m_created_by . ' </div>
@@ -716,8 +716,13 @@ class userStruct
         }
   
         $sql = "SELECT * FROM snowflakes_users WHERE ";
-        if (strpos($usernameOrEmail, "@"))
+        if (strpos($usernameOrEmail, "@") )
         {
+            if (!filter_var($usernameOrEmail, FILTER_VALIDATE_EMAIL))
+            {
+                return false;
+            }
+
             $sql.="email='" . $usernameOrEmail . "'";
         }
         else
@@ -1291,7 +1296,7 @@ class galleryStruct
         {
             $retHtml .= '
                     <li data-pile="' . htmlentities($this->m_title . '<br/><div class="owner"> By -' . $this->m_created_by . '</div>') . '"> 
-                        <a class="colorbox" href="' . $DBImageFiles[$counter] . '" onerror="this.href=\'' . $UploadImgUrl . 'missing_default.png\'"  title="' . htmlentities($DBImageCaption[$counter]) . '"> 
+                        <a class="colorbox" href="' . $DBImageFiles[$counter] . '" onerror="this.href=\'#MISSINGTHUMBIMG#\'"  title="' . htmlentities($DBImageCaption[$counter]) . '"> 
                             <span class="tp-info"><span>' . htmlentities($DBImageCaption[$counter]) . '</span></span> 
                             <img src="' . $imageThumbLink . '" onerror="this.src=\'#MISSINGIMG#\'" alt="' . htmlentities($DBImageCaption[$counter]) . '"> 
                         </a>
@@ -1819,7 +1824,7 @@ class eventStruct
                     </ul>
                 </div>
             </div>
-            <!--SFEvent Ends--> 
+            <!--/SFEvent--> 
             <div class="clear"></div>
             <div class="SnowflakeDate"> Posted |: ' . date(" F j, Y", $this->m_created) . '  | By - ' . $this->m_created_by . ' </div>
             <div class="SnowflakeIt"> 
@@ -1827,7 +1832,7 @@ class eventStruct
                 <span class="flakeitParam" id="flakecount' . $this->m_id . '"> ' . $this->m_flake_it . ' </span>
             </div>
         </div>
-        <!--eventWrapper Ends-->';
+        <!--/eventWrapper-->';
         return $retHtml;
     }
 
@@ -3109,7 +3114,7 @@ final class sfUtils
             </head>
             <body>';
         $message .= '
-                    <!--Snowflake starts-->
+                    <!--Snowflake-->
                         <div class="Snowflake">
                             <div class="Logo"><img alt="Snowflakes" class="logo" src="' . $snowflakesUrl . 'resources/images/Snowflakes.png" width="180" height="60" /></div>
                             <div class="clear"></div>
@@ -3127,9 +3132,9 @@ final class sfUtils
         $message .= "<p>If you haven't asked for a password reset then ignore and delete this message.";
         $message .= "If you requested to reset your password then click the reset link below. </p>";
         $message .= "<h4 class=\"SummaryHead\"><a class=\"smallNewButton\" href=\"$resetlink\">Reset link</a></h4>";
-        $message .='</div><!--SnowflakeDescr Ends-->
+        $message .='</div><!--/SnowflakeDescr-->
                     </div>
-                    <!--Snowflake Ends-->';
+                    <!--/Snowflake-->';
         $message .= '</body>
             </html>';
 
@@ -4853,7 +4858,6 @@ final class sfUtils
      * */
     public static function deliverResponseAndExit($data, $code, $content_type = 'html')
     {
-
         if (!$data)
         {
             return false;
@@ -4872,13 +4876,10 @@ final class sfUtils
         }
         elseif (strcasecmp($m_content_type, 'jsonhtml') == 0)
         {
-            $startedAt = time();
-            echo '{"data":';
-            echo " {\n";
-            echo '"id":'. $startedAt.',';
-            echo '"msg": '. json_encode($data) . " \n";
-            echo "}\n}";
-            echo PHP_EOL;
+            // Format html data into a JSON response
+            $json_response = json_encode($data);
+            // Deliver formatted data
+            echo $json_response;
         }
         elseif (strcasecmp($m_content_type, 'xml') == 0)
         {
@@ -4936,11 +4937,13 @@ final class sfUtils
         $Powerlink = $siteSettings->m_sfUrl . "resources/images/Snowflakes2.png";
         $UploadImgUrl = $siteSettings->m_sfGalleryUrl;
         $imageMissing = $UploadImgUrl . "missing_default.png";
+        $imageMissingthumb = $siteSettings->m_sfGalleryThumbUrl . "missing_default.png";
 
         $newData = str_replace('#SNOWFLAKESURL#', $siteSettings->m_sfUrl, $data);
         $newData1 = str_replace('#POWERLINK#', $Powerlink, $newData);
         $newData2 = str_replace('#MISSINGIMG#', $imageMissing, $newData1);
-        $newData3 = str_replace('#SFGALLERYIMGURL#', $siteSettings->m_sfGalleryImgUrl, $newData2);
+        $newData21 = str_replace('#MISSINGTHUMBIMG#', $imageMissingthumb, $newData2);
+        $newData3 = str_replace('#SFGALLERYIMGURL#', $siteSettings->m_sfGalleryImgUrl, $newData21);
         $newData4 = str_replace('#SFGALLERYTHUMBURL#', $siteSettings->m_sfGalleryThumbUrl, $newData3);
         $data = $newData4;
         if (strlen($shareURL) > 0)

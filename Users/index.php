@@ -243,7 +243,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                 do
                 {
                     ?>
-                        <!--Summary starts-->
+                        <!--Summary-->
                         <div class="Summary userBlock">
                     <?php $thedeletelink = "index.php?deleteId=" . $userStructList[$i]->m_id; ?>
 
@@ -260,7 +260,7 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                 </a>
                             </div>
 
-                            <!--Userside starts-->
+                            <!--Userside-->
                             <div class="Userside">
                                 <p> Access: <?php echo $userStructList[$i]->m_access_name; ?></p>
                                 <p> Email : <?php echo $userStructList[$i]->m_email; ?></p>
@@ -268,9 +268,9 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                 <p> Last in : <?php echo $lastin->format(" F j, Y g:h a"); ?></p>
                                 <p> Status  : <?php echo $userStructList[$i]->m_logged_in == 1 ? "Online" : "Offline"; ?></p>
                                 <p> Flakes  : <?php echo $userStructList[$i]->m_flake_it; ?></p>
-                            </div><!--Userside Ends-->
+                            </div><!--/Userside-->
 
-                        </div><!--Summary Ends-->
+                        </div><!--/Summary-->
                     <?php
                     $i++;
                 } while ($i < count($userStructList));

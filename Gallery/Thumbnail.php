@@ -300,9 +300,9 @@ $user->getUserByUsername($SFconnects, $colname_rsAdmin);
                                 <input type="hidden" name="thumbHeight" value="<?php echo $thumbHeight; ?>" />
                                 <input type="submit" class="NewButton"  name="uploadThumb" value="Save Thumbnail" id="save_thumb" />
                             </form>
-                        </div><!--contactform Ends-->
+                        </div><!--/contactform-->
 
-                    </div> <!-- PageWrap Ends -->
+                    </div> <!--/PageWrap-->
 
                 <?php } else { ?>
                     <h1>No image to edit</h1>

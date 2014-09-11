@@ -731,6 +731,7 @@ a.blue[data-bubble]:after {
 .smallNewButton a{
     color:#fafafa;
     font-family: Strait, sans-serif;
+    cursor:pointer;
 }
 
 .smallNewButton img{

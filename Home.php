@@ -305,7 +305,7 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                 <!-- PageWrap -->
                 <div class="PageWrap">
 
-                    <!--Summary starts-->
+                    <!--Summary-->
                     <div class="Summary">
                         <h4 class="SummaryHead"><a href="Users/Account.php?userName=<?php echo $user->m_username; ?>">Welcome <span><?php echo $user->m_username; ?></span></a></h4>
                         <div class="clear"></div>
@@ -328,16 +328,16 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                         <p><span class="SummaryPara" id="SfGallery_user_unpublished"><?php echo $_SESSION['SfGallery']['user_unpublished']; ?></span> unPublished Gallery<a href="Gallery/index.php?publish=0&amp;userSf=<?php echo $user->m_username; ?>"> view </a></p>
                         <div class="clear"></div>
                         <div class="SummaryDescBtnDown"><span>more</span></div>
-                        <!--SummaryDescription starts-->
+                        <!--SummaryDescription-->
                         <div class="SummaryDescription">
                             <h4 class="SummaryHead">Recent Activities</h4>
                             <div id="activities">
                                 <?php echo $activities; ?>
                             </div>
-                        </div><!--SummaryDescription Ends-->
-                    </div><!--Summary Ends-->
+                        </div><!--/SummaryDescription-->
+                    </div><!--/Summary-->
 
-                    <!--Summary starts-->
+                    <!--Summary-->
                     <div class="Summary">
                         <h4 class="SummaryHead"><a href="ViewSnowflakes.php">Snowflakes</a></h4>
 
@@ -347,7 +347,7 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
 
                         <div class="SummaryDescBtnDown"><span>more</span></div>
 
-                        <!--SummaryDescription starts-->
+                        <!--SummaryDescription-->
                         <div class="SummaryDescription">
                             <?php
                             if ($totalRows_rsPages > 0) {
@@ -403,10 +403,10 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                                 <h4 class="SummaryHead">There are no Snowflakes </h4>
                                 <div class="NewButton"><a href="AddFlake.php"> Create One <img src="resources/images/Icons/Add.png" height="22" width="22" alt="Create" /></a></div>
                             <?php } ?> 
-                        </div><!--SummaryDescription Ends-->
-                    </div><!--Summary Ends-->
+                        </div><!--SummaryDescription-->
+                    </div><!--/Summary-->
 
-                    <!--Summary starts-->
+                    <!--Summary-->
                     <div class="Summary">
                         <h4 class="SummaryHead"><a href="Events/index.php">Events</a></h4>
 
@@ -416,7 +416,7 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
 
                         <div class="SummaryDescBtnDown"><span>more</span></div>
 
-                        <!--SummaryDescription starts-->
+                        <!--SummaryDescription-->
                         <div class="SummaryDescription">
                             <?php
                             if ($totalRows_rsCompare > 0) {
@@ -450,7 +450,7 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                                         </div>
                                         <div class="SFEvent-content">
                                         </div>
-                                    </div> <!--SFEvent Ends-->
+                                    </div> <!--/SFEvent-->
                                     <div class="clear"></div>
                                     <div class="SnowflakeDate"> Posted |: <?php echo date(" F j, Y", $row_rsCompare[$i]['created']); ?>  | By - <?php echo $row_rsCompare[$i]['created_by']; ?> </div>
                                     <div class="SnowflakeIt">  
@@ -467,10 +467,10 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                             <?php } else { ?> 
                                 <h4 class="SummaryHead"><a href="Events/index.php">There are no events this week</a></h4>
                             <?php } ?> 
-                        </div><!--SummaryDescription Ends-->
-                    </div><!--Summary Ends-->
+                        </div><!--/SummaryDescription-->
+                    </div><!--/Summary-->
 
-                    <!--Summary starts-->
+                    <!--Summary-->
                     <div class="Summary">
                         <h4 class="SummaryHead"><a href="Gallery/index.php">Gallery</a></h4>
 
@@ -478,7 +478,7 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                         <p><span class="SummaryPara" ><?php echo $totalRows_galleryUnpublished ?></span> UnPublished Gallery</p>
                         <p><span class="SummaryPara" ><?php echo $totalRows_gallery ?></span> Gallery in total</p>
                         <div class="SummaryDescBtnDown"><span>more</span></div>
-                        <!--SummaryDescription starts-->
+                        <!--SummaryDescription-->
                         <div class="SummaryDescription">
                             <?php
                             if ($totalRows_gallery > 0) {
@@ -531,11 +531,11 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                                                 <?php } ?>     
 
                                             </ul>
-                                            <!--tp-grid Ends--> 
+                                            <!--/tp-grid--> 
                                         </div>
-                                        <!--wrapper Ends--> 
+                                        <!--/wrapper--> 
                                     </div>
-                                    <!--SummaryWrapper Ends-->
+                                    <!--/SummaryWrapper-->
                                     <div class="PageBreak"></div>
                                     <div class="SnowflakeDate">Date Created |: <?php echo date(" F j, Y", $row_rsSFGallery[0]['created']); ?> | By - <?php echo $row_rsSFGallery[0]['created_by']; ?> </div>
                                     <div class="SnowflakeIt">  
@@ -550,8 +550,8 @@ $totalRows_rsCompareThreeMonths = $result2[0]['count'];
                                 <h4 class="SummaryHead">There are no Gallery Get </h4>
                                 <div class="NewButton"><a href="Gallery/CreateGallery.php"> Create One <img src="resources/images/Icons/Add.png" height="22" width="22" alt="Create" /></a></div>
                             <?php } ?> 
-                        </div><!--SummaryDescription Ends-->
-                    </div><!--Summary Ends-->
+                        </div><!--/SummaryDescription-->
+                    </div><!--/Summary-->
                 </div>
                 <!--/PageWrap --> 
 

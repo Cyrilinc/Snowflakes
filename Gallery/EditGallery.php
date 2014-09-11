@@ -562,9 +562,9 @@ if ((isset($MM_update)) && ($MM_update == "EditGallery") && $viewLink != "#") {
                                         <!--<li> <a class="EditThumb" title="Edith Thumbnail"> <img src="../resources/images/Icons/Edit.png" width="22" height="22" alt="Edit" /></a> <a class="DeleteImage" title="Remove image"><img src="../resources/images/Icons/Delete.png" width="22" height="22" alt="Delete" /> </a>  <a class="colorbox" href="../Uploads/default.png"> <span class="tp-info"><span>Snowflakes</span></span> <img src="../Uploads/GalleryThumbs/Snowflakes.png"   alt="Snowflakes"> </a> </li>-->
 
                                     </ul>
-                                    <!--tp-grid Ends--> 
+                                    <!--/tp-grid--> 
                                 </div>
-                                <!--wrapper Ends--> 
+                                <!--/wrapper--> 
                                 <br />
                                 <input class="NewButton" type="submit" value="Save Gallery"  name="EditGallery">
                                 <input name="id" type="hidden" id="Galleryid" value="<?php echo $galleryStruct->m_id; ?>" />
@@ -577,10 +577,10 @@ if ((isset($MM_update)) && ($MM_update == "EditGallery") && $viewLink != "#") {
                             </form>
                             <p>&nbsp;</p>
                         </div>
-                        <!--contactform Ends--> 
+                        <!--/contactform--> 
 
                     </div>
-                    <!-- PageWrap Ends --> 
+                    <!--/PageWrap--> 
                 <?php } else { ?>
                     <!-- Break -->
                     <div class="clear"></div>

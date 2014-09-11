@@ -133,9 +133,9 @@ $SnowflakesUrl = $siteSettings->m_sfUrl;
     <?php } ?>     
 
             </ul>
-            <!--tp-grid Ends--> 
+            <!--/tp-grid--> 
         </div>
-        <!--wrapper Ends-->
+        <!--/wrapper-->
         <?php
     }
     else

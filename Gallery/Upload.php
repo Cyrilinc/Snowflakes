@@ -88,9 +88,9 @@ if (isset($Post_upload)) {
                     <div class="clear"></div>
                     <div class="Break2"></div>
                     <div id="dnd-thumbnails" class="vbox boxcenter center"></div>
-                </div><!--contactform Ends-->
+                </div><!--/contactform-->
 
-            </div> <!-- PageWrap Ends -->
-        </div> <!-- uploadContainer Ends-->
+            </div> <!--/PageWrap-->
+        </div> <!--/uploadContainer-->
     </body>
 </html>

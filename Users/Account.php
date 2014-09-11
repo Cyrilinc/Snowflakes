@@ -10,10 +10,10 @@ if (!isset($_SESSION))
     session_name("Snowflakes");
     session_start();
 }
-$php_self = sfUtils::getFilterServer( 'PHP_SELF');
+$php_self = sfUtils::getFilterServer('PHP_SELF');
 // ** Logout the current user. **
 $logoutAction = $php_self . "?doLogout=true";
-$query_string = sfUtils::getFilterServer( 'QUERY_STRING');
+$query_string = sfUtils::getFilterServer('QUERY_STRING');
 if ((isset($query_string)) && ($query_string != ""))
 {
     $logoutAction .="&amp;" . htmlentities($query_string);
@@ -153,7 +153,7 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
             });
         </script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<?php ?>
+        <?php ?>
         <script type="text/javascript">
             google.load("visualization", "1", {packages: ["corechart"]});
             google.setOnLoadCallback(drawChart);
@@ -253,17 +253,17 @@ $totalOtherFlakeitCount = $diffsnowflakeit + $diffeventflakeit + $diffgalleryfla
                                             <li><a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a></li>
                                         </ul>
                                     </li>
-    <?php
-}
-else
-{
-    ?>
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
                                     <li>
                                         <a href="<?php echo $logoutAction ?>" title="Log out"> <img src="../resources/images/Icons/Logout.png"  height="22" width="22" alt="Log out" /> Log Out </a>
                                     </li>
-    <?php
-}
-?>
+                                    <?php
+                                }
+                                ?>
                                 <!-- InstanceEndEditable -->
                             </ul>
                         </div>
@@ -287,25 +287,31 @@ else
 
                 <!-- PageWrap -->
                 <div class="PageWrap">
-<?php if ($userName != Null || $userId != Null || $colname_id != -1)
-{ ?>
+                    <?php if ($userName != Null || $userId != Null || $colname_id != -1)
+                    {
+                        ?>
                         <div class="Snowflake">
 
                             <!--SnowflakeDescr-->
                             <div class="SnowflakeDescr">
-    <?php if ($sfuser->m_username == $user->m_username)
-    { ?>
+                                <?php if ($sfuser->m_username == $user->m_username)
+                                {
+                                    ?>
                                     <div class="SnowflakeHead">
                                         <a href="EditUser.php?adminid=<?php echo $sfuser->m_id; ?>" title="Edit your profile" onclick="ConfirmDelete();">
-                                        <?php echo $sfuser->m_username; ?>
+        <?php echo $sfuser->m_username; ?>
                                             <img src="../resources/images/Icons/Edit.png" height="25" width="25" alt="Edit your profile" />
                                         </a>
                                     </div>
-    <?php }
-    else
-    { ?>
+                                <?php
+                                }
+                                else
+                                {
+                                    ?>
                                     <div class="SnowflakeHead"><?php echo $sfuser->m_username; ?></div>
-    <?php } ?>
+                                    <?php
+                                }
+                                ?>
                                 <div class="SnowflakeImage">
                                     <a class="colorbox" href="../Uploads/<?php echo $sfuser->m_image_name; ?>" title="<?php echo $sfuser->m_username; ?>" >
                                         <img src="../Uploads/<?php echo $sfuser->m_image_name; ?>" onerror="this.src='<?php echo $imageMissing; ?>'" alt="<?php echo $sfuser->m_username . "'s"; ?> profile" />
@@ -315,13 +321,13 @@ else
                                 <p> Access  : <?php echo $levelname; ?></p>
                                 <p> Email   : <?php echo $sfuser->m_email; ?></p>
                                 <p> Last in : <?php
-    $lastin = new DateTime($sfuser->m_last_login);
-    echo $lastin->format(" F j, Y g:h a");
-    ?></p>
+                                    $lastin = new DateTime($sfuser->m_last_login);
+                                    echo $lastin->format(" F j, Y g:h a");
+                                    ?></p>
                                 <p> Status  : <?php echo $sfuser->m_logged_in == 1 ? "Online" : "Offline"; ?></p>
                                 <p> Flakes  : <?php echo $sfuser->m_flake_it; ?></p>
 
-                                <!--Userside starts-->
+                                <!--Userside-->
                                 <ul class="Userside">
                                     <li><span class="SummaryPara" ><?php echo $_SESSION['Snowflakes']['user_published'] ?></span> Published Snowflakes<a href="../ViewSnowflakes.php?publish=1&amp;userSf=<?php echo $sfuser->m_username; ?>"> view </a></li>
                                     <li><span class="SummaryPara" ><?php echo $_SESSION['Snowflakes']['user_unpublished']; ?></span> unPublished Snowflakes<a href="../ViewSnowflakes.php?publish=0&amp;userSf=<?php echo $sfuser->m_username; ?>"> view </a></li>
@@ -329,27 +335,28 @@ else
                                     <li><span class="SummaryPara" ><?php echo $_SESSION['SfEvents']['user_unpublished']; ?></span> unPublished Events<a href="../Events/index.php?publish=0&amp;userSf=<?php echo $sfuser->m_username; ?>"> view </a></li>
                                     <li><span class="SummaryPara" ><?php echo $_SESSION['SfGallery']['user_published']; ?></span> Published Gallery<a href="../Gallery/index.php?publish=1&amp;userSf=<?php echo $sfuser->m_username; ?>"> view </a></li>
                                     <li><span class="SummaryPara" ><?php echo $_SESSION['SfGallery']['user_unpublished']; ?></span> unPublished Gallery<a href="../Gallery/index.php?publish=0&amp;userSf=<?php echo $sfuser->m_username; ?>"> view </a></li>
-                                </ul><!--Userside Ends-->
+                                </ul><!--/Userside-->
                                 <div class="clear"></div>
                                 <div id="donutchart"></div>
                                 <div class="clear"></div>
                                 <div class="SummaryDescBtnDown"><span>more</span></div>
-                                <!--SummaryDescription starts-->
+                                <!--SummaryDescription-->
                                 <div class="SummaryDescription">
                                     <h4 class="SummaryHead">Recent Activities</h4>
                                     <div id="activities">
     <?php echo $activities; ?>
                                     </div>
-                                </div><!--SummaryDescription Ends-->
+                                </div><!--/SummaryDescription-->
 
-                            </div><!--SnowflakeDescr Ends-->
+                            </div><!--/SnowflakeDescr-->
                         </div>
                         <!--/Snowflake -->
 
-<?php }
-else
-{
-    ?>
+                    <?php
+                    }
+                    else
+                    {
+                        ?>
                         <h1>No User to view</h1>
 <?php } ?>
 
