@@ -736,8 +736,8 @@ class sfImageProcessor
             }else
             {
                 $siteSettings = new sfSettings($inifile);
-                $message .= sfUtils::sfPromptMessage('<div class="imageSuccess"><img src="'.$siteSettings->m_sfGalleryUrl.$imageLoc.'" alt="Uploaded Image"></div>', 'success');
-            
+                $image = $forGallery ? $siteSettings->m_sfGalleryImgUrl.$imageLoc : $siteSettings->m_sfGalleryUrl.$imageLoc;
+                $message .= sfUtils::sfPromptMessage('<div class="imageSuccess"><img src="'.$image.'" alt="Uploaded Image"></div>', 'success');
             }
         }
         else

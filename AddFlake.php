@@ -77,17 +77,17 @@ if (empty($_FILES["uploadImage"]["name"]))
 }
 else
 {
-    echo 'I was here '.__LINE__."<br>";
+    //echo 'I was here '.__LINE__."<br>";
     $File_is_Uploaded = sfImageProcessor::uploadSingleImage($_FILES['uploadImage'], 'config/config.ini', $targetFile, $formmessage, false);
     //$formmessage .=" <br>" . $targetFile;
 }
-echo 'I was here '.__LINE__."<br>".$File_is_Uploaded."<br>";
+//echo 'I was here '.__LINE__."<br>".$File_is_Uploaded."<br>";
 ?>
 <?php
 $config = new databaseParam('config/config.ini');
 $SFconnects = new sfConnect($config->dbArray());
 $connected = $SFconnects->connect(); // Connect to database
-echo 'I was here '.__LINE__."<br>";
+//echo 'I was here '.__LINE__."<br>";
 if(!$connected){
     $formmessage.= sfUtils::sfPromptMessage("Snowflakes could not connect to database.".$SFconnects->getMessage(),'error');
 }

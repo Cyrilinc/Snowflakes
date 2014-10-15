@@ -5116,7 +5116,8 @@ class dataDirParam
         //datadir Info           //config Name [datadir]
         $this->m_logdir = $array['logdir'];
         $this->m_path = $array['path'];
-        $this->m_backupPath = $array['backupPath'];
+        if(array_key_exists("backupPath", $array))
+                $this->m_backupPath = $array['backupPath'];
         $this->m_resources = $array['resources'];
         $this->m_uploadGalleryDir = $array['uploadGalleryDir'];
         $this->m_galleryImgDir = $array['galleryImgDir'];

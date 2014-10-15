@@ -69,7 +69,7 @@ $SFconnects = new sfConnect($config->dbArray());
 $SFconnects->connect(); // Connect to database
 
 $deleteId = -1; // check for delete id first before selecting
-$delete_Id = filter_input(INPUT_GET, 'deleteId');
+$delete_Id = filter_input(INPUT_GET, 'deleteId',FILTER_VALIDATE_INT);
 if (isset($delete_Id)) {
     $deleteId = $delete_Id;
     $setDel = filter_input(INPUT_GET, 'setDel');
